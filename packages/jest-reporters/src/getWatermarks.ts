@@ -6,7 +6,7 @@
  */
 
 import istanbulReport = require('istanbul-lib-report');
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 
 export default function getWatermarks(
   config: Config.GlobalConfig,

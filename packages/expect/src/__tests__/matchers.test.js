@@ -7,9 +7,9 @@
 
 const chalk = require('chalk');
 const Immutable = require('immutable');
-const {alignedAnsiStyleSerializer} = require('@jest/test-utils');
-const {stringify} = require('jest-matcher-utils');
-const jestExpect = require('../');
+const {alignedAnsiStyleSerializer} = require('@elric/test-utils');
+const {stringify} = require('elric-matcher-utils');
+const elricExpect = require('../');
 const chalkEnabled = chalk.enabled;
 
 expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
@@ -23,34 +23,34 @@ afterAll(() => {
 });
 
 it('should throw if passed two arguments', () => {
-  expect(() => jestExpect('foo', 'bar')).toThrow(
+  expect(() => elricExpect('foo', 'bar')).toThrow(
     new Error('Expect takes at most one argument.'),
   );
 });
 
 describe('.rejects', () => {
   it('should reject', async () => {
-    await jestExpect(Promise.reject(4)).rejects.toBe(4);
-    await jestExpect(Promise.reject(4)).rejects.not.toBe(5);
-    await jestExpect(Promise.reject(4.2)).rejects.toBeCloseTo(4.2, 5);
-    await jestExpect(Promise.reject(3)).rejects.not.toBeCloseTo(4.2, 5);
-    await jestExpect(Promise.reject({a: 1, b: 2})).rejects.toMatchObject({
+    await elricExpect(Promise.reject(4)).rejects.toBe(4);
+    await elricExpect(Promise.reject(4)).rejects.not.toBe(5);
+    await elricExpect(Promise.reject(4.2)).rejects.toBeCloseTo(4.2, 5);
+    await elricExpect(Promise.reject(3)).rejects.not.toBeCloseTo(4.2, 5);
+    await elricExpect(Promise.reject({a: 1, b: 2})).rejects.toMatchObject({
       a: 1,
     });
-    await jestExpect(Promise.reject({a: 1, b: 2})).rejects.not.toMatchObject({
+    await elricExpect(Promise.reject({a: 1, b: 2})).rejects.not.toMatchObject({
       c: 1,
     });
-    await jestExpect(
+    await elricExpect(
       Promise.reject(new Error('rejectMessage')),
     ).rejects.toMatchObject({message: 'rejectMessage'});
-    await jestExpect(Promise.reject(new Error())).rejects.toThrow();
+    await elricExpect(Promise.reject(new Error())).rejects.toThrow();
   });
 
   it('should reject with toThrow', async () => {
     async function fn() {
       throw new Error('some error');
     }
-    await jestExpect(fn()).rejects.toThrow('some error');
+    await elricExpect(fn()).rejects.toThrow('some error');
   });
 
   it('should reject async function to toThrow', async () => {
@@ -63,7 +63,7 @@ describe('.rejects', () => {
     it(`fails non-promise value ${stringify(value)} synchronously`, () => {
       let error;
       try {
-        jestExpect(value).rejects.toBe(111);
+        elricExpect(value).rejects.toBe(111);
       } catch (e) {
         error = e;
       }
@@ -73,7 +73,7 @@ describe('.rejects', () => {
     it(`fails non-promise value ${stringify(value)}`, async () => {
       let error;
       try {
-        await jestExpect(value).rejects.toBeDefined();
+        await elricExpect(value).rejects.toBeDefined();
       } catch (e) {
         error = e;
       }
@@ -86,7 +86,7 @@ describe('.rejects', () => {
     it(`fails non-promise value ${stringify(value)} synchronously`, () => {
       let error;
       try {
-        jestExpect(value).rejects.not.toBe(111);
+        elricExpect(value).rejects.not.toBe(111);
       } catch (e) {
         error = e;
       }
@@ -96,7 +96,7 @@ describe('.rejects', () => {
     it(`fails non-promise value ${stringify(value)}`, async () => {
       let error;
       try {
-        await jestExpect(value).rejects.not.toBeDefined();
+        await elricExpect(value).rejects.not.toBeDefined();
       } catch (e) {
         error = e;
       }
@@ -108,7 +108,7 @@ describe('.rejects', () => {
   it('fails for promise that resolves', async () => {
     let error;
     try {
-      await jestExpect(Promise.resolve(4)).rejects.toBe(4);
+      await elricExpect(Promise.resolve(4)).rejects.toBe(4);
     } catch (e) {
       error = e;
     }
@@ -119,17 +119,17 @@ describe('.rejects', () => {
 
 describe('.resolves', () => {
   it('should resolve', async () => {
-    await jestExpect(Promise.resolve(4)).resolves.toBe(4);
-    await jestExpect(Promise.resolve(4)).resolves.not.toBe(5);
-    await jestExpect(Promise.resolve(4.2)).resolves.toBeCloseTo(4.2, 5);
-    await jestExpect(Promise.resolve(3)).resolves.not.toBeCloseTo(4.2, 5);
-    await jestExpect(Promise.resolve({a: 1, b: 2})).resolves.toMatchObject({
+    await elricExpect(Promise.resolve(4)).resolves.toBe(4);
+    await elricExpect(Promise.resolve(4)).resolves.not.toBe(5);
+    await elricExpect(Promise.resolve(4.2)).resolves.toBeCloseTo(4.2, 5);
+    await elricExpect(Promise.resolve(3)).resolves.not.toBeCloseTo(4.2, 5);
+    await elricExpect(Promise.resolve({a: 1, b: 2})).resolves.toMatchObject({
       a: 1,
     });
-    await jestExpect(Promise.resolve({a: 1, b: 2})).resolves.not.toMatchObject({
+    await elricExpect(Promise.resolve({a: 1, b: 2})).resolves.not.toMatchObject({
       c: 1,
     });
-    await jestExpect(
+    await elricExpect(
       Promise.resolve(() => {
         throw new Error();
       }),
@@ -140,7 +140,7 @@ describe('.resolves', () => {
     it(`fails non-promise value ${stringify(value)} synchronously`, () => {
       let error;
       try {
-        jestExpect(value).resolves.toBeDefined();
+        elricExpect(value).resolves.toBeDefined();
       } catch (e) {
         error = e;
       }
@@ -151,7 +151,7 @@ describe('.resolves', () => {
     it(`fails non-promise value ${stringify(value)}`, async () => {
       let error;
       try {
-        await jestExpect(value).resolves.toBeDefined();
+        await elricExpect(value).resolves.toBeDefined();
       } catch (e) {
         error = e;
       }
@@ -164,7 +164,7 @@ describe('.resolves', () => {
     it(`fails non-promise value ${stringify(value)} synchronously`, () => {
       let error;
       try {
-        jestExpect(value).resolves.not.toBeDefined();
+        elricExpect(value).resolves.not.toBeDefined();
       } catch (e) {
         error = e;
       }
@@ -175,7 +175,7 @@ describe('.resolves', () => {
     it(`fails non-promise value ${stringify(value)}`, async () => {
       let error;
       try {
-        await jestExpect(value).resolves.not.toBeDefined();
+        await elricExpect(value).resolves.not.toBeDefined();
       } catch (e) {
         error = e;
       }
@@ -187,7 +187,7 @@ describe('.resolves', () => {
   it('fails for promise that rejects', async () => {
     let error;
     try {
-      await jestExpect(Promise.reject(4)).resolves.toBe(4);
+      await elricExpect(Promise.reject(4)).resolves.toBe(4);
     } catch (e) {
       error = e;
     }
@@ -198,17 +198,17 @@ describe('.resolves', () => {
 
 describe('.toBe()', () => {
   it('does not throw', () => {
-    jestExpect('a').not.toBe('b');
-    jestExpect('a').toBe('a');
-    jestExpect(1).not.toBe(2);
-    jestExpect(1).toBe(1);
-    jestExpect(null).not.toBe(undefined);
-    jestExpect(null).toBe(null);
-    jestExpect(undefined).toBe(undefined);
-    jestExpect(NaN).toBe(NaN);
-    jestExpect(BigInt(1)).not.toBe(BigInt(2));
-    jestExpect(BigInt(1)).not.toBe(1);
-    jestExpect(BigInt(1)).toBe(BigInt(1));
+    elricExpect('a').not.toBe('b');
+    elricExpect('a').toBe('a');
+    elricExpect(1).not.toBe(2);
+    elricExpect(1).toBe(1);
+    elricExpect(null).not.toBe(undefined);
+    elricExpect(null).toBe(null);
+    elricExpect(undefined).toBe(undefined);
+    elricExpect(NaN).toBe(NaN);
+    elricExpect(BigInt(1)).not.toBe(BigInt(2));
+    elricExpect(BigInt(1)).not.toBe(1);
+    elricExpect(BigInt(1)).toBe(BigInt(1));
   });
 
   [
@@ -238,7 +238,7 @@ describe('.toBe()', () => {
     [-0, +0],
   ].forEach(([a, b]) => {
     it(`fails for: ${stringify(a)} and ${stringify(b)}`, () => {
-      expect(() => jestExpect(a).toBe(b)).toThrowErrorMatchingSnapshot();
+      expect(() => elricExpect(a).toBe(b)).toThrowErrorMatchingSnapshot();
     });
   });
 
@@ -247,19 +247,19 @@ describe('.toBe()', () => {
     [{a: BigInt(1)}, {a: BigInt(1)}],
   ].forEach(([a, b]) => {
     it(`fails for: ${stringify(a)} and ${stringify(b)}`, () => {
-      expect(() => jestExpect(a).toBe(b)).toThrowError('toBe');
+      expect(() => elricExpect(a).toBe(b)).toThrowError('toBe');
     });
   });
 
   [false, 1, 'a', undefined, null, {}, []].forEach(v => {
     it(`fails for '${stringify(v)}' with '.not'`, () => {
-      expect(() => jestExpect(v).not.toBe(v)).toThrowErrorMatchingSnapshot();
+      expect(() => elricExpect(v).not.toBe(v)).toThrowErrorMatchingSnapshot();
     });
   });
 
   [BigInt(1), BigInt('1')].forEach(v => {
     it(`fails for '${stringify(v)}' with '.not'`, () => {
-      expect(() => jestExpect(v).not.toBe(v)).toThrowError('toBe');
+      expect(() => elricExpect(v).not.toBe(v)).toThrowError('toBe');
     });
   });
 
@@ -267,14 +267,14 @@ describe('.toBe()', () => {
     const obj = {};
     obj.circular = obj;
 
-    expect(() => jestExpect(obj).toBe({})).toThrowErrorMatchingSnapshot();
+    expect(() => elricExpect(obj).toBe({})).toThrowErrorMatchingSnapshot();
   });
 
   test('assertion error matcherResult property contains matcher name, expected and actual values', () => {
     const actual = {a: 1};
     const expected = {a: 2};
     try {
-      jestExpect(actual).toBe(expected);
+      elricExpect(actual).toBe(expected);
     } catch (error) {
       expect(error.matcherResult).toEqual(
         expect.objectContaining({
@@ -342,13 +342,13 @@ describe('.toStrictEqual()', () => {
 
   it('matches the expected snapshot when it fails', () => {
     expect(() =>
-      jestExpect({
+      elricExpect({
         test: 2,
       }).toStrictEqual({test: new TestClassA(1, 2)}),
     ).toThrowErrorMatchingSnapshot();
 
     expect(() =>
-      jestExpect({
+      elricExpect({
         test: new TestClassA(1, 2),
       }).not.toStrictEqual({test: new TestClassA(1, 2)}),
     ).toThrowErrorMatchingSnapshot();
@@ -356,11 +356,11 @@ describe('.toStrictEqual()', () => {
 
   it('displays substring diff', () => {
     const expected =
-      'Another caveat is that Jest will not typecheck your tests.';
+      'Another caveat is that elric will not typecheck your tests.';
     const received =
-      'Because TypeScript support in Babel is just transpilation, Jest will not type-check your tests as they run.';
+      'Because TypeScript support in Babel is just transpilation, elric will not type-check your tests as they run.';
     expect(() =>
-      jestExpect(received).toStrictEqual(expected),
+      elricExpect(received).toStrictEqual(expected),
     ).toThrowErrorMatchingSnapshot();
   });
 
@@ -386,7 +386,7 @@ describe('.toStrictEqual()', () => {
       '    at Object.doesNotThrow (__tests__/assertionError.test.js:70:10)',
     ].join('\n');
     expect(() =>
-      jestExpect(received).toStrictEqual(expected),
+      elricExpect(received).toStrictEqual(expected),
     ).toThrowErrorMatchingSnapshot();
   });
 
@@ -568,14 +568,14 @@ describe('.toEqual()', () => {
       Immutable.Map({1: Immutable.Map({2: {a: 11}})}),
     ],
     [new Uint8Array([97, 98, 99]), new Uint8Array([97, 98, 100])],
-    [{a: 1, b: 2}, jestExpect.objectContaining({a: 2})],
-    [false, jestExpect.objectContaining({a: 2})],
-    [[1, 3], jestExpect.arrayContaining([1, 2])],
-    [1, jestExpect.arrayContaining([1, 2])],
-    ['abd', jestExpect.stringContaining('bc')],
-    ['abd', jestExpect.stringMatching(/bc/i)],
-    [undefined, jestExpect.anything()],
-    [undefined, jestExpect.any(Function)],
+    [{a: 1, b: 2}, elricExpect.objectContaining({a: 2})],
+    [false, elricExpect.objectContaining({a: 2})],
+    [[1, 3], elricExpect.arrayContaining([1, 2])],
+    [1, elricExpect.arrayContaining([1, 2])],
+    ['abd', elricExpect.stringContaining('bc')],
+    ['abd', elricExpect.stringMatching(/bc/i)],
+    [undefined, elricExpect.anything()],
+    [undefined, elricExpect.any(Function)],
     [
       'Eve',
       {
@@ -614,7 +614,7 @@ describe('.toEqual()', () => {
         [Symbol.for('bar')]: 2,
       },
       {
-        [Symbol.for('foo')]: jestExpect.any(Number),
+        [Symbol.for('foo')]: elricExpect.any(Number),
         [Symbol.for('bar')]: 1,
       },
     ],
@@ -646,8 +646,8 @@ describe('.toEqual()', () => {
     test(`{pass: false} expect(${stringify(a)}).toEqual(${stringify(
       b,
     )})`, () => {
-      expect(() => jestExpect(a).toEqual(b)).toThrowErrorMatchingSnapshot();
-      jestExpect(a).not.toEqual(b);
+      expect(() => elricExpect(a).toEqual(b)).toThrowErrorMatchingSnapshot();
+      elricExpect(a).not.toEqual(b);
     });
   });
 
@@ -658,8 +658,8 @@ describe('.toEqual()', () => {
     test(`{pass: false} expect(${stringify(a)}).toEqual(${stringify(
       b,
     )})`, () => {
-      expect(() => jestExpect(a).toEqual(b)).toThrowError('toEqual');
-      jestExpect(a).not.toEqual(b);
+      expect(() => elricExpect(a).toEqual(b)).toThrowError('toEqual');
+      elricExpect(a).not.toEqual(b);
     });
   });
 
@@ -790,12 +790,12 @@ describe('.toEqual()', () => {
       Immutable.Map({1: Immutable.Map({2: {a: 99}})}),
     ],
     [new Uint8Array([97, 98, 99]), new Uint8Array([97, 98, 99])],
-    [{a: 1, b: 2}, jestExpect.objectContaining({a: 1})],
-    [[1, 2, 3], jestExpect.arrayContaining([2, 3])],
-    ['abcd', jestExpect.stringContaining('bc')],
-    ['abcd', jestExpect.stringMatching('bc')],
-    [true, jestExpect.anything()],
-    [() => {}, jestExpect.any(Function)],
+    [{a: 1, b: 2}, elricExpect.objectContaining({a: 1})],
+    [[1, 2, 3], elricExpect.arrayContaining([2, 3])],
+    ['abcd', elricExpect.stringContaining('bc')],
+    ['abcd', elricExpect.stringMatching('bc')],
+    [true, elricExpect.anything()],
+    [() => {}, elricExpect.any(Function)],
     [
       {
         a: 1,
@@ -804,8 +804,8 @@ describe('.toEqual()', () => {
       },
       {
         a: 1,
-        b: jestExpect.any(Function),
-        c: jestExpect.anything(),
+        b: elricExpect.any(Function),
+        c: elricExpect.anything(),
       },
     ],
     [
@@ -832,7 +832,7 @@ describe('.toEqual()', () => {
         [Symbol.for('bar')]: 2,
       },
       {
-        [Symbol.for('foo')]: jestExpect.any(Number),
+        [Symbol.for('foo')]: elricExpect.any(Number),
         [Symbol.for('bar')]: 2,
       },
     ],
@@ -852,8 +852,8 @@ describe('.toEqual()', () => {
     test(`{pass: true} expect(${stringify(a)}).not.toEqual(${stringify(
       b,
     )})`, () => {
-      jestExpect(a).toEqual(b);
-      expect(() => jestExpect(a).not.toEqual(b)).toThrowErrorMatchingSnapshot();
+      elricExpect(a).toEqual(b);
+      expect(() => elricExpect(a).not.toEqual(b)).toThrowErrorMatchingSnapshot();
     });
   });
 
@@ -872,8 +872,8 @@ describe('.toEqual()', () => {
     test(`{pass: true} expect(${stringify(a)}).not.toEqual(${stringify(
       b,
     )})`, () => {
-      jestExpect(a).toEqual(b);
-      expect(() => jestExpect(a).not.toEqual(b)).toThrowError('toEqual');
+      elricExpect(a).toEqual(b);
+      expect(() => elricExpect(a).not.toEqual(b)).toThrowError('toEqual');
     });
   });
 
@@ -881,7 +881,7 @@ describe('.toEqual()', () => {
     const actual = {a: 1};
     const expected = {a: 2};
     try {
-      jestExpect(actual).toEqual(expected);
+      elricExpect(actual).toEqual(expected);
     } catch (error) {
       expect(error.matcherResult).toEqual(
         expect.objectContaining({
@@ -1024,10 +1024,10 @@ describe('.toBeInstanceOf()', () => {
   ].forEach(([a, b]) => {
     test(`passing ${stringify(a)} and ${stringify(b)}`, () => {
       expect(() =>
-        jestExpect(a).not.toBeInstanceOf(b),
+        elricExpect(a).not.toBeInstanceOf(b),
       ).toThrowErrorMatchingSnapshot();
 
-      jestExpect(a).toBeInstanceOf(b);
+      elricExpect(a).toBeInstanceOf(b);
     });
   });
 
@@ -1044,74 +1044,74 @@ describe('.toBeInstanceOf()', () => {
   ].forEach(([a, b]) => {
     test(`failing ${stringify(a)} and ${stringify(b)}`, () => {
       expect(() =>
-        jestExpect(a).toBeInstanceOf(b),
+        elricExpect(a).toBeInstanceOf(b),
       ).toThrowErrorMatchingSnapshot();
 
-      jestExpect(a).not.toBeInstanceOf(b);
+      elricExpect(a).not.toBeInstanceOf(b);
     });
   });
 
   it('throws if constructor is not a function', () => {
     expect(() =>
-      jestExpect({}).toBeInstanceOf(4),
+      elricExpect({}).toBeInstanceOf(4),
     ).toThrowErrorMatchingSnapshot();
   });
 });
 
 describe('.toBeTruthy(), .toBeFalsy()', () => {
   it('does not accept arguments', () => {
-    expect(() => jestExpect(0).toBeTruthy(null)).toThrowErrorMatchingSnapshot();
+    expect(() => elricExpect(0).toBeTruthy(null)).toThrowErrorMatchingSnapshot();
 
     expect(() =>
-      jestExpect(0).not.toBeFalsy(null),
+      elricExpect(0).not.toBeFalsy(null),
     ).toThrowErrorMatchingSnapshot();
   });
 
   [{}, [], true, 1, 'a', 0.5, new Map(), () => {}, Infinity].forEach(v => {
     test(`'${stringify(v)}' is truthy`, () => {
-      jestExpect(v).toBeTruthy();
-      jestExpect(v).not.toBeFalsy();
+      elricExpect(v).toBeTruthy();
+      elricExpect(v).not.toBeFalsy();
 
       expect(() =>
-        jestExpect(v).not.toBeTruthy(),
+        elricExpect(v).not.toBeTruthy(),
       ).toThrowErrorMatchingSnapshot();
 
-      expect(() => jestExpect(v).toBeFalsy()).toThrowErrorMatchingSnapshot();
+      expect(() => elricExpect(v).toBeFalsy()).toThrowErrorMatchingSnapshot();
     });
   });
 
   [BigInt(1)].forEach(v => {
     test(`'${stringify(v)}' is truthy`, () => {
-      jestExpect(v).toBeTruthy();
-      jestExpect(v).not.toBeFalsy();
+      elricExpect(v).toBeTruthy();
+      elricExpect(v).not.toBeFalsy();
 
-      expect(() => jestExpect(v).not.toBeTruthy()).toThrowError('toBeTruthy');
+      expect(() => elricExpect(v).not.toBeTruthy()).toThrowError('toBeTruthy');
 
-      expect(() => jestExpect(v).toBeFalsy()).toThrowError('toBeFalsy');
+      expect(() => elricExpect(v).toBeFalsy()).toThrowError('toBeFalsy');
     });
   });
 
   [false, null, NaN, 0, '', undefined].forEach(v => {
     test(`'${stringify(v)}' is falsy`, () => {
-      jestExpect(v).toBeFalsy();
-      jestExpect(v).not.toBeTruthy();
+      elricExpect(v).toBeFalsy();
+      elricExpect(v).not.toBeTruthy();
 
-      expect(() => jestExpect(v).toBeTruthy()).toThrowErrorMatchingSnapshot();
+      expect(() => elricExpect(v).toBeTruthy()).toThrowErrorMatchingSnapshot();
 
       expect(() =>
-        jestExpect(v).not.toBeFalsy(),
+        elricExpect(v).not.toBeFalsy(),
       ).toThrowErrorMatchingSnapshot();
     });
   });
 
   [BigInt(0)].forEach(v => {
     test(`'${stringify(v)}' is falsy`, () => {
-      jestExpect(v).toBeFalsy();
-      jestExpect(v).not.toBeTruthy();
+      elricExpect(v).toBeFalsy();
+      elricExpect(v).not.toBeTruthy();
 
-      expect(() => jestExpect(v).toBeTruthy()).toThrowError('toBeTruthy');
+      expect(() => elricExpect(v).toBeTruthy()).toThrowError('toBeTruthy');
 
-      expect(() => jestExpect(v).not.toBeFalsy()).toThrowError('toBeFalsy');
+      expect(() => elricExpect(v).not.toBeFalsy()).toThrowError('toBeFalsy');
     });
   });
 });
@@ -1119,17 +1119,17 @@ describe('.toBeTruthy(), .toBeFalsy()', () => {
 describe('.toBeNaN()', () => {
   it('{pass: true} expect(NaN).toBeNaN()', () => {
     [NaN, Math.sqrt(-1), Infinity - Infinity, 0 / 0].forEach(v => {
-      jestExpect(v).toBeNaN();
+      elricExpect(v).toBeNaN();
 
-      expect(() => jestExpect(v).not.toBeNaN()).toThrowErrorMatchingSnapshot();
+      expect(() => elricExpect(v).not.toBeNaN()).toThrowErrorMatchingSnapshot();
     });
   });
 
   it('throws', () => {
     [1, '', null, undefined, {}, [], 0.2, 0, Infinity, -Infinity].forEach(v => {
-      expect(() => jestExpect(v).toBeNaN()).toThrowErrorMatchingSnapshot();
+      expect(() => elricExpect(v).toBeNaN()).toThrowErrorMatchingSnapshot();
 
-      jestExpect(v).not.toBeNaN();
+      elricExpect(v).not.toBeNaN();
     });
   });
 });
@@ -1137,60 +1137,60 @@ describe('.toBeNaN()', () => {
 describe('.toBeNull()', () => {
   [{}, [], true, 1, 'a', 0.5, new Map(), () => {}, Infinity].forEach(v => {
     test(`fails for '${stringify(v)}'`, () => {
-      jestExpect(v).not.toBeNull();
+      elricExpect(v).not.toBeNull();
 
-      expect(() => jestExpect(v).toBeNull()).toThrowErrorMatchingSnapshot();
+      expect(() => elricExpect(v).toBeNull()).toThrowErrorMatchingSnapshot();
     });
   });
 
   it('fails for null with .not', () => {
     expect(() =>
-      jestExpect(null).not.toBeNull(),
+      elricExpect(null).not.toBeNull(),
     ).toThrowErrorMatchingSnapshot();
   });
 
   it('pass for null', () => {
-    jestExpect(null).toBeNull();
+    elricExpect(null).toBeNull();
   });
 });
 
 describe('.toBeDefined(), .toBeUndefined()', () => {
   [{}, [], true, 1, 'a', 0.5, new Map(), () => {}, Infinity].forEach(v => {
     test(`'${stringify(v)}' is defined`, () => {
-      jestExpect(v).toBeDefined();
-      jestExpect(v).not.toBeUndefined();
+      elricExpect(v).toBeDefined();
+      elricExpect(v).not.toBeUndefined();
 
       expect(() =>
-        jestExpect(v).not.toBeDefined(),
+        elricExpect(v).not.toBeDefined(),
       ).toThrowErrorMatchingSnapshot();
 
       expect(() =>
-        jestExpect(v).toBeUndefined(),
+        elricExpect(v).toBeUndefined(),
       ).toThrowErrorMatchingSnapshot();
     });
   });
 
   [BigInt(1)].forEach(v => {
     test(`'${stringify(v)}' is defined`, () => {
-      jestExpect(v).toBeDefined();
-      jestExpect(v).not.toBeUndefined();
+      elricExpect(v).toBeDefined();
+      elricExpect(v).not.toBeUndefined();
 
-      expect(() => jestExpect(v).not.toBeDefined()).toThrowError('toBeDefined');
+      expect(() => elricExpect(v).not.toBeDefined()).toThrowError('toBeDefined');
 
-      expect(() => jestExpect(v).toBeUndefined()).toThrowError('toBeUndefined');
+      expect(() => elricExpect(v).toBeUndefined()).toThrowError('toBeUndefined');
     });
   });
 
   test('undefined is undefined', () => {
-    jestExpect(undefined).toBeUndefined();
-    jestExpect(undefined).not.toBeDefined();
+    elricExpect(undefined).toBeUndefined();
+    elricExpect(undefined).not.toBeDefined();
 
     expect(() =>
-      jestExpect(undefined).toBeDefined(),
+      elricExpect(undefined).toBeDefined(),
     ).toThrowErrorMatchingSnapshot();
 
     expect(() =>
-      jestExpect(undefined).not.toBeUndefined(),
+      elricExpect(undefined).not.toBeUndefined(),
     ).toThrowErrorMatchingSnapshot();
   });
 });
@@ -1209,79 +1209,79 @@ describe(
       [0.1, 0.2],
     ].forEach(([small, big]) => {
       it(`{pass: true} expect(${small}).toBeLessThan(${big})`, () => {
-        jestExpect(small).toBeLessThan(big);
+        elricExpect(small).toBeLessThan(big);
       });
 
       it(`{pass: false} expect(${big}).toBeLessThan(${small})`, () => {
-        jestExpect(big).not.toBeLessThan(small);
+        elricExpect(big).not.toBeLessThan(small);
       });
 
       it(`{pass: true} expect(${big}).toBeGreaterThan(${small})`, () => {
-        jestExpect(big).toBeGreaterThan(small);
+        elricExpect(big).toBeGreaterThan(small);
       });
 
       it(`{pass: false} expect(${small}).toBeGreaterThan(${big})`, () => {
-        jestExpect(small).not.toBeGreaterThan(big);
+        elricExpect(small).not.toBeGreaterThan(big);
       });
 
       it(`{pass: true} expect(${small}).toBeLessThanOrEqual(${big})`, () => {
-        jestExpect(small).toBeLessThanOrEqual(big);
+        elricExpect(small).toBeLessThanOrEqual(big);
       });
 
       it(`{pass: false} expect(${big}).toBeLessThanOrEqual(${small})`, () => {
-        jestExpect(big).not.toBeLessThanOrEqual(small);
+        elricExpect(big).not.toBeLessThanOrEqual(small);
       });
 
       it(`{pass: true} expect(${big}).toBeGreaterThanOrEqual(${small})`, () => {
-        jestExpect(big).toBeGreaterThanOrEqual(small);
+        elricExpect(big).toBeGreaterThanOrEqual(small);
       });
 
       it(`{pass: false} expect(${small}).toBeGreaterThanOrEqual(${big})`, () => {
-        jestExpect(small).not.toBeGreaterThanOrEqual(big);
+        elricExpect(small).not.toBeGreaterThanOrEqual(big);
       });
 
       it(`throws: [${small}, ${big}]`, () => {
         expect(() =>
-          jestExpect(small).toBeGreaterThan(big),
+          elricExpect(small).toBeGreaterThan(big),
         ).toThrowErrorMatchingSnapshot();
 
         expect(() =>
-          jestExpect(small).not.toBeLessThan(big),
+          elricExpect(small).not.toBeLessThan(big),
         ).toThrowErrorMatchingSnapshot();
 
         expect(() =>
-          jestExpect(big).not.toBeGreaterThan(small),
+          elricExpect(big).not.toBeGreaterThan(small),
         ).toThrowErrorMatchingSnapshot();
 
         expect(() =>
-          jestExpect(big).toBeLessThan(small),
+          elricExpect(big).toBeLessThan(small),
         ).toThrowErrorMatchingSnapshot();
 
         expect(() =>
-          jestExpect(small).toBeGreaterThanOrEqual(big),
+          elricExpect(small).toBeGreaterThanOrEqual(big),
         ).toThrowErrorMatchingSnapshot();
 
         expect(() =>
-          jestExpect(small).not.toBeLessThanOrEqual(big),
+          elricExpect(small).not.toBeLessThanOrEqual(big),
         ).toThrowErrorMatchingSnapshot();
 
         expect(() =>
-          jestExpect(big).not.toBeGreaterThanOrEqual(small),
+          elricExpect(big).not.toBeGreaterThanOrEqual(small),
         ).toThrowErrorMatchingSnapshot();
 
         expect(() =>
-          jestExpect(big).toBeLessThanOrEqual(small),
+          elricExpect(big).toBeLessThanOrEqual(small),
         ).toThrowErrorMatchingSnapshot();
       });
     });
 
     test('can compare BigInt to Numbers', () => {
       const a = BigInt(2);
-      jestExpect(a).toBeGreaterThan(1);
-      jestExpect(a).toBeGreaterThanOrEqual(2);
-      jestExpect(2).toBeLessThanOrEqual(a);
-      jestExpect(a).toBeLessThan(3);
-      jestExpect(a).toBeLessThanOrEqual(2);
+      elricExpect(a).toBeGreaterThan(1);
+      elricExpect(a).toBeGreaterThanOrEqual(2);
+      elricExpect(2).toBeLessThanOrEqual(a);
+      elricExpect(a).toBeLessThan(3);
+      elricExpect(a).toBeLessThanOrEqual(2);
     });
     [
       [BigInt(1), BigInt(2)],
@@ -1291,81 +1291,81 @@ describe(
       it(`{pass: true} expect(${stringify(small)}).toBeLessThan(${stringify(
         big,
       )})`, () => {
-        jestExpect(small).toBeLessThan(big);
+        elricExpect(small).toBeLessThan(big);
       });
 
       it(`{pass: false} expect(${stringify(big)}).toBeLessThan(${stringify(
         small,
       )})`, () => {
-        jestExpect(big).not.toBeLessThan(small);
+        elricExpect(big).not.toBeLessThan(small);
       });
 
       it(`{pass: true} expect(${stringify(big)}).toBeGreaterThan(${stringify(
         small,
       )})`, () => {
-        jestExpect(big).toBeGreaterThan(small);
+        elricExpect(big).toBeGreaterThan(small);
       });
 
       it(`{pass: false} expect(${stringify(small)}).toBeGreaterThan(${stringify(
         big,
       )})`, () => {
-        jestExpect(small).not.toBeGreaterThan(big);
+        elricExpect(small).not.toBeGreaterThan(big);
       });
 
       it(`{pass: true} expect(${stringify(
         small,
       )}).toBeLessThanOrEqual(${stringify(big)})`, () => {
-        jestExpect(small).toBeLessThanOrEqual(big);
+        elricExpect(small).toBeLessThanOrEqual(big);
       });
 
       it(`{pass: false} expect(${stringify(
         big,
       )}).toBeLessThanOrEqual(${stringify(small)})`, () => {
-        jestExpect(big).not.toBeLessThanOrEqual(small);
+        elricExpect(big).not.toBeLessThanOrEqual(small);
       });
 
       it(`{pass: true} expect(${stringify(
         big,
       )}).toBeGreaterThanOrEqual(${stringify(small)})`, () => {
-        jestExpect(big).toBeGreaterThanOrEqual(small);
+        elricExpect(big).toBeGreaterThanOrEqual(small);
       });
 
       it(`{pass: false} expect(${stringify(
         small,
       )}).toBeGreaterThanOrEqual(${stringify(big)})`, () => {
-        jestExpect(small).not.toBeGreaterThanOrEqual(big);
+        elricExpect(small).not.toBeGreaterThanOrEqual(big);
       });
 
       it(`throws: [${stringify(small)}, ${stringify(big)}]`, () => {
-        expect(() => jestExpect(small).toBeGreaterThan(big)).toThrowError(
+        expect(() => elricExpect(small).toBeGreaterThan(big)).toThrowError(
           'toBeGreaterThan',
         );
 
-        expect(() => jestExpect(small).not.toBeLessThan(big)).toThrowError(
+        expect(() => elricExpect(small).not.toBeLessThan(big)).toThrowError(
           'toBeLessThan',
         );
 
-        expect(() => jestExpect(big).not.toBeGreaterThan(small)).toThrowError(
+        expect(() => elricExpect(big).not.toBeGreaterThan(small)).toThrowError(
           'toBeGreaterThan',
         );
 
-        expect(() => jestExpect(big).toBeLessThan(small)).toThrowError(
+        expect(() => elricExpect(big).toBeLessThan(small)).toThrowError(
           'toBeLessThan',
         );
 
         expect(() =>
-          jestExpect(small).toBeGreaterThanOrEqual(big),
+          elricExpect(small).toBeGreaterThanOrEqual(big),
         ).toThrowError('toBeGreaterThanOrEqual');
 
         expect(() =>
-          jestExpect(small).not.toBeLessThanOrEqual(big),
+          elricExpect(small).not.toBeLessThanOrEqual(big),
         ).toThrowError('toBeLessThanOrEqual');
 
         expect(() =>
-          jestExpect(big).not.toBeGreaterThanOrEqual(small),
+          elricExpect(big).not.toBeGreaterThanOrEqual(small),
         ).toThrowError('toBeGreaterThanOrEqual');
 
-        expect(() => jestExpect(big).toBeLessThanOrEqual(small)).toThrowError(
+        expect(() => elricExpect(big).toBeLessThanOrEqual(small)).toThrowError(
           'toBeLessThanOrEqual',
         );
       });
@@ -1379,15 +1379,15 @@ describe(
       [-Infinity, -Infinity],
     ].forEach(([n1, n2]) => {
       test(`equal numbers: [${n1}, ${n2}]`, () => {
-        jestExpect(n1).toBeGreaterThanOrEqual(n2);
-        jestExpect(n1).toBeLessThanOrEqual(n2);
+        elricExpect(n1).toBeGreaterThanOrEqual(n2);
+        elricExpect(n1).toBeLessThanOrEqual(n2);
 
         expect(() =>
-          jestExpect(n1).not.toBeGreaterThanOrEqual(n2),
+          elricExpect(n1).not.toBeGreaterThanOrEqual(n2),
         ).toThrowErrorMatchingSnapshot();
 
         expect(() =>
-          jestExpect(n1).not.toBeLessThanOrEqual(n2),
+          elricExpect(n1).not.toBeLessThanOrEqual(n2),
         ).toThrowErrorMatchingSnapshot();
       });
     });
@@ -1397,14 +1397,14 @@ describe(
       [BigInt(Number.MAX_SAFE_INTEGER), BigInt(Number.MAX_SAFE_INTEGER)],
     ].forEach(([n1, n2]) => {
       test(`equal numbers: [${n1}, ${n2}]`, () => {
-        jestExpect(n1).toBeGreaterThanOrEqual(n2);
-        jestExpect(n1).toBeLessThanOrEqual(n2);
+        elricExpect(n1).toBeGreaterThanOrEqual(n2);
+        elricExpect(n1).toBeLessThanOrEqual(n2);
 
         expect(() =>
-          jestExpect(n1).not.toBeGreaterThanOrEqual(n2),
+          elricExpect(n1).not.toBeGreaterThanOrEqual(n2),
         ).toThrowError('toBeGreaterThanOrEqual');
 
-        expect(() => jestExpect(n1).not.toBeLessThanOrEqual(n2)).toThrowError(
+        expect(() => elricExpect(n1).not.toBeLessThanOrEqual(n2)).toThrowError(
           'toBeLessThanOrEqual',
         );
       });
@@ -1428,12 +1428,12 @@ describe('.toContain(), .toContainEqual()', () => {
       },
     };
 
-    jestExpect(iterable).toContain(2);
-    jestExpect(iterable).toContainEqual(2);
-    expect(() => jestExpect(iterable).not.toContain(1)).toThrowError(
+    elricExpect(iterable).toContain(2);
+    elricExpect(iterable).toContainEqual(2);
+    expect(() => elricExpect(iterable).not.toContain(1)).toThrowError(
       'toContain',
     );
-    expect(() => jestExpect(iterable).not.toContainEqual(1)).toThrowError(
+    expect(() => elricExpect(iterable).not.toContainEqual(1)).toThrowError(
       'toContainEqual',
     );
   });
@@ -1450,10 +1450,10 @@ describe('.toContain(), .toContainEqual()', () => {
     [typedArray, 1],
   ].forEach(([list, v]) => {
     it(`'${stringify(list)}' contains '${stringify(v)}'`, () => {
-      jestExpect(list).toContain(v);
+      elricExpect(list).toContain(v);
 
       expect(() =>
-        jestExpect(list).not.toContain(v),
+        elricExpect(list).not.toContain(v),
       ).toThrowErrorMatchingSnapshot();
     });
   });
@@ -1463,9 +1463,9 @@ describe('.toContain(), .toContainEqual()', () => {
     [[1, 2, 3, BigInt(3), 4], BigInt(3)],
   ].forEach(([list, v]) => {
     it(`'${stringify(list)}' contains '${stringify(v)}'`, () => {
-      jestExpect(list).toContain(v);
+      elricExpect(list).toContain(v);
 
-      expect(() => jestExpect(list).not.toContain(v)).toThrowError('toContain');
+      expect(() => elricExpect(list).not.toContain(v)).toThrowError('toContain');
     });
   });
 
@@ -1476,35 +1476,35 @@ describe('.toContain(), .toContainEqual()', () => {
     [[{}, []], {}],
   ].forEach(([list, v]) => {
     it(`'${stringify(list)}' does not contain '${stringify(v)}'`, () => {
-      jestExpect(list).not.toContain(v);
+      elricExpect(list).not.toContain(v);
 
       expect(() =>
-        jestExpect(list).toContain(v),
+        elricExpect(list).toContain(v),
       ).toThrowErrorMatchingSnapshot();
     });
   });
 
   [[[BigInt(1), BigInt(2), BigInt(3)], 3]].forEach(([list, v]) => {
     it(`'${stringify(list)}' does not contain '${stringify(v)}'`, () => {
-      jestExpect(list).not.toContain(v);
+      elricExpect(list).not.toContain(v);
 
-      expect(() => jestExpect(list).toContain(v)).toThrowError('toContain');
+      expect(() => elricExpect(list).toContain(v)).toThrowError('toContain');
     });
   });
 
   test('error cases', () => {
-    expect(() => jestExpect(null).toContain(1)).toThrowErrorMatchingSnapshot();
-    expect(() => jestExpect('-0').toContain(-0)).toThrowErrorMatchingSnapshot();
+    expect(() => elricExpect(null).toContain(1)).toThrowErrorMatchingSnapshot();
+    expect(() => elricExpect('-0').toContain(-0)).toThrowErrorMatchingSnapshot();
     expect(() =>
-      jestExpect('null').toContain(null),
+      elricExpect('null').toContain(null),
     ).toThrowErrorMatchingSnapshot();
     expect(() =>
-      jestExpect('undefined').toContain(undefined),
+      elricExpect('undefined').toContain(undefined),
     ).toThrowErrorMatchingSnapshot();
     expect(() =>
-      jestExpect('false').toContain(false),
+      elricExpect('false').toContain(false),
     ).toThrowErrorMatchingSnapshot();
-    expect(() => jestExpect('1').toContain(BigInt(1))).toThrowError(
+    expect(() => elricExpect('1').toContain(BigInt(1))).toThrowError(
       'toContain',
     );
   });
@@ -1522,9 +1522,9 @@ describe('.toContain(), .toContainEqual()', () => {
     it(`'${stringify(list)}' contains a value equal to '${stringify(
       v,
     )}'`, () => {
-      jestExpect(list).toContainEqual(v);
+      elricExpect(list).toContainEqual(v);
       expect(() =>
-        jestExpect(list).not.toContainEqual(v),
+        elricExpect(list).not.toContainEqual(v),
       ).toThrowErrorMatchingSnapshot();
     });
   });
@@ -1533,17 +1533,17 @@ describe('.toContain(), .toContainEqual()', () => {
     it(`'${stringify(list)}' does not contain a value equal to'${stringify(
       v,
     )}'`, () => {
-      jestExpect(list).not.toContainEqual(v);
+      elricExpect(list).not.toContainEqual(v);
 
       expect(() =>
-        jestExpect(list).toContainEqual(v),
+        elricExpect(list).toContainEqual(v),
       ).toThrowErrorMatchingSnapshot();
     });
   });
 
   test('error cases for toContainEqual', () => {
     expect(() =>
-      jestExpect(null).toContainEqual(1),
+      elricExpect(null).toContainEqual(1),
     ).toThrowErrorMatchingSnapshot();
   });
 });
@@ -1560,10 +1560,10 @@ describe('.toBeCloseTo', () => {
     [-Infinity, -Infinity],
   ].forEach(([n1, n2]) => {
     it(`{pass: true} expect(${n1}).toBeCloseTo(${n2})`, () => {
-      jestExpect(n1).toBeCloseTo(n2);
+      elricExpect(n1).toBeCloseTo(n2);
 
       expect(() =>
-        jestExpect(n1).not.toBeCloseTo(n2),
+        elricExpect(n1).not.toBeCloseTo(n2),
       ).toThrowErrorMatchingSnapshot();
     });
   });
@@ -1577,10 +1577,10 @@ describe('.toBeCloseTo', () => {
     [-Infinity, -1.23],
   ].forEach(([n1, n2]) => {
     it(`{pass: false} expect(${n1}).toBeCloseTo(${n2})`, () => {
-      jestExpect(n1).not.toBeCloseTo(n2);
+      elricExpect(n1).not.toBeCloseTo(n2);
 
       expect(() =>
-        jestExpect(n1).toBeCloseTo(n2),
+        elricExpect(n1).toBeCloseTo(n2),
       ).toThrowErrorMatchingSnapshot();
     });
   });
@@ -1590,10 +1590,10 @@ describe('.toBeCloseTo', () => {
     [56789, 51234, -4],
   ].forEach(([n1, n2, p]) => {
     it(`{pass: false} expect(${n1}).toBeCloseTo(${n2}, ${p})`, () => {
-      jestExpect(n1).not.toBeCloseTo(n2, p);
+      elricExpect(n1).not.toBeCloseTo(n2, p);
 
       expect(() =>
-        jestExpect(n1).toBeCloseTo(n2, p),
+        elricExpect(n1).toBeCloseTo(n2, p),
       ).toThrowErrorMatchingSnapshot();
     });
   });
@@ -1605,10 +1605,10 @@ describe('.toBeCloseTo', () => {
     [2.0000002, 2, 5],
   ].forEach(([n1, n2, p]) => {
     it(`{pass: true} expect(${n1}).toBeCloseTo(${n2}, ${p})`, () => {
-      jestExpect(n1).toBeCloseTo(n2, p);
+      elricExpect(n1).toBeCloseTo(n2, p);
 
       expect(() =>
-        jestExpect(n1).not.toBeCloseTo(n2, p),
+        elricExpect(n1).not.toBeCloseTo(n2, p),
       ).toThrowErrorMatchingSnapshot();
     });
   });
@@ -1619,7 +1619,7 @@ describe('.toBeCloseTo', () => {
       const expected = 0;
       const received = '';
       expect(() => {
-        jestExpect(received).toBeCloseTo(expected, precision);
+        elricExpect(received).toBeCloseTo(expected, precision);
       }).toThrowErrorMatchingSnapshot();
     });
 
@@ -1627,7 +1627,7 @@ describe('.toBeCloseTo', () => {
       const received = 0.1;
       // expected is undefined
       expect(() => {
-        jestExpect(received).not.toBeCloseTo();
+        elricExpect(received).not.toBeCloseTo();
       }).toThrowErrorMatchingSnapshot();
     });
 
@@ -1635,7 +1635,7 @@ describe('.toBeCloseTo', () => {
       const expected = '0';
       const received = Promise.reject(0.01);
       return expect(
-        jestExpect(received).rejects.toBeCloseTo(expected),
+        elricExpect(received).rejects.toBeCloseTo(expected),
       ).rejects.toThrowErrorMatchingSnapshot();
     });
 
@@ -1643,7 +1643,7 @@ describe('.toBeCloseTo', () => {
       const expected = 0;
       const received = Promise.reject(Symbol('0.1'));
       return expect(
-        jestExpect(received).rejects.not.toBeCloseTo(expected),
+        elricExpect(received).rejects.not.toBeCloseTo(expected),
       ).rejects.toThrowErrorMatchingSnapshot();
     });
 
@@ -1652,7 +1652,7 @@ describe('.toBeCloseTo', () => {
       const expected = 0;
       const received = Promise.resolve(false);
       return expect(
-        jestExpect(received).resolves.toBeCloseTo(expected, precision),
+        elricExpect(received).resolves.toBeCloseTo(expected, precision),
       ).rejects.toThrowErrorMatchingSnapshot();
     });
 
@@ -1661,7 +1661,7 @@ describe('.toBeCloseTo', () => {
       const expected = null;
       const received = Promise.resolve(0.1);
       return expect(
-        jestExpect(received).resolves.not.toBeCloseTo(expected, precision),
+        elricExpect(received).resolves.not.toBeCloseTo(expected, precision),
       ).rejects.toThrowErrorMatchingSnapshot();
     });
   });
@@ -1673,10 +1673,10 @@ describe('.toMatch()', () => {
     ['Foo bar', /^foo/i],
   ].forEach(([n1, n2]) => {
     it(`{pass: true} expect(${n1}).toMatch(${n2})`, () => {
-      jestExpect(n1).toMatch(n2);
+      elricExpect(n1).toMatch(n2);
 
       expect(() =>
-        jestExpect(n1).not.toMatch(n2),
+        elricExpect(n1).not.toMatch(n2),
       ).toThrowErrorMatchingSnapshot();
     });
   });
@@ -1686,7 +1686,7 @@ describe('.toMatch()', () => {
     ['bar', /foo/],
   ].forEach(([n1, n2]) => {
     it(`throws: [${n1}, ${n2}]`, () => {
-      expect(() => jestExpect(n1).toMatch(n2)).toThrowErrorMatchingSnapshot();
+      expect(() => elricExpect(n1).toMatch(n2)).toThrowErrorMatchingSnapshot();
     });
   });
 
@@ -1703,7 +1703,7 @@ describe('.toMatch()', () => {
       'throws if non String actual value passed:' +
         ` [${stringify(n1)}, ${stringify(n2)}]`,
       () => {
-        expect(() => jestExpect(n1).toMatch(n2)).toThrowErrorMatchingSnapshot();
+        expect(() => elricExpect(n1).toMatch(n2)).toThrowErrorMatchingSnapshot();
       },
     );
   });
@@ -1720,20 +1720,20 @@ describe('.toMatch()', () => {
       `throws if non String/RegExp expected value passed:` +
         ` [${stringify(n1)}, ${stringify(n2)}]`,
       () => {
-        expect(() => jestExpect(n1).toMatch(n2)).toThrowErrorMatchingSnapshot();
+        expect(() => elricExpect(n1).toMatch(n2)).toThrowErrorMatchingSnapshot();
       },
     );
   });
 
   it('escapes strings properly', () => {
-    jestExpect('this?: throws').toMatch('this?: throws');
+    elricExpect('this?: throws').toMatch('this?: throws');
   });
 
   it('does not maintain RegExp state between calls', () => {
     const regex = /[f]\d+/gi;
-    jestExpect('f123').toMatch(regex);
-    jestExpect('F456').toMatch(regex);
-    jestExpect(regex.lastIndex).toBe(0);
+    elricExpect('f123').toMatch(regex);
+    elricExpect('F456').toMatch(regex);
+    elricExpect(regex.lastIndex).toBe(0);
   });
 });
 
@@ -1749,9 +1749,9 @@ describe('.toHaveLength', () => {
     test(`{pass: true} expect(${stringify(
       received,
     )}).toHaveLength(${length})`, () => {
-      jestExpect(received).toHaveLength(length);
+      elricExpect(received).toHaveLength(length);
       expect(() =>
-        jestExpect(received).not.toHaveLength(length),
+        elricExpect(received).not.toHaveLength(length),
       ).toThrowErrorMatchingSnapshot();
     });
   });
@@ -1766,20 +1766,20 @@ describe('.toHaveLength', () => {
     test(`{pass: false} expect(${stringify(
       received,
     )}).toHaveLength(${length})`, () => {
-      jestExpect(received).not.toHaveLength(length);
+      elricExpect(received).not.toHaveLength(length);
       expect(() =>
-        jestExpect(received).toHaveLength(length),
+        elricExpect(received).toHaveLength(length),
       ).toThrowErrorMatchingSnapshot();
     });
   });
 
   test('error cases', () => {
     expect(() =>
-      jestExpect({a: 9}).toHaveLength(1),
+      elricExpect({a: 9}).toHaveLength(1),
     ).toThrowErrorMatchingSnapshot();
-    expect(() => jestExpect(0).toHaveLength(1)).toThrowErrorMatchingSnapshot();
+    expect(() => elricExpect(0).toHaveLength(1)).toThrowErrorMatchingSnapshot();
     expect(() =>
-      jestExpect(undefined).not.toHaveLength(1),
+      elricExpect(undefined).not.toHaveLength(1),
     ).toThrowErrorMatchingSnapshot();
   });
 
@@ -1788,7 +1788,7 @@ describe('.toHaveLength', () => {
       const expected = '3';
       const received = 'abc';
       expect(() => {
-        jestExpect(received).not.toHaveLength(expected);
+        elricExpect(received).not.toHaveLength(expected);
       }).toThrowErrorMatchingSnapshot();
     });
 
@@ -1796,7 +1796,7 @@ describe('.toHaveLength', () => {
       const expected = Infinity;
       const received = Promise.reject('abc');
       return expect(
-        jestExpect(received).rejects.toHaveLength(expected),
+        elricExpect(received).rejects.toHaveLength(expected),
       ).rejects.toThrowErrorMatchingSnapshot();
     });
 
@@ -1804,7 +1804,7 @@ describe('.toHaveLength', () => {
       const expected = NaN;
       const received = Promise.reject('abc');
       return expect(
-        jestExpect(received).rejects.not.toHaveLength(expected),
+        elricExpect(received).rejects.not.toHaveLength(expected),
       ).rejects.toThrowErrorMatchingSnapshot();
     });
 
@@ -1812,7 +1812,7 @@ describe('.toHaveLength', () => {
       const expected = 0.5;
       const received = Promise.resolve('abc');
       return expect(
-        jestExpect(received).resolves.toHaveLength(expected),
+        elricExpect(received).resolves.toHaveLength(expected),
       ).rejects.toThrowErrorMatchingSnapshot();
     });
 
@@ -1820,7 +1820,7 @@ describe('.toHaveLength', () => {
       const expected = -3;
       const received = Promise.resolve('abc');
       return expect(
-        jestExpect(received).resolves.not.toHaveLength(expected),
+        elricExpect(received).resolves.not.toHaveLength(expected),
       ).rejects.toThrowErrorMatchingSnapshot();
     });
   });
@@ -1867,13 +1867,13 @@ describe('.toHaveProperty()', () => {
 
   const receivedDiffMultiple = {
     children: [
-      'Roses are red.\nViolets are blue.\nTesting with Jest is good for you.',
+      'Roses are red.\nViolets are blue.\nTesting with elric is good for you.',
     ],
     props: null,
     type: 'pre',
   };
   const valueDiffMultiple =
-    'Roses are red, violets are blue.\nTesting with Jest\nIs good for you.';
+    'Roses are red, violets are blue.\nTesting with elric\nIs good for you.';
 
   [
     [{a: {b: {c: {d: 1}}}}, 'a.b.c.d', 1],
@@ -1902,9 +1902,9 @@ describe('.toHaveProperty()', () => {
     test(`{pass: true} expect(${stringify(
       obj,
     )}).toHaveProperty('${keyPath}', ${stringify(value)})`, () => {
-      jestExpect(obj).toHaveProperty(keyPath, value);
+      elricExpect(obj).toHaveProperty(keyPath, value);
       expect(() =>
-        jestExpect(obj).not.toHaveProperty(keyPath, value),
+        elricExpect(obj).not.toHaveProperty(keyPath, value),
       ).toThrowErrorMatchingSnapshot();
     });
   });
@@ -1932,9 +1932,9 @@ describe('.toHaveProperty()', () => {
       obj,
     )}).toHaveProperty('${keyPath}', ${stringify(value)})`, () => {
       expect(() =>
-        jestExpect(obj).toHaveProperty(keyPath, value),
+        elricExpect(obj).toHaveProperty(keyPath, value),
       ).toThrowErrorMatchingSnapshot();
-      jestExpect(obj).not.toHaveProperty(keyPath, value);
+      elricExpect(obj).not.toHaveProperty(keyPath, value);
     });
   });
 
@@ -1949,9 +1949,9 @@ describe('.toHaveProperty()', () => {
     test(`{pass: true} expect(${stringify(
       obj,
     )}).toHaveProperty('${keyPath}')`, () => {
-      jestExpect(obj).toHaveProperty(keyPath);
+      elricExpect(obj).toHaveProperty(keyPath);
       expect(() =>
-        jestExpect(obj).not.toHaveProperty(keyPath),
+        elricExpect(obj).not.toHaveProperty(keyPath),
       ).toThrowErrorMatchingSnapshot();
     });
   });
@@ -1973,9 +1973,9 @@ describe('.toHaveProperty()', () => {
       obj,
     )}).toHaveProperty('${keyPath}')`, () => {
       expect(() =>
-        jestExpect(obj).toHaveProperty(keyPath),
+        elricExpect(obj).toHaveProperty(keyPath),
       ).toThrowErrorMatchingSnapshot();
-      jestExpect(obj).not.toHaveProperty(keyPath);
+      elricExpect(obj).not.toHaveProperty(keyPath);
     });
   });
 
@@ -1991,7 +1991,7 @@ describe('.toHaveProperty()', () => {
       obj,
     )}).toHaveProperty('${keyPath}')`, () => {
       expect(() =>
-        jestExpect(obj).toHaveProperty(keyPath),
+        elricExpect(obj).toHaveProperty(keyPath),
       ).toThrowErrorMatchingSnapshot();
     });
   });
@@ -2028,9 +2028,9 @@ describe('toMatchObject()', () => {
       it(`{pass: true} expect(${stringify(n1)}).toMatchObject(${stringify(
         n2,
       )})`, () => {
-        jestExpect(n1).toMatchObject(n2);
+        elricExpect(n1).toMatchObject(n2);
         expect(() =>
-          jestExpect(n1).not.toMatchObject(n2),
+          elricExpect(n1).not.toMatchObject(n2),
         ).toThrowErrorMatchingSnapshot();
       });
     });
@@ -2041,9 +2041,9 @@ describe('toMatchObject()', () => {
       it(`{pass: false} expect(${stringify(n1)}).toMatchObject(${stringify(
         n2,
       )})`, () => {
-        jestExpect(n1).not.toMatchObject(n2);
+        elricExpect(n1).not.toMatchObject(n2);
         expect(() =>
-          jestExpect(n1).toMatchObject(n2),
+          elricExpect(n1).toMatchObject(n2),
         ).toThrowErrorMatchingSnapshot();
       });
     });
@@ -2120,8 +2120,8 @@ describe('toMatchObject()', () => {
     [{a: 'b', t: {x: {r: 'r'}, z: 'z'}}, {t: {x: {r: 'r'}}}],
     [{a: [3, 4, 5], b: 'b'}, {a: [3, 4, 5]}],
     [{a: [3, 4, 5, 'v'], b: 'b'}, {a: [3, 4, 5, 'v']}],
-    [{a: 1, c: 2}, {a: jestExpect.any(Number)}],
-    [{a: {x: 'x', y: 'y'}}, {a: {x: jestExpect.any(String)}}],
+    [{a: 1, c: 2}, {a: elricExpect.any(Number)}],
+    [{a: {x: 'x', y: 'y'}}, {a: {x: elricExpect.any(String)}}],
     [new Set([1, 2]), new Set([1, 2])],
     [new Set([1, 2]), new Set([2, 1])],
     [new Date('2015-11-30'), new Date('2015-11-30')],
@@ -2140,19 +2140,19 @@ describe('toMatchObject()', () => {
     [new Foo(), {a: undefined, b: 'b'}],
     [Object.assign(Object.create(null), {a: 'b'}), {a: 'b'}],
     [
-      {a: 'b', c: 'd', [Symbol.for('jest')]: 'jest'},
-      {a: 'b', [Symbol.for('jest')]: 'jest'},
+      {a: 'b', c: 'd', [Symbol.for('elric')]: 'elric'},
+      {a: 'b', [Symbol.for('elric')]: 'elric'},
     ],
     [
-      {a: 'b', c: 'd', [Symbol.for('jest')]: 'jest'},
-      {a: 'b', c: 'd', [Symbol.for('jest')]: 'jest'},
+      {a: 'b', c: 'd', [Symbol.for('elric')]: 'elric'},
+      {a: 'b', c: 'd', [Symbol.for('elric')]: 'elric'},
     ],
     // These snapshots will show {} as the object because the properties
     // are not enumerable. We will need to somehow make the serialization of
     // these keys a little smarter before reporting accurately.
     [new Sub(), {a: undefined, b: 'b', c: 'c'}],
     [withDefineProperty(new Sub(), 'd', 4), {d: 4}],
-    [{a: 'b', toString() {}}, {toString: jestExpect.any(Function)}],
+    [{a: 'b', toString() {}}, {toString: elricExpect.any(Function)}],
   ]);
 
   testToMatchSnapshots([
@@ -2161,7 +2161,7 @@ describe('toMatchObject()', () => {
       {a: 'b', c: 'd'},
       {a: 'b!', c: 'd'},
     ],
-    [{a: 'a', c: 'd'}, {a: jestExpect.any(Number)}],
+    [{a: 'a', c: 'd'}, {a: elricExpect.any(Number)}],
     [
       {a: 'b', t: {x: {r: 'r'}, z: 'z'}},
       {a: 'b', t: {z: [3]}},
@@ -2171,7 +2171,7 @@ describe('toMatchObject()', () => {
     [{a: [3, 4, 5], b: 'b'}, {a: [3, 4]}],
     [{a: [3, 4, 'v'], b: 'b'}, {a: ['v']}],
     [{a: [3, 4, 5], b: 'b'}, {a: {b: 4}}],
-    [{a: [3, 4, 5], b: 'b'}, {a: {b: jestExpect.any(String)}}],
+    [{a: [3, 4, 5], b: 'b'}, {a: {b: elricExpect.any(String)}}],
     [
       [1, 2],
       [1, 3],
@@ -2197,10 +2197,10 @@ describe('toMatchObject()', () => {
     [new Error('foo'), new Error('bar')],
     [Object.assign(Object.create(null), {a: 'b'}), {c: 'd'}],
     [
-      {a: 'b', c: 'd', [Symbol.for('jest')]: 'jest'},
-      {a: 'c', [Symbol.for('jest')]: expect.any(String)},
+      {a: 'b', c: 'd', [Symbol.for('elric')]: 'elric'},
+      {a: 'c', [Symbol.for('elric')]: expect.any(String)},
     ],
-    [{a: 'b'}, {toString: jestExpect.any(Function)}],
+    [{a: 'b'}, {toString: elricExpect.any(Function)}],
   ]);
 
   [
@@ -2219,7 +2219,7 @@ describe('toMatchObject()', () => {
       n2,
     )})`, () => {
       expect(() =>
-        jestExpect(n1).toMatchObject(n2),
+        elricExpect(n1).toMatchObject(n2),
       ).toThrowErrorMatchingSnapshot();
     });
   });
@@ -2234,9 +2234,9 @@ describe('toMatchObject()', () => {
     const matcher = {other: 'child'};
     matcher.ref = matcher;
 
-    jestExpect(b).not.toMatchObject(matcher);
+    elricExpect(b).not.toMatchObject(matcher);
     expect(() =>
-      jestExpect(b).toMatchObject(matcher),
+      elricExpect(b).toMatchObject(matcher),
     ).toThrowErrorMatchingSnapshot();
   });
 });

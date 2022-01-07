@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ensureNoExpected() throws error when expected is not undefined with matcherName 1`] = `
 <d>expect(</><r>received</><d>)[.not].toBeDefined()</>

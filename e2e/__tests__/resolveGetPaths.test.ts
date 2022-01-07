@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('require.resolve.paths', () => {
-  const {exitCode} = runJest('resolve-get-paths');
+  const {exitCode} = runelric('resolve-get-paths');
   expect(exitCode).toBe(0);
 });

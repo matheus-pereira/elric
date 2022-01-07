@@ -6,4 +6,4 @@
  *
  */
 
-module.exports = jest.fn();
+module.exports = elric.fn();

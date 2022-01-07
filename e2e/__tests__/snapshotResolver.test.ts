@@ -7,7 +7,7 @@
 
 import * as path from 'path';
 import * as fs from 'graceful-fs';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const snapshotDir = path.resolve(
   __dirname,
@@ -29,7 +29,7 @@ describe('Custom snapshot resolver', () => {
   afterAll(cleanup);
 
   it('Resolves snapshot files using custom resolver', () => {
-    const result = runJest('snapshot-resolver', ['-w=1', '--ci=false']);
+    const result = runelric('snapshot-resolver', ['-w=1', '--ci=false']);
 
     expect(result.stderr).toMatch('1 snapshot written from 1 test suite');
 

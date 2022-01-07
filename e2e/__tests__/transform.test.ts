@@ -8,20 +8,20 @@
 import {tmpdir} from 'os';
 import * as path from 'path';
 import * as fs from 'graceful-fs';
-import {wrap} from 'jest-snapshot-serializer-raw';
-import {onNodeVersions} from '@jest/test-utils';
+import {wrap} from 'elric-snapshot-serializer-raw';
+import {onNodeVersions} from '@elric/test-utils';
 import {
   cleanup,
   copyDir,
   createEmptyPackage,
   extractSummary,
-  linkJestPackage,
+  linkelricPackage,
   runYarnInstall,
 } from '../Utils';
-import runJest, {json as runWithJson} from '../runJest';
+import runelric, {json as runWithJson} from '../runelric';
 
-describe('babel-jest', () => {
-  const dir = path.resolve(__dirname, '..', 'transform/babel-jest');
+describe('babel-elric', () => {
+  const dir = path.resolve(__dirname, '..', 'transform/babel-elric');
 
   beforeEach(() => {
     runYarnInstall(dir);
@@ -35,7 +35,7 @@ describe('babel-jest', () => {
   });
 
   it('instruments only specific files and collects coverage', () => {
-    const {stdout} = runJest(dir, ['--coverage', '--no-cache'], {
+    const {stdout} = runelric(dir, ['--coverage', '--no-cache'], {
       stripAnsi: true,
     });
     expect(stdout).toMatch('covered.js');
@@ -46,19 +46,19 @@ describe('babel-jest', () => {
   });
 });
 
-describe('babel-jest ignored', () => {
-  const dir = path.resolve(__dirname, '..', 'transform/babel-jest-ignored');
+describe('babel-elric ignored', () => {
+  const dir = path.resolve(__dirname, '..', 'transform/babel-elric-ignored');
 
   it('tells user to match ignored files', () => {
     // --no-cache because babel can cache stuff and result in false green
-    const {exitCode, stderr} = runJest(dir, ['--no-cache']);
+    const {exitCode, stderr} = runelric(dir, ['--no-cache']);
     expect(exitCode).toBe(1);
     expect(wrap(extractSummary(stderr).rest)).toMatchSnapshot();
   });
 });
 
-describe('babel-jest with manual transformer', () => {
-  const dir = path.resolve(__dirname, '..', 'transform/babel-jest-manual');
+describe('babel-elric with manual transformer', () => {
+  const dir = path.resolve(__dirname, '..', 'transform/babel-elric-manual');
 
   beforeEach(() => {
     runYarnInstall(dir);
@@ -72,28 +72,28 @@ describe('babel-jest with manual transformer', () => {
   });
 });
 
-// babel-jest is automatically linked at the root because it is a workspace now
+// babel-elric is automatically linked at the root because it is a workspace now
 // a way to test this in isolation is to move the test suite into a temp folder
-describe('no babel-jest', () => {
-  const dir = path.resolve(__dirname, '..', 'transform/no-babel-jest');
-  // doing test in a temp directory because we don't want jest node_modules affect it
-  const tempDir = path.resolve(tmpdir(), 'transform-no-babel-jest');
+describe('no babel-elric', () => {
+  const dir = path.resolve(__dirname, '..', 'transform/no-babel-elric');
+  // doing test in a temp directory because we don't want elric node_modules affect it
+  const tempDir = path.resolve(tmpdir(), 'transform-no-babel-elric');
 
   beforeEach(() => {
     cleanup(tempDir);
     createEmptyPackage(tempDir);
     copyDir(dir, tempDir);
-    linkJestPackage('babel-jest', tempDir);
+    linkelricPackage('babel-elric', tempDir);
   });
 
   test('fails with syntax error on flow types', () => {
-    const {stderr} = runJest(tempDir, ['--no-cache', '--no-watchman']);
+    const {stderr} = runelric(tempDir, ['--no-cache', '--no-watchman']);
     expect(stderr).toMatch(/FAIL.*failsWithSyntaxError/);
     expect(stderr).toMatch('Unexpected token');
   });
 
-  test('instrumentation with no babel-jest', () => {
-    const {stdout} = runJest(
+  test('instrumentation with no babel-elric', () => {
+    const {stdout} = runelric(
       tempDir,
       ['--no-cache', '--coverage', '--no-watchman'],
       {stripAnsi: true},
@@ -122,7 +122,7 @@ describe('custom transformer', () => {
   });
 
   it('instruments files', () => {
-    const {stdout, exitCode} = runJest(dir, ['--no-cache', '--coverage'], {
+    const {stdout, exitCode} = runelric(dir, ['--no-cache', '--coverage'], {
       stripAnsi: true,
     });
     // coverage should be empty because there's no real instrumentation
@@ -177,7 +177,7 @@ describe('transformer-config', () => {
   });
 
   it('instruments only specific files and collects coverage', () => {
-    const {stdout} = runJest(dir, ['--coverage', '--no-cache'], {
+    const {stdout} = runelric(dir, ['--coverage', '--no-cache'], {
       stripAnsi: true,
     });
     expect(stdout).toMatch('Covered.js');
@@ -194,7 +194,7 @@ describe('transformer caching', () => {
 
   it('does not rerun transform within worker', () => {
     // --no-cache because babel can cache stuff and result in false green
-    const {stdout} = runJest(dir, ['--no-cache', '-w=2']);
+    const {stdout} = runelric(dir, ['--no-cache', '-w=2']);
 
     const loggedFiles = stdout.split('\n');
 
@@ -233,7 +233,7 @@ describe('transform-snapshotResolver', () => {
   afterAll(cleanupTest);
 
   it('should transform the snapshotResolver', () => {
-    const result = runJest(dir, ['-w=1', '--no-cache', '--ci=false']);
+    const result = runelric(dir, ['-w=1', '--no-cache', '--ci=false']);
 
     expect(result.stderr).toMatch('1 snapshot written from 1 test suite');
 
@@ -302,14 +302,14 @@ onNodeVersions('>=12.17.0', () => {
     });
   });
 
-  describe('babel-jest-async', () => {
-    const dir = path.resolve(__dirname, '../transform/babel-jest-async');
+  describe('babel-elric-async', () => {
+    const dir = path.resolve(__dirname, '../transform/babel-elric-async');
 
     beforeAll(() => {
       runYarnInstall(dir);
     });
 
-    it("should use babel-jest's async transforms", () => {
+    it("should use babel-elric's async transforms", () => {
       const {json, stderr} = runWithJson(dir, ['--no-cache'], {
         nodeOptions: '--experimental-vm-modules --no-warnings',
       });

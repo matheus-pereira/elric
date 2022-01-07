@@ -16,7 +16,7 @@ let mockForkedProcesses;
 function mockBuildForkedProcess() {
   const mockChild = new EventEmitter();
 
-  mockChild.postMessage = jest.fn();
+  mockChild.postMessage = elric.fn();
 
   return mockChild;
 }
@@ -37,12 +37,12 @@ function assertCallsToChild(childNum, ...calls) {
   });
 }
 
-describe('Jest Worker Process Integration', () => {
+describe('elric Worker Process Integration', () => {
   beforeEach(() => {
     mockForkedProcesses = [];
 
-    jest.mock('worker_threads', () => {
-      const fakeClass = jest.fn(() => {
+    elric.mock('worker_threads', () => {
+      const fakeClass = elric.fn(() => {
         const forkedProcess = mockBuildForkedProcess();
 
         mockForkedProcesses.push(forkedProcess);
@@ -60,7 +60,7 @@ describe('Jest Worker Process Integration', () => {
   });
 
   afterEach(() => {
-    jest.resetModules();
+    elric.resetModules();
   });
 
   it('calls a single method from the worker', async () => {

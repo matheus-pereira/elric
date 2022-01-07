@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('imported globals', () => {
-  const result = runJest('imported-globals');
+  const result = runelric('imported-globals');
   expect(result.exitCode).toBe(0);
 });

@@ -60,10 +60,10 @@ const IMPORT_OR_EXPORT_RE = createRegExp(
   'g',
 );
 
-const JEST_EXTENSIONS_RE = createRegExp(
+const elric_EXTENSIONS_RE = createRegExp(
   [
     ...functionCallStart(
-      'jest\\s*\\.\\s*(?:requireActual|requireMock|genMockFromModule|createMockFromModule)',
+      'elric\\s*\\.\\s*(?:requireActual|requireMock|genMockFromModule|createMockFromModule)',
     ),
     CAPTURE_STRING_LITERAL(1),
     WHITESPACE,
@@ -86,7 +86,7 @@ export function extract(code: string): Set<string> {
     .replace(LINE_COMMENT_RE, '')
     .replace(IMPORT_OR_EXPORT_RE, addDependency)
     .replace(REQUIRE_OR_DYNAMIC_IMPORT_RE, addDependency)
-    .replace(JEST_EXTENSIONS_RE, addDependency);
+    .replace(elric_EXTENSIONS_RE, addDependency);
 
   return dependencies;
 }

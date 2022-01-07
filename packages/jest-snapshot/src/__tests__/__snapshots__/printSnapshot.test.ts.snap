@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matcher error toMatchInlineSnapshot Expected properties must be an object (non-null) without snapshot 1`] = `
 <d>expect(</><r>received</><d>).</>toMatchInlineSnapshot<d>(</><g>properties</><d>)</>
@@ -516,10 +516,10 @@ exports[`printSnapshotAndReceived isLineDiffable true object 1`] = `
 <d>  Object {</>
 <d>    "props": Object {</>
 <m>-     "className": "logo",</>
-<m>-     "src": "/img/jest.png",</>
-<t>+     "alt": "Jest logo",</>
+<m>-     "src": "/img/elric.png",</>
+<t>+     "alt": "elric logo",</>
 <t>+     "class": "logo",</>
-<t>+     "src": "/img/jest.svg",</>
+<t>+     "src": "/img/elric.svg",</>
 <d>    },</>
 <d>    "type": "img",</>
 <d>  }</>

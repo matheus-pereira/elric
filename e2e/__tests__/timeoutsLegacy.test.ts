@@ -6,18 +6,18 @@
  */
 
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
-import {skipSuiteOnJestCircus} from '@jest/test-utils';
+import {wrap} from 'elric-snapshot-serializer-raw';
+import {skipSuiteOnelricCircus} from '@elric/test-utils';
 import {cleanup, extractSummary, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 /**
- * NOTE: This test should be removed once jest-circus is rolled out as a breaking change.
+ * NOTE: This test should be removed once elric-circus is rolled out as a breaking change.
  */
 
 const DIR = path.resolve(__dirname, '../timeouts-legacy');
 
-skipSuiteOnJestCircus();
+skipSuiteOnelricCircus();
 
 beforeEach(() => cleanup(DIR));
 afterAll(() => cleanup(DIR));
@@ -36,10 +36,10 @@ test('exceeds the timeout set using jasmine.DEFAULT_TIMEOUT_INTERVAL', () => {
     'package.json': '{}',
   });
 
-  const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false']);
+  const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false']);
   const {rest, summary} = extractSummary(stderr);
   expect(rest).toMatch(
-    /(jest\.setTimeout|jasmine\.DEFAULT_TIMEOUT_INTERVAL|Exceeded timeout)/,
+    /(elric\.setTimeout|jasmine\.DEFAULT_TIMEOUT_INTERVAL|Exceeded timeout)/,
   );
   expect(wrap(summary)).toMatchSnapshot();
   expect(exitCode).toBe(1);
@@ -59,7 +59,7 @@ test('does not exceed the timeout using jasmine.DEFAULT_TIMEOUT_INTERVAL', () =>
     'package.json': '{}',
   });
 
-  const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false']);
+  const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false']);
   const {rest, summary} = extractSummary(stderr);
   expect(wrap(rest)).toMatchSnapshot();
   expect(wrap(summary)).toMatchSnapshot();
@@ -81,7 +81,7 @@ test('can read and write jasmine.DEFAULT_TIMEOUT_INTERVAL', () => {
     'package.json': '{}',
   });
 
-  const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false']);
+  const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false']);
   const {summary} = extractSummary(stderr);
   expect(wrap(summary)).toMatchSnapshot();
   expect(exitCode).toBe(0);

@@ -76,7 +76,7 @@ describe('promise it', () => {
   });
 
   // I wish it was possible to catch this but I do not see a way.
-  // Currently both jest and mocha will pass this test.
+  // Currently both elric and mocha will pass this test.
   it.skip('fails with thrown error - async', () => {
     setTimeout(() => {
       throw new Error('async fail - no done');

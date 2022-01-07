@@ -6,16 +6,16 @@
  */
 
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import slash = require('slash');
 import {extractSummary} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const MULTIPLE_CONFIGS_WARNING_TEXT = 'Multiple configurations found';
 
 test('multiple configs will warn', () => {
   const rootDir = slash(path.resolve(__dirname, '../..'));
-  const {exitCode, stderr} = runJest('multiple-configs', [], {
+  const {exitCode, stderr} = runelric('multiple-configs', [], {
     skipPkgJsonCheck: true,
   });
 
@@ -30,9 +30,9 @@ test('multiple configs will warn', () => {
 });
 
 test('multiple configs warning can be suppressed by using --config', () => {
-  const {exitCode, stderr} = runJest(
+  const {exitCode, stderr} = runelric(
     'multiple-configs',
-    ['--config', 'jest.config.json'],
+    ['--config', 'elric.config.json'],
     {
       skipPkgJsonCheck: true,
     },

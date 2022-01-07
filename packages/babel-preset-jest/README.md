@@ -1,11 +1,11 @@
-# babel-preset-jest
+# babel-preset-elric
 
-> Babel preset for all Jest plugins. This preset is automatically included when using [babel-jest](https://github.com/facebook/jest/tree/main/packages/babel-jest).
+> Babel preset for all elric plugins. This preset is automatically included when using [babel-elric](https://github.com/facebook/elric/tree/main/packages/babel-elric).
 
 ## Install
 
 ```sh
-$ npm install --save-dev babel-preset-jest
+$ npm install --save-dev babel-preset-elric
 ```
 
 ## Usage
@@ -14,20 +14,20 @@ $ npm install --save-dev babel-preset-jest
 
 ```js
 module.exports = {
-  presets: ['jest'],
+  presets: ['elric'],
 };
 ```
 
 ### Via CLI
 
 ```sh
-$ babel script.js --presets jest
+$ babel script.js --presets elric
 ```
 
 ### Via Node API
 
 ```javascript
 require('@babel/core').transform('code', {
-  presets: ['jest'],
+  presets: ['elric'],
 });
 ```

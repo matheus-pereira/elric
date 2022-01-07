@@ -1,5 +1,5 @@
 {
-  "name": "jest-watcher",
+  "name": "elric-watcher",
   "description": "Delightful JavaScript Testing.",
   "version": "27.4.6",
   "main": "./build/index.js",
@@ -12,26 +12,26 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@jest/test-result": "^27.4.6",
-    "@jest/types": "^27.4.2",
+    "@elric/test-result": "^27.4.6",
+    "@elric/types": "^27.4.2",
     "@types/node": "*",
     "ansi-escapes": "^4.2.1",
     "chalk": "^4.0.0",
-    "jest-util": "^27.4.2",
+    "elric-util": "^27.4.2",
     "string-length": "^4.0.1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest",
-    "directory": "packages/jest-watcher"
+    "url": "https://github.com/facebook/elric",
+    "directory": "packages/elric-watcher"
   },
   "bugs": {
-    "url": "https://github.com/facebook/jest/issues"
+    "url": "https://github.com/facebook/elric/issues"
   },
   "engines": {
     "node": "^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0"
   },
-  "homepage": "https://jestjs.io/",
+  "homepage": "https://elricjs.io/",
   "license": "MIT",
   "publishConfig": {
     "access": "public"

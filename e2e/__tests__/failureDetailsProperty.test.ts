@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {isJestJasmineRun} from '@jest/test-utils';
-import runJest from '../runJest';
+import {iselricJasmineRun} from '@elric/test-utils';
+import runelric from '../runelric';
 
 const removeStackTraces = (stdout: string) =>
   stdout.replace(
@@ -15,7 +15,7 @@ const removeStackTraces = (stdout: string) =>
   );
 
 test('that the failureDetails property is set', () => {
-  const {stdout, stderr} = runJest('failureDetails-property', [
+  const {stdout, stderr} = runelric('failureDetails-property', [
     'tests.test.js',
   ]);
 
@@ -24,7 +24,7 @@ test('that the failureDetails property is set', () => {
 
   const output = JSON.parse(removeStackTraces(stdout));
 
-  if (isJestJasmineRun()) {
+  if (iselricJasmineRun()) {
     expect(output).toMatchInlineSnapshot(`
       Array [
         Array [

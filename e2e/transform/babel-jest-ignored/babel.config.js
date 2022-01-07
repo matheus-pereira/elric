@@ -8,10 +8,10 @@
 module.exports = {
   only: [
     'blablabla',
-    /jest-circus/,
-    /jest-each/,
-    /jest-environment-node/,
-    /jest-jasmine2/,
-    /jest-source-map/,
+    /elric-circus/,
+    /elric-each/,
+    /elric-environment-node/,
+    /elric-jasmine2/,
+    /elric-source-map/,
   ],
 };

@@ -8,6 +8,6 @@
 
 test('access environment methods after done', () => {
   setTimeout(() => {
-    jest.clearAllTimers();
+    elric.clearAllTimers();
   }, 0);
 });

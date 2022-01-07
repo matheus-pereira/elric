@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`printDiffOrStringify asymmetricMatcher array 1`] = `
 <g>- Expected  - 1</>
@@ -67,7 +67,7 @@ exports[`printDiffOrStringify asymmetricMatcher custom asymmetricMatcher 1`] = `
 <d>  }</>
 `;
 
-exports[`printDiffOrStringify asymmetricMatcher jest asymmetricMatcher 1`] = `
+exports[`printDiffOrStringify asymmetricMatcher elric asymmetricMatcher 1`] = `
 <g>- Expected  - 1</>
 <r>+ Received  + 1</>
 
@@ -78,8 +78,8 @@ exports[`printDiffOrStringify asymmetricMatcher jest asymmetricMatcher 1`] = `
 <d>      1,</>
 <d>      3,</>
 <d>    ],</>
-<d>    "d": StringContaining "jest",</>
-<d>    "e": StringMatching /^jest/,</>
+<d>    "d": StringContaining "elric",</>
+<d>    "e": StringMatching /^elric/,</>
 <d>    "f": ObjectContaining {</>
 <d>      "a": Any<Date>,</>
 <d>    },</>

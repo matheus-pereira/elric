@@ -1,10 +1,10 @@
 {
-  "name": "jest-phabricator",
+  "name": "elric-phabricator",
   "version": "27.4.6",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/jest-phabricator"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/elric-phabricator"
   },
   "types": "./build/index.d.ts",
   "exports": {
@@ -15,7 +15,7 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@jest/test-result": "^27.4.6"
+    "@elric/test-result": "^27.4.6"
   },
   "engines": {
     "node": "^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0"

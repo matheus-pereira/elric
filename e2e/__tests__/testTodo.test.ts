@@ -6,41 +6,41 @@
  */
 
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {extractSummary} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 const dir = path.resolve(__dirname, '../test-todo');
 
 test('works with all statuses', () => {
-  const result = runJest(dir, ['statuses.test.js']);
+  const result = runelric(dir, ['statuses.test.js']);
   expect(result.exitCode).toBe(1);
   const {rest} = extractSummary(result.stderr);
   expect(wrap(rest)).toMatchSnapshot();
 });
 
 test('shows error messages when called with no arguments', () => {
-  const result = runJest(dir, ['todoNoArgs.test.js']);
+  const result = runelric(dir, ['todoNoArgs.test.js']);
   expect(result.exitCode).toBe(1);
   const {rest} = extractSummary(result.stderr);
   expect(wrap(rest)).toMatchSnapshot();
 });
 
 test('shows error messages when called with multiple arguments', () => {
-  const result = runJest(dir, ['todoMultipleArgs.test.js']);
+  const result = runelric(dir, ['todoMultipleArgs.test.js']);
   expect(result.exitCode).toBe(1);
   const {rest} = extractSummary(result.stderr);
   expect(wrap(rest)).toMatchSnapshot();
 });
 
 test('shows error messages when called with invalid argument', () => {
-  const result = runJest(dir, ['todoNonString.test.js']);
+  const result = runelric(dir, ['todoNonString.test.js']);
   expect(result.exitCode).toBe(1);
   const {rest} = extractSummary(result.stderr);
   expect(wrap(rest)).toMatchSnapshot();
 });
 
 test('shows todo messages when in verbose mode', () => {
-  const result = runJest(dir, ['verbose.test.js', '--verbose']);
+  const result = runelric(dir, ['verbose.test.js', '--verbose']);
   expect(result.exitCode).toBe(0);
   const {rest} = extractSummary(result.stderr);
   expect(wrap(rest)).toMatchSnapshot();

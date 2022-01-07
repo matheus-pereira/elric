@@ -9,9 +9,9 @@ import {
   AssertionResult,
   TestResult,
   createEmptyTestResult,
-} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import {formatResultsErrors} from 'jest-message-util';
+} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import {formatResultsErrors} from 'elric-message-util';
 import type {SpecResult} from './jasmine/Spec';
 import type {SuiteResult} from './jasmine/Suite';
 import type {Reporter, RunDetails} from './types';

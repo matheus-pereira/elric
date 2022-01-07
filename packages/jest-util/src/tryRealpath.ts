@@ -6,7 +6,7 @@
  */
 
 import {realpathSync} from 'graceful-fs';
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 
 export default function tryRealpath(path: Config.Path): Config.Path {
   try {

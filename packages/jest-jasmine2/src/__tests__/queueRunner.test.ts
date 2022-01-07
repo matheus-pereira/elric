@@ -10,8 +10,8 @@ import queueRunner from '../queueRunner';
 
 describe('queueRunner', () => {
   it('runs every function in the queue.', async () => {
-    const fnOne = jest.fn(next => next());
-    const fnTwo = jest.fn(next => next());
+    const fnOne = elric.fn(next => next());
+    const fnTwo = elric.fn(next => next());
     const options = {
       clearTimeout,
       fail: () => {},
@@ -33,9 +33,9 @@ describe('queueRunner', () => {
   });
 
   it('exposes `fail` to `next`.', async () => {
-    const fail = jest.fn();
-    const fnOne = jest.fn(next => next.fail());
-    const fnTwo = jest.fn(next => next());
+    const fail = elric.fn();
+    const fnOne = elric.fn(next => next.fail());
+    const fnTwo = elric.fn(next => next());
     const options = {
       clearTimeout,
       fail,
@@ -60,11 +60,11 @@ describe('queueRunner', () => {
 
   it('passes errors to `onException`.', async () => {
     const error = new Error('The error a test throws.');
-    const fnOne = jest.fn(() => {
+    const fnOne = elric.fn(() => {
       throw error;
     });
-    const fnTwo = jest.fn(next => next());
-    const onException = jest.fn();
+    const fnTwo = elric.fn(next => next());
+    const onException = elric.fn();
     const options = {
       clearTimeout,
       fail: () => {},
@@ -88,9 +88,9 @@ describe('queueRunner', () => {
   });
 
   it('passes an error to `onException` on timeout.', async () => {
-    const fnOne = jest.fn(_next => {});
-    const fnTwo = jest.fn(next => next());
-    const onException = jest.fn();
+    const fnOne = elric.fn(_next => {});
+    const fnTwo = elric.fn(next => next());
+    const onException = elric.fn();
     const options = {
       clearTimeout,
       fail: () => {},
@@ -114,16 +114,16 @@ describe('queueRunner', () => {
     // i.e. the `message` of the error passed to `onException`.
     expect(onException.mock.calls[0][0].message).toEqual(
       'Timeout - Async callback was not invoked within the 0 ms timeout ' +
-        'specified by jest.setTimeout.',
+        'specified by elric.setTimeout.',
     );
     expect(fnTwo).toHaveBeenCalled();
   });
 
   it('calls `fail` with arguments', async () => {
-    const failFn = jest.fn(next => next.fail('miserably', 'failed'));
+    const failFn = elric.fn(next => next.fail('miserably', 'failed'));
     const options = {
       clearTimeout,
-      fail: jest.fn(),
+      fail: elric.fn(),
       queueableFns: [{fn: failFn}],
       setTimeout,
     };
@@ -135,9 +135,9 @@ describe('queueRunner', () => {
 
   it('calls `fail` when done(error) is invoked', async () => {
     const error = new Error('I am an error');
-    const fail = jest.fn();
-    const fnOne = jest.fn(next => next(error));
-    const fnTwo = jest.fn(next => next());
+    const fail = elric.fn();
+    const fnOne = elric.fn(next => next(error));
+    const fnTwo = elric.fn(next => next());
     const options = {
       clearTimeout,
       fail,

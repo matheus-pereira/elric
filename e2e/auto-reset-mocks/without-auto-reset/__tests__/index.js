@@ -7,10 +7,10 @@
 
 'use strict';
 
-jest.mock('../');
+elric.mock('../');
 
 const importedFn = require('../');
-const localFn = jest.fn();
+const localFn = elric.fn();
 
 describe('without an explicit reset', () => {
   test('first test', () => {
@@ -32,7 +32,7 @@ describe('without an explicit reset', () => {
 
 describe('with an explicit reset', () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    elric.resetAllMocks();
   });
 
   test('first test', () => {

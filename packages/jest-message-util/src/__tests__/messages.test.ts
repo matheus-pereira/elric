@@ -13,23 +13,23 @@ import {formatExecError, formatResultsErrors, formatStackTrace} from '..';
 
 const rootDir = tempy.directory();
 
-jest.mock('graceful-fs', () => ({
-  ...jest.requireActual('fs'),
-  readFileSync: jest.fn(),
+elric.mock('graceful-fs', () => ({
+  ...elric.requireActual('fs'),
+  readFileSync: elric.fn(),
 }));
 
 const unixStackTrace =
   `  ` +
-  `at stack (../jest-jasmine2/build/jasmine-2.4.1.js:1580:17)
-  at Object.addResult (../jest-jasmine2/build/jasmine-2.4.1.js:1550:14)
-  at jasmine.addResult (../jest-jasmine2/build/index.js:82:44)
-  at Spec.Env.factory (../jest-jasmine2/build/jasmine-2.4.1.js:641:18)
-  at Spec.addResult (../jest-jasmine2/build/jasmine-2.4.1.js:333:34)
-  at Expectation.addResult (../jest-jasmine2/build/jasmine-2.4.1.js:591:21)
-  at Expectation.toBe (../jest-jasmine2/build/jasmine-2.4.1.js:1504:12)
+  `at stack (../elric-jasmine2/build/jasmine-2.4.1.js:1580:17)
+  at Object.addResult (../elric-jasmine2/build/jasmine-2.4.1.js:1550:14)
+  at jasmine.addResult (../elric-jasmine2/build/index.js:82:44)
+  at Spec.Env.factory (../elric-jasmine2/build/jasmine-2.4.1.js:641:18)
+  at Spec.addResult (../elric-jasmine2/build/jasmine-2.4.1.js:333:34)
+  at Expectation.addResult (../elric-jasmine2/build/jasmine-2.4.1.js:591:21)
+  at Expectation.toBe (../elric-jasmine2/build/jasmine-2.4.1.js:1504:12)
   at Object.it (build/__tests__/messages-test.js:45:41)
-  at Object.<anonymous> (../jest-jasmine2/build/jasmine-pit.js:35:32)
-  at attemptAsync (../jest-jasmine2/build/jasmine-2.4.1.js:1919:24)`;
+  at Object.<anonymous> (../elric-jasmine2/build/jasmine-pit.js:35:32)
+  at attemptAsync (../elric-jasmine2/build/jasmine-2.4.1.js:1919:24)`;
 
 const assertionStack =
   '  ' +
@@ -42,11 +42,11 @@ const assertionStack =
       "string"
 
       at Object.it (__tests__/test.js:8:14)
-      at Object.asyncFn (node_modules/jest-jasmine2/build/jasmine_async.js:124:345)
-      at resolve (node_modules/jest-jasmine2/build/queue_runner.js:46:12)
+      at Object.asyncFn (node_modules/elric-jasmine2/build/jasmine_async.js:124:345)
+      at resolve (node_modules/elric-jasmine2/build/queue_runner.js:46:12)
           at Promise (<anonymous>)
-      at mapper (node_modules/jest-jasmine2/build/queue_runner.js:34:499)
-      at promise.then (node_modules/jest-jasmine2/build/queue_runner.js:74:39)
+      at mapper (node_modules/elric-jasmine2/build/queue_runner.js:34:499)
+      at promise.then (node_modules/elric-jasmine2/build/queue_runner.js:74:39)
           at <anonymous>
       at process._tickCallback (internal/process/next_tick.js:188:7)
       at internal/process/next_tick.js:188:7
@@ -80,7 +80,7 @@ const babelStack =
 `;
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  elric.clearAllMocks();
 });
 
 it('should exclude jasmine from stack trace for Unix paths.', () => {

@@ -6,9 +6,9 @@
  */
 
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {cleanup} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const dir = path.resolve(__dirname, '../coverage-without-transform');
 const coverageDir = path.join(dir, 'coverage');
@@ -22,7 +22,7 @@ afterAll(() => {
 });
 
 it('produces code coverage for uncovered files without transformer', () => {
-  const {exitCode, stdout} = runJest(dir, ['--coverage', '--no-cache']);
+  const {exitCode, stdout} = runelric(dir, ['--coverage', '--no-cache']);
 
   expect(exitCode).toBe(0);
   expect(wrap(stdout)).toMatchSnapshot();

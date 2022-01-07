@@ -5,6 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Allow people to use `jest-circus/runner` as a runner.
-const runner = require('./build/legacy-code-todo-rewrite/jestAdapter');
+// Allow people to use `elric-circus/runner` as a runner.
+const runner = require('./build/legacy-code-todo-rewrite/elricAdapter');
 module.exports = runner;

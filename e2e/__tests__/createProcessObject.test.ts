@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('allows retrieving the current domain', () => {
-  const result = runJest('create-process-object');
+  const result = runelric('create-process-object');
 
   expect(result.exitCode).toBe(0);
 });

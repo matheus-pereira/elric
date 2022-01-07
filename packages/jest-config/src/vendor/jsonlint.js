@@ -1,5 +1,5 @@
 // From: https://github.com/zaach/jsonlint
-// Vendored in Jest to avoid jsonlint's transitive dependencies.
+// Vendored in elric to avoid jsonlint's transitive dependencies.
 /* eslint-disable */
 var jsonlint = (function () {
   var parser = {

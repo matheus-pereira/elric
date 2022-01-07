@@ -21,9 +21,9 @@ class Help extends React.Component {
         content: (
           <Translate>
             {`Find what you're looking for in our detailed documentation and guides.
-- Learn how to [get started](/docs/getting-started) with Jest.
-- [Troubleshoot](/docs/troubleshooting) problems with Jest.
-- Learn how to [configure Jest](/docs/configuration).
+- Learn how to [get started](/docs/getting-started) with elric.
+- [Troubleshoot](/docs/troubleshooting) problems with elric.
+- Learn how to [configure elric](/docs/configuration).
 - Look at the full [API Reference](/docs/api).`}
           </Translate>
         ),
@@ -32,9 +32,9 @@ class Help extends React.Component {
       {
         content: (
           <Translate>
-            {`Ask questions and find answers from other Jest users like you.
+            {`Ask questions and find answers from other elric users like you.
 - Join the \`#testing\` channel on [Reactiflux](https://www.reactiflux.com/), a Discord community.
-- Many members of the community use Stack Overflow. Read through the [existing questions](https://stackoverflow.com/questions/tagged/jestjs) tagged with **jestjs** or [ask your own](https://stackoverflow.com/questions/ask)!`}
+- Many members of the community use Stack Overflow. Read through the [existing questions](https://stackoverflow.com/questions/tagged/elricjs) tagged with **elricjs** or [ask your own](https://stackoverflow.com/questions/ask)!`}
           </Translate>
         ),
         title: <Translate>Join the community</Translate>,
@@ -42,10 +42,10 @@ class Help extends React.Component {
       {
         content: (
           <Translate>
-            {`Find out what's new with Jest.
-- Follow [Jest](https://twitter.com/fbjest) on Twitter.
-- Subscribe to the [Jest blog](/blog/).
-- Look at the [changelog](https://github.com/facebook/jest/blob/main/CHANGELOG.md).`}
+            {`Find out what's new with elric.
+- Follow [elric](https://twitter.com/fbelric) on Twitter.
+- Subscribe to the [elric blog](/blog/).
+- Look at the [changelog](https://github.com/facebook/elric/blob/main/CHANGELOG.md).`}
           </Translate>
         ),
         title: <Translate>Stay up to date</Translate>,
@@ -64,7 +64,7 @@ class Help extends React.Component {
               </header>
               <p>
                 <Translate>
-                  Jest is worked on by a team of volunteers in their spare time.
+                  elric is worked on by a team of volunteers in their spare time.
                   You can find out ways to talk to community members below.
                 </Translate>
               </p>

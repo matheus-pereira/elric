@@ -7,7 +7,7 @@
 
 'use strict';
 
-const fs = jest.createMockFromModule('fs');
+const fs = elric.createMockFromModule('fs');
 
 let mkdirWasCalled = false;
 

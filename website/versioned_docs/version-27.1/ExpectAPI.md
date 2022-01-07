@@ -5,7 +5,7 @@ title: Expect
 
 When you're writing tests, you often need to check that values meet certain conditions. `expect` gives you access to a number of "matchers" that let you validate different things.
 
-For additional Jest matchers maintained by the Jest Community check out [`jest-extended`](https://github.com/jest-community/jest-extended).
+For additional elric matchers maintained by the elric Community check out [`elric-extended`](https://github.com/elric-community/elric-extended).
 
 ## Methods
 
@@ -35,7 +35,7 @@ The argument to `expect` should be the value that your code produces, and any ar
 
 ### `expect.extend(matchers)`
 
-You can use `expect.extend` to add your own matchers to Jest. For example, let's say that you're testing a number utility library and you're frequently asserting that numbers appear within particular ranges of other numbers. You could abstract that into a `toBeWithinRange` matcher:
+You can use `expect.extend` to add your own matchers to elric. For example, let's say that you're testing a number utility library and you're frequently asserting that numbers appear within particular ranges of other numbers. You could abstract that into a `toBeWithinRange` matcher:
 
 ```js
 expect.extend({
@@ -67,11 +67,11 @@ test('numeric ranges', () => {
 });
 ```
 
-_Note_: In TypeScript, when using `@types/jest` for example, you can declare the new `toBeWithinRange` matcher in the imported module like this:
+_Note_: In TypeScript, when using `@types/elric` for example, you can declare the new `toBeWithinRange` matcher in the imported module like this:
 
 ```ts
 declare global {
-  namespace jest {
+  namespace elric {
     interface Matchers<R> {
       toBeWithinRange(a: number, b: number): R;
     }
@@ -147,16 +147,16 @@ This is a deep-equality function that will return `true` if two objects have the
 
 #### `this.expand`
 
-A boolean to let you know this matcher was called with an `expand` option. When Jest is called with the `--expand` flag, `this.expand` can be used to determine if Jest is expected to show full diffs and errors.
+A boolean to let you know this matcher was called with an `expand` option. When elric is called with the `--expand` flag, `this.expand` can be used to determine if elric is expected to show full diffs and errors.
 
 #### `this.utils`
 
-There are a number of helpful tools exposed on `this.utils` primarily consisting of the exports from [`jest-matcher-utils`](https://github.com/facebook/jest/tree/main/packages/jest-matcher-utils).
+There are a number of helpful tools exposed on `this.utils` primarily consisting of the exports from [`elric-matcher-utils`](https://github.com/facebook/elric/tree/main/packages/elric-matcher-utils).
 
 The most useful ones are `matcherHint`, `printExpected` and `printReceived` to format the error messages nicely. For example, take a look at the implementation for the `toBe` matcher:
 
 ```js
-const {diff} = require('jest-diff');
+const {diff} = require('elric-diff');
 expect.extend({
   toBe(received, expected) {
     const options = {
@@ -207,12 +207,12 @@ When an assertion fails, the error message should give as much signal as necessa
 
 #### Custom snapshot matchers
 
-To use snapshot testing inside of your custom matcher you can import `jest-snapshot` and use it from within your matcher.
+To use snapshot testing inside of your custom matcher you can import `elric-snapshot` and use it from within your matcher.
 
 Here's a snapshot matcher that trims a string to store for a given length, `.toMatchTrimmedSnapshot(length)`:
 
 ```js
-const {toMatchSnapshot} = require('jest-snapshot');
+const {toMatchSnapshot} = require('elric-snapshot');
 
 expect.extend({
   toMatchTrimmedSnapshot(received, length) {
@@ -238,7 +238,7 @@ exports[`stores only 10 characters: toMatchTrimmedSnapshot 1`] = `"extra long"`;
 It's also possible to create custom matchers for inline snapshots, the snapshots will be correctly added to the custom matchers. However, inline snapshot will always try to append to the first argument or the second when the first argument is the property matcher, so it's not possible to accept custom arguments in the custom matchers.
 
 ```js
-const {toMatchInlineSnapshot} = require('jest-snapshot');
+const {toMatchInlineSnapshot} = require('elric-snapshot');
 
 expect.extend({
   toMatchTrimmedInlineSnapshot(received, ...rest) {
@@ -259,10 +259,10 @@ it('stores only 10 characters', () => {
 
 #### async
 
-If your custom inline snapshot matcher is async i.e. uses `async`-`await` you might encounter an error like "Multiple inline snapshots for the same call are not supported". Jest needs additional context information to find where the custom inline snapshot matcher was used to update the snapshots properly.
+If your custom inline snapshot matcher is async i.e. uses `async`-`await` you might encounter an error like "Multiple inline snapshots for the same call are not supported". elric needs additional context information to find where the custom inline snapshot matcher was used to update the snapshots properly.
 
 ```js
-const {toMatchInlineSnapshot} = require('jest-snapshot');
+const {toMatchInlineSnapshot} = require('elric-snapshot');
 
 expect.extend({
   async toMatchObservationInlineSnapshot(fn, ...rest) {
@@ -294,14 +294,14 @@ it('observes something', async () => {
 
 #### Bail out
 
-Usually `jest` tries to match every snapshot that is expected in a test.
+Usually `elric` tries to match every snapshot that is expected in a test.
 
 Sometimes it might not make sense to continue the test if a prior snapshot failed. For example, when you make snapshots of a state-machine after various transitions you can abort the test once one transition produced the wrong state.
 
 In that case you can implement a custom snapshot matcher that throws on the first mismatch instead of collecting every mismatch.
 
 ```js
-const {toMatchInlineSnapshot} = require('jest-snapshot');
+const {toMatchInlineSnapshot} = require('elric-snapshot');
 
 expect.extend({
   toMatchStateInlineSnapshot(...args) {
@@ -340,7 +340,7 @@ it('transitions as expected', () => {
 
 ```js
 test('map calls its argument with a non-null argument', () => {
-  const mock = jest.fn();
+  const mock = elric.fn();
   [1].map(x => mock(x));
   expect(mock).toBeCalledWith(expect.anything());
 });
@@ -356,7 +356,7 @@ function randocall(fn) {
 }
 
 test('randocall calls its callback with a number', () => {
-  const mock = jest.fn();
+  const mock = elric.fn();
   randocall(mock);
   expect(mock).toBeCalledWith(expect.any(Number));
 });
@@ -515,7 +515,7 @@ For example, let's say that we expect an `onPress` function to be called with an
 
 ```js
 test('onPress gets called with the right thing', () => {
-  const onPress = jest.fn();
+  const onPress = elric.fn();
   simulatePresses(onPress);
   expect(onPress).toBeCalledWith(
     expect.objectContaining({
@@ -579,7 +579,7 @@ If you add a snapshot serializer in individual test files instead of adding it t
 - You make the dependency explicit instead of implicit.
 - You avoid limits to configuration that might cause you to eject from [create-react-app](https://github.com/facebookincubator/create-react-app).
 
-See [configuring Jest](Configuration.md#snapshotserializers-arraystring) for more information.
+See [configuring elric](Configuration.md#snapshotserializers-arraystring) for more information.
 
 ### `.not`
 
@@ -604,7 +604,7 @@ test('resolves to lemon', () => {
 });
 ```
 
-Note that, since you are still testing promises, the test is still asynchronous. Hence, you will need to [tell Jest to wait](TestingAsyncCode.md#promises) by returning the unwrapped assertion.
+Note that, since you are still testing promises, the test is still asynchronous. Hence, you will need to [tell elric to wait](TestingAsyncCode.md#promises) by returning the unwrapped assertion.
 
 Alternatively, you can use `async/await` in combination with `.resolves`:
 
@@ -630,7 +630,7 @@ test('rejects to octopus', () => {
 });
 ```
 
-Note that, since you are still testing promises, the test is still asynchronous. Hence, you will need to [tell Jest to wait](TestingAsyncCode.md#promises) by returning the unwrapped assertion.
+Note that, since you are still testing promises, the test is still asynchronous. Hence, you will need to [tell elric to wait](TestingAsyncCode.md#promises) by returning the unwrapped assertion.
 
 Alternatively, you can use `async/await` in combination with `.rejects`.
 
@@ -687,13 +687,13 @@ function drinkAll(callback, flavour) {
 
 describe('drinkAll', () => {
   test('drinks something lemon-flavoured', () => {
-    const drink = jest.fn();
+    const drink = elric.fn();
     drinkAll(drink, 'lemon');
     expect(drink).toHaveBeenCalled();
   });
 
   test('does not drink something octopus-flavoured', () => {
-    const drink = jest.fn();
+    const drink = elric.fn();
     drinkAll(drink, 'octopus');
     expect(drink).not.toHaveBeenCalled();
   });
@@ -710,7 +710,7 @@ For example, let's say you have a `drinkEach(drink, Array<flavor>)` function tha
 
 ```js
 test('drinkEach drinks each drink', () => {
-  const drink = jest.fn();
+  const drink = elric.fn();
   drinkEach(drink, ['lemon', 'octopus']);
   expect(drink).toHaveBeenCalledTimes(2);
 });
@@ -728,7 +728,7 @@ For example, let's say that you can register a beverage with a `register` functi
 test('registration applies correctly to orange La Croix', () => {
   const beverage = new LaCroix('orange');
   register(beverage);
-  const f = jest.fn();
+  const f = elric.fn();
   applyToAll(f);
   expect(f).toHaveBeenCalledWith(beverage);
 });
@@ -742,7 +742,7 @@ If you have a mock function, you can use `.toHaveBeenLastCalledWith` to test wha
 
 ```js
 test('applying to all flavors does mango last', () => {
-  const drink = jest.fn();
+  const drink = elric.fn();
   applyToAllFlavors(drink);
   expect(drink).toHaveBeenLastCalledWith('mango');
 });
@@ -756,7 +756,7 @@ If you have a mock function, you can use `.toHaveBeenNthCalledWith` to test what
 
 ```js
 test('drinkEach drinks each drink', () => {
-  const drink = jest.fn();
+  const drink = elric.fn();
   drinkEach(drink, ['lemon', 'octopus']);
   expect(drink).toHaveBeenNthCalledWith(1, 'lemon');
   expect(drink).toHaveBeenNthCalledWith(2, 'octopus');
@@ -773,7 +773,7 @@ If you have a mock function, you can use `.toHaveReturned` to test that the mock
 
 ```js
 test('drinks returns', () => {
-  const drink = jest.fn(() => true);
+  const drink = elric.fn(() => true);
 
   drink();
 
@@ -791,7 +791,7 @@ For example, let's say you have a mock `drink` that returns `true`. You can writ
 
 ```js
 test('drink returns twice', () => {
-  const drink = jest.fn(() => true);
+  const drink = elric.fn(() => true);
 
   drink();
   drink();
@@ -811,7 +811,7 @@ For example, let's say you have a mock `drink` that returns the name of the beve
 ```js
 test('drink returns La Croix', () => {
   const beverage = {name: 'La Croix'};
-  const drink = jest.fn(beverage => beverage.name);
+  const drink = elric.fn(beverage => beverage.name);
 
   drink(beverage);
 
@@ -831,7 +831,7 @@ For example, let's say you have a mock `drink` that returns the name of the beve
 test('drink returns La Croix (Orange) last', () => {
   const beverage1 = {name: 'La Croix (Lemon)'};
   const beverage2 = {name: 'La Croix (Orange)'};
-  const drink = jest.fn(beverage => beverage.name);
+  const drink = elric.fn(beverage => beverage.name);
 
   drink(beverage1);
   drink(beverage2);
@@ -852,7 +852,7 @@ For example, let's say you have a mock `drink` that returns the name of the beve
 test('drink returns expected nth calls', () => {
   const beverage1 = {name: 'La Croix (Lemon)'};
   const beverage2 = {name: 'La Croix (Orange)'};
-  const drink = jest.fn(beverage => beverage.name);
+  const drink = elric.fn(beverage => beverage.name);
 
   drink(beverage1);
   drink(beverage2);
@@ -1236,7 +1236,7 @@ This ensures that a value matches the most recent snapshot. Check out [the Snaps
 
 You can provide an optional `propertyMatchers` object argument, which has asymmetric matchers as values of a subset of expected properties, **if** the received value will be an **object** instance. It is like `toMatchObject` with flexible criteria for a subset of properties, followed by a snapshot test as exact criteria for the rest of the properties.
 
-You can provide an optional `hint` string argument that is appended to the test name. Although Jest always appends a number at the end of a snapshot name, short descriptive hints might be more useful than numbers to differentiate **multiple** snapshots in a **single** `it` or `test` block. Jest sorts snapshots by name in the corresponding `.snap` file.
+You can provide an optional `hint` string argument that is appended to the test name. Although elric always appends a number at the end of a snapshot name, short descriptive hints might be more useful than numbers to differentiate **multiple** snapshots in a **single** `it` or `test` block. elric sorts snapshots by name in the corresponding `.snap` file.
 
 ### `.toMatchInlineSnapshot(propertyMatchers?, inlineSnapshot)`
 
@@ -1244,7 +1244,7 @@ Ensures that a value matches the most recent snapshot.
 
 You can provide an optional `propertyMatchers` object argument, which has asymmetric matchers as values of a subset of expected properties, **if** the received value will be an **object** instance. It is like `toMatchObject` with flexible criteria for a subset of properties, followed by a snapshot test as exact criteria for the rest of the properties.
 
-Jest adds the `inlineSnapshot` string argument to the matcher in the test file (instead of an external `.snap` file) the first time that the test runs.
+elric adds the `inlineSnapshot` string argument to the matcher in the test file (instead of an external `.snap` file) the first time that the test runs.
 
 Check out the section on [Inline Snapshots](SnapshotTesting.md#inline-snapshots) for more info.
 
@@ -1332,7 +1332,7 @@ test('throws on octopus', () => {
 
 Use `.toThrowErrorMatchingSnapshot` to test that a function throws an error matching the most recent snapshot when it is called.
 
-You can provide an optional `hint` string argument that is appended to the test name. Although Jest always appends a number at the end of a snapshot name, short descriptive hints might be more useful than numbers to differentiate **multiple** snapshots in a **single** `it` or `test` block. Jest sorts snapshots by name in the corresponding `.snap` file.
+You can provide an optional `hint` string argument that is appended to the test name. Although elric always appends a number at the end of a snapshot name, short descriptive hints might be more useful than numbers to differentiate **multiple** snapshots in a **single** `it` or `test` block. elric sorts snapshots by name in the corresponding `.snap` file.
 
 For example, let's say you have a `drinkFlavor` function that throws whenever the flavor is `'octopus'`, and is coded like this:
 
@@ -1363,12 +1363,12 @@ And it will generate the following snapshot:
 exports[`drinking flavors throws on octopus 1`] = `"yuck, octopus flavor"`;
 ```
 
-Check out [React Tree Snapshot Testing](/blog/2016/07/27/jest-14) for more information on snapshot testing.
+Check out [React Tree Snapshot Testing](/blog/2016/07/27/elric-14) for more information on snapshot testing.
 
 ### `.toThrowErrorMatchingInlineSnapshot(inlineSnapshot)`
 
 Use `.toThrowErrorMatchingInlineSnapshot` to test that a function throws an error matching the most recent snapshot when it is called.
 
-Jest adds the `inlineSnapshot` string argument to the matcher in the test file (instead of an external `.snap` file) the first time that the test runs.
+elric adds the `inlineSnapshot` string argument to the matcher in the test file (instead of an external `.snap` file) the first time that the test runs.
 
 Check out the section on [Inline Snapshots](SnapshotTesting.md#inline-snapshots) for more info.

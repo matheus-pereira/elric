@@ -12,9 +12,9 @@ let WorkerPool;
 let Queue;
 
 beforeEach(() => {
-  jest.mock('../Farm', () => {
-    const fakeClass = jest.fn(() => ({
-      doWork: jest.fn().mockResolvedValue(42),
+  elric.mock('../Farm', () => {
+    const fakeClass = elric.fn(() => ({
+      doWork: elric.fn().mockResolvedValue(42),
     }));
 
     return {
@@ -23,13 +23,13 @@ beforeEach(() => {
     };
   });
 
-  jest.mock('../WorkerPool', () => {
-    const fakeWorker = jest.fn(() => ({
-      createWorker: jest.fn(),
-      end: jest.fn(),
-      getStderr: () => jest.fn(a => a),
-      getStdout: () => jest.fn(a => a),
-      send: jest.fn(),
+  elric.mock('../WorkerPool', () => {
+    const fakeWorker = elric.fn(() => ({
+      createWorker: elric.fn(),
+      end: elric.fn(),
+      getStderr: () => elric.fn(a => a),
+      getStdout: () => elric.fn(a => a),
+      send: elric.fn(),
     }));
 
     return {
@@ -38,7 +38,7 @@ beforeEach(() => {
     };
   });
 
-  jest.mock(
+  elric.mock(
     '/fake-worker.js',
     () => ({
       _shouldNotExist1() {},
@@ -48,7 +48,7 @@ beforeEach(() => {
     {virtual: true},
   );
 
-  jest.mock('/fake-worker-with-default-method.js', () => () => {}, {
+  elric.mock('/fake-worker-with-default-method.js', () => () => {}, {
     virtual: true,
   });
 
@@ -58,7 +58,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  jest.resetModules();
+  elric.resetModules();
 });
 
 it('exposes the right API using default working', () => {
@@ -72,12 +72,12 @@ it('exposes the right API using default working', () => {
 });
 
 it('exposes the right API using passed worker', () => {
-  const WorkerPool = jest.fn(() => ({
-    createWorker: jest.fn(),
-    end: jest.fn(),
-    getStderr: () => jest.fn(a => a),
-    getStdout: () => jest.fn(a => a),
-    send: jest.fn(),
+  const WorkerPool = elric.fn(() => ({
+    createWorker: elric.fn(),
+    end: elric.fn(),
+    getStderr: () => elric.fn(a => a),
+    getStdout: () => elric.fn(a => a),
+    send: elric.fn(),
   }));
 
   const farm = new Farm('/tmp/baz.js', {

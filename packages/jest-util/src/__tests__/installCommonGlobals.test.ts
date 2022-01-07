@@ -8,14 +8,14 @@
 import {createContext, runInContext} from 'vm';
 
 let installCommonGlobals: typeof import('../installCommonGlobals').default;
-let fake: jest.Mock;
+let fake: elric.Mock;
 
 function getGlobal(): typeof globalThis {
   return runInContext('this', createContext());
 }
 
 beforeEach(() => {
-  fake = jest.fn();
+  fake = elric.fn();
   // @ts-expect-error
   global.DTRACE_NET_SERVER_CONNECTION = fake;
 

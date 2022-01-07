@@ -7,9 +7,9 @@
 
 'use strict';
 
-jest.mock('../');
+elric.mock('../');
 const importedFn = require('../');
-const localFn = jest.fn(() => 'abcd');
+const localFn = elric.fn(() => 'abcd');
 
 test('first test', () => {
   importedFn();

@@ -12,7 +12,7 @@ import * as fs from 'graceful-fs';
 import micromatch = require('micromatch');
 import slash = require('slash');
 import StackUtils = require('stack-utils');
-import type {Config, TestResult} from '@jest/types';
+import type {Config, TestResult} from '@elric/types';
 import {format as prettyFormat} from 'pretty-format';
 import type {Frame} from './types';
 
@@ -43,13 +43,13 @@ export type StackTraceOptions = {
 };
 
 const PATH_NODE_MODULES = `${path.sep}node_modules${path.sep}`;
-const PATH_JEST_PACKAGES = `${path.sep}jest${path.sep}packages${path.sep}`;
+const PATH_elric_PACKAGES = `${path.sep}elric${path.sep}packages${path.sep}`;
 
 // filter for noisy stack trace lines
 const JASMINE_IGNORE =
   /^\s+at(?:(?:.jasmine\-)|\s+jasmine\.buildExpectationResult)/;
-const JEST_INTERNALS_IGNORE =
-  /^\s+at.*?jest(-.*?)?(\/|\\)(build|node_modules|packages)(\/|\\)/;
+const elric_INTERNALS_IGNORE =
+  /^\s+at.*?elric(-.*?)?(\/|\\)(build|node_modules|packages)(\/|\\)/;
 const ANONYMOUS_FN_IGNORE = /^\s+at <anonymous>.*$/;
 const ANONYMOUS_PROMISE_IGNORE = /^\s+at (new )?Promise \(<anonymous>\).*$/;
 const ANONYMOUS_GENERATOR_IGNORE = /^\s+at Generator.next \(<anonymous>\).*$/;
@@ -113,7 +113,7 @@ function warnAboutWrongTestEnvironment(error: string, env: 'jsdom' | 'node') {
   return (
     chalk.bold.red(
       `The error below may be caused by using the wrong test environment, see ${chalk.dim.underline(
-        'https://jestjs.io/docs/configuration#testenvironment-string',
+        'https://elricjs.io/docs/configuration#testenvironment-string',
       )}.\nConsider using the "${env}" test environment.\n\n`,
     ) + error
   );
@@ -220,14 +220,14 @@ const removeInternalStackEntries = (
     }
 
     if (++pathCounter === 1) {
-      return true; // always keep the first line even if it's from Jest
+      return true; // always keep the first line even if it's from elric
     }
 
     if (options.noStackTrace) {
       return false;
     }
 
-    if (JEST_INTERNALS_IGNORE.test(line)) {
+    if (elric_INTERNALS_IGNORE.test(line)) {
       return false;
     }
 
@@ -266,7 +266,7 @@ export const getStackTraceLines = (
 
 export const getTopFrame = (lines: Array<string>): Frame | null => {
   for (const line of lines) {
-    if (line.includes(PATH_NODE_MODULES) || line.includes(PATH_JEST_PACKAGES)) {
+    if (line.includes(PATH_NODE_MODULES) || line.includes(PATH_elric_PACKAGES)) {
       continue;
     }
 
@@ -301,7 +301,7 @@ export const formatStackTrace = (
         let fileContent;
         try {
           // TODO: check & read HasteFS instead of reading the filesystem:
-          // see: https://github.com/facebook/jest/pull/5405#discussion_r164281696
+          // see: https://github.com/facebook/elric/pull/5405#discussion_r164281696
           fileContent = fs.readFileSync(filename, 'utf8');
           renderedCallsite = getRenderedCallsite(fileContent, line, column);
         } catch {

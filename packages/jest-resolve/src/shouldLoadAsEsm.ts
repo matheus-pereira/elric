@@ -8,7 +8,7 @@
 import {dirname, extname} from 'path';
 // @ts-expect-error: experimental, not added to the types
 import {SyntheticModule} from 'vm';
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import {findClosestPackageJson, readPackageCached} from './fileWalkers';
 
 const runtimeSupportsVmModules = typeof SyntheticModule === 'function';

@@ -8,7 +8,7 @@
 import {tmpdir} from 'os';
 import * as path from 'path';
 import {cleanup, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(tmpdir(), 'run-tests-by-path-test');
 
@@ -20,20 +20,20 @@ test('runs tests by exact path', () => {
     '.watchmanconfig': '',
     '__tests__/t1.test.js': 'it("foo", () => {})',
     '__tests__/t2.test.js': 'it("bar", () => {})',
-    'package.json': JSON.stringify({jest: {testEnvironment: 'node'}}),
+    'package.json': JSON.stringify({elric: {testEnvironment: 'node'}}),
   });
 
   // Passing an exact path executes only the given test.
-  const run1 = runJest(DIR, ['--runTestsByPath', '__tests__/t1.test.js']);
+  const run1 = runelric(DIR, ['--runTestsByPath', '__tests__/t1.test.js']);
   expect(run1.stderr).toMatch('PASS __tests__/t1.test.js');
   expect(run1.stderr).not.toMatch('PASS __tests__/t2.test.js');
 
   // When running with thte flag and a pattern, no test is found.
-  const run2 = runJest(DIR, ['--runTestsByPath', '__tests__/t']);
+  const run2 = runelric(DIR, ['--runTestsByPath', '__tests__/t']);
   expect(run2.stdout).toMatch(/no tests found/i);
 
   // When ran without the flag and a pattern, both tests are found.
-  const run3 = runJest(DIR, ['__tests__/t']);
+  const run3 = runelric(DIR, ['__tests__/t']);
   expect(run3.stderr).toMatch('PASS __tests__/t1.test.js');
   expect(run3.stderr).toMatch('PASS __tests__/t2.test.js');
 });

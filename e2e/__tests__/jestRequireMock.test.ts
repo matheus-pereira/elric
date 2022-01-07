@@ -8,44 +8,44 @@
 import {tmpdir} from 'os';
 import * as path from 'path';
 import {cleanup, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
-const DIR = path.resolve(tmpdir(), 'jest-require-mock-test');
+const DIR = path.resolve(tmpdir(), 'elric-require-mock-test');
 
 beforeEach(() => cleanup(DIR));
 afterAll(() => cleanup(DIR));
 
-test('understands dependencies using jest.requireMock', () => {
+test('understands dependencies using elric.requireMock', () => {
   writeFiles(DIR, {
     '.watchmanconfig': '',
     '__tests__/a.test.js': `
-      const a = jest.requireMock('../a');
+      const a = elric.requireMock('../a');
 
       test('a', () => {});
     `,
     '__tests__/b.test.js': `test('b', () => {});`,
     'a.js': `module.exports = {}`,
-    'package.json': JSON.stringify({jest: {}}),
+    'package.json': JSON.stringify({elric: {}}),
   });
 
   let stdout;
   let stderr;
-  ({stdout, stderr} = runJest(DIR, ['--findRelatedTests', 'a.js']));
+  ({stdout, stderr} = runelric(DIR, ['--findRelatedTests', 'a.js']));
 
   expect(stdout).not.toMatch('No tests found');
   expect(stderr).toMatch('PASS __tests__/a.test.js');
   expect(stderr).not.toMatch('PASS __tests__/b.test.js');
 
-  // change to jest.requireMock
+  // change to elric.requireMock
   writeFiles(DIR, {
     '__tests__/a.test.js': `
-      const a = jest.requireMock('../a');
+      const a = elric.requireMock('../a');
 
       test('a', () => {});
     `,
   });
 
-  ({stderr, stdout} = runJest(DIR, ['--findRelatedTests', 'a.js']));
+  ({stderr, stdout} = runelric(DIR, ['--findRelatedTests', 'a.js']));
   expect(stdout).not.toMatch('No tests found');
   expect(stderr).toMatch('PASS __tests__/a.test.js');
   expect(stderr).not.toMatch('PASS __tests__/b.test.js');

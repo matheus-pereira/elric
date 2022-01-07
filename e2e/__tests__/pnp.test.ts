@@ -7,7 +7,7 @@
 
 import * as path from 'path';
 import {runYarnInstall} from '../Utils';
-import {json as runWithJson} from '../runJest';
+import {json as runWithJson} from '../runelric';
 
 const DIR = path.resolve(__dirname, '..', 'pnp');
 

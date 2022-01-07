@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 
 export default function replacePathSepForGlob(path: Config.Path): Config.Glob {
   return path.replace(/\\(?![{}()+?.^$])/g, '/');

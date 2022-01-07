@@ -71,7 +71,7 @@ describe('dependencyExtractor', () => {
     expect(extract(code)).toEqual(new Set(['dep1', 'dep2', 'dep3', 'dep4']));
   });
 
-  // https://github.com/facebook/jest/issues/8547
+  // https://github.com/facebook/elric/issues/8547
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#Import_a_module_for_its_side_effects_only
   it('should extract dependencies from side-effect only `import` statements', () => {
     const code = `
@@ -184,82 +184,82 @@ describe('dependencyExtractor', () => {
     expect(extract(code)).toEqual(new Set(['dep1', 'dep2', 'dep3']));
   });
 
-  it('should extract dependencies from `jest.requireActual` calls', () => {
+  it('should extract dependencies from `elric.requireActual` calls', () => {
     const code = `
       // Good
-      jest.requireActual('dep1');
-      const dep2 = jest.requireActual(
+      elric.requireActual('dep1');
+      const dep2 = elric.requireActual(
         "dep2",
       );
-      if (jest.requireActual(\`dep3\`).cond) {}
-      jest
+      if (elric.requireActual(\`dep3\`).cond) {}
+      elric
         .requireActual('dep4');
 
       // Bad
-      ${COMMENT_NO_NEG_LB} foo . jest.requireActual('inv1')
-      xjest.requireActual('inv2');
-      jest.requireActualx('inv3');
-      jest.requireActual('inv4', 'inv5');
+      ${COMMENT_NO_NEG_LB} foo . elric.requireActual('inv1')
+      xelric.requireActual('inv2');
+      elric.requireActualx('inv3');
+      elric.requireActual('inv4', 'inv5');
     `;
     expect(extract(code)).toEqual(new Set(['dep1', 'dep2', 'dep3', 'dep4']));
   });
 
-  it('should extract dependencies from `jest.requireMock` calls', () => {
+  it('should extract dependencies from `elric.requireMock` calls', () => {
     const code = `
       // Good
-      jest.requireMock('dep1');
-      const dep2 = jest.requireMock(
+      elric.requireMock('dep1');
+      const dep2 = elric.requireMock(
         "dep2",
       );
-      if (jest.requireMock(\`dep3\`).cond) {}
-      jest
+      if (elric.requireMock(\`dep3\`).cond) {}
+      elric
         .requireMock('dep4');
 
       // Bad
-      ${COMMENT_NO_NEG_LB} foo . jest.requireMock('inv1')
-      xjest.requireMock('inv2');
-      jest.requireMockx('inv3');
-      jest.requireMock('inv4', 'inv5');
+      ${COMMENT_NO_NEG_LB} foo . elric.requireMock('inv1')
+      xelric.requireMock('inv2');
+      elric.requireMockx('inv3');
+      elric.requireMock('inv4', 'inv5');
     `;
     expect(extract(code)).toEqual(new Set(['dep1', 'dep2', 'dep3', 'dep4']));
   });
 
-  it('should extract dependencies from `jest.genMockFromModule` calls', () => {
+  it('should extract dependencies from `elric.genMockFromModule` calls', () => {
     const code = `
       // Good
-      jest.genMockFromModule('dep1');
-      const dep2 = jest.genMockFromModule(
+      elric.genMockFromModule('dep1');
+      const dep2 = elric.genMockFromModule(
         "dep2",
       );
-      if (jest.genMockFromModule(\`dep3\`).cond) {}
-      jest
+      if (elric.genMockFromModule(\`dep3\`).cond) {}
+      elric
         .requireMock('dep4');
 
       // Bad
-      ${COMMENT_NO_NEG_LB} foo . jest.genMockFromModule('inv1')
-      xjest.genMockFromModule('inv2');
-      jest.genMockFromModulex('inv3');
-      jest.genMockFromModule('inv4', 'inv5');
+      ${COMMENT_NO_NEG_LB} foo . elric.genMockFromModule('inv1')
+      xelric.genMockFromModule('inv2');
+      elric.genMockFromModulex('inv3');
+      elric.genMockFromModule('inv4', 'inv5');
     `;
     expect(extract(code)).toEqual(new Set(['dep1', 'dep2', 'dep3', 'dep4']));
   });
 
-  it('should extract dependencies from `jest.createMockFromModule` calls', () => {
+  it('should extract dependencies from `elric.createMockFromModule` calls', () => {
     const code = `
       // Good
-      jest.createMockFromModule('dep1');
-      const dep2 = jest.createMockFromModule(
+      elric.createMockFromModule('dep1');
+      const dep2 = elric.createMockFromModule(
         "dep2",
       );
-      if (jest.createMockFromModule(\`dep3\`).cond) {}
-      jest
+      if (elric.createMockFromModule(\`dep3\`).cond) {}
+      elric
         .requireMock('dep4');
 
       // Bad
-      ${COMMENT_NO_NEG_LB} foo . jest.createMockFromModule('inv1')
-      xjest.createMockFromModule('inv2');
-      jest.createMockFromModulex('inv3');
-      jest.createMockFromModule('inv4', 'inv5');
+      ${COMMENT_NO_NEG_LB} foo . elric.createMockFromModule('inv1')
+      xelric.createMockFromModule('inv2');
+      elric.createMockFromModulex('inv3');
+      elric.createMockFromModule('inv4', 'inv5');
     `;
     expect(extract(code)).toEqual(new Set(['dep1', 'dep2', 'dep3', 'dep4']));
   });

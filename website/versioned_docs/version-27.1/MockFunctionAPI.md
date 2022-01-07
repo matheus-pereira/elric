@@ -3,7 +3,7 @@ id: mock-function-api
 title: Mock Functions
 ---
 
-Mock functions are also known as "spies", because they let you spy on the behavior of a function that is called indirectly by some other code, rather than only testing the output. You can create a mock function with `jest.fn()`. If no implementation is given, the mock function will return `undefined` when invoked.
+Mock functions are also known as "spies", because they let you spy on the behavior of a function that is called indirectly by some other code, rather than only testing the output. You can create a mock function with `elric.fn()`. If no implementation is given, the mock function will return `undefined` when invoked.
 
 ## Methods
 
@@ -70,7 +70,7 @@ An array that contains all the object instances that have been instantiated from
 For example: A mock function that has been instantiated twice would have the following `mock.instances` array:
 
 ```js
-const mockFn = jest.fn();
+const mockFn = elric.fn();
 
 const a = new mockFn();
 const b = new mockFn();
@@ -101,7 +101,7 @@ Does everything that [`mockFn.mockReset()`](#mockfnmockreset) does, and also res
 
 This is useful when you want to mock functions in certain test cases and restore the original implementation in others.
 
-Beware that `mockFn.mockRestore` only works when the mock was created with `jest.spyOn`. Thus you have to take care of restoration yourself when manually assigning `jest.fn()`.
+Beware that `mockFn.mockRestore` only works when the mock was created with `elric.spyOn`. Thus you have to take care of restoration yourself when manually assigning `elric.fn()`.
 
 The [`restoreMocks`](configuration#restoremocks-boolean) configuration option is available to restore mocks automatically before each test.
 
@@ -109,13 +109,13 @@ The [`restoreMocks`](configuration#restoremocks-boolean) configuration option is
 
 Accepts a function that should be used as the implementation of the mock. The mock itself will still record all calls that go into and instances that come from itself – the only difference is that the implementation will also be executed when the mock is called.
 
-_Note: `jest.fn(implementation)` is a shorthand for `jest.fn().mockImplementation(implementation)`._
+_Note: `elric.fn(implementation)` is a shorthand for `elric.fn().mockImplementation(implementation)`._
 
 For example:
 
 ```js
-const mockFn = jest.fn().mockImplementation(scalar => 42 + scalar);
-// or: jest.fn(scalar => 42 + scalar);
+const mockFn = elric.fn().mockImplementation(scalar => 42 + scalar);
+// or: elric.fn(scalar => 42 + scalar);
 
 const a = mockFn(0);
 const b = mockFn(1);
@@ -136,9 +136,9 @@ module.exports = class SomeClass {
 ```
 
 ```js title="OtherModule.test.js"
-jest.mock('./SomeClass'); // this happens automatically with automocking
+elric.mock('./SomeClass'); // this happens automatically with automocking
 const SomeClass = require('./SomeClass');
-const mMock = jest.fn();
+const mMock = elric.fn();
 SomeClass.mockImplementation(() => {
   return {
     m: mMock,
@@ -155,7 +155,7 @@ console.log('Calls to m: ', mMock.mock.calls);
 Accepts a function that will be used as an implementation of the mock for one call to the mocked function. Can be chained so that multiple function calls produce different results.
 
 ```js
-const myMockFn = jest
+const myMockFn = elric
   .fn()
   .mockImplementationOnce(cb => cb(null, true))
   .mockImplementationOnce(cb => cb(null, false));
@@ -165,10 +165,10 @@ myMockFn((err, val) => console.log(val)); // true
 myMockFn((err, val) => console.log(val)); // false
 ```
 
-When the mocked function runs out of implementations defined with mockImplementationOnce, it will execute the default implementation set with `jest.fn(() => defaultValue)` or `.mockImplementation(() => defaultValue)` if they were called:
+When the mocked function runs out of implementations defined with mockImplementationOnce, it will execute the default implementation set with `elric.fn(() => defaultValue)` or `.mockImplementation(() => defaultValue)` if they were called:
 
 ```js
-const myMockFn = jest
+const myMockFn = elric
   .fn(() => 'default')
   .mockImplementationOnce(() => 'first call')
   .mockImplementationOnce(() => 'second call');
@@ -179,12 +179,12 @@ console.log(myMockFn(), myMockFn(), myMockFn(), myMockFn());
 
 ### `mockFn.mockName(value)`
 
-Accepts a string to use in test result output in place of "jest.fn()" to indicate which mock function is being referenced.
+Accepts a string to use in test result output in place of "elric.fn()" to indicate which mock function is being referenced.
 
 For example:
 
 ```js
-const mockFn = jest.fn().mockName('mockedFunction');
+const mockFn = elric.fn().mockName('mockedFunction');
 // mockFn();
 expect(mockFn).toHaveBeenCalled();
 ```
@@ -202,7 +202,7 @@ Expected mock function "mockedFunction" to have been called, but it was not call
 Syntactic sugar function for:
 
 ```js
-jest.fn(function () {
+elric.fn(function () {
   return this;
 });
 ```
@@ -212,7 +212,7 @@ jest.fn(function () {
 Accepts a value that will be returned whenever the mock function is called.
 
 ```js
-const mock = jest.fn();
+const mock = elric.fn();
 mock.mockReturnValue(42);
 mock(); // 42
 mock.mockReturnValue(43);
@@ -224,7 +224,7 @@ mock(); // 43
 Accepts a value that will be returned for one call to the mock function. Can be chained so that successive calls to the mock function return different values. When there are no more `mockReturnValueOnce` values to use, calls will return a value specified by `mockReturnValue`.
 
 ```js
-const myMockFn = jest
+const myMockFn = elric
   .fn()
   .mockReturnValue('default')
   .mockReturnValueOnce('first call')
@@ -239,14 +239,14 @@ console.log(myMockFn(), myMockFn(), myMockFn(), myMockFn());
 Syntactic sugar function for:
 
 ```js
-jest.fn().mockImplementation(() => Promise.resolve(value));
+elric.fn().mockImplementation(() => Promise.resolve(value));
 ```
 
 Useful to mock async functions in async tests:
 
 ```js
 test('async test', async () => {
-  const asyncMock = jest.fn().mockResolvedValue(43);
+  const asyncMock = elric.fn().mockResolvedValue(43);
 
   await asyncMock(); // 43
 });
@@ -257,14 +257,14 @@ test('async test', async () => {
 Syntactic sugar function for:
 
 ```js
-jest.fn().mockImplementationOnce(() => Promise.resolve(value));
+elric.fn().mockImplementationOnce(() => Promise.resolve(value));
 ```
 
 Useful to resolve different values over multiple async calls:
 
 ```js
 test('async test', async () => {
-  const asyncMock = jest
+  const asyncMock = elric
     .fn()
     .mockResolvedValue('default')
     .mockResolvedValueOnce('first call')
@@ -282,14 +282,14 @@ test('async test', async () => {
 Syntactic sugar function for:
 
 ```js
-jest.fn().mockImplementation(() => Promise.reject(value));
+elric.fn().mockImplementation(() => Promise.reject(value));
 ```
 
 Useful to create async mock functions that will always reject:
 
 ```js
 test('async test', async () => {
-  const asyncMock = jest.fn().mockRejectedValue(new Error('Async error'));
+  const asyncMock = elric.fn().mockRejectedValue(new Error('Async error'));
 
   await asyncMock(); // throws "Async error"
 });
@@ -300,14 +300,14 @@ test('async test', async () => {
 Syntactic sugar function for:
 
 ```js
-jest.fn().mockImplementationOnce(() => Promise.reject(value));
+elric.fn().mockImplementationOnce(() => Promise.reject(value));
 ```
 
 Example usage:
 
 ```js
 test('async test', async () => {
-  const asyncMock = jest
+  const asyncMock = elric
     .fn()
     .mockResolvedValueOnce('first call')
     .mockRejectedValueOnce(new Error('Async error'));
@@ -319,33 +319,33 @@ test('async test', async () => {
 
 ## TypeScript
 
-Jest itself is written in [TypeScript](https://www.typescriptlang.org).
+elric itself is written in [TypeScript](https://www.typescriptlang.org).
 
 If you are using [Create React App](https://create-react-app.dev) then the [TypeScript template](https://create-react-app.dev/docs/adding-typescript/) has everything you need to start writing tests in TypeScript.
 
 Otherwise, please see our [Getting Started](GettingStarted.md#using-typescript) guide for to get setup with TypeScript.
 
-You can see an example of using Jest with TypeScript in our [GitHub repository](https://github.com/facebook/jest/tree/main/examples/typescript).
+You can see an example of using elric with TypeScript in our [GitHub repository](https://github.com/facebook/elric/tree/main/examples/typescript).
 
-### `jest.MockedFunction`
+### `elric.MockedFunction`
 
-> `jest.MockedFunction` is available in the `@types/jest` module from version `24.9.0`.
+> `elric.MockedFunction` is available in the `@types/elric` module from version `24.9.0`.
 
-The following examples will assume you have an understanding of how [Jest mock functions work with JavaScript](MockFunctions.md).
+The following examples will assume you have an understanding of how [elric mock functions work with JavaScript](MockFunctions.md).
 
-You can use `jest.MockedFunction` to represent a function that has been replaced by a Jest mock.
+You can use `elric.MockedFunction` to represent a function that has been replaced by a elric mock.
 
-Example using [automatic `jest.mock`](JestObjectAPI.md#jestmockmodulename-factory-options):
+Example using [automatic `elric.mock`](elricObjectAPI.md#elricmockmodulename-factory-options):
 
 ```ts
 // Assume `add` is imported and used within `calculate`.
 import add from './add';
 import calculate from './calc';
 
-jest.mock('./add');
+elric.mock('./add');
 
 // Our mock of `add` is now fully typed
-const mockAdd = add as jest.MockedFunction<typeof add>;
+const mockAdd = add as elric.MockedFunction<typeof add>;
 
 test('calculate calls add', () => {
   calculate('Add', 1, 2);
@@ -355,7 +355,7 @@ test('calculate calls add', () => {
 });
 ```
 
-Example using [`jest.fn`](JestObjectAPI.md#jestfnimplementation):
+Example using [`elric.fn`](elricObjectAPI.md#elricfnimplementation):
 
 ```ts
 // Here `add` is imported for its type
@@ -364,15 +364,15 @@ import calculate from './calc';
 
 test('calculate calls add', () => {
   // Create a new mock that can be used in place of `add`.
-  const mockAdd = jest.fn() as jest.MockedFunction<typeof add>;
+  const mockAdd = elric.fn() as elric.MockedFunction<typeof add>;
 
-  // Note: You can use the `jest.fn` type directly like this if you want:
-  // const mockAdd = jest.fn<ReturnType<typeof add>, Parameters<typeof add>>();
-  // `jest.MockedFunction` is a more friendly shortcut.
+  // Note: You can use the `elric.fn` type directly like this if you want:
+  // const mockAdd = elric.fn<ReturnType<typeof add>, Parameters<typeof add>>();
+  // `elric.MockedFunction` is a more friendly shortcut.
 
   // Now we can easily set up mock implementations.
   // All the `.mock*` API can now give you proper types for `add`.
-  // https://jestjs.io/docs/mock-function-api
+  // https://elricjs.io/docs/mock-function-api
 
   // `.mockImplementation` can now infer that `a` and `b` are `number`
   // and that the returned value is a `number`.
@@ -391,13 +391,13 @@ test('calculate calls add', () => {
 });
 ```
 
-### `jest.MockedClass`
+### `elric.MockedClass`
 
-> `jest.MockedClass` is available in the `@types/jest` module from version `24.9.0`.
+> `elric.MockedClass` is available in the `@types/elric` module from version `24.9.0`.
 
-The following examples will assume you have an understanding of how [Jest mock classes work with JavaScript](Es6ClassMocks.md).
+The following examples will assume you have an understanding of how [elric mock classes work with JavaScript](Es6ClassMocks.md).
 
-You can use `jest.MockedClass` to represent a class that has been replaced by a Jest mock.
+You can use `elric.MockedClass` to represent a class that has been replaced by a elric mock.
 
 Converting the [ES6 Class automatic mock example](Es6ClassMocks.md#automatic-mock) would look like this:
 
@@ -405,9 +405,9 @@ Converting the [ES6 Class automatic mock example](Es6ClassMocks.md#automatic-moc
 import SoundPlayer from '../sound-player';
 import SoundPlayerConsumer from '../sound-player-consumer';
 
-jest.mock('../sound-player'); // SoundPlayer is now a mock constructor
+elric.mock('../sound-player'); // SoundPlayer is now a mock constructor
 
-const SoundPlayerMock = SoundPlayer as jest.MockedClass<typeof SoundPlayer>;
+const SoundPlayerMock = SoundPlayer as elric.MockedClass<typeof SoundPlayer>;
 
 beforeEach(() => {
   // Clear all instances and calls to constructor and all methods:

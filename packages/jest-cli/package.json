@@ -1,5 +1,5 @@
 {
-  "name": "jest-cli",
+  "name": "elric-cli",
   "description": "Delightful JavaScript Testing.",
   "version": "27.4.7",
   "main": "./build/index.js",
@@ -10,19 +10,19 @@
       "default": "./build/index.js"
     },
     "./package.json": "./package.json",
-    "./bin/jest": "./bin/jest.js"
+    "./bin/elric": "./bin/elric.js"
   },
   "dependencies": {
-    "@jest/core": "^27.4.7",
-    "@jest/test-result": "^27.4.6",
-    "@jest/types": "^27.4.2",
+    "@elric/core": "^27.4.7",
+    "@elric/test-result": "^27.4.6",
+    "@elric/types": "^27.4.2",
     "chalk": "^4.0.0",
     "exit": "^0.1.2",
     "graceful-fs": "^4.2.9",
     "import-local": "^3.0.2",
-    "jest-config": "^27.4.7",
-    "jest-util": "^27.4.2",
-    "jest-validate": "^27.4.6",
+    "elric-config": "^27.4.7",
+    "elric-util": "^27.4.2",
+    "elric-validate": "^27.4.6",
     "prompts": "^2.0.1",
     "yargs": "^16.2.0"
   },
@@ -41,20 +41,20 @@
     }
   },
   "bin": {
-    "jest": "./bin/jest.js"
+    "elric": "./bin/elric.js"
   },
   "engines": {
     "node": "^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest",
-    "directory": "packages/jest-cli"
+    "url": "https://github.com/facebook/elric",
+    "directory": "packages/elric-cli"
   },
   "bugs": {
-    "url": "https://github.com/facebook/jest/issues"
+    "url": "https://github.com/facebook/elric/issues"
   },
-  "homepage": "https://jestjs.io/",
+  "homepage": "https://elricjs.io/",
   "license": "MIT",
   "keywords": [
     "ava",
@@ -66,7 +66,7 @@
     "immersive",
     "instant",
     "jasmine",
-    "jest",
+    "elric",
     "jsdom",
     "mocha",
     "mocking",

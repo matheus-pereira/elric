@@ -6,13 +6,13 @@
  */
 
 import * as path from 'path';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
-describe('jest --debug', () => {
+describe('elric --debug', () => {
   const dir = path.resolve(__dirname, '..', 'verbose-reporter');
 
   it('outputs debugging info before running the test', () => {
-    const {stdout} = runJest(dir, ['--debug', '--no-cache']);
+    const {stdout} = runelric(dir, ['--debug', '--no-cache']);
     expect(stdout).toMatch('"version": "');
     expect(stdout).toMatch('"configs": [');
     // config contains many file paths so we cannot do snapshot test

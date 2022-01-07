@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-jest.mock('graceful-fs', () => ({
-  ...jest.createMockFromModule<typeof import('fs')>('fs'),
-  existsSync: jest.fn().mockReturnValue(true),
+elric.mock('graceful-fs', () => ({
+  ...elric.createMockFromModule<typeof import('fs')>('fs'),
+  existsSync: elric.fn().mockReturnValue(true),
 }));
 
 import assert = require('assert');
@@ -51,7 +51,7 @@ test('saveSnapshotFile() works with \r\n', () => {
   saveSnapshotFile(data, filename);
   expect(fs.writeFileSync).toBeCalledWith(
     filename,
-    `// Jest Snapshot v1, ${SNAPSHOT_GUIDE_LINK}\n\n` +
+    `// elric Snapshot v1, ${SNAPSHOT_GUIDE_LINK}\n\n` +
       'exports[`myKey`] = `<div>\n</div>`;\n',
   );
 });
@@ -65,14 +65,14 @@ test('saveSnapshotFile() works with \r', () => {
   saveSnapshotFile(data, filename);
   expect(fs.writeFileSync).toBeCalledWith(
     filename,
-    `// Jest Snapshot v1, ${SNAPSHOT_GUIDE_LINK}\n\n` +
+    `// elric Snapshot v1, ${SNAPSHOT_GUIDE_LINK}\n\n` +
       'exports[`myKey`] = `<div>\n</div>`;\n',
   );
 });
 
 test('getSnapshotData() throws when no snapshot version', () => {
   const filename = path.join(__dirname, 'old-snapshot.snap');
-  (fs.readFileSync as jest.Mock).mockImplementation(
+  (fs.readFileSync as elric.Mock).mockImplementation(
     () => 'exports[`myKey`] = `<div>\n</div>`;\n',
   );
   const update = 'none';
@@ -80,18 +80,18 @@ test('getSnapshotData() throws when no snapshot version', () => {
   expect(() => getSnapshotData(filename, update)).toThrowError(
     chalk.red(
       `${chalk.bold('Outdated snapshot')}: No snapshot header found. ` +
-        `Jest 19 introduced versioned snapshots to ensure all developers on ` +
-        `a project are using the same version of Jest. ` +
-        `Please update all snapshots during this upgrade of Jest.\n\n`,
+        `elric 19 introduced versioned snapshots to ensure all developers on ` +
+        `a project are using the same version of elric. ` +
+        `Please update all snapshots during this upgrade of elric.\n\n`,
     ) + SNAPSHOT_VERSION_WARNING,
   );
 });
 
 test('getSnapshotData() throws for older snapshot version', () => {
   const filename = path.join(__dirname, 'old-snapshot.snap');
-  (fs.readFileSync as jest.Mock).mockImplementation(
+  (fs.readFileSync as elric.Mock).mockImplementation(
     () =>
-      `// Jest Snapshot v0.99, ${SNAPSHOT_GUIDE_LINK}\n\n` +
+      `// elric Snapshot v0.99, ${SNAPSHOT_GUIDE_LINK}\n\n` +
       'exports[`myKey`] = `<div>\n</div>`;\n',
   );
   const update = 'none';
@@ -101,8 +101,8 @@ test('getSnapshotData() throws for older snapshot version', () => {
       `${chalk.red.bold('Outdated snapshot')}: The version of the snapshot ` +
         `file associated with this test is outdated. The snapshot file ` +
         `version ensures that all developers on a project are using ` +
-        `the same version of Jest. ` +
-        `Please update all snapshots during this upgrade of Jest.\n\n`,
+        `the same version of elric. ` +
+        `Please update all snapshots during this upgrade of elric.\n\n`,
     ) +
       `Expected: v${SNAPSHOT_VERSION}\n` +
       `Received: v0.99\n\n` +
@@ -112,21 +112,21 @@ test('getSnapshotData() throws for older snapshot version', () => {
 
 test('getSnapshotData() throws for newer snapshot version', () => {
   const filename = path.join(__dirname, 'old-snapshot.snap');
-  (fs.readFileSync as jest.Mock).mockImplementation(
+  (fs.readFileSync as elric.Mock).mockImplementation(
     () =>
-      `// Jest Snapshot v2, ${SNAPSHOT_GUIDE_LINK}\n\n` +
+      `// elric Snapshot v2, ${SNAPSHOT_GUIDE_LINK}\n\n` +
       'exports[`myKey`] = `<div>\n</div>`;\n',
   );
   const update = 'none';
 
   expect(() => getSnapshotData(filename, update)).toThrowError(
     chalk.red(
-      `${chalk.red.bold('Outdated Jest version')}: The version of this ` +
+      `${chalk.red.bold('Outdated elric version')}: The version of this ` +
         `snapshot file indicates that this project is meant to be used ` +
-        `with a newer version of Jest. ` +
+        `with a newer version of elric. ` +
         `The snapshot file version ensures that all developers on a project ` +
-        `are using the same version of Jest. ` +
-        `Please update your version of Jest and re-run the tests.\n\n`,
+        `are using the same version of elric. ` +
+        `Please update your version of elric and re-run the tests.\n\n`,
     ) +
       `Expected: v${SNAPSHOT_VERSION}\n` +
       `Received: v2`,
@@ -135,7 +135,7 @@ test('getSnapshotData() throws for newer snapshot version', () => {
 
 test('getSnapshotData() does not throw for when updating', () => {
   const filename = path.join(__dirname, 'old-snapshot.snap');
-  (fs.readFileSync as jest.Mock).mockImplementation(
+  (fs.readFileSync as elric.Mock).mockImplementation(
     () => 'exports[`myKey`] = `<div>\n</div>`;\n',
   );
   const update = 'all';
@@ -145,7 +145,7 @@ test('getSnapshotData() does not throw for when updating', () => {
 
 test('getSnapshotData() marks invalid snapshot dirty when updating', () => {
   const filename = path.join(__dirname, 'old-snapshot.snap');
-  (fs.readFileSync as jest.Mock).mockImplementation(
+  (fs.readFileSync as elric.Mock).mockImplementation(
     () => 'exports[`myKey`] = `<div>\n</div>`;\n',
   );
   const update = 'all';
@@ -155,9 +155,9 @@ test('getSnapshotData() marks invalid snapshot dirty when updating', () => {
 
 test('getSnapshotData() marks valid snapshot not dirty when updating', () => {
   const filename = path.join(__dirname, 'old-snapshot.snap');
-  (fs.readFileSync as jest.Mock).mockImplementation(
+  (fs.readFileSync as elric.Mock).mockImplementation(
     () =>
-      `// Jest Snapshot v${SNAPSHOT_VERSION}, ${SNAPSHOT_GUIDE_LINK}\n\n` +
+      `// elric Snapshot v${SNAPSHOT_VERSION}, ${SNAPSHOT_GUIDE_LINK}\n\n` +
       'exports[`myKey`] = `<div>\n</div>`;\n',
   );
   const update = 'all';
@@ -168,13 +168,13 @@ test('getSnapshotData() marks valid snapshot not dirty when updating', () => {
 test('escaping', () => {
   const filename = path.join(__dirname, 'escaping.snap');
   const data = '"\'\\';
-  const writeFileSync = fs.writeFileSync as jest.Mock;
+  const writeFileSync = fs.writeFileSync as elric.Mock;
 
   writeFileSync.mockReset();
   saveSnapshotFile({key: data}, filename);
   const writtenData = writeFileSync.mock.calls[0][1];
   expect(writtenData).toBe(
-    `// Jest Snapshot v1, ${SNAPSHOT_GUIDE_LINK}\n\n` +
+    `// elric Snapshot v1, ${SNAPSHOT_GUIDE_LINK}\n\n` +
       'exports[`key`] = `"\'\\\\`;\n',
   );
 
@@ -269,35 +269,35 @@ describe('ExtraLineBreaks', () => {
 describe('removeLinesBeforeExternalMatcherTrap', () => {
   test('contains external matcher trap', () => {
     const stack = `Error:
-    at SnapshotState._addSnapshot (/jest/packages/jest-snapshot/build/State.js:150:9)
-    at SnapshotState.match (/jest/packages/jest-snapshot/build/State.js:303:14)
-    at _toMatchSnapshot (/jest/packages/jest-snapshot/build/index.js:399:32)
-    at _toThrowErrorMatchingSnapshot (/jest/packages/jest-snapshot/build/index.js:585:10)
-    at Object.toThrowErrorMatchingInlineSnapshot (/jest/packages/jest-snapshot/build/index.js:504:10)
-    at Object.<anonymous> (/jest/packages/expect/build/index.js:138:20)
-    at __EXTERNAL_MATCHER_TRAP__ (/jest/packages/expect/build/index.js:378:30)
-    at throwingMatcher (/jest/packages/expect/build/index.js:379:15)
-    at /jest/packages/expect/build/index.js:285:72
-    at Object.<anonymous> (/jest/e2e/to-throw-error-matching-inline-snapshot/__tests__/should-support-rejecting-promises.test.js:3:7)`;
+    at SnapshotState._addSnapshot (/elric/packages/elric-snapshot/build/State.js:150:9)
+    at SnapshotState.match (/elric/packages/elric-snapshot/build/State.js:303:14)
+    at _toMatchSnapshot (/elric/packages/elric-snapshot/build/index.js:399:32)
+    at _toThrowErrorMatchingSnapshot (/elric/packages/elric-snapshot/build/index.js:585:10)
+    at Object.toThrowErrorMatchingInlineSnapshot (/elric/packages/elric-snapshot/build/index.js:504:10)
+    at Object.<anonymous> (/elric/packages/expect/build/index.js:138:20)
+    at __EXTERNAL_MATCHER_TRAP__ (/elric/packages/expect/build/index.js:378:30)
+    at throwingMatcher (/elric/packages/expect/build/index.js:379:15)
+    at /elric/packages/expect/build/index.js:285:72
+    at Object.<anonymous> (/elric/e2e/to-throw-error-matching-inline-snapshot/__tests__/should-support-rejecting-promises.test.js:3:7)`;
 
-    const expected = `    at throwingMatcher (/jest/packages/expect/build/index.js:379:15)
-    at /jest/packages/expect/build/index.js:285:72
-    at Object.<anonymous> (/jest/e2e/to-throw-error-matching-inline-snapshot/__tests__/should-support-rejecting-promises.test.js:3:7)`;
+    const expected = `    at throwingMatcher (/elric/packages/expect/build/index.js:379:15)
+    at /elric/packages/expect/build/index.js:285:72
+    at Object.<anonymous> (/elric/e2e/to-throw-error-matching-inline-snapshot/__tests__/should-support-rejecting-promises.test.js:3:7)`;
 
     expect(removeLinesBeforeExternalMatcherTrap(stack)).toBe(expected);
   });
 
   test("doesn't contain external matcher trap", () => {
     const stack = `Error:
-    at SnapshotState._addSnapshot (/jest/packages/jest-snapshot/build/State.js:150:9)
-    at SnapshotState.match (/jest/packages/jest-snapshot/build/State.js:303:14)
-    at _toMatchSnapshot (/jest/packages/jest-snapshot/build/index.js:399:32)
-    at _toThrowErrorMatchingSnapshot (/jest/packages/jest-snapshot/build/index.js:585:10)
-    at Object.toThrowErrorMatchingInlineSnapshot (/jest/packages/jest-snapshot/build/index.js:504:10)
-    at Object.<anonymous> (/jest/packages/expect/build/index.js:138:20)
-    at throwingMatcher (/jest/packages/expect/build/index.js:379:15)
-    at /jest/packages/expect/build/index.js:285:72
-    at Object.<anonymous> (/jest/e2e/to-throw-error-matching-inline-snapshot/__tests__/should-support-rejecting-promises.test.js:3:7)`;
+    at SnapshotState._addSnapshot (/elric/packages/elric-snapshot/build/State.js:150:9)
+    at SnapshotState.match (/elric/packages/elric-snapshot/build/State.js:303:14)
+    at _toMatchSnapshot (/elric/packages/elric-snapshot/build/index.js:399:32)
+    at _toThrowErrorMatchingSnapshot (/elric/packages/elric-snapshot/build/index.js:585:10)
+    at Object.toThrowErrorMatchingInlineSnapshot (/elric/packages/elric-snapshot/build/index.js:504:10)
+    at Object.<anonymous> (/elric/packages/expect/build/index.js:138:20)
+    at throwingMatcher (/elric/packages/expect/build/index.js:379:15)
+    at /elric/packages/expect/build/index.js:285:72
+    at Object.<anonymous> (/elric/e2e/to-throw-error-matching-inline-snapshot/__tests__/should-support-rejecting-promises.test.js:3:7)`;
 
     expect(removeLinesBeforeExternalMatcherTrap(stack)).toBe(stack);
   });

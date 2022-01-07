@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`can bail with a custom inline snapshot matcher 1`] = `
 FAIL __tests__/bail.test.js
@@ -25,7 +25,7 @@ FAIL __tests__/bail.test.js
 
  › 1 snapshot failed.
 Snapshot Summary
- › 1 snapshot failed from 1 test suite. Inspect your code changes or re-run jest with \`-u\` to update them.
+ › 1 snapshot failed from 1 test suite. Inspect your code changes or re-run elric with \`-u\` to update them.
 `;
 
 exports[`works with custom inline snapshot matchers 1`] = `
@@ -117,5 +117,5 @@ FAIL __tests__/asynchronous.test.js
 
  › 4 snapshots failed.
 Snapshot Summary
- › 4 snapshots failed from 1 test suite. Inspect your code changes or re-run jest with \`-u\` to update them.
+ › 4 snapshots failed from 1 test suite. Inspect your code changes or re-run elric with \`-u\` to update them.
 `;

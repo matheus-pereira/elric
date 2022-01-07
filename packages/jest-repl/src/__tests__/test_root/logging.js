@@ -8,9 +8,9 @@
 'use strict';
 
 if (
-  require('jest-runtime/src/__tests__/test_root/RegularModule').getModuleStateValue()
+  require('elric-runtime/src/__tests__/test_root/RegularModule').getModuleStateValue()
 ) {
   console.log('Hello, world!');
 } else {
-  console.log('Automocking is not properly disabled in jest-runtime.');
+  console.log('Automocking is not properly disabled in elric-runtime.');
 }

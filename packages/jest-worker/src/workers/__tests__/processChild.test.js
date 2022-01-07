@@ -30,7 +30,7 @@ beforeEach(() => {
   mockCount = 0;
   ended = false;
 
-  jest.mock(
+  elric.mock(
     '../my-fancy-worker',
     () => {
       mockCount++;
@@ -85,32 +85,32 @@ beforeEach(() => {
     {virtual: true},
   );
 
-  jest.mock(
+  elric.mock(
     '../my-fancy-standalone-worker',
-    () => jest.fn().mockImplementation(() => 12345),
+    () => elric.fn().mockImplementation(() => 12345),
     {virtual: true},
   );
 
   // This mock emulates a transpiled Babel module that carries a default export
   // that corresponds to a method.
-  jest.mock(
+  elric.mock(
     '../my-fancy-babel-worker',
     () => ({
       __esModule: true,
-      default: jest.fn().mockImplementation(() => 67890),
+      default: elric.fn().mockImplementation(() => 67890),
     }),
     {virtual: true},
   );
 
-  process.exit = jest.fn();
-  process.send = jest.fn();
+  process.exit = elric.fn();
+  process.send = elric.fn();
 
   // Require the child!
   require('../processChild');
 });
 
 afterEach(() => {
-  jest.resetModules();
+  elric.resetModules();
 
   process.removeAllListeners('message');
 
@@ -162,7 +162,7 @@ it('calls initialize with the correct arguments', () => {
 });
 
 it('returns results immediately when function is synchronous', () => {
-  process.send = jest.fn();
+  process.send = elric.fn();
 
   process.emit('message', [
     CHILD_MESSAGE_INITIALIZE,
@@ -241,7 +241,7 @@ it('returns results immediately when function is synchronous', () => {
 });
 
 it('returns results when it gets resolved if function is asynchronous', async () => {
-  jest.useRealTimers();
+  elric.useRealTimers();
 
   process.emit('message', [
     CHILD_MESSAGE_INITIALIZE,

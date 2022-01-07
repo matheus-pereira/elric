@@ -6,9 +6,9 @@
  */
 
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {cleanup, extractSummary, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(__dirname, '../cli_accepts_exact_filenames');
 
@@ -20,10 +20,10 @@ test('CLI accepts exact file names if matchers matched', () => {
     'foo/bar.spec.js': `
       test('foo', () => {});
     `,
-    'package.json': JSON.stringify({jest: {testEnvironment: 'node'}}),
+    'package.json': JSON.stringify({elric: {testEnvironment: 'node'}}),
   });
 
-  const result = runJest(DIR, ['-i', '--forceExit', './foo/bar.spec.js']);
+  const result = runelric(DIR, ['-i', '--forceExit', './foo/bar.spec.js']);
 
   expect(result.exitCode).toBe(0);
 
@@ -41,10 +41,10 @@ test('CLI skips exact file names if no matchers matched', () => {
     'foo/bar.js': `
       test('foo', () => {);
     `,
-    'package.json': JSON.stringify({jest: {testEnvironment: 'node'}}),
+    'package.json': JSON.stringify({elric: {testEnvironment: 'node'}}),
   });
 
-  const result = runJest(DIR, ['-i', '--forceExit', './foo/bar.js']);
+  const result = runelric(DIR, ['-i', '--forceExit', './foo/bar.js']);
 
   expect(result.exitCode).toBe(1);
   expect(result.stdout).toMatch(/No tests found([\S\s]*)2 files checked./);

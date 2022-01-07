@@ -11,7 +11,7 @@ const assert = require('assert');
 const {performance} = require('perf_hooks');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const workerFarm = require('worker-farm');
-const JestWorker = require('../../build').Worker;
+const elricWorker = require('../../build').Worker;
 
 // Typical tests: node --expose-gc test.js empty 100000
 //                node --expose-gc test.js loadTest 10000
@@ -75,7 +75,7 @@ function testWorkerFarm() {
   });
 }
 
-function testJestWorker() {
+function testelricWorker() {
   return new Promise(async resolve => {
     const startTime = performance.now();
     let count = 0;
@@ -95,7 +95,7 @@ function testJestWorker() {
       }
     }
 
-    const farm = new JestWorker(require.resolve('./workers/jest_worker'), {
+    const farm = new elricWorker(require.resolve('./workers/elric_worker'), {
       exposedMethods: [method],
       forkOptions: {execArgv: []},
       numWorkers: threads,
@@ -143,9 +143,9 @@ async function main() {
     // eslint-disable-next-line no-undef
     global.gc && gc();
 
-    profile('jest worker');
-    const jW = await testJestWorker();
-    profileEnd('jest worker');
+    profile('elric worker');
+    const jW = await testelricWorker();
+    profileEnd('elric worker');
     await sleep(3000);
     // eslint-disable-next-line no-undef
     global.gc && gc();
@@ -153,7 +153,7 @@ async function main() {
     wFResults.push(wF);
     jWResults.push(jW);
 
-    console.log('jest-worker:', jW);
+    console.log('elric-worker:', jW);
     console.log('worker-farm:', wF);
   }
 
@@ -172,7 +172,7 @@ async function main() {
 
   console.log('-'.repeat(75));
   console.log('total worker-farm:', {wFGT, wFPT});
-  console.log('total jest-worker:', {jWGT, jWPT});
+  console.log('total elric-worker:', {jWGT, jWPT});
 
   console.log('-'.repeat(75));
   console.log(

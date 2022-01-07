@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Custom Reporters Integration IncompleteReporter for flexibility 1`] = `
 onRunComplete is called
@@ -115,7 +115,7 @@ exports[`Custom Reporters Integration invalid format for adding reporters 1`] = 
     ]
 
   Configuration Documentation:
-  https://jestjs.io/docs/configuration
+  https://elricjs.io/docs/configuration
 
 `;
 

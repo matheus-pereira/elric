@@ -6,10 +6,10 @@
  */
 
 import chalk from 'chalk';
-import {KEYS} from 'jest-watcher';
+import {KEYS} from 'elric-watcher';
 import SnapshotInteractiveMode from '../SnapshotInteractiveMode';
 
-jest
+elric
   .mock('ansi-escapes', () => ({
     cursorRestorePosition: '[MOCK - cursorRestorePosition]',
     cursorSavePosition: '[MOCK - cursorSavePosition]',
@@ -18,15 +18,15 @@ jest
     cursorUp: () => '[MOCK - cursorUp]',
     eraseDown: '[MOCK - eraseDown]',
   }))
-  .mock('jest-util', () => {
-    const {specialChars, ...util} = jest.requireActual('jest-util');
+  .mock('elric-util', () => {
+    const {specialChars, ...util} = elric.requireActual('elric-util');
     return {
       ...util,
       specialChars: {...specialChars, CLEAR: '[MOCK - clear]'},
     };
   });
 
-jest.doMock('chalk', () =>
+elric.doMock('chalk', () =>
   Object.assign(new chalk.Instance({level: 0}), {
     stripColor: str => str,
   }),
@@ -37,9 +37,9 @@ describe('SnapshotInteractiveMode', () => {
   let instance;
   let mockCallback;
   beforeEach(() => {
-    pipe = {write: jest.fn()};
+    pipe = {write: elric.fn()};
     instance = new SnapshotInteractiveMode(pipe);
-    mockCallback = jest.fn(() => {
+    mockCallback = elric.fn(() => {
       instance.updateWithResults({snapshot: {failure: true}});
     });
   });
@@ -85,7 +85,7 @@ describe('SnapshotInteractiveMode', () => {
   });
 
   test('press Q or ESC triggers an abort', () => {
-    instance.abort = jest.fn();
+    instance.abort = elric.fn();
     instance.put('q');
     instance.put(KEYS.ESCAPE);
     expect(instance.abort).toHaveBeenCalledTimes(2);
@@ -139,7 +139,7 @@ describe('SnapshotInteractiveMode', () => {
   });
 
   test('update 1 test, then finish and return', () => {
-    const mockCallback = jest.fn();
+    const mockCallback = elric.fn();
     mockCallback.mockImplementationOnce(() => {
       instance.updateWithResults({snapshot: {failure: true}});
     });
@@ -196,7 +196,7 @@ describe('SnapshotInteractiveMode', () => {
   });
 
   test('update 2 tests, then finish and return', () => {
-    const mockCallback = jest.fn();
+    const mockCallback = elric.fn();
     mockCallback.mockImplementationOnce(() => {
       instance.updateWithResults({snapshot: {failure: true}});
     });
@@ -244,7 +244,7 @@ describe('SnapshotInteractiveMode', () => {
   });
 
   test('update 1 test, skip 1 test, then finish and restart', () => {
-    const mockCallback = jest.fn();
+    const mockCallback = elric.fn();
     mockCallback.mockImplementationOnce(() => {
       instance.updateWithResults({snapshot: {failure: true}});
     });
@@ -292,7 +292,7 @@ describe('SnapshotInteractiveMode', () => {
   });
 
   test('skip 1 test, update 1 test, then finish and restart', () => {
-    const mockCallback = jest.fn();
+    const mockCallback = elric.fn();
     mockCallback.mockImplementationOnce(() => {
       instance.updateWithResults({snapshot: {failure: true}});
     });

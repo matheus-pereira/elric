@@ -7,7 +7,7 @@
 
 'use strict';
 
-const BrowserEnv = require('jest-environment-jsdom');
+const BrowserEnv = require('elric-environment-jsdom');
 
 module.exports = class BrowserEnvWithConditions extends BrowserEnv {
   exportConditions() {

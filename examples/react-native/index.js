@@ -16,4 +16,4 @@ class App extends Component<{}> {
   }
 }
 
-AppRegistry.registerComponent('jestrn', () => App);
+AppRegistry.registerComponent('elricrn', () => App);

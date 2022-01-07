@@ -15,7 +15,7 @@ describe('Runtime', () => {
     createRuntime = require('createRuntime');
   });
 
-  describe('jest.spyOn', () => {
+  describe('elric.spyOn', () => {
     it('calls the original function', async () => {
       const runtime = await createRuntime(__filename);
       const root = runtime.requireModule(runtime.__mockRootPath);
@@ -27,7 +27,7 @@ describe('Runtime', () => {
         },
       };
 
-      const spy = root.jest.spyOn(obj, 'method');
+      const spy = root.elric.spyOn(obj, 'method');
 
       obj.method();
 
@@ -36,7 +36,7 @@ describe('Runtime', () => {
     });
   });
 
-  describe('jest.spyOnProperty', () => {
+  describe('elric.spyOnProperty', () => {
     it('calls the original function', async () => {
       const runtime = await createRuntime(__filename);
       const root = runtime.requireModule(runtime.__mockRootPath);
@@ -48,7 +48,7 @@ describe('Runtime', () => {
         },
       };
 
-      const spy = root.jest.spyOn(obj, 'method', 'get');
+      const spy = root.elric.spyOn(obj, 'method', 'get');
 
       obj.method();
 

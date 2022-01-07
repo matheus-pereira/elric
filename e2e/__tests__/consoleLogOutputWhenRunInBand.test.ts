@@ -6,9 +6,9 @@
  */
 
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {cleanup, extractSummary, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(__dirname, '../console-log-output-when-run-in-band');
 
@@ -25,7 +25,7 @@ test('prints console.logs when run with forceExit', () => {
     'package.json': '{}',
   });
 
-  const {stderr, exitCode, ...res} = runJest(DIR, [
+  const {stderr, exitCode, ...res} = runelric(DIR, [
     '-i',
     '--ci=false',
     '--forceExit',

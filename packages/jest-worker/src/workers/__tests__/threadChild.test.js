@@ -7,10 +7,10 @@
 
 'use strict';
 
-jest.mock('worker_threads', () => {
+elric.mock('worker_threads', () => {
   const EventEmitter = require('events');
   const thread = new EventEmitter();
-  thread.postMessage = jest.fn();
+  thread.postMessage = elric.fn();
 
   return {
     isMainThread: false,
@@ -40,7 +40,7 @@ beforeEach(() => {
   mockCount = 0;
   ended = false;
 
-  jest.mock(
+  elric.mock(
     '../my-fancy-worker',
     () => {
       mockCount++;
@@ -95,19 +95,19 @@ beforeEach(() => {
     {virtual: true},
   );
 
-  jest.mock(
+  elric.mock(
     '../my-fancy-standalone-worker',
-    () => jest.fn().mockImplementation(() => 12345),
+    () => elric.fn().mockImplementation(() => 12345),
     {virtual: true},
   );
 
   // This mock emulates a transpiled Babel module that carries a default export
   // that corresponds to a method.
-  jest.mock(
+  elric.mock(
     '../my-fancy-babel-worker',
     () => ({
       __esModule: true,
-      default: jest.fn().mockImplementation(() => 67890),
+      default: elric.fn().mockImplementation(() => 67890),
     }),
     {virtual: true},
   );
@@ -123,12 +123,12 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  jest.resetModules();
+  elric.resetModules();
 
   thread.removeAllListeners('message');
 });
 
-it('sets env.JEST_WORKER_ID', () => {
+it('sets env.elric_WORKER_ID', () => {
   thread.emit('message', [
     CHILD_MESSAGE_INITIALIZE,
     true, // Not really used here, but for flow type purity.
@@ -137,7 +137,7 @@ it('sets env.JEST_WORKER_ID', () => {
     '3',
   ]);
 
-  expect(process.env.JEST_WORKER_ID).toBe('3');
+  expect(process.env.elric_WORKER_ID).toBe('3');
 });
 
 it('lazily requires the file', () => {
@@ -184,7 +184,7 @@ it('calls initialize with the correct arguments', () => {
 });
 
 it('returns results immediately when function is synchronous', () => {
-  thread.send = jest.fn();
+  thread.send = elric.fn();
 
   thread.emit('message', [
     CHILD_MESSAGE_INITIALIZE,
@@ -268,7 +268,7 @@ it('returns results immediately when function is synchronous', () => {
 });
 
 it('returns results when it gets resolved if function is asynchronous', async () => {
-  jest.useRealTimers();
+  elric.useRealTimers();
 
   thread.emit('message', [
     CHILD_MESSAGE_INITIALIZE,

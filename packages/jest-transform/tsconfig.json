@@ -5,10 +5,10 @@
     "outDir": "build"
   },
   "references": [
-    {"path": "../jest-haste-map"},
-    {"path": "../jest-regex-util"},
-    {"path": "../jest-types"},
-    {"path": "../jest-util"},
+    {"path": "../elric-haste-map"},
+    {"path": "../elric-regex-util"},
+    {"path": "../elric-types"},
+    {"path": "../elric-util"},
     {"path": "../test-utils"}
   ]
 }

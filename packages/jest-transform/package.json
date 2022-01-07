@@ -1,10 +1,10 @@
 {
-  "name": "@jest/transform",
+  "name": "@elric/transform",
   "version": "27.4.6",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/jest-transform"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/elric-transform"
   },
   "license": "MIT",
   "main": "./build/index.js",
@@ -18,15 +18,15 @@
   },
   "dependencies": {
     "@babel/core": "^7.1.0",
-    "@jest/types": "^27.4.2",
+    "@elric/types": "^27.4.2",
     "babel-plugin-istanbul": "^6.1.1",
     "chalk": "^4.0.0",
     "convert-source-map": "^1.4.0",
     "fast-json-stable-stringify": "^2.0.0",
     "graceful-fs": "^4.2.9",
-    "jest-haste-map": "^27.4.6",
-    "jest-regex-util": "^27.4.0",
-    "jest-util": "^27.4.2",
+    "elric-haste-map": "^27.4.6",
+    "elric-regex-util": "^27.4.0",
+    "elric-util": "^27.4.2",
     "micromatch": "^4.0.4",
     "pirates": "^4.0.4",
     "slash": "^3.0.0",
@@ -34,7 +34,7 @@
     "write-file-atomic": "^3.0.0"
   },
   "devDependencies": {
-    "@jest/test-utils": "^27.4.6",
+    "@elric/test-utils": "^27.4.6",
     "@types/babel__core": "^7.1.0",
     "@types/convert-source-map": "^1.5.1",
     "@types/fast-json-stable-stringify": "^2.0.0",
@@ -42,7 +42,7 @@
     "@types/micromatch": "^4.0.1",
     "@types/write-file-atomic": "^3.0.0",
     "dedent": "^0.7.0",
-    "jest-snapshot-serializer-raw": "^1.1.0"
+    "elric-snapshot-serializer-raw": "^1.1.0"
   },
   "engines": {
     "node": "^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0"

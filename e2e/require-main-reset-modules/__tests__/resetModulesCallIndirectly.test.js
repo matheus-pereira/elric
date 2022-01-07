@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 beforeEach(() => {
-  jest.resetModules();
+  elric.resetModules();
 });
 
 afterEach(() => {
-  jest.resetModules();
+  elric.resetModules();
 });
 
 test('require.main is set on requiring indirectly', () => {

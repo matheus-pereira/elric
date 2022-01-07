@@ -5,22 +5,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-jest.mock(require.resolve('prettier'), () => require('../__mocks__/prettier'));
+elric.mock(require.resolve('prettier'), () => require('../__mocks__/prettier'));
 
 import {tmpdir} from 'os';
 import * as path from 'path';
 const prettier = require(require.resolve('prettier'));
 import * as fs from 'graceful-fs';
-import {Frame} from 'jest-message-util';
+import {Frame} from 'elric-message-util';
 import {saveInlineSnapshots} from '../InlineSnapshots';
 
 let dir;
 beforeEach(() => {
-  (prettier.resolveConfig.sync as jest.Mock).mockReset();
+  (prettier.resolveConfig.sync as elric.Mock).mockReset();
 });
 
 beforeEach(() => {
-  dir = path.join(tmpdir(), `jest-inline-snapshot-test-${Date.now()}`);
+  dir = path.join(tmpdir(), `elric-inline-snapshot-test-${Date.now()}`);
   fs.mkdirSync(dir);
 });
 
@@ -246,7 +246,7 @@ test.each([['babel'], ['flow'], ['typescript']])(
     const filename = path.join(dir, 'my.test.js');
     fs.writeFileSync(filename, 'expect(1).toMatchInlineSnapshot(`2`);\n');
 
-    (prettier.resolveConfig.sync as jest.Mock).mockReturnValue({parser});
+    (prettier.resolveConfig.sync as elric.Mock).mockReturnValue({parser});
 
     saveInlineSnapshots(
       [
@@ -259,7 +259,7 @@ test.each([['babel'], ['flow'], ['typescript']])(
     );
 
     expect(
-      (prettier.resolveConfig.sync as jest.Mock).mock.results[0].value,
+      (prettier.resolveConfig.sync as elric.Mock).mock.results[0].value,
     ).toEqual({parser});
 
     expect(fs.readFileSync(filename, 'utf-8')).toBe(
@@ -365,7 +365,7 @@ test('saveInlineSnapshots() uses escaped backticks', () => {
 test('saveInlineSnapshots() works with non-literals in expect call', () => {
   const filename = path.join(dir, 'my.test.js');
   fs.writeFileSync(filename, `expect({a: 'a'}).toMatchInlineSnapshot();\n`);
-  (prettier.resolveConfig.sync as jest.Mock).mockReturnValue({
+  (prettier.resolveConfig.sync as elric.Mock).mockReturnValue({
     bracketSpacing: false,
     singleQuote: true,
   });
@@ -393,7 +393,7 @@ test('saveInlineSnapshots() indents multi-line snapshots with spaces', () => {
       "  expect({a: 'a'}).toMatchInlineSnapshot();\n" +
       '});\n',
   );
-  (prettier.resolveConfig.sync as jest.Mock).mockReturnValue({
+  (prettier.resolveConfig.sync as elric.Mock).mockReturnValue({
     bracketSpacing: false,
     singleQuote: true,
   });
@@ -435,7 +435,7 @@ test('saveInlineSnapshots() does not re-indent error snapshots', () => {
       "  expect({a: 'a'}).toMatchInlineSnapshot();\n" +
       '});\n',
   );
-  (prettier.resolveConfig.sync as jest.Mock).mockReturnValue({
+  (prettier.resolveConfig.sync as elric.Mock).mockReturnValue({
     bracketSpacing: false,
     singleQuote: true,
   });
@@ -484,7 +484,7 @@ test('saveInlineSnapshots() does not re-indent already indented snapshots', () =
       '  `);\n' +
       '});\n',
   );
-  (prettier.resolveConfig.sync as jest.Mock).mockReturnValue({
+  (prettier.resolveConfig.sync as elric.Mock).mockReturnValue({
     bracketSpacing: false,
     singleQuote: true,
   });
@@ -525,7 +525,7 @@ test('saveInlineSnapshots() indents multi-line snapshots with tabs', () => {
       "  expect({a: 'a'}).toMatchInlineSnapshot();\n" +
       '});\n',
   );
-  (prettier.resolveConfig.sync as jest.Mock).mockReturnValue({
+  (prettier.resolveConfig.sync as elric.Mock).mockReturnValue({
     bracketSpacing: false,
     singleQuote: true,
     useTabs: true,
@@ -558,7 +558,7 @@ test('saveInlineSnapshots() indents snapshots after prettier reformats', () => {
     filename,
     "it('is a test', () => expect({a: 'a'}).toMatchInlineSnapshot());\n",
   );
-  (prettier.resolveConfig.sync as jest.Mock).mockReturnValue({
+  (prettier.resolveConfig.sync as elric.Mock).mockReturnValue({
     bracketSpacing: false,
     singleQuote: true,
   });
@@ -589,7 +589,7 @@ test('saveInlineSnapshots() does not indent empty lines', () => {
     filename,
     "it('is a test', () => expect(`hello\n\nworld`).toMatchInlineSnapshot());\n",
   );
-  (prettier.resolveConfig.sync as jest.Mock).mockReturnValue({
+  (prettier.resolveConfig.sync as elric.Mock).mockReturnValue({
     bracketSpacing: false,
     singleQuote: true,
   });

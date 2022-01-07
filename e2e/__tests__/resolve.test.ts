@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('resolve platform modules', () => {
-  const result = runJest('resolve');
+  const result = runelric('resolve');
   expect(result.exitCode).toBe(0);
 });

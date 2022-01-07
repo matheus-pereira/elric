@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {JestEnvironment} from '@jest/environment';
-import {bind as bindEach} from 'jest-each';
+import type {elricEnvironment} from '@elric/environment';
+import {bind as bindEach} from 'elric-each';
 
-export default (environment: JestEnvironment): void => {
+export default (environment: elricEnvironment): void => {
   environment.global.it.each = bindEach(environment.global.it);
   environment.global.fit.each = bindEach(environment.global.fit);
   environment.global.xit.each = bindEach(environment.global.xit);

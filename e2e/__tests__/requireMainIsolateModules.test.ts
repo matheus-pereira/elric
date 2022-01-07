@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
-test('`require.main` on using `jest.isolateModules` should not be undefined', () => {
-  const {exitCode} = runJest('require-main-isolate-modules');
+test('`require.main` on using `elric.isolateModules` should not be undefined', () => {
+  const {exitCode} = runelric('require-main-isolate-modules');
 
   expect(exitCode).toBe(0);
 });

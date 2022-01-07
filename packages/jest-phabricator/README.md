@@ -1,17 +1,17 @@
-# jest-phabricator
+# elric-phabricator
 
 This Repo contains the testResultsProcessor needed to create the coverage map needed by Phabricator to show inline coverage at diff time.
 
 ## How to use it
 
-Below you'll find an example of a Phabricator Jest UnitTestEngine reference implementation.
+Below you'll find an example of a Phabricator elric UnitTestEngine reference implementation.
 
-You need to add the jest unit engine to your .arcconfig:
+You need to add the elric unit engine to your .arcconfig:
 
 ```json
 ...
 
-"unit.engine" : "JestUnitTestEngine",
+"unit.engine" : "elricUnitTestEngine",
 
 ...
 ```
@@ -19,30 +19,30 @@ You need to add the jest unit engine to your .arcconfig:
 Or use the `ArcanistConfigurationDrivenUnitTestEngine` and add an entry to your .arcunit
 
 ```json
-"jest": {
-  "type": "jest",
+"elric": {
+  "type": "elric",
   "include": "(\\.js$)"
 }
 ```
 
-In `JestUnitTestEngine` there are a couple of constants you probably need to modify:
+In `elricUnitTestEngine` there are a couple of constants you probably need to modify:
 
 - `PROCESSOR` points to the path or the processor
-- `JEST_PATH` is the path to Jest
+- `elric_PATH` is the path to elric
 
-If you need to pass to Jest a custom configuration you can either use `JEST_PATH` and point it to a bash/script file that will just jest with `--config=path/to/config` or alternatively you can add the config option in the `getJestOptions` php function.
+If you need to pass to elric a custom configuration you can either use `elric_PATH` and point it to a bash/script file that will just elric with `--config=path/to/config` or alternatively you can add the config option in the `getelricOptions` php function.
 
 ## Reference implementation
 
 ```php
-final class JestUnitTestEngine extends ArcanistUnitTestEngine {
-  const PROCESSOR = 'jest/packages/jest-phabricator/build/index.js';
-  const JEST_PATH = 'jest/packages/jest/bin/jest.js';
+final class elricUnitTestEngine extends ArcanistUnitTestEngine {
+  const PROCESSOR = 'elric/packages/elric-phabricator/build/index.js';
+  const elric_PATH = 'elric/packages/elric/bin/elric.js';
   const TOO_MANY_FILES_TO_COVER = 100;
   const GIGANTIC_DIFF_THRESHOLD = 200;
 
   public function getEngineConfigurationName() {
-    return 'jest';
+    return 'elric';
   }
 
   private function getRoot() {
@@ -154,28 +154,28 @@ final class JestUnitTestEngine extends ArcanistUnitTestEngine {
 
     $result_arrays = [];
     $paths = $this->getPaths();
-    $jest_paths = array();
+    $elric_paths = array();
     foreach ($paths as $path) {
       $ext = idx(pathinfo($path), 'extension');
       if ($ext === 'js' || $ext === 'json') {
-        // Filter deleted modules because Jest can't do anything with them.
+        // Filter deleted modules because elric can't do anything with them.
         if (file_exists("$root/$path")) {
-          $jest_paths[] = "$root/$path";
+          $elric_paths[] = "$root/$path";
         }
       }
     }
 
     $commands = [];
-    if (count($jest_paths) > self::GIGANTIC_DIFF_THRESHOLD) {
+    if (count($elric_paths) > self::GIGANTIC_DIFF_THRESHOLD) {
       $console->writeOut("Too many files, skipping JavaScript tests.\n");
       $result_arrays[] = array();
     } else {
-      if (count($jest_paths) > 0) {
+      if (count($elric_paths) > 0) {
         $console->writeOut("Running JavaScript tests.\n");
         $commands[] = array(
-          'bin' => self::JEST_PATH,
-          'options' => $this->getJestOptions($jest_paths),
-          'paths' => $jest_paths,
+          'bin' => self::elric_PATH,
+          'options' => $this->getelricOptions($elric_paths),
+          'paths' => $elric_paths,
         );
       }
 
@@ -183,7 +183,7 @@ final class JestUnitTestEngine extends ArcanistUnitTestEngine {
         $result_arrays[] = $this->runCommands($commands);
       } catch (Exception $e) {
         // Ignore the exception in case of failing tests
-        // As Jest should have already printed the results.
+        // As elric should have already printed the results.
         $result = new ArcanistUnitTestResult();
         $result->setName('JavaScript tests');
         $result->setResult(ArcanistUnitTestResult::RESULT_FAIL);
@@ -197,7 +197,7 @@ final class JestUnitTestEngine extends ArcanistUnitTestEngine {
     return call_user_func_array('array_merge', $result_arrays);
   }
 
-  private function getJestOptions($paths) {
+  private function getelricOptions($paths) {
     $output_JSON = $this->getOutputJSON();
     $options = array(
       '--colors',

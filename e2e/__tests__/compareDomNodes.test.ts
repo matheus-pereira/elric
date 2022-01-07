@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('does not crash when expect involving a DOM node fails', () => {
-  const result = runJest('compare-dom-nodes');
+  const result = runelric('compare-dom-nodes');
 
   expect(result.stderr).toContain('FAIL __tests__/failedAssertion.js');
 });

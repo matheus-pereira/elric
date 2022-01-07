@@ -99,8 +99,8 @@ describe('FakeTimers', () => {
       timers.useFakeTimers();
 
       const runOrder = [];
-      const mock1 = jest.fn(() => runOrder.push('mock1'));
-      const mock2 = jest.fn(() => runOrder.push('mock2'));
+      const mock1 = elric.fn(() => runOrder.push('mock1'));
+      const mock2 = elric.fn(() => runOrder.push('mock2'));
 
       global.process.nextTick(mock1);
       global.process.nextTick(mock2);
@@ -116,7 +116,7 @@ describe('FakeTimers', () => {
     });
 
     it('does nothing when no ticks have been scheduled', () => {
-      const nextTick = jest.fn();
+      const nextTick = elric.fn();
       const global = {
         Date,
         clearTimeout,
@@ -146,7 +146,7 @@ describe('FakeTimers', () => {
       const timers = new FakeTimers({global});
       timers.useFakeTimers();
 
-      const mock1 = jest.fn();
+      const mock1 = elric.fn();
       global.process.nextTick(mock1);
       expect(mock1).toHaveBeenCalledTimes(0);
 
@@ -190,12 +190,12 @@ describe('FakeTimers', () => {
       timers.useFakeTimers();
 
       const runOrder = [];
-      const mock1 = jest.fn(() => runOrder.push('mock1'));
-      const mock2 = jest.fn(() => runOrder.push('mock2'));
-      const mock3 = jest.fn(() => runOrder.push('mock3'));
-      const mock4 = jest.fn(() => runOrder.push('mock4'));
-      const mock5 = jest.fn(() => runOrder.push('mock5'));
-      const mock6 = jest.fn(() => runOrder.push('mock6'));
+      const mock1 = elric.fn(() => runOrder.push('mock1'));
+      const mock2 = elric.fn(() => runOrder.push('mock2'));
+      const mock3 = elric.fn(() => runOrder.push('mock3'));
+      const mock4 = elric.fn(() => runOrder.push('mock4'));
+      const mock5 = elric.fn(() => runOrder.push('mock5'));
+      const mock6 = elric.fn(() => runOrder.push('mock6'));
 
       global.setTimeout(mock1, 100);
       global.setTimeout(mock2, NaN);
@@ -220,7 +220,7 @@ describe('FakeTimers', () => {
 
     it('warns when trying to advance timers while real timers are used', () => {
       const consoleWarn = console.warn;
-      console.warn = jest.fn();
+      console.warn = elric.fn();
       const timers = new FakeTimers({
         config: {
           rootDir: __dirname,
@@ -235,7 +235,7 @@ describe('FakeTimers', () => {
     });
 
     it('does nothing when no timers have been scheduled', () => {
-      const nativeSetTimeout = jest.fn();
+      const nativeSetTimeout = elric.fn();
       const global = {
         Date,
         clearTimeout,
@@ -253,7 +253,7 @@ describe('FakeTimers', () => {
       const timers = new FakeTimers({global});
       timers.useFakeTimers();
 
-      const fn = jest.fn();
+      const fn = elric.fn();
       global.setTimeout(fn, 0);
       expect(fn).toHaveBeenCalledTimes(0);
 
@@ -269,7 +269,7 @@ describe('FakeTimers', () => {
       const timers = new FakeTimers({global});
       timers.useFakeTimers();
 
-      const fn = jest.fn();
+      const fn = elric.fn();
       global.setTimeout(fn, 0, 'mockArg1', 'mockArg2');
 
       timers.runAllTimers();
@@ -278,7 +278,7 @@ describe('FakeTimers', () => {
     });
 
     it("doesn't pass the callback to native setTimeout", () => {
-      const nativeSetTimeout = jest.fn();
+      const nativeSetTimeout = elric.fn();
 
       const global = {
         Date,
@@ -293,7 +293,7 @@ describe('FakeTimers', () => {
       nativeSetTimeout.mockClear();
       timers.useFakeTimers();
 
-      const mock1 = jest.fn();
+      const mock1 = elric.fn();
       global.setTimeout(mock1, 0);
 
       timers.runAllTimers();
@@ -324,7 +324,7 @@ describe('FakeTimers', () => {
       const timers = new FakeTimers({global});
       timers.useFakeTimers();
 
-      const fn = jest.fn();
+      const fn = elric.fn();
       global.setTimeout(() => {
         process.nextTick(fn);
       }, 0);
@@ -342,10 +342,10 @@ describe('FakeTimers', () => {
       timers.useFakeTimers();
 
       const runOrder = [];
-      const mock1 = jest.fn(() => runOrder.push('mock1'));
-      const mock2 = jest.fn(() => runOrder.push('mock2'));
-      const mock3 = jest.fn(() => runOrder.push('mock3'));
-      const mock4 = jest.fn(() => runOrder.push('mock4'));
+      const mock1 = elric.fn(() => runOrder.push('mock1'));
+      const mock2 = elric.fn(() => runOrder.push('mock2'));
+      const mock3 = elric.fn(() => runOrder.push('mock3'));
+      const mock4 = elric.fn(() => runOrder.push('mock4'));
 
       global.setTimeout(mock1, 100);
       global.setTimeout(mock2, 0);
@@ -391,10 +391,10 @@ describe('FakeTimers', () => {
       timers.useFakeTimers();
 
       const runOrder: Array<string> = [];
-      const mock1 = jest.fn(() => runOrder.push('mock1'));
-      const mock2 = jest.fn(() => runOrder.push('mock2'));
-      const mock3 = jest.fn(() => runOrder.push('mock3'));
-      const mock4 = jest.fn(() => runOrder.push('mock4'));
+      const mock1 = elric.fn(() => runOrder.push('mock1'));
+      const mock2 = elric.fn(() => runOrder.push('mock2'));
+      const mock3 = elric.fn(() => runOrder.push('mock3'));
+      const mock4 = elric.fn(() => runOrder.push('mock4'));
 
       global.setTimeout(mock1, 100);
       global.setTimeout(mock2, 0);
@@ -426,10 +426,10 @@ describe('FakeTimers', () => {
       timers.useFakeTimers();
 
       const runOrder: Array<string> = [];
-      const mock1 = jest.fn(() => runOrder.push('mock1'));
-      const mock2 = jest.fn(() => runOrder.push('mock2'));
-      const mock3 = jest.fn(() => runOrder.push('mock3'));
-      const mock4 = jest.fn(() => runOrder.push('mock4'));
+      const mock1 = elric.fn(() => runOrder.push('mock1'));
+      const mock2 = elric.fn(() => runOrder.push('mock2'));
+      const mock3 = elric.fn(() => runOrder.push('mock3'));
+      const mock4 = elric.fn(() => runOrder.push('mock4'));
 
       global.setTimeout(mock1, 100);
       global.setTimeout(mock2, 0);
@@ -460,10 +460,10 @@ describe('FakeTimers', () => {
       timers.useFakeTimers();
 
       const runOrder: Array<string> = [];
-      const mock1 = jest.fn(() => runOrder.push('mock1'));
-      const mock2 = jest.fn(() => runOrder.push('mock2'));
-      const mock3 = jest.fn(() => runOrder.push('mock3'));
-      const mock4 = jest.fn(() => runOrder.push('mock4'));
+      const mock1 = elric.fn(() => runOrder.push('mock1'));
+      const mock2 = elric.fn(() => runOrder.push('mock2'));
+      const mock3 = elric.fn(() => runOrder.push('mock3'));
+      const mock4 = elric.fn(() => runOrder.push('mock4'));
 
       global.setTimeout(mock1, 0);
       global.setTimeout(() => {
@@ -492,7 +492,7 @@ describe('FakeTimers', () => {
       const timers = new FakeTimers({global});
       timers.useFakeTimers();
 
-      const mock1 = jest.fn();
+      const mock1 = elric.fn();
       global.setTimeout(mock1, 100);
 
       timers.reset();
@@ -505,7 +505,7 @@ describe('FakeTimers', () => {
       const timers = new FakeTimers({global});
       timers.useFakeTimers();
 
-      const mock1 = jest.fn();
+      const mock1 = elric.fn();
       global.setInterval(mock1, 200);
 
       timers.reset();
@@ -526,7 +526,7 @@ describe('FakeTimers', () => {
       const timers = new FakeTimers({global});
       timers.useFakeTimers();
 
-      const mock1 = jest.fn();
+      const mock1 = elric.fn();
       global.process.nextTick(mock1);
       global.setImmediate(mock1);
 
@@ -540,7 +540,7 @@ describe('FakeTimers', () => {
       const timers = new FakeTimers({global});
       timers.useFakeTimers();
 
-      const mock1 = jest.fn();
+      const mock1 = elric.fn();
       global.setTimeout(mock1, 100);
       timers.advanceTimersByTime(50);
 
@@ -554,7 +554,7 @@ describe('FakeTimers', () => {
 
   describe('runOnlyPendingTimers', () => {
     it('runs all timers in order', () => {
-      const nativeSetImmediate = jest.fn();
+      const nativeSetImmediate = elric.fn();
 
       const global = {
         Date,
@@ -627,7 +627,7 @@ describe('FakeTimers', () => {
       const timers = new FakeTimers({global});
       timers.useFakeTimers();
 
-      const fn = jest.fn();
+      const fn = elric.fn();
       const timer = global.setTimeout(fn, 10);
       global.setTimeout(() => {
         global.clearTimeout(timer);
@@ -640,10 +640,10 @@ describe('FakeTimers', () => {
 
   describe('useRealTimers', () => {
     it('resets native timer APIs', () => {
-      const nativeSetTimeout = jest.fn();
-      const nativeSetInterval = jest.fn();
-      const nativeClearTimeout = jest.fn();
-      const nativeClearInterval = jest.fn();
+      const nativeSetTimeout = elric.fn();
+      const nativeSetInterval = elric.fn();
+      const nativeClearTimeout = elric.fn();
+      const nativeClearInterval = elric.fn();
 
       const global = {
         Date,
@@ -672,7 +672,7 @@ describe('FakeTimers', () => {
     });
 
     it('resets native process.nextTick when present', () => {
-      const nativeProcessNextTick = jest.fn();
+      const nativeProcessNextTick = elric.fn();
 
       const global = {
         Date,
@@ -693,8 +693,8 @@ describe('FakeTimers', () => {
     });
 
     it('resets native setImmediate when present', () => {
-      const nativeSetImmediate = jest.fn();
-      const nativeClearImmediate = jest.fn();
+      const nativeSetImmediate = elric.fn();
+      const nativeClearImmediate = elric.fn();
 
       const global = {
         Date,
@@ -721,10 +721,10 @@ describe('FakeTimers', () => {
 
   describe('useFakeTimers', () => {
     it('resets mock timer APIs', () => {
-      const nativeSetTimeout = jest.fn();
-      const nativeSetInterval = jest.fn();
-      const nativeClearTimeout = jest.fn();
-      const nativeClearInterval = jest.fn();
+      const nativeSetTimeout = elric.fn();
+      const nativeSetInterval = elric.fn();
+      const nativeClearTimeout = elric.fn();
+      const nativeClearInterval = elric.fn();
 
       const global = {
         Date,
@@ -753,7 +753,7 @@ describe('FakeTimers', () => {
     });
 
     it('resets mock process.nextTick when present', () => {
-      const nativeProcessNextTick = jest.fn();
+      const nativeProcessNextTick = elric.fn();
 
       const global = {
         Date,
@@ -774,8 +774,8 @@ describe('FakeTimers', () => {
     });
 
     it('resets mock setImmediate when present', () => {
-      const nativeSetImmediate = jest.fn();
-      const nativeClearImmediate = jest.fn();
+      const nativeSetImmediate = elric.fn();
+      const nativeClearImmediate = elric.fn();
 
       const global = {
         Date,

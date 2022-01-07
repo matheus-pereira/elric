@@ -22,7 +22,7 @@ function forEach(items, callback) {
 To test this function, we can use a mock function, and inspect the mock's state to ensure the callback is invoked as expected.
 
 ```javascript
-const mockCallback = jest.fn(x => 42 + x);
+const mockCallback = elric.fn(x => 42 + x);
 forEach([0, 1], mockCallback);
 
 // The mock function is called twice
@@ -43,7 +43,7 @@ expect(mockCallback.mock.results[0].value).toBe(42);
 All mock functions have this special `.mock` property, which is where data about how the function has been called and what the function returned is kept. The `.mock` property also tracks the value of `this` for each call, so it is possible to inspect this as well:
 
 ```javascript
-const myMock = jest.fn();
+const myMock = elric.fn();
 
 const a = new myMock();
 const b = {};
@@ -82,7 +82,7 @@ expect(someMockFunction.mock.instances[0].name).toEqual('test');
 Mock functions can also be used to inject test values into your code during a test:
 
 ```javascript
-const myMock = jest.fn();
+const myMock = elric.fn();
 console.log(myMock());
 // > undefined
 
@@ -95,7 +95,7 @@ console.log(myMock(), myMock(), myMock(), myMock());
 Mock functions are also very effective in code that uses a functional continuation-passing style. Code written in this style helps avoid the need for complicated stubs that recreate the behavior of the real component they're standing in for, in favor of injecting values directly into the test right before they're used.
 
 ```javascript
-const filterTestFn = jest.fn();
+const filterTestFn = elric.fn();
 
 // Make the mock return `true` for the first call,
 // and `false` for the second call
@@ -127,7 +127,7 @@ class Users {
 export default Users;
 ```
 
-Now, in order to test this method without actually hitting the API (and thus creating slow and fragile tests), we can use the `jest.mock(...)` function to automatically mock the axios module.
+Now, in order to test this method without actually hitting the API (and thus creating slow and fragile tests), we can use the `elric.mock(...)` function to automatically mock the axios module.
 
 Once we mock the module we can provide a `mockResolvedValue` for `.get` that returns the data we want our test to assert against. In effect, we are saying that we want `axios.get('/users.json')` to return a fake response.
 
@@ -135,7 +135,7 @@ Once we mock the module we can provide a `mockResolvedValue` for `.get` that ret
 import axios from 'axios';
 import Users from './users';
 
-jest.mock('axios');
+elric.mock('axios');
 
 test('should fetch users', () => {
   const users = [{name: 'Bob'}];
@@ -163,14 +163,14 @@ export default () => 'baz';
 //test.js
 import defaultExport, {bar, foo} from '../foo-bar-baz';
 
-jest.mock('../foo-bar-baz', () => {
-  const originalModule = jest.requireActual('../foo-bar-baz');
+elric.mock('../foo-bar-baz', () => {
+  const originalModule = elric.requireActual('../foo-bar-baz');
 
   //Mock the default export and named export 'foo'
   return {
     __esModule: true,
     ...originalModule,
-    default: jest.fn(() => 'mocked baz'),
+    default: elric.fn(() => 'mocked baz'),
     foo: 'mocked foo',
   };
 });
@@ -187,10 +187,10 @@ test('should do a partial mock', () => {
 
 ## Mock Implementations
 
-Still, there are cases where it's useful to go beyond the ability to specify return values and full-on replace the implementation of a mock function. This can be done with `jest.fn` or the `mockImplementationOnce` method on mock functions.
+Still, there are cases where it's useful to go beyond the ability to specify return values and full-on replace the implementation of a mock function. This can be done with `elric.fn` or the `mockImplementationOnce` method on mock functions.
 
 ```javascript
-const myMockFn = jest.fn(cb => cb(null, true));
+const myMockFn = elric.fn(cb => cb(null, true));
 
 myMockFn((err, val) => console.log(val));
 // > true
@@ -205,7 +205,7 @@ module.exports = function () {
 ```
 
 ```js title="test.js"
-jest.mock('../foo'); // this happens automatically with automocking
+elric.mock('../foo'); // this happens automatically with automocking
 const foo = require('../foo');
 
 // foo is a mock function
@@ -217,7 +217,7 @@ foo();
 When you need to recreate a complex behavior of a mock function such that multiple function calls produce different results, use the `mockImplementationOnce` method:
 
 ```javascript
-const myMockFn = jest
+const myMockFn = elric
   .fn()
   .mockImplementationOnce(cb => cb(null, true))
   .mockImplementationOnce(cb => cb(null, false));
@@ -229,10 +229,10 @@ myMockFn((err, val) => console.log(val));
 // > false
 ```
 
-When the mocked function runs out of implementations defined with `mockImplementationOnce`, it will execute the default implementation set with `jest.fn` (if it is defined):
+When the mocked function runs out of implementations defined with `mockImplementationOnce`, it will execute the default implementation set with `elric.fn` (if it is defined):
 
 ```javascript
-const myMockFn = jest
+const myMockFn = elric
   .fn(() => 'default')
   .mockImplementationOnce(() => 'first call')
   .mockImplementationOnce(() => 'second call');
@@ -245,13 +245,13 @@ For cases where we have methods that are typically chained (and thus always need
 
 ```javascript
 const myObj = {
-  myMethod: jest.fn().mockReturnThis(),
+  myMethod: elric.fn().mockReturnThis(),
 };
 
 // is the same as
 
 const otherObj = {
-  myMethod: jest.fn(function () {
+  myMethod: elric.fn(function () {
     return this;
   }),
 };
@@ -259,10 +259,10 @@ const otherObj = {
 
 ## Mock Names
 
-You can optionally provide a name for your mock functions, which will be displayed instead of "jest.fn()" in the test error output. Use this if you want to be able to quickly identify the mock function reporting an error in your test output.
+You can optionally provide a name for your mock functions, which will be displayed instead of "elric.fn()" in the test error output. Use this if you want to be able to quickly identify the mock function reporting an error in your test output.
 
 ```javascript
-const myMockFn = jest
+const myMockFn = elric
   .fn()
   .mockReturnValue('default')
   .mockImplementation(scalar => 42 + scalar)

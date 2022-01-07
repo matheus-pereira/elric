@@ -5,18 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 describe.each(['modern', 'legacy'])(
   '%s implementation of fake timers',
   implementation => {
     it('should be possible to use from config', () => {
-      const result = runJest(`fake-time/${implementation}/from-config`);
+      const result = runelric(`fake-time/${implementation}/from-config`);
       expect(result.exitCode).toBe(0);
     });
 
-    it('should be possible to use from jest-object', () => {
-      const result = runJest(`fake-time/${implementation}/from-jest-object`);
+    it('should be possible to use from elric-object', () => {
+      const result = runelric(`fake-time/${implementation}/from-elric-object`);
       expect(result.exitCode).toBe(0);
     });
   },

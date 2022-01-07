@@ -16,11 +16,11 @@ const modifyPackageJson = ({
 }): string => {
   if (shouldModifyScripts) {
     projectPackageJson.scripts
-      ? (projectPackageJson.scripts.test = 'jest')
-      : (projectPackageJson.scripts = {test: 'jest'});
+      ? (projectPackageJson.scripts.test = 'elric')
+      : (projectPackageJson.scripts = {test: 'elric'});
   }
 
-  delete projectPackageJson.jest;
+  delete projectPackageJson.elric;
 
   return JSON.stringify(projectPackageJson, null, 2) + '\n';
 };

@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('module.parent should be null in test files', () => {
-  const {exitCode} = runJest('module-parent-null-in-test');
+  const {exitCode} = runelric('module-parent-null-in-test');
 
   expect(exitCode).toBe(0);
 });

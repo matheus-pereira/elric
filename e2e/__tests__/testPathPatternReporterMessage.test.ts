@@ -8,9 +8,9 @@
 import {tmpdir} from 'os';
 import * as path from 'path';
 import {cleanup, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
-const DIR = path.resolve(tmpdir(), 'jest-path-pattern-reporter-message');
+const DIR = path.resolve(tmpdir(), 'elric-path-pattern-reporter-message');
 
 beforeEach(() => cleanup(DIR));
 afterEach(() => cleanup(DIR));
@@ -24,15 +24,15 @@ test('prints a message with path pattern at the end', () => {
   });
   let stderr;
 
-  ({stderr} = runJest(DIR, ['a']));
+  ({stderr} = runelric(DIR, ['a']));
   expect(stderr).toMatch('Ran all test suites matching /a/i');
 
-  ({stderr} = runJest(DIR, ['a', 'b']));
+  ({stderr} = runelric(DIR, ['a', 'b']));
   expect(stderr).toMatch('Ran all test suites matching /a|b/i');
 
-  ({stderr} = runJest(DIR, ['--testPathPattern', 'a']));
+  ({stderr} = runelric(DIR, ['--testPathPattern', 'a']));
   expect(stderr).toMatch('Ran all test suites matching /a/i');
 
-  ({stderr} = runJest(DIR, ['--testPathPattern', 'a|b']));
+  ({stderr} = runelric(DIR, ['--testPathPattern', 'a|b']));
   expect(stderr).toMatch('Ran all test suites matching /a|b/i');
 });

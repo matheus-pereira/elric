@@ -6,29 +6,29 @@
  *
  */
 
-import {TestWatcher} from '@jest/core';
+import {TestWatcher} from '@elric/core';
 import TestRunner from '../index';
 
 let mockWorkerFarm;
 
-jest.mock('jest-worker', () => ({
-  Worker: jest.fn(
+elric.mock('elric-worker', () => ({
+  Worker: elric.fn(
     worker =>
       (mockWorkerFarm = {
-        end: jest.fn().mockResolvedValue({forceExited: false}),
-        getStderr: jest.fn(),
-        getStdout: jest.fn(),
-        worker: jest.fn((data, callback) => require(worker)(data, callback)),
+        end: elric.fn().mockResolvedValue({forceExited: false}),
+        getStderr: elric.fn(),
+        getStdout: elric.fn(),
+        worker: elric.fn((data, callback) => require(worker)(data, callback)),
       }),
   ),
 }));
 
-jest.mock('../testWorker', () => {});
+elric.mock('../testWorker', () => {});
 
 test('injects the serializable module map into each worker in watch mode', async () => {
   const globalConfig = {maxWorkers: 2, watch: true};
   const config = {rootDir: '/path/'};
-  const serializableModuleMap = jest.fn();
+  const serializableModuleMap = elric.fn();
   const runContext = {};
   const context = {
     config,
@@ -67,7 +67,7 @@ test('injects the serializable module map into each worker in watch mode', async
   ]);
 });
 
-test('assign process.env.JEST_WORKER_ID = 1 when in runInBand mode', async () => {
+test('assign process.env.elric_WORKER_ID = 1 when in runInBand mode', async () => {
   const globalConfig = {maxWorkers: 1, watch: false};
   const config = {rootDir: '/path/'};
   const context = {config};
@@ -81,5 +81,5 @@ test('assign process.env.JEST_WORKER_ID = 1 when in runInBand mode', async () =>
     {serial: true},
   );
 
-  expect(process.env.JEST_WORKER_ID).toBe('1');
+  expect(process.env.elric_WORKER_ID).toBe('1');
 });

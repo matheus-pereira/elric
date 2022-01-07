@@ -7,7 +7,7 @@
 
 import {tmpdir} from 'os';
 import * as path from 'path';
-import JestHasteMap from 'jest-haste-map';
+import elricHasteMap from 'elric-haste-map';
 import {cleanup, writeFiles} from '../Utils';
 
 const DIR = path.resolve(tmpdir(), 'haste_map_sha1');
@@ -26,7 +26,7 @@ test('exits the process after test are done but before timers complete', async (
     'node_modules/bar/index.js': '"node modules bar"',
   });
 
-  const haste = new JestHasteMap({
+  const haste = new elricHasteMap({
     computeSha1: true,
     extensions: ['js', 'json', 'png'],
     forceNodeFilesystemAPI: true,

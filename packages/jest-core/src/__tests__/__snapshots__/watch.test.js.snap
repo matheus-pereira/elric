@@ -1,13 +1,13 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Watch mode flows Runs Jest in a non-interactive environment not showing usage 1`] = `
+exports[`Watch mode flows Runs elric in a non-interactive environment not showing usage 1`] = `
 Array [
   "
 ",
 ]
 `;
 
-exports[`Watch mode flows Runs Jest once by default and shows usage 1`] = `
+exports[`Watch mode flows Runs elric once by default and shows usage 1`] = `
 Array [
   "
 Watch Usage
@@ -51,7 +51,7 @@ Watch Usage
 `;
 
 exports[`Watch mode flows makes watch plugin initialization errors look nice 1`] = `
-[Error: Failed to initialize watch plugin "packages/jest-core/src/__tests__/__fixtures__/watchPluginThrows":
+[Error: Failed to initialize watch plugin "packages/elric-core/src/__tests__/__fixtures__/watchPluginThrows":
 
   ● Test suite failed to run
 

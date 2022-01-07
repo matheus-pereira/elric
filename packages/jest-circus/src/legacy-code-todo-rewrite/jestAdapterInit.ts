@@ -6,24 +6,24 @@
  */
 
 import throat from 'throat';
-import type {JestEnvironment} from '@jest/environment';
+import type {elricEnvironment} from '@elric/environment';
 import {
   AssertionResult,
   Status,
   TestFileEvent,
   TestResult,
   createEmptyTestResult,
-} from '@jest/test-result';
-import type {Circus, Config, Global} from '@jest/types';
+} from '@elric/test-result';
+import type {Circus, Config, Global} from '@elric/types';
 import {extractExpectedAssertionsErrors, getState, setState} from 'expect';
-import {bind} from 'jest-each';
-import {formatExecError, formatResultsErrors} from 'jest-message-util';
+import {bind} from 'elric-each';
+import {formatExecError, formatResultsErrors} from 'elric-message-util';
 import {
   SnapshotState,
   SnapshotStateType,
   addSerializer,
   buildSnapshotResolver,
-} from 'jest-snapshot';
+} from 'elric-snapshot';
 import globals from '..';
 import run from '../run';
 import {
@@ -34,11 +34,11 @@ import {
 } from '../state';
 import testCaseReportHandler from '../testCaseReportHandler';
 import {getTestID} from '../utils';
-import createExpect, {Expect} from './jestExpect';
+import createExpect, {Expect} from './elricExpect';
 
 type Process = NodeJS.Process;
 
-interface JestGlobals extends Global.TestFrameworkGlobals {
+interface elricGlobals extends Global.TestFrameworkGlobals {
   expect: Expect;
 }
 
@@ -48,18 +48,18 @@ export const initialize = async ({
   globalConfig,
   localRequire,
   parentProcess,
-  sendMessageToJest,
+  sendMessageToelric,
   setGlobalsForRuntime,
   testPath,
 }: {
   config: Config.ProjectConfig;
-  environment: JestEnvironment;
+  environment: elricEnvironment;
   globalConfig: Config.GlobalConfig;
   localRequire: <T = unknown>(path: Config.Path) => T;
   testPath: Config.Path;
   parentProcess: Process;
-  sendMessageToJest?: TestFileEvent;
-  setGlobalsForRuntime: (globals: JestGlobals) => void;
+  sendMessageToelric?: TestFileEvent;
+  setGlobalsForRuntime: (globals: elricGlobals) => void;
 }): Promise<{
   globals: Global.TestFrameworkGlobals;
   snapshotState: SnapshotStateType;
@@ -105,7 +105,7 @@ export const initialize = async ({
       timeout?: number,
     ) => {
       const promise = mutex(() => testFn());
-      // eslint-disable-next-line jest/no-focused-tests
+      // eslint-disable-next-line elric/no-focused-tests
       test.only(testName, () => promise, timeout);
     };
 
@@ -125,7 +125,7 @@ export const initialize = async ({
     addEventHandler(environment.handleTestEvent.bind(environment));
   }
 
-  const runtimeGlobals: JestGlobals = {
+  const runtimeGlobals: elricGlobals = {
     ...globalsObject,
     expect: createExpect(globalConfig),
   };
@@ -146,7 +146,7 @@ export const initialize = async ({
     await dispatch({name: 'include_test_location_in_result'});
   }
 
-  // Jest tests snapshotSerializers in order preceding built-in serializers.
+  // elric tests snapshotSerializers in order preceding built-in serializers.
   // Therefore, add in reverse because the last added is the first tested.
   config.snapshotSerializers
     .concat()
@@ -162,19 +162,19 @@ export const initialize = async ({
     snapshotFormat: config.snapshotFormat,
     updateSnapshot,
   });
-  // @ts-expect-error: snapshotState is a jest extension of `expect`
+  // @ts-expect-error: snapshotState is a elric extension of `expect`
   setState({snapshotState, testPath});
 
   addEventHandler(handleSnapshotStateAfterRetry(snapshotState));
-  if (sendMessageToJest) {
-    addEventHandler(testCaseReportHandler(testPath, sendMessageToJest));
+  if (sendMessageToelric) {
+    addEventHandler(testCaseReportHandler(testPath, sendMessageToelric));
   }
 
   // Return it back to the outer scope (test runner outside the VM).
   return {globals: globalsObject, snapshotState};
 };
 
-export const runAndTransformResultsToJestFormat = async ({
+export const runAndTransformResultsToelricFormat = async ({
   config,
   globalConfig,
   testPath,
@@ -297,7 +297,7 @@ const _addExpectedAssertionErrors = (test: Circus.TestEntry) => {
   test.errors = test.errors.concat(errors);
 };
 
-// Get suppressed errors from ``jest-matchers`` that weren't throw during
+// Get suppressed errors from ``elric-matchers`` that weren't throw during
 // test execution and add them to the test result, potentially failing
 // a passing test.
 const _addSuppressedErrors = (test: Circus.TestEntry) => {

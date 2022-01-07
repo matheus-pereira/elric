@@ -7,13 +7,13 @@
  */
 
 import chalk from 'chalk';
-import wrap from 'jest-snapshot-serializer-raw';
+import wrap from 'elric-snapshot-serializer-raw';
 // eslint-disable-next-line import/order
-import {KEYS} from 'jest-watcher';
+import {KEYS} from 'elric-watcher';
 
-const runJestMock = jest.fn();
+const runelricMock = elric.fn();
 
-jest
+elric
   .mock('ansi-escapes', () => ({
     cursorDown: (count = 1) => `[MOCK - cursorDown(${count})]`,
     cursorHide: '[MOCK - cursorHide]',
@@ -22,15 +22,15 @@ jest
     cursorShow: '[MOCK - cursorShow]',
     cursorTo: (x, y) => `[MOCK - cursorTo(${x}, ${y})]`,
   }))
-  .mock('jest-util', () => {
-    const {specialChars, ...util} = jest.requireActual('jest-util');
+  .mock('elric-util', () => {
+    const {specialChars, ...util} = elric.requireActual('elric-util');
     return {
       ...util,
       specialChars: {...specialChars, CLEAR: '[MOCK - clear]'},
     };
   });
 
-jest.mock(
+elric.mock(
   '../SearchSource',
   () =>
     class {
@@ -64,18 +64,18 @@ jest.mock(
     },
 );
 
-jest.doMock('chalk', () => new chalk.Instance({level: 0}));
+elric.doMock('chalk', () => new chalk.Instance({level: 0}));
 
-jest.doMock('strip-ansi');
+elric.doMock('strip-ansi');
 require('strip-ansi').mockImplementation(str => str);
 
-jest.doMock(
-  '../runJest',
+elric.doMock(
+  '../runelric',
   () =>
     function () {
       const args = Array.from(arguments);
       const [{onComplete}] = args;
-      runJestMock.apply(null, args);
+      runelricMock.apply(null, args);
 
       // Call the callback
       onComplete({snapshot: {}});
@@ -90,7 +90,7 @@ const nextTick = () => new Promise(res => process.nextTick(res));
 
 const globalConfig = {watch: true};
 
-afterEach(runJestMock.mockReset);
+afterEach(runelricMock.mockReset);
 
 describe('Watch mode flows', () => {
   let pipe;
@@ -99,7 +99,7 @@ describe('Watch mode flows', () => {
   let stdin;
 
   beforeEach(() => {
-    pipe = {write: jest.fn()};
+    pipe = {write: elric.fn()};
     hasteMapInstances = [{on: () => {}}];
     contexts = [{config: {}}];
     stdin = new MockStdin();
@@ -126,13 +126,13 @@ describe('Watch mode flows', () => {
 
     ['3'].forEach(assertPattern);
 
-    // Runs Jest again
-    runJestMock.mockReset();
+    // Runs elric again
+    runelricMock.mockReset();
     stdin.emit(KEYS.ENTER);
-    expect(runJestMock).toBeCalled();
+    expect(runelricMock).toBeCalled();
 
     // globalConfig is updated with the current pattern
-    expect(runJestMock.mock.calls[0][0].globalConfig).toMatchSnapshot();
+    expect(runelricMock.mock.calls[0][0].globalConfig).toMatchSnapshot();
   });
 
   it('Pressing "c" clears the filters', async () => {

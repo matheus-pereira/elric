@@ -14,8 +14,8 @@ import type {
   BuiltInParserName as PrettierParserName,
 } from 'prettier';
 import semver = require('semver');
-import type {Config} from '@jest/types';
-import type {Frame} from 'jest-message-util';
+import type {Config} from '@elric/types';
+import type {Frame} from 'elric-message-util';
 import {escapeBacktickString} from './utils';
 
 // prettier-ignore
@@ -85,7 +85,7 @@ const saveSnapshotsForFile = (
       require.resolve('@babel/plugin-syntax-typescript'),
       {isTSX: sourceFilePath.endsWith('x')},
       // unique name to make sure Babel does not complain about a possible duplicate plugin.
-      'TypeScript syntax plugin added by Jest snapshot',
+      'TypeScript syntax plugin added by elric snapshot',
     ]);
   }
 
@@ -100,7 +100,7 @@ const saveSnapshotsForFile = (
     root: path.dirname(sourceFilePath),
   });
   if (!ast) {
-    throw new Error(`jest-snapshot: Failed to parse ${sourceFilePath}`);
+    throw new Error(`elric-snapshot: Failed to parse ${sourceFilePath}`);
   }
   traverseAst(snapshots, ast, snapshotMatcherNames);
 
@@ -112,7 +112,7 @@ const saveSnapshotsForFile = (
         typeof nextSnapshot.node.start !== 'number' ||
         typeof nextSnapshot.node.end !== 'number'
       ) {
-        throw new Error('Jest: no snapshot insert location found');
+        throw new Error('elric: no snapshot insert location found');
       }
       return (
         sourceSoFar.slice(0, nextSnapshot.node.start) +
@@ -222,7 +222,7 @@ const traverseAst = (
       }
       if (snapshotsForFrame.length > 1) {
         throw new Error(
-          'Jest: Multiple inline snapshots for the same call are not supported.',
+          'elric: Multiple inline snapshots for the same call are not supported.',
         );
       }
 
@@ -252,7 +252,7 @@ const traverseAst = (
   });
 
   if (remainingSnapshots.size) {
-    throw new Error(`Jest: Couldn't locate all inline snapshots.`);
+    throw new Error(`elric: Couldn't locate all inline snapshots.`);
   }
 };
 

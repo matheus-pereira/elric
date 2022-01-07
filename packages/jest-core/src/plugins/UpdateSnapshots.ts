@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import {
   BaseWatchPlugin,
-  JestHookSubscriber,
+  elricHookSubscriber,
   UpdateConfigCallback,
   UsageData,
-} from 'jest-watcher';
+} from 'elric-watcher';
 
 class UpdateSnapshotsPlugin extends BaseWatchPlugin {
   private _hasSnapshotFailure: boolean;
@@ -31,7 +31,7 @@ class UpdateSnapshotsPlugin extends BaseWatchPlugin {
     return Promise.resolve(false);
   }
 
-  apply(hooks: JestHookSubscriber): void {
+  apply(hooks: elricHookSubscriber): void {
     hooks.onTestRunComplete(results => {
       this._hasSnapshotFailure = results.snapshot.failure;
     });

@@ -13,7 +13,7 @@ import {
   generateTestFilesToForceUsingWorkers,
   writeFiles,
 } from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = resolve(tmpdir(), 'worker-force-exit');
 
@@ -41,7 +41,7 @@ test('prints a warning if a worker is force exited', () => {
       });
     `,
   });
-  const {exitCode, stderr} = runJest(DIR, ['--maxWorkers=2']);
+  const {exitCode, stderr} = runelric(DIR, ['--maxWorkers=2']);
 
   expect(exitCode).toBe(0);
   verifyNumPassed(stderr);
@@ -58,7 +58,7 @@ test('force exits a worker that fails to exit gracefully', async () => {
       });
     `,
   });
-  const {exitCode, stderr} = runJest(DIR, ['--maxWorkers=2']);
+  const {exitCode, stderr} = runelric(DIR, ['--maxWorkers=2']);
 
   expect(exitCode).toBe(0);
   verifyNumPassed(stderr);

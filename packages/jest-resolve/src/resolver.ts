@@ -10,9 +10,9 @@
 import * as path from 'path';
 import chalk = require('chalk');
 import slash = require('slash');
-import type {Config} from '@jest/types';
-import type {IModuleMap} from 'jest-haste-map';
-import {tryRealpath} from 'jest-util';
+import type {Config} from '@elric/types';
+import type {IModuleMap} from 'elric-haste-map';
+import {tryRealpath} from 'elric-util';
 import ModuleNotFoundError from './ModuleNotFoundError';
 import defaultResolver from './defaultResolver';
 import {clearFsCache} from './fileWalkers';

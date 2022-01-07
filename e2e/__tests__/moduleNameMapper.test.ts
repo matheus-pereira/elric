@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {extractSummary} from '../Utils';
-import runJest, {json as runWithJson} from '../runJest';
+import runelric, {json as runWithJson} from '../runelric';
 
 test('moduleNameMapper wrong configuration', () => {
-  const {stderr, exitCode} = runJest('module-name-mapper-wrong-config');
+  const {stderr, exitCode} = runelric('module-name-mapper-wrong-config');
   const {rest} = extractSummary(stderr);
 
   expect(exitCode).toBe(1);
@@ -18,7 +18,7 @@ test('moduleNameMapper wrong configuration', () => {
 });
 
 test('moduleNameMapper wrong array configuration', () => {
-  const {stderr, exitCode} = runJest('module-name-mapper-wrong-array-config');
+  const {stderr, exitCode} = runelric('module-name-mapper-wrong-array-config');
   const {rest} = extractSummary(stderr);
 
   expect(exitCode).toBe(1);
@@ -26,7 +26,7 @@ test('moduleNameMapper wrong array configuration', () => {
 });
 
 test('moduleNameMapper correct configuration', () => {
-  const {stderr, exitCode} = runJest('module-name-mapper-correct-config', [], {
+  const {stderr, exitCode} = runelric('module-name-mapper-correct-config', [], {
     stripAnsi: true,
   });
   const {rest} = extractSummary(stderr);
@@ -36,7 +36,7 @@ test('moduleNameMapper correct configuration', () => {
 });
 
 test('moduleNameMapper correct configuration mocking module of absolute path', () => {
-  const {stderr, exitCode} = runJest(
+  const {stderr, exitCode} = runelric(
     'module-name-mapper-correct-mock-absolute-path',
     [],
     {

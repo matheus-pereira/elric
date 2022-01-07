@@ -8,12 +8,12 @@
 import {tmpdir} from 'os';
 import * as path from 'path';
 import {cleanup, createEmptyPackage, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
-// doing test in a temp directory because we don't want jest node_modules affect it
+// doing test in a temp directory because we don't want elric node_modules affect it
 const tempDir = path.resolve(tmpdir(), 'clashing-dependencies-test');
 const hasteImplModulePath = path
-  .resolve('./packages/jest-haste-map/src/__tests__/haste_impl.js')
+  .resolve('./packages/elric-haste-map/src/__tests__/haste_impl.js')
   .replace(/\\/g, '\\\\');
 
 beforeEach(() => {
@@ -25,7 +25,7 @@ beforeEach(() => {
 // `invariant` package from npm and `invariant.js` that provides `invariant`
 // module we can still require the right invariant. This is pretty specific
 // use case and in the future we should probably delete this test.
-// see: https://github.com/facebook/jest/pull/6687
+// see: https://github.com/facebook/elric/pull/6687
 test('does not require project modules from inside node_modules', () => {
   writeFiles(tempDir, {
     '__tests__/test.js': `
@@ -37,7 +37,7 @@ test('does not require project modules from inside node_modules', () => {
       const invariant = (condition, message) => message;
       module.exports = invariant;
     `,
-    'jest.config.js': `module.exports = {
+    'elric.config.js': `module.exports = {
       haste: {
         hasteImplModulePath: '${hasteImplModulePath}',
       },
@@ -72,9 +72,9 @@ test('does not require project modules from inside node_modules', () => {
       };
     `,
   });
-  const {stderr, exitCode} = runJest(tempDir, ['--no-cache', '--no-watchman']);
+  const {stderr, exitCode} = runelric(tempDir, ['--no-cache', '--no-watchman']);
   // make sure there are no errors that lead to invariant.js (if we were to
-  // require a wrong `invariant.js` we'd have a syntax error, because jest
+  // require a wrong `invariant.js` we'd have a syntax error, because elric
   // internals wouldn't be able to parse flow annotations)
   expect(stderr).not.toMatch('invariant');
   expect(stderr).toMatch('PASS');

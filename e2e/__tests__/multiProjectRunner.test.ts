@@ -7,9 +7,9 @@
 
 import {tmpdir} from 'os';
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {cleanup, extractSummary, sortLines, writeFiles} from '../Utils';
-import runJest, {getConfig} from '../runJest';
+import runelric, {getConfig} from '../runelric';
 
 const DIR = path.resolve(tmpdir(), 'multi-project-runner-test');
 
@@ -25,11 +25,11 @@ test("--listTests doesn't duplicate the test files", () => {
     '/project2.js': `module.exports = {rootDir: './', displayName: 'BACKEND'}`,
     '__tests__/inBothProjectsTest.js': `test('test', () => {});`,
     'package.json': JSON.stringify({
-      jest: {projects: ['<rootDir>/project1.js', '<rootDir>/project2.js']},
+      elric: {projects: ['<rootDir>/project1.js', '<rootDir>/project2.js']},
     }),
   });
 
-  const {stdout} = runJest(DIR, ['--listTests']);
+  const {stdout} = runelric(DIR, ['--listTests']);
   expect(stdout.split('\n')).toHaveLength(1);
   expect(stdout).toMatch('inBothProjectsTest.js');
 });
@@ -60,7 +60,7 @@ test('can pass projects or global config', () => {
       test('file1', () => {});
     `,
     'project1/file1.js': SAMPLE_FILE_CONTENT,
-    'project1/jest.config.js': `module.exports = {rootDir: './', displayName: 'BACKEND',         haste: {
+    'project1/elric.config.js': `module.exports = {rootDir: './', displayName: 'BACKEND',         haste: {
               hasteImplModulePath: '<rootDir>/../hasteImpl.js',
             },}`,
     'project2/__tests__/file1.test.js': `
@@ -68,7 +68,7 @@ test('can pass projects or global config', () => {
       test('file1', () => {});
     `,
     'project2/file1.js': SAMPLE_FILE_CONTENT,
-    'project2/jest.config.js': `module.exports = {rootDir: './',         haste: {
+    'project2/elric.config.js': `module.exports = {rootDir: './',         haste: {
               hasteImplModulePath: '<rootDir>/../hasteImpl.js',
             },}`,
     'project3/__tests__/file1.test.js': `
@@ -76,13 +76,13 @@ test('can pass projects or global config', () => {
       test('file1', () => {});
     `,
     'project3/file1.js': SAMPLE_FILE_CONTENT,
-    'project3/jest.config.js': `module.exports = {rootDir: './', displayName: 'UI',         haste: {
+    'project3/elric.config.js': `module.exports = {rootDir: './', displayName: 'UI',         haste: {
               hasteImplModulePath: '<rootDir>/../hasteImpl.js',
             },}`,
   });
   let stderr;
 
-  ({stderr} = runJest(DIR, ['--no-watchman', '--config', 'base_config.js']));
+  ({stderr} = runelric(DIR, ['--no-watchman', '--config', 'base_config.js']));
   expect(stderr).toMatch(
     'The name `file1` was looked up in the Haste module map. It cannot be resolved, because there exists several different files',
   );
@@ -100,7 +100,7 @@ test('can pass projects or global config', () => {
     `,
   });
 
-  ({stderr} = runJest(DIR, [
+  ({stderr} = runelric(DIR, [
     '--no-watchman',
     '-i',
     '--projects',
@@ -115,7 +115,7 @@ test('can pass projects or global config', () => {
   expect(wrap(result1.summary)).toMatchSnapshot();
   expect(wrap(sortLines(result1.rest))).toMatchSnapshot();
 
-  ({stderr} = runJest(DIR, [
+  ({stderr} = runelric(DIR, [
     '--no-watchman',
     '-i',
     '--config',
@@ -140,15 +140,15 @@ test('"No tests found" message for projects', () => {
       test('file1', () => {});
     `,
     'project1/file1.js': SAMPLE_FILE_CONTENT,
-    'project1/jest.config.js': `module.exports = {rootDir: './'}`,
+    'project1/elric.config.js': `module.exports = {rootDir: './'}`,
     'project2/__tests__/file1.test.js': `
       const file1 = require('../file1');
       test('file1', () => {});
     `,
     'project2/file1.js': SAMPLE_FILE_CONTENT,
-    'project2/jest.config.js': `module.exports = {rootDir: './'}`,
+    'project2/elric.config.js': `module.exports = {rootDir: './'}`,
   });
-  const {stdout: verboseOutput} = runJest(DIR, [
+  const {stdout: verboseOutput} = runelric(DIR, [
     '--no-watchman',
     'xyz321',
     '--verbose',
@@ -157,7 +157,7 @@ test('"No tests found" message for projects', () => {
     'project2',
   ]);
   expect(verboseOutput).toContain('Pattern: xyz321 - 0 matches');
-  const {stdout} = runJest(DIR, [
+  const {stdout} = runelric(DIR, [
     '--no-watchman',
     'xyz321',
     '--projects',
@@ -176,7 +176,7 @@ test.each([{projectPath: 'packages/somepackage'}, {projectPath: 'packages/*'}])(
     writeFiles(DIR, {
       'package.json': `
         {
-          "jest": {
+          "elric": {
             "testMatch": ["<rootDir>/packages/somepackage/test.js"],
             "projects": [
               "${projectPath}"
@@ -186,7 +186,7 @@ test.each([{projectPath: 'packages/somepackage'}, {projectPath: 'packages/*'}])(
       `,
       'packages/somepackage/package.json': `
         {
-          "jest": {
+          "elric": {
             "displayName": "somepackage"
           }
         }
@@ -198,7 +198,7 @@ test.each([{projectPath: 'packages/somepackage'}, {projectPath: 'packages/*'}])(
       `,
     });
 
-    const {stdout, stderr, exitCode} = runJest(DIR, ['--no-watchman']);
+    const {stdout, stderr, exitCode} = runelric(DIR, ['--no-watchman']);
     expect(stderr).toContain('PASS somepackage packages/somepackage/test.js');
     expect(stderr).toContain('Test Suites: 1 passed, 1 total');
     expect(stdout).toEqual('');
@@ -215,7 +215,7 @@ test.each([
     writeFiles(DIR, {
       'package.json': `
         {
-          "jest": {
+          "elric": {
             "projects": [
               "${projectPath}"
             ]
@@ -224,7 +224,7 @@ test.each([
       `,
       'packages/p1/package.json': `
         {
-          "jest": {
+          "elric": {
             "displayName": "p1"
           }
         }
@@ -236,7 +236,7 @@ test.each([
       `,
       'packages/p2/package.json': `
         {
-          "jest": {
+          "elric": {
             "displayName": "p2"
           }
         }
@@ -248,7 +248,7 @@ test.each([
       `,
     });
 
-    const {stdout, stderr, exitCode} = runJest(DIR, ['--no-watchman']);
+    const {stdout, stderr, exitCode} = runelric(DIR, ['--no-watchman']);
     expect(stderr).toContain(`PASS ${displayName} ${projectPath}/test.js`);
     expect(stderr).toContain('Test Suites: 1 passed, 1 total');
     expect(stdout).toEqual('');
@@ -259,7 +259,7 @@ test.each([
 test('projects can be workspaces with non-JS/JSON files', () => {
   writeFiles(DIR, {
     'package.json': JSON.stringify({
-      jest: {
+      elric: {
         projects: ['packages/*'],
       },
     }),
@@ -279,7 +279,7 @@ test('projects can be workspaces with non-JS/JSON files', () => {
     'packages/project2/package.json': '{}',
   });
 
-  const {exitCode, stdout, stderr} = runJest(DIR, ['--no-watchman']);
+  const {exitCode, stdout, stderr} = runelric(DIR, ['--no-watchman']);
 
   expect(stderr).toContain('Test Suites: 2 passed, 2 total');
   expect(stderr).toContain('PASS packages/project1/__tests__/file1.test.js');
@@ -297,7 +297,7 @@ test('objects in project configuration', () => {
     '__tests__/file2.test.js': `
       test('bar', () => {});
     `,
-    'jest.config.js': `module.exports = {
+    'elric.config.js': `module.exports = {
       projects: [
         { testMatch: ['<rootDir>/__tests__/file1.test.js'] },
         { testMatch: ['<rootDir>/__tests__/file2.test.js'] },
@@ -306,7 +306,7 @@ test('objects in project configuration', () => {
     'package.json': '{}',
   });
 
-  const {stdout, stderr, exitCode} = runJest(DIR, ['--no-watchman']);
+  const {stdout, stderr, exitCode} = runelric(DIR, ['--no-watchman']);
   expect(stderr).toContain('Test Suites: 2 passed, 2 total');
   expect(stderr).toContain('PASS __tests__/file1.test.js');
   expect(stderr).toContain('PASS __tests__/file2.test.js');
@@ -320,7 +320,7 @@ test('allows a single project', () => {
     '__tests__/file1.test.js': `
       test('foo', () => {});
     `,
-    'jest.config.js': `module.exports = {
+    'elric.config.js': `module.exports = {
       projects: [
         { testMatch: ['<rootDir>/__tests__/file1.test.js'] },
       ]
@@ -328,7 +328,7 @@ test('allows a single project', () => {
     'package.json': '{}',
   });
 
-  const {stdout, stderr, exitCode} = runJest(DIR, ['--no-watchman']);
+  const {stdout, stderr, exitCode} = runelric(DIR, ['--no-watchman']);
   expect(stderr).toContain('PASS __tests__/file1.test.js');
   expect(stderr).toContain('Test Suites: 1 passed, 1 total');
   expect(stdout).toEqual('');
@@ -339,7 +339,7 @@ test('resolves projects and their <rootDir> properly', () => {
   writeFiles(DIR, {
     '.watchmanconfig': '',
     'package.json': JSON.stringify({
-      jest: {
+      elric: {
         projects: [
           'project1.conf.json',
           '<rootDir>/project2/project2.conf.json',
@@ -367,7 +367,7 @@ test('resolves projects and their <rootDir> properly', () => {
   });
 
   let stderr;
-  ({stderr} = runJest(DIR, ['--no-watchman']));
+  ({stderr} = runelric(DIR, ['--no-watchman']));
 
   expect(stderr).toMatch('Ran all test suites in 2 projects.');
   expect(stderr).toMatch('PASS project1/__tests__/test.test.js');
@@ -378,13 +378,13 @@ test('resolves projects and their <rootDir> properly', () => {
     'dir1/random_file': '',
     'dir2/random_file': '',
     'package.json': JSON.stringify({
-      jest: {
+      elric: {
         projects: ['**/*.conf.json'],
       },
     }),
   });
 
-  ({stderr} = runJest(DIR, ['--no-watchman']));
+  ({stderr} = runelric(DIR, ['--no-watchman']));
   expect(stderr).toMatch('Ran all test suites in 2 projects.');
   expect(stderr).toMatch('PASS project1/__tests__/test.test.js');
   expect(stderr).toMatch('PASS project2/__tests__/test.test.js');
@@ -394,7 +394,7 @@ test('resolves projects and their <rootDir> properly', () => {
     'dir1/random_file': '',
     'dir2/random_file': '',
     'package.json': JSON.stringify({
-      jest: {
+      elric: {
         projects: [
           'dir1',
           'dir2',
@@ -405,7 +405,7 @@ test('resolves projects and their <rootDir> properly', () => {
     }),
   });
 
-  ({stderr} = runJest(DIR, ['--no-watchman']));
+  ({stderr} = runelric(DIR, ['--no-watchman']));
   expect(stderr).toMatch(
     /Whoops! Two projects resolved to the same config path/,
   );
@@ -416,7 +416,7 @@ test('resolves projects and their <rootDir> properly', () => {
   // project with a directory/file that does not exist
   writeFiles(DIR, {
     'package.json': JSON.stringify({
-      jest: {
+      elric: {
         projects: [
           'banana',
           'project1.conf.json',
@@ -426,7 +426,7 @@ test('resolves projects and their <rootDir> properly', () => {
     }),
   });
 
-  ({stderr} = runJest(DIR, ['--no-watchman']));
+  ({stderr} = runelric(DIR, ['--no-watchman']));
   expect(stderr).toMatch(
     `Can't find a root directory while resolving a config file path.`,
   );
@@ -442,7 +442,7 @@ test('Does transform files with the corresponding project transformer', () => {
       const file = require('../../file.js');
       test('file', () => expect(file).toBe('PROJECT1'));
     `,
-    'project1/jest.config.js': `
+    'project1/elric.config.js': `
       module.exports = {
         rootDir: './',
         transform: {'file\.js': './transformer.js'},
@@ -457,7 +457,7 @@ test('Does transform files with the corresponding project transformer', () => {
       const file = require('../../file.js');
       test('file', () => expect(file).toBe('PROJECT2'));
     `,
-    'project2/jest.config.js': `
+    'project2/elric.config.js': `
       module.exports = {
         rootDir: './',
         transform: {'file\.js': './transformer.js'},
@@ -470,7 +470,7 @@ test('Does transform files with the corresponding project transformer', () => {
     `,
   });
 
-  const {stderr} = runJest(DIR, [
+  const {stderr} = runelric(DIR, [
     '--no-watchman',
     '-i',
     '--projects',
@@ -494,7 +494,7 @@ describe("doesn't bleed module file extensions resolution with multiple workers"
       const file = require('../../file');
       test('file 1', () => expect(file).toBe('file1'));
     `,
-      'project1/jest.config.js': `
+      'project1/elric.config.js': `
       module.exports = {
         rootDir: '..',
       };`,
@@ -502,7 +502,7 @@ describe("doesn't bleed module file extensions resolution with multiple workers"
       const file = require('../../file');
       test('file 2', () => expect(file).toBe('file2'));
     `,
-      'project2/jest.config.js': `
+      'project2/elric.config.js': `
       module.exports = {
         rootDir: '..',
         moduleFileExtensions: ['p2.js', 'js']
@@ -521,7 +521,7 @@ describe("doesn't bleed module file extensions resolution with multiple workers"
     expect(name2).toHaveLength(32);
     expect(name1).not.toEqual(name2);
 
-    const {stderr} = runJest(DIR, [
+    const {stderr} = runelric(DIR, [
       '--no-watchman',
       '-w=2',
       '--projects',
@@ -540,7 +540,7 @@ describe("doesn't bleed module file extensions resolution with multiple workers"
       'file.js': 'module.exports = "file1"',
       'file.p2.js': 'module.exports = "file2"',
       'package.json': JSON.stringify({
-        jest: {projects: [{}, {moduleFileExtensions: ['p2.js', 'js']}]},
+        elric: {projects: [{}, {moduleFileExtensions: ['p2.js', 'js']}]},
       }),
       'project1/__tests__/project1.test.js': `
       const file = require('../../file');
@@ -564,7 +564,7 @@ describe("doesn't bleed module file extensions resolution with multiple workers"
     expect(name2).toHaveLength(32);
     expect(name1).not.toEqual(name2);
 
-    const {stderr} = runJest(DIR, ['--no-watchman', '-w=2']);
+    const {stderr} = runelric(DIR, ['--no-watchman', '-w=2']);
 
     expect(stderr).toMatch('Ran all test suites in 2 projects.');
     expect(stderr).toMatch('PASS project1/__tests__/project1.test.js');

@@ -1,5 +1,5 @@
 {
-  "jest": {
+  "elric": {
     "timers": "fake",
     "setupFiles": [
       "<rootDir>/fake-promises"

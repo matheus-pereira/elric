@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
-import {isSnapshotPath} from 'jest-snapshot';
+import type {Config} from '@elric/types';
+import {isSnapshotPath} from 'elric-snapshot';
 
 export default function isValidPath(
   globalConfig: Config.GlobalConfig,

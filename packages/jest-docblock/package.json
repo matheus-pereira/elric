@@ -1,10 +1,10 @@
 {
-  "name": "jest-docblock",
+  "name": "elric-docblock",
   "version": "27.4.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/jest-docblock"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/elric-docblock"
   },
   "license": "MIT",
   "main": "./build/index.js",

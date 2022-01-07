@@ -9,7 +9,7 @@ import assert = require('assert');
 import {Console} from 'console';
 import {InspectOptions, format, formatWithOptions, inspect} from 'util';
 import chalk = require('chalk');
-import {ErrorWithStack, formatTime} from 'jest-util';
+import {ErrorWithStack, formatTime} from 'elric-util';
 import type {
   ConsoleBuffer,
   LogCounters,

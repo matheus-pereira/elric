@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`lastCalledWith includes the custom mock name in the error message 1`] = `
 <d>expect(</><r>named-mock</><d>).</>not<d>.</>lastCalledWith<d>(</><g>...expected</><d>)</>
@@ -8,7 +8,7 @@ Expected: not <g>"foo"</>, <g>"bar"</>
 Number of calls: <r>1</>
 `;
 
-exports[`lastCalledWith works only on spies or jest.fn 1`] = `
+exports[`lastCalledWith works only on spies or elric.fn 1`] = `
 <d>expect(</><r>received</><d>).</>lastCalledWith<d>(</><g>...expected</><d>)</>
 
 <b>Matcher error</>: <r>received</> value must be a mock or spy function
@@ -18,7 +18,7 @@ Received has value: <r>[Function fn]</>
 `;
 
 exports[`lastCalledWith works when not called 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>lastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>lastCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: <g>"foo"</>, <g>"bar"</>
 
@@ -26,7 +26,7 @@ Number of calls: <r>0</>
 `;
 
 exports[`lastCalledWith works with Immutable.js objects 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>lastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>lastCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: not <g>Immutable.Map {"a": {"b": "c"}}</>, <g>Immutable.Map {"a": {"b": "c"}}</>
 
@@ -34,7 +34,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`lastCalledWith works with Map 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>lastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>lastCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: not <g>Map {1 => 2, 2 => 1}</>
 
@@ -42,7 +42,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`lastCalledWith works with Map 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>lastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>lastCalledWith<d>(</><g>...expected</><d>)</>
 
 <g>- Expected</>
 <r>+ Received</>
@@ -58,7 +58,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`lastCalledWith works with Set 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>lastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>lastCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: not <g>Set {1, 2}</>
 
@@ -66,7 +66,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`lastCalledWith works with Set 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>lastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>lastCalledWith<d>(</><g>...expected</><d>)</>
 
 <g>- Expected</>
 <r>+ Received</>
@@ -82,7 +82,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`lastCalledWith works with arguments that don't match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>lastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>lastCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: <g>"foo"</>, <g>"bar"</>
 Received: <d>"foo"</>, <r>"bar1"</>
@@ -91,7 +91,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`lastCalledWith works with arguments that match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>lastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>lastCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: not <g>"foo"</>, <g>"bar"</>
 
@@ -99,7 +99,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`lastCalledWith works with many arguments 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>lastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>lastCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: not <g>"foo"</>, <g>"bar"</>
 Received
@@ -110,7 +110,7 @@ Number of calls: <r>3</>
 `;
 
 exports[`lastCalledWith works with many arguments that don't match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>lastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>lastCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: <g>"foo"</>, <g>"bar"</>
 Received
@@ -121,7 +121,7 @@ Number of calls: <r>3</>
 `;
 
 exports[`lastCalledWith works with trailing undefined arguments 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>lastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>lastCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: <g>"foo"</>
 Received: <d>"foo"</>, <r>undefined</>
@@ -130,7 +130,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`lastReturnedWith a call that throws is not considered to have returned 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>lastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>lastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>undefined</>
 Received: function call threw an error
@@ -140,7 +140,7 @@ Number of calls:   <r>1</>
 `;
 
 exports[`lastReturnedWith a call that throws undefined is not considered to have returned 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>lastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>lastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>undefined</>
 Received: function call threw an error
@@ -158,7 +158,7 @@ Number of returns: <r>0</>
 `;
 
 exports[`lastReturnedWith lastReturnedWith incomplete recursive calls are handled properly 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>lastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>lastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>0</>
 Received
@@ -170,7 +170,7 @@ Number of calls:   <r>4</>
 `;
 
 exports[`lastReturnedWith lastReturnedWith works with three calls 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>lastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>lastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>"foo3"</>
 Received
@@ -180,7 +180,7 @@ Received
 Number of returns: <r>3</>
 `;
 
-exports[`lastReturnedWith works only on spies or jest.fn 1`] = `
+exports[`lastReturnedWith works only on spies or elric.fn 1`] = `
 <d>expect(</><r>received</><d>).</>lastReturnedWith<d>(</><g>expected</><d>)</>
 
 <b>Matcher error</>: <r>received</> value must be a mock function
@@ -190,7 +190,7 @@ Received has value: <r>[Function fn]</>
 `;
 
 exports[`lastReturnedWith works when not called 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>lastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>lastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>"foo"</>
 
@@ -198,7 +198,7 @@ Number of returns: <r>0</>
 `;
 
 exports[`lastReturnedWith works with Immutable.js objects directly created 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>lastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>lastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>Immutable.Map {"a": {"b": "c"}}</>
 
@@ -206,7 +206,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`lastReturnedWith works with Immutable.js objects indirectly created 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>lastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>lastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>Immutable.Map {"a": {"b": "c"}}</>
 
@@ -214,7 +214,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`lastReturnedWith works with Map 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>lastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>lastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>Map {1 => 2, 2 => 1}</>
 
@@ -222,7 +222,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`lastReturnedWith works with Map 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>lastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>lastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>Map {"a" => "b", "b" => "a"}</>
 Received: <r>Map {1 => 2, 2 => 1}</>
@@ -231,7 +231,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`lastReturnedWith works with Set 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>lastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>lastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>Set {1, 2}</>
 
@@ -239,7 +239,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`lastReturnedWith works with Set 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>lastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>lastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>Set {3, 4}</>
 Received: <r>Set {1, 2}</>
@@ -248,7 +248,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`lastReturnedWith works with argument that does match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>lastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>lastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>"foo"</>
 
@@ -256,7 +256,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`lastReturnedWith works with argument that does not match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>lastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>lastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>"bar"</>
 Received: <r>"foo"</>
@@ -265,7 +265,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`lastReturnedWith works with undefined 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>lastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>lastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>undefined</>
 
@@ -308,7 +308,7 @@ n has type:  number
 n has value: 0
 `;
 
-exports[`nthCalledWith works only on spies or jest.fn 1`] = `
+exports[`nthCalledWith works only on spies or elric.fn 1`] = `
 <d>expect(</><r>received</><d>).</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 <b>Matcher error</>: <r>received</> value must be a mock or spy function
@@ -318,7 +318,7 @@ Received has value: <r>[Function fn]</>
 `;
 
 exports[`nthCalledWith works when not called 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 n: 1
 Expected: <g>"foo"</>, <g>"bar"</>
@@ -327,7 +327,7 @@ Number of calls: <r>0</>
 `;
 
 exports[`nthCalledWith works with Immutable.js objects 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 n: 1
 Expected: not <g>Immutable.Map {"a": {"b": "c"}}</>, <g>Immutable.Map {"a": {"b": "c"}}</>
@@ -336,7 +336,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`nthCalledWith works with Map 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 n: 1
 Expected: not <g>Map {1 => 2, 2 => 1}</>
@@ -345,7 +345,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`nthCalledWith works with Map 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 n: 1
 <g>- Expected</>
@@ -362,7 +362,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`nthCalledWith works with Set 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 n: 1
 Expected: not <g>Set {1, 2}</>
@@ -371,7 +371,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`nthCalledWith works with Set 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 n: 1
 <g>- Expected</>
@@ -388,7 +388,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`nthCalledWith works with arguments that don't match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 n: 1
 Expected: <g>"foo"</>, <g>"bar"</>
@@ -398,7 +398,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`nthCalledWith works with arguments that match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 n: 1
 Expected: not <g>"foo"</>, <g>"bar"</>
@@ -407,7 +407,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`nthCalledWith works with three calls 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 n: 1
 Expected: not <g>"foo1"</>, <g>"bar"</>
@@ -419,7 +419,7 @@ Number of calls: <r>3</>
 `;
 
 exports[`nthCalledWith works with trailing undefined arguments 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>nthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 n: 1
 Expected: <g>"foo"</>
@@ -429,7 +429,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`nthReturnedWith a call that throws is not considered to have returned 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: <g>undefined</>
@@ -440,7 +440,7 @@ Number of calls:   <r>1</>
 `;
 
 exports[`nthReturnedWith a call that throws undefined is not considered to have returned 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: <g>undefined</>
@@ -460,7 +460,7 @@ Number of returns: <r>0</>
 `;
 
 exports[`nthReturnedWith nthReturnedWith incomplete recursive calls are handled properly 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: <g>6</>
@@ -473,7 +473,7 @@ Number of calls:   <r>4</>
 `;
 
 exports[`nthReturnedWith nthReturnedWith incomplete recursive calls are handled properly 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 2
 Expected: <g>3</>
@@ -487,7 +487,7 @@ Number of calls:   <r>4</>
 `;
 
 exports[`nthReturnedWith nthReturnedWith incomplete recursive calls are handled properly 3`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 3
 Expected: not <g>1</>
@@ -501,7 +501,7 @@ Number of calls:   <r>4</>
 `;
 
 exports[`nthReturnedWith nthReturnedWith incomplete recursive calls are handled properly 4`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 4
 Expected: not <g>0</>
@@ -540,7 +540,7 @@ n has value: 0
 `;
 
 exports[`nthReturnedWith nthReturnedWith should reject nth value greater than number of calls 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 4
 Expected: <g>"foo"</>
@@ -551,7 +551,7 @@ Number of returns: <r>3</>
 `;
 
 exports[`nthReturnedWith nthReturnedWith should replace 1st, 2nd, 3rd with first, second, third 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: <g>"bar1"</>
@@ -563,7 +563,7 @@ Number of returns: <r>3</>
 `;
 
 exports[`nthReturnedWith nthReturnedWith should replace 1st, 2nd, 3rd with first, second, third 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: not <g>"foo1"</>
@@ -575,7 +575,7 @@ Number of returns: <r>3</>
 `;
 
 exports[`nthReturnedWith nthReturnedWith works with three calls 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: not <g>"foo1"</>
@@ -586,7 +586,7 @@ Received
 Number of returns: <r>3</>
 `;
 
-exports[`nthReturnedWith works only on spies or jest.fn 1`] = `
+exports[`nthReturnedWith works only on spies or elric.fn 1`] = `
 <d>expect(</><r>received</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 <b>Matcher error</>: <r>received</> value must be a mock function
@@ -596,7 +596,7 @@ Received has value: <r>[Function fn]</>
 `;
 
 exports[`nthReturnedWith works when not called 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: <g>"foo"</>
@@ -605,7 +605,7 @@ Number of returns: <r>0</>
 `;
 
 exports[`nthReturnedWith works with Immutable.js objects directly created 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: not <g>Immutable.Map {"a": {"b": "c"}}</>
@@ -614,7 +614,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`nthReturnedWith works with Immutable.js objects indirectly created 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: not <g>Immutable.Map {"a": {"b": "c"}}</>
@@ -623,7 +623,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`nthReturnedWith works with Map 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: not <g>Map {1 => 2, 2 => 1}</>
@@ -632,7 +632,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`nthReturnedWith works with Map 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: <g>Map {"a" => "b", "b" => "a"}</>
@@ -642,7 +642,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`nthReturnedWith works with Set 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: not <g>Set {1, 2}</>
@@ -651,7 +651,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`nthReturnedWith works with Set 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: <g>Set {3, 4}</>
@@ -661,7 +661,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`nthReturnedWith works with argument that does match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: not <g>"foo"</>
@@ -670,7 +670,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`nthReturnedWith works with argument that does not match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: <g>"bar"</>
@@ -680,7 +680,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`nthReturnedWith works with undefined 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>nthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: not <g>undefined</>
@@ -723,7 +723,7 @@ Received number of calls: <r>1</>
 `;
 
 exports[`toBeCalled passes when called 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toBeCalled<d>()</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toBeCalled<d>()</>
 
 Expected number of calls: <g>0</>
 Received number of calls: <r>1</>
@@ -731,7 +731,7 @@ Received number of calls: <r>1</>
 1: <r>"arg0"</>, <r>"arg1"</>, <r>"arg2"</>
 `;
 
-exports[`toBeCalled works only on spies or jest.fn 1`] = `
+exports[`toBeCalled works only on spies or elric.fn 1`] = `
 <d>expect(</><r>received</><d>).</>toBeCalled<d>()</>
 
 <b>Matcher error</>: <r>received</> value must be a mock or spy function
@@ -795,20 +795,20 @@ Expected has value: <g>[Function anonymous]</>
 `;
 
 exports[`toBeCalledTimes .not passes if function called less than expected times 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toBeCalledTimes<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toBeCalledTimes<d>(</><g>expected</><d>)</>
 
 Expected number of calls: <g>2</>
 Received number of calls: <r>1</>
 `;
 
 exports[`toBeCalledTimes .not passes if function called more than expected times 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toBeCalledTimes<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toBeCalledTimes<d>(</><g>expected</><d>)</>
 
 Expected number of calls: <g>2</>
 Received number of calls: <r>3</>
 `;
 
-exports[`toBeCalledTimes .not works only on spies or jest.fn 1`] = `
+exports[`toBeCalledTimes .not works only on spies or elric.fn 1`] = `
 <d>expect(</><r>received</><d>).</>not<d>.</>toBeCalledTimes<d>(</><g>expected</><d>)</>
 
 <b>Matcher error</>: <r>received</> value must be a mock or spy function
@@ -892,7 +892,7 @@ Expected: not <g>"foo"</>, <g>"bar"</>
 Number of calls: <r>1</>
 `;
 
-exports[`toBeCalledWith works only on spies or jest.fn 1`] = `
+exports[`toBeCalledWith works only on spies or elric.fn 1`] = `
 <d>expect(</><r>received</><d>).</>toBeCalledWith<d>(</><g>...expected</><d>)</>
 
 <b>Matcher error</>: <r>received</> value must be a mock or spy function
@@ -902,7 +902,7 @@ Received has value: <r>[Function fn]</>
 `;
 
 exports[`toBeCalledWith works when not called 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toBeCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toBeCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: <g>"foo"</>, <g>"bar"</>
 
@@ -910,7 +910,7 @@ Number of calls: <r>0</>
 `;
 
 exports[`toBeCalledWith works with Immutable.js objects 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toBeCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toBeCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: not <g>Immutable.Map {"a": {"b": "c"}}</>, <g>Immutable.Map {"a": {"b": "c"}}</>
 
@@ -918,7 +918,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toBeCalledWith works with Map 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toBeCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toBeCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: not <g>Map {1 => 2, 2 => 1}</>
 
@@ -926,7 +926,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toBeCalledWith works with Map 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toBeCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toBeCalledWith<d>(</><g>...expected</><d>)</>
 
 <g>- Expected</>
 <r>+ Received</>
@@ -942,7 +942,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toBeCalledWith works with Set 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toBeCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toBeCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: not <g>Set {1, 2}</>
 
@@ -950,7 +950,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toBeCalledWith works with Set 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toBeCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toBeCalledWith<d>(</><g>...expected</><d>)</>
 
 <g>- Expected</>
 <r>+ Received</>
@@ -966,7 +966,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toBeCalledWith works with arguments that don't match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toBeCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toBeCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: <g>"foo"</>, <g>"bar"</>
 Received: <d>"foo"</>, <r>"bar1"</>
@@ -975,7 +975,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toBeCalledWith works with arguments that match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toBeCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toBeCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: not <g>"foo"</>, <g>"bar"</>
 
@@ -983,7 +983,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toBeCalledWith works with many arguments 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toBeCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toBeCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: not <g>"foo"</>, <g>"bar"</>
 Received
@@ -993,7 +993,7 @@ Number of calls: <r>3</>
 `;
 
 exports[`toBeCalledWith works with many arguments that don't match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toBeCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toBeCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: <g>"foo"</>, <g>"bar"</>
 Received
@@ -1005,7 +1005,7 @@ Number of calls: <r>3</>
 `;
 
 exports[`toBeCalledWith works with trailing undefined arguments 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toBeCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toBeCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: <g>"foo"</>
 Received: <d>"foo"</>, <r>undefined</>
@@ -1048,7 +1048,7 @@ Received number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenCalled passes when called 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveBeenCalled<d>()</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveBeenCalled<d>()</>
 
 Expected number of calls: <g>0</>
 Received number of calls: <r>1</>
@@ -1056,7 +1056,7 @@ Received number of calls: <r>1</>
 1: <r>"arg0"</>, <r>"arg1"</>, <r>"arg2"</>
 `;
 
-exports[`toHaveBeenCalled works only on spies or jest.fn 1`] = `
+exports[`toHaveBeenCalled works only on spies or elric.fn 1`] = `
 <d>expect(</><r>received</><d>).</>toHaveBeenCalled<d>()</>
 
 <b>Matcher error</>: <r>received</> value must be a mock or spy function
@@ -1120,20 +1120,20 @@ Expected has value: <g>[Function anonymous]</>
 `;
 
 exports[`toHaveBeenCalledTimes .not passes if function called less than expected times 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenCalledTimes<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveBeenCalledTimes<d>(</><g>expected</><d>)</>
 
 Expected number of calls: <g>2</>
 Received number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenCalledTimes .not passes if function called more than expected times 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenCalledTimes<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveBeenCalledTimes<d>(</><g>expected</><d>)</>
 
 Expected number of calls: <g>2</>
 Received number of calls: <r>3</>
 `;
 
-exports[`toHaveBeenCalledTimes .not works only on spies or jest.fn 1`] = `
+exports[`toHaveBeenCalledTimes .not works only on spies or elric.fn 1`] = `
 <d>expect(</><r>received</><d>).</>not<d>.</>toHaveBeenCalledTimes<d>(</><g>expected</><d>)</>
 
 <b>Matcher error</>: <r>received</> value must be a mock or spy function
@@ -1217,7 +1217,7 @@ Expected: not <g>"foo"</>, <g>"bar"</>
 Number of calls: <r>1</>
 `;
 
-exports[`toHaveBeenCalledWith works only on spies or jest.fn 1`] = `
+exports[`toHaveBeenCalledWith works only on spies or elric.fn 1`] = `
 <d>expect(</><r>received</><d>).</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
 
 <b>Matcher error</>: <r>received</> value must be a mock or spy function
@@ -1227,7 +1227,7 @@ Received has value: <r>[Function fn]</>
 `;
 
 exports[`toHaveBeenCalledWith works when not called 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: <g>"foo"</>, <g>"bar"</>
 
@@ -1235,7 +1235,7 @@ Number of calls: <r>0</>
 `;
 
 exports[`toHaveBeenCalledWith works with Immutable.js objects 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: not <g>Immutable.Map {"a": {"b": "c"}}</>, <g>Immutable.Map {"a": {"b": "c"}}</>
 
@@ -1243,7 +1243,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenCalledWith works with Map 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: not <g>Map {1 => 2, 2 => 1}</>
 
@@ -1251,7 +1251,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenCalledWith works with Map 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
 
 <g>- Expected</>
 <r>+ Received</>
@@ -1267,7 +1267,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenCalledWith works with Set 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: not <g>Set {1, 2}</>
 
@@ -1275,7 +1275,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenCalledWith works with Set 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
 
 <g>- Expected</>
 <r>+ Received</>
@@ -1291,7 +1291,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenCalledWith works with arguments that don't match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: <g>"foo"</>, <g>"bar"</>
 Received: <d>"foo"</>, <r>"bar1"</>
@@ -1300,7 +1300,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenCalledWith works with arguments that match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: not <g>"foo"</>, <g>"bar"</>
 
@@ -1308,7 +1308,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenCalledWith works with many arguments 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: not <g>"foo"</>, <g>"bar"</>
 Received
@@ -1318,7 +1318,7 @@ Number of calls: <r>3</>
 `;
 
 exports[`toHaveBeenCalledWith works with many arguments that don't match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: <g>"foo"</>, <g>"bar"</>
 Received
@@ -1330,7 +1330,7 @@ Number of calls: <r>3</>
 `;
 
 exports[`toHaveBeenCalledWith works with trailing undefined arguments 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: <g>"foo"</>
 Received: <d>"foo"</>, <r>undefined</>
@@ -1346,7 +1346,7 @@ Expected: not <g>"foo"</>, <g>"bar"</>
 Number of calls: <r>1</>
 `;
 
-exports[`toHaveBeenLastCalledWith works only on spies or jest.fn 1`] = `
+exports[`toHaveBeenLastCalledWith works only on spies or elric.fn 1`] = `
 <d>expect(</><r>received</><d>).</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
 
 <b>Matcher error</>: <r>received</> value must be a mock or spy function
@@ -1356,7 +1356,7 @@ Received has value: <r>[Function fn]</>
 `;
 
 exports[`toHaveBeenLastCalledWith works when not called 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: <g>"foo"</>, <g>"bar"</>
 
@@ -1364,7 +1364,7 @@ Number of calls: <r>0</>
 `;
 
 exports[`toHaveBeenLastCalledWith works with Immutable.js objects 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: not <g>Immutable.Map {"a": {"b": "c"}}</>, <g>Immutable.Map {"a": {"b": "c"}}</>
 
@@ -1372,7 +1372,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenLastCalledWith works with Map 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: not <g>Map {1 => 2, 2 => 1}</>
 
@@ -1380,7 +1380,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenLastCalledWith works with Map 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
 
 <g>- Expected</>
 <r>+ Received</>
@@ -1396,7 +1396,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenLastCalledWith works with Set 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: not <g>Set {1, 2}</>
 
@@ -1404,7 +1404,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenLastCalledWith works with Set 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
 
 <g>- Expected</>
 <r>+ Received</>
@@ -1420,7 +1420,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenLastCalledWith works with arguments that don't match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: <g>"foo"</>, <g>"bar"</>
 Received: <d>"foo"</>, <r>"bar1"</>
@@ -1429,7 +1429,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenLastCalledWith works with arguments that match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: not <g>"foo"</>, <g>"bar"</>
 
@@ -1437,7 +1437,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenLastCalledWith works with many arguments 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: not <g>"foo"</>, <g>"bar"</>
 Received
@@ -1448,7 +1448,7 @@ Number of calls: <r>3</>
 `;
 
 exports[`toHaveBeenLastCalledWith works with many arguments that don't match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: <g>"foo"</>, <g>"bar"</>
 Received
@@ -1459,7 +1459,7 @@ Number of calls: <r>3</>
 `;
 
 exports[`toHaveBeenLastCalledWith works with trailing undefined arguments 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveBeenLastCalledWith<d>(</><g>...expected</><d>)</>
 
 Expected: <g>"foo"</>
 Received: <d>"foo"</>, <r>undefined</>
@@ -1503,7 +1503,7 @@ n has type:  number
 n has value: 0
 `;
 
-exports[`toHaveBeenNthCalledWith works only on spies or jest.fn 1`] = `
+exports[`toHaveBeenNthCalledWith works only on spies or elric.fn 1`] = `
 <d>expect(</><r>received</><d>).</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 <b>Matcher error</>: <r>received</> value must be a mock or spy function
@@ -1513,7 +1513,7 @@ Received has value: <r>[Function fn]</>
 `;
 
 exports[`toHaveBeenNthCalledWith works when not called 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 n: 1
 Expected: <g>"foo"</>, <g>"bar"</>
@@ -1522,7 +1522,7 @@ Number of calls: <r>0</>
 `;
 
 exports[`toHaveBeenNthCalledWith works with Immutable.js objects 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 n: 1
 Expected: not <g>Immutable.Map {"a": {"b": "c"}}</>, <g>Immutable.Map {"a": {"b": "c"}}</>
@@ -1531,7 +1531,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenNthCalledWith works with Map 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 n: 1
 Expected: not <g>Map {1 => 2, 2 => 1}</>
@@ -1540,7 +1540,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenNthCalledWith works with Map 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 n: 1
 <g>- Expected</>
@@ -1557,7 +1557,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenNthCalledWith works with Set 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 n: 1
 Expected: not <g>Set {1, 2}</>
@@ -1566,7 +1566,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenNthCalledWith works with Set 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 n: 1
 <g>- Expected</>
@@ -1583,7 +1583,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenNthCalledWith works with arguments that don't match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 n: 1
 Expected: <g>"foo"</>, <g>"bar"</>
@@ -1593,7 +1593,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenNthCalledWith works with arguments that match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 n: 1
 Expected: not <g>"foo"</>, <g>"bar"</>
@@ -1602,7 +1602,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveBeenNthCalledWith works with three calls 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 n: 1
 Expected: not <g>"foo1"</>, <g>"bar"</>
@@ -1614,7 +1614,7 @@ Number of calls: <r>3</>
 `;
 
 exports[`toHaveBeenNthCalledWith works with trailing undefined arguments 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveBeenNthCalledWith<d>(</>n<d>, </><g>...expected</><d>)</>
 
 n: 1
 Expected: <g>"foo"</>
@@ -1624,7 +1624,7 @@ Number of calls: <r>1</>
 `;
 
 exports[`toHaveLastReturnedWith a call that throws is not considered to have returned 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>undefined</>
 Received: function call threw an error
@@ -1634,7 +1634,7 @@ Number of calls:   <r>1</>
 `;
 
 exports[`toHaveLastReturnedWith a call that throws undefined is not considered to have returned 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>undefined</>
 Received: function call threw an error
@@ -1652,7 +1652,7 @@ Number of returns: <r>0</>
 `;
 
 exports[`toHaveLastReturnedWith lastReturnedWith incomplete recursive calls are handled properly 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>0</>
 Received
@@ -1664,7 +1664,7 @@ Number of calls:   <r>4</>
 `;
 
 exports[`toHaveLastReturnedWith lastReturnedWith works with three calls 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>"foo3"</>
 Received
@@ -1674,7 +1674,7 @@ Received
 Number of returns: <r>3</>
 `;
 
-exports[`toHaveLastReturnedWith works only on spies or jest.fn 1`] = `
+exports[`toHaveLastReturnedWith works only on spies or elric.fn 1`] = `
 <d>expect(</><r>received</><d>).</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
 
 <b>Matcher error</>: <r>received</> value must be a mock function
@@ -1684,7 +1684,7 @@ Received has value: <r>[Function fn]</>
 `;
 
 exports[`toHaveLastReturnedWith works when not called 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>"foo"</>
 
@@ -1692,7 +1692,7 @@ Number of returns: <r>0</>
 `;
 
 exports[`toHaveLastReturnedWith works with Immutable.js objects directly created 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>Immutable.Map {"a": {"b": "c"}}</>
 
@@ -1700,7 +1700,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveLastReturnedWith works with Immutable.js objects indirectly created 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>Immutable.Map {"a": {"b": "c"}}</>
 
@@ -1708,7 +1708,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveLastReturnedWith works with Map 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>Map {1 => 2, 2 => 1}</>
 
@@ -1716,7 +1716,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveLastReturnedWith works with Map 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>Map {"a" => "b", "b" => "a"}</>
 Received: <r>Map {1 => 2, 2 => 1}</>
@@ -1725,7 +1725,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveLastReturnedWith works with Set 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>Set {1, 2}</>
 
@@ -1733,7 +1733,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveLastReturnedWith works with Set 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>Set {3, 4}</>
 Received: <r>Set {1, 2}</>
@@ -1742,7 +1742,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveLastReturnedWith works with argument that does match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>"foo"</>
 
@@ -1750,7 +1750,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveLastReturnedWith works with argument that does not match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>"bar"</>
 Received: <r>"foo"</>
@@ -1759,7 +1759,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveLastReturnedWith works with undefined 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveLastReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>undefined</>
 
@@ -1767,7 +1767,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveNthReturnedWith a call that throws is not considered to have returned 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: <g>undefined</>
@@ -1778,7 +1778,7 @@ Number of calls:   <r>1</>
 `;
 
 exports[`toHaveNthReturnedWith a call that throws undefined is not considered to have returned 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: <g>undefined</>
@@ -1798,7 +1798,7 @@ Number of returns: <r>0</>
 `;
 
 exports[`toHaveNthReturnedWith nthReturnedWith incomplete recursive calls are handled properly 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: <g>6</>
@@ -1811,7 +1811,7 @@ Number of calls:   <r>4</>
 `;
 
 exports[`toHaveNthReturnedWith nthReturnedWith incomplete recursive calls are handled properly 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 2
 Expected: <g>3</>
@@ -1825,7 +1825,7 @@ Number of calls:   <r>4</>
 `;
 
 exports[`toHaveNthReturnedWith nthReturnedWith incomplete recursive calls are handled properly 3`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 3
 Expected: not <g>1</>
@@ -1839,7 +1839,7 @@ Number of calls:   <r>4</>
 `;
 
 exports[`toHaveNthReturnedWith nthReturnedWith incomplete recursive calls are handled properly 4`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 4
 Expected: not <g>0</>
@@ -1878,7 +1878,7 @@ n has value: 0
 `;
 
 exports[`toHaveNthReturnedWith nthReturnedWith should reject nth value greater than number of calls 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 4
 Expected: <g>"foo"</>
@@ -1889,7 +1889,7 @@ Number of returns: <r>3</>
 `;
 
 exports[`toHaveNthReturnedWith nthReturnedWith should replace 1st, 2nd, 3rd with first, second, third 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: <g>"bar1"</>
@@ -1901,7 +1901,7 @@ Number of returns: <r>3</>
 `;
 
 exports[`toHaveNthReturnedWith nthReturnedWith should replace 1st, 2nd, 3rd with first, second, third 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: not <g>"foo1"</>
@@ -1913,7 +1913,7 @@ Number of returns: <r>3</>
 `;
 
 exports[`toHaveNthReturnedWith nthReturnedWith works with three calls 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: not <g>"foo1"</>
@@ -1924,7 +1924,7 @@ Received
 Number of returns: <r>3</>
 `;
 
-exports[`toHaveNthReturnedWith works only on spies or jest.fn 1`] = `
+exports[`toHaveNthReturnedWith works only on spies or elric.fn 1`] = `
 <d>expect(</><r>received</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 <b>Matcher error</>: <r>received</> value must be a mock function
@@ -1934,7 +1934,7 @@ Received has value: <r>[Function fn]</>
 `;
 
 exports[`toHaveNthReturnedWith works when not called 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: <g>"foo"</>
@@ -1943,7 +1943,7 @@ Number of returns: <r>0</>
 `;
 
 exports[`toHaveNthReturnedWith works with Immutable.js objects directly created 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: not <g>Immutable.Map {"a": {"b": "c"}}</>
@@ -1952,7 +1952,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveNthReturnedWith works with Immutable.js objects indirectly created 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: not <g>Immutable.Map {"a": {"b": "c"}}</>
@@ -1961,7 +1961,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveNthReturnedWith works with Map 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: not <g>Map {1 => 2, 2 => 1}</>
@@ -1970,7 +1970,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveNthReturnedWith works with Map 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: <g>Map {"a" => "b", "b" => "a"}</>
@@ -1980,7 +1980,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveNthReturnedWith works with Set 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: not <g>Set {1, 2}</>
@@ -1989,7 +1989,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveNthReturnedWith works with Set 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: <g>Set {3, 4}</>
@@ -1999,7 +1999,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveNthReturnedWith works with argument that does match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: not <g>"foo"</>
@@ -2008,7 +2008,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveNthReturnedWith works with argument that does not match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: <g>"bar"</>
@@ -2018,7 +2018,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveNthReturnedWith works with undefined 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveNthReturnedWith<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: not <g>undefined</>
@@ -2036,7 +2036,7 @@ Expected has value: <g>555</>
 `;
 
 exports[`toHaveReturned .not passes when a call throws undefined 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveReturned<d>()</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveReturned<d>()</>
 
 Expected number of returns: >= <g>1</>
 Received number of returns:    <r>0</>
@@ -2044,7 +2044,7 @@ Received number of calls:      <r>1</>
 `;
 
 exports[`toHaveReturned .not passes when all calls throw 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveReturned<d>()</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveReturned<d>()</>
 
 Expected number of returns: >= <g>1</>
 Received number of returns:    <r>0</>
@@ -2052,13 +2052,13 @@ Received number of calls:      <r>2</>
 `;
 
 exports[`toHaveReturned .not passes when not returned 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveReturned<d>()</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveReturned<d>()</>
 
 Expected number of returns: >= <g>1</>
 Received number of returns:    <r>0</>
 `;
 
-exports[`toHaveReturned .not works only on jest.fn 1`] = `
+exports[`toHaveReturned .not works only on elric.fn 1`] = `
 <d>expect(</><r>received</><d>).</>not<d>.</>toHaveReturned<d>()</>
 
 <b>Matcher error</>: <r>received</> value must be a mock function
@@ -2086,7 +2086,7 @@ Received number of returns: <r>1</>
 `;
 
 exports[`toHaveReturned incomplete recursive calls are handled properly 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveReturned<d>()</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveReturned<d>()</>
 
 Expected number of returns: >= <g>1</>
 Received number of returns:    <r>0</>
@@ -2094,7 +2094,7 @@ Received number of calls:      <r>4</>
 `;
 
 exports[`toHaveReturned passes when at least one call does not throw 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveReturned<d>()</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveReturned<d>()</>
 
 Expected number of returns: <g>0</>
 Received number of returns: <r>2</>
@@ -2106,7 +2106,7 @@ Received number of calls:   <r>3</>
 `;
 
 exports[`toHaveReturned passes when returned 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveReturned<d>()</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveReturned<d>()</>
 
 Expected number of returns: <g>0</>
 Received number of returns: <r>1</>
@@ -2115,7 +2115,7 @@ Received number of returns: <r>1</>
 `;
 
 exports[`toHaveReturned passes when undefined is returned 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveReturned<d>()</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveReturned<d>()</>
 
 Expected number of returns: <g>0</>
 Received number of returns: <r>1</>
@@ -2187,27 +2187,27 @@ Expected has value: <g>[Function anonymous]</>
 `;
 
 exports[`toHaveReturnedTimes .not passes if function called less than expected times 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveReturnedTimes<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveReturnedTimes<d>(</><g>expected</><d>)</>
 
 Expected number of returns: <g>2</>
 Received number of returns: <r>1</>
 `;
 
 exports[`toHaveReturnedTimes .not passes if function returned more than expected times 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveReturnedTimes<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveReturnedTimes<d>(</><g>expected</><d>)</>
 
 Expected number of returns: <g>2</>
 Received number of returns: <r>3</>
 `;
 
 exports[`toHaveReturnedTimes calls that return undefined are counted as returns 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveReturnedTimes<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveReturnedTimes<d>(</><g>expected</><d>)</>
 
 Expected number of returns: not <g>2</>
 `;
 
 exports[`toHaveReturnedTimes calls that throw are not counted 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveReturnedTimes<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveReturnedTimes<d>(</><g>expected</><d>)</>
 
 Expected number of returns: <g>3</>
 Received number of returns: <r>2</>
@@ -2215,7 +2215,7 @@ Received number of calls:   <r>3</>
 `;
 
 exports[`toHaveReturnedTimes calls that throw undefined are not counted 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveReturnedTimes<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveReturnedTimes<d>(</><g>expected</><d>)</>
 
 Expected number of returns: not <g>2</>
 
@@ -2230,7 +2230,7 @@ Received number of returns: <r>2</>
 `;
 
 exports[`toHaveReturnedTimes incomplete recursive calls are handled properly 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveReturnedTimes<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveReturnedTimes<d>(</><g>expected</><d>)</>
 
 Expected number of returns: not <g>2</>
 
@@ -2292,7 +2292,7 @@ Expected has value: <g>[Function anonymous]</>
 `;
 
 exports[`toHaveReturnedTimes passes if function returned equal to expected times 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveReturnedTimes<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveReturnedTimes<d>(</><g>expected</><d>)</>
 
 Expected number of returns: not <g>2</>
 `;
@@ -2307,7 +2307,7 @@ Received has value: <r>[Function spy]</>
 `;
 
 exports[`toHaveReturnedWith a call that throws is not considered to have returned 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>undefined</>
 Received: function call threw an error
@@ -2317,7 +2317,7 @@ Number of calls:   <r>1</>
 `;
 
 exports[`toHaveReturnedWith a call that throws undefined is not considered to have returned 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>undefined</>
 Received: function call threw an error
@@ -2335,7 +2335,7 @@ Number of returns: <r>0</>
 `;
 
 exports[`toHaveReturnedWith returnedWith incomplete recursive calls are handled properly 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>undefined</>
 Received
@@ -2348,7 +2348,7 @@ Number of calls:   <r>4</>
 `;
 
 exports[`toHaveReturnedWith returnedWith works with more calls than the limit 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>"bar"</>
 Received
@@ -2359,7 +2359,7 @@ Received
 Number of returns: <r>6</>
 `;
 
-exports[`toHaveReturnedWith works only on spies or jest.fn 1`] = `
+exports[`toHaveReturnedWith works only on spies or elric.fn 1`] = `
 <d>expect(</><r>received</><d>).</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
 
 <b>Matcher error</>: <r>received</> value must be a mock function
@@ -2369,7 +2369,7 @@ Received has value: <r>[Function fn]</>
 `;
 
 exports[`toHaveReturnedWith works when not called 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>"foo"</>
 
@@ -2377,7 +2377,7 @@ Number of returns: <r>0</>
 `;
 
 exports[`toHaveReturnedWith works with Immutable.js objects directly created 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>Immutable.Map {"a": {"b": "c"}}</>
 
@@ -2385,7 +2385,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveReturnedWith works with Immutable.js objects indirectly created 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>Immutable.Map {"a": {"b": "c"}}</>
 
@@ -2393,7 +2393,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveReturnedWith works with Map 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>Map {1 => 2, 2 => 1}</>
 
@@ -2401,7 +2401,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveReturnedWith works with Map 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>Map {"a" => "b", "b" => "a"}</>
 Received: <r>Map {1 => 2, 2 => 1}</>
@@ -2410,7 +2410,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveReturnedWith works with Set 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>Set {1, 2}</>
 
@@ -2418,7 +2418,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveReturnedWith works with Set 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>Set {3, 4}</>
 Received: <r>Set {1, 2}</>
@@ -2427,7 +2427,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveReturnedWith works with argument that does match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>"foo"</>
 
@@ -2435,7 +2435,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveReturnedWith works with argument that does not match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>"bar"</>
 Received: <r>"foo"</>
@@ -2444,7 +2444,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toHaveReturnedWith works with undefined 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toHaveReturnedWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>undefined</>
 
@@ -2461,7 +2461,7 @@ Expected has value: <g>555</>
 `;
 
 exports[`toReturn .not passes when a call throws undefined 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toReturn<d>()</>
+<d>expect(</><r>elric.fn()</><d>).</>toReturn<d>()</>
 
 Expected number of returns: >= <g>1</>
 Received number of returns:    <r>0</>
@@ -2469,7 +2469,7 @@ Received number of calls:      <r>1</>
 `;
 
 exports[`toReturn .not passes when all calls throw 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toReturn<d>()</>
+<d>expect(</><r>elric.fn()</><d>).</>toReturn<d>()</>
 
 Expected number of returns: >= <g>1</>
 Received number of returns:    <r>0</>
@@ -2477,13 +2477,13 @@ Received number of calls:      <r>2</>
 `;
 
 exports[`toReturn .not passes when not returned 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toReturn<d>()</>
+<d>expect(</><r>elric.fn()</><d>).</>toReturn<d>()</>
 
 Expected number of returns: >= <g>1</>
 Received number of returns:    <r>0</>
 `;
 
-exports[`toReturn .not works only on jest.fn 1`] = `
+exports[`toReturn .not works only on elric.fn 1`] = `
 <d>expect(</><r>received</><d>).</>not<d>.</>toReturn<d>()</>
 
 <b>Matcher error</>: <r>received</> value must be a mock function
@@ -2511,7 +2511,7 @@ Received number of returns: <r>1</>
 `;
 
 exports[`toReturn incomplete recursive calls are handled properly 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toReturn<d>()</>
+<d>expect(</><r>elric.fn()</><d>).</>toReturn<d>()</>
 
 Expected number of returns: >= <g>1</>
 Received number of returns:    <r>0</>
@@ -2519,7 +2519,7 @@ Received number of calls:      <r>4</>
 `;
 
 exports[`toReturn passes when at least one call does not throw 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toReturn<d>()</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toReturn<d>()</>
 
 Expected number of returns: <g>0</>
 Received number of returns: <r>2</>
@@ -2531,7 +2531,7 @@ Received number of calls:   <r>3</>
 `;
 
 exports[`toReturn passes when returned 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toReturn<d>()</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toReturn<d>()</>
 
 Expected number of returns: <g>0</>
 Received number of returns: <r>1</>
@@ -2540,7 +2540,7 @@ Received number of returns: <r>1</>
 `;
 
 exports[`toReturn passes when undefined is returned 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toReturn<d>()</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toReturn<d>()</>
 
 Expected number of returns: <g>0</>
 Received number of returns: <r>1</>
@@ -2612,27 +2612,27 @@ Expected has value: <g>[Function anonymous]</>
 `;
 
 exports[`toReturnTimes .not passes if function called less than expected times 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toReturnTimes<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toReturnTimes<d>(</><g>expected</><d>)</>
 
 Expected number of returns: <g>2</>
 Received number of returns: <r>1</>
 `;
 
 exports[`toReturnTimes .not passes if function returned more than expected times 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toReturnTimes<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toReturnTimes<d>(</><g>expected</><d>)</>
 
 Expected number of returns: <g>2</>
 Received number of returns: <r>3</>
 `;
 
 exports[`toReturnTimes calls that return undefined are counted as returns 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toReturnTimes<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toReturnTimes<d>(</><g>expected</><d>)</>
 
 Expected number of returns: not <g>2</>
 `;
 
 exports[`toReturnTimes calls that throw are not counted 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toReturnTimes<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toReturnTimes<d>(</><g>expected</><d>)</>
 
 Expected number of returns: <g>3</>
 Received number of returns: <r>2</>
@@ -2640,7 +2640,7 @@ Received number of calls:   <r>3</>
 `;
 
 exports[`toReturnTimes calls that throw undefined are not counted 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toReturnTimes<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toReturnTimes<d>(</><g>expected</><d>)</>
 
 Expected number of returns: not <g>2</>
 
@@ -2655,7 +2655,7 @@ Received number of returns: <r>2</>
 `;
 
 exports[`toReturnTimes incomplete recursive calls are handled properly 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toReturnTimes<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toReturnTimes<d>(</><g>expected</><d>)</>
 
 Expected number of returns: not <g>2</>
 
@@ -2717,7 +2717,7 @@ Expected has value: <g>[Function anonymous]</>
 `;
 
 exports[`toReturnTimes passes if function returned equal to expected times 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toReturnTimes<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toReturnTimes<d>(</><g>expected</><d>)</>
 
 Expected number of returns: not <g>2</>
 `;
@@ -2732,7 +2732,7 @@ Received has value: <r>[Function spy]</>
 `;
 
 exports[`toReturnWith a call that throws is not considered to have returned 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toReturnWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toReturnWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>undefined</>
 Received: function call threw an error
@@ -2742,7 +2742,7 @@ Number of calls:   <r>1</>
 `;
 
 exports[`toReturnWith a call that throws undefined is not considered to have returned 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toReturnWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toReturnWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>undefined</>
 Received: function call threw an error
@@ -2760,7 +2760,7 @@ Number of returns: <r>0</>
 `;
 
 exports[`toReturnWith returnedWith incomplete recursive calls are handled properly 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toReturnWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toReturnWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>undefined</>
 Received
@@ -2773,7 +2773,7 @@ Number of calls:   <r>4</>
 `;
 
 exports[`toReturnWith returnedWith works with more calls than the limit 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toReturnWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toReturnWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>"bar"</>
 Received
@@ -2784,7 +2784,7 @@ Received
 Number of returns: <r>6</>
 `;
 
-exports[`toReturnWith works only on spies or jest.fn 1`] = `
+exports[`toReturnWith works only on spies or elric.fn 1`] = `
 <d>expect(</><r>received</><d>).</>toReturnWith<d>(</><g>expected</><d>)</>
 
 <b>Matcher error</>: <r>received</> value must be a mock function
@@ -2794,7 +2794,7 @@ Received has value: <r>[Function fn]</>
 `;
 
 exports[`toReturnWith works when not called 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toReturnWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toReturnWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>"foo"</>
 
@@ -2802,7 +2802,7 @@ Number of returns: <r>0</>
 `;
 
 exports[`toReturnWith works with Immutable.js objects directly created 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toReturnWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toReturnWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>Immutable.Map {"a": {"b": "c"}}</>
 
@@ -2810,7 +2810,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toReturnWith works with Immutable.js objects indirectly created 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toReturnWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toReturnWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>Immutable.Map {"a": {"b": "c"}}</>
 
@@ -2818,7 +2818,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toReturnWith works with Map 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toReturnWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toReturnWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>Map {1 => 2, 2 => 1}</>
 
@@ -2826,7 +2826,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toReturnWith works with Map 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toReturnWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toReturnWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>Map {"a" => "b", "b" => "a"}</>
 Received: <r>Map {1 => 2, 2 => 1}</>
@@ -2835,7 +2835,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toReturnWith works with Set 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toReturnWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toReturnWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>Set {1, 2}</>
 
@@ -2843,7 +2843,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toReturnWith works with Set 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toReturnWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toReturnWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>Set {3, 4}</>
 Received: <r>Set {1, 2}</>
@@ -2852,7 +2852,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toReturnWith works with argument that does match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toReturnWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toReturnWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>"foo"</>
 
@@ -2860,7 +2860,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toReturnWith works with argument that does not match 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toReturnWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>toReturnWith<d>(</><g>expected</><d>)</>
 
 Expected: <g>"bar"</>
 Received: <r>"foo"</>
@@ -2869,7 +2869,7 @@ Number of returns: <r>1</>
 `;
 
 exports[`toReturnWith works with undefined 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toReturnWith<d>(</><g>expected</><d>)</>
+<d>expect(</><r>elric.fn()</><d>).</>not<d>.</>toReturnWith<d>(</><g>expected</><d>)</>
 
 Expected: not <g>undefined</>
 

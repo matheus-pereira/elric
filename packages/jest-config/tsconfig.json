@@ -4,19 +4,19 @@
     "rootDir": "src",
     "outDir": "build"
   },
-  // TODO: This is missing `babel-jest`, `jest-jasmine2`, `jest-circus` and
-  // jest-test-sequencer, but that is just `require.resolve`d, so no real use
+  // TODO: This is missing `babel-elric`, `elric-jasmine2`, `elric-circus` and
+  // elric-test-sequencer, but that is just `require.resolve`d, so no real use
   // for their types
   "references": [
-    {"path": "../jest-environment-jsdom"},
-    {"path": "../jest-environment-node"},
-    {"path": "../jest-get-type"},
-    {"path": "../jest-regex-util"},
-    {"path": "../jest-resolve"},
-    {"path": "../jest-runner"},
-    {"path": "../jest-types"},
-    {"path": "../jest-util"},
-    {"path": "../jest-validate"},
+    {"path": "../elric-environment-jsdom"},
+    {"path": "../elric-environment-node"},
+    {"path": "../elric-get-type"},
+    {"path": "../elric-regex-util"},
+    {"path": "../elric-resolve"},
+    {"path": "../elric-runner"},
+    {"path": "../elric-types"},
+    {"path": "../elric-util"},
+    {"path": "../elric-validate"},
     {"path": "../pretty-format"}
   ]
 }

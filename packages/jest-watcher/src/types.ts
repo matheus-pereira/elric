@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {AggregatedResult} from '@jest/test-result';
-import type {Config} from '@jest/types';
+import type {AggregatedResult} from '@elric/test-result';
+import type {Config} from '@elric/types';
 
 type TestSuiteInfo = {
   config: Config.ProjectConfig;
@@ -14,27 +14,27 @@ type TestSuiteInfo = {
   testPath: string;
 };
 
-export type JestHookExposedFS = {
+export type elricHookExposedFS = {
   projects: Array<{
     config: Config.ProjectConfig;
     testPaths: Array<Config.Path>;
   }>;
 };
 
-export type FileChange = (fs: JestHookExposedFS) => void;
+export type FileChange = (fs: elricHookExposedFS) => void;
 export type ShouldRunTestSuite = (
   testSuiteInfo: TestSuiteInfo,
 ) => Promise<boolean>;
 export type TestRunComplete = (results: AggregatedResult) => void;
 
-export type JestHookSubscriber = {
+export type elricHookSubscriber = {
   onFileChange: (fn: FileChange) => void;
   onTestRunComplete: (fn: TestRunComplete) => void;
   shouldRunTestSuite: (fn: ShouldRunTestSuite) => void;
 };
 
-export type JestHookEmitter = {
-  onFileChange: (fs: JestHookExposedFS) => void;
+export type elricHookEmitter = {
+  onFileChange: (fs: elricHookExposedFS) => void;
   onTestRunComplete: (results: AggregatedResult) => void;
   shouldRunTestSuite: (
     testSuiteInfo: TestSuiteInfo,
@@ -73,7 +73,7 @@ export type UpdateConfigCallback = (config?: AllowedConfigOptions) => void;
 
 export interface WatchPlugin {
   isInternal?: boolean;
-  apply?: (hooks: JestHookSubscriber) => void;
+  apply?: (hooks: elricHookSubscriber) => void;
   getUsageInfo?: (globalConfig: Config.GlobalConfig) => UsageData | null;
   onKey?: (value: string) => void;
   run?: (

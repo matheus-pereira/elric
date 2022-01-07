@@ -6,9 +6,9 @@
  */
 
 import chalk = require('chalk');
-import type {Config} from '@jest/types';
-import {getType} from 'jest-get-type';
-import {ValidationError} from 'jest-validate';
+import type {Config} from '@elric/types';
+import {getType} from 'elric-get-type';
+import {ValidationError} from 'elric-validate';
 import {BULLET, DOCUMENTATION_NOTE} from './utils';
 
 const validReporterTypes = ['array', 'string'];
@@ -19,7 +19,7 @@ const ERROR = `${BULLET}Reporter Validation Error`;
  * within the reporter are not valid.
  *
  * This is a highly specific reporter error and in the future will be
- * merged with jest-validate. Till then, we can make use of it. It works
+ * merged with elric-validate. Till then, we can make use of it. It works
  * and that's what counts most at this time.
  */
 export function createReporterError(

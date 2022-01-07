@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {extractSummary} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('works with custom inline snapshot matchers', () => {
-  const {stderr} = runJest('custom-inline-snapshot-matchers', [
+  const {stderr} = runelric('custom-inline-snapshot-matchers', [
     // Prevent adding new snapshots or rather changing the test.
     '--ci',
     'asynchronous.test.js',
@@ -27,7 +27,7 @@ test('works with custom inline snapshot matchers', () => {
 });
 
 test('can bail with a custom inline snapshot matcher', () => {
-  const {stderr} = runJest('custom-inline-snapshot-matchers', [
+  const {stderr} = runelric('custom-inline-snapshot-matchers', [
     // Prevent adding new snapshots or rather changing the test.
     '--ci',
     'bail.test.js',

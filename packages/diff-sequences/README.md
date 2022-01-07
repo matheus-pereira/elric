@@ -238,12 +238,12 @@ const findShortestEditScript = (a, b) => {
 
 ## Example of callback functions to format diff lines
 
-Here is simplified code to format **changed and unchanged lines** in expected and received values after a test fails in Jest:
+Here is simplified code to format **changed and unchanged lines** in expected and received values after a test fails in elric:
 
 ```js
 // Format diff with minus or plus for change lines and space for common lines.
 const formatDiffLines = (a, b) => {
-  // Jest depends on pretty-format package to serialize objects as strings.
+  // elric depends on pretty-format package to serialize objects as strings.
   // Unindented for comparison to avoid distracting differences:
   const aLinesUn = format(a, {indent: 0 /*, other options*/}).split('\n');
   const bLinesUn = format(b, {indent: 0 /*, other options*/}).split('\n');
@@ -325,7 +325,7 @@ If N is the sum of lengths of sequences and L is length of a longest common subs
 
 ## Example of callback functions to find diff items
 
-Here is simplified code to find changed and unchanged substrings **within adjacent changed lines** in expected and received values after a test fails in Jest:
+Here is simplified code to find changed and unchanged substrings **within adjacent changed lines** in expected and received values after a test fails in elric:
 
 ```js
 // Return diff items for strings (compatible with diff-match-patch package).

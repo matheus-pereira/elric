@@ -14,12 +14,12 @@ import {
   trimAndFormatPath,
 } from './utils';
 
-export type {Config} from '@jest/types';
+export type {Config} from '@elric/types';
 export type {
   AggregatedResult,
   SnapshotSummary,
   TestResult,
-} from '@jest/test-result';
+} from '@elric/test-result';
 export {default as BaseReporter} from './BaseReporter';
 export {default as CoverageReporter} from './CoverageReporter';
 export {default as DefaultReporter} from './DefaultReporter';

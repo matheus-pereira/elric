@@ -10,7 +10,7 @@ import {EventEmitter} from 'events';
 let createProcessObject;
 
 function requireCreateProcessObject() {
-  jest.isolateModules(() => {
+  elric.isolateModules(() => {
     createProcessObject = require('../createProcessObject').default;
   });
 }

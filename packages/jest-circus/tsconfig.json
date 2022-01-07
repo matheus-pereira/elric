@@ -6,15 +6,15 @@
   },
   "references": [
     {"path": "../expect"},
-    {"path": "../jest-each"},
-    {"path": "../jest-environment"},
-    {"path": "../jest-matcher-utils"},
-    {"path": "../jest-message-util"},
-    {"path": "../jest-runtime"},
-    {"path": "../jest-snapshot"},
-    {"path": "../jest-test-result"},
-    {"path": "../jest-types"},
-    {"path": "../jest-util"},
+    {"path": "../elric-each"},
+    {"path": "../elric-environment"},
+    {"path": "../elric-matcher-utils"},
+    {"path": "../elric-message-util"},
+    {"path": "../elric-runtime"},
+    {"path": "../elric-snapshot"},
+    {"path": "../elric-test-result"},
+    {"path": "../elric-types"},
+    {"path": "../elric-util"},
     {"path": "../pretty-format"}
   ]
 }

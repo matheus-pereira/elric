@@ -8,13 +8,13 @@
 import {tmpdir} from 'os';
 import * as path from 'path';
 import * as fs from 'graceful-fs';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const CACHE = path.resolve(tmpdir(), 'clear-cache-directory');
 
-describe('jest --clearCache', () => {
+describe('elric --clearCache', () => {
   test('normal run results in cache directory being written', () => {
-    const {exitCode} = runJest('clear-cache', [`--cacheDirectory=${CACHE}`]);
+    const {exitCode} = runelric('clear-cache', [`--cacheDirectory=${CACHE}`]);
 
     expect(fs.existsSync(CACHE)).toBe(true);
     expect(exitCode).toBe(0);
@@ -22,7 +22,7 @@ describe('jest --clearCache', () => {
   test('clearCache results in deleted directory and exitCode 0', () => {
     expect(fs.existsSync(CACHE)).toBe(true);
 
-    const {exitCode, stdout, stderr} = runJest('clear-cache', [
+    const {exitCode, stdout, stderr} = runelric('clear-cache', [
       '--clearCache',
       `--cacheDirectory=${CACHE}`,
     ]);

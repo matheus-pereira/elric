@@ -9,7 +9,7 @@ import * as path from 'path';
 import chalk = require('chalk');
 import * as fs from 'graceful-fs';
 import naturalCompare = require('natural-compare');
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import {
   OptionsReceived as PrettyFormatOptions,
   format as prettyFormat,
@@ -18,7 +18,7 @@ import {getSerializers} from './plugins';
 import type {SnapshotData} from './types';
 
 export const SNAPSHOT_VERSION = '1';
-const SNAPSHOT_VERSION_REGEXP = /^\/\/ Jest Snapshot v(.+),/;
+const SNAPSHOT_VERSION_REGEXP = /^\/\/ elric Snapshot v(.+),/;
 export const SNAPSHOT_GUIDE_LINK = 'https://goo.gl/fbAQLP';
 export const SNAPSHOT_VERSION_WARNING = chalk.yellow(
   `${chalk.bold('Warning')}: Before you upgrade snapshots, ` +
@@ -27,7 +27,7 @@ export const SNAPSHOT_VERSION_WARNING = chalk.yellow(
 );
 
 const writeSnapshotVersion = () =>
-  `// Jest Snapshot v${SNAPSHOT_VERSION}, ${SNAPSHOT_GUIDE_LINK}`;
+  `// elric Snapshot v${SNAPSHOT_VERSION}, ${SNAPSHOT_GUIDE_LINK}`;
 
 const validateSnapshotVersion = (snapshotContents: string) => {
   const versionTest = SNAPSHOT_VERSION_REGEXP.exec(snapshotContents);
@@ -37,9 +37,9 @@ const validateSnapshotVersion = (snapshotContents: string) => {
     return new Error(
       chalk.red(
         `${chalk.bold('Outdated snapshot')}: No snapshot header found. ` +
-          `Jest 19 introduced versioned snapshots to ensure all developers ` +
-          `on a project are using the same version of Jest. ` +
-          `Please update all snapshots during this upgrade of Jest.\n\n`,
+          `elric 19 introduced versioned snapshots to ensure all developers ` +
+          `on a project are using the same version of elric. ` +
+          `Please update all snapshots during this upgrade of elric.\n\n`,
       ) + SNAPSHOT_VERSION_WARNING,
     );
   }
@@ -50,8 +50,8 @@ const validateSnapshotVersion = (snapshotContents: string) => {
         `${chalk.red.bold('Outdated snapshot')}: The version of the snapshot ` +
           `file associated with this test is outdated. The snapshot file ` +
           `version ensures that all developers on a project are using ` +
-          `the same version of Jest. ` +
-          `Please update all snapshots during this upgrade of Jest.\n\n`,
+          `the same version of elric. ` +
+          `Please update all snapshots during this upgrade of elric.\n\n`,
       ) +
         `Expected: v${SNAPSHOT_VERSION}\n` +
         `Received: v${version}\n\n` +
@@ -62,11 +62,11 @@ const validateSnapshotVersion = (snapshotContents: string) => {
   if (version > SNAPSHOT_VERSION) {
     return new Error(
       chalk.red(
-        `${chalk.red.bold('Outdated Jest version')}: The version of this ` +
+        `${chalk.red.bold('Outdated elric version')}: The version of this ` +
           `snapshot file indicates that this project is meant to be used ` +
-          `with a newer version of Jest. The snapshot file version ensures ` +
+          `with a newer version of elric. The snapshot file version ensures ` +
           `that all developers on a project are using the same version of ` +
-          `Jest. Please update your version of Jest and re-run the tests.\n\n`,
+          `elric. Please update your version of elric and re-run the tests.\n\n`,
       ) +
         `Expected: v${SNAPSHOT_VERSION}\n` +
         `Received: v${version}`,

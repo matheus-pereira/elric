@@ -6,13 +6,13 @@
  */
 
 import * as path from 'path';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(__dirname, '../no-tests-found-test');
 
 describe('No tests are found', () => {
   test('fails the test suite in standard situation', () => {
-    const {exitCode, stdout} = runJest(DIR, [
+    const {exitCode, stdout} = runelric(DIR, [
       '--testPathPattern',
       '/non/existing/path/',
     ]);
@@ -22,7 +22,7 @@ describe('No tests are found', () => {
   });
 
   test("doesn't fail the test suite if --passWithNoTests passed", () => {
-    const {exitCode, stdout} = runJest(DIR, [
+    const {exitCode, stdout} = runelric(DIR, [
       '--testPathPattern',
       '/non/existing/path/',
       '--passWithNoTests',
@@ -34,7 +34,7 @@ describe('No tests are found', () => {
 
   test("doesn't fail the test suite if using --lastCommit", () => {
     // Since there are no files in DIR no tests will be found
-    const {exitCode, stdout} = runJest(DIR, ['--lastCommit']);
+    const {exitCode, stdout} = runelric(DIR, ['--lastCommit']);
 
     expect(stdout).toMatch('No tests found');
     expect(exitCode).toBe(0);
@@ -42,7 +42,7 @@ describe('No tests are found', () => {
 
   test("doesn't fail the test suite if using --onlyChanged", () => {
     // Since there are no files in DIR no tests will be found
-    const {exitCode, stdout} = runJest(DIR, ['--onlyChanged']);
+    const {exitCode, stdout} = runelric(DIR, ['--onlyChanged']);
 
     expect(stdout).toMatch('No tests found');
     expect(exitCode).toBe(0);
@@ -50,7 +50,7 @@ describe('No tests are found', () => {
 
   test("doesn't fail the test suite if using --findRelatedTests", () => {
     // Since there are no files in DIR no tests will be found
-    const {exitCode, stdout} = runJest(DIR, [
+    const {exitCode, stdout} = runelric(DIR, [
       '--findRelatedTests',
       '/non/existing/path',
     ]);

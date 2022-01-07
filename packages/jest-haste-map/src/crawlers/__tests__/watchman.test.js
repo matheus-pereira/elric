@@ -10,10 +10,10 @@
 
 const path = require('path');
 
-jest.mock('fb-watchman', () => {
+elric.mock('fb-watchman', () => {
   const normalizePathSep = require('../../lib/normalizePathSep').default;
-  const Client = jest.fn();
-  Client.prototype.capabilityCheck = jest.fn((args, callback) =>
+  const Client = elric.fn();
+  Client.prototype.capabilityCheck = elric.fn((args, callback) =>
     setImmediate(() => {
       callback(null, {
         capabilities: {'suffix-set': true},
@@ -21,15 +21,15 @@ jest.mock('fb-watchman', () => {
       });
     }),
   );
-  Client.prototype.command = jest.fn((args, callback) =>
+  Client.prototype.command = elric.fn((args, callback) =>
     setImmediate(() => {
       const path = args[1] ? normalizePathSep(args[1]) : undefined;
       const response = mockResponse[args[0]][path];
       callback(null, response.next ? response.next().value : response);
     }),
   );
-  Client.prototype.on = jest.fn();
-  Client.prototype.end = jest.fn();
+  Client.prototype.on = elric.fn();
+  Client.prototype.end = elric.fn();
   return {Client};
 });
 

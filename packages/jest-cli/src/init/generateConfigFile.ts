@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
-import {defaults, descriptions} from 'jest-config';
+import type {Config} from '@elric/types';
+import {defaults, descriptions} from 'elric-config';
 
 const stringifyOption = (
   option: keyof Config.InitialOptions,
@@ -87,7 +87,7 @@ const generateConfigFile = (
  * For a detailed explanation regarding each configuration property${
    useTypescript ? ' and type check' : ''
  }, visit:
- * https://jestjs.io/docs/configuration
+ * https://elricjs.io/docs/configuration
  */
 
 `;

@@ -7,7 +7,7 @@
 
 const toString = Object.prototype.toString;
 
-const MULTIPLE_VALID_OPTIONS_SYMBOL = Symbol('JEST_MULTIPLE_VALID_OPTIONS');
+const MULTIPLE_VALID_OPTIONS_SYMBOL = Symbol('elric_MULTIPLE_VALID_OPTIONS');
 
 function validationConditionSingle(
   option: unknown,

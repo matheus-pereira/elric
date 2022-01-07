@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import testResult from '@jest/test-result';
+import testResult from '@elric/test-result';
 
 const {createEmptyTestResult} = testResult;
 

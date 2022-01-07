@@ -7,9 +7,9 @@
 
 import {tmpdir} from 'os';
 import * as path from 'path';
-import {tryRealpath} from 'jest-util';
+import {tryRealpath} from 'elric-util';
 import {cleanup, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(tmpdir(), 'existent-roots');
 
@@ -18,7 +18,7 @@ afterAll(() => cleanup(DIR));
 
 function writeConfig(rootDir: string, roots?: Array<string>) {
   writeFiles(DIR, {
-    'jest.config.js': `
+    'elric.config.js': `
       module.exports = ${JSON.stringify({rootDir, roots}, null, 2)};
     `,
     'package.json': '{}',
@@ -29,7 +29,7 @@ test('error when rootDir does not exist', () => {
   const fakeRootDir = path.join(DIR, 'foobar');
   writeConfig(fakeRootDir);
 
-  const {exitCode, stderr} = runJest(DIR);
+  const {exitCode, stderr} = runelric(DIR);
 
   expect(exitCode).toBe(1);
   expect(stderr).toContain(
@@ -40,12 +40,12 @@ test('error when rootDir does not exist', () => {
 test('error when rootDir is a file', () => {
   // Replace tmpdir with its realpath as Windows uses the 8.3 path
   const fakeRootDir = path
-    .join(DIR, 'jest.config.js')
+    .join(DIR, 'elric.config.js')
     .replace(tmpdir(), tryRealpath(tmpdir()));
 
   writeConfig(fakeRootDir);
 
-  const {exitCode, stderr} = runJest(DIR);
+  const {exitCode, stderr} = runelric(DIR);
 
   expect(exitCode).toBe(1);
   expect(stderr).toContain(
@@ -57,7 +57,7 @@ test('error when roots directory does not exist', () => {
   const fakeRootDir = path.join(DIR, 'foobar');
   writeConfig(DIR, ['<rootDir>', fakeRootDir]);
 
-  const {exitCode, stderr} = runJest(DIR);
+  const {exitCode, stderr} = runelric(DIR);
 
   expect(exitCode).toBe(1);
   expect(stderr).toContain(
@@ -66,10 +66,10 @@ test('error when roots directory does not exist', () => {
 });
 
 test('error when roots is a file', () => {
-  const fakeRootDir = path.join(DIR, 'jest.config.js');
+  const fakeRootDir = path.join(DIR, 'elric.config.js');
   writeConfig(DIR, ['<rootDir>', fakeRootDir]);
 
-  const {exitCode, stderr} = runJest(DIR);
+  const {exitCode, stderr} = runelric(DIR);
 
   expect(exitCode).toBe(1);
   expect(stderr).toContain(

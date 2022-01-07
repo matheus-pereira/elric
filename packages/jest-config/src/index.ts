@@ -8,16 +8,16 @@
 import * as path from 'path';
 import chalk = require('chalk');
 import * as fs from 'graceful-fs';
-import type {Config} from '@jest/types';
-import {tryRealpath} from 'jest-util';
+import type {Config} from '@elric/types';
+import {tryRealpath} from 'elric-util';
 import * as constants from './constants';
 import normalize from './normalize';
 import readConfigFileAndSetRootDir from './readConfigFileAndSetRootDir';
 import resolveConfigPath from './resolveConfigPath';
 import {isJSONString, replaceRootDirInPath} from './utils';
 
-// TODO: remove export in Jest 28
-export {resolveTestEnvironment as getTestEnvironment} from 'jest-resolve';
+// TODO: remove export in elric 28
+export {resolveTestEnvironment as getTestEnvironment} from 'elric-resolve';
 
 export {isJSONString} from './utils';
 export {default as normalize} from './normalize';
@@ -57,7 +57,7 @@ export async function readConfig(
         : parentConfigDirname;
     } else {
       throw new Error(
-        'Jest: Cannot use configuration as an object without a file path.',
+        'elric: Cannot use configuration as an object without a file path.',
       );
     }
   } else if (isJSONString(argv.config)) {
@@ -76,7 +76,7 @@ export async function readConfig(
     config.rootDir = config.rootDir || packageRootOrConfig;
     rawOptions = config;
     // A string passed to `--config`, which is either a direct path to the config
-    // or a path to directory containing `package.json`, `jest.config.js` or `jest.config.ts`
+    // or a path to directory containing `package.json`, `elric.config.js` or `elric.config.ts`
   } else if (!skipArgvConfigOption && typeof argv.config == 'string') {
     configPath = resolveConfigPath(
       argv.config,
@@ -258,7 +258,7 @@ const ensureNoDuplicateConfigs = (
 
 This usually means that your ${chalk.bold(
         '"projects"',
-      )} config includes a directory that doesn't have any configuration recognizable by Jest. Please fix it.
+      )} config includes a directory that doesn't have any configuration recognizable by elric. Please fix it.
 `;
 
       throw new Error(message);
@@ -270,11 +270,11 @@ This usually means that your ${chalk.bold(
 };
 
 // Possible scenarios:
-//  1. jest --config config.json
-//  2. jest --projects p1 p2
-//  3. jest --projects p1 p2 --config config.json
-//  4. jest --projects p1
-//  5. jest
+//  1. elric --config config.json
+//  2. elric --projects p1 p2
+//  3. elric --projects p1 p2 --config config.json
+//  4. elric --projects p1
+//  5. elric
 //
 // If no projects are specified, process.cwd() will be used as the default
 // (and only) project.
@@ -321,7 +321,7 @@ export async function readConfigs(
             typeof root === 'string' &&
             fs.existsSync(root) &&
             !fs.lstatSync(root).isDirectory() &&
-            !constants.JEST_CONFIG_EXT_ORDER.some(ext => root.endsWith(ext))
+            !constants.elric_CONFIG_EXT_ORDER.some(ext => root.endsWith(ext))
           ) {
             return false;
           }
@@ -361,7 +361,7 @@ export async function readConfigs(
   }
 
   if (!globalConfig || !configs.length) {
-    throw new Error('jest: No configuration found for any project.');
+    throw new Error('elric: No configuration found for any project.');
   }
 
   return {

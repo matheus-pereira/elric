@@ -12,7 +12,7 @@ const BULLET = '\u25cf ';
 const DOCUMENTATION_NOTE = `  ${chalk.bold(
   'Code Transformation Documentation:',
 )}
-  https://jestjs.io/docs/code-transformation
+  https://elricjs.io/docs/code-transformation
 `;
 
 export const makeInvalidReturnValueError = (): string =>
@@ -48,7 +48,7 @@ export const makeInvalidSyncTransformerError = (
       chalk.bold(BULLET + 'Invalid synchronous transformer module:'),
       `  "${slash(
         transformPath,
-      )}" specified in the "transform" object of Jest configuration`,
+      )}" specified in the "transform" object of elric configuration`,
       '  must export a `process` function.',
       '',
     ].join('\n') + DOCUMENTATION_NOTE,
@@ -60,7 +60,7 @@ export const makeInvalidTransformerError = (transformPath: string): string =>
       chalk.bold(BULLET + 'Invalid transformer module:'),
       `  "${slash(
         transformPath,
-      )}" specified in the "transform" object of Jest configuration`,
+      )}" specified in the "transform" object of elric configuration`,
       '  must export a `process` or `processAsync` or `createTransformer` function.',
       '',
     ].join('\n') + DOCUMENTATION_NOTE,

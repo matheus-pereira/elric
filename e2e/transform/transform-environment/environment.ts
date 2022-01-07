@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
-import NodeEnvironment from 'jest-environment-node';
+import type {Config} from '@elric/types';
+import NodeEnvironment from 'elric-environment-node';
 
 export default class CustomEnvironment extends NodeEnvironment {
   constructor(config: Config.ProjectConfig) {

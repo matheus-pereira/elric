@@ -7,7 +7,7 @@
 
 'use strict';
 
-const NodeEnv = require('jest-environment-node');
+const NodeEnv = require('elric-environment-node');
 
 module.exports = class NodeEnvWithConditions extends NodeEnv {
   exportConditions() {

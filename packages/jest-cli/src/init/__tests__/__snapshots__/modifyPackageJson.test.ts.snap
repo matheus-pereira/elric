@@ -1,9 +1,9 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should add test script when there are no scripts 1`] = `
 "{
   \\"scripts\\": {
-    \\"test\\": \\"jest\\"
+    \\"test\\": \\"elric\\"
   }
 }
 "
@@ -13,7 +13,7 @@ exports[`should add test script when there are scripts 1`] = `
 "{
   \\"scripts\\": {
     \\"lint\\": \\"eslint .\\",
-    \\"test\\": \\"jest\\"
+    \\"test\\": \\"elric\\"
   }
 }
 "
@@ -24,10 +24,10 @@ exports[`should not add test script when { shouldModifyScripts: false } 1`] = `
 "
 `;
 
-exports[`should remove jest config if exists 1`] = `
+exports[`should remove elric config if exists 1`] = `
 "{
   \\"scripts\\": {
-    \\"test\\": \\"jest\\"
+    \\"test\\": \\"elric\\"
   }
 }
 "

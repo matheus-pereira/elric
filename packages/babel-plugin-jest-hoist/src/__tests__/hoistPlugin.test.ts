@@ -9,11 +9,11 @@
 import * as path from 'path';
 import pluginTester from 'babel-plugin-tester';
 import {format as formatCode} from 'prettier';
-import babelPluginJestHoist from '..';
+import babelPluginelricHoist from '..';
 
 pluginTester({
-  plugin: babelPluginJestHoist,
-  pluginName: 'babel-plugin-jest-hoist',
+  plugin: babelPluginelricHoist,
+  pluginName: 'babel-plugin-elric-hoist',
   tests: {
     'automatic react runtime': {
       babelOptions: {
@@ -28,7 +28,7 @@ pluginTester({
         ],
       },
       code: `
-        jest.mock('./App', () => () => <div>Hello world</div>);
+        elric.mock('./App', () => () => <div>Hello world</div>);
       `,
       formatResult(code) {
         // replace the filename with something that will be the same across OSes and machine
@@ -45,8 +45,8 @@ pluginTester({
       code: `
         require('x');
 
-        jest.enableAutomock();
-        jest.disableAutomock();
+        elric.enableAutomock();
+        elric.disableAutomock();
       `,
       snapshot: true,
     },
@@ -54,7 +54,7 @@ pluginTester({
       code: `
         beforeEach(() => {
           require('x')
-          jest.mock('someNode')
+          elric.mock('someNode')
         })
       `,
       snapshot: true,
@@ -62,7 +62,7 @@ pluginTester({
     'within a block with no siblings': {
       code: `
         beforeEach(() => {
-          jest.mock('someNode')
+          elric.mock('someNode')
         })
       `,
       snapshot: true,

@@ -7,10 +7,10 @@
 
 import type {V8Coverage} from 'collect-v8-coverage';
 import type {CoverageMap, CoverageMapData} from 'istanbul-lib-coverage';
-import type {ConsoleBuffer} from '@jest/console';
-import type {Config, TestResult, TransformTypes} from '@jest/types';
-import type {FS as HasteFS, ModuleMap} from 'jest-haste-map';
-import type Resolver from 'jest-resolve';
+import type {ConsoleBuffer} from '@elric/console';
+import type {Config, TestResult, TransformTypes} from '@elric/types';
+import type {FS as HasteFS, ModuleMap} from 'elric-haste-map';
+import type Resolver from 'elric-resolve';
 
 export interface RuntimeTransformResult extends TransformTypes.TransformResult {
   wrapperLength: number;
@@ -195,7 +195,7 @@ type Context = {
   resolver: Resolver;
 };
 
-// Typings for `sendMessageToJest` events
+// Typings for `sendMessageToelric` events
 export type TestEvents = {
   'test-file-start': [Test];
   'test-file-success': [Test, TestResult];

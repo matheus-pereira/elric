@@ -6,9 +6,9 @@
  *
  */
 
-import * as matcherUtils from 'jest-matcher-utils';
+import * as matcherUtils from 'elric-matcher-utils';
 import {equals, fnNameFor, hasProperty, isA, isUndefined} from './jasmineUtils';
-import {getState} from './jestMatchersObject';
+import {getState} from './elricMatchersObject';
 import type {
   AsymmetricMatcher as AsymmetricMatcherInterface,
   MatcherState,
@@ -26,7 +26,7 @@ export abstract class AsymmetricMatcher<
   State extends MatcherState = MatcherState,
 > implements AsymmetricMatcherInterface
 {
-  $$typeof = Symbol.for('jest.asymmetricMatcher');
+  $$typeof = Symbol.for('elric.asymmetricMatcher');
 
   constructor(protected sample: T, protected inverse = false) {}
 

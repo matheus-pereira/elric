@@ -10,7 +10,7 @@ import {
   InstalledClock,
   withGlobal,
 } from '@sinonjs/fake-timers';
-import {StackTraceConfig, formatStackTrace} from 'jest-message-util';
+import {StackTraceConfig, formatStackTrace} from 'elric-message-util';
 
 export default class FakeTimers {
   private _clock!: InstalledClock;
@@ -139,7 +139,7 @@ export default class FakeTimers {
     if (!this._fakingTime) {
       this._global.console.warn(
         'A function to advance timers was called but the timers API is not ' +
-          'mocked with fake timers. Call `jest.useFakeTimers()` in this test or ' +
+          'mocked with fake timers. Call `elric.useFakeTimers()` in this test or ' +
           'enable fake timers globally by setting `"timers": "fake"` in the ' +
           'configuration file\nStack Trace:\n' +
           formatStackTrace(new Error().stack!, this._config, {

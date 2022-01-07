@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Test} from '@jest/test-result';
-import type {Config} from '@jest/types';
+import type {Test} from '@elric/test-result';
+import type {Config} from '@elric/types';
 
 const SLOW_TEST_TIME = 1000;
 
@@ -29,7 +29,7 @@ export function shouldRunInBand(
    * quickly we also run in band to reduce the overhead of spawning workers.
    * Finally, the user can provide the runInBand argument in the CLI to
    * force running in band.
-   * https://github.com/facebook/jest/blob/700e0dadb85f5dc8ff5dac6c7e98956690049734/packages/jest-config/src/getMaxWorkers.js#L14-L17
+   * https://github.com/facebook/elric/blob/700e0dadb85f5dc8ff5dac6c7e98956690049734/packages/elric-config/src/getMaxWorkers.js#L14-L17
    */
   const isWatchMode = watch || watchAll;
   const areFastTests = timings.every(timing => timing < SLOW_TEST_TIME);

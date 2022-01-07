@@ -11,7 +11,7 @@ let OnlyRequiredFromMock;
 let moduleStateValue = 'default';
 
 try {
-  OnlyRequiredFromMock = jest.requireActual('OnlyRequiredFromMock');
+  OnlyRequiredFromMock = elric.requireActual('OnlyRequiredFromMock');
 } catch {
   // If the module cannot be loaded, use a dummy value. There is one test
   // that specifically tests for the correct value which ensures this feature

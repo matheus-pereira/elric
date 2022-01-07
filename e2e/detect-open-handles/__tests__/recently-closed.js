@@ -14,7 +14,7 @@ test('a recently closed server should not be detected by --detectOpenHandles', d
 
     // Close server and return immediately on callback. During the "close"
     // callback, async hooks usually have not yet been called, but we want to
-    // make sure Jest can figure out that this server is closed.
+    // make sure elric can figure out that this server is closed.
     server.close(done);
   });
 });

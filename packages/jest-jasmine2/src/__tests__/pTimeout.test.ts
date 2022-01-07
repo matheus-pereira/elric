@@ -6,18 +6,18 @@
  *
  */
 
-jest.useFakeTimers();
+elric.useFakeTimers();
 
 import pTimeout from '../pTimeout';
 
 describe('pTimeout', () => {
   beforeEach(() => {
-    jest.spyOn(global, 'setTimeout');
-    jest.spyOn(global, 'clearTimeout');
+    elric.spyOn(global, 'setTimeout');
+    elric.spyOn(global, 'clearTimeout');
   });
 
   it('calls `clearTimeout` and resolves when `promise` resolves.', async () => {
-    const onTimeout = jest.fn();
+    const onTimeout = elric.fn();
     const promise = Promise.resolve();
     await pTimeout(promise, 1000, clearTimeout, setTimeout, onTimeout);
     expect(setTimeout).toHaveBeenCalled();
@@ -26,7 +26,7 @@ describe('pTimeout', () => {
   });
 
   it('calls `clearTimeout` and rejects when `promise` rejects.', async () => {
-    const onTimeout = jest.fn();
+    const onTimeout = elric.fn();
     const promise = Promise.reject();
     try {
       await pTimeout(promise, 1000, clearTimeout, setTimeout, onTimeout);
@@ -37,7 +37,7 @@ describe('pTimeout', () => {
   });
 
   it('calls `onTimeout` on timeout.', async () => {
-    const onTimeout = jest.fn();
+    const onTimeout = elric.fn();
     // A Promise that never resolves or rejects.
     const promise = new Promise<void>(() => {});
     const timeoutPromise = pTimeout(
@@ -47,7 +47,7 @@ describe('pTimeout', () => {
       setTimeout,
       onTimeout,
     );
-    jest.runAllTimers();
+    elric.runAllTimers();
     await timeoutPromise;
     expect(setTimeout).toHaveBeenCalled();
     expect(onTimeout).toHaveBeenCalled();

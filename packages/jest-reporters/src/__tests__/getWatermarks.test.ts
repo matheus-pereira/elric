@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {makeGlobalConfig} from '@jest/test-utils';
+import {makeGlobalConfig} from '@elric/test-utils';
 import getWatermarks from '../getWatermarks';
 
 describe('getWatermarks', () => {

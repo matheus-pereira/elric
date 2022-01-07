@@ -13,7 +13,7 @@
 import co from 'co';
 import isGeneratorFn from 'is-generator-fn';
 import throat from 'throat';
-import type {Config, Global} from '@jest/types';
+import type {Config, Global} from '@elric/types';
 import isError from './isError';
 import type Spec from './jasmine/Spec';
 import type {DoneFn, QueueableFn} from './queueRunner';
@@ -45,7 +45,7 @@ function promisifyLifeCycleFunction(
     }
 
     if (typeof fn !== 'function') {
-      // Pass non-functions to Jest, which throws a nice error.
+      // Pass non-functions to elric, which throws a nice error.
       return originalFn.call(env, fn, timeout);
     }
 
@@ -54,14 +54,14 @@ function promisifyLifeCycleFunction(
     if (hasDoneCallback) {
       // Give the function a name so it can be detected in call stacks, but
       // otherwise Jasmine will handle it.
-      const asyncJestLifecycleWithCallback = function (
+      const asyncelricLifecycleWithCallback = function (
         this: Global.TestContext,
         ...args: Array<any>
       ) {
         // @ts-expect-error: Support possible extra args at runtime
         return fn.apply(this, args);
       };
-      return originalFn.call(env, asyncJestLifecycleWithCallback, timeout);
+      return originalFn.call(env, asyncelricLifecycleWithCallback, timeout);
     }
 
     const extraError = new Error();
@@ -74,7 +74,7 @@ function promisifyLifeCycleFunction(
 
     // We make *all* functions async and run `done` right away if they
     // didn't return a promise.
-    const asyncJestLifecycle = function (done: DoneFn) {
+    const asyncelricLifecycle = function (done: DoneFn) {
       const wrappedFn = isGeneratorFn(fn) ? co.wrap(fn) : fn;
       const returnValue = wrappedFn.call({}, doneFnNoop);
 
@@ -92,7 +92,7 @@ function promisifyLifeCycleFunction(
       }
     };
 
-    return originalFn.call(env, asyncJestLifecycle, timeout);
+    return originalFn.call(env, asyncelricLifecycle, timeout);
   };
 }
 
@@ -120,7 +120,7 @@ function promisifyIt(
     }
 
     if (typeof fn !== 'function') {
-      // Pass non-functions to Jest, which throws a nice error.
+      // Pass non-functions to elric, which throws a nice error.
       return originalFn.call(env, specName, fn, timeout);
     }
 
@@ -129,14 +129,14 @@ function promisifyIt(
     if (hasDoneCallback) {
       // Give the function a name so it can be detected in call stacks, but
       // otherwise Jasmine will handle it.
-      const asyncJestTestWithCallback = function (
+      const asyncelricTestWithCallback = function (
         this: Global.TestContext,
         ...args: Array<any>
       ) {
         // @ts-expect-error: Support possible extra args at runtime
         return fn.apply(this, args);
       };
-      return originalFn.call(env, specName, asyncJestTestWithCallback, timeout);
+      return originalFn.call(env, specName, asyncelricTestWithCallback, timeout);
     }
 
     const extraError = new Error();
@@ -147,7 +147,7 @@ function promisifyIt(
     // https://crbug.com/v8/7142
     extraError.stack = extraError.stack;
 
-    const asyncJestTest = function (done: DoneFn) {
+    const asyncelricTest = function (done: DoneFn) {
       const wrappedFn = isGeneratorFn(fn) ? co.wrap(fn) : fn;
       const returnValue = wrappedFn.call({}, doneFnNoop);
 
@@ -171,13 +171,13 @@ function promisifyIt(
       } else {
         done.fail(
           new Error(
-            'Jest: `it` and `test` must return either a Promise or undefined.',
+            'elric: `it` and `test` must return either a Promise or undefined.',
           ),
         );
       }
     };
 
-    return originalFn.call(env, specName, asyncJestTest, timeout);
+    return originalFn.call(env, specName, asyncelricTest, timeout);
   };
 }
 
@@ -209,7 +209,7 @@ function makeConcurrent(
           return promise;
         }
         throw new Error(
-          `Jest: concurrent test "${spec.getFullName()}" must return a Promise.`,
+          `elric: concurrent test "${spec.getFullName()}" must return a Promise.`,
         );
       });
     } catch (error: unknown) {

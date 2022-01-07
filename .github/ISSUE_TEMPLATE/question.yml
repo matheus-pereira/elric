@@ -12,9 +12,9 @@ body:
 
         For anything else, such as questions or getting help, please see:
 
-        - [The Jest help page](https://jestjs.io/help)
+        - [The elric help page](https://elricjs.io/help)
         - [Our `#testing` channel in Reactiflux](https://discord.gg/j6FKKQQrW9)
-        - The [jestjs](https://stackoverflow.com/questions/tagged/jestjs) tag on [StackOverflow](https://stackoverflow.com/questions/ask)
+        - The [elricjs](https://stackoverflow.com/questions/tagged/elricjs) tag on [StackOverflow](https://stackoverflow.com/questions/ask)
   - type: checkboxes
     id: no-post
     attributes:

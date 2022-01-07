@@ -5,11 +5,11 @@
     "outDir": "build"
   },
   "references": [
-    {"path": "../jest-regex-util"},
-    {"path": "../jest-serializer"},
-    {"path": "../jest-types"},
-    {"path": "../jest-util"},
-    {"path": "../jest-worker"},
+    {"path": "../elric-regex-util"},
+    {"path": "../elric-serializer"},
+    {"path": "../elric-types"},
+    {"path": "../elric-util"},
+    {"path": "../elric-worker"},
     {"path": "../test-utils"}
   ]
 }

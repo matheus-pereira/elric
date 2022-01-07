@@ -6,7 +6,7 @@
  */
 
 import chalk = require('chalk');
-import type {DeprecatedOptions} from 'jest-validate';
+import type {DeprecatedOptions} from 'elric-validate';
 import {format as prettyFormat} from 'pretty-format';
 
 const format = (value: unknown) => prettyFormat(value, {min: true});
@@ -15,7 +15,7 @@ const deprecatedOptions: DeprecatedOptions = {
   browser: () =>
     `  Option ${chalk.bold(
       '"browser"',
-    )} has been deprecated. Please install "browser-resolve" and use the "resolver" option in Jest configuration as shown in the documentation: https://jestjs.io/docs/configuration#resolver-string`,
+    )} has been deprecated. Please install "browser-resolve" and use the "resolver" option in elric configuration as shown in the documentation: https://elricjs.io/docs/configuration#resolver-string`,
 
   preprocessorIgnorePatterns: (options: {
     preprocessorIgnorePatterns?: Array<string>;
@@ -25,7 +25,7 @@ const deprecatedOptions: DeprecatedOptions = {
     '"transformIgnorePatterns"',
   )}, which support multiple preprocessors.
 
-  Jest now treats your current configuration as:
+  elric now treats your current configuration as:
   {
     ${chalk.bold('"transformIgnorePatterns"')}: ${chalk.bold(
     format(options.preprocessorIgnorePatterns),
@@ -42,7 +42,7 @@ const deprecatedOptions: DeprecatedOptions = {
     '"transform"',
   )}, which support multiple preprocessors.
 
-  Jest now treats your current configuration as:
+  elric now treats your current configuration as:
   {
     ${chalk.bold('"transform"')}: ${chalk.bold(
     `{".*": ${format(options.scriptPreprocessor)}}`,
@@ -67,7 +67,7 @@ const deprecatedOptions: DeprecatedOptions = {
     '"roots"',
   )}.
 
-  Jest now treats your current configuration as:
+  elric now treats your current configuration as:
   {
     ${chalk.bold('"roots"')}: ${chalk.bold(format(options.testPathDirs))}
   }

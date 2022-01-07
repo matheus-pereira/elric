@@ -522,7 +522,7 @@ export class ModuleMocker {
   private _defaultMockConfig(): MockFunctionConfig {
     return {
       mockImpl: undefined,
-      mockName: 'jest.fn()',
+      mockName: 'elric.fn()',
       specificMockImpls: [],
       specificReturnValues: [],
     };
@@ -773,7 +773,7 @@ export class ModuleMocker {
 
       f.getMockName = () => {
         const mockConfig = this._ensureMockConfig(f);
-        return mockConfig.mockName || 'jest.fn()';
+        return mockConfig.mockName || 'elric.fn()';
       };
 
       if (metadata.mockImpl) {
@@ -1190,8 +1190,8 @@ export class ModuleMocker {
   }
 }
 
-const JestMock = new ModuleMocker(global as unknown as typeof globalThis);
+const elricMock = new ModuleMocker(global as unknown as typeof globalThis);
 
-export const fn = JestMock.fn.bind(JestMock);
-export const spyOn = JestMock.spyOn.bind(JestMock);
-export const mocked = JestMock.mocked.bind(JestMock);
+export const fn = elricMock.fn.bind(elricMock);
+export const spyOn = elricMock.spyOn.bind(elricMock);
+export const mocked = elricMock.mocked.bind(elricMock);

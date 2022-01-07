@@ -1,10 +1,10 @@
 {
-  "name": "jest-circus",
+  "name": "elric-circus",
   "version": "27.4.6",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/jest-circus"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/elric-circus"
   },
   "license": "MIT",
   "main": "./build/index.js",
@@ -18,21 +18,21 @@
     "./runner": "./runner.js"
   },
   "dependencies": {
-    "@jest/environment": "^27.4.6",
-    "@jest/test-result": "^27.4.6",
-    "@jest/types": "^27.4.2",
+    "@elric/environment": "^27.4.6",
+    "@elric/test-result": "^27.4.6",
+    "@elric/types": "^27.4.2",
     "@types/node": "*",
     "chalk": "^4.0.0",
     "co": "^4.6.0",
     "dedent": "^0.7.0",
     "expect": "^27.4.6",
     "is-generator-fn": "^2.0.0",
-    "jest-each": "^27.4.6",
-    "jest-matcher-utils": "^27.4.6",
-    "jest-message-util": "^27.4.6",
-    "jest-runtime": "^27.4.6",
-    "jest-snapshot": "^27.4.6",
-    "jest-util": "^27.4.2",
+    "elric-each": "^27.4.6",
+    "elric-matcher-utils": "^27.4.6",
+    "elric-message-util": "^27.4.6",
+    "elric-runtime": "^27.4.6",
+    "elric-snapshot": "^27.4.6",
+    "elric-util": "^27.4.2",
     "pretty-format": "^27.4.6",
     "slash": "^3.0.0",
     "stack-utils": "^2.0.3",
@@ -47,7 +47,7 @@
     "@types/stack-utils": "^2.0.0",
     "execa": "^5.0.0",
     "graceful-fs": "^4.2.9",
-    "jest-snapshot-serializer-raw": "^1.1.0"
+    "elric-snapshot-serializer-raw": "^1.1.0"
   },
   "engines": {
     "node": "^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0"

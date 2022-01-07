@@ -7,7 +7,7 @@
 
 'use strict';
 
-const JSDOMEnvironment = require('jest-environment-jsdom');
+const JSDOMEnvironment = require('elric-environment-jsdom');
 
 class TestEnvironment extends JSDOMEnvironment {
   handleTestEvent(event) {

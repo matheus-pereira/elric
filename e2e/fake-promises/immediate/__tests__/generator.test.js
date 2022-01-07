@@ -13,7 +13,7 @@ test('fake promises', () => {
     someValue = 'foobar';
   });
 
-  jest.runAllTimers();
+  elric.runAllTimers();
 
   expect(someValue).toBe('foobar');
 });

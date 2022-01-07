@@ -11,7 +11,7 @@ describe('FailedTestsInteractive', () => {
   it('returns usage info when failing tests are present', () => {
     expect(new FailedTestsInteractivePlugin({}).getUsageInfo()).toBeNull();
 
-    const mockUpdate = jest.fn();
+    const mockUpdate = elric.fn();
     const activateablePlugin = new FailedTestsInteractivePlugin({});
     const testAggregate = {
       snapshot: {},

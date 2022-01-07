@@ -594,7 +594,7 @@ describe('moduleMocker', () => {
     });
 
     it('mockReturnValueOnce mocks value just once', () => {
-      const fake = jest.fn(a => a + 2);
+      const fake = elric.fn(a => a + 2);
       fake.mockReturnValueOnce(42);
       expect(fake(2)).toEqual(42);
       expect(fake(2)).toEqual(4);
@@ -985,9 +985,9 @@ describe('moduleMocker', () => {
 
   describe('mockImplementationOnce', () => {
     it('should mock constructor', () => {
-      const mock1 = jest.fn();
-      const mock2 = jest.fn();
-      const Module = jest.fn(() => ({someFn: mock1}));
+      const mock1 = elric.fn();
+      const mock2 = elric.fn();
+      const Module = elric.fn(() => ({someFn: mock1}));
       const testFn = function () {
         const m = new Module();
         m.someFn();
@@ -1030,7 +1030,7 @@ describe('moduleMocker', () => {
   });
 
   test('mockReturnValue does not override mockImplementationOnce', () => {
-    const mockFn = jest
+    const mockFn = elric
       .fn()
       .mockReturnValue(1)
       .mockImplementationOnce(() => 2);
@@ -1039,7 +1039,7 @@ describe('moduleMocker', () => {
   });
 
   test('mockImplementation resets the mock', () => {
-    const fn = jest.fn();
+    const fn = elric.fn();
     expect(fn()).toBeUndefined();
     fn.mockReturnValue('returnValue');
     fn.mockImplementation(() => 'foo');
@@ -1053,37 +1053,37 @@ describe('moduleMocker', () => {
     expect(moduleMocker.isMockFunction(mockFn)).toBe(true);
   });
 
-  test('default mockName is jest.fn()', () => {
-    const fn = jest.fn();
-    expect(fn.getMockName()).toBe('jest.fn()');
+  test('default mockName is elric.fn()', () => {
+    const fn = elric.fn();
+    expect(fn.getMockName()).toBe('elric.fn()');
   });
 
   test('mockName sets the mock name', () => {
-    const fn = jest.fn();
+    const fn = elric.fn();
     fn.mockName('myMockFn');
     expect(fn.getMockName()).toBe('myMockFn');
   });
 
   test('mockName gets reset by mockReset', () => {
-    const fn = jest.fn();
-    expect(fn.getMockName()).toBe('jest.fn()');
+    const fn = elric.fn();
+    expect(fn.getMockName()).toBe('elric.fn()');
     fn.mockName('myMockFn');
     expect(fn.getMockName()).toBe('myMockFn');
     fn.mockReset();
-    expect(fn.getMockName()).toBe('jest.fn()');
+    expect(fn.getMockName()).toBe('elric.fn()');
   });
 
   test('mockName gets reset by mockRestore', () => {
-    const fn = jest.fn();
-    expect(fn.getMockName()).toBe('jest.fn()');
+    const fn = elric.fn();
+    expect(fn.getMockName()).toBe('elric.fn()');
     fn.mockName('myMockFn');
     expect(fn.getMockName()).toBe('myMockFn');
     fn.mockRestore();
-    expect(fn.getMockName()).toBe('jest.fn()');
+    expect(fn.getMockName()).toBe('elric.fn()');
   });
 
   test('mockName is not reset by mockClear', () => {
-    const fn = jest.fn(() => false);
+    const fn = elric.fn(() => false);
     fn.mockName('myMockFn');
     expect(fn.getMockName()).toBe('myMockFn');
     fn.mockClear();

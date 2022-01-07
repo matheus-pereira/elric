@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {extractSummary} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('console debugging with --verbose', () => {
-  const {stderr, stdout, exitCode} = runJest('console-debugging', [
+  const {stderr, stdout, exitCode} = runelric('console-debugging', [
     '--noStackTrace',
     '--no-cache',
   ]);

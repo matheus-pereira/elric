@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import jestSnapshot from '../';
+import elricSnapshot from '../';
 
-const {toMatchSnapshot} = jestSnapshot;
+const {toMatchSnapshot} = elricSnapshot;
 
 it(`matcher returns matcher name, expected and actual values`, () => {
   const actual = 'a';

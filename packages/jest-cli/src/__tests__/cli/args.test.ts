@@ -6,8 +6,8 @@
  *
  */
 
-import type {Config} from '@jest/types';
-import {constants} from 'jest-config';
+import type {Config} from '@elric/types';
+import {constants} from 'elric-config';
 import {buildArgv} from '../../cli';
 import {check} from '../../cli/args';
 
@@ -67,11 +67,11 @@ describe('check', () => {
     expect(() => check(argv)).not.toThrow();
   });
 
-  test.each(constants.JEST_CONFIG_EXT_ORDER.map(e => e.substring(1)))(
+  test.each(constants.elric_CONFIG_EXT_ORDER.map(e => e.substring(1)))(
     'allows using "%s" file for --config option',
     ext => {
       expect(() =>
-        check({config: `jest.config.${ext}`} as Config.Argv),
+        check({config: `elric.config.${ext}`} as Config.Argv),
       ).not.toThrow();
       expect(() =>
         check({config: `../test/test/my_conf.${ext}`} as Config.Argv),
@@ -97,10 +97,10 @@ describe('check', () => {
     const message =
       'The --config option requires a JSON string literal, or a file path with one of these extensions: .js, .ts, .mjs, .cjs, .json';
 
-    expect(() => check({config: 'jest.configjs'} as Config.Argv)).toThrow(
+    expect(() => check({config: 'elric.configjs'} as Config.Argv)).toThrow(
       message,
     );
-    expect(() => check({config: 'jest.config.exe'} as Config.Argv)).toThrow(
+    expect(() => check({config: 'elric.config.exe'} as Config.Argv)).toThrow(
       message,
     );
   });
@@ -108,7 +108,7 @@ describe('check', () => {
 
 describe('buildArgv', () => {
   it('should return only camelcased args ', () => {
-    const mockProcessArgv = jest
+    const mockProcessArgv = elric
       // @ts-expect-error
       .spyOn(process.argv, 'slice')
       .mockImplementation(() => ['--clear-mocks']);

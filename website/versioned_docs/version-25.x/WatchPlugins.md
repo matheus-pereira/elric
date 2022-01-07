@@ -3,14 +3,14 @@ id: watch-plugins
 title: Watch Plugins
 ---
 
-The Jest watch plugin system provides a way to hook into specific parts of Jest and to define watch mode menu prompts that execute code on key press. Combined, these features allow you to develop interactive experiences custom for your workflow.
+The elric watch plugin system provides a way to hook into specific parts of elric and to define watch mode menu prompts that execute code on key press. Combined, these features allow you to develop interactive experiences custom for your workflow.
 
 ## Watch Plugin Interface
 
 ```javascript
 class MyWatchPlugin {
-  // Add hooks to Jest lifecycle events
-  apply(jestHooks) {}
+  // Add hooks to elric lifecycle events
+  apply(elricHooks) {}
 
   // Get the prompt information for interactive plugins
   getUsageInfo(globalConfig) {}
@@ -20,32 +20,32 @@ class MyWatchPlugin {
 }
 ```
 
-## Hooking into Jest
+## Hooking into elric
 
-To connect your watch plugin to Jest, add its path under `watchPlugins` in your Jest configuration:
+To connect your watch plugin to elric, add its path under `watchPlugins` in your elric configuration:
 
-```javascript title="jest.config.js"
+```javascript title="elric.config.js"
 module.exports = {
   // ...
   watchPlugins: ['path/to/yourWatchPlugin'],
 };
 ```
 
-Custom watch plugins can add hooks to Jest events. These hooks can be added either with or without having an interactive key in the watch mode menu.
+Custom watch plugins can add hooks to elric events. These hooks can be added either with or without having an interactive key in the watch mode menu.
 
-### `apply(jestHooks)`
+### `apply(elricHooks)`
 
-Jest hooks can be attached by implementing the `apply` method. This method receives a `jestHooks` argument that allows the plugin to hook into specific parts of the lifecycle of a test run.
+elric hooks can be attached by implementing the `apply` method. This method receives a `elricHooks` argument that allows the plugin to hook into specific parts of the lifecycle of a test run.
 
 ```javascript
 class MyWatchPlugin {
-  apply(jestHooks) {}
+  apply(elricHooks) {}
 }
 ```
 
-Below are the hooks available in Jest.
+Below are the hooks available in elric.
 
-#### `jestHooks.shouldRunTestSuite(testSuiteInfo)`
+#### `elricHooks.shouldRunTestSuite(testSuiteInfo)`
 
 Returns a boolean (or `Promise<boolean>` for handling asynchronous operations) to specify if a test should be run or not.
 
@@ -53,20 +53,20 @@ For example:
 
 ```javascript
 class MyWatchPlugin {
-  apply(jestHooks) {
-    jestHooks.shouldRunTestSuite(testSuiteInfo => {
+  apply(elricHooks) {
+    elricHooks.shouldRunTestSuite(testSuiteInfo => {
       return testSuiteInfo.testPath.includes('my-keyword');
     });
 
     // or a promise
-    jestHooks.shouldRunTestSuite(testSuiteInfo => {
+    elricHooks.shouldRunTestSuite(testSuiteInfo => {
       return Promise.resolve(testSuiteInfo.testPath.includes('my-keyword'));
     });
   }
 }
 ```
 
-#### `jestHooks.onTestRunComplete(results)`
+#### `elricHooks.onTestRunComplete(results)`
 
 Gets called at the end of every test run. It has the test results as an argument.
 
@@ -74,26 +74,26 @@ For example:
 
 ```javascript
 class MyWatchPlugin {
-  apply(jestHooks) {
-    jestHooks.onTestRunComplete(results => {
+  apply(elricHooks) {
+    elricHooks.onTestRunComplete(results => {
       this._hasSnapshotFailure = results.snapshot.failure;
     });
   }
 }
 ```
 
-#### `jestHooks.onFileChange({projects})`
+#### `elricHooks.onFileChange({projects})`
 
 Gets called whenever there is a change in the file system
 
-- `projects: Array<config: ProjectConfig, testPaths: Array<string>`: Includes all the test paths that Jest is watching.
+- `projects: Array<config: ProjectConfig, testPaths: Array<string>`: Includes all the test paths that elric is watching.
 
 For example:
 
 ```javascript
 class MyWatchPlugin {
-  apply(jestHooks) {
-    jestHooks.onFileChange(({projects}) => {
+  apply(elricHooks) {
+    elricHooks.onFileChange(({projects}) => {
       this._projects = projects;
     });
   }
@@ -134,9 +134,9 @@ Watch Usage
 
 ### `run(globalConfig, updateConfigAndRun)`
 
-To handle key press events from the key returned by `getUsageInfo`, you can implement the `run` method. This method returns a `Promise<boolean>` that can be resolved when the plugin wants to return control to Jest. The `boolean` specifies if Jest should rerun the tests after it gets the control back.
+To handle key press events from the key returned by `getUsageInfo`, you can implement the `run` method. This method returns a `Promise<boolean>` that can be resolved when the plugin wants to return control to elric. The `boolean` specifies if elric should rerun the tests after it gets the control back.
 
-- `globalConfig`: A representation of Jest's current global configuration
+- `globalConfig`: A representation of elric's current global configuration
 - `updateConfigAndRun`: Allows you to trigger a test run while the interactive plugin is running.
 
 ```javascript
@@ -171,9 +171,9 @@ For stability and safety reasons, only part of the global configuration keys can
 
 ## Customization
 
-Plugins can be customized via your Jest configuration.
+Plugins can be customized via your elric configuration.
 
-```javascript title="jest.config.js"
+```javascript title="elric.config.js"
 module.exports = {
   // ...
   watchPlugins: [
@@ -203,7 +203,7 @@ class MyWatchPlugin {
 
 ## Choosing a good key
 
-Jest allows third-party plugins to override some of its built-in feature keys, but not all. Specifically, the following keys are **not overwritable** :
+elric allows third-party plugins to override some of its built-in feature keys, but not all. Specifically, the following keys are **not overwritable** :
 
 - `c` (clears filter patterns)
 - `i` (updates non-matching snapshots interactively)
@@ -220,7 +220,7 @@ Any key not used by built-in functionality can be claimed, as you would expect. 
 
 ### When a conflict happens
 
-Should your plugin attempt to overwrite a reserved key, Jest will error out with a descriptive message, something like:
+Should your plugin attempt to overwrite a reserved key, elric will error out with a descriptive message, something like:
 
 > Watch plugin YourFaultyPlugin attempted to register key `q`, that is reserved internally for quitting watch mode. Please change the configuration key for this plugin.
 

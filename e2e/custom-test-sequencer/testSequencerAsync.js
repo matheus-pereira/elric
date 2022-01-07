@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const Sequencer = require('@jest/test-sequencer').default;
+const Sequencer = require('@elric/test-sequencer').default;
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 

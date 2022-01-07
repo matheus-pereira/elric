@@ -8,7 +8,7 @@
 'use strict';
 
 beforeEach(() => {
-  jest.spyOn(console, 'error');
+  elric.spyOn(console, 'error');
   console.error.mockImplementation(() => {});
 });
 

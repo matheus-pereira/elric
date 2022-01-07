@@ -17,7 +17,7 @@ requireOutside('package')
 with
 
 require(require.resolve('package', {
-  [Symbol.for('jest-resolve-outside-vm-option')]: true,
+  [Symbol.for('elric-resolve-outside-vm-option')]: true,
 }));
 */
 
@@ -26,11 +26,11 @@ const REQUIRE_OUTSIDE_FUNCTION_NAME = 'requireOutside';
 module.exports = ({template, types: t}) => {
   const replacement = template(`
     require(require.resolve(IMPORT_PATH, {
-      [(global['jest-symbol-do-not-touch'] || global.Symbol).for('jest-resolve-outside-vm-option')]: true,
+      [(global['elric-symbol-do-not-touch'] || global.Symbol).for('elric-resolve-outside-vm-option')]: true,
     }));
   `);
   return {
-    name: 'jest-require-outside-vm',
+    name: 'elric-require-outside-vm',
     visitor: {
       CallExpression(path) {
         const {callee, arguments: args} = path.node;

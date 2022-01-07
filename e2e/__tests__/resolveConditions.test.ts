@@ -6,8 +6,8 @@
  */
 
 import {resolve} from 'path';
-import {onNodeVersions} from '@jest/test-utils';
-import runJest from '../runJest';
+import {onNodeVersions} from '@elric/test-utils';
+import runelric from '../runelric';
 
 const dir = resolve(__dirname, '..', 'resolve-conditions');
 
@@ -16,7 +16,7 @@ onNodeVersions('>=12.16.0', () => {
   test('resolves package exports correctly with custom resolver', () => {
     // run multiple times to ensure there are no caching errors
     for (let i = 0; i < 5; i++) {
-      const {exitCode} = runJest(dir, [], {
+      const {exitCode} = runelric(dir, [], {
         nodeOptions: '--experimental-vm-modules --no-warnings',
       });
       try {

@@ -5,15 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {AggregatedResult} from '@jest/test-result';
-import {makeGlobalConfig} from '@jest/test-utils';
-import type {Config} from '@jest/types';
-import Resolver from 'jest-resolve';
+import type {AggregatedResult} from '@elric/test-result';
+import {makeGlobalConfig} from '@elric/test-utils';
+import type {Config} from '@elric/types';
+import Resolver from 'elric-resolve';
 import NotifyReporter from '../NotifyReporter';
 
-jest.mock('../DefaultReporter');
-jest.mock('node-notifier', () => ({
-  notify: jest.fn(),
+elric.mock('../DefaultReporter');
+elric.mock('node-notifier', () => ({
+  notify: elric.fn(),
 }));
 
 const initialContext = {
@@ -210,7 +210,7 @@ test('test failure-change with moduleName', () => {
 
 describe('node-notifier is an optional dependency', () => {
   beforeEach(() => {
-    jest.resetModules();
+    elric.resetModules();
   });
 
   const ctor = () => {
@@ -223,7 +223,7 @@ describe('node-notifier is an optional dependency', () => {
   };
 
   test('without node-notifier uses mock function that throws an error', () => {
-    jest.doMock('node-notifier', () => {
+    elric.doMock('node-notifier', () => {
       throw new Resolver.ModuleNotFoundError(
         "Cannot find module 'node-notifier'",
       );
@@ -236,20 +236,20 @@ describe('node-notifier is an optional dependency', () => {
 
   test('throws the error when require throws an unexpected error', () => {
     const error = new Error('unexpected require error');
-    jest.doMock('node-notifier', () => {
+    elric.doMock('node-notifier', () => {
       throw error;
     });
     expect(ctor).toThrow(error);
   });
 
   test('uses node-notifier when it is available', () => {
-    const mockNodeNotifier = {notify: jest.fn()};
-    jest.doMock('node-notifier', () => mockNodeNotifier);
+    const mockNodeNotifier = {notify: elric.fn()};
+    elric.doMock('node-notifier', () => mockNodeNotifier);
     const result = ctor();
     expect(result['_notifier']).toBe(mockNodeNotifier);
   });
 });
 
 afterEach(() => {
-  jest.clearAllMocks();
+  elric.clearAllMocks();
 });

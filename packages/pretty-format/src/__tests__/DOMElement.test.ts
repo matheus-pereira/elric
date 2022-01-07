@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @jest-environment jsdom
+ * @elric-environment jsdom
  */
 /* eslint-env browser*/
 
@@ -67,11 +67,11 @@ describe('DOMElement Plugin', () => {
   it('supports an HTML element with attribute and text content', () => {
     const parent = document.createElement('div');
     parent.setAttribute('style', 'color: #99424F');
-    const text = document.createTextNode('Jest');
+    const text = document.createTextNode('elric');
     parent.appendChild(text);
 
     expect(parent).toPrettyPrintTo(
-      '<div\n  style="color: #99424F"\n>\n  Jest\n</div>',
+      '<div\n  style="color: #99424F"\n>\n  elric\n</div>',
     );
   });
 
@@ -110,11 +110,11 @@ describe('DOMElement Plugin', () => {
     parent.appendChild(child);
 
     child.setAttribute('style', 'color: #99424F');
-    const text = document.createTextNode('Jest');
+    const text = document.createTextNode('elric');
     child.appendChild(text);
 
     expect(parent).toPrettyPrintTo(
-      '<div>\n  <span\n    style="color: #99424F"\n  >\n    Jest\n  </span>\n</div>',
+      '<div>\n  <span\n    style="color: #99424F"\n  >\n    elric\n  </span>\n</div>',
     );
   });
 
@@ -249,7 +249,7 @@ Testing.`;
     // React 16 does not render text in comments (see below)
     const parent = document.createElement('p');
     parent.innerHTML = [
-      '<strong>Jest</strong>',
+      '<strong>elric</strong>',
       ' means ',
       '<em>painless</em>',
       ' Javascript testing',
@@ -259,7 +259,7 @@ Testing.`;
       [
         '<p>',
         '  <strong>',
-        '    Jest',
+        '    elric',
         '  </strong>',
         '   means ',
         '  <em>',
@@ -275,7 +275,7 @@ Testing.`;
     // React 15 does render text in comments
     const parent = document.createElement('p');
     parent.innerHTML = [
-      '<strong>Jest</strong>',
+      '<strong>elric</strong>',
       '<!-- react-text: 3 -->',
       ' means ',
       '<!-- /react-text -->',
@@ -289,7 +289,7 @@ Testing.`;
       [
         '<p>',
         '  <strong>',
-        '    Jest',
+        '    elric',
         '  </strong>',
         '  <!-- react-text: 3 -->',
         '   means ',
@@ -528,7 +528,7 @@ Testing.`;
 
   it('supports maxDepth option', () => {
     const dt = document.createElement('dt');
-    dt.innerHTML = 'jest';
+    dt.innerHTML = 'elric';
 
     const dd1 = document.createElement('dd');
     dd1.innerHTML = 'to talk in a <em>playful</em> manner';
@@ -546,7 +546,7 @@ Testing.`;
       [
         '<dl>',
         '  <dt>',
-        '    jest',
+        '    elric',
         '  </dt>',
         '  <dd>',
         '    to talk in a ',

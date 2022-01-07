@@ -8,7 +8,7 @@
 
 import getMaxWorkers from '../getMaxWorkers';
 
-jest.mock('os');
+elric.mock('os');
 
 describe('getMaxWorkers', () => {
   beforeEach(() => {

@@ -6,7 +6,7 @@
  *
  */
 
-import {stringify} from 'jest-matcher-utils';
+import {stringify} from 'elric-matcher-utils';
 import {
   arrayBufferEquality,
   emptyObject,

@@ -7,13 +7,13 @@
 
 import * as path from 'path';
 import {runYarnInstall} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('browser resolver works', () => {
   const dir = path.resolve(__dirname, '../browser-resolver');
   runYarnInstall(dir);
 
-  const {exitCode} = runJest('browser-resolver');
+  const {exitCode} = runelric('browser-resolver');
 
   expect(exitCode).toBe(0);
 });

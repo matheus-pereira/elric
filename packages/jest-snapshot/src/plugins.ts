@@ -10,7 +10,7 @@ import {
   Plugins as PrettyFormatPlugins,
   plugins as prettyFormatPlugins,
 } from 'pretty-format';
-import jestMockSerializer from './mockSerializer';
+import elricMockSerializer from './mockSerializer';
 
 const {
   DOMCollection,
@@ -27,7 +27,7 @@ let PLUGINS: PrettyFormatPlugins = [
   DOMElement,
   DOMCollection,
   Immutable,
-  jestMockSerializer,
+  elricMockSerializer,
   AsymmetricMatcher,
 ];
 

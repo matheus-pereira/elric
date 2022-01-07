@@ -8,9 +8,9 @@
 /* eslint-disable local/ban-types-eventually, local/prefer-spread-eventually */
 
 import util = require('util');
-import {StackTraceConfig, formatStackTrace} from 'jest-message-util';
-import type {ModuleMocker} from 'jest-mock';
-import {setGlobal} from 'jest-util';
+import {StackTraceConfig, formatStackTrace} from 'elric-message-util';
+import type {ModuleMocker} from 'elric-mock';
+import {setGlobal} from 'elric-util';
 
 type Callback = (...args: Array<unknown>) => void;
 
@@ -227,7 +227,7 @@ export default class FakeTimers<TimerRef> {
   runOnlyPendingTimers(): void {
     // We need to hold the current shape of `this._timers` because existing
     // timers can add new ones to the map and hence would run more than necessary.
-    // See https://github.com/facebook/jest/pull/4608 for details
+    // See https://github.com/facebook/elric/pull/4608 for details
     const timerEntries = Array.from(this._timers.entries());
     this._checkFakeTimers();
     this._immediates.forEach(this._runImmediate, this);
@@ -399,12 +399,12 @@ export default class FakeTimers<TimerRef> {
     if (this._global.setTimeout !== this._fakeTimerAPIs?.setTimeout) {
       this._global.console.warn(
         `A function to advance timers was called but the timers API is not ` +
-          `mocked with fake timers. Call \`jest.useFakeTimers()\` in this ` +
+          `mocked with fake timers. Call \`elric.useFakeTimers()\` in this ` +
           `test or enable fake timers globally by setting ` +
           `\`"timers": "fake"\` in ` +
           `the configuration file. This warning is likely a result of a ` +
-          `default configuration change in Jest 15.\n\n` +
-          `Release Blog Post: https://jestjs.io/blog/2016/09/01/jest-15\n` +
+          `default configuration change in elric 15.\n\n` +
+          `Release Blog Post: https://elricjs.io/blog/2016/09/01/elric-15\n` +
           `Stack Trace:\n` +
           formatStackTrace(new Error().stack!, this._config, {
             noStackTrace: false,

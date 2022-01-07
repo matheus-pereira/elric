@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {isJestJasmineRun} from '@jest/test-utils';
-import {json as runWithJson} from '../runJest';
+import {iselricJasmineRun} from '@elric/test-utils';
+import {json as runWithJson} from '../runelric';
 
 it('defaults to null for location', () => {
   const {json: result} = runWithJson('location-in-results');
@@ -45,39 +45,39 @@ it('adds correct location info when provided with flag', () => {
   });
 
   expect(assertions[3].location).toEqual({
-    column: isJestJasmineRun() ? 22 : 1,
+    column: iselricJasmineRun() ? 22 : 1,
     line: 24,
   });
 
   expect(assertions[4].location).toEqual({
-    column: isJestJasmineRun() ? 22 : 1,
+    column: iselricJasmineRun() ? 22 : 1,
     line: 24,
   });
 
   // Technically the column should be 3, but callsites is not correct.
-  // jest-circus uses stack-utils + asyncErrors which resolves this.
+  // elric-circus uses stack-utils + asyncErrors which resolves this.
   expect(assertions[5].location).toEqual({
-    column: isJestJasmineRun() ? 2 : 3,
+    column: iselricJasmineRun() ? 2 : 3,
     line: 29,
   });
 
   expect(assertions[6].location).toEqual({
-    column: isJestJasmineRun() ? 2 : 3,
+    column: iselricJasmineRun() ? 2 : 3,
     line: 33,
   });
 
   expect(assertions[7].location).toEqual({
-    column: isJestJasmineRun() ? 2 : 3,
+    column: iselricJasmineRun() ? 2 : 3,
     line: 37,
   });
 
   expect(assertions[8].location).toEqual({
-    column: isJestJasmineRun() ? 24 : 3,
+    column: iselricJasmineRun() ? 24 : 3,
     line: 41,
   });
 
   expect(assertions[9].location).toEqual({
-    column: isJestJasmineRun() ? 24 : 3,
+    column: iselricJasmineRun() ? 24 : 3,
     line: 41,
   });
 });

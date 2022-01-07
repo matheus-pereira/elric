@@ -16,17 +16,17 @@ import {
   LogType,
   NullConsole,
   getConsoleOutput,
-} from '@jest/console';
-import type {JestEnvironment} from '@jest/environment';
-import type {TestFileEvent, TestResult} from '@jest/test-result';
-import {createScriptTransformer} from '@jest/transform';
-import type {Config} from '@jest/types';
-import * as docblock from 'jest-docblock';
-import LeakDetector from 'jest-leak-detector';
-import {formatExecError} from 'jest-message-util';
-import Resolver, {resolveTestEnvironment} from 'jest-resolve';
-import type RuntimeClass from 'jest-runtime';
-import {ErrorWithStack, interopRequireDefault, setGlobal} from 'jest-util';
+} from '@elric/console';
+import type {elricEnvironment} from '@elric/environment';
+import type {TestFileEvent, TestResult} from '@elric/test-result';
+import {createScriptTransformer} from '@elric/transform';
+import type {Config} from '@elric/types';
+import * as docblock from 'elric-docblock';
+import LeakDetector from 'elric-leak-detector';
+import {formatExecError} from 'elric-message-util';
+import Resolver, {resolveTestEnvironment} from 'elric-resolve';
+import type RuntimeClass from 'elric-runtime';
+import {ErrorWithStack, interopRequireDefault, setGlobal} from 'elric-util';
 import type {TestFramework, TestRunnerContext} from './types';
 
 type RunTestInternalResult = {
@@ -80,11 +80,11 @@ async function runTestInternal(
   config: Config.ProjectConfig,
   resolver: Resolver,
   context?: TestRunnerContext,
-  sendMessageToJest?: TestFileEvent,
+  sendMessageToelric?: TestFileEvent,
 ): Promise<RunTestInternalResult> {
   const testSource = fs.readFileSync(path, 'utf8');
   const docblockPragmas = docblock.parse(docblock.extract(testSource));
-  const customEnvironment = docblockPragmas['jest-environment'];
+  const customEnvironment = docblockPragmas['elric-environment'];
 
   let testEnvironment = config.testEnvironment;
 
@@ -106,18 +106,18 @@ async function runTestInternal(
   const cacheFS = new Map([[path, testSource]]);
   const transformer = await createScriptTransformer(config, cacheFS);
 
-  const TestEnvironment: typeof JestEnvironment =
+  const TestEnvironment: typeof elricEnvironment =
     await transformer.requireAndTranspileModule(testEnvironment);
   const testFramework: TestFramework =
     await transformer.requireAndTranspileModule(
-      process.env.JEST_JASMINE === '1'
-        ? require.resolve('jest-jasmine2')
+      process.env.elric_JASMINE === '1'
+        ? require.resolve('elric-jasmine2')
         : config.testRunner,
     );
   const Runtime: typeof RuntimeClass = interopRequireDefault(
     config.moduleLoader
       ? require(config.moduleLoader)
-      : require('jest-runtime'),
+      : require('elric-runtime'),
   ).default;
 
   const consoleOut = globalConfig.useStderr ? process.stderr : process.stdout;
@@ -147,7 +147,7 @@ async function runTestInternal(
 
   if (typeof environment.getVmContext !== 'function') {
     console.error(
-      `Test environment found at "${testEnvironment}" does not export a "getVmContext" method, which is mandatory from Jest 27. This method is a replacement for "runScript".`,
+      `Test environment found at "${testEnvironment}" does not export a "getVmContext" method, which is mandatory from elric 27. This method is a replacement for "runScript".`,
     );
     process.exit(1);
   }
@@ -268,7 +268,7 @@ async function runTestInternal(
         environment,
         runtime,
         path,
-        sendMessageToJest,
+        sendMessageToelric,
       );
     } catch (err: any) {
       // Access stack before uninstalling sourcemaps
@@ -342,7 +342,7 @@ export default async function runTest(
   config: Config.ProjectConfig,
   resolver: Resolver,
   context?: TestRunnerContext,
-  sendMessageToJest?: TestFileEvent,
+  sendMessageToelric?: TestFileEvent,
 ): Promise<TestResult> {
   const {leakDetector, result} = await runTestInternal(
     path,
@@ -350,7 +350,7 @@ export default async function runTest(
     config,
     resolver,
     context,
-    sendMessageToJest,
+    sendMessageToelric,
   );
 
   if (leakDetector) {

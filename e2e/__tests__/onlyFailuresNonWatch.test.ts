@@ -9,7 +9,7 @@ import {tmpdir} from 'os';
 import * as path from 'path';
 import * as fs from 'graceful-fs';
 import {cleanup, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(tmpdir(), 'non-watch-mode-onlyFailures');
 
@@ -25,7 +25,7 @@ test('onlyFailures flag works in non-watch mode', () => {
     test('foo', () => { expect('foo').toBe('foo'); });
     `,
     'package.json': JSON.stringify({
-      jest: {
+      elric: {
         testEnvironment: 'node',
       },
     }),
@@ -33,13 +33,13 @@ test('onlyFailures flag works in non-watch mode', () => {
 
   let stdout, stderr;
 
-  ({stdout, stderr} = runJest(DIR));
+  ({stdout, stderr} = runelric(DIR));
   expect(stdout).toBe('');
   expect(stderr).toMatch('FAIL __tests__/a.js');
   expect(stderr).toMatch('PASS __tests__/b.js');
 
   // only the failed test should run and it should fail
-  ({stdout, stderr} = runJest(DIR, ['--onlyFailures']));
+  ({stdout, stderr} = runelric(DIR, ['--onlyFailures']));
   expect(stdout).toBe('');
   expect(stderr).toMatch('FAIL __tests__/a.js');
   expect(stderr).not.toMatch('__tests__/b.js');
@@ -49,13 +49,13 @@ test('onlyFailures flag works in non-watch mode', () => {
   fs.writeFileSync(path.join(DIR, '__tests__/a.js'), data);
 
   // only the failed test should run and it should pass
-  ({stdout, stderr} = runJest(DIR, ['--onlyFailures']));
+  ({stdout, stderr} = runelric(DIR, ['--onlyFailures']));
   expect(stdout).toBe('');
   expect(stderr).toMatch('PASS __tests__/a.js');
   expect(stderr).not.toMatch('__tests__/b.js');
 
   // No test should run
-  ({stdout, stderr} = runJest(DIR, ['--onlyFailures']));
+  ({stdout, stderr} = runelric(DIR, ['--onlyFailures']));
   expect(stdout).toBe('No failed test found.');
   expect(stderr).toBe('');
 });

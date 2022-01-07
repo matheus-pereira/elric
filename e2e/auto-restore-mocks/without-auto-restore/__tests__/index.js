@@ -11,7 +11,7 @@ const TestClass = require('../');
 const localClass = new TestClass();
 
 describe('without an explicit restore', () => {
-  jest.spyOn(localClass, 'test').mockImplementation(() => 'ABCD');
+  elric.spyOn(localClass, 'test').mockImplementation(() => 'ABCD');
 
   test('first test', () => {
     expect(localClass.test()).toEqual('ABCD');
@@ -26,11 +26,11 @@ describe('without an explicit restore', () => {
 
 describe('with an explicit restore', () => {
   beforeEach(() => {
-    jest.restoreAllMocks();
+    elric.restoreAllMocks();
   });
 
   test('first test', () => {
-    jest.spyOn(localClass, 'test').mockImplementation(() => 'ABCD');
+    elric.spyOn(localClass, 'test').mockImplementation(() => 'ABCD');
     expect(localClass.test()).toEqual('ABCD');
     expect(localClass.test).toHaveBeenCalledTimes(1);
   });

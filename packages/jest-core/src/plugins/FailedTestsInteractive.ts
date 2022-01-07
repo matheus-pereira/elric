@@ -5,21 +5,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {AggregatedResult, AssertionLocation} from '@jest/test-result';
-import type {Config} from '@jest/types';
+import type {AggregatedResult, AssertionLocation} from '@elric/test-result';
+import type {Config} from '@elric/types';
 import {
   BaseWatchPlugin,
-  JestHookSubscriber,
+  elricHookSubscriber,
   UpdateConfigCallback,
   UsageData,
-} from 'jest-watcher';
+} from 'elric-watcher';
 import FailedTestsInteractiveMode from '../FailedTestsInteractiveMode';
 
 export default class FailedTestsInteractivePlugin extends BaseWatchPlugin {
   private _failedTestAssertions?: Array<AssertionLocation>;
   private readonly _manager = new FailedTestsInteractiveMode(this._stdout);
 
-  apply(hooks: JestHookSubscriber): void {
+  apply(hooks: elricHookSubscriber): void {
     hooks.onTestRunComplete(results => {
       this._failedTestAssertions = this.getFailedTestAssertions(results);
 

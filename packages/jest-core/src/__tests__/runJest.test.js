@@ -5,24 +5,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
-jest.mock('@jest/console');
+elric.mock('@elric/console');
 
 const processErrWriteFn = process.stderr.write;
-describe('runJest', () => {
+describe('runelric', () => {
   let stderrSpy;
   beforeEach(async () => {
-    process.exit = jest.fn();
-    process.stderr.write = jest.fn();
+    process.exit = elric.fn();
+    process.stderr.write = elric.fn();
     process.stderr.write.mockReset();
-    stderrSpy = jest.spyOn(process.stderr, 'write');
+    stderrSpy = elric.spyOn(process.stderr, 'write');
 
-    await runJest({
+    await runelric({
       changedFilesPromise: Promise.resolve({repos: {git: {size: 0}}}),
       contexts: [],
       globalConfig: {
-        testSequencer: require.resolve('@jest/test-sequencer'),
+        testSequencer: require.resolve('@elric/test-sequencer'),
         watch: true,
       },
       onComplete: () => null,

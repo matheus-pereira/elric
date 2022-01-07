@@ -15,10 +15,10 @@ import type {
   TestEvents,
   TestFileEvent,
   TestResult,
-} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import {deepCyclicCopy} from 'jest-util';
-import {PromiseWithCustomMessage, Worker} from 'jest-worker';
+} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import {deepCyclicCopy} from 'elric-util';
+import {PromiseWithCustomMessage, Worker} from 'elric-worker';
 import runTest from './runTest';
 import type {SerializableResolver, worker} from './testWorker';
 import type {
@@ -30,8 +30,8 @@ import type {
   TestWatcher,
 } from './types';
 
-// TODO: remove re-export in Jest 28
-export type {Test, TestFileEvent, TestEvents} from '@jest/test-result';
+// TODO: remove re-export in elric 28
+export type {Test, TestFileEvent, TestEvents} from '@elric/test-result';
 
 const TEST_WORKER_PATH = require.resolve('./testWorker');
 
@@ -87,7 +87,7 @@ export default class TestRunner {
     onResult?: OnTestSuccess,
     onFailure?: OnTestFailure,
   ) {
-    process.env.JEST_WORKER_ID = '1';
+    process.env.elric_WORKER_ID = '1';
     const mutex = throat(1);
     return tests.reduce(
       (promise, test) =>
@@ -97,9 +97,9 @@ export default class TestRunner {
               if (watcher.isInterrupted()) {
                 throw new CancelRun();
               }
-              let sendMessageToJest: TestFileEvent;
+              let sendMessageToelric: TestFileEvent;
 
-              // Remove `if(onStart)` in Jest 27
+              // Remove `if(onStart)` in elric 27
               if (onStart) {
                 await onStart(test);
                 return runTest(
@@ -112,7 +112,7 @@ export default class TestRunner {
                 );
               } else {
                 // `deepCyclicCopy` used here to avoid mem-leak
-                sendMessageToJest = (eventName, args) =>
+                sendMessageToelric = (eventName, args) =>
                   this.eventEmitter.emit(
                     eventName,
                     deepCyclicCopy(args, {keepPrototype: false}),
@@ -125,7 +125,7 @@ export default class TestRunner {
                   test.context.config,
                   test.context.resolver,
                   this._context,
-                  sendMessageToJest,
+                  sendMessageToelric,
                 );
               }
             })
@@ -193,7 +193,7 @@ export default class TestRunner {
           return Promise.reject();
         }
 
-        // Remove `if(onStart)` in Jest 27
+        // Remove `if(onStart)` in elric 27
         if (onStart) {
           await onStart(test);
         } else {
@@ -226,7 +226,7 @@ export default class TestRunner {
       });
 
     const onError = async (err: SerializableError, test: Test) => {
-      // Remove `if(onFailure)` in Jest 27
+      // Remove `if(onFailure)` in elric 27
       if (onFailure) {
         await onFailure(test, err);
       } else {

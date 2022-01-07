@@ -11,13 +11,13 @@ import type {
   SerializableError,
   TestFileEvent,
   TestResult,
-} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import HasteMap, {SerializableModuleMap} from 'jest-haste-map';
-import {separateMessageFromStack} from 'jest-message-util';
-import type Resolver from 'jest-resolve';
-import Runtime from 'jest-runtime';
-import {messageParent} from 'jest-worker';
+} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import HasteMap, {SerializableModuleMap} from 'elric-haste-map';
+import {separateMessageFromStack} from 'elric-message-util';
+import type Resolver from 'elric-resolve';
+import Runtime from 'elric-runtime';
+import {messageParent} from 'elric-worker';
 import runTest from './runTest';
 import type {ErrorWithCode, TestRunnerSerializedContext} from './types';
 
@@ -81,7 +81,7 @@ export function setup(setupData: {
   }
 }
 
-const sendMessageToJest: TestFileEvent = (eventName, args) => {
+const sendMessageToelric: TestFileEvent = (eventName, args) => {
   messageParent([eventName, args]);
 };
 
@@ -104,7 +104,7 @@ export async function worker({
           context.sourcesRelatedToTestsInChangedFiles &&
           new Set(context.sourcesRelatedToTestsInChangedFiles),
       },
-      sendMessageToJest,
+      sendMessageToelric,
     );
   } catch (error: any) {
     throw formatError(error);

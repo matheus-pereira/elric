@@ -1,11 +1,11 @@
-# babel-plugin-jest-hoist
+# babel-plugin-elric-hoist
 
-Babel plugin to hoist `jest.disableAutomock`, `jest.enableAutomock`, `jest.unmock`, `jest.mock`, calls above `import` statements. This plugin is automatically included when using [babel-jest](https://github.com/facebook/jest/tree/main/packages/babel-jest).
+Babel plugin to hoist `elric.disableAutomock`, `elric.enableAutomock`, `elric.unmock`, `elric.mock`, calls above `import` statements. This plugin is automatically included when using [babel-elric](https://github.com/facebook/elric/tree/main/packages/babel-elric).
 
 ## Installation
 
 ```sh
-$ yarn add --dev babel-plugin-jest-hoist
+$ yarn add --dev babel-plugin-elric-hoist
 ```
 
 ## Usage
@@ -14,20 +14,20 @@ $ yarn add --dev babel-plugin-jest-hoist
 
 ```js
 module.exports = {
-  plugins: ['jest-hoist'],
+  plugins: ['elric-hoist'],
 };
 ```
 
 ### Via CLI
 
 ```sh
-$ babel --plugins jest-hoist script.js
+$ babel --plugins elric-hoist script.js
 ```
 
 ### Via Node API
 
 ```javascript
 require('@babel/core').transform('code', {
-  plugins: ['jest-hoist'],
+  plugins: ['elric-hoist'],
 });
 ```

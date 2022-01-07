@@ -33,7 +33,7 @@ describe('Runtime', () => {
       expect(origModuleStateValue).toBe('default');
 
       // Generate a mock for a module with side effects
-      const mock = module.jest.createMockFromModule('ModuleWithSideEffects');
+      const mock = module.elric.createMockFromModule('ModuleWithSideEffects');
 
       // Make sure we get a mock.
       expect(mock.fn()).toBe(undefined);
@@ -43,7 +43,7 @@ describe('Runtime', () => {
     it('resolves mapped modules correctly', async () => {
       const runtime = await createRuntime(__filename, {moduleNameMapper});
       const root = runtime.requireModule(runtime.__mockRootPath);
-      const mockModule = root.jest.createMockFromModule(
+      const mockModule = root.elric.createMockFromModule(
         'module/name/createMockFromModule',
       );
 
@@ -59,7 +59,7 @@ describe('Runtime', () => {
     );
 
     const module = testRequire('RegularModule');
-    const mockModule = module.jest.createMockFromModule('RegularModule');
+    const mockModule = module.elric.createMockFromModule('RegularModule');
     const testObjectPrototype = Object.getPrototypeOf(module.object);
     const mockObjectPrototype = Object.getPrototypeOf(mockModule.object);
     expect(mockObjectPrototype).toBe(testObjectPrototype);

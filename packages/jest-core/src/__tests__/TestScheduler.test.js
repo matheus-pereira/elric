@@ -6,28 +6,28 @@
  *
  */
 
-import {SummaryReporter} from '@jest/reporters';
-import {makeProjectConfig} from '@jest/test-utils';
+import {SummaryReporter} from '@elric/reporters';
+import {makeProjectConfig} from '@elric/test-utils';
 import {createTestScheduler} from '../TestScheduler';
 import * as testSchedulerHelper from '../testSchedulerHelper';
 
-jest.mock('@jest/reporters');
+elric.mock('@elric/reporters');
 const mockSerialRunner = {
   isSerial: true,
-  runTests: jest.fn(),
+  runTests: elric.fn(),
 };
-jest.mock('jest-runner-serial', () => jest.fn(() => mockSerialRunner), {
+elric.mock('elric-runner-serial', () => elric.fn(() => mockSerialRunner), {
   virtual: true,
 });
 
 const mockParallelRunner = {
-  runTests: jest.fn(),
+  runTests: elric.fn(),
 };
-jest.mock('jest-runner-parallel', () => jest.fn(() => mockParallelRunner), {
+elric.mock('elric-runner-parallel', () => elric.fn(() => mockParallelRunner), {
   virtual: true,
 });
 
-const spyShouldRunInBand = jest.spyOn(testSchedulerHelper, 'shouldRunInBand');
+const spyShouldRunInBand = elric.spyOn(testSchedulerHelper, 'shouldRunInBand');
 
 beforeEach(() => {
   mockSerialRunner.runTests.mockClear();
@@ -89,18 +89,18 @@ test('schedule tests run in parallel per default', async () => {
     context: {
       config: makeProjectConfig({
         moduleFileExtensions: ['.js'],
-        runner: 'jest-runner-parallel',
+        runner: 'elric-runner-parallel',
         transform: [],
       }),
       hasteFS: {
-        matchFiles: jest.fn(() => []),
+        matchFiles: elric.fn(() => []),
       },
     },
     path: './test/path.js',
   };
   const tests = [test, test];
 
-  await scheduler.scheduleTests(tests, {isInterrupted: jest.fn()});
+  await scheduler.scheduleTests(tests, {isInterrupted: elric.fn()});
 
   expect(mockParallelRunner.runTests).toHaveBeenCalled();
   expect(mockParallelRunner.runTests.mock.calls[0][5].serial).toBeFalsy();
@@ -112,18 +112,18 @@ test('schedule tests run in serial if the runner flags them', async () => {
     context: {
       config: makeProjectConfig({
         moduleFileExtensions: ['.js'],
-        runner: 'jest-runner-serial',
+        runner: 'elric-runner-serial',
         transform: [],
       }),
       hasteFS: {
-        matchFiles: jest.fn(() => []),
+        matchFiles: elric.fn(() => []),
       },
     },
     path: './test/path.js',
   };
 
   const tests = [test, test];
-  await scheduler.scheduleTests(tests, {isInterrupted: jest.fn()});
+  await scheduler.scheduleTests(tests, {isInterrupted: elric.fn()});
 
   expect(mockSerialRunner.runTests).toHaveBeenCalled();
   expect(mockSerialRunner.runTests.mock.calls[0][5].serial).toBeTruthy();
@@ -136,20 +136,20 @@ test('should bail after `n` failures', async () => {
       config: makeProjectConfig({
         moduleFileExtensions: ['.js'],
         rootDir: './',
-        runner: 'jest-runner-serial',
+        runner: 'elric-runner-serial',
         transform: [],
       }),
       hasteFS: {
-        matchFiles: jest.fn(() => []),
+        matchFiles: elric.fn(() => []),
       },
     },
     path: './test/path.js',
   };
 
   const tests = [test];
-  const setState = jest.fn();
+  const setState = elric.fn();
   await scheduler.scheduleTests(tests, {
-    isInterrupted: jest.fn(),
+    isInterrupted: elric.fn(),
     isWatchMode: () => true,
     setState,
   });
@@ -168,20 +168,20 @@ test('should not bail if less than `n` failures', async () => {
       config: makeProjectConfig({
         moduleFileExtensions: ['.js'],
         rootDir: './',
-        runner: 'jest-runner-serial',
+        runner: 'elric-runner-serial',
         transform: [],
       }),
       hasteFS: {
-        matchFiles: jest.fn(() => []),
+        matchFiles: elric.fn(() => []),
       },
     },
     path: './test/path.js',
   };
 
   const tests = [test];
-  const setState = jest.fn();
+  const setState = elric.fn();
   await scheduler.scheduleTests(tests, {
-    isInterrupted: jest.fn(),
+    isInterrupted: elric.fn(),
     isWatchMode: () => true,
     setState,
   });
@@ -199,11 +199,11 @@ test('should set runInBand to run in serial', async () => {
     context: {
       config: makeProjectConfig({
         moduleFileExtensions: ['.js'],
-        runner: 'jest-runner-parallel',
+        runner: 'elric-runner-parallel',
         transform: [],
       }),
       hasteFS: {
-        matchFiles: jest.fn(() => []),
+        matchFiles: elric.fn(() => []),
       },
     },
     path: './test/path.js',
@@ -212,7 +212,7 @@ test('should set runInBand to run in serial', async () => {
 
   spyShouldRunInBand.mockReturnValue(true);
 
-  await scheduler.scheduleTests(tests, {isInterrupted: jest.fn()});
+  await scheduler.scheduleTests(tests, {isInterrupted: elric.fn()});
 
   expect(spyShouldRunInBand).toHaveBeenCalled();
   expect(mockParallelRunner.runTests).toHaveBeenCalled();
@@ -225,11 +225,11 @@ test('should set runInBand to not run in serial', async () => {
     context: {
       config: makeProjectConfig({
         moduleFileExtensions: ['.js'],
-        runner: 'jest-runner-parallel',
+        runner: 'elric-runner-parallel',
         transform: [],
       }),
       hasteFS: {
-        matchFiles: jest.fn(() => []),
+        matchFiles: elric.fn(() => []),
       },
     },
     path: './test/path.js',
@@ -238,7 +238,7 @@ test('should set runInBand to not run in serial', async () => {
 
   spyShouldRunInBand.mockReturnValue(false);
 
-  await scheduler.scheduleTests(tests, {isInterrupted: jest.fn()});
+  await scheduler.scheduleTests(tests, {isInterrupted: elric.fn()});
 
   expect(spyShouldRunInBand).toHaveBeenCalled();
   expect(mockParallelRunner.runTests).toHaveBeenCalled();

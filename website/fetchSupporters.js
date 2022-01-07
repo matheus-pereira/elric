@@ -14,7 +14,7 @@ const {gql, request} = require('graphql-request');
 
 const graphqlQuery = gql`
   {
-    account(slug: "jest") {
+    account(slug: "elric") {
       orders(status: ACTIVE, limit: 1000) {
         nodes {
           tier {

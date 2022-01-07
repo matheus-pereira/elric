@@ -11,54 +11,54 @@ import {Writable} from 'stream';
 import execa = require('execa');
 import * as fs from 'graceful-fs';
 import stripAnsi = require('strip-ansi');
-import type {FormattedTestResults} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import {ErrorWithStack} from 'jest-util';
+import type {FormattedTestResults} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import {ErrorWithStack} from 'elric-util';
 import {normalizeIcons} from './Utils';
 
-const JEST_PATH = path.resolve(__dirname, '../packages/jest-cli/bin/jest.js');
+const elric_PATH = path.resolve(__dirname, '../packages/elric-cli/bin/elric.js');
 
-type RunJestOptions = {
+type RunelricOptions = {
   nodeOptions?: string;
   nodePath?: string;
   skipPkgJsonCheck?: boolean; // don't complain if can't find package.json
   stripAnsi?: boolean; // remove colors from stdout and stderr,
-  timeout?: number; // kill the Jest process after X milliseconds
+  timeout?: number; // kill the elric process after X milliseconds
   env?: NodeJS.ProcessEnv;
 };
 
 // return the result of the spawned process:
 //  [ 'status', 'signal', 'output', 'pid', 'stdout', 'stderr',
 //    'envPairs', 'options', 'args', 'file' ]
-export default function runJest(
+export default function runelric(
   dir: string,
   args?: Array<string>,
-  options: RunJestOptions = {},
-): RunJestResult {
+  options: RunelricOptions = {},
+): RunelricResult {
   return normalizeStdoutAndStderrOnResult(
-    spawnJest(dir, args, options),
+    spawnelric(dir, args, options),
     options,
   );
 }
 
-function spawnJest(
+function spawnelric(
   dir: string,
   args?: Array<string>,
-  options?: RunJestOptions,
+  options?: RunelricOptions,
   spawnAsync?: false,
-): RunJestResult;
-function spawnJest(
+): RunelricResult;
+function spawnelric(
   dir: string,
   args?: Array<string>,
-  options?: RunJestOptions,
+  options?: RunelricOptions,
   spawnAsync?: true,
 ): execa.ExecaChildProcess;
 
-// Spawns Jest and returns either a Promise (if spawnAsync is true) or the completed child process
-function spawnJest(
+// Spawns elric and returns either a Promise (if spawnAsync is true) or the completed child process
+function spawnelric(
   dir: string,
   args: Array<string> = [],
-  options: RunJestOptions = {},
+  options: RunelricOptions = {},
   spawnAsync = false,
 ): execa.ExecaSyncReturnValue | execa.ExecaChildProcess {
   const isRelative = !path.isAbsolute(dir);
@@ -73,8 +73,8 @@ function spawnJest(
       `
       Make sure you have a local package.json file at
         "${localPackageJson}".
-      Otherwise Jest will try to traverse the directory tree and find the
-      global package.json, which will send Jest into infinite loop.
+      Otherwise elric will try to traverse the directory tree and find the
+      global package.json, which will send elric into infinite loop.
     `,
     );
   }
@@ -87,7 +87,7 @@ function spawnJest(
   if (options.nodeOptions) env['NODE_OPTIONS'] = options.nodeOptions;
   if (options.nodePath) env['NODE_PATH'] = options.nodePath;
 
-  const spawnArgs = [JEST_PATH, ...args];
+  const spawnArgs = [elric_PATH, ...args];
   const spawnOptions: execa.CommonOptions<string> = {
     cwd: dir,
     env,
@@ -102,15 +102,15 @@ function spawnJest(
   );
 }
 
-export type RunJestResult = execa.ExecaReturnValue;
+export type RunelricResult = execa.ExecaReturnValue;
 
-export interface RunJestJsonResult extends RunJestResult {
+export interface RunelricJsonResult extends RunelricResult {
   json: FormattedTestResults;
 }
 
 function normalizeStreamString(
   stream: string,
-  options: RunJestOptions,
+  options: RunelricOptions,
 ): string {
   if (options.stripAnsi) stream = stripAnsi(stream);
   stream = normalizeIcons(stream);
@@ -119,26 +119,26 @@ function normalizeStreamString(
 }
 
 function normalizeStdoutAndStderrOnResult(
-  result: RunJestResult,
-  options: RunJestOptions,
-): RunJestResult {
+  result: RunelricResult,
+  options: RunelricOptions,
+): RunelricResult {
   const stdout = normalizeStreamString(result.stdout, options);
   const stderr = normalizeStreamString(result.stderr, options);
 
   return {...result, stderr, stdout};
 }
 
-// Runs `jest` with `--json` option and adds `json` property to the result obj.
+// Runs `elric` with `--json` option and adds `json` property to the result obj.
 //   'success', 'startTime', 'numTotalTests', 'numTotalTestSuites',
 //   'numRuntimeErrorTestSuites', 'numPassedTests', 'numFailedTests',
 //   'numPendingTests', 'testResults'
 export const json = function (
   dir: string,
   args?: Array<string>,
-  options: RunJestOptions = {},
-): RunJestJsonResult {
+  options: RunelricOptions = {},
+): RunelricJsonResult {
   args = [...(args || []), '--json'];
-  const result = runJest(dir, args, options);
+  const result = runelric(dir, args, options);
   try {
     return {
       ...result,
@@ -160,21 +160,21 @@ type StdErrAndOutString = {stderr: string; stdout: string};
 type ConditionFunction = (arg: StdErrAndOutString) => boolean;
 type CheckerFunction = (arg: StdErrAndOutString) => void;
 
-// Runs `jest` continously (watch mode) and allows the caller to wait for
+// Runs `elric` continously (watch mode) and allows the caller to wait for
 // conditions on stdout and stderr and to end the process.
 export const runContinuous = function (
   dir: string,
   args?: Array<string>,
-  options: RunJestOptions = {},
+  options: RunelricOptions = {},
 ) {
-  const jestPromise = spawnJest(dir, args, {timeout: 30000, ...options}, true);
+  const elricPromise = spawnelric(dir, args, {timeout: 30000, ...options}, true);
 
   let stderr = '';
   let stdout = '';
   const pending = new Set<CheckerFunction>();
   const pendingRejection = new WeakMap<CheckerFunction, () => void>();
 
-  jestPromise.addListener('exit', () => {
+  elricPromise.addListener('exit', () => {
     for (const fn of pending) {
       const reject = pendingRejection.get(fn);
 
@@ -193,7 +193,7 @@ export const runContinuous = function (
     }
   };
 
-  jestPromise.stdout!.pipe(
+  elricPromise.stdout!.pipe(
     new Writable({
       write(chunk, _encoding, callback) {
         stdout += chunk.toString('utf8');
@@ -203,7 +203,7 @@ export const runContinuous = function (
     }),
   );
 
-  jestPromise.stderr!.pipe(
+  elricPromise.stderr!.pipe(
     new Writable({
       write(chunk, _encoding, callback) {
         stderr += chunk.toString('utf8');
@@ -215,9 +215,9 @@ export const runContinuous = function (
 
   const continuousRun = {
     async end() {
-      jestPromise.kill();
+      elricPromise.kill();
 
-      const result = await jestPromise;
+      const result = await elricPromise;
 
       // Not sure why we have to assign here... The ones on `result` are empty strings
       result.stdout = stdout;
@@ -231,7 +231,7 @@ export const runContinuous = function (
     },
 
     getInput() {
-      return jestPromise.stdin;
+      return elricPromise.stdin;
     },
 
     async waitUntil(fn: ConditionFunction) {
@@ -260,13 +260,13 @@ export const runContinuous = function (
 export function getConfig(
   dir: string,
   args: Array<string> = [],
-  options?: RunJestOptions,
+  options?: RunelricOptions,
 ): {
   globalConfig: Config.GlobalConfig;
   configs: Array<Config.ProjectConfig>;
   version: string;
 } {
-  const {exitCode, stdout} = runJest(
+  const {exitCode, stdout} = runelric(
     dir,
     args.concat('--show-config'),
     options,

@@ -1,6 +1,6 @@
 # How to Contribute
 
-Jest is one of Facebook's open source projects that is both under very active development and is also being used to ship code to everybody on [facebook.com](https://www.facebook.com). We're still working out the kinks to make contributing to this project as easy and transparent as possible, but we're not quite there yet. Hopefully this document makes the process for contributing clear and answers some questions that you may have.
+elric is one of Facebook's open source projects that is both under very active development and is also being used to ship code to everybody on [facebook.com](https://www.facebook.com). We're still working out the kinks to make contributing to this project as easy and transparent as possible, but we're not quite there yet. Hopefully this document makes the process for contributing clear and answers some questions that you may have.
 
 ## [Code of Conduct](https://code.facebook.com/codeofconduct)
 
@@ -8,7 +8,7 @@ Facebook has adopted a Code of Conduct that we expect project participants to ad
 
 ## Open Development
 
-All work on Jest happens directly on [GitHub](/). Both core team members and external contributors send pull requests which go through the same review process.
+All work on elric happens directly on [GitHub](/). Both core team members and external contributors send pull requests which go through the same review process.
 
 ### `main` is unsafe
 
@@ -25,14 +25,14 @@ _Before_ submitting a pull request, please make sure the following is done…
     Open terminal (e.g. Terminal, iTerm, Git Bash or Git Shell) and type:
 
     ```sh-session
-    $ git clone https://github.com/<your_username>/jest
-    $ cd jest
+    $ git clone https://github.com/<your_username>/elric
+    $ cd elric
     $ git checkout -b my_branch
     ```
 
     Note: Replace `<your_username>` with your GitHub username
 
-1.  Jest uses [Yarn](https://code.facebook.com/posts/1840075619545360) for running development scripts. If you haven't already done so, please [install yarn](https://yarnpkg.com/en/docs/install).
+1.  elric uses [Yarn](https://code.facebook.com/posts/1840075619545360) for running development scripts. If you haven't already done so, please [install yarn](https://yarnpkg.com/en/docs/install).
 
 1.  Make sure you have `python` installed. Python is required by [node-gyp](https://github.com/nodejs/node-gyp) that is used when running `yarn install`.
 
@@ -81,7 +81,7 @@ _Before_ submitting a pull request, please make sure the following is done…
 
 1.  If you've changed APIs, update the documentation.
 
-1.  Ensure the test suite passes via `yarn jest`. To run the test suite you may need to install [Mercurial](https://www.mercurial-scm.org/) (`hg`). On macOS, this can be done using [homebrew](http://brew.sh/): `brew install hg`.
+1.  Ensure the test suite passes via `yarn elric`. To run the test suite you may need to install [Mercurial](https://www.mercurial-scm.org/) (`hg`). On macOS, this can be done using [homebrew](http://brew.sh/): `brew install hg`.
 
     ```sh-session
     $ brew install hg # maybe
@@ -92,7 +92,7 @@ _Before_ submitting a pull request, please make sure the following is done…
 
 #### Changelog entries
 
-All changes that add a feature to or fix a bug in any of Jest's packages require a changelog entry containing the names of the packages affected, a description of the change, and the number of and link to the pull request. Try to match the structure of the existing entries.
+All changes that add a feature to or fix a bug in any of elric's packages require a changelog entry containing the names of the packages affected, a description of the change, and the number of and link to the pull request. Try to match the structure of the existing entries.
 
 For significant changes to the documentation or website and things like cleanup, refactoring, and dependency updates, the "Chore & Maintenance" section of the changelog can be used.
 
@@ -106,17 +106,17 @@ Code that is written needs to be tested to ensure that it achieves the desired b
 
 ##### Unit tests
 
-Some of the packages within jest have a `__tests__` directory. This is where unit tests reside in. If the scope of your work only requires a unit test, this is where you will write it in. Tests here usually don't require much if any setup.
+Some of the packages within elric have a `__tests__` directory. This is where unit tests reside in. If the scope of your work only requires a unit test, this is where you will write it in. Tests here usually don't require much if any setup.
 
 ##### Integration tests
 
-There will be situations however where the work you have done cannot be tested alone using unit tests. In situations like this, you should write an integration test for your code. The integration tests reside within the `e2e` directory. Within this directory, there is a `__tests__` directory. This is where you will write the integration test itself. The tests within this directory execute jest itself using `runJest.js` and assertions are usually made on one if not all the output of the following `status`, `stdout` and `stderr`. The other sub directories within the `e2e` directory are where you will write the files that jest will run for your integration tests. Feel free to take a look at any of the tests in the `__tests__` directory within `e2e` to have a better sense of how it is currently being done.
+There will be situations however where the work you have done cannot be tested alone using unit tests. In situations like this, you should write an integration test for your code. The integration tests reside within the `e2e` directory. Within this directory, there is a `__tests__` directory. This is where you will write the integration test itself. The tests within this directory execute elric itself using `runelric.js` and assertions are usually made on one if not all the output of the following `status`, `stdout` and `stderr`. The other sub directories within the `e2e` directory are where you will write the files that elric will run for your integration tests. Feel free to take a look at any of the tests in the `__tests__` directory within `e2e` to have a better sense of how it is currently being done.
 
 It is possible to run the integration test itself manually to inspect that the new behaviour is indeed correct. Here is a small code snippet of how to do just that. This is useful when debugging a failing test.
 
 ```bash
 $ cd e2e/clear-cache
-$ node ../../packages/jest-cli/bin/jest.js # It is possible to use node --inspect or ndb
+$ node ../../packages/elric-cli/bin/elric.js # It is possible to use node --inspect or ndb
 PASS  __tests__/clear_cache.test.js
 ✓ stub (3ms)
 
@@ -127,12 +127,12 @@ Time:        0.232 s, estimated 1 s
 Ran all test suites.
 ```
 
-##### Using jest-circus
+##### Using elric-circus
 
-There may be cases where you want to run jest using `jest-circus` instead of `jest-jasmine2` (which is the default runner) for integration testing. In situations like this, set the environment variable `JEST_CIRCUS` to 1. That will configure jest to use `jest-circus`. So something like this.
+There may be cases where you want to run elric using `elric-circus` instead of `elric-jasmine2` (which is the default runner) for integration testing. In situations like this, set the environment variable `elric_CIRCUS` to 1. That will configure elric to use `elric-circus`. So something like this.
 
 ```bash
-JEST_CIRCUS=1 yarn jest
+elric_CIRCUS=1 yarn elric
 ```
 
 #### Additional Workflow for any changes made to website or docs
@@ -148,7 +148,7 @@ If you are making changes to the website or documentation, test the website fold
     ```
 1.  You can run a development server to check if the changes you made are being displayed accurately by running `yarn start` in the website directory.
 
-The Jest website also offers documentation for older versions of Jest, which you can edit in `website/versioned_docs`. After making changes to the current documentation in `docs`, please check if any older versions of the documentation have a copy of the file where the change is also relevant and apply the changes to the `versioned_docs` as well.
+The elric website also offers documentation for older versions of elric, which you can edit in `website/versioned_docs`. After making changes to the current documentation in `docs`, please check if any older versions of the documentation have a copy of the file where the change is also relevant and apply the changes to the `versioned_docs` as well.
 
 ### Contributor License Agreement (CLA)
 
@@ -156,28 +156,28 @@ In order to accept your pull request, we need you to submit a CLA. You only need
 
 [Complete your CLA here.](https://code.facebook.com/cla)
 
-## How to try a development build of Jest in another project
+## How to try a development build of elric in another project
 
-To build Jest:
+To build elric:
 
 ```sh-session
-$ cd /path/to/your/Jest_clone
+$ cd /path/to/your/elric_clone
 
 # Do one of the following:
 
 # Check out a commit from another contributor, and then
 $ yarn run build
 
-# Or, save your changes to Jest, and then
-$ yarn test # which also builds Jest
+# Or, save your changes to elric, and then
+$ yarn test # which also builds elric
 ```
 
-To run tests in another project with the development build of Jest:
+To run tests in another project with the development build of elric:
 
 ```sh-session
 $ cd /path/to/another/project
 
-$ node /path/to/your/JestClone/packages/jest/bin/jest [options] # run jest-cli/bin/jest.js in the development build
+$ node /path/to/your/elricClone/packages/elric/bin/elric [options] # run elric-cli/bin/elric.js in the development build
 ```
 
 - To decide whether to specify any options, see `test` under `scripts` in the `package.json` file of the other project.
@@ -194,7 +194,7 @@ The best way to get your bug fixed is to provide a reduced test case. Please pro
 
 ### Docs translation
 
-We get translations from Crowdin, see https://crowdin.com/project/jest-v2. Any and all help is very much appreciated!
+We get translations from Crowdin, see https://crowdin.com/project/elric-v2. Any and all help is very much appreciated!
 
 ### Security Bugs
 
@@ -219,20 +219,20 @@ Facebook has a [bounty program](https://www.facebook.com/whitehat/) for the safe
 
 This project exists thanks to all the people who [contribute](CONTRIBUTING.md).
 
-<a href="graphs/contributors"><img src="https://opencollective.com/jest/contributors.svg?width=890&button=false" /></a>
+<a href="graphs/contributors"><img src="https://opencollective.com/elric/contributors.svg?width=890&button=false" /></a>
 
-### [Backers](https://opencollective.com/jest#backer)
+### [Backers](https://opencollective.com/elric#backer)
 
 Thank you to all our backers! 🙏
 
-<a href="https://opencollective.com/jest#backers" target="_blank"><img src="https://opencollective.com/jest/backers.svg?width=890"></a>
+<a href="https://opencollective.com/elric#backers" target="_blank"><img src="https://opencollective.com/elric/backers.svg?width=890"></a>
 
-### [Sponsors](https://opencollective.com/jest#sponsor)
+### [Sponsors](https://opencollective.com/elric#sponsor)
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website.
 
-<a href="https://opencollective.com/jest/sponsor/0/website" target="_blank"><img src="https://opencollective.com/jest/sponsor/0/avatar.svg"></a> <a href="https://opencollective.com/jest/sponsor/1/website" target="_blank"><img src="https://opencollective.com/jest/sponsor/1/avatar.svg"></a> <a href="https://opencollective.com/jest/sponsor/2/website" target="_blank"><img src="https://opencollective.com/jest/sponsor/2/avatar.svg"></a> <a href="https://opencollective.com/jest/sponsor/3/website" target="_blank"><img src="https://opencollective.com/jest/sponsor/3/avatar.svg"></a> <a href="https://opencollective.com/jest/sponsor/4/website" target="_blank"><img src="https://opencollective.com/jest/sponsor/4/avatar.svg"></a> <a href="https://opencollective.com/jest/sponsor/5/website" target="_blank"><img src="https://opencollective.com/jest/sponsor/5/avatar.svg"></a> <a href="https://opencollective.com/jest/sponsor/6/website" target="_blank"><img src="https://opencollective.com/jest/sponsor/6/avatar.svg"></a> <a href="https://opencollective.com/jest/sponsor/7/website" target="_blank"><img src="https://opencollective.com/jest/sponsor/7/avatar.svg"></a> <a href="https://opencollective.com/jest/sponsor/8/website" target="_blank"><img src="https://opencollective.com/jest/sponsor/8/avatar.svg"></a> <a href="https://opencollective.com/jest/sponsor/9/website" target="_blank"><img src="https://opencollective.com/jest/sponsor/9/avatar.svg"></a>
+<a href="https://opencollective.com/elric/sponsor/0/website" target="_blank"><img src="https://opencollective.com/elric/sponsor/0/avatar.svg"></a> <a href="https://opencollective.com/elric/sponsor/1/website" target="_blank"><img src="https://opencollective.com/elric/sponsor/1/avatar.svg"></a> <a href="https://opencollective.com/elric/sponsor/2/website" target="_blank"><img src="https://opencollective.com/elric/sponsor/2/avatar.svg"></a> <a href="https://opencollective.com/elric/sponsor/3/website" target="_blank"><img src="https://opencollective.com/elric/sponsor/3/avatar.svg"></a> <a href="https://opencollective.com/elric/sponsor/4/website" target="_blank"><img src="https://opencollective.com/elric/sponsor/4/avatar.svg"></a> <a href="https://opencollective.com/elric/sponsor/5/website" target="_blank"><img src="https://opencollective.com/elric/sponsor/5/avatar.svg"></a> <a href="https://opencollective.com/elric/sponsor/6/website" target="_blank"><img src="https://opencollective.com/elric/sponsor/6/avatar.svg"></a> <a href="https://opencollective.com/elric/sponsor/7/website" target="_blank"><img src="https://opencollective.com/elric/sponsor/7/avatar.svg"></a> <a href="https://opencollective.com/elric/sponsor/8/website" target="_blank"><img src="https://opencollective.com/elric/sponsor/8/avatar.svg"></a> <a href="https://opencollective.com/elric/sponsor/9/website" target="_blank"><img src="https://opencollective.com/elric/sponsor/9/avatar.svg"></a>
 
 ## License
 
-By contributing to Jest, you agree that your contributions will be licensed under its MIT license.
+By contributing to elric, you agree that your contributions will be licensed under its MIT license.

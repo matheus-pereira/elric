@@ -1,4 +1,4 @@
-# jest-worker
+# elric-worker
 
 Module for executing heavy tasks under forked processes in parallel, by providing a `Promise` based interface, minimum overhead, and bound workers.
 
@@ -11,7 +11,7 @@ The list of exposed methods can be explicitly provided via the `exposedMethods` 
 ## Install
 
 ```sh
-$ yarn add jest-worker
+$ yarn add elric-worker
 ```
 
 ## Example
@@ -21,10 +21,10 @@ This example covers the minimal usage:
 ### File `parent.js`
 
 ```javascript
-import {Worker as JestWorker} from 'jest-worker';
+import {Worker as elricWorker} from 'elric-worker';
 
 async function main() {
-  const worker = new JestWorker(require.resolve('./Worker'));
+  const worker = new elricWorker(require.resolve('./Worker'));
   const result = await worker.hello('Alice'); // "Hello, Alice"
 }
 
@@ -41,7 +41,7 @@ export function hello(param) {
 
 ## Experimental worker
 
-Node 10 shipped with [worker-threads](https://nodejs.org/api/worker_threads.html), a "threading API" that uses SharedArrayBuffers to communicate between the main process and its child threads. This experimental Node feature can significantly improve the communication time between parent and child processes in `jest-worker`.
+Node 10 shipped with [worker-threads](https://nodejs.org/api/worker_threads.html), a "threading API" that uses SharedArrayBuffers to communicate between the main process and its child threads. This experimental Node feature can significantly improve the communication time between parent and child processes in `elric-worker`.
 
 Since `worker_threads` are considered experimental in Node, you have to opt-in to this behavior by passing `enableWorkerThreads: true` when instantiating the worker. While the feature was unflagged in Node 11.7.0, you'll need to run the Node process with the `--experimental-worker` flag for Node 10.
 
@@ -85,11 +85,11 @@ The arguments that will be passed to the `setup` method during initialization.
 
 #### `WorkerPool: (workerPath: string, options?: WorkerPoolOptions) => WorkerPoolInterface` (optional)
 
-Provide a custom worker pool to be used for spawning child processes. By default, Jest will use a node thread pool if available and fall back to child process threads.
+Provide a custom worker pool to be used for spawning child processes. By default, elric will use a node thread pool if available and fall back to child process threads.
 
 #### `enableWorkerThreads: boolean` (optional)
 
-`jest-worker` will automatically detect if `worker_threads` are available, but will not use them unless passed `enableWorkerThreads: true`.
+`elric-worker` will automatically detect if `worker_threads` are available, but will not use them unless passed `enableWorkerThreads: true`.
 
 ### `workerSchedulingPolicy: 'round-robin' | 'in-order'` (optional)
 
@@ -102,24 +102,24 @@ Tasks are always assigned to the first free worker as soon as tasks start to que
 
 ### `taskQueue`: TaskQueue` (optional)
 
-The task queue defines in which order tasks (method calls) are processed by the workers. `jest-worker` ships with a `FifoQueue` and `PriorityQueue`:
+The task queue defines in which order tasks (method calls) are processed by the workers. `elric-worker` ships with a `FifoQueue` and `PriorityQueue`:
 
 - `FifoQueue` (default): Processes the method calls (tasks) in the call order.
-- `PriorityQueue`: Processes the method calls by a computed priority in natural ordering (lower priorities first). Tasks with the same priority are processed in any order (FIFO not guaranteed). The constructor accepts a single argument, the function that is passed the name of the called function and the arguments and returns a numerical value for the priority: `new require('jest-worker').PriorityQueue((method, filename) => filename.length)`.
+- `PriorityQueue`: Processes the method calls by a computed priority in natural ordering (lower priorities first). Tasks with the same priority are processed in any order (FIFO not guaranteed). The constructor accepts a single argument, the function that is passed the name of the called function and the arguments and returns a numerical value for the priority: `new require('elric-worker').PriorityQueue((method, filename) => filename.length)`.
 
-## JestWorker
+## elricWorker
 
 ### Methods
 
-The returned `JestWorker` instance has all the exposed methods, plus some additional ones to interact with the workers itself:
+The returned `elricWorker` instance has all the exposed methods, plus some additional ones to interact with the workers itself:
 
 #### `getStdout(): Readable`
 
-Returns a `ReadableStream` where the standard output of all workers is piped. Note that the `silent` option of the child workers must be set to `true` to make it work. This is the default set by `jest-worker`, but keep it in mind when overriding options through `forkOptions`.
+Returns a `ReadableStream` where the standard output of all workers is piped. Note that the `silent` option of the child workers must be set to `true` to make it work. This is the default set by `elric-worker`, but keep it in mind when overriding options through `forkOptions`.
 
 #### `getStderr(): Readable`
 
-Returns a `ReadableStream` where the standard error of all workers is piped. Note that the `silent` option of the child workers must be set to `true` to make it work. This is the default set by `jest-worker`, but keep it in mind when overriding options through `forkOptions`.
+Returns a `ReadableStream` where the standard error of all workers is piped. Note that the `silent` option of the child workers must be set to `true` to make it work. This is the default set by `elric-worker`, but keep it in mind when overriding options through `forkOptions`.
 
 #### `end()`
 
@@ -129,13 +129,13 @@ Returns a Promise that resolves with `{ forceExited: boolean }` once all workers
 
 **Note:**
 
-`await`ing the `end()` Promise immediately after the workers are no longer needed before proceeding to do other useful things in your program may not be a good idea. If workers have to be force exited, `jest-worker` may go through multiple stages of force exiting (e.g. SIGTERM, later SIGKILL) and give the worker overall around 1 second time to exit on its own. During this time, your program will wait, even though it may not be necessary that all workers are dead before continuing execution.
+`await`ing the `end()` Promise immediately after the workers are no longer needed before proceeding to do other useful things in your program may not be a good idea. If workers have to be force exited, `elric-worker` may go through multiple stages of force exiting (e.g. SIGTERM, later SIGKILL) and give the worker overall around 1 second time to exit on its own. During this time, your program will wait, even though it may not be necessary that all workers are dead before continuing execution.
 
 Consider deliberately leaving this Promise floating (unhandled resolution). After your program has done the rest of its work and is about to exit, the Node process will wait for the Promise to resolve after all workers are dead as the last event loop task. That way you parallelized computation time of your program and waiting time and you didn't delay the outputs of your program unnecessarily.
 
 ### Worker IDs
 
-Each worker has a unique id (index that starts with `1`), which is available inside the worker as `process.env.JEST_WORKER_ID`.
+Each worker has a unique id (index that starts with `1`), which is available inside the worker as `process.env.elric_WORKER_ID`.
 
 ## Setting up and tearing down the child process
 
@@ -153,10 +153,10 @@ This example covers the standard usage:
 ### File `parent.js`
 
 ```javascript
-import {Worker as JestWorker} from 'jest-worker';
+import {Worker as elricWorker} from 'elric-worker';
 
 async function main() {
-  const myWorker = new JestWorker(require.resolve('./Worker'), {
+  const myWorker = new elricWorker(require.resolve('./Worker'), {
     exposedMethods: ['foo', 'bar', 'getWorkerId'],
     numWorkers: 4,
   });
@@ -186,7 +186,7 @@ export function bar(param) {
 }
 
 export function getWorkerId() {
-  return process.env.JEST_WORKER_ID;
+  return process.env.elric_WORKER_ID;
 }
 ```
 
@@ -197,10 +197,10 @@ This example covers the usage with a `computeWorkerKey` method:
 ### File `parent.js`
 
 ```javascript
-import {Worker as JestWorker} from 'jest-worker';
+import {Worker as elricWorker} from 'elric-worker';
 
 async function main() {
-  const myWorker = new JestWorker(require.resolve('./Worker'), {
+  const myWorker = new elricWorker(require.resolve('./Worker'), {
     computeWorkerKey: (method, filename) => filename,
   });
 
@@ -236,7 +236,7 @@ export function transform(filename) {
     return cache[filename];
   }
 
-  // jest-worker can handle both immediate results and thenables. If a
+  // elric-worker can handle both immediate results and thenables. If a
   // thenable is returned, it will be await'ed until it resolves.
   return babel.transformFileAsync(filename).then(result => {
     cache[filename] = result;

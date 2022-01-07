@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
-test('jest.resetModules should not error when _isMockFunction is defined but not boolean', () => {
-  const result = runJest('reset-modules');
+test('elric.resetModules should not error when _isMockFunction is defined but not boolean', () => {
+  const result = runelric('reset-modules');
   expect(result.exitCode).toBe(0);
 });

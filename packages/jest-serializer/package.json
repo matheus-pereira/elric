@@ -1,10 +1,10 @@
 {
-  "name": "jest-serializer",
+  "name": "elric-serializer",
   "version": "27.4.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/jest-serializer"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/elric-serializer"
   },
   "devDependencies": {
     "@types/graceful-fs": "^4.1.3"

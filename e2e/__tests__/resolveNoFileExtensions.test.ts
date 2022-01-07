@@ -6,9 +6,9 @@
  */
 
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {cleanup, extractSummary, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(__dirname, '../resolve-no-extensions-no-js');
 
@@ -16,7 +16,7 @@ beforeEach(() => cleanup(DIR));
 afterAll(() => cleanup(DIR));
 
 test('show error message with matching files', () => {
-  const {exitCode, stderr} = runJest('resolve-no-extensions');
+  const {exitCode, stderr} = runelric('resolve-no-extensions');
   const {rest} = extractSummary(stderr);
 
   expect(exitCode).toBe(1);
@@ -30,7 +30,7 @@ test('show error message when no js moduleFileExtensions', () => {
     `,
     'package.json': `
       {
-        "jest": {
+        "elric": {
           "moduleFileExtensions": ["jsx"]
         }
       }
@@ -44,7 +44,7 @@ test('show error message when no js moduleFileExtensions', () => {
     `,
   });
 
-  const {exitCode, stderr} = runJest('resolve-no-extensions-no-js');
+  const {exitCode, stderr} = runelric('resolve-no-extensions-no-js');
 
   expect(exitCode).toBe(1);
   expect(wrap(stderr)).toMatchSnapshot();

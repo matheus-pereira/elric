@@ -10,7 +10,7 @@ import path from 'path';
 import fs from 'graceful-fs';
 import greeting from '../';
 
-const DIR = path.join(os.tmpdir(), 'jest-global-setup-esm');
+const DIR = path.join(os.tmpdir(), 'elric-global-setup-esm');
 
 test('should exist setup file', () => {
   const files = fs.readdirSync(DIR);

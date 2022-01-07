@@ -8,15 +8,15 @@
 'use strict';
 
 module.exports = {
-  ...require('./jest.config'),
+  ...require('./elric.config'),
   coverageReporters: ['json'],
   reporters: [
     [
-      'jest-junit',
+      'elric-junit',
       {outputDirectory: 'reports/junit', outputName: 'js-test-results.xml'},
     ],
     [
-      'jest-silent-reporter',
+      'elric-silent-reporter',
       {showPaths: true, showWarnings: true, useDots: true},
     ],
   ],

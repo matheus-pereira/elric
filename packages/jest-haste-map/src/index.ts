@@ -13,10 +13,10 @@ import {EventEmitter} from 'events';
 import {tmpdir} from 'os';
 import * as path from 'path';
 import type {Stats} from 'graceful-fs';
-import type {Config} from '@jest/types';
-import {escapePathForRegex} from 'jest-regex-util';
-import serializer from 'jest-serializer';
-import {Worker} from 'jest-worker';
+import type {Config} from '@elric/types';
+import {escapePathForRegex} from 'elric-regex-util';
+import serializer from 'elric-serializer';
+import {Worker} from 'elric-worker';
 import HasteFS from './HasteFS';
 import HasteModuleMap from './ModuleMap';
 import H from './constants';
@@ -43,9 +43,9 @@ import type {
   WorkerMetadata,
 } from './types';
 import FSEventsWatcher = require('./watchers/FSEventsWatcher');
-// @ts-expect-error: not converted to TypeScript - it's a fork: https://github.com/facebook/jest/pull/10919
+// @ts-expect-error: not converted to TypeScript - it's a fork: https://github.com/facebook/elric/pull/10919
 import NodeWatcher from './watchers/NodeWatcher';
-// @ts-expect-error: not converted to TypeScript - it's a fork: https://github.com/facebook/jest/pull/5387
+// @ts-expect-error: not converted to TypeScript - it's a fork: https://github.com/facebook/elric/pull/5387
 import WatchmanWatcher from './watchers/WatchmanWatcher';
 import {getSha1, worker} from './worker';
 // TypeScript doesn't like us importing from outside `rootDir`, but it doesn't
@@ -149,7 +149,7 @@ function invariant(condition: unknown, message?: string): asserts condition {
  * synchronous operations. It uses worker processes for parallelizing file
  * access and metadata extraction.
  *
- * The data structures created by `jest-haste-map` can be used directly from the
+ * The data structures created by `elric-haste-map` can be used directly from the
  * cache without further processing. The metadata objects in the `files` and
  * `map` objects contain cross-references: a metadata object from one can look
  * up the corresponding metadata object in the other map. Note that in most
@@ -277,7 +277,7 @@ export default class HasteMap extends EventEmitter {
         );
       } else {
         throw new Error(
-          'jest-haste-map: the `ignorePattern` option must be a RegExp',
+          'elric-haste-map: the `ignorePattern` option must be a RegExp',
         );
       }
     } else {
@@ -286,7 +286,7 @@ export default class HasteMap extends EventEmitter {
 
     if (this._options.enableSymlinks && this._options.useWatchman) {
       throw new Error(
-        'jest-haste-map: enableSymlinks config option was set, but ' +
+        'elric-haste-map: enableSymlinks config option was set, but ' +
           'is incompatible with watchman.\n' +
           'Set either `enableSymlinks` to false or `useWatchman` to false.',
       );
@@ -467,7 +467,7 @@ export default class HasteMap extends EventEmitter {
 
         this._console[method](
           [
-            'jest-haste-map: Haste module naming collision: ' + id,
+            'elric-haste-map: Haste module naming collision: ' + id,
             '  The following files share their name; please adjust your hasteImpl:',
             '    * <rootDir>' + path.sep + existingModule[H.PATH],
             '    * <rootDir>' + path.sep + module[H.PATH],
@@ -517,7 +517,7 @@ export default class HasteMap extends EventEmitter {
     const fileMetadata = hasteMap.files.get(relativeFilePath);
     if (!fileMetadata) {
       throw new Error(
-        'jest-haste-map: File to process was not found in the haste map.',
+        'elric-haste-map: File to process was not found in the haste map.',
       );
     }
 
@@ -597,7 +597,7 @@ export default class HasteMap extends EventEmitter {
 
           this._console[method](
             [
-              'jest-haste-map: duplicate manual mock found: ' + mockPath,
+              'elric-haste-map: duplicate manual mock found: ' + mockPath,
               '  The following files share their name; please delete one of them:',
               '    * <rootDir>' + path.sep + existingMockPath,
               '    * <rootDir>' + path.sep + secondMockPath,
@@ -771,7 +771,7 @@ export default class HasteMap extends EventEmitter {
     const retry = (error: Error) => {
       if (crawl === watchmanCrawl) {
         this._console.warn(
-          `jest-haste-map: Watchman crawl failed. Retrying once with node ` +
+          `elric-haste-map: Watchman crawl failed. Retrying once with node ` +
             `crawler.\n` +
             `  Usually this happens when watchman isn't running. Create an ` +
             `empty \`.watchmanconfig\` file in your project's root folder or ` +
@@ -940,7 +940,7 @@ export default class HasteMap extends EventEmitter {
 
             let moduleMap = hasteMap.map.get(moduleName);
             if (moduleMap != null) {
-              // We are forced to copy the object because jest-haste-map exposes
+              // We are forced to copy the object because elric-haste-map exposes
               // the map as an immutable entity.
               moduleMap = copy(moduleMap);
               delete moduleMap[platform];
@@ -1001,7 +1001,7 @@ export default class HasteMap extends EventEmitter {
         })
         .catch((error: Error) => {
           this._console.error(
-            `jest-haste-map: watch error:\n  ${error.stack}\n`,
+            `elric-haste-map: watch error:\n  ${error.stack}\n`,
           );
         });
     };

@@ -1,11 +1,11 @@
-# jest-serializer
+# elric-serializer
 
 Module for serializing and deserializing object into memory and disk. By default, the `v8` implementations are used, but if not present, it defaults to `JSON` implementation. Both serializers have the advantage of being able to serialize `Map`, `Set`, `undefined`, `NaN`, etc, although the JSON one does it through a replacer/reviver.
 
 ## Install
 
 ```sh
-$ yarn add jest-serializer
+$ yarn add elric-serializer
 ```
 
 ## API
@@ -17,7 +17,7 @@ Three kinds of API groups are exposed:
 This set of functions take or return a `Buffer`. All the process happens in memory. This is useful when willing to transfer over HTTP, TCP or via UNIX pipes.
 
 ```javascript
-import {deserialize, serialize} from 'jest-serializer';
+import {deserialize, serialize} from 'elric-serializer';
 
 const myObject = {
   foo: 'bar',
@@ -33,7 +33,7 @@ const myCopyObject = deserialize(buffer);
 This set of functions allow to send to disk a serialization result and retrieve it back, in a synchronous way. It mimics the `fs` API so it looks familiar.
 
 ```javascript
-import {readFileSync, writeFileSync} from 'jest-serializer';
+import {readFileSync, writeFileSync} from 'elric-serializer';
 
 const myObject = {
   foo: 'bar',

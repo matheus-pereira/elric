@@ -3,5 +3,5 @@ First, run `./prepare.sh` to generate the benchmark files. On Windows, use a Bas
 To run the benchmark, use a benchmarking tool such as [hyperfine](https://github.com/sharkdp/hyperfine):
 
 ```sh
-hyperfine -w 3 -m 10 ../../jest /tmp/other-jest-clone-to-compare-against/jest
+hyperfine -w 3 -m 10 ../../elric /tmp/other-elric-clone-to-compare-against/elric
 ```

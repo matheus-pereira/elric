@@ -17,8 +17,8 @@ import {
   diff as diffDefault,
   diffStringsRaw,
   diffStringsUnified,
-} from 'jest-diff';
-import {getType, isPrimitive} from 'jest-get-type';
+} from 'elric-diff';
+import {getType, isPrimitive} from 'elric-get-type';
 import {
   format as prettyFormat,
   plugins as prettyFormatPlugins,
@@ -393,7 +393,7 @@ export const printDiffOrStringify = (
   return expectedLine + '\n' + receivedLine;
 };
 
-// Sometimes, e.g. when comparing two numbers, the output from jest-diff
+// Sometimes, e.g. when comparing two numbers, the output from elric-diff
 // does not contain more information than the `Expected:` / `Received:` already gives.
 // In those cases, we do not print a diff to make the output shorter and not redundant.
 const shouldPrintDiff = (actual: unknown, expected: unknown) => {

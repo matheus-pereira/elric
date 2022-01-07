@@ -7,9 +7,9 @@
 
 import * as path from 'path';
 import * as fs from 'graceful-fs';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {extractSummary} from '../Utils';
-import runJest, {json as runWithJson} from '../runJest';
+import runelric, {json as runWithJson} from '../runelric';
 
 const emptyTest = 'describe("", () => {it("", () => {})})';
 const snapshotDir = path.resolve(
@@ -120,7 +120,7 @@ describe('Snapshot', () => {
 
   it('works with escaped characters', () => {
     // Write the first snapshot
-    let result = runJest('snapshot-escape', [
+    let result = runelric('snapshot-escape', [
       '-w=1',
       '--ci=false',
       'snapshot.test.js',
@@ -138,7 +138,7 @@ describe('Snapshot', () => {
     const newTestData = initialTestData + testData;
     fs.writeFileSync(snapshotEscapeTestFile, newTestData, 'utf8');
 
-    result = runJest('snapshot-escape', [
+    result = runelric('snapshot-escape', [
       '-w=1',
       '--ci=false',
       '--updateSnapshot',
@@ -152,7 +152,7 @@ describe('Snapshot', () => {
 
     // Now let's check again if everything still passes.
     // If this test doesn't pass, some snapshot data was not properly escaped.
-    result = runJest('snapshot-escape', [
+    result = runelric('snapshot-escape', [
       '-w=1',
       '--ci=false',
       'snapshot.test.js',
@@ -166,7 +166,7 @@ describe('Snapshot', () => {
 
   it('works with escaped regex', () => {
     // Write the first snapshot
-    let result = runJest('snapshot-escape', [
+    let result = runelric('snapshot-escape', [
       '-w=1',
       '--ci=false',
       'snapshotEscapeRegex.js',
@@ -177,7 +177,7 @@ describe('Snapshot', () => {
     expect(result.exitCode).toBe(0);
     expect(wrap(extractSummary(stderr).summary)).toMatchSnapshot();
 
-    result = runJest('snapshot-escape', [
+    result = runelric('snapshot-escape', [
       '-w=1',
       '--ci=false',
       'snapshotEscapeRegex.js',
@@ -193,7 +193,7 @@ describe('Snapshot', () => {
 
   it('works with template literal substitutions', () => {
     // Write the first snapshot
-    let result = runJest('snapshot-escape', [
+    let result = runelric('snapshot-escape', [
       '-w=1',
       '--ci=false',
       'snapshotEscapeSubstitution.test.js',
@@ -204,7 +204,7 @@ describe('Snapshot', () => {
     expect(result.exitCode).toBe(0);
     expect(wrap(extractSummary(stderr).summary)).toMatchSnapshot();
 
-    result = runJest('snapshot-escape', [
+    result = runelric('snapshot-escape', [
       '-w=1',
       '--ci=false',
       'snapshotEscapeSubstitution.test.js',

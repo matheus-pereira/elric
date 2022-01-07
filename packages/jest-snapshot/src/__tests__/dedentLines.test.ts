@@ -76,8 +76,8 @@ describe('dedentLines non-null', () => {
         {
           $$typeof,
           props: {
-            alt: 'Jest logo',
-            src: 'jest.svg',
+            alt: 'elric logo',
+            src: 'elric.svg',
           },
           type: 'img',
         },
@@ -139,7 +139,7 @@ describe('dedentLines null', () => {
       children: null,
       props: {
         alt: 'trailing newline\n',
-        src: 'jest.svg',
+        src: 'elric.svg',
       },
       type: 'img',
     };
@@ -236,7 +236,7 @@ describe('dedentLines null', () => {
   });
 
   test('markup unclosed self-closing start tag', () => {
-    const indented = ['<img', '  alt="Jest logo"', '  src="jest.svg"'];
+    const indented = ['<img', '  alt="elric logo"', '  src="elric.svg"'];
 
     expect(dedentLines(indented)).toEqual(null);
   });

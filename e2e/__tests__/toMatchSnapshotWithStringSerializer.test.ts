@@ -8,7 +8,7 @@
 import * as path from 'path';
 import * as fs from 'graceful-fs';
 import {cleanup, makeTemplate, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(
   __dirname,
@@ -40,13 +40,13 @@ test('empty external', () => {
     writeFiles(TESTS_DIR, {
       [filename]: template([`''`]),
     });
-    const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+    const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
     expect(stderr).toMatch('1 snapshot written from 1 test suite.');
     expect(exitCode).toBe(0);
   }
 
   {
-    const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+    const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
     expect(stderr).toMatch('Snapshots:   1 passed, 1 total');
     expect(stderr).not.toMatch('1 snapshot written from 1 test suite.');
     expect(exitCode).toBe(0);
@@ -56,7 +56,7 @@ test('empty external', () => {
     writeFiles(TESTS_DIR, {
       [filename]: template([`'non-empty'`]),
     });
-    const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+    const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
     expect(stderr).toMatch('Snapshots:   1 failed, 1 total');
     expect(stderr).not.toMatch('not written'); // not confused with --ci option
     expect(stderr).toMatch(ORDINARY_FAILURE);
@@ -79,7 +79,7 @@ test('empty internal ci false', () => {
     writeFiles(TESTS_DIR, {
       [filename]: template([received1]),
     });
-    const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+    const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
     expect(stderr).toMatch('1 snapshot written from 1 test suite.');
     expect(exitCode).toBe(0);
   }
@@ -88,7 +88,7 @@ test('empty internal ci false', () => {
     writeFiles(TESTS_DIR, {
       [filename]: readFile(filename).replace(received1, received2),
     });
-    const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+    const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
     expect(stderr).toMatch('Snapshots:   1 failed, 1 total');
     expect(stderr).not.toMatch('1 snapshot written from 1 test suite.');
     expect(stderr).toMatch(ORDINARY_FAILURE);
@@ -108,7 +108,7 @@ test('undefined internal ci true', () => {
     writeFiles(TESTS_DIR, {
       [filename]: template([`'non-empty'`]),
     });
-    const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=true', filename]);
+    const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=true', filename]);
     expect(stderr).toMatch('Snapshots:   1 failed, 1 total');
     expect(stderr).not.toMatch(ORDINARY_FAILURE);
     expect(stderr).toMatch(NOT_WRITTEN);

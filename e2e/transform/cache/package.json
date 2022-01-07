@@ -1,7 +1,7 @@
 {
   "name": "cache",
   "version": "1.0.0",
-  "jest": {
+  "elric": {
     "testEnvironment": "node",
     "transform": {
       "\\.js$": "<rootDir>/transformer.js"

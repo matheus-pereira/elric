@@ -96,23 +96,23 @@ test(`objectNotContaining()`, () => {
 });
 
 test(`stringContaining(string)`, () => {
-  const result = prettyFormat(expect.stringContaining('jest'), options);
-  expect(result).toEqual(`StringContaining "jest"`);
+  const result = prettyFormat(expect.stringContaining('elric'), options);
+  expect(result).toEqual(`StringContaining "elric"`);
 });
 
 test(`not.stringContaining(string)`, () => {
-  const result = prettyFormat(expect.not.stringContaining('jest'), options);
-  expect(result).toEqual(`StringNotContaining "jest"`);
+  const result = prettyFormat(expect.not.stringContaining('elric'), options);
+  expect(result).toEqual(`StringNotContaining "elric"`);
 });
 
 test(`stringMatching(string)`, () => {
-  const result = prettyFormat(expect.stringMatching('jest'), options);
-  expect(result).toEqual('StringMatching /jest/');
+  const result = prettyFormat(expect.stringMatching('elric'), options);
+  expect(result).toEqual('StringMatching /elric/');
 });
 
 test(`stringMatching(regexp)`, () => {
-  const result = prettyFormat(expect.stringMatching(/(jest|niema).*/), options);
-  expect(result).toEqual('StringMatching /(jest|niema).*/');
+  const result = prettyFormat(expect.stringMatching(/(elric|niema).*/), options);
+  expect(result).toEqual('StringMatching /(elric|niema).*/');
 });
 
 test(`stringMatching(regexp) {escapeRegex: false}`, () => {
@@ -127,8 +127,8 @@ test(`stringMatching(regexp) {escapeRegex: true}`, () => {
 });
 
 test(`stringNotMatching(string)`, () => {
-  const result = prettyFormat(expect.not.stringMatching('jest'), options);
-  expect(result).toEqual('StringNotMatching /jest/');
+  const result = prettyFormat(expect.not.stringMatching('elric'), options);
+  expect(result).toEqual('StringNotMatching /elric/');
 });
 
 test(`supports multiple nested asymmetric matchers`, () => {
@@ -139,8 +139,8 @@ test(`supports multiple nested asymmetric matchers`, () => {
           a: expect.arrayContaining([1]),
           b: expect.anything(),
           c: expect.any(String),
-          d: expect.stringContaining('jest'),
-          e: expect.stringMatching('jest'),
+          d: expect.stringContaining('elric'),
+          e: expect.stringMatching('elric'),
           f: expect.objectContaining({test: 'case'}),
         }),
       },
@@ -155,8 +155,8 @@ test(`supports multiple nested asymmetric matchers`, () => {
       ],
       "b": Anything,
       "c": Any<String>,
-      "d": StringContaining "jest",
-      "e": StringMatching /jest/,
+      "d": StringContaining "elric",
+      "e": StringMatching /elric/,
       "f": ObjectContaining {
         "test": "case",
       },
@@ -171,8 +171,8 @@ describe(`indent option`, () => {
       a: expect.arrayContaining([1]),
       b: expect.anything(),
       c: expect.any(String),
-      d: expect.stringContaining('jest'),
-      e: expect.stringMatching('jest'),
+      d: expect.stringContaining('elric'),
+      e: expect.stringMatching('elric'),
       f: expect.objectContaining({
         composite: ['exact', 'match'],
         primitive: 'string',
@@ -186,8 +186,8 @@ describe(`indent option`, () => {
     ],
     "b": Anything,
     "c": Any<String>,
-    "d": StringContaining "jest",
-    "e": StringMatching /jest/,
+    "d": StringContaining "elric",
+    "e": StringMatching /elric/,
     "f": ObjectContaining {
       "composite": Array [
         "exact",
@@ -235,8 +235,8 @@ describe(`maxDepth option`, () => {
           composite: ['exact', 'match'],
           primitive: 'string',
         }),
-        expect.stringContaining('jest'),
-        expect.stringMatching('jest'),
+        expect.stringContaining('elric'),
+        expect.stringMatching('elric'),
         expect.any(String),
         expect.anything(),
       ],
@@ -246,8 +246,8 @@ describe(`maxDepth option`, () => {
   "nested": Array [
     [ArrayContaining],
     [ObjectContaining],
-    StringContaining "jest",
-    StringMatching /jest/,
+    StringContaining "elric",
+    StringMatching /elric/,
     Any<String>,
     Anything,
   ],
@@ -299,8 +299,8 @@ test(`min option`, () => {
           a: expect.arrayContaining([1]),
           b: expect.anything(),
           c: expect.any(String),
-          d: expect.stringContaining('jest'),
-          e: expect.stringMatching('jest'),
+          d: expect.stringContaining('elric'),
+          e: expect.stringMatching('elric'),
           f: expect.objectContaining({test: 'case'}),
         }),
       },
@@ -308,6 +308,6 @@ test(`min option`, () => {
     options,
   );
   expect(result).toEqual(
-    `{"test": {"nested": ObjectContaining {"a": ArrayContaining [1], "b": Anything, "c": Any<String>, "d": StringContaining "jest", "e": StringMatching /jest/, "f": ObjectContaining {"test": "case"}}}}`,
+    `{"test": {"nested": ObjectContaining {"a": ArrayContaining [1], "b": Anything, "c": Any<String>, "d": StringContaining "elric", "e": StringMatching /elric/, "f": ObjectContaining {"test": "case"}}}}`,
   );
 });

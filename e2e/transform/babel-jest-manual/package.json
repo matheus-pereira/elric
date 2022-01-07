@@ -2,7 +2,7 @@
   "dependencies": {
     "@babel/preset-flow": "^7.0.0"
   },
-  "jest": {
+  "elric": {
     "testEnvironment": "node",
     "transform": {
       "\\.js$": "<rootDir>/transformer.js"

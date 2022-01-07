@@ -8,25 +8,25 @@
 'use strict';
 
 test('fake timers with number argument', () => {
-  jest.useFakeTimers('modern');
+  elric.useFakeTimers('modern');
 
-  jest.setSystemTime(0);
+  elric.setSystemTime(0);
 
   expect(Date.now()).toBe(0);
 
-  jest.setSystemTime(1000);
+  elric.setSystemTime(1000);
 
   expect(Date.now()).toBe(1000);
 });
 
 test('fake timers with Date argument', () => {
-  jest.useFakeTimers('modern');
+  elric.useFakeTimers('modern');
 
-  jest.setSystemTime(new Date(0));
+  elric.setSystemTime(new Date(0));
 
   expect(Date.now()).toBe(0);
 
-  jest.setSystemTime(new Date(1000));
+  elric.setSystemTime(new Date(1000));
 
   expect(Date.now()).toBe(1000);
 });

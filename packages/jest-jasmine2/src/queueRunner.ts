@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {formatTime} from 'jest-util';
+import {formatTime} from 'elric-util';
 import PCancelable from './PCancelable';
 import pTimeout from './pTimeout';
 
@@ -78,7 +78,7 @@ export default function queueRunner(options: Options): PromiseLike<void> & {
         initError.message =
           'Timeout - Async callback was not invoked within the ' +
           formatTime(timeoutMs) +
-          ' timeout specified by jest.setTimeout.';
+          ' timeout specified by elric.setTimeout.';
         initError.stack = initError.message + initError.stack;
         options.onException(initError);
       },

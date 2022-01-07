@@ -1,10 +1,10 @@
 {
-  "name": "@jest/test-sequencer",
+  "name": "@elric/test-sequencer",
   "version": "27.4.6",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/jest-test-sequencer"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/elric-test-sequencer"
   },
   "license": "MIT",
   "main": "./build/index.js",
@@ -17,10 +17,10 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@jest/test-result": "^27.4.6",
+    "@elric/test-result": "^27.4.6",
     "graceful-fs": "^4.2.9",
-    "jest-haste-map": "^27.4.6",
-    "jest-runtime": "^27.4.6"
+    "elric-haste-map": "^27.4.6",
+    "elric-runtime": "^27.4.6"
   },
   "devDependencies": {
     "@types/graceful-fs": "^4.1.3"

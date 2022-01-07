@@ -7,6 +7,6 @@
 'use strict';
 /*eslint-env browser */
 
-test('found url jestjs.io', () => {
-  expect(window.location.href).toBe('https://jestjs.io/');
+test('found url elricjs.io', () => {
+  expect(window.location.href).toBe('https://elricjs.io/');
 });

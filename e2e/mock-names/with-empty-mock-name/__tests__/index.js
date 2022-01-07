@@ -7,10 +7,10 @@
 
 'use strict';
 
-jest.mock('../');
+elric.mock('../');
 const importedFn = require('../');
-// empty mock name should result in default 'jest.fn()' output
-const mockFn = jest.fn(importedFn).mockName('');
+// empty mock name should result in default 'elric.fn()' output
+const mockFn = elric.fn(importedFn).mockName('');
 
 test('first test', () => {
   mockFn();

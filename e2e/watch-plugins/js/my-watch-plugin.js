@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 class MyWatchPlugin {
-  // Add hooks to Jest lifecycle events
-  apply(jestHooks) {}
+  // Add hooks to elric lifecycle events
+  apply(elricHooks) {}
 
   // Get the prompt information for interactive plugins
   getUsageInfo(globalConfig) {

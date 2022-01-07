@@ -42,7 +42,7 @@ it(`doesn't mock modules when explicitly unmocked when using automocking`, async
     moduleNameMapper,
   });
   const root = runtime.requireModule(runtime.__mockRootPath);
-  root.jest.unmock('RegularModule');
+  root.elric.unmock('RegularModule');
   const exports = runtime.requireModuleOrMock(
     runtime.__mockRootPath,
     'RegularModule',
@@ -56,7 +56,7 @@ it(`doesn't mock modules when explicitly unmocked via a different name`, async (
     moduleNameMapper,
   });
   const root = runtime.requireModule(runtime.__mockRootPath);
-  root.jest.unmock('./RegularModule');
+  root.elric.unmock('./RegularModule');
   const exports = runtime.requireModuleOrMock(
     runtime.__mockRootPath,
     'RegularModule',
@@ -67,7 +67,7 @@ it(`doesn't mock modules when explicitly unmocked via a different name`, async (
 it(`doesn't mock modules when disableAutomock() has been called`, async () => {
   const runtime = await createRuntime(__filename, {moduleNameMapper});
   const root = runtime.requireModule(runtime.__mockRootPath);
-  root.jest.disableAutomock();
+  root.elric.disableAutomock();
   const exports = runtime.requireModuleOrMock(
     runtime.__mockRootPath,
     'RegularModule',
@@ -90,7 +90,7 @@ it('uses manual mock when automocking on and mock is available', async () => {
 it('does not use manual mock when automocking is off and a real module is available', async () => {
   const runtime = await createRuntime(__filename, {moduleNameMapper});
   const root = runtime.requireModule(runtime.__mockRootPath);
-  root.jest.disableAutomock();
+  root.elric.disableAutomock();
   const exports = runtime.requireModuleOrMock(
     runtime.__mockRootPath,
     'ManuallyMocked',
@@ -163,7 +163,7 @@ it('unmocks modules in config.unmockedModulePathPatterns for tests with automock
     unmockedModulePathPatterns: ['npm3-main-dep'],
   });
   const root = runtime.requireModule(runtime.__mockRootPath);
-  root.jest.enableAutomock();
+  root.elric.enableAutomock();
   const nodeModule = runtime.requireModuleOrMock(
     runtime.__mockRootPath,
     'npm3-main-dep',
@@ -177,13 +177,13 @@ it('unmocks virtual mocks after they have been mocked previously', async () => {
   const root = runtime.requireModule(runtime.__mockRootPath);
 
   const mockImpl = {foo: 'bar'};
-  root.jest.mock('my-virtual-module', () => mockImpl, {virtual: true});
+  root.elric.mock('my-virtual-module', () => mockImpl, {virtual: true});
 
   expect(
     runtime.requireModuleOrMock(runtime.__mockRootPath, 'my-virtual-module'),
   ).toEqual(mockImpl);
 
-  root.jest.unmock('my-virtual-module');
+  root.elric.unmock('my-virtual-module');
 
   expect(() => {
     runtime.requireModuleOrMock(runtime.__mockRootPath, 'my-virtual-module');
@@ -323,7 +323,7 @@ describe('isolateModules', () => {
   describe('can use isolateModules from a beforeEach block', () => {
     let exports;
     beforeEach(() => {
-      jest.isolateModules(() => {
+      elric.isolateModules(() => {
         exports = require('./test_root/ModuleWithState');
       });
     });

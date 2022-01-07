@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {makeGlobalConfig} from '@jest/test-utils';
+import {makeGlobalConfig} from '@elric/test-utils';
 import getResultHeader from '../getResultHeader';
 const terminalLink = require('terminal-link');
 
-jest.mock('terminal-link', () => jest.fn(() => 'wannabehyperlink'));
+elric.mock('terminal-link', () => elric.fn(() => 'wannabehyperlink'));
 
 const endTime = 1577717671160;
 const testTime = 5500;

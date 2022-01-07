@@ -6,8 +6,8 @@
  */
 
 import chalk = require('chalk');
-import type {Config} from '@jest/types';
-import {isInteractive} from 'jest-util';
+import type {Config} from '@elric/types';
+import {isInteractive} from 'elric-util';
 
 export default function getNoTestFoundRelatedToChangedFiles(
   globalConfig: Config.GlobalConfig,
@@ -21,8 +21,8 @@ export default function getNoTestFoundRelatedToChangedFiles(
     msg += chalk.dim(
       '\n' +
         (globalConfig.watch
-          ? 'Press `a` to run all tests, or run Jest with `--watchAll`.'
-          : 'Run Jest without `-o` or with `--all` to run all tests.'),
+          ? 'Press `a` to run all tests, or run elric with `--watchAll`.'
+          : 'Run elric without `-o` or with `--all` to run all tests.'),
     );
   }
 

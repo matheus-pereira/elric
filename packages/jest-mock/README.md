@@ -1,9 +1,9 @@
-# jest-mock
+# elric-mock
 
 ## API
 
 ```js
-import {ModuleMocker} from 'jest-mock';
+import {ModuleMocker} from 'elric-mock';
 ```
 
 ### `constructor(global)`

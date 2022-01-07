@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Global} from '@jest/types';
+import type {Global} from '@elric/types';
 
 let circusIt: Global.It;
 let circusTest: Global.It;
 
-// using jest-jasmine2's 'it' to test jest-circus's 'it'. Had to differentiate
+// using elric-jasmine2's 'it' to test elric-circus's 'it'. Had to differentiate
 // the two with this alias.
 
 const aliasCircusIt = () => {

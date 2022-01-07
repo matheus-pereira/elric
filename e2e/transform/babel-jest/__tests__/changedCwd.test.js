@@ -16,7 +16,7 @@ beforeAll(() => {
   require('../this-directory-is-covered/excludedFromCoverage');
 });
 
-it('strips flowtypes using babel-jest and .babelrc', () => {
+it('strips flowtypes using babel-elric and .babelrc', () => {
   const a: string = 'a';
   expect(a).toBe('a');
 });

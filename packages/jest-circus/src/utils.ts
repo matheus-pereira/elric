@@ -11,15 +11,15 @@ import dedent = require('dedent');
 import isGeneratorFn from 'is-generator-fn';
 import slash = require('slash');
 import StackUtils = require('stack-utils');
-import type {AssertionResult, Status} from '@jest/test-result';
-import type {Circus, Global} from '@jest/types';
-import {ErrorWithStack, convertDescriptorToString, formatTime} from 'jest-util';
+import type {AssertionResult, Status} from '@elric/test-result';
+import type {Circus, Global} from '@elric/types';
+import {ErrorWithStack, convertDescriptorToString, formatTime} from 'elric-util';
 import {format as prettyFormat} from 'pretty-format';
 import {ROOT_DESCRIBE_BLOCK_NAME, getState} from './state';
 
 const stackUtils = new StackUtils({cwd: 'A path that does not exist'});
 
-const jestEachBuildDir = slash(path.dirname(require.resolve('jest-each')));
+const elricEachBuildDir = slash(path.dirname(require.resolve('elric-each')));
 
 function takesDoneCallback(fn: Circus.AsyncFn): fn is Global.DoneTakingTestFn {
   return fn.length > 0;
@@ -160,7 +160,7 @@ export const describeBlockHasTests = (
 const _makeTimeoutMessage = (timeout: number, isHook: boolean) =>
   `Exceeded timeout of ${formatTime(timeout)} for a ${
     isHook ? 'hook' : 'test'
-  }.\nUse jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test.`;
+  }.\nUse elric.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test.`;
 
 // Global values can be overwritten by mocks or tests. We'll capture
 // the original values in the variables before we require any files.
@@ -333,7 +333,7 @@ export const makeSingleTestResult = (
     const stackLines = test.asyncError.stack.split('\n');
     const stackLine = stackLines[1];
     let parsedLine = stackUtils.parseLine(stackLine);
-    if (parsedLine?.file?.startsWith(jestEachBuildDir)) {
+    if (parsedLine?.file?.startsWith(elricEachBuildDir)) {
       const stackLine = stackLines[4];
       parsedLine = stackUtils.parseLine(stackLine);
     }

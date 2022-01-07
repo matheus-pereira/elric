@@ -2470,31 +2470,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/console@^27.4.6, @jest/console@workspace:packages/jest-console":
+"@elric/console@^27.4.6, @elric/console@workspace:packages/elric-console":
   version: 0.0.0-use.local
-  resolution: "@jest/console@workspace:packages/jest-console"
+  resolution: "@elric/console@workspace:packages/elric-console"
   dependencies:
-    "@jest/test-utils": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/test-utils": ^27.4.6
+    "@elric/types": ^27.4.2
     "@types/node": "*"
     chalk: ^4.0.0
-    jest-message-util: ^27.4.6
-    jest-util: ^27.4.2
+    elric-message-util: ^27.4.6
+    elric-util: ^27.4.2
     slash: ^3.0.0
   languageName: unknown
   linkType: soft
 
-"@jest/core@^27.4.7, @jest/core@workspace:packages/jest-core":
+"@elric/core@^27.4.7, @elric/core@workspace:packages/elric-core":
   version: 0.0.0-use.local
-  resolution: "@jest/core@workspace:packages/jest-core"
+  resolution: "@elric/core@workspace:packages/elric-core"
   dependencies:
-    "@jest/console": ^27.4.6
-    "@jest/reporters": ^27.4.6
-    "@jest/test-result": ^27.4.6
-    "@jest/test-sequencer": ^27.4.6
-    "@jest/test-utils": ^27.4.6
-    "@jest/transform": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/console": ^27.4.6
+    "@elric/reporters": ^27.4.6
+    "@elric/test-result": ^27.4.6
+    "@elric/test-sequencer": ^27.4.6
+    "@elric/test-utils": ^27.4.6
+    "@elric/transform": ^27.4.6
+    "@elric/types": ^27.4.2
     "@types/exit": ^0.1.30
     "@types/graceful-fs": ^4.1.2
     "@types/micromatch": ^4.0.1
@@ -2505,20 +2505,20 @@ __metadata:
     emittery: ^0.8.1
     exit: ^0.1.2
     graceful-fs: ^4.2.9
-    jest-changed-files: ^27.4.2
-    jest-config: ^27.4.7
-    jest-haste-map: ^27.4.6
-    jest-message-util: ^27.4.6
-    jest-regex-util: ^27.4.0
-    jest-resolve: ^27.4.6
-    jest-resolve-dependencies: ^27.4.6
-    jest-runner: ^27.4.6
-    jest-runtime: ^27.4.6
-    jest-snapshot: ^27.4.6
-    jest-snapshot-serializer-raw: ^1.1.0
-    jest-util: ^27.4.2
-    jest-validate: ^27.4.6
-    jest-watcher: ^27.4.6
+    elric-changed-files: ^27.4.2
+    elric-config: ^27.4.7
+    elric-haste-map: ^27.4.6
+    elric-message-util: ^27.4.6
+    elric-regex-util: ^27.4.0
+    elric-resolve: ^27.4.6
+    elric-resolve-dependencies: ^27.4.6
+    elric-runner: ^27.4.6
+    elric-runtime: ^27.4.6
+    elric-snapshot: ^27.4.6
+    elric-snapshot-serializer-raw: ^1.1.0
+    elric-util: ^27.4.2
+    elric-validate: ^27.4.6
+    elric-watcher: ^27.4.6
     micromatch: ^4.0.4
     rimraf: ^3.0.0
     slash: ^3.0.0
@@ -2531,55 +2531,55 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@jest/create-cache-key-function@workspace:*, @jest/create-cache-key-function@workspace:packages/jest-create-cache-key-function":
+"@elric/create-cache-key-function@workspace:*, @elric/create-cache-key-function@workspace:packages/elric-create-cache-key-function":
   version: 0.0.0-use.local
-  resolution: "@jest/create-cache-key-function@workspace:packages/jest-create-cache-key-function"
+  resolution: "@elric/create-cache-key-function@workspace:packages/elric-create-cache-key-function"
   dependencies:
-    "@jest/types": ^27.4.2
+    "@elric/types": ^27.4.2
     "@types/node": "*"
-    jest-util: ^27.4.2
+    elric-util: ^27.4.2
   languageName: unknown
   linkType: soft
 
-"@jest/environment@^27.4.6, @jest/environment@workspace:packages/jest-environment":
+"@elric/environment@^27.4.6, @elric/environment@workspace:packages/elric-environment":
   version: 0.0.0-use.local
-  resolution: "@jest/environment@workspace:packages/jest-environment"
+  resolution: "@elric/environment@workspace:packages/elric-environment"
   dependencies:
-    "@jest/fake-timers": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/fake-timers": ^27.4.6
+    "@elric/types": ^27.4.2
     "@types/node": "*"
-    jest-mock: ^27.4.6
+    elric-mock: ^27.4.6
   languageName: unknown
   linkType: soft
 
-"@jest/fake-timers@^27.4.6, @jest/fake-timers@workspace:packages/jest-fake-timers":
+"@elric/fake-timers@^27.4.6, @elric/fake-timers@workspace:packages/elric-fake-timers":
   version: 0.0.0-use.local
-  resolution: "@jest/fake-timers@workspace:packages/jest-fake-timers"
+  resolution: "@elric/fake-timers@workspace:packages/elric-fake-timers"
   dependencies:
-    "@jest/types": ^27.4.2
+    "@elric/types": ^27.4.2
     "@sinonjs/fake-timers": ^8.0.1
     "@types/node": "*"
     "@types/sinonjs__fake-timers": ^6.0.1
-    jest-message-util: ^27.4.6
-    jest-mock: ^27.4.6
-    jest-snapshot-serializer-raw: ^1.1.0
-    jest-util: ^27.4.2
+    elric-message-util: ^27.4.6
+    elric-mock: ^27.4.6
+    elric-snapshot-serializer-raw: ^1.1.0
+    elric-util: ^27.4.2
   languageName: unknown
   linkType: soft
 
-"@jest/globals@^27.4.6, @jest/globals@workspace:*, @jest/globals@workspace:packages/jest-globals":
+"@elric/globals@^27.4.6, @elric/globals@workspace:*, @elric/globals@workspace:packages/elric-globals":
   version: 0.0.0-use.local
-  resolution: "@jest/globals@workspace:packages/jest-globals"
+  resolution: "@elric/globals@workspace:packages/elric-globals"
   dependencies:
-    "@jest/environment": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/environment": ^27.4.6
+    "@elric/types": ^27.4.2
     expect: ^27.4.6
   languageName: unknown
   linkType: soft
 
-"@jest/monorepo@workspace:.":
+"@elric/monorepo@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@jest/monorepo@workspace:."
+  resolution: "@elric/monorepo@workspace:."
   dependencies:
     "@babel/core": ^7.3.4
     "@babel/plugin-proposal-class-properties": ^7.3.4
@@ -2589,14 +2589,14 @@ __metadata:
     "@babel/preset-typescript": ^7.0.0
     "@babel/register": ^7.0.0
     "@crowdin/cli": ^3.5.2
-    "@jest/globals": "workspace:*"
-    "@jest/test-utils": "workspace:*"
+    "@elric/globals": "workspace:*"
+    "@elric/test-utils": "workspace:*"
     "@tsconfig/node10": ^1.0.8
     "@types/babel__core": ^7.0.0
     "@types/babel__generator": ^7.0.0
     "@types/babel__template": ^7.0.0
     "@types/dedent": 0.7.0
-    "@types/jest": ^26.0.15
+    "@types/elric": ^26.0.15
     "@types/node": ~10.14.0
     "@types/which": ^2.0.0
     "@typescript-eslint/eslint-plugin": ^4.1.0
@@ -2615,7 +2615,7 @@ __metadata:
     eslint-import-resolver-typescript: ^2.5.0
     eslint-plugin-eslint-comments: ^3.1.2
     eslint-plugin-import: ^2.6.0
-    eslint-plugin-jest: ^24.0.0
+    eslint-plugin-elric: ^24.0.0
     eslint-plugin-local: ^1.0.0
     eslint-plugin-markdown: ^1.0.0
     eslint-plugin-prettier: ^3.0.1
@@ -2629,15 +2629,15 @@ __metadata:
     istanbul-lib-coverage: ^3.0.0
     istanbul-lib-report: ^3.0.0
     istanbul-reports: ^3.1.3
-    jest: "workspace:*"
-    jest-changed-files: "workspace:*"
-    jest-junit: ^13.0.0
-    jest-mock: "workspace:*"
-    jest-runner-tsd: ^1.1.0
-    jest-silent-reporter: ^0.5.0
-    jest-snapshot: "workspace:*"
-    jest-snapshot-serializer-raw: ^1.1.0
-    jest-watch-typeahead: ^0.6.0
+    elric: "workspace:*"
+    elric-changed-files: "workspace:*"
+    elric-junit: ^13.0.0
+    elric-mock: "workspace:*"
+    elric-runner-tsd: ^1.1.0
+    elric-silent-reporter: ^0.5.0
+    elric-snapshot: "workspace:*"
+    elric-snapshot-serializer-raw: ^1.1.0
+    elric-watch-typeahead: ^0.6.0
     jquery: ^3.2.1
     lerna: ^4.0.0
     micromatch: ^4.0.4
@@ -2664,16 +2664,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@jest/reporters@^27.4.6, @jest/reporters@workspace:packages/jest-reporters":
+"@elric/reporters@^27.4.6, @elric/reporters@workspace:packages/elric-reporters":
   version: 0.0.0-use.local
-  resolution: "@jest/reporters@workspace:packages/jest-reporters"
+  resolution: "@elric/reporters@workspace:packages/elric-reporters"
   dependencies:
     "@bcoe/v8-coverage": ^0.2.3
-    "@jest/console": ^27.4.6
-    "@jest/test-result": ^27.4.6
-    "@jest/test-utils": ^27.4.6
-    "@jest/transform": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/console": ^27.4.6
+    "@elric/test-result": ^27.4.6
+    "@elric/test-utils": ^27.4.6
+    "@elric/transform": ^27.4.6
+    "@elric/types": ^27.4.2
     "@types/exit": ^0.1.30
     "@types/glob": ^7.1.1
     "@types/graceful-fs": ^4.1.3
@@ -2694,10 +2694,10 @@ __metadata:
     istanbul-lib-report: ^3.0.0
     istanbul-lib-source-maps: ^4.0.0
     istanbul-reports: ^3.1.3
-    jest-haste-map: ^27.4.6
-    jest-resolve: ^27.4.6
-    jest-util: ^27.4.2
-    jest-worker: ^27.4.6
+    elric-haste-map: ^27.4.6
+    elric-resolve: ^27.4.6
+    elric-util: ^27.4.2
+    elric-worker: ^27.4.6
     mock-fs: ^4.4.1
     slash: ^3.0.0
     source-map: ^0.6.0
@@ -2713,9 +2713,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@jest/source-map@^27.4.0, @jest/source-map@workspace:packages/jest-source-map":
+"@elric/source-map@^27.4.0, @elric/source-map@workspace:packages/elric-source-map":
   version: 0.0.0-use.local
-  resolution: "@jest/source-map@workspace:packages/jest-source-map"
+  resolution: "@elric/source-map@workspace:packages/elric-source-map"
   dependencies:
     "@types/graceful-fs": ^4.1.2
     callsites: ^3.0.0
@@ -2724,34 +2724,34 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@jest/test-result@^27.4.6, @jest/test-result@workspace:packages/jest-test-result":
+"@elric/test-result@^27.4.6, @elric/test-result@workspace:packages/elric-test-result":
   version: 0.0.0-use.local
-  resolution: "@jest/test-result@workspace:packages/jest-test-result"
+  resolution: "@elric/test-result@workspace:packages/elric-test-result"
   dependencies:
-    "@jest/console": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/console": ^27.4.6
+    "@elric/types": ^27.4.2
     "@types/istanbul-lib-coverage": ^2.0.0
     collect-v8-coverage: ^1.0.0
   languageName: unknown
   linkType: soft
 
-"@jest/test-sequencer@^27.4.6, @jest/test-sequencer@workspace:packages/jest-test-sequencer":
+"@elric/test-sequencer@^27.4.6, @elric/test-sequencer@workspace:packages/elric-test-sequencer":
   version: 0.0.0-use.local
-  resolution: "@jest/test-sequencer@workspace:packages/jest-test-sequencer"
+  resolution: "@elric/test-sequencer@workspace:packages/elric-test-sequencer"
   dependencies:
-    "@jest/test-result": ^27.4.6
+    "@elric/test-result": ^27.4.6
     "@types/graceful-fs": ^4.1.3
     graceful-fs: ^4.2.9
-    jest-haste-map: ^27.4.6
-    jest-runtime: ^27.4.6
+    elric-haste-map: ^27.4.6
+    elric-runtime: ^27.4.6
   languageName: unknown
   linkType: soft
 
-"@jest/test-utils@^27.4.6, @jest/test-utils@workspace:*, @jest/test-utils@workspace:packages/test-utils":
+"@elric/test-utils@^27.4.6, @elric/test-utils@workspace:*, @elric/test-utils@workspace:packages/test-utils":
   version: 0.0.0-use.local
-  resolution: "@jest/test-utils@workspace:packages/test-utils"
+  resolution: "@elric/test-utils@workspace:packages/test-utils"
   dependencies:
-    "@jest/types": ^27.4.2
+    "@elric/types": ^27.4.2
     "@types/node": "*"
     "@types/semver": ^7.1.0
     ansi-regex: ^5.0.1
@@ -2761,13 +2761,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@jest/transform@^27.4.6, @jest/transform@workspace:packages/jest-transform":
+"@elric/transform@^27.4.6, @elric/transform@workspace:packages/elric-transform":
   version: 0.0.0-use.local
-  resolution: "@jest/transform@workspace:packages/jest-transform"
+  resolution: "@elric/transform@workspace:packages/elric-transform"
   dependencies:
     "@babel/core": ^7.1.0
-    "@jest/test-utils": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/test-utils": ^27.4.6
+    "@elric/types": ^27.4.2
     "@types/babel__core": ^7.1.0
     "@types/convert-source-map": ^1.5.1
     "@types/fast-json-stable-stringify": ^2.0.0
@@ -2780,10 +2780,10 @@ __metadata:
     dedent: ^0.7.0
     fast-json-stable-stringify: ^2.0.0
     graceful-fs: ^4.2.9
-    jest-haste-map: ^27.4.6
-    jest-regex-util: ^27.4.0
-    jest-snapshot-serializer-raw: ^1.1.0
-    jest-util: ^27.4.2
+    elric-haste-map: ^27.4.6
+    elric-regex-util: ^27.4.0
+    elric-snapshot-serializer-raw: ^1.1.0
+    elric-util: ^27.4.2
     micromatch: ^4.0.4
     pirates: ^4.0.4
     slash: ^3.0.0
@@ -2792,9 +2792,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@jest/types@^27.4.2, @jest/types@workspace:packages/jest-types":
+"@elric/types@^27.4.2, @elric/types@workspace:packages/elric-types":
   version: 0.0.0-use.local
-  resolution: "@jest/types@workspace:packages/jest-types"
+  resolution: "@elric/types@workspace:packages/elric-types"
   dependencies:
     "@types/istanbul-lib-coverage": ^2.0.0
     "@types/istanbul-reports": ^3.0.0
@@ -2805,9 +2805,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@jest/types@npm:^25.5.0":
+"@elric/types@npm:^25.5.0":
   version: 25.5.0
-  resolution: "@jest/types@npm:25.5.0"
+  resolution: "@elric/types@npm:25.5.0"
   dependencies:
     "@types/istanbul-lib-coverage": ^2.0.0
     "@types/istanbul-reports": ^1.1.1
@@ -2817,9 +2817,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/types@npm:^26.6.1, @jest/types@npm:^26.6.2":
+"@elric/types@npm:^26.6.1, @elric/types@npm:^26.6.2":
   version: 26.6.2
-  resolution: "@jest/types@npm:26.6.2"
+  resolution: "@elric/types@npm:26.6.2"
   dependencies:
     "@types/istanbul-lib-coverage": ^2.0.0
     "@types/istanbul-reports": ^3.0.0
@@ -4757,21 +4757,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:*":
+"@types/elric@npm:*":
   version: 27.0.3
-  resolution: "@types/jest@npm:27.0.3"
+  resolution: "@types/elric@npm:27.0.3"
   dependencies:
-    jest-diff: ^27.0.0
+    elric-diff: ^27.0.0
     pretty-format: ^27.0.0
   checksum: c3c0f707f86d9b4195e29fd28871bd1017a242a60764d8f404ef3f8c5d9cdf95fc1d69fde9e2de09f23987457647cc690b9a9834ec6a3bf14a65ddb1d2cba492
   languageName: node
   linkType: hard
 
-"@types/jest@npm:^26.0.15":
+"@types/elric@npm:^26.0.15":
   version: 26.0.24
-  resolution: "@types/jest@npm:26.0.24"
+  resolution: "@types/elric@npm:26.0.24"
   dependencies:
-    jest-diff: ^26.0.0
+    elric-diff: ^26.0.0
     pretty-format: ^26.0.0
   checksum: e5d3651c1edf197011d19ee8f4bacd52667fa673d1b2ffbfbce624208d643fd4372ebb31fa8a1d89843a7705f142e38076e25e1e7b67f3aacafd6ae8bc77cbcf
   languageName: node
@@ -4788,9 +4788,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jsdom@patch:@types/jsdom@*#./patches/@types-jsdom.patch::locator=%40jest%2Fmonorepo%40workspace%3A.":
+"@types/jsdom@patch:@types/jsdom@*#./patches/@types-jsdom.patch::locator=%40elric%2Fmonorepo%40workspace%3A.":
   version: 16.2.14
-  resolution: "@types/jsdom@patch:@types/jsdom@npm%3A16.2.14#./patches/@types-jsdom.patch::version=16.2.14&hash=f9e5dd&locator=%40jest%2Fmonorepo%40workspace%3A."
+  resolution: "@types/jsdom@patch:@types/jsdom@npm%3A16.2.14#./patches/@types-jsdom.patch::version=16.2.14&hash=f9e5dd&locator=%40elric%2Fmonorepo%40workspace%3A."
   dependencies:
     "@types/node": "*"
     "@types/parse5": "*"
@@ -5787,12 +5787,12 @@ __metadata:
     "@babel/plugin-proposal-decorators": "*"
     "@babel/preset-env": "*"
     "@babel/preset-typescript": "*"
-    "@types/jest": "*"
-    babel-jest: "*"
+    "@types/elric": "*"
+    babel-elric: "*"
     babel-plugin-transform-typescript-metadata: "*"
     core-js: ^3.2.1
-    jest: "*"
-    jest-zone-patch: "*"
+    elric: "*"
+    elric-zone-patch: "*"
     rxjs: ^7.3.0
     tslib: ^2.0.0
     typescript: "*"
@@ -6295,18 +6295,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-jest@workspace:*, babel-jest@workspace:packages/babel-jest":
+"babel-elric@workspace:*, babel-elric@workspace:packages/babel-elric":
   version: 0.0.0-use.local
-  resolution: "babel-jest@workspace:packages/babel-jest"
+  resolution: "babel-elric@workspace:packages/babel-elric"
   dependencies:
     "@babel/core": ^7.8.0
-    "@jest/test-utils": ^27.4.6
-    "@jest/transform": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/test-utils": ^27.4.6
+    "@elric/transform": ^27.4.6
+    "@elric/types": ^27.4.2
     "@types/babel__core": ^7.1.14
     "@types/graceful-fs": ^4.1.3
     babel-plugin-istanbul: ^6.1.1
-    babel-preset-jest: ^27.4.0
+    babel-preset-elric: ^27.4.0
     chalk: ^4.0.0
     graceful-fs: ^4.2.9
     slash: ^3.0.0
@@ -6382,9 +6382,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-jest-hoist@^27.4.0, babel-plugin-jest-hoist@workspace:packages/babel-plugin-jest-hoist":
+"babel-plugin-elric-hoist@^27.4.0, babel-plugin-elric-hoist@workspace:packages/babel-plugin-elric-hoist":
   version: 0.0.0-use.local
-  resolution: "babel-plugin-jest-hoist@workspace:packages/babel-plugin-jest-hoist"
+  resolution: "babel-plugin-elric-hoist@workspace:packages/babel-plugin-elric-hoist"
   dependencies:
     "@babel/core": ^7.11.6
     "@babel/preset-react": ^7.12.1
@@ -6532,11 +6532,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-preset-jest@^27.4.0, babel-preset-jest@workspace:packages/babel-preset-jest":
+"babel-preset-elric@^27.4.0, babel-preset-elric@workspace:packages/babel-preset-elric":
   version: 0.0.0-use.local
-  resolution: "babel-preset-jest@workspace:packages/babel-preset-jest"
+  resolution: "babel-preset-elric@workspace:packages/babel-preset-elric"
   dependencies:
-    babel-plugin-jest-hoist: ^27.4.0
+    babel-plugin-elric-hoist: ^27.4.0
     babel-preset-current-node-syntax: ^1.0.0
   peerDependencies:
     "@babel/core": ^7.0.0
@@ -7990,15 +7990,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"create-jest-runner@npm:^0.6.0":
+"create-elric-runner@npm:^0.6.0":
   version: 0.6.0
-  resolution: "create-jest-runner@npm:0.6.0"
+  resolution: "create-elric-runner@npm:0.6.0"
   dependencies:
     chalk: ^3.0.0
-    jest-worker: ^25.1.0
+    elric-worker: ^25.1.0
     throat: ^5.0.0
   bin:
-    create-jest-runner: generator/index.js
+    create-elric-runner: generator/index.js
   checksum: 18cce006b1ec46435e4a3c50c91670bc1a5b22c4e2506b3625d8016976da93506bc0f12c968ad5c620b6c2203e93aebeef4d7e6e664f03bf249cf30cd43d2e86
   languageName: node
   linkType: hard
@@ -8086,7 +8086,7 @@ __metadata:
   resolution: "css-minimizer-webpack-plugin@npm:3.3.1"
   dependencies:
     cssnano: ^5.0.6
-    jest-worker: ^27.0.2
+    elric-worker: ^27.0.2
     postcss: ^8.3.5
     schema-utils: ^4.0.0
     serialize-javascript: ^6.0.0
@@ -9385,9 +9385,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jest@npm:^24.0.0":
+"eslint-plugin-elric@npm:^24.0.0":
   version: 24.7.0
-  resolution: "eslint-plugin-jest@npm:24.7.0"
+  resolution: "eslint-plugin-elric@npm:24.7.0"
   dependencies:
     "@typescript-eslint/experimental-utils": ^4.0.1
   peerDependencies:
@@ -9651,8 +9651,8 @@ __metadata:
   dependencies:
     "@babel/core": "*"
     "@babel/preset-env": "*"
-    babel-jest: "*"
-    jest: "*"
+    babel-elric: "*"
+    elric: "*"
   languageName: unknown
   linkType: soft
 
@@ -9662,8 +9662,8 @@ __metadata:
   dependencies:
     "@babel/core": "*"
     "@babel/preset-env": "*"
-    babel-jest: "*"
-    jest: "*"
+    babel-elric: "*"
+    elric: "*"
   languageName: unknown
   linkType: soft
 
@@ -9675,10 +9675,10 @@ __metadata:
     "@babel/plugin-proposal-class-properties": "*"
     "@babel/preset-env": "*"
     "@babel/preset-react": "*"
-    babel-jest: "*"
+    babel-elric: "*"
     enzyme: "*"
     enzyme-adapter-react-16: "*"
-    jest: "*"
+    elric: "*"
     react: ^16.14.0
     react-dom: ^16.14.0
   languageName: unknown
@@ -9690,8 +9690,8 @@ __metadata:
   dependencies:
     "@babel/core": "*"
     "@babel/preset-env": "*"
-    babel-jest: "*"
-    jest: "*"
+    babel-elric: "*"
+    elric: "*"
   languageName: unknown
   linkType: soft
 
@@ -9701,8 +9701,8 @@ __metadata:
   dependencies:
     "@babel/core": "*"
     "@babel/preset-env": "*"
-    babel-jest: "*"
-    jest: "*"
+    babel-elric: "*"
+    elric: "*"
     jquery: "*"
   languageName: unknown
   linkType: soft
@@ -9713,8 +9713,8 @@ __metadata:
   dependencies:
     "@babel/core": "*"
     "@babel/preset-env": "*"
-    babel-jest: "*"
-    jest: "*"
+    babel-elric: "*"
+    elric: "*"
   languageName: unknown
   linkType: soft
 
@@ -9724,8 +9724,8 @@ __metadata:
   dependencies:
     "@babel/core": "*"
     "@babel/preset-env": "*"
-    babel-jest: "*"
-    jest: "*"
+    babel-elric: "*"
+    elric: "*"
     lodash: ^4.17.19
   languageName: unknown
   linkType: soft
@@ -9736,9 +9736,9 @@ __metadata:
   dependencies:
     "@babel/core": "*"
     "@babel/preset-env": "*"
-    babel-jest: "*"
-    jest: "*"
-    jest-environment-node: "*"
+    babel-elric: "*"
+    elric: "*"
+    elric-environment-node: "*"
     mongodb: ^3.1.13
     mongodb-memory-server: ^6.9.6
   languageName: unknown
@@ -9750,8 +9750,8 @@ __metadata:
   dependencies:
     "@babel/core": "*"
     "@babel/preset-env": "*"
-    babel-jest: "*"
-    jest: "*"
+    babel-elric: "*"
+    elric: "*"
     metro-react-native-babel-preset: 0.65.2
     react: 17.0.1
     react-native: 0.64.0
@@ -9768,8 +9768,8 @@ __metadata:
     "@babel/preset-env": "*"
     "@babel/preset-react": "*"
     "@testing-library/react": "*"
-    babel-jest: "*"
-    jest: "*"
+    babel-elric: "*"
+    elric: "*"
     react: "*"
     react-dom: "*"
   languageName: unknown
@@ -9782,8 +9782,8 @@ __metadata:
     "@babel/core": "*"
     "@babel/preset-env": "*"
     "@babel/preset-react": "*"
-    babel-jest: "*"
-    jest: "*"
+    babel-elric: "*"
+    elric: "*"
     react: "*"
     react-dom: "*"
   languageName: unknown
@@ -9797,8 +9797,8 @@ __metadata:
     "@babel/plugin-proposal-class-properties": "*"
     "@babel/preset-env": "*"
     "@babel/preset-react": "*"
-    babel-jest: "*"
-    jest: "*"
+    babel-elric: "*"
+    elric: "*"
     react: "*"
     react-test-renderer: "*"
   languageName: unknown
@@ -9810,8 +9810,8 @@ __metadata:
   dependencies:
     "@babel/core": "*"
     "@babel/preset-env": "*"
-    babel-jest: "*"
-    jest: "*"
+    babel-elric: "*"
+    elric: "*"
   languageName: unknown
   linkType: soft
 
@@ -9823,9 +9823,9 @@ __metadata:
     "@babel/preset-env": "*"
     "@babel/preset-react": "*"
     "@babel/preset-typescript": "*"
-    "@types/jest": "*"
-    babel-jest: "*"
-    jest: "*"
+    "@types/elric": "*"
+    babel-elric: "*"
+    elric: "*"
     react: "*"
     react-dom: "*"
     typescript: "*"
@@ -9897,14 +9897,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "expect@workspace:packages/expect"
   dependencies:
-    "@jest/test-utils": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/test-utils": ^27.4.6
+    "@elric/types": ^27.4.2
     chalk: ^4.0.0
     fast-check: ^2.0.0
     immutable: ^4.0.0
-    jest-get-type: ^27.4.0
-    jest-matcher-utils: ^27.4.6
-    jest-message-util: ^27.4.6
+    elric-get-type: ^27.4.0
+    elric-matcher-utils: ^27.4.6
+    elric-message-util: ^27.4.6
   languageName: unknown
   linkType: soft
 
@@ -12583,25 +12583,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-changed-files@^27.4.2, jest-changed-files@workspace:*, jest-changed-files@workspace:packages/jest-changed-files":
+"elric-changed-files@^27.4.2, elric-changed-files@workspace:*, elric-changed-files@workspace:packages/elric-changed-files":
   version: 0.0.0-use.local
-  resolution: "jest-changed-files@workspace:packages/jest-changed-files"
+  resolution: "elric-changed-files@workspace:packages/elric-changed-files"
   dependencies:
-    "@jest/types": ^27.4.2
+    "@elric/types": ^27.4.2
     execa: ^5.0.0
     throat: ^6.0.1
   languageName: unknown
   linkType: soft
 
-"jest-circus@^27.4.6, jest-circus@workspace:packages/jest-circus":
+"elric-circus@^27.4.6, elric-circus@workspace:packages/elric-circus":
   version: 0.0.0-use.local
-  resolution: "jest-circus@workspace:packages/jest-circus"
+  resolution: "elric-circus@workspace:packages/elric-circus"
   dependencies:
     "@babel/core": ^7.1.0
     "@babel/register": ^7.0.0
-    "@jest/environment": ^27.4.6
-    "@jest/test-result": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/environment": ^27.4.6
+    "@elric/test-result": ^27.4.6
+    "@elric/types": ^27.4.2
     "@types/co": ^4.6.0
     "@types/dedent": ^0.7.0
     "@types/graceful-fs": ^4.1.3
@@ -12614,13 +12614,13 @@ __metadata:
     expect: ^27.4.6
     graceful-fs: ^4.2.9
     is-generator-fn: ^2.0.0
-    jest-each: ^27.4.6
-    jest-matcher-utils: ^27.4.6
-    jest-message-util: ^27.4.6
-    jest-runtime: ^27.4.6
-    jest-snapshot: ^27.4.6
-    jest-snapshot-serializer-raw: ^1.1.0
-    jest-util: ^27.4.2
+    elric-each: ^27.4.6
+    elric-matcher-utils: ^27.4.6
+    elric-message-util: ^27.4.6
+    elric-runtime: ^27.4.6
+    elric-snapshot: ^27.4.6
+    elric-snapshot-serializer-raw: ^1.1.0
+    elric-util: ^27.4.2
     pretty-format: ^27.4.6
     slash: ^3.0.0
     stack-utils: ^2.0.3
@@ -12628,13 +12628,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"jest-cli@^27.4.7, jest-cli@workspace:packages/jest-cli":
+"elric-cli@^27.4.7, elric-cli@workspace:packages/elric-cli":
   version: 0.0.0-use.local
-  resolution: "jest-cli@workspace:packages/jest-cli"
+  resolution: "elric-cli@workspace:packages/elric-cli"
   dependencies:
-    "@jest/core": ^27.4.7
-    "@jest/test-result": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/core": ^27.4.7
+    "@elric/test-result": ^27.4.6
+    "@elric/types": ^27.4.2
     "@types/exit": ^0.1.30
     "@types/graceful-fs": ^4.1.3
     "@types/prompts": ^2.0.1
@@ -12643,9 +12643,9 @@ __metadata:
     exit: ^0.1.2
     graceful-fs: ^4.2.9
     import-local: ^3.0.2
-    jest-config: ^27.4.7
-    jest-util: ^27.4.2
-    jest-validate: ^27.4.6
+    elric-config: ^27.4.7
+    elric-util: ^27.4.2
+    elric-validate: ^27.4.6
     prompts: ^2.0.1
     yargs: ^16.2.0
   peerDependencies:
@@ -12654,37 +12654,37 @@ __metadata:
     node-notifier:
       optional: true
   bin:
-    jest: ./bin/jest.js
+    elric: ./bin/elric.js
   languageName: unknown
   linkType: soft
 
-"jest-config@^27.4.7, jest-config@workspace:packages/jest-config":
+"elric-config@^27.4.7, elric-config@workspace:packages/elric-config":
   version: 0.0.0-use.local
-  resolution: "jest-config@workspace:packages/jest-config"
+  resolution: "elric-config@workspace:packages/elric-config"
   dependencies:
     "@babel/core": ^7.8.0
-    "@jest/test-sequencer": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/test-sequencer": ^27.4.6
+    "@elric/types": ^27.4.2
     "@types/glob": ^7.1.1
     "@types/graceful-fs": ^4.1.3
     "@types/micromatch": ^4.0.1
-    babel-jest: ^27.4.6
+    babel-elric: ^27.4.6
     chalk: ^4.0.0
     ci-info: ^3.2.0
     deepmerge: ^4.2.2
     glob: ^7.1.1
     graceful-fs: ^4.2.9
-    jest-circus: ^27.4.6
-    jest-environment-jsdom: ^27.4.6
-    jest-environment-node: ^27.4.6
-    jest-get-type: ^27.4.0
-    jest-jasmine2: ^27.4.6
-    jest-regex-util: ^27.4.0
-    jest-resolve: ^27.4.6
-    jest-runner: ^27.4.6
-    jest-snapshot-serializer-raw: ^1.1.0
-    jest-util: ^27.4.2
-    jest-validate: ^27.4.6
+    elric-circus: ^27.4.6
+    elric-environment-jsdom: ^27.4.6
+    elric-environment-node: ^27.4.6
+    elric-get-type: ^27.4.0
+    elric-jasmine2: ^27.4.6
+    elric-regex-util: ^27.4.0
+    elric-resolve: ^27.4.6
+    elric-runner: ^27.4.6
+    elric-snapshot-serializer-raw: ^1.1.0
+    elric-util: ^27.4.2
+    elric-validate: ^27.4.6
     micromatch: ^4.0.4
     pretty-format: ^27.4.6
     semver: ^7.3.5
@@ -12700,117 +12700,117 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"jest-diff@^27.4.6, jest-diff@workspace:packages/jest-diff":
+"elric-diff@^27.4.6, elric-diff@workspace:packages/elric-diff":
   version: 0.0.0-use.local
-  resolution: "jest-diff@workspace:packages/jest-diff"
+  resolution: "elric-diff@workspace:packages/elric-diff"
   dependencies:
-    "@jest/test-utils": ^27.4.6
+    "@elric/test-utils": ^27.4.6
     chalk: ^4.0.0
     diff-sequences: ^27.4.0
-    jest-get-type: ^27.4.0
+    elric-get-type: ^27.4.0
     pretty-format: ^27.4.6
     strip-ansi: ^6.0.0
   languageName: unknown
   linkType: soft
 
-"jest-diff@npm:^25.1.0":
+"elric-diff@npm:^25.1.0":
   version: 25.5.0
-  resolution: "jest-diff@npm:25.5.0"
+  resolution: "elric-diff@npm:25.5.0"
   dependencies:
     chalk: ^3.0.0
     diff-sequences: ^25.2.6
-    jest-get-type: ^25.2.6
+    elric-get-type: ^25.2.6
     pretty-format: ^25.5.0
   checksum: 14a2634ecb159a9a2f061239db1cea0c889e7a72ab05bd1fa799db30efca2ce79291372823f5e3468d9bc856f404f312e44e89c171eea8132b5835d12f71d0b3
   languageName: node
   linkType: hard
 
-"jest-docblock@^27.4.0, jest-docblock@workspace:packages/jest-docblock":
+"elric-docblock@^27.4.0, elric-docblock@workspace:packages/elric-docblock":
   version: 0.0.0-use.local
-  resolution: "jest-docblock@workspace:packages/jest-docblock"
+  resolution: "elric-docblock@workspace:packages/elric-docblock"
   dependencies:
     "@types/node": "*"
     detect-newline: ^3.0.0
   languageName: unknown
   linkType: soft
 
-"jest-docblock@npm:^26.0.0":
+"elric-docblock@npm:^26.0.0":
   version: 26.0.0
-  resolution: "jest-docblock@npm:26.0.0"
+  resolution: "elric-docblock@npm:26.0.0"
   dependencies:
     detect-newline: ^3.0.0
   checksum: 54b8ea1c8445a4b15e9ee5035f1bd60b0d492b87258995133a1b5df43a07803c93b54e8adaa45eae05778bd61ad57745491c625e7aa65198a9aa4f0c79030b56
   languageName: node
   linkType: hard
 
-"jest-each@^27.4.6, jest-each@workspace:packages/jest-each":
+"elric-each@^27.4.6, elric-each@workspace:packages/elric-each":
   version: 0.0.0-use.local
-  resolution: "jest-each@workspace:packages/jest-each"
+  resolution: "elric-each@workspace:packages/elric-each"
   dependencies:
-    "@jest/types": ^27.4.2
+    "@elric/types": ^27.4.2
     chalk: ^4.0.0
-    jest-get-type: ^27.4.0
-    jest-util: ^27.4.2
+    elric-get-type: ^27.4.0
+    elric-util: ^27.4.2
     pretty-format: ^27.4.6
   languageName: unknown
   linkType: soft
 
-"jest-environment-jsdom@^27.4.6, jest-environment-jsdom@workspace:packages/jest-environment-jsdom":
+"elric-environment-jsdom@^27.4.6, elric-environment-jsdom@workspace:packages/elric-environment-jsdom":
   version: 0.0.0-use.local
-  resolution: "jest-environment-jsdom@workspace:packages/jest-environment-jsdom"
+  resolution: "elric-environment-jsdom@workspace:packages/elric-environment-jsdom"
   dependencies:
-    "@jest/environment": ^27.4.6
-    "@jest/fake-timers": ^27.4.6
-    "@jest/test-utils": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/environment": ^27.4.6
+    "@elric/fake-timers": ^27.4.6
+    "@elric/test-utils": ^27.4.6
+    "@elric/types": ^27.4.2
     "@types/jsdom": ^16.2.4
     "@types/node": "*"
-    jest-mock: ^27.4.6
-    jest-util: ^27.4.2
+    elric-mock: ^27.4.6
+    elric-util: ^27.4.2
     jsdom: ^16.6.0
   languageName: unknown
   linkType: soft
 
-"jest-environment-node@workspace:*, jest-environment-node@workspace:packages/jest-environment-node":
+"elric-environment-node@workspace:*, elric-environment-node@workspace:packages/elric-environment-node":
   version: 0.0.0-use.local
-  resolution: "jest-environment-node@workspace:packages/jest-environment-node"
+  resolution: "elric-environment-node@workspace:packages/elric-environment-node"
   dependencies:
-    "@jest/environment": ^27.4.6
-    "@jest/fake-timers": ^27.4.6
-    "@jest/test-utils": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/environment": ^27.4.6
+    "@elric/fake-timers": ^27.4.6
+    "@elric/test-utils": ^27.4.6
+    "@elric/types": ^27.4.2
     "@types/node": "*"
-    jest-mock: ^27.4.6
-    jest-util: ^27.4.2
+    elric-mock: ^27.4.6
+    elric-util: ^27.4.2
   languageName: unknown
   linkType: soft
 
-"jest-get-type@^27.4.0, jest-get-type@workspace:packages/jest-get-type":
+"elric-get-type@^27.4.0, elric-get-type@workspace:packages/elric-get-type":
   version: 0.0.0-use.local
-  resolution: "jest-get-type@workspace:packages/jest-get-type"
+  resolution: "elric-get-type@workspace:packages/elric-get-type"
   languageName: unknown
   linkType: soft
 
-"jest-get-type@npm:^25.2.6":
+"elric-get-type@npm:^25.2.6":
   version: 25.2.6
-  resolution: "jest-get-type@npm:25.2.6"
+  resolution: "elric-get-type@npm:25.2.6"
   checksum: 6051fcb75cdaa8fad66fd5a1e91d2c1597e9ccc54eecd5cd489fd73a00e322d28cb5859b656a8224a41eddab0ecfb875df9ec62f545a76afa1a55d3ba97fba6d
   languageName: node
   linkType: hard
 
-"jest-get-type@npm:^26.3.0":
+"elric-get-type@npm:^26.3.0":
   version: 26.3.0
-  resolution: "jest-get-type@npm:26.3.0"
+  resolution: "elric-get-type@npm:26.3.0"
   checksum: fc3e2d2b90cca74597c4ad6234c2fcc2ccb62894d0f7afe22fc55b5d93a2f02d3080ccef50f09c979d4b5a060bc76c4343911556d75ed9e892e0ebda6d54c44b
   languageName: node
   linkType: hard
 
-"jest-haste-map@^27.4.6, jest-haste-map@workspace:packages/jest-haste-map":
+"elric-haste-map@^27.4.6, elric-haste-map@workspace:packages/elric-haste-map":
   version: 0.0.0-use.local
-  resolution: "jest-haste-map@workspace:packages/jest-haste-map"
+  resolution: "elric-haste-map@workspace:packages/elric-haste-map"
   dependencies:
-    "@jest/test-utils": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/test-utils": ^27.4.6
+    "@elric/types": ^27.4.2
     "@types/fb-watchman": ^2.0.0
     "@types/graceful-fs": ^4.1.2
     "@types/micromatch": ^4.0.1
@@ -12819,11 +12819,11 @@ __metadata:
     fb-watchman: ^2.0.0
     fsevents: ^2.3.2
     graceful-fs: ^4.2.9
-    jest-regex-util: ^27.4.0
-    jest-serializer: ^27.4.0
-    jest-snapshot-serializer-raw: ^1.1.0
-    jest-util: ^27.4.2
-    jest-worker: ^27.4.6
+    elric-regex-util: ^27.4.0
+    elric-serializer: ^27.4.0
+    elric-snapshot-serializer-raw: ^1.1.0
+    elric-util: ^27.4.2
+    elric-worker: ^27.4.6
     micromatch: ^4.0.4
     slash: ^3.0.0
     walker: ^1.0.7
@@ -12833,21 +12833,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"jest-haste-map@npm:^26.5.2":
+"elric-haste-map@npm:^26.5.2":
   version: 26.6.2
-  resolution: "jest-haste-map@npm:26.6.2"
+  resolution: "elric-haste-map@npm:26.6.2"
   dependencies:
-    "@jest/types": ^26.6.2
+    "@elric/types": ^26.6.2
     "@types/graceful-fs": ^4.1.2
     "@types/node": "*"
     anymatch: ^3.0.3
     fb-watchman: ^2.0.0
     fsevents: ^2.1.2
     graceful-fs: ^4.2.4
-    jest-regex-util: ^26.0.0
-    jest-serializer: ^26.6.2
-    jest-util: ^26.6.2
-    jest-worker: ^26.6.2
+    elric-regex-util: ^26.0.0
+    elric-serializer: ^26.6.2
+    elric-util: ^26.6.2
+    elric-worker: ^26.6.2
     micromatch: ^4.0.2
     sane: ^4.0.3
     walker: ^1.0.7
@@ -12858,34 +12858,34 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-jasmine2@^27.4.6, jest-jasmine2@workspace:packages/jest-jasmine2":
+"elric-jasmine2@^27.4.6, elric-jasmine2@workspace:packages/elric-jasmine2":
   version: 0.0.0-use.local
-  resolution: "jest-jasmine2@workspace:packages/jest-jasmine2"
+  resolution: "elric-jasmine2@workspace:packages/elric-jasmine2"
   dependencies:
-    "@jest/environment": ^27.4.6
-    "@jest/source-map": ^27.4.0
-    "@jest/test-result": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/environment": ^27.4.6
+    "@elric/source-map": ^27.4.0
+    "@elric/test-result": ^27.4.6
+    "@elric/types": ^27.4.2
     "@types/co": ^4.6.2
     "@types/node": "*"
     chalk: ^4.0.0
     co: ^4.6.0
     expect: ^27.4.6
     is-generator-fn: ^2.0.0
-    jest-each: ^27.4.6
-    jest-matcher-utils: ^27.4.6
-    jest-message-util: ^27.4.6
-    jest-runtime: ^27.4.6
-    jest-snapshot: ^27.4.6
-    jest-util: ^27.4.2
+    elric-each: ^27.4.6
+    elric-matcher-utils: ^27.4.6
+    elric-message-util: ^27.4.6
+    elric-runtime: ^27.4.6
+    elric-snapshot: ^27.4.6
+    elric-util: ^27.4.2
     pretty-format: ^27.4.6
     throat: ^6.0.1
   languageName: unknown
   linkType: soft
 
-"jest-junit@npm:^13.0.0":
+"elric-junit@npm:^13.0.0":
   version: 13.0.0
-  resolution: "jest-junit@npm:13.0.0"
+  resolution: "elric-junit@npm:13.0.0"
   dependencies:
     mkdirp: ^1.0.4
     strip-ansi: ^6.0.1
@@ -12895,36 +12895,36 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-leak-detector@^27.4.6, jest-leak-detector@workspace:packages/jest-leak-detector":
+"elric-leak-detector@^27.4.6, elric-leak-detector@workspace:packages/elric-leak-detector":
   version: 0.0.0-use.local
-  resolution: "jest-leak-detector@workspace:packages/jest-leak-detector"
+  resolution: "elric-leak-detector@workspace:packages/elric-leak-detector"
   dependencies:
     "@types/weak-napi": ^2.0.0
-    jest-get-type: ^27.4.0
+    elric-get-type: ^27.4.0
     pretty-format: ^27.4.6
     weak-napi: ^2.0.1
   languageName: unknown
   linkType: soft
 
-"jest-matcher-utils@^27.4.6, jest-matcher-utils@workspace:packages/jest-matcher-utils":
+"elric-matcher-utils@^27.4.6, elric-matcher-utils@workspace:packages/elric-matcher-utils":
   version: 0.0.0-use.local
-  resolution: "jest-matcher-utils@workspace:packages/jest-matcher-utils"
+  resolution: "elric-matcher-utils@workspace:packages/elric-matcher-utils"
   dependencies:
-    "@jest/test-utils": ^27.4.6
+    "@elric/test-utils": ^27.4.6
     "@types/node": "*"
     chalk: ^4.0.0
-    jest-diff: ^27.4.6
-    jest-get-type: ^27.4.0
+    elric-diff: ^27.4.6
+    elric-get-type: ^27.4.0
     pretty-format: ^27.4.6
   languageName: unknown
   linkType: soft
 
-"jest-message-util@^27.4.6, jest-message-util@workspace:packages/jest-message-util":
+"elric-message-util@^27.4.6, elric-message-util@workspace:packages/elric-message-util":
   version: 0.0.0-use.local
-  resolution: "jest-message-util@workspace:packages/jest-message-util"
+  resolution: "elric-message-util@workspace:packages/elric-message-util"
   dependencies:
     "@babel/code-frame": ^7.12.13
-    "@jest/types": ^27.4.2
+    "@elric/types": ^27.4.2
     "@types/babel__code-frame": ^7.0.0
     "@types/graceful-fs": ^4.1.3
     "@types/micromatch": ^4.0.1
@@ -12938,126 +12938,126 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"jest-mock@^27.4.6, jest-mock@workspace:*, jest-mock@workspace:packages/jest-mock":
+"elric-mock@^27.4.6, elric-mock@workspace:*, elric-mock@workspace:packages/elric-mock":
   version: 0.0.0-use.local
-  resolution: "jest-mock@workspace:packages/jest-mock"
+  resolution: "elric-mock@workspace:packages/elric-mock"
   dependencies:
-    "@jest/types": ^27.4.2
+    "@elric/types": ^27.4.2
     "@types/node": "*"
   languageName: unknown
   linkType: soft
 
-"jest-phabricator@workspace:packages/jest-phabricator":
+"elric-phabricator@workspace:packages/elric-phabricator":
   version: 0.0.0-use.local
-  resolution: "jest-phabricator@workspace:packages/jest-phabricator"
+  resolution: "elric-phabricator@workspace:packages/elric-phabricator"
   dependencies:
-    "@jest/test-result": ^27.4.6
+    "@elric/test-result": ^27.4.6
   languageName: unknown
   linkType: soft
 
-"jest-pnp-resolver@npm:^1.2.2":
+"elric-pnp-resolver@npm:^1.2.2":
   version: 1.2.2
-  resolution: "jest-pnp-resolver@npm:1.2.2"
+  resolution: "elric-pnp-resolver@npm:1.2.2"
   peerDependencies:
-    jest-resolve: "*"
+    elric-resolve: "*"
   peerDependenciesMeta:
-    jest-resolve:
+    elric-resolve:
       optional: true
   checksum: d91c86e3899f35ac1a6d40fa29e94212fc9b8e5e70d31d77ff281413441c844ec44a3673a3860f9b2155fed6738548f52eee9e63845e8d5f8550a890533c78cc
   languageName: node
   linkType: hard
 
-"jest-regex-util@^27.0.0, jest-regex-util@^27.4.0, jest-regex-util@workspace:packages/jest-regex-util":
+"elric-regex-util@^27.0.0, elric-regex-util@^27.4.0, elric-regex-util@workspace:packages/elric-regex-util":
   version: 0.0.0-use.local
-  resolution: "jest-regex-util@workspace:packages/jest-regex-util"
+  resolution: "elric-regex-util@workspace:packages/elric-regex-util"
   dependencies:
     "@types/node": "*"
   languageName: unknown
   linkType: soft
 
-"jest-regex-util@npm:^26.0.0":
+"elric-regex-util@npm:^26.0.0":
   version: 26.0.0
-  resolution: "jest-regex-util@npm:26.0.0"
+  resolution: "elric-regex-util@npm:26.0.0"
   checksum: a3d08a852a7b79e3071ebe112b9fb4122efe6b987477e6769eb78814a8306d3c9e29ed544f25bb6a6d3737668b67ee4339810ed5fe5a9d6318639d6f81f47d3d
   languageName: node
   linkType: hard
 
-"jest-repl@workspace:packages/jest-repl":
+"elric-repl@workspace:packages/elric-repl":
   version: 0.0.0-use.local
-  resolution: "jest-repl@workspace:packages/jest-repl"
+  resolution: "elric-repl@workspace:packages/elric-repl"
   dependencies:
-    "@jest/console": ^27.4.6
-    "@jest/environment": ^27.4.6
-    "@jest/transform": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/console": ^27.4.6
+    "@elric/environment": ^27.4.6
+    "@elric/transform": ^27.4.6
+    "@elric/types": ^27.4.2
     "@types/yargs": ^16.0.0
     chalk: ^4.0.0
     execa: ^5.0.0
-    jest-config: ^27.4.7
-    jest-runtime: ^27.4.6
-    jest-util: ^27.4.2
-    jest-validate: ^27.4.6
+    elric-config: ^27.4.7
+    elric-runtime: ^27.4.6
+    elric-util: ^27.4.2
+    elric-validate: ^27.4.6
     repl: ^0.1.3
     yargs: ^16.2.0
   bin:
-    jest-repl: ./bin/jest-repl.js
-    jest-runtime: ./bin/jest-runtime-cli.js
+    elric-repl: ./bin/elric-repl.js
+    elric-runtime: ./bin/elric-runtime-cli.js
   languageName: unknown
   linkType: soft
 
-"jest-resolve-dependencies@^27.4.6, jest-resolve-dependencies@workspace:packages/jest-resolve-dependencies":
+"elric-resolve-dependencies@^27.4.6, elric-resolve-dependencies@workspace:packages/elric-resolve-dependencies":
   version: 0.0.0-use.local
-  resolution: "jest-resolve-dependencies@workspace:packages/jest-resolve-dependencies"
+  resolution: "elric-resolve-dependencies@workspace:packages/elric-resolve-dependencies"
   dependencies:
-    "@jest/test-utils": ^27.4.6
-    "@jest/types": ^27.4.2
-    jest-haste-map: ^27.4.6
-    jest-regex-util: ^27.4.0
-    jest-resolve: ^27.4.6
-    jest-runtime: ^27.4.6
-    jest-snapshot: ^27.4.6
+    "@elric/test-utils": ^27.4.6
+    "@elric/types": ^27.4.2
+    elric-haste-map: ^27.4.6
+    elric-regex-util: ^27.4.0
+    elric-resolve: ^27.4.6
+    elric-runtime: ^27.4.6
+    elric-snapshot: ^27.4.6
   languageName: unknown
   linkType: soft
 
-"jest-resolve@^27.4.6, jest-resolve@workspace:packages/jest-resolve":
+"elric-resolve@^27.4.6, elric-resolve@workspace:packages/elric-resolve":
   version: 0.0.0-use.local
-  resolution: "jest-resolve@workspace:packages/jest-resolve"
+  resolution: "elric-resolve@workspace:packages/elric-resolve"
   dependencies:
-    "@jest/types": ^27.4.2
+    "@elric/types": ^27.4.2
     "@types/graceful-fs": ^4.1.3
     "@types/resolve": ^1.20.0
     chalk: ^4.0.0
     graceful-fs: ^4.2.9
-    jest-haste-map: ^27.4.6
-    jest-pnp-resolver: ^1.2.2
-    jest-util: ^27.4.2
-    jest-validate: ^27.4.6
+    elric-haste-map: ^27.4.6
+    elric-pnp-resolver: ^1.2.2
+    elric-util: ^27.4.2
+    elric-validate: ^27.4.6
     resolve: ^1.20.0
     resolve.exports: ^1.1.0
     slash: ^3.0.0
   languageName: unknown
   linkType: soft
 
-"jest-runner-tsd@npm:^1.1.0":
+"elric-runner-tsd@npm:^1.1.0":
   version: 1.1.0
-  resolution: "jest-runner-tsd@npm:1.1.0"
+  resolution: "elric-runner-tsd@npm:1.1.0"
   dependencies:
-    create-jest-runner: ^0.6.0
-    jest-docblock: ^26.0.0
+    create-elric-runner: ^0.6.0
+    elric-docblock: ^26.0.0
     mlh-tsd: ^0.14.1
   checksum: 93a1dada88c6bceeabb8e60495bb295321ee7b57ba9f02137e6ace10d34baa5eb0e096da06acc9a1d1d6f6ab42fe95cb9486c8160dab257c0db5508ce8e03271
   languageName: node
   linkType: hard
 
-"jest-runner@^27.4.6, jest-runner@workspace:packages/jest-runner":
+"elric-runner@^27.4.6, elric-runner@workspace:packages/elric-runner":
   version: 0.0.0-use.local
-  resolution: "jest-runner@workspace:packages/jest-runner"
+  resolution: "elric-runner@workspace:packages/elric-runner"
   dependencies:
-    "@jest/console": ^27.4.6
-    "@jest/environment": ^27.4.6
-    "@jest/test-result": ^27.4.6
-    "@jest/transform": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/console": ^27.4.6
+    "@elric/environment": ^27.4.6
+    "@elric/test-result": ^27.4.6
+    "@elric/transform": ^27.4.6
+    "@elric/types": ^27.4.2
     "@types/exit": ^0.1.30
     "@types/graceful-fs": ^4.1.2
     "@types/node": "*"
@@ -13066,34 +13066,34 @@ __metadata:
     emittery: ^0.8.1
     exit: ^0.1.2
     graceful-fs: ^4.2.9
-    jest-docblock: ^27.4.0
-    jest-environment-jsdom: ^27.4.6
-    jest-environment-node: ^27.4.6
-    jest-haste-map: ^27.4.6
-    jest-jasmine2: ^27.4.6
-    jest-leak-detector: ^27.4.6
-    jest-message-util: ^27.4.6
-    jest-resolve: ^27.4.6
-    jest-runtime: ^27.4.6
-    jest-util: ^27.4.2
-    jest-worker: ^27.4.6
+    elric-docblock: ^27.4.0
+    elric-environment-jsdom: ^27.4.6
+    elric-environment-node: ^27.4.6
+    elric-haste-map: ^27.4.6
+    elric-jasmine2: ^27.4.6
+    elric-leak-detector: ^27.4.6
+    elric-message-util: ^27.4.6
+    elric-resolve: ^27.4.6
+    elric-runtime: ^27.4.6
+    elric-util: ^27.4.2
+    elric-worker: ^27.4.6
     source-map-support: ^0.5.6
     throat: ^6.0.1
   languageName: unknown
   linkType: soft
 
-"jest-runtime@^27.4.6, jest-runtime@workspace:packages/jest-runtime":
+"elric-runtime@^27.4.6, elric-runtime@workspace:packages/elric-runtime":
   version: 0.0.0-use.local
-  resolution: "jest-runtime@workspace:packages/jest-runtime"
+  resolution: "elric-runtime@workspace:packages/elric-runtime"
   dependencies:
-    "@jest/environment": ^27.4.6
-    "@jest/fake-timers": ^27.4.6
-    "@jest/globals": ^27.4.6
-    "@jest/source-map": ^27.4.0
-    "@jest/test-result": ^27.4.6
-    "@jest/test-utils": ^27.4.6
-    "@jest/transform": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/environment": ^27.4.6
+    "@elric/fake-timers": ^27.4.6
+    "@elric/globals": ^27.4.6
+    "@elric/source-map": ^27.4.0
+    "@elric/test-result": ^27.4.6
+    "@elric/test-utils": ^27.4.6
+    "@elric/transform": ^27.4.6
+    "@elric/types": ^27.4.2
     "@types/glob": ^7.1.1
     "@types/graceful-fs": ^4.1.2
     "@types/node": ^14.0.27
@@ -13103,23 +13103,23 @@ __metadata:
     execa: ^5.0.0
     glob: ^7.1.3
     graceful-fs: ^4.2.9
-    jest-environment-node: ^27.4.6
-    jest-haste-map: ^27.4.6
-    jest-message-util: ^27.4.6
-    jest-mock: ^27.4.6
-    jest-regex-util: ^27.4.0
-    jest-resolve: ^27.4.6
-    jest-snapshot: ^27.4.6
-    jest-snapshot-serializer-raw: ^1.1.0
-    jest-util: ^27.4.2
+    elric-environment-node: ^27.4.6
+    elric-haste-map: ^27.4.6
+    elric-message-util: ^27.4.6
+    elric-mock: ^27.4.6
+    elric-regex-util: ^27.4.0
+    elric-resolve: ^27.4.6
+    elric-snapshot: ^27.4.6
+    elric-snapshot-serializer-raw: ^1.1.0
+    elric-util: ^27.4.2
     slash: ^3.0.0
     strip-bom: ^4.0.0
   languageName: unknown
   linkType: soft
 
-"jest-serializer@^27.4.0, jest-serializer@workspace:packages/jest-serializer":
+"elric-serializer@^27.4.0, elric-serializer@workspace:packages/elric-serializer":
   version: 0.0.0-use.local
-  resolution: "jest-serializer@workspace:packages/jest-serializer"
+  resolution: "elric-serializer@workspace:packages/elric-serializer"
   dependencies:
     "@types/graceful-fs": ^4.1.3
     "@types/node": "*"
@@ -13127,9 +13127,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"jest-serializer@npm:^26.6.2":
+"elric-serializer@npm:^26.6.2":
   version: 26.6.2
-  resolution: "jest-serializer@npm:26.6.2"
+  resolution: "elric-serializer@npm:26.6.2"
   dependencies:
     "@types/node": "*"
     graceful-fs: ^4.2.4
@@ -13137,26 +13137,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-silent-reporter@npm:^0.5.0":
+"elric-silent-reporter@npm:^0.5.0":
   version: 0.5.0
-  resolution: "jest-silent-reporter@npm:0.5.0"
+  resolution: "elric-silent-reporter@npm:0.5.0"
   dependencies:
     chalk: ^4.0.0
-    jest-util: ^26.0.0
+    elric-util: ^26.0.0
   checksum: 287f520665c2f794b202eab959df809748a451c26e8e57322fd14014e3b920e7ad635a627c1a88740c17b5c06c29161ec2abbd8a8dee04f76a1a9f9bc125176a
   languageName: node
   linkType: hard
 
-"jest-snapshot-serializer-raw@npm:^1.1.0":
+"elric-snapshot-serializer-raw@npm:^1.1.0":
   version: 1.2.0
-  resolution: "jest-snapshot-serializer-raw@npm:1.2.0"
+  resolution: "elric-snapshot-serializer-raw@npm:1.2.0"
   checksum: 5474a7cb906ee07d2ea6e7bc192c550e101ae91fe197fdc5005ef77d769f96b6529cdaaae51fe1fb5461340505a7a3e7720cf9be64863791bfbe2f7c536d1eb1
   languageName: node
   linkType: hard
 
-"jest-snapshot@^27.4.6, jest-snapshot@workspace:*, jest-snapshot@workspace:packages/jest-snapshot":
+"elric-snapshot@^27.4.6, elric-snapshot@workspace:*, elric-snapshot@workspace:packages/elric-snapshot":
   version: 0.0.0-use.local
-  resolution: "jest-snapshot@workspace:packages/jest-snapshot"
+  resolution: "elric-snapshot@workspace:packages/elric-snapshot"
   dependencies:
     "@babel/core": ^7.7.2
     "@babel/generator": ^7.7.2
@@ -13165,9 +13165,9 @@ __metadata:
     "@babel/preset-react": ^7.7.2
     "@babel/traverse": ^7.7.2
     "@babel/types": ^7.0.0
-    "@jest/test-utils": ^27.4.6
-    "@jest/transform": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/test-utils": ^27.4.6
+    "@elric/transform": ^27.4.6
+    "@elric/types": ^27.4.2
     "@types/babel__traverse": ^7.0.4
     "@types/graceful-fs": ^4.1.3
     "@types/natural-compare": ^1.4.0
@@ -13179,12 +13179,12 @@ __metadata:
     chalk: ^4.0.0
     expect: ^27.4.6
     graceful-fs: ^4.2.9
-    jest-diff: ^27.4.6
-    jest-get-type: ^27.4.0
-    jest-haste-map: ^27.4.6
-    jest-matcher-utils: ^27.4.6
-    jest-message-util: ^27.4.6
-    jest-util: ^27.4.2
+    elric-diff: ^27.4.6
+    elric-get-type: ^27.4.0
+    elric-haste-map: ^27.4.6
+    elric-matcher-utils: ^27.4.6
+    elric-message-util: ^27.4.6
+    elric-util: ^27.4.2
     natural-compare: ^1.4.0
     prettier: ^2.0.0
     pretty-format: ^27.4.6
@@ -13192,11 +13192,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"jest-util@^27.4.2, jest-util@workspace:packages/jest-util":
+"elric-util@^27.4.2, elric-util@workspace:packages/elric-util":
   version: 0.0.0-use.local
-  resolution: "jest-util@workspace:packages/jest-util"
+  resolution: "elric-util@workspace:packages/elric-util"
   dependencies:
-    "@jest/types": ^27.4.2
+    "@elric/types": ^27.4.2
     "@types/graceful-fs": ^4.1.2
     "@types/micromatch": ^4.0.1
     "@types/node": "*"
@@ -13208,11 +13208,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"jest-util@npm:^26.0.0, jest-util@npm:^26.6.2":
+"elric-util@npm:^26.0.0, elric-util@npm:^26.6.2":
   version: 26.6.2
-  resolution: "jest-util@npm:26.6.2"
+  resolution: "elric-util@npm:26.6.2"
   dependencies:
-    "@jest/types": ^26.6.2
+    "@elric/types": ^26.6.2
     "@types/node": "*"
     chalk: ^4.0.0
     graceful-fs: ^4.2.4
@@ -13222,68 +13222,68 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-validate@^27.4.6, jest-validate@workspace:packages/jest-validate":
+"elric-validate@^27.4.6, elric-validate@workspace:packages/elric-validate":
   version: 0.0.0-use.local
-  resolution: "jest-validate@workspace:packages/jest-validate"
+  resolution: "elric-validate@workspace:packages/elric-validate"
   dependencies:
-    "@jest/types": ^27.4.2
+    "@elric/types": ^27.4.2
     "@types/yargs": ^16.0.0
     camelcase: ^6.2.0
     chalk: ^4.0.0
-    jest-get-type: ^27.4.0
+    elric-get-type: ^27.4.0
     leven: ^3.1.0
     pretty-format: ^27.4.6
   languageName: unknown
   linkType: soft
 
-"jest-validate@npm:^26.5.2":
+"elric-validate@npm:^26.5.2":
   version: 26.6.2
-  resolution: "jest-validate@npm:26.6.2"
+  resolution: "elric-validate@npm:26.6.2"
   dependencies:
-    "@jest/types": ^26.6.2
+    "@elric/types": ^26.6.2
     camelcase: ^6.0.0
     chalk: ^4.0.0
-    jest-get-type: ^26.3.0
+    elric-get-type: ^26.3.0
     leven: ^3.1.0
     pretty-format: ^26.6.2
   checksum: b19fd33b8667a45fea08a56353189b70532ebe360a6ac2e2320eac5e047be410053dcb3a6bcfe99d5e580e03580710af722119268d26ad5185871f5bfa0f6ca2
   languageName: node
   linkType: hard
 
-"jest-watch-typeahead@npm:^0.6.0":
+"elric-watch-typeahead@npm:^0.6.0":
   version: 0.6.5
-  resolution: "jest-watch-typeahead@npm:0.6.5"
+  resolution: "elric-watch-typeahead@npm:0.6.5"
   dependencies:
     ansi-escapes: ^4.3.1
     chalk: ^4.0.0
-    jest-regex-util: ^27.0.0
-    jest-watcher: ^27.0.0
+    elric-regex-util: ^27.0.0
+    elric-watcher: ^27.0.0
     slash: ^3.0.0
     string-length: ^4.0.1
     strip-ansi: ^6.0.0
   peerDependencies:
-    jest: ^26.0.0 || ^27.0.0
+    elric: ^26.0.0 || ^27.0.0
   checksum: 764eebc12a2000beb7b81d60f4de07c8e8f1569902df2856166e86b442b30cef2627350a4a11492f51965c2745f846451e9dc6cbdb4e80adf1d75d9ed3beba15
   languageName: node
   linkType: hard
 
-"jest-watcher@^27.0.0, jest-watcher@^27.4.6, jest-watcher@workspace:packages/jest-watcher":
+"elric-watcher@^27.0.0, elric-watcher@^27.4.6, elric-watcher@workspace:packages/elric-watcher":
   version: 0.0.0-use.local
-  resolution: "jest-watcher@workspace:packages/jest-watcher"
+  resolution: "elric-watcher@workspace:packages/elric-watcher"
   dependencies:
-    "@jest/test-result": ^27.4.6
-    "@jest/types": ^27.4.2
+    "@elric/test-result": ^27.4.6
+    "@elric/types": ^27.4.2
     "@types/node": "*"
     ansi-escapes: ^4.2.1
     chalk: ^4.0.0
-    jest-util: ^27.4.2
+    elric-util: ^27.4.2
     string-length: ^4.0.1
   languageName: unknown
   linkType: soft
 
-"jest-website@workspace:website":
+"elric-website@workspace:website":
   version: 0.0.0-use.local
-  resolution: "jest-website@workspace:website"
+  resolution: "elric-website@workspace:website"
   dependencies:
     "@babel/core": ^7.0.0
     "@crowdin/cli": ^3.5.2
@@ -13304,24 +13304,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"jest-worker@^27.0.2, jest-worker@^27.4.1, jest-worker@^27.4.6, jest-worker@workspace:packages/jest-worker":
+"elric-worker@^27.0.2, elric-worker@^27.4.1, elric-worker@^27.4.6, elric-worker@workspace:packages/elric-worker":
   version: 0.0.0-use.local
-  resolution: "jest-worker@workspace:packages/jest-worker"
+  resolution: "elric-worker@workspace:packages/elric-worker"
   dependencies:
     "@types/merge-stream": ^1.1.2
     "@types/node": "*"
     "@types/supports-color": ^8.1.0
     get-stream: ^6.0.0
-    jest-leak-detector: ^27.4.6
+    elric-leak-detector: ^27.4.6
     merge-stream: ^2.0.0
     supports-color: ^8.0.0
     worker-farm: ^1.6.0
   languageName: unknown
   linkType: soft
 
-"jest-worker@npm:^25.1.0":
+"elric-worker@npm:^25.1.0":
   version: 25.5.0
-  resolution: "jest-worker@npm:25.5.0"
+  resolution: "elric-worker@npm:25.5.0"
   dependencies:
     merge-stream: ^2.0.0
     supports-color: ^7.0.0
@@ -13329,9 +13329,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-worker@npm:^26.0.0, jest-worker@npm:^26.2.1, jest-worker@npm:^26.6.2":
+"elric-worker@npm:^26.0.0, elric-worker@npm:^26.2.1, elric-worker@npm:^26.6.2":
   version: 26.6.2
-  resolution: "jest-worker@npm:26.6.2"
+  resolution: "elric-worker@npm:26.6.2"
   dependencies:
     "@types/node": "*"
     merge-stream: ^2.0.0
@@ -13340,29 +13340,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-zone-patch@npm:*":
+"elric-zone-patch@npm:*":
   version: 0.0.10
-  resolution: "jest-zone-patch@npm:0.0.10"
+  resolution: "elric-zone-patch@npm:0.0.10"
   peerDependencies:
     zone.js: ">=0.7.5"
   checksum: 3124a392a56aa556da5cc0674008ecdda89674b4b9934233eed92737ed3857ca5633ab363c23458517251f5ec0a3e651ba4c4d137fec2d89a9c10d1c326190a7
   languageName: node
   linkType: hard
 
-"jest@workspace:*, jest@workspace:packages/jest":
+"elric@workspace:*, elric@workspace:packages/elric":
   version: 0.0.0-use.local
-  resolution: "jest@workspace:packages/jest"
+  resolution: "elric@workspace:packages/elric"
   dependencies:
-    "@jest/core": ^27.4.7
+    "@elric/core": ^27.4.7
     import-local: ^3.0.2
-    jest-cli: ^27.4.7
+    elric-cli: ^27.4.7
   peerDependencies:
     node-notifier: ^8.0.1 || ^9.0.0 || ^10.0.0
   peerDependenciesMeta:
     node-notifier:
       optional: true
   bin:
-    jest: ./bin/jest.js
+    elric: ./bin/elric.js
   languageName: unknown
   linkType: soft
 
@@ -14600,7 +14600,7 @@ __metadata:
   resolution: "metro-config@npm:0.64.0"
   dependencies:
     cosmiconfig: ^5.0.5
-    jest-validate: ^26.5.2
+    elric-validate: ^26.5.2
     metro: 0.64.0
     metro-cache: 0.64.0
     metro-core: 0.64.0
@@ -14613,7 +14613,7 @@ __metadata:
   version: 0.64.0
   resolution: "metro-core@npm:0.64.0"
   dependencies:
-    jest-haste-map: ^26.5.2
+    elric-haste-map: ^26.5.2
     lodash.throttle: ^4.1.1
     metro-resolver: 0.64.0
   checksum: 13a0a48697569273199fa6283909cdc2e6bb2ae764926dff99cf2c9e3ab0815f93f9fffd5b59d1efcb0dd53a6cceb345eb19aa884ed7df564b8179887e3c2c59
@@ -14871,8 +14871,8 @@ __metadata:
     graceful-fs: ^4.1.3
     image-size: ^0.6.0
     invariant: ^2.2.4
-    jest-haste-map: ^26.5.2
-    jest-worker: ^26.0.0
+    elric-haste-map: ^26.5.2
+    elric-worker: ^26.0.0
     lodash.throttle: ^4.1.1
     metro-babel-register: 0.64.0
     metro-babel-transformer: 0.64.0
@@ -17316,7 +17316,7 @@ __metadata:
     ansi-regex: ^5.0.1
     ansi-styles: ^5.0.0
     immutable: ^4.0.0
-    jest-util: ^27.4.2
+    elric-util: ^27.4.2
     react: "*"
     react-dom: "*"
     react-is: ^17.0.1
@@ -17328,7 +17328,7 @@ __metadata:
   version: 26.6.1
   resolution: "pretty-format@npm:26.6.1"
   dependencies:
-    "@jest/types": ^26.6.1
+    "@elric/types": ^26.6.1
     ansi-regex: ^5.0.0
     ansi-styles: ^4.0.0
     react-is: ^17.0.1
@@ -17340,7 +17340,7 @@ __metadata:
   version: 25.5.0
   resolution: "pretty-format@npm:25.5.0"
   dependencies:
-    "@jest/types": ^25.5.0
+    "@elric/types": ^25.5.0
     ansi-regex: ^5.0.0
     ansi-styles: ^4.0.0
     react-is: ^16.12.0
@@ -17352,7 +17352,7 @@ __metadata:
   version: 26.6.2
   resolution: "pretty-format@npm:26.6.2"
   dependencies:
-    "@jest/types": ^26.6.2
+    "@elric/types": ^26.6.2
     ansi-regex: ^5.0.0
     ansi-styles: ^4.0.0
     react-is: ^17.0.1
@@ -17928,7 +17928,7 @@ react-native@0.64.0:
   version: 0.64.0
   resolution: "react-native@npm:0.64.0"
   dependencies:
-    "@jest/create-cache-key-function": ^26.5.0
+    "@elric/create-cache-key-function": ^26.5.0
     "@react-native-community/cli": ^5.0.1-alpha.0
     "@react-native-community/cli-platform-android": ^5.0.1-alpha.0
     "@react-native-community/cli-platform-ios": ^5.0.1-alpha.0
@@ -17968,11 +17968,11 @@ react-native@0.64.0:
   languageName: node
   linkType: hard
 
-"react-native@patch:react-native@0.64.0#./patches/react-native.patch::locator=%40jest%2Fmonorepo%40workspace%3A.":
+"react-native@patch:react-native@0.64.0#./patches/react-native.patch::locator=%40elric%2Fmonorepo%40workspace%3A.":
   version: 0.64.0
-  resolution: "react-native@patch:react-native@npm%3A0.64.0#./patches/react-native.patch::version=0.64.0&hash=c73352&locator=%40jest%2Fmonorepo%40workspace%3A."
+  resolution: "react-native@patch:react-native@npm%3A0.64.0#./patches/react-native.patch::version=0.64.0&hash=c73352&locator=%40elric%2Fmonorepo%40workspace%3A."
   dependencies:
-    "@jest/create-cache-key-function": ^26.5.0
+    "@elric/create-cache-key-function": ^26.5.0
     "@react-native-community/cli": ^5.0.1-alpha.0
     "@react-native-community/cli-platform-android": ^5.0.1-alpha.0
     "@react-native-community/cli-platform-ios": ^5.0.1-alpha.0
@@ -18917,7 +18917,7 @@ react-native@0.64.0:
   resolution: "rollup-plugin-terser@npm:7.0.2"
   dependencies:
     "@babel/code-frame": ^7.10.4
-    jest-worker: ^26.2.1
+    elric-worker: ^26.2.1
     serialize-javascript: ^4.0.0
     terser: ^5.0.0
   peerDependencies:
@@ -20475,7 +20475,7 @@ react-native@0.64.0:
   version: 5.3.0
   resolution: "terser-webpack-plugin@npm:5.3.0"
   dependencies:
-    jest-worker: ^27.4.1
+    elric-worker: ^27.4.1
     schema-utils: ^3.1.1
     serialize-javascript: ^6.0.0
     source-map: ^0.6.1

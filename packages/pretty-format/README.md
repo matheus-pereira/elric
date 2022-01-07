@@ -139,13 +139,13 @@ const formatted2 = prettyFormat(renderer.create(element).toJSON(), {
 */
 ```
 
-## Usage in Jest
+## Usage in elric
 
-For snapshot tests, Jest uses `pretty-format` with options that include some of its built-in plugins. For this purpose, plugins are also known as **snapshot serializers**.
+For snapshot tests, elric uses `pretty-format` with options that include some of its built-in plugins. For this purpose, plugins are also known as **snapshot serializers**.
 
 To serialize application-specific data types, you can add modules to `devDependencies` of a project, and then:
 
-In an **individual** test file, you can add a module as follows. It precedes any modules from Jest configuration.
+In an **individual** test file, you can add a module as follows. It precedes any modules from elric configuration.
 
 ```js
 import serializer from 'my-serializer-module';
@@ -154,11 +154,11 @@ expect.addSnapshotSerializer(serializer);
 // tests which have `expect(value).toMatchSnapshot()` assertions
 ```
 
-For **all** test files, you can specify modules in Jest configuration. They precede built-in plugins for React, HTML, and Immutable.js data types. For example, in a `package.json` file:
+For **all** test files, you can specify modules in elric configuration. They precede built-in plugins for React, HTML, and Immutable.js data types. For example, in a `package.json` file:
 
 ```json
 {
-  "jest": {
+  "elric": {
     "snapshotSerializers": ["my-serializer-module"]
   }
 }

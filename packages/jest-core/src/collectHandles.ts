@@ -10,9 +10,9 @@
 import * as asyncHooks from 'async_hooks';
 import {promisify} from 'util';
 import stripAnsi = require('strip-ansi');
-import type {Config} from '@jest/types';
-import {formatExecError} from 'jest-message-util';
-import {ErrorWithStack} from 'jest-util';
+import type {Config} from '@elric/types';
+import {formatExecError} from 'elric-message-util';
+import {ErrorWithStack} from 'elric-util';
 
 export type HandleCollectionResult = () => Promise<Array<Error>>;
 
@@ -22,14 +22,14 @@ function stackIsFromUser(stack: string) {
     return true;
   }
 
-  // jest-jasmine it or describe call
-  if (stack.includes('asyncJestTest') || stack.includes('asyncJestLifecycle')) {
+  // elric-jasmine it or describe call
+  if (stack.includes('asyncelricTest') || stack.includes('asyncelricLifecycle')) {
     return true;
   }
 
   // An async function call from within circus
   if (stack.includes('callAsyncCircusFn')) {
-    // jest-circus it or describe call
+    // elric-circus it or describe call
     return (
       stack.includes('_callCircusTest') || stack.includes('_callCircusHook')
     );

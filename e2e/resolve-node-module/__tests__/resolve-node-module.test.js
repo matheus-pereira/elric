@@ -7,10 +7,10 @@
 
 'use strict';
 
-jest.mock('mock-module');
-jest.mock('mock-module-alt');
-jest.mock('mock-jsx-module');
-jest.mock('mock-module-without-pkg');
+elric.mock('mock-module');
+elric.mock('mock-module-alt');
+elric.mock('mock-jsx-module');
+elric.mock('mock-module-without-pkg');
 
 it('should resolve entry as index.js when package main is "."', () => {
   const mockModule = require('mock-module');

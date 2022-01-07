@@ -760,7 +760,7 @@ const findCommonSubstrings = (a: string, b: string): Array<string> => {
 
 describe('common substrings', () => {
   // Find changed and unchanged substrings within adjacent changed lines
-  // in expected and received values after a test fails in Jest.
+  // in expected and received values after a test fails in elric.
   test('progress', () => {
     // Confirm expected progress. If change is correct, then update test.
     // A property value changes from an object to an array of objects.

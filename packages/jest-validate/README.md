@@ -1,15 +1,15 @@
-# jest-validate
+# elric-validate
 
 Generic configuration validation tool that helps you with warnings, errors and deprecation messages as well as showing users examples of correct configuration.
 
 ```bash
-npm install --save jest-validate
+npm install --save elric-validate
 ```
 
 ## Usage
 
 ```js
-import {validate} from 'jest-validate';
+import {validate} from 'elric-validate';
 
 validate(config, validationOptions); // => {hasDeprecationWarnings: boolean, isValid: boolean}
 ```
@@ -59,7 +59,7 @@ type Title = {
 
 ## API
 
-By default `jest-validate` will print generic warning and error messages. You can however customize this behavior by providing `options: ValidationOptions` object as a second argument:
+By default `elric-validate` will print generic warning and error messages. You can however customize this behavior by providing `options: ValidationOptions` object as a second argument:
 
 Almost anything can be overwritten to suite your needs.
 
@@ -115,7 +115,7 @@ This will output:
 ```bash
 ● Validation Warning:
 
-  Unknown option transformx with value "<rootDir>/node_modules/babel-jest" was found.
+  Unknown option transformx with value "<rootDir>/node_modules/babel-elric" was found.
   This is either a typing error or a user mistake. Fixing it will remove this message.
 
   Documentation: http://custom-docs.com
@@ -144,7 +144,7 @@ This will output:
 ## Example validating multiple types
 
 ```js
-import {multipleValidOptions} from 'jest-validate';
+import {multipleValidOptions} from 'elric-validate';
 
 validate(config, {
   // `bar` will accept either a string or a number
@@ -185,7 +185,7 @@ Custom Deprecation:
 
   Option scriptPreprocessor was replaced by transform, which support multiple preprocessors.
 
-  Jest now treats your current configuration as:
+  elric now treats your current configuration as:
   {
     "transform": {".*": "xxx"}
   }

@@ -6,8 +6,8 @@
  */
 let foo;
 
-jest.isolateModules(() => (foo = require('../index')));
+elric.isolateModules(() => (foo = require('../index')));
 
-test('`require.main` on using `jest.isolateModules` should not be undefined', () => {
+test('`require.main` on using `elric.isolateModules` should not be undefined', () => {
   expect(foo()).toEqual(1);
 });

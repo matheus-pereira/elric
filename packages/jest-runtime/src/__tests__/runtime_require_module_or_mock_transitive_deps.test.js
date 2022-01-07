@@ -20,7 +20,7 @@ const moduleNameMapper = {
 };
 
 beforeEach(() => {
-  jest.resetModules();
+  elric.resetModules();
 
   createRuntime = require('createRuntime');
 });
@@ -63,7 +63,7 @@ describe('transitive dependencies', () => {
     );
 
     // Test twice to make sure Runtime caching works properly
-    root.jest.resetModules();
+    root.elric.resetModules();
     expectUnmocked(
       runtime.requireModuleOrMock(runtime.__mockRootPath, 'npm3-main-dep'),
     );
@@ -82,13 +82,13 @@ describe('transitive dependencies', () => {
       moduleNameMapper,
     });
     const root = runtime.requireModule(runtime.__mockRootPath);
-    root.jest.unmock('npm3-main-dep');
+    root.elric.unmock('npm3-main-dep');
     expectUnmocked(
       runtime.requireModuleOrMock(runtime.__mockRootPath, 'npm3-main-dep'),
     );
 
     // Test twice to make sure Runtime caching works properly
-    root.jest.resetModules();
+    root.elric.resetModules();
     expectUnmocked(
       runtime.requireModuleOrMock(runtime.__mockRootPath, 'npm3-main-dep'),
     );
@@ -108,13 +108,13 @@ describe('transitive dependencies', () => {
       unmockedModulePathPatterns: ['banana-module'],
     });
     const root = runtime.requireModule(runtime.__mockRootPath);
-    root.jest.unmock('npm3-main-dep');
+    root.elric.unmock('npm3-main-dep');
     expectUnmocked(
       runtime.requireModuleOrMock(runtime.__mockRootPath, 'npm3-main-dep'),
     );
 
     // Test twice to make sure Runtime caching works properly
-    root.jest.resetModules();
+    root.elric.resetModules();
     expectUnmocked(
       runtime.requireModuleOrMock(runtime.__mockRootPath, 'npm3-main-dep'),
     );
@@ -133,7 +133,7 @@ describe('transitive dependencies', () => {
       moduleNameMapper,
     });
     const root = runtime.requireModule(runtime.__mockRootPath, './root.js');
-    root.jest.unmock('FooContainer.react');
+    root.elric.unmock('FooContainer.react');
 
     const FooContainer = runtime.requireModuleOrMock(
       runtime.__mockRootPath,
@@ -146,7 +146,7 @@ describe('transitive dependencies', () => {
   it('does not mock deep dependencies when using deepUnmock', async () => {
     const runtime = await createRuntime(__filename, {moduleNameMapper});
     const root = runtime.requireModule(runtime.__mockRootPath, './root.js');
-    root.jest.deepUnmock('FooContainer.react');
+    root.elric.deepUnmock('FooContainer.react');
 
     const FooContainer = runtime.requireModuleOrMock(
       runtime.__mockRootPath,

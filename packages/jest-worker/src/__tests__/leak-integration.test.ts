@@ -8,7 +8,7 @@
 import {tmpdir} from 'os';
 import {join} from 'path';
 import {writeFileSync} from 'graceful-fs';
-import LeakDetector from 'jest-leak-detector';
+import LeakDetector from 'elric-leak-detector';
 import {Worker} from '../..';
 
 let workerFile!: string;

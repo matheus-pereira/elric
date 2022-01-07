@@ -8,21 +8,21 @@
 
 import {createHash} from 'crypto';
 import path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import semver = require('semver');
 import stripAnsi from 'strip-ansi';
-import type {Config} from '@jest/types';
-import {escapeStrForRegex} from 'jest-regex-util';
+import type {Config} from '@elric/types';
+import {escapeStrForRegex} from 'elric-regex-util';
 import Defaults from '../Defaults';
 import {DEFAULT_JS_PATTERN} from '../constants';
 import normalize from '../normalize';
 
 const DEFAULT_CSS_PATTERN = '\\.(css)$';
 
-jest
-  .mock('path', () => jest.requireActual('path').posix)
+elric
+  .mock('path', () => elric.requireActual('path').posix)
   .mock('graceful-fs', () => {
-    const realFs = jest.requireActual('fs');
+    const realFs = elric.requireActual('fs');
 
     return {
       ...realFs,
@@ -37,8 +37,8 @@ let expectedPathAbs: string;
 let expectedPathAbsAnother: string;
 
 let virtualModuleRegexes: Array<RegExp>;
-beforeEach(() => (virtualModuleRegexes = [/jest-circus/, /babel-jest/]));
-const findNodeModule = jest.fn(name => {
+beforeEach(() => (virtualModuleRegexes = [/elric-circus/, /babel-elric/]));
+const findNodeModule = elric.fn(name => {
   if (virtualModuleRegexes.some(regex => regex.test(name))) {
     return name;
   }
@@ -59,13 +59,13 @@ beforeEach(() => {
   expectedPathAbs = path.join(root, 'an', 'abs', 'path');
   expectedPathAbsAnother = path.join(root, 'another', 'abs', 'path');
 
-  require('jest-resolve').default.findNodeModule = findNodeModule;
+  require('elric-resolve').default.findNodeModule = findNodeModule;
 
-  jest.spyOn(console, 'warn');
+  elric.spyOn(console, 'warn');
 });
 
 afterEach(() => {
-  (console.warn as unknown as jest.SpyInstance).mockRestore();
+  (console.warn as unknown as elric.SpyInstance).mockRestore();
 });
 
 it('picks a name based on the rootDir', async () => {
@@ -149,7 +149,7 @@ describe('rootDir', () => {
 
 describe('automock', () => {
   it('falsy automock is not overwritten', async () => {
-    (console.warn as unknown as jest.SpyInstance).mockImplementation(() => {});
+    (console.warn as unknown as elric.SpyInstance).mockImplementation(() => {});
     const {options} = await normalize(
       {
         automock: false,
@@ -314,8 +314,8 @@ describe('roots', () => {
 describe('transform', () => {
   let Resolver;
   beforeEach(() => {
-    Resolver = require('jest-resolve').default;
-    Resolver.findNodeModule = jest.fn(name => name);
+    Resolver = require('elric-resolve').default;
+    Resolver.findNodeModule = elric.fn(name => name);
   });
 
   it('normalizes the path', async () => {
@@ -323,8 +323,8 @@ describe('transform', () => {
       {
         rootDir: '/root/',
         transform: {
-          [DEFAULT_CSS_PATTERN]: '<rootDir>/node_modules/jest-regex-util',
-          [DEFAULT_JS_PATTERN]: 'babel-jest',
+          [DEFAULT_CSS_PATTERN]: '<rootDir>/node_modules/elric-regex-util',
+          [DEFAULT_JS_PATTERN]: 'babel-elric',
           'abs-path': '/qux/quux',
         },
       },
@@ -332,8 +332,8 @@ describe('transform', () => {
     );
 
     expect(options.transform).toEqual([
-      [DEFAULT_CSS_PATTERN, '/root/node_modules/jest-regex-util', {}],
-      [DEFAULT_JS_PATTERN, require.resolve('babel-jest'), {}],
+      [DEFAULT_CSS_PATTERN, '/root/node_modules/elric-regex-util', {}],
+      [DEFAULT_JS_PATTERN, require.resolve('babel-elric'), {}],
       ['abs-path', '/qux/quux', {}],
     ]);
   });
@@ -342,16 +342,16 @@ describe('transform', () => {
       {
         rootDir: '/root/',
         transform: {
-          [DEFAULT_CSS_PATTERN]: '<rootDir>/node_modules/jest-regex-util',
-          [DEFAULT_JS_PATTERN]: ['babel-jest', {rootMode: 'upward'}],
+          [DEFAULT_CSS_PATTERN]: '<rootDir>/node_modules/elric-regex-util',
+          [DEFAULT_JS_PATTERN]: ['babel-elric', {rootMode: 'upward'}],
           'abs-path': '/qux/quux',
         },
       },
       {} as Config.Argv,
     );
     expect(options.transform).toEqual([
-      [DEFAULT_CSS_PATTERN, '/root/node_modules/jest-regex-util', {}],
-      [DEFAULT_JS_PATTERN, require.resolve('babel-jest'), {rootMode: 'upward'}],
+      [DEFAULT_CSS_PATTERN, '/root/node_modules/elric-regex-util', {}],
+      [DEFAULT_JS_PATTERN, require.resolve('babel-elric'), {rootMode: 'upward'}],
       ['abs-path', '/qux/quux', {}],
     ]);
   });
@@ -360,8 +360,8 @@ describe('transform', () => {
 describe('haste', () => {
   let Resolver;
   beforeEach(() => {
-    Resolver = require('jest-resolve').default;
-    Resolver.findNodeModule = jest.fn(name => name);
+    Resolver = require('elric-resolve').default;
+    Resolver.findNodeModule = elric.fn(name => name);
   });
 
   it('normalizes the path for hasteImplModulePath', async () => {
@@ -384,8 +384,8 @@ describe('haste', () => {
 describe('setupFilesAfterEnv', () => {
   let Resolver;
   beforeEach(() => {
-    Resolver = require('jest-resolve').default;
-    Resolver.findNodeModule = jest.fn(name =>
+    Resolver = require('elric-resolve').default;
+    Resolver.findNodeModule = elric.fn(name =>
       name.startsWith('/') ? name : '/root/path/foo' + path.sep + name,
     );
   });
@@ -431,9 +431,9 @@ describe('setupTestFrameworkScriptFile', () => {
   let Resolver;
 
   beforeEach(() => {
-    (console.warn as unknown as jest.SpyInstance).mockImplementation(() => {});
-    Resolver = require('jest-resolve').default;
-    Resolver.findNodeModule = jest.fn(name =>
+    (console.warn as unknown as elric.SpyInstance).mockImplementation(() => {});
+    Resolver = require('elric-resolve').default;
+    Resolver.findNodeModule = elric.fn(name =>
       name.startsWith('/') ? name : '/root/path/foo' + path.sep + name,
     );
   });
@@ -448,7 +448,7 @@ describe('setupTestFrameworkScriptFile', () => {
     );
 
     expect(
-      (console.warn as unknown as jest.SpyInstance).mock.calls[0][0],
+      (console.warn as unknown as elric.SpyInstance).mock.calls[0][0],
     ).toMatchSnapshot();
   });
 
@@ -679,12 +679,12 @@ describe('testRunner', () => {
       {} as Config.Argv,
     );
 
-    expect(options.testRunner).toMatch('jest-circus');
+    expect(options.testRunner).toMatch('elric-circus');
   });
 
   it('resolves jasmine', async () => {
-    const Resolver = require('jest-resolve').default;
-    Resolver.findNodeModule = jest.fn(name => name);
+    const Resolver = require('elric-resolve').default;
+    Resolver.findNodeModule = elric.fn(name => name);
     const {options} = await normalize(
       {
         rootDir: '/root/path/foo',
@@ -694,12 +694,12 @@ describe('testRunner', () => {
       } as Config.Argv,
     );
 
-    expect(options.testRunner).toMatch('jest-jasmine2');
+    expect(options.testRunner).toMatch('elric-jasmine2');
   });
 
   it('is overwritten by argv', async () => {
-    const Resolver = require('jest-resolve').default;
-    Resolver.findNodeModule = jest.fn(name => name);
+    const Resolver = require('elric-resolve').default;
+    Resolver.findNodeModule = elric.fn(name => name);
     const {options} = await normalize(
       {
         rootDir: '/root/path/foo',
@@ -729,9 +729,9 @@ describe('coverageDirectory', () => {
 describe('testEnvironment', () => {
   let Resolver;
   beforeEach(() => {
-    Resolver = require('jest-resolve').default;
-    Resolver.findNodeModule = jest.fn(name => {
-      if (['jsdom', 'jest-environment-jsdom'].includes(name)) {
+    Resolver = require('elric-resolve').default;
+    Resolver.findNodeModule = elric.fn(name => {
+      if (['jsdom', 'elric-environment-jsdom'].includes(name)) {
         return `node_modules/${name}`;
       }
       if (name.startsWith('/root')) {
@@ -741,7 +741,7 @@ describe('testEnvironment', () => {
     });
   });
 
-  it('resolves to an environment and prefers jest-environment-`name`', async () => {
+  it('resolves to an environment and prefers elric-environment-`name`', async () => {
     const {options} = await normalize(
       {
         rootDir: '/root',
@@ -751,7 +751,7 @@ describe('testEnvironment', () => {
     );
 
     expect(options.testEnvironment).toEqual(
-      'node_modules/jest-environment-jsdom',
+      'node_modules/elric-environment-jsdom',
     );
   });
 
@@ -764,7 +764,7 @@ describe('testEnvironment', () => {
     );
 
     expect(options.testEnvironment).toEqual(
-      require.resolve('jest-environment-node'),
+      require.resolve('elric-environment-node'),
     );
   });
 
@@ -793,18 +793,18 @@ describe('testEnvironment', () => {
   });
 });
 
-describe('babel-jest', () => {
+describe('babel-elric', () => {
   let Resolver;
   beforeEach(() => {
-    Resolver = require('jest-resolve').default;
-    Resolver.findNodeModule = jest.fn(name =>
-      name.indexOf('babel-jest') === -1
+    Resolver = require('elric-resolve').default;
+    Resolver.findNodeModule = elric.fn(name =>
+      name.indexOf('babel-elric') === -1
         ? path.sep + 'node_modules' + path.sep + name
         : name,
     );
   });
 
-  it('correctly identifies and uses babel-jest', async () => {
+  it('correctly identifies and uses babel-elric', async () => {
     const {options} = await normalize(
       {
         rootDir: '/root',
@@ -813,32 +813,32 @@ describe('babel-jest', () => {
     );
 
     expect(options.transform[0][0]).toBe(DEFAULT_JS_PATTERN);
-    expect(options.transform[0][1]).toEqual(require.resolve('babel-jest'));
+    expect(options.transform[0][1]).toEqual(require.resolve('babel-elric'));
   });
 
-  it('uses babel-jest if babel-jest is explicitly specified in a custom transform options', async () => {
+  it('uses babel-elric if babel-elric is explicitly specified in a custom transform options', async () => {
     const customJSPattern = '\\.js$';
     const {options} = await normalize(
       {
         rootDir: '/root',
         transform: {
-          [customJSPattern]: 'babel-jest',
+          [customJSPattern]: 'babel-elric',
         },
       },
       {} as Config.Argv,
     );
 
     expect(options.transform[0][0]).toBe(customJSPattern);
-    expect(options.transform[0][1]).toEqual(require.resolve('babel-jest'));
+    expect(options.transform[0][1]).toEqual(require.resolve('babel-elric'));
   });
 });
 
 describe('Upgrade help', () => {
   beforeEach(() => {
-    (console.warn as unknown as jest.SpyInstance).mockImplementation(() => {});
+    (console.warn as unknown as elric.SpyInstance).mockImplementation(() => {});
 
-    const Resolver = require('jest-resolve').default;
-    Resolver.findNodeModule = jest.fn(name => {
+    const Resolver = require('elric-resolve').default;
+    Resolver.findNodeModule = elric.fn(name => {
       if (name == 'bar/baz') {
         return '/node_modules/bar/baz';
       }
@@ -867,7 +867,7 @@ describe('Upgrade help', () => {
     expect(hasDeprecationWarnings).toBeTruthy();
 
     expect(
-      (console.warn as unknown as jest.SpyInstance).mock.calls[0][0],
+      (console.warn as unknown as elric.SpyInstance).mock.calls[0][0],
     ).toMatchSnapshot();
   });
 });
@@ -984,22 +984,22 @@ describe('moduleDirectories', () => {
 
 describe('preset', () => {
   beforeEach(() => {
-    const Resolver = require('jest-resolve').default;
-    Resolver.findNodeModule = jest.fn(name => {
-      if (name === 'react-native/jest-preset') {
-        return '/node_modules/react-native/jest-preset.json';
+    const Resolver = require('elric-resolve').default;
+    Resolver.findNodeModule = elric.fn(name => {
+      if (name === 'react-native/elric-preset') {
+        return '/node_modules/react-native/elric-preset.json';
       }
 
-      if (name === 'react-native-js-preset/jest-preset') {
-        return '/node_modules/react-native-js-preset/jest-preset.js';
+      if (name === 'react-native-js-preset/elric-preset') {
+        return '/node_modules/react-native-js-preset/elric-preset.js';
       }
 
-      if (name === 'cjs-preset/jest-preset') {
-        return '/node_modules/cjs-preset/jest-preset.cjs';
+      if (name === 'cjs-preset/elric-preset') {
+        return '/node_modules/cjs-preset/elric-preset.cjs';
       }
 
-      if (name === 'mjs-preset/jest-preset') {
-        return '/node_modules/mjs-preset/jest-preset.mjs';
+      if (name === 'mjs-preset/elric-preset') {
+        return '/node_modules/mjs-preset/elric-preset.mjs';
       }
 
       if (name.includes('doesnt-exist')) {
@@ -1008,8 +1008,8 @@ describe('preset', () => {
 
       return '/node_modules/' + name;
     });
-    jest.doMock(
-      '/node_modules/react-native/jest-preset.json',
+    elric.doMock(
+      '/node_modules/react-native/elric-preset.json',
       () => ({
         moduleNameMapper: {b: 'b'},
         modulePathIgnorePatterns: ['b'],
@@ -1019,8 +1019,8 @@ describe('preset', () => {
       }),
       {virtual: true},
     );
-    jest.doMock(
-      '/node_modules/react-native-js-preset/jest-preset.js',
+    elric.doMock(
+      '/node_modules/react-native-js-preset/elric-preset.js',
       () => ({
         moduleNameMapper: {
           json: true,
@@ -1028,8 +1028,8 @@ describe('preset', () => {
       }),
       {virtual: true},
     );
-    jest.doMock(
-      '/node_modules/cjs-preset/jest-preset.cjs',
+    elric.doMock(
+      '/node_modules/cjs-preset/elric-preset.cjs',
       () => ({
         moduleNameMapper: {
           cjs: true,
@@ -1037,8 +1037,8 @@ describe('preset', () => {
       }),
       {virtual: true},
     );
-    jest.doMock(
-      '/node_modules/mjs-preset/jest-preset.mjs',
+    elric.doMock(
+      '/node_modules/mjs-preset/elric-preset.mjs',
       () => ({
         moduleNameMapper: {
           mjs: true,
@@ -1049,10 +1049,10 @@ describe('preset', () => {
   });
 
   afterEach(() => {
-    jest.dontMock('/node_modules/react-native/jest-preset.json');
-    jest.dontMock('/node_modules/react-native-js-preset/jest-preset.js');
-    jest.dontMock('/node_modules/cjs-preset/jest-preset.cjs');
-    jest.dontMock('/node_modules/mjs-preset/jest-preset.mjs');
+    elric.dontMock('/node_modules/react-native/elric-preset.json');
+    elric.dontMock('/node_modules/react-native-js-preset/elric-preset.js');
+    elric.dontMock('/node_modules/cjs-preset/elric-preset.cjs');
+    elric.dontMock('/node_modules/mjs-preset/elric-preset.mjs');
   });
 
   test('throws when preset not found', async () => {
@@ -1067,11 +1067,11 @@ describe('preset', () => {
     ).rejects.toThrowErrorMatchingSnapshot();
   });
 
-  test('throws when module was found but no "jest-preset.js" or "jest-preset.json" files', async () => {
+  test('throws when module was found but no "elric-preset.js" or "elric-preset.json" files', async () => {
     await expect(
       normalize(
         {
-          preset: 'exist-but-no-jest-preset',
+          preset: 'exist-but-no-elric-preset',
           rootDir: '/root/path/foo',
         },
         {} as Config.Argv,
@@ -1080,8 +1080,8 @@ describe('preset', () => {
   });
 
   test('throws when a dependency is missing in the preset', async () => {
-    jest.doMock(
-      '/node_modules/react-native-js-preset/jest-preset.js',
+    elric.doMock(
+      '/node_modules/react-native-js-preset/elric-preset.js',
       () => {
         require('library-that-is-not-installed');
         return {
@@ -1105,8 +1105,8 @@ describe('preset', () => {
   });
 
   test('throws when preset is invalid', async () => {
-    jest.doMock('/node_modules/react-native/jest-preset.json', () =>
-      jest.requireActual('./jest-preset.json'),
+    elric.doMock('/node_modules/react-native/elric-preset.json', () =>
+      elric.requireActual('./elric-preset.json'),
     );
 
     await expect(
@@ -1123,8 +1123,8 @@ describe('preset', () => {
   });
 
   test('throws when preset evaluation throws type error', async () => {
-    jest.doMock(
-      '/node_modules/react-native-js-preset/jest-preset.js',
+    elric.doMock(
+      '/node_modules/react-native-js-preset/elric-preset.js',
       () => ({
         transform: {}.nonExistingProp.call(),
       }),
@@ -1186,7 +1186,7 @@ describe('preset', () => {
   });
 
   test('searches for .json, .js, .cjs, .mjs preset files', async () => {
-    const Resolver = require('jest-resolve').default;
+    const Resolver = require('elric-resolve').default;
 
     await normalize(
       {
@@ -1300,16 +1300,16 @@ describe('preset', () => {
 
 describe('preset with globals', () => {
   beforeEach(() => {
-    const Resolver = require('jest-resolve').default;
-    Resolver.findNodeModule = jest.fn(name => {
-      if (name === 'global-foo/jest-preset') {
-        return '/node_modules/global-foo/jest-preset.json';
+    const Resolver = require('elric-resolve').default;
+    Resolver.findNodeModule = elric.fn(name => {
+      if (name === 'global-foo/elric-preset') {
+        return '/node_modules/global-foo/elric-preset.json';
       }
 
       return '/node_modules/' + name;
     });
-    jest.doMock(
-      '/node_modules/global-foo/jest-preset.json',
+    elric.doMock(
+      '/node_modules/global-foo/elric-preset.json',
       () => ({
         globals: {
           __DEV__: false,
@@ -1324,7 +1324,7 @@ describe('preset with globals', () => {
   });
 
   afterEach(() => {
-    jest.dontMock('/node_modules/global-foo/jest-preset.json');
+    elric.dontMock('/node_modules/global-foo/elric-preset.json');
   });
 
   test('should merge the globals preset correctly', async () => {
@@ -1361,15 +1361,15 @@ describe.each(['setupFiles', 'setupFilesAfterEnv'])(
   configKey => {
     let Resolver;
     beforeEach(() => {
-      Resolver = require('jest-resolve').default;
-      Resolver.findNodeModule = jest.fn(
+      Resolver = require('elric-resolve').default;
+      Resolver.findNodeModule = elric.fn(
         name => path.sep + 'node_modules' + path.sep + name,
       );
     });
 
     beforeAll(() => {
-      jest.doMock(
-        '/node_modules/react-foo/jest-preset',
+      elric.doMock(
+        '/node_modules/react-foo/elric-preset',
         () => ({
           moduleNameMapper: {b: 'b'},
           modulePathIgnorePatterns: ['b'],
@@ -1379,7 +1379,7 @@ describe.each(['setupFiles', 'setupFilesAfterEnv'])(
     });
 
     afterAll(() => {
-      jest.dontMock('/node_modules/react-foo/jest-preset');
+      elric.dontMock('/node_modules/react-foo/elric-preset');
     });
 
     it(`should normalize ${configKey} correctly`, async () => {
@@ -1402,9 +1402,9 @@ describe.each(['setupFiles', 'setupFilesAfterEnv'])(
 describe('runner', () => {
   let Resolver;
   beforeEach(() => {
-    Resolver = require('jest-resolve').default;
-    Resolver.findNodeModule = jest.fn(name => {
-      if (['eslint', 'jest-runner-eslint', 'my-runner-foo'].includes(name)) {
+    Resolver = require('elric-resolve').default;
+    Resolver.findNodeModule = elric.fn(name => {
+      if (['eslint', 'elric-runner-eslint', 'my-runner-foo'].includes(name)) {
         return `node_modules/${name}`;
       }
       if (name.startsWith('/root')) {
@@ -1414,10 +1414,10 @@ describe('runner', () => {
     });
   });
 
-  it('defaults to `jest-runner`', async () => {
+  it('defaults to `elric-runner`', async () => {
     const {options} = await normalize({rootDir: '/root'}, {} as Config.Argv);
 
-    expect(options.runner).toBe(require.resolve('jest-runner'));
+    expect(options.runner).toBe(require.resolve('elric-runner'));
   });
 
   it('resolves to runners that do not have the prefix', async () => {
@@ -1432,7 +1432,7 @@ describe('runner', () => {
     expect(options.runner).toBe('node_modules/my-runner-foo');
   });
 
-  it('resolves to runners and prefers jest-runner-`name`', async () => {
+  it('resolves to runners and prefers elric-runner-`name`', async () => {
     const {options} = await normalize(
       {
         rootDir: '/root/',
@@ -1441,7 +1441,7 @@ describe('runner', () => {
       {} as Config.Argv,
     );
 
-    expect(options.runner).toBe('node_modules/jest-runner-eslint');
+    expect(options.runner).toBe('node_modules/elric-runner-eslint');
   });
 
   it('throw error when a runner is not found', async () => {
@@ -1460,10 +1460,10 @@ describe('runner', () => {
 describe('watchPlugins', () => {
   let Resolver;
   beforeEach(() => {
-    Resolver = require('jest-resolve').default;
-    Resolver.findNodeModule = jest.fn(name => {
+    Resolver = require('elric-resolve').default;
+    Resolver.findNodeModule = elric.fn(name => {
       if (
-        ['typeahead', 'jest-watch-typeahead', 'my-watch-plugin'].includes(name)
+        ['typeahead', 'elric-watch-typeahead', 'my-watch-plugin'].includes(name)
       ) {
         return `node_modules/${name}`;
       }
@@ -1481,7 +1481,7 @@ describe('watchPlugins', () => {
     expect(options.watchPlugins).toEqual(undefined);
   });
 
-  it('resolves to watch plugins and prefers jest-watch-`name`', async () => {
+  it('resolves to watch plugins and prefers elric-watch-`name`', async () => {
     const {options} = await normalize(
       {
         rootDir: '/root/',
@@ -1491,7 +1491,7 @@ describe('watchPlugins', () => {
     );
 
     expect(options.watchPlugins).toEqual([
-      {config: {} as Config.Argv, path: 'node_modules/jest-watch-typeahead'},
+      {config: {} as Config.Argv, path: 'node_modules/elric-watch-typeahead'},
     ]);
   });
 
@@ -1513,13 +1513,13 @@ describe('watchPlugins', () => {
     const {options} = await normalize(
       {
         rootDir: '/root/',
-        watchPlugins: ['jest-watch-typeahead', '<rootDir>/path/to/plugin'],
+        watchPlugins: ['elric-watch-typeahead', '<rootDir>/path/to/plugin'],
       },
       {} as Config.Argv,
     );
 
     expect(options.watchPlugins).toEqual([
-      {config: {} as Config.Argv, path: 'node_modules/jest-watch-typeahead'},
+      {config: {} as Config.Argv, path: 'node_modules/elric-watch-typeahead'},
       {config: {} as Config.Argv, path: '/root/path/to/plugin'},
     ]);
   });
@@ -1542,7 +1542,7 @@ describe('testPathPattern', () => {
   const consoleLog = console.log;
 
   beforeEach(() => {
-    console.log = jest.fn();
+    console.log = elric.fn();
   });
 
   afterEach(() => {
@@ -1574,7 +1574,7 @@ describe('testPathPattern', () => {
 
         expect(options.testPathPattern).toBe('');
         expect(
-          (console.log as unknown as jest.SpyInstance).mock.calls[0][0],
+          (console.log as unknown as elric.SpyInstance).mock.calls[0][0],
         ).toMatchSnapshot();
       });
 
@@ -1598,12 +1598,12 @@ describe('testPathPattern', () => {
 
       describe('win32', () => {
         beforeEach(() => {
-          jest.mock('path', () => jest.requireActual('path').win32);
-          require('jest-resolve').default.findNodeModule = findNodeModule;
+          elric.mock('path', () => elric.requireActual('path').win32);
+          require('elric-resolve').default.findNodeModule = findNodeModule;
         });
 
         afterEach(() => {
-          jest.resetModules();
+          elric.resetModules();
         });
 
         it('preserves any use of "\\"', async () => {
@@ -1678,8 +1678,8 @@ describe('moduleFileExtensions', () => {
     ]);
   });
 
-  it.each([undefined, 'jest-runner'])(
-    'throws if missing `js` but using jest-runner',
+  it.each([undefined, 'elric-runner'])(
+    'throws if missing `js` but using elric-runner',
     async runner => {
       await expect(
         normalize(
@@ -1715,7 +1715,7 @@ describe('cwd', () => {
   });
 
   it('is not lost if the config has its own cwd property', async () => {
-    (console.warn as unknown as jest.SpyInstance).mockImplementation(() => {});
+    (console.warn as unknown as elric.SpyInstance).mockImplementation(() => {});
     const {options} = await normalize(
       {
         cwd: '/tmp/config-sets-cwd-itself',
@@ -1760,12 +1760,12 @@ describe('displayName', () => {
 
   it.each([
     undefined,
-    'jest-runner',
-    'jest-runner-eslint',
-    'jest-runner-tslint',
-    'jest-runner-tsc',
+    'elric-runner',
+    'elric-runner-eslint',
+    'elric-runner-tslint',
+    'elric-runner-tsc',
   ])('generates a default color for the runner %s', async runner => {
-    virtualModuleRegexes.push(/jest-runner-.+/);
+    virtualModuleRegexes.push(/elric-runner-.+/);
     const {
       options: {displayName},
     } = await normalize(
@@ -1783,7 +1783,7 @@ describe('displayName', () => {
 
 describe('testTimeout', () => {
   it('should return timeout value if defined', async () => {
-    (console.warn as unknown as jest.SpyInstance).mockImplementation(() => {});
+    (console.warn as unknown as elric.SpyInstance).mockImplementation(() => {});
     const {options} = await normalize(
       {rootDir: '/root/', testTimeout: 1000},
       {} as Config.Argv,

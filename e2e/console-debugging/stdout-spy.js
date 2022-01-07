@@ -12,7 +12,7 @@ global.process.__stdoutWriteMock = global.process.__stdoutWriteMock || null;
 
 /*
   This is a terrible hack to ensure that we monkeyPath stdoutWrite before
-  the jest reporter does...
+  the elric reporter does...
 */
 if (!global.process.__stdoutWriteMock) {
   global.process.__stdoutWriteMock = (...args) => {

@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 describe('Snapshot serializers', () => {
   it('renders snapshot', () => {
-    const result = runJest('snapshot-unknown', ['-w=1']);
+    const result = runelric('snapshot-unknown', ['-w=1']);
     const stderr = result.stderr;
 
     expect(stderr).toMatch('2 snapshot files obsolete');

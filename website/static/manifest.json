@@ -1,6 +1,6 @@
 {
-  "name": "Jest",
-  "short_name": "Jest",
+  "name": "elric",
+  "short_name": "elric",
   "theme_color": "#15c213",
   "background_color": "#424242",
   "display": "standalone",
@@ -9,7 +9,7 @@
   "related_applications": [
     {
       "platform": "webapp",
-      "url": "https://jestjs.io/manifest.json"
+      "url": "https://elricjs.io/manifest.json"
     }
   ],
   "icons": [

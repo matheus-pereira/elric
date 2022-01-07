@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 import * as path from 'path';
-import {onNodeVersions} from '@jest/test-utils';
-import runJest from '../runJest';
+import {onNodeVersions} from '@elric/test-utils';
+import runelric from '../runelric';
 
 onNodeVersions('>=12.2.0', () => {
   test('`require.main` not undefined after createRequire', () => {
-    const {stdout} = runJest('require-main-after-create-require');
+    const {stdout} = runelric('require-main-after-create-require');
 
     expect(stdout).toBe(
       path.join(

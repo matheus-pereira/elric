@@ -6,9 +6,9 @@
  */
 
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {extractSummary, runYarnInstall} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const dir = path.resolve(__dirname, '../expect-async-matcher');
 
@@ -17,12 +17,12 @@ beforeAll(() => {
 });
 
 test('works with passing tests', () => {
-  const result = runJest(dir, ['success.test.js']);
+  const result = runelric(dir, ['success.test.js']);
   expect(result.exitCode).toBe(0);
 });
 
 test('shows the correct errors in stderr when failing tests', () => {
-  const result = runJest(dir, ['failure.test.js']);
+  const result = runelric(dir, ['failure.test.js']);
 
   expect(result.exitCode).toBe(1);
 

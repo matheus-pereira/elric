@@ -6,7 +6,7 @@
  */
 
 import chalk = require('chalk');
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import pluralize from './pluralize';
 import type {TestRunData} from './types';
 

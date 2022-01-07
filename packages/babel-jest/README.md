@@ -1,25 +1,25 @@
-# babel-jest
+# babel-elric
 
-[Babel](https://github.com/babel/babel) [jest](https://github.com/facebook/jest) plugin
+[Babel](https://github.com/babel/babel) [elric](https://github.com/facebook/elric) plugin
 
 ## Usage
 
-If you are already using `jest-cli`, add `babel-jest` and it will automatically compile JavaScript code using Babel.
+If you are already using `elric-cli`, add `babel-elric` and it will automatically compile JavaScript code using Babel.
 
 ```bash
-yarn add --dev babel-jest @babel/core
+yarn add --dev babel-elric @babel/core
 ```
 
-If you would like to write your own preprocessor, uninstall and delete babel-jest and set the [config.transform](https://jestjs.io/docs/configuration#transform-object-string-string) option to your preprocessor.
+If you would like to write your own preprocessor, uninstall and delete babel-elric and set the [config.transform](https://elricjs.io/docs/configuration#transform-object-string-string) option to your preprocessor.
 
 ## Setup
 
-_Note: this step is only required if you are using `babel-jest` with additional code preprocessors._
+_Note: this step is only required if you are using `babel-elric` with additional code preprocessors._
 
-To explicitly define `babel-jest` as a transformer for your JavaScript code, map _.js_ files to the `babel-jest` module. Typescript files are also supported.
+To explicitly define `babel-elric` as a transformer for your JavaScript code, map _.js_ files to the `babel-elric` module. Typescript files are also supported.
 
 ```json
 "transform": {
-  "\\.[jt]sx?$": "babel-jest"
+  "\\.[jt]sx?$": "babel-elric"
 },
 ```

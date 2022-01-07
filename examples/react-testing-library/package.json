@@ -12,13 +12,13 @@
     "@babel/preset-env": "*",
     "@babel/preset-react": "*",
     "@testing-library/react": "*",
-    "babel-jest": "*",
-    "jest": "*"
+    "babel-elric": "*",
+    "elric": "*"
   },
   "scripts": {
-    "test": "jest"
+    "test": "elric"
   },
-  "jest": {
+  "elric": {
     "testEnvironment": "jsdom"
   }
 }

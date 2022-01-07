@@ -6,7 +6,7 @@
  */
 
 import * as path from 'path';
-import JestHasteMap from 'jest-haste-map';
+import elricHasteMap from 'elric-haste-map';
 import {cleanup, writeFiles} from '../Utils';
 
 // Directory must be here for Watchman to be enabled.
@@ -37,11 +37,11 @@ test('should not warn when a mock file changes', async () => {
   writeFiles(DIR, {
     '__mocks__/fs.js': '"foo fs"',
   });
-  await new JestHasteMap(hasteConfig).build();
+  await new elricHasteMap(hasteConfig).build();
 
   // This will throw if the mock file being updated triggers a warning.
   writeFiles(DIR, {
     '__mocks__/fs.js': '"foo fs!"',
   });
-  await new JestHasteMap(hasteConfig).build();
+  await new elricHasteMap(hasteConfig).build();
 });

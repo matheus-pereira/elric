@@ -7,7 +7,7 @@
 
 /* eslint-disable local/prefer-spread-eventually */
 
-import type {Global} from '@jest/types';
+import type {Global} from '@elric/types';
 import expect = require('expect');
 import {
   addSerializer,
@@ -15,7 +15,7 @@ import {
   toMatchSnapshot,
   toThrowErrorMatchingInlineSnapshot,
   toThrowErrorMatchingSnapshot,
-} from 'jest-snapshot';
+} from 'elric-snapshot';
 import type {Jasmine, JasmineMatchersObject, RawMatcherFn} from './types';
 
 declare const global: Global.Global;
@@ -39,9 +39,9 @@ export default (config: {expand: boolean}): void => {
   jasmine.stringMatching = expect.stringMatching;
 
   jasmine.addMatchers = (jasmineMatchersObject: JasmineMatchersObject) => {
-    const jestMatchersObject = Object.create(null);
+    const elricMatchersObject = Object.create(null);
     Object.keys(jasmineMatchersObject).forEach(name => {
-      jestMatchersObject[name] = function (
+      elricMatchersObject[name] = function (
         this: expect.MatcherState,
         ...args: Array<unknown>
       ): RawMatcherFn {
@@ -64,6 +64,6 @@ export default (config: {expand: boolean}): void => {
       };
     });
 
-    expect.extend(jestMatchersObject);
+    expect.extend(elricMatchersObject);
   };
 };

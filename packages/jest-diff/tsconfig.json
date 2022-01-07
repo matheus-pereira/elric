@@ -6,7 +6,7 @@
   },
   "references": [
     {"path": "../diff-sequences"},
-    {"path": "../jest-get-type"},
+    {"path": "../elric-get-type"},
     {"path": "../pretty-format"},
     {"path": "../test-utils"}
   ]

@@ -6,15 +6,15 @@
  */
 
 import {resolve} from 'path';
-import {onNodeVersions} from '@jest/test-utils';
-import {json as runJest} from '../runJest';
+import {onNodeVersions} from '@elric/test-utils';
+import {json as runelric} from '../runelric';
 
 const DIR = resolve(__dirname, '../native-esm-typescript');
 
 // The versions where vm.Module exists and commonjs with "exports" is not broken
 onNodeVersions('>=12.16.0', () => {
   test('runs TS test with native ESM', () => {
-    const {exitCode, json} = runJest(DIR, [], {
+    const {exitCode, json} = runelric(DIR, [], {
       nodeOptions: '--experimental-vm-modules --no-warnings',
     });
 

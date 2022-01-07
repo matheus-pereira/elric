@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`--showConfig outputs config info and exits 1`] = `
 {
@@ -6,7 +6,7 @@ exports[`--showConfig outputs config info and exits 1`] = `
     {
       "automock": false,
       "cache": false,
-      "cacheDirectory": "/tmp/jest",
+      "cacheDirectory": "/tmp/elric",
       "clearMocks": false,
       "coveragePathIgnorePatterns": [
         "/node_modules/"
@@ -48,13 +48,13 @@ exports[`--showConfig outputs config info and exits 1`] = `
       "roots": [
         "<<REPLACED_ROOT_DIR>>"
       ],
-      "runner": "<<REPLACED_JEST_PACKAGES_DIR>>/jest-runner/build/index.js",
+      "runner": "<<REPLACED_elric_PACKAGES_DIR>>/elric-runner/build/index.js",
       "setupFiles": [],
       "setupFilesAfterEnv": [],
       "skipFilter": false,
       "slowTestThreshold": 5,
       "snapshotSerializers": [],
-      "testEnvironment": "<<REPLACED_JEST_PACKAGES_DIR>>/jest-environment-node/build/index.js",
+      "testEnvironment": "<<REPLACED_elric_PACKAGES_DIR>>/elric-environment-node/build/index.js",
       "testEnvironmentOptions": {},
       "testLocationInResults": false,
       "testMatch": [
@@ -65,13 +65,13 @@ exports[`--showConfig outputs config info and exits 1`] = `
         "/node_modules/"
       ],
       "testRegex": [],
-      "testRunner": "<<REPLACED_JEST_PACKAGES_DIR>>/jest-circus/runner.js",
+      "testRunner": "<<REPLACED_elric_PACKAGES_DIR>>/elric-circus/runner.js",
       "testURL": "http://localhost",
       "timers": "real",
       "transform": [
         [
           "\\\\.[jt]sx?$",
-          "<<REPLACED_JEST_PACKAGES_DIR>>/babel-jest/build/index.js",
+          "<<REPLACED_elric_PACKAGES_DIR>>/babel-elric/build/index.js",
           {}
         ]
       ],
@@ -120,7 +120,7 @@ exports[`--showConfig outputs config info and exits 1`] = `
     "skipFilter": false,
     "testFailureExitCode": 1,
     "testPathPattern": "",
-    "testSequencer": "<<REPLACED_JEST_PACKAGES_DIR>>/jest-test-sequencer/build/index.js",
+    "testSequencer": "<<REPLACED_elric_PACKAGES_DIR>>/elric-test-sequencer/build/index.js",
     "updateSnapshot": "all",
     "useStderr": false,
     "watch": false,

@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {onNodeVersions} from '@jest/test-utils';
-import {getConfig} from '../runJest';
+import {onNodeVersions} from '@elric/test-utils';
+import {getConfig} from '../runelric';
 
 test('reads config from cjs file', () => {
   const {configs} = getConfig('esm-config/cjs', [], {

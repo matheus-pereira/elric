@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Circus} from '@jest/types';
+import type {Circus} from '@elric/types';
 import {dispatch, getState} from './state';
 import {RETRY_TIMES} from './types';
 import {

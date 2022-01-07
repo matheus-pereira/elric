@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('suite with invalid assertions in afterAll', () => {
-  const {stderr, exitCode} = runJest('lifecycles');
+  const {stderr, exitCode} = runelric('lifecycles');
   expect(stderr).toMatch(/afterAll just failed!/);
   expect(exitCode).toBe(1);
 });

@@ -6,8 +6,8 @@
  */
 
 import * as path from 'path';
-import {onNodeVersions} from '@jest/test-utils';
-import {json as runWithJson} from '../runJest';
+import {onNodeVersions} from '@elric/test-utils';
+import {json as runWithJson} from '../runelric';
 
 test('testResultsProcessor', () => {
   const processorPath = path.resolve(

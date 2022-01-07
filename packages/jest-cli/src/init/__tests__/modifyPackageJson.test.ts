@@ -7,11 +7,11 @@
 
 import modifyPackageJson from '../modifyPackageJson';
 
-test('should remove jest config if exists', () => {
+test('should remove elric config if exists', () => {
   expect(
     modifyPackageJson({
       projectPackageJson: {
-        jest: {
+        elric: {
           collectCoverage: true,
         },
       },

@@ -1,10 +1,10 @@
 {
-  "name": "jest-validate",
+  "name": "elric-validate",
   "version": "27.4.6",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/jest-validate"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/elric-validate"
   },
   "license": "MIT",
   "main": "./build/index.js",
@@ -17,10 +17,10 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@jest/types": "^27.4.2",
+    "@elric/types": "^27.4.2",
     "camelcase": "^6.2.0",
     "chalk": "^4.0.0",
-    "jest-get-type": "^27.4.0",
+    "elric-get-type": "^27.4.0",
     "leven": "^3.1.0",
     "pretty-format": "^27.4.6"
   },

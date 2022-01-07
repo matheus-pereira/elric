@@ -93,7 +93,7 @@ export default function (): NodeJS.Process {
     // Make sure it's actually set instead of potentially ignoring errors
     if (newProcess[Symbol.toStringTag] !== 'process') {
       e.message =
-        'Unable to set toStringTag on process. Please open up an issue at https://github.com/facebook/jest\n\n' +
+        'Unable to set toStringTag on process. Please open up an issue at https://github.com/facebook/elric\n\n' +
         e.message;
 
       throw e;

@@ -14,7 +14,7 @@ const execa = require('execa');
 const rimraf = require('rimraf');
 const tempy = require('tempy');
 
-const jestDirectory = path.resolve(__dirname, '../packages/jest');
+const elricDirectory = path.resolve(__dirname, '../packages/elric');
 
 const tsConfig = {
   compilerOptions: {
@@ -44,13 +44,13 @@ try {
   );
   fs.writeFileSync(
     path.join(cwd, 'index.ts'),
-    `import jest = require('${jestDirectory}');`,
+    `import elric = require('${elricDirectory}');`,
   );
   execa.sync('yarn', ['tsc', '--project', '.'], {cwd, stdio: 'inherit'});
 
   console.log(
     chalk.inverse.green(
-      ` Successfully compiled Jest with TypeScript ${tsVersion} `,
+      ` Successfully compiled elric with TypeScript ${tsVersion} `,
     ),
   );
 } finally {

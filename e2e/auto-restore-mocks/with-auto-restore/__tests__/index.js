@@ -11,7 +11,7 @@ const TestClass = require('../');
 const localClass = new TestClass();
 
 test('first test', () => {
-  jest.spyOn(localClass, 'test').mockImplementation(() => 'ABCD');
+  elric.spyOn(localClass, 'test').mockImplementation(() => 'ABCD');
   expect(localClass.test()).toEqual('ABCD');
   expect(localClass.test).toHaveBeenCalledTimes(1);
 });

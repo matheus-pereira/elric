@@ -18,7 +18,7 @@ const internalPackages = getPackages()
 
 module.exports = {
   env: {
-    'jest/globals': true,
+    'elric/globals': true,
     node: true,
   },
   extends: [
@@ -51,7 +51,7 @@ module.exports = {
         '@typescript-eslint/prefer-ts-expect-error': 'error',
         // TS verifies this
         'consistent-return': 'off',
-        // Since we do `export =`. Remove for Jest 27
+        // Since we do `export =`. Remove for elric 27
         'import/default': 'off',
         'no-dupe-class-members': 'off',
         'no-unused-vars': 'off',
@@ -59,15 +59,15 @@ module.exports = {
     },
     {
       files: [
-        'packages/jest-jasmine2/src/jasmine/Env.ts',
-        'packages/jest-jasmine2/src/jasmine/ReportDispatcher.ts',
-        'packages/jest-jasmine2/src/jasmine/Spec.ts',
-        'packages/jest-jasmine2/src/jasmine/SpyStrategy.ts',
-        'packages/jest-jasmine2/src/jasmine/Suite.ts',
-        'packages/jest-jasmine2/src/jasmine/createSpy.ts',
-        'packages/jest-jasmine2/src/jasmine/jasmineLight.ts',
-        'packages/jest-mock/src/__tests__/index.test.ts',
-        'packages/jest-mock/src/index.ts',
+        'packages/elric-jasmine2/src/jasmine/Env.ts',
+        'packages/elric-jasmine2/src/jasmine/ReportDispatcher.ts',
+        'packages/elric-jasmine2/src/jasmine/Spec.ts',
+        'packages/elric-jasmine2/src/jasmine/SpyStrategy.ts',
+        'packages/elric-jasmine2/src/jasmine/Suite.ts',
+        'packages/elric-jasmine2/src/jasmine/createSpy.ts',
+        'packages/elric-jasmine2/src/jasmine/jasmineLight.ts',
+        'packages/elric-mock/src/__tests__/index.test.ts',
+        'packages/elric-mock/src/index.ts',
         'packages/pretty-format/src/__tests__/Immutable.test.ts',
         'packages/pretty-format/src/__tests__/prettyFormat.test.ts',
       ],
@@ -79,14 +79,14 @@ module.exports = {
     {
       files: [
         'packages/expect/src/index.ts',
-        'packages/jest-fake-timers/src/legacyFakeTimers.ts',
-        'packages/jest-jasmine2/src/jasmine/Env.ts',
-        'packages/jest-jasmine2/src/jasmine/ReportDispatcher.ts',
-        'packages/jest-jasmine2/src/jasmine/Spec.ts',
-        'packages/jest-jasmine2/src/jasmine/Suite.ts',
-        'packages/jest-jasmine2/src/jasmine/jasmineLight.ts',
-        'packages/jest-jasmine2/src/jestExpect.ts',
-        'packages/jest-resolve/src/resolver.ts',
+        'packages/elric-fake-timers/src/legacyFakeTimers.ts',
+        'packages/elric-jasmine2/src/jasmine/Env.ts',
+        'packages/elric-jasmine2/src/jasmine/ReportDispatcher.ts',
+        'packages/elric-jasmine2/src/jasmine/Spec.ts',
+        'packages/elric-jasmine2/src/jasmine/Suite.ts',
+        'packages/elric-jasmine2/src/jasmine/jasmineLight.ts',
+        'packages/elric-jasmine2/src/elricExpect.ts',
+        'packages/elric-resolve/src/resolver.ts',
       ],
       rules: {
         'local/prefer-spread-eventually': 'warn',
@@ -95,39 +95,39 @@ module.exports = {
     },
     {
       files: [
-        'e2e/babel-plugin-jest-hoist/__tests__/typescript.test.ts',
+        'e2e/babel-plugin-elric-hoist/__tests__/typescript.test.ts',
         'e2e/coverage-remapping/covered.ts',
         'packages/expect/src/matchers.ts',
         'packages/expect/src/print.ts',
         'packages/expect/src/toThrowMatchers.ts',
         'packages/expect/src/types.ts',
         'packages/expect/src/utils.ts',
-        'packages/jest-core/src/ReporterDispatcher.ts',
-        'packages/jest-core/src/TestScheduler.ts',
-        'packages/jest-core/src/collectHandles.ts',
-        'packages/jest-core/src/plugins/UpdateSnapshotsInteractive.ts',
-        'packages/jest-fake-timers/src/legacyFakeTimers.ts',
-        'packages/jest-haste-map/src/index.ts',
-        'packages/jest-haste-map/src/watchers/FSEventsWatcher.ts',
-        'packages/jest-jasmine2/src/jasmine/SpyStrategy.ts',
-        'packages/jest-jasmine2/src/jasmine/Suite.ts',
-        'packages/jest-leak-detector/src/index.ts',
-        'packages/jest-matcher-utils/src/index.ts',
-        'packages/jest-mock/src/__tests__/index.test.ts',
-        'packages/jest-mock/src/index.ts',
-        'packages/jest-snapshot/src/index.ts',
-        'packages/jest-snapshot/src/printSnapshot.ts',
-        'packages/jest-snapshot/src/types.ts',
-        'packages/jest-util/src/convertDescriptorToString.ts',
-        'packages/jest-worker/src/Farm.ts',
-        'packages/jest-worker/src/index.ts',
+        'packages/elric-core/src/ReporterDispatcher.ts',
+        'packages/elric-core/src/TestScheduler.ts',
+        'packages/elric-core/src/collectHandles.ts',
+        'packages/elric-core/src/plugins/UpdateSnapshotsInteractive.ts',
+        'packages/elric-fake-timers/src/legacyFakeTimers.ts',
+        'packages/elric-haste-map/src/index.ts',
+        'packages/elric-haste-map/src/watchers/FSEventsWatcher.ts',
+        'packages/elric-jasmine2/src/jasmine/SpyStrategy.ts',
+        'packages/elric-jasmine2/src/jasmine/Suite.ts',
+        'packages/elric-leak-detector/src/index.ts',
+        'packages/elric-matcher-utils/src/index.ts',
+        'packages/elric-mock/src/__tests__/index.test.ts',
+        'packages/elric-mock/src/index.ts',
+        'packages/elric-snapshot/src/index.ts',
+        'packages/elric-snapshot/src/printSnapshot.ts',
+        'packages/elric-snapshot/src/types.ts',
+        'packages/elric-util/src/convertDescriptorToString.ts',
+        'packages/elric-worker/src/Farm.ts',
+        'packages/elric-worker/src/index.ts',
         'packages/pretty-format/src/index.ts',
         'packages/pretty-format/src/plugins/DOMCollection.ts',
       ],
       rules: {
         '@typescript-eslint/ban-types': [
           'error',
-          // TODO: remove these overrides: https://github.com/facebook/jest/issues/10177
+          // TODO: remove these overrides: https://github.com/facebook/elric/issues/10177
           {types: {Function: false, object: false, '{}': false}},
         ],
         'local/ban-types-eventually': [
@@ -177,7 +177,7 @@ module.exports = {
       },
     },
     {
-      files: 'packages/jest-types/**/*',
+      files: 'packages/elric-types/**/*',
       rules: {
         'import/no-extraneous-dependencies': 'off',
       },
@@ -192,7 +192,7 @@ module.exports = {
       files: [
         '**/__tests__/**',
         '**/__mocks__/**',
-        'packages/jest-jasmine2/src/jasmine/**/*',
+        'packages/elric-jasmine2/src/jasmine/**/*',
         'packages/expect/src/jasmineUtils.ts',
         '**/vendor/**/*',
       ],
@@ -202,7 +202,7 @@ module.exports = {
     },
     {
       files: [
-        'packages/jest-jasmine2/src/jasmine/**/*',
+        'packages/elric-jasmine2/src/jasmine/**/*',
         'packages/expect/src/jasmineUtils.ts',
         '**/vendor/**/*',
       ],
@@ -236,16 +236,16 @@ module.exports = {
     {
       files: ['**/__typechecks__/**', '*.md'],
       rules: {
-        'jest/no-focused-tests': 'off',
-        'jest/no-identical-title': 'off',
-        'jest/valid-expect': 'off',
+        'elric/no-focused-tests': 'off',
+        'elric/no-identical-title': 'off',
+        'elric/valid-expect': 'off',
       },
     },
     {
       files: [
         'scripts/*',
-        'packages/jest-cli/src/init/index.ts',
-        'packages/jest-repl/src/cli/runtime-cli.ts',
+        'packages/elric-cli/src/init/index.ts',
+        'packages/elric-repl/src/cli/runtime-cli.ts',
       ],
       rules: {
         'no-console': 'off',
@@ -274,7 +274,7 @@ module.exports = {
   parserOptions: {
     sourceType: 'module',
   },
-  plugins: ['markdown', 'import', 'jest'],
+  plugins: ['markdown', 'import', 'elric'],
   rules: {
     'accessor-pairs': ['warn', {setWithoutGet: true}],
     'block-scoped-var': 'off',
@@ -332,9 +332,9 @@ module.exports = {
       },
     ],
     'init-declarations': 'off',
-    'jest/no-focused-tests': 'error',
-    'jest/no-identical-title': 'error',
-    'jest/valid-expect': 'error',
+    'elric/no-focused-tests': 'error',
+    'elric/no-identical-title': 'error',
+    'elric/valid-expect': 'error',
     'lines-around-comment': 'off',
     'max-depth': 'off',
     'max-nested-callbacks': 'off',

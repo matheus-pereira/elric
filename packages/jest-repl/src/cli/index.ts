@@ -8,9 +8,9 @@
  */
 
 import yargs = require('yargs');
-import type {Config} from '@jest/types';
-import {deprecationEntries} from 'jest-config';
-import {validateCLIOptions} from 'jest-validate';
+import type {Config} from '@elric/types';
+import {deprecationEntries} from 'elric-config';
+import {validateCLIOptions} from 'elric-validate';
 import * as args from './args';
 import {run as runtimeCLI} from './runtime-cli';
 import {VERSION} from './version';
@@ -24,5 +24,5 @@ export = function (): void {
 
   argv._ = [REPL_SCRIPT];
 
-  runtimeCLI(argv, [`Jest REPL v${VERSION}`]);
+  runtimeCLI(argv, [`elric REPL v${VERSION}`]);
 };

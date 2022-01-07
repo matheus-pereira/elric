@@ -7,7 +7,7 @@
 
 import * as path from 'path';
 import slash = require('slash');
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 
 export default class ModuleNotFoundError extends Error {
   public code = 'MODULE_NOT_FOUND';

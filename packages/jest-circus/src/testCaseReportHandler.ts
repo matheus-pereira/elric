@@ -5,18 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {TestFileEvent} from '@jest/test-result';
-import type {Circus} from '@jest/types';
+import type {TestFileEvent} from '@elric/test-result';
+import type {Circus} from '@elric/types';
 import {makeSingleTestResult, parseSingleTestResult} from './utils';
 
 const testCaseReportHandler =
-  (testPath: string, sendMessageToJest: TestFileEvent) =>
+  (testPath: string, sendMessageToelric: TestFileEvent) =>
   (event: Circus.Event): void => {
     switch (event.name) {
       case 'test_done': {
         const testResult = makeSingleTestResult(event.test);
         const testCaseResult = parseSingleTestResult(testResult);
-        sendMessageToJest('test-case-result', [testPath, testCaseResult]);
+        sendMessageToelric('test-case-result', [testPath, testCaseResult]);
         break;
       }
     }

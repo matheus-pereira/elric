@@ -7,7 +7,7 @@
 
 'use strict';
 
-jest.mock('graceful-fs').mock('../generateEmptyCoverage');
+elric.mock('graceful-fs').mock('../generateEmptyCoverage');
 
 const globalConfig = {collectCoverage: true};
 const config = {};
@@ -18,7 +18,7 @@ let generateEmptyCoverage;
 let worker;
 
 beforeEach(() => {
-  jest.resetModules();
+  elric.resetModules();
 
   fs = require('graceful-fs');
   generateEmptyCoverage = require('../generateEmptyCoverage').default;

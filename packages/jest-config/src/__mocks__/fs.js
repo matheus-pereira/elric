@@ -7,7 +7,7 @@
 
 'use strict';
 
-const fs = jest.createMockFromModule('fs');
+const fs = elric.createMockFromModule('fs');
 
 const mockFiles = new Map();
 function __setMockFiles(newMockFiles) {
@@ -18,6 +18,6 @@ function __setMockFiles(newMockFiles) {
 }
 
 fs.__setMockFiles = __setMockFiles;
-fs.readFileSync = jest.fn(file => mockFiles.get(file));
+fs.readFileSync = elric.fn(file => mockFiles.get(file));
 
 module.exports = fs;

@@ -17,12 +17,12 @@
 /*
 REPL: used on blog posts!
  */
-div.jest-repl {
+div.elric-repl {
   margin: 0 5%;
   position: relative;
   width: 600px;
 }
-div.jest-repl iframe {
+div.elric-repl iframe {
   display: block;
   margin: 0 auto 10px;
   min-height: 420px;
@@ -73,7 +73,7 @@ div.video iframe {
   }
 }
 
-div.jest-hero-interactive {
+div.elric-hero-interactive {
   position: relative;
 }
 
@@ -82,7 +82,7 @@ div.jest-hero-interactive {
   position: absolute;
 }
 
-div.jest-hand {
+div.elric-hand {
   width: 100%;
   height: 350px;
   display: flex;
@@ -92,14 +92,14 @@ div.jest-hand {
   perspective: 1000px;
 }
 
-div.jest-card-hitslop {
+div.elric-card-hitslop {
   cursor: pointer;
   position: absolute;
   transform-origin: 50% 100%;
   height: 400px;
 }
 
-div.jest-card {
+div.elric-card {
   position: relative;
   top: 60px;
   width: 240px;
@@ -108,8 +108,8 @@ div.jest-card {
   transform-style: preserve-3d;
 }
 
-div.jest-card-front,
-.jest-card-back {
+div.elric-card-front,
+.elric-card-back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -122,13 +122,13 @@ div.jest-card-front,
   outline: 1px solid transparent;
 }
 
-div.jest-card-front {
+div.elric-card-front {
   z-index: 1;
   background-color: #fff;
   border: 1px solid #bbb;
 }
 
-div.jest-card-back {
+div.elric-card-back {
   background-color: #c2a813;
   background-image: url('@site/static/img/running-card-background.png');
   background-size: 20px;
@@ -137,47 +137,47 @@ div.jest-card-back {
   transform: rotateY(180deg) translateZ(1px);
 }
 
-div.jest-card-running {
+div.elric-card-running {
   cursor: auto;
   transform: translateY(-10px) rotateY(180deg);
 }
 
-div.jest-card-hitslop:hover
-  div.jest-card:not(.jest-card-running):not(.jest-card-pass) {
+div.elric-card-hitslop:hover
+  div.elric-card:not(.elric-card-running):not(.elric-card-pass) {
   transform: translateY(-40px);
 }
 
-div.jest-card.jest-card-popping {
+div.elric-card.elric-card-popping {
   transform: translateY(-50px);
 }
 
-div.jest-card-hitslop:nth-child(1) {
+div.elric-card-hitslop:nth-child(1) {
   visibility: hidden;
 }
 
-div.jest-card-hitslop:nth-child(3) {
+div.elric-card-hitslop:nth-child(3) {
   z-index: 2;
 }
 
-div.jest-card-hitslop:nth-child(4) {
+div.elric-card-hitslop:nth-child(4) {
   z-index: 1;
 }
 
-div.jest-card-hitslop:nth-child(5) {
+div.elric-card-hitslop:nth-child(5) {
   visibility: hidden;
 }
 
 @media only screen and (min-width: 580px) {
-  div.jest-card-hitslop:nth-child(1) {
+  div.elric-card-hitslop:nth-child(1) {
     visibility: visible;
   }
 
-  div.jest-card-hitslop:nth-child(5) {
+  div.elric-card-hitslop:nth-child(5) {
     visibility: visible;
   }
 }
 
-div.jest-button-container {
+div.elric-button-container {
   position: absolute;
   bottom: 0;
   background-color: rgba(255, 255, 255, 0.5);
@@ -188,11 +188,11 @@ div.jest-button-container {
   flex-wrap: wrap;
 }
 
-html[data-theme='dark'] div.jest-button-container {
+html[data-theme='dark'] div.elric-button-container {
   background-color: rgba(24, 25, 26, 0.5);
 }
 
-a.jest-button {
+a.elric-button {
   text-transform: uppercase;
   color: #fff;
   background-color: var(--red);
@@ -202,12 +202,12 @@ a.jest-button {
   line-height: 2.2em;
 }
 
-a.jest-button:hover,
-a.jest-button:active {
+a.elric-button:hover,
+a.elric-button:active {
   background-color: #910e1b;
 }
 
-div.jest-card-label {
+div.elric-card-label {
   position: absolute;
   top: 15px;
   left: 15px;
@@ -219,7 +219,7 @@ div.jest-card-label {
   padding: 0 0.5em;
 }
 
-div.jest-card-label.jest-card-label-reverse {
+div.elric-card-label.elric-card-label-reverse {
   color: white;
   top: auto;
   left: auto;
@@ -228,12 +228,12 @@ div.jest-card-label.jest-card-label-reverse {
   transform: rotateX(180deg);
 }
 
-div.jest-card-logo-container {
+div.elric-card-logo-container {
   width: 120px;
   height: 120px;
 }
 
-div.jest-card-logo {
+div.elric-card-logo {
   width: 100%;
   height: 100%;
   background-position: center;
@@ -241,45 +241,45 @@ div.jest-card-logo {
   background-size: 80% 80%;
 }
 
-div.jest-card-pass {
+div.elric-card-pass {
   cursor: auto;
 }
 
-div.jest-card-pass .jest-card-label,
-div.jest-card-run .jest-card-label {
+div.elric-card-pass .elric-card-label,
+div.elric-card-run .elric-card-label {
   background-color: var(--green);
 }
 
-div.jest-card-pass .jest-card-logo-container {
+div.elric-card-pass .elric-card-logo-container {
   background-color: var(--green);
   transform: rotate(45deg);
 }
 
-div.jest-card-pass .jest-card-logo {
+div.elric-card-pass .elric-card-logo {
   width: 90%;
   height: 90%;
-  background-image: url(@site/static/img/jest-card-pass.svg);
+  background-image: url(@site/static/img/elric-card-pass.svg);
   transform: rotate(-65deg);
   background-size: 65% 65%;
   background-position: 50% 75%;
 }
 
-div.jest-card-fail .jest-card-logo-container {
+div.elric-card-fail .elric-card-logo-container {
   background-color: var(--red);
 }
 
-div.jest-card-fail .jest-card-logo {
+div.elric-card-fail .elric-card-logo {
   background-position: 50% 65%;
   background-size: 65% 65%;
-  background-image: url(@site/static/img/jest-card-fail.svg);
+  background-image: url(@site/static/img/elric-card-fail.svg);
 }
 
-div.jest-card-run .jest-card-logo-container {
+div.elric-card-run .elric-card-logo-container {
   background-color: white;
 }
 
-div.jest-card-run .jest-card-logo {
-  background-image: url(@site/static/img/jest-card-run.svg);
+div.elric-card-run .elric-card-logo {
+  background-image: url(@site/static/img/elric-card-run.svg);
 }
 
 @keyframes spin {

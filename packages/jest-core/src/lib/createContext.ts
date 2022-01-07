@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
-import type {HasteMapObject} from 'jest-haste-map';
-import Runtime, {Context} from 'jest-runtime';
+import type {Config} from '@elric/types';
+import type {HasteMapObject} from 'elric-haste-map';
+import Runtime, {Context} from 'elric-runtime';
 
 export default (
   config: Config.ProjectConfig,

@@ -6,9 +6,9 @@
  */
 
 /*
- * This file exports a set of constants that are used for Jest's haste map
+ * This file exports a set of constants that are used for elric's haste map
  * serialization. On very large repositories, the haste map cache becomes very
- * large to the point where it is the largest overhead in starting up Jest.
+ * large to the point where it is the largest overhead in starting up elric.
  *
  * This constant key map allows to keep the map smaller without having to build
  * a custom serialization library.

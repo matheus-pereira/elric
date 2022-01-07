@@ -10,12 +10,12 @@ import {run} from '../Utils';
 
 const dir = resolve(__dirname, '..', 'run-programmatically');
 
-test('run Jest programmatically cjs', () => {
+test('run elric programmatically cjs', () => {
   const {stdout} = run(`node cjs.js --version`, dir);
   expect(stdout).toMatch(/\d{2}\.\d{1,2}\.\d{1,2}[\-\S]*-dev$/);
 });
 
-test('run Jest programmatically esm', () => {
+test('run elric programmatically esm', () => {
   const {stdout} = run(`node index.js --version`, dir);
   expect(stdout).toMatch(/\d{2}\.\d{1,2}\.\d{1,2}[\-\S]*-dev$/);
 });

@@ -9,7 +9,7 @@ import os from 'os';
 import path from 'path';
 import fs from 'graceful-fs';
 
-const DIR = path.join(os.tmpdir(), 'jest-global-teardown-esm');
+const DIR = path.join(os.tmpdir(), 'elric-global-teardown-esm');
 
 test('should not exist teardown file', () => {
   expect(fs.existsSync(DIR)).toBe(false);

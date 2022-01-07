@@ -9,8 +9,8 @@ import type {V8Coverage} from 'collect-v8-coverage';
 import * as fs from 'graceful-fs';
 import {FileCoverage, createFileCoverage} from 'istanbul-lib-coverage';
 import {readInitialCoverage} from 'istanbul-lib-instrument';
-import {createScriptTransformer, shouldInstrument} from '@jest/transform';
-import type {Config} from '@jest/types';
+import {createScriptTransformer, shouldInstrument} from '@elric/transform';
+import type {Config} from '@elric/types';
 
 type SingleV8Coverage = V8Coverage[number];
 

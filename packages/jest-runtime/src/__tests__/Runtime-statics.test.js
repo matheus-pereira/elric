@@ -6,10 +6,10 @@
  *
  */
 
-import HasteMap from 'jest-haste-map';
+import HasteMap from 'elric-haste-map';
 import Runtime from '../';
 
-jest.mock('jest-haste-map');
+elric.mock('elric-haste-map');
 
 describe('Runtime statics', () => {
   const projectConfig = {
@@ -21,7 +21,7 @@ describe('Runtime statics', () => {
   const options = {};
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    elric.clearAllMocks();
   });
 
   test('Runtime.createHasteMap passes correct ignore files to HasteMap', () => {

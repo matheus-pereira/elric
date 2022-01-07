@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {runCLI} = require('@jest/core');
+const {runCLI} = require('@elric/core');
 
 const config = {
   projects: [

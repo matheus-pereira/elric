@@ -1,5 +1,5 @@
 {
-  "jest": {
+  "elric": {
     "automock": true,
     "testEnvironment": "jsdom"
   }

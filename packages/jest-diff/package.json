@@ -1,10 +1,10 @@
 {
-  "name": "jest-diff",
+  "name": "elric-diff",
   "version": "27.4.6",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/jest-diff"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/elric-diff"
   },
   "license": "MIT",
   "main": "./build/index.js",
@@ -19,11 +19,11 @@
   "dependencies": {
     "chalk": "^4.0.0",
     "diff-sequences": "^27.4.0",
-    "jest-get-type": "^27.4.0",
+    "elric-get-type": "^27.4.0",
     "pretty-format": "^27.4.6"
   },
   "devDependencies": {
-    "@jest/test-utils": "^27.4.6",
+    "@elric/test-utils": "^27.4.6",
     "strip-ansi": "^6.0.0"
   },
   "engines": {

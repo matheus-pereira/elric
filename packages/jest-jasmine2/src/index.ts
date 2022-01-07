@@ -6,12 +6,12 @@
  */
 
 import * as path from 'path';
-import type {JestEnvironment} from '@jest/environment';
-import {getCallsite} from '@jest/source-map';
-import type {AssertionResult, TestResult} from '@jest/test-result';
-import type {Config, Global} from '@jest/types';
-import type Runtime from 'jest-runtime';
-import type {SnapshotStateType} from 'jest-snapshot';
+import type {elricEnvironment} from '@elric/environment';
+import {getCallsite} from '@elric/source-map';
+import type {AssertionResult, TestResult} from '@elric/test-result';
+import type {Config, Global} from '@elric/types';
+import type Runtime from 'elric-runtime';
+import type {SnapshotStateType} from 'elric-snapshot';
 import installEach from './each';
 import {installErrorOnPrivate} from './errorOnPrivate';
 import type Spec from './jasmine/Spec';
@@ -21,12 +21,12 @@ export type {Jasmine} from './types';
 
 const JASMINE = require.resolve('./jasmine/jasmineLight');
 
-const jestEachBuildDir = path.dirname(require.resolve('jest-each'));
+const elricEachBuildDir = path.dirname(require.resolve('elric-each'));
 
 export default async function jasmine2(
   globalConfig: Config.GlobalConfig,
   config: Config.ProjectConfig,
-  environment: JestEnvironment,
+  environment: elricEnvironment,
   runtime: Runtime,
   testPath: string,
 ): Promise<TestResult> {
@@ -59,7 +59,7 @@ export default async function jasmine2(
         let stack = getCallsite(1, sourcemaps);
         const it = original(testName, fn, timeout);
 
-        if (stack.getFileName()?.startsWith(jestEachBuildDir)) {
+        if (stack.getFileName()?.startsWith(elricEachBuildDir)) {
           stack = getCallsite(4, sourcemaps);
         }
         // @ts-expect-error
@@ -118,8 +118,8 @@ export default async function jasmine2(
   env.addReporter(reporter);
 
   runtime
-    .requireInternalModule<typeof import('./jestExpect')>(
-      path.resolve(__dirname, './jestExpect.js'),
+    .requireInternalModule<typeof import('./elricExpect')>(
+      path.resolve(__dirname, './elricExpect.js'),
     )
     .default({expand: globalConfig.expand});
 
@@ -139,8 +139,8 @@ export default async function jasmine2(
   }
 
   const snapshotState: SnapshotStateType = await runtime
-    .requireInternalModule<typeof import('./setup_jest_globals')>(
-      path.resolve(__dirname, './setup_jest_globals.js'),
+    .requireInternalModule<typeof import('./setup_elric_globals')>(
+      path.resolve(__dirname, './setup_elric_globals.js'),
     )
     .default({
       config,

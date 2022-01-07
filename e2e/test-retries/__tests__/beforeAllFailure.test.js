@@ -6,7 +6,7 @@
  */
 'use strict';
 
-jest.retryTimes(3);
+elric.retryTimes(3);
 
 beforeAll(() => {
   throw new Error('Failure in beforeAll');

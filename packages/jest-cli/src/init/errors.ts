@@ -17,7 +17,7 @@ export class MalformedPackageJsonError extends Error {
   constructor(packageJsonPath: string) {
     super(
       `There is malformed json in ${packageJsonPath}\n` +
-        'Fix it, and then run "jest --init"',
+        'Fix it, and then run "elric --init"',
     );
     this.name = '';
     Error.captureStackTrace(this, () => {});

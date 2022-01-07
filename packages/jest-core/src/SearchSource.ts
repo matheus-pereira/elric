@@ -8,15 +8,15 @@
 import * as os from 'os';
 import * as path from 'path';
 import micromatch = require('micromatch');
-import type {Test} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import type {ChangedFiles} from 'jest-changed-files';
-import {replaceRootDirInPath} from 'jest-config';
-import {escapePathForRegex} from 'jest-regex-util';
-import {DependencyResolver} from 'jest-resolve-dependencies';
-import type {Context} from 'jest-runtime';
-import {buildSnapshotResolver} from 'jest-snapshot';
-import {globsToMatcher, testPathPatternToRegExp} from 'jest-util';
+import type {Test} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import type {ChangedFiles} from 'elric-changed-files';
+import {replaceRootDirInPath} from 'elric-config';
+import {escapePathForRegex} from 'elric-regex-util';
+import {DependencyResolver} from 'elric-resolve-dependencies';
+import type {Context} from 'elric-runtime';
+import {buildSnapshotResolver} from 'elric-snapshot';
+import {globsToMatcher, testPathPatternToRegExp} from 'elric-util';
 import type {Filter, Stats, TestPathCases} from './types';
 
 export type SearchResult = {

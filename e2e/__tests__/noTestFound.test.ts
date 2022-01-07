@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 describe('Coverage Report', () => {
   it('outputs coverage report', () => {
-    const {stdout} = runJest('coverage-report', ['not-a-valid-test']);
+    const {stdout} = runelric('coverage-report', ['not-a-valid-test']);
 
     expect(stdout).toMatch('No tests found');
 
@@ -19,7 +19,7 @@ describe('Coverage Report', () => {
 
 describe('File path not found in mulit-project scenario', () => {
   it('outputs coverage report', () => {
-    const {stdout} = runJest('multi-project-config-root', [
+    const {stdout} = runelric('multi-project-config-root', [
       '--runTestsByPath',
       'not-a-valid-test',
     ]);

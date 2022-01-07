@@ -7,7 +7,7 @@
 
 import {isAbsolute} from 'path';
 import {pathToFileURL} from 'url';
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import interopRequireDefault from './interopRequireDefault';
 
 export default async function requireOrImportModule<T>(
@@ -16,7 +16,7 @@ export default async function requireOrImportModule<T>(
 ): Promise<T> {
   if (!isAbsolute(filePath) && filePath[0] === '.') {
     throw new Error(
-      `Jest: requireOrImportModule path must be absolute, was "${filePath}"`,
+      `elric: requireOrImportModule path must be absolute, was "${filePath}"`,
     );
   }
   try {
@@ -39,7 +39,7 @@ export default async function requireOrImportModule<T>(
 
         if (!importedModule.default) {
           throw new Error(
-            `Jest: Failed to load ESM at ${filePath} - did you use a default export?`,
+            `elric: Failed to load ESM at ${filePath} - did you use a default export?`,
           );
         }
 
@@ -47,7 +47,7 @@ export default async function requireOrImportModule<T>(
       } catch (innerError: any) {
         if (innerError.message === 'Not supported') {
           throw new Error(
-            `Jest: Your version of Node does not support dynamic import - please enable it or use a .cjs file extension for file ${filePath}`,
+            `elric: Your version of Node does not support dynamic import - please enable it or use a .cjs file extension for file ${filePath}`,
           );
         }
         throw innerError;

@@ -16,6 +16,6 @@ module.exports = {
       test: '**/*.ts',
     },
   ],
-  plugins: ['jest-hoist'],
+  plugins: ['elric-hoist'],
   presets: ['@babel/preset-env'],
 };

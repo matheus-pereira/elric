@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {extractSummary} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('console printing', () => {
-  const {stderr, exitCode} = runJest('console-after-teardown');
+  const {stderr, exitCode} = runelric('console-after-teardown');
   const {rest} = extractSummary(stderr);
 
   expect(exitCode).toBe(1);

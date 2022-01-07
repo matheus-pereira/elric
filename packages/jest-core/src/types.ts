@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Test} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import type {Context} from 'jest-runtime';
+import type {Test} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import type {Context} from 'elric-runtime';
 
 export type Stats = {
   roots: number;

@@ -23,8 +23,8 @@ import {
   diffLinesUnified2,
   diffStringsRaw,
   diffStringsUnified,
-} from 'jest-diff';
-import {getType, isPrimitive} from 'jest-get-type';
+} from 'elric-diff';
+import {getType, isPrimitive} from 'elric-get-type';
 import {
   BOLD_WEIGHT,
   EXPECTED_COLOR,
@@ -33,7 +33,7 @@ import {
   RECEIVED_COLOR,
   getLabelPrinter,
   matcherHint,
-} from 'jest-matcher-utils';
+} from 'elric-matcher-utils';
 import {format as prettyFormat} from 'pretty-format';
 import {
   aBackground2,
@@ -316,7 +316,7 @@ export const printSnapshotAndReceived = (
     const bLines2 = b.split('\n');
 
     // Fall through to fix a regression for custom serializers
-    // like jest-snapshot-serializer-raw that ignore the indent option.
+    // like elric-snapshot-serializer-raw that ignore the indent option.
     const b0 = serialize(received, 0);
     if (b0 !== b) {
       const aLines0 = dedentLines(aLines2);

@@ -16,11 +16,11 @@ beforeEach(() => {
 afterEach(() => {
   process.stdout.isTTY = oldIsTTY;
   process.env.TERM = oldTERM;
-  jest.resetModules();
+  elric.resetModules();
 });
 
 it('Returns true when running on interactive environment', () => {
-  jest.doMock('ci-info', () => ({isCI: false}));
+  elric.doMock('ci-info', () => ({isCI: false}));
   process.stdout.isTTY = true;
   process.env.TERM = 'xterm-256color';
 
@@ -33,31 +33,31 @@ it('Returns false when running on a non-interactive environment', () => {
   const expectedResult = false;
 
   // Test with isCI being true and isTTY false
-  jest.doMock('ci-info', () => ({isCI: true}));
+  elric.doMock('ci-info', () => ({isCI: true}));
   process.stdout.isTTY = undefined;
   process.env.TERM = 'xterm-256color';
   isInteractive = require('../isInteractive').default;
   expect(isInteractive).toBe(expectedResult);
 
   // Test with isCI being false and isTTY false
-  jest.resetModules();
-  jest.doMock('ci-info', () => ({isCI: false}));
+  elric.resetModules();
+  elric.doMock('ci-info', () => ({isCI: false}));
   process.stdout.isTTY = undefined;
   process.env.TERM = 'xterm-256color';
   isInteractive = require('../isInteractive').default;
   expect(isInteractive).toBe(expectedResult);
 
   // Test with isCI being true and isTTY true
-  jest.resetModules();
-  jest.doMock('ci-info', () => ({isCI: true}));
+  elric.resetModules();
+  elric.doMock('ci-info', () => ({isCI: true}));
   process.stdout.isTTY = true;
   process.env.TERM = 'xterm-256color';
   isInteractive = require('../isInteractive').default;
   expect(isInteractive).toBe(expectedResult);
 
   // Test with dumb terminal
-  jest.resetModules();
-  jest.doMock('ci-info', () => ({isCI: false}));
+  elric.resetModules();
+  elric.doMock('ci-info', () => ({isCI: false}));
   process.stdout.isTTY = undefined;
   process.env.TERM = 'dumb';
   isInteractive = require('../isInteractive').default;

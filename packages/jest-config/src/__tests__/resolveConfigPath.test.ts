@@ -8,7 +8,7 @@
 import {tmpdir} from 'os';
 import * as path from 'path';
 import {cleanup, writeFiles} from '../../../../e2e/Utils';
-import {JEST_CONFIG_EXT_ORDER} from '../constants';
+import {elric_CONFIG_EXT_ORDER} from '../constants';
 import resolveConfigPath from '../resolveConfigPath';
 
 const DIR = path.resolve(tmpdir(), 'resolve_config_path_test');
@@ -17,8 +17,8 @@ const NO_ROOT_DIR_ERROR_PATTERN = /Can't find a root directory/;
 const MULTIPLE_CONFIGS_ERROR_PATTERN = /Multiple configurations found/;
 
 const mockConsoleWarn = () => {
-  jest.spyOn(console, 'warn');
-  const mockedConsoleWarn = console.warn as jest.Mock<void, Array<any>>;
+  elric.spyOn(console, 'warn');
+  const mockedConsoleWarn = console.warn as elric.Mock<void, Array<any>>;
 
   // We will mock console.warn because it would produce a lot of noise in the tests
   mockedConsoleWarn.mockImplementation(() => {});
@@ -29,7 +29,7 @@ const mockConsoleWarn = () => {
 beforeEach(() => cleanup(DIR));
 afterEach(() => cleanup(DIR));
 
-describe.each(JEST_CONFIG_EXT_ORDER.slice(0))(
+describe.each(elric_CONFIG_EXT_ORDER.slice(0))(
   'Resolve config path %s',
   extension => {
     test(`file path with "${extension}"`, () => {
@@ -63,20 +63,20 @@ describe.each(JEST_CONFIG_EXT_ORDER.slice(0))(
         DIR,
         relativePackageJsonPath,
       );
-      const relativeJestConfigPath = `a/b/c/jest.config${extension}`;
-      const absoluteJestConfigPath = path.resolve(DIR, relativeJestConfigPath);
+      const relativeelricConfigPath = `a/b/c/elric.config${extension}`;
+      const absoluteelricConfigPath = path.resolve(DIR, relativeelricConfigPath);
 
       // no configs yet. should throw
       writeFiles(DIR, {[`a/b/c/some_random_file${extension}`]: ''});
 
       expect(() =>
         // absolute
-        resolveConfigPath(path.dirname(absoluteJestConfigPath), DIR),
+        resolveConfigPath(path.dirname(absoluteelricConfigPath), DIR),
       ).toThrowError(ERROR_PATTERN);
 
       expect(() =>
         // relative
-        resolveConfigPath(path.dirname(relativeJestConfigPath), DIR),
+        resolveConfigPath(path.dirname(relativeelricConfigPath), DIR),
       ).toThrowError(ERROR_PATTERN);
 
       writeFiles(DIR, {[relativePackageJsonPath]: ''});
@@ -93,29 +93,29 @@ describe.each(JEST_CONFIG_EXT_ORDER.slice(0))(
       ).toBe(absolutePackageJsonPath);
       expect(mockedConsoleWarn).not.toBeCalled();
 
-      // jest.config.js takes precedence
-      writeFiles(DIR, {[relativeJestConfigPath]: ''});
+      // elric.config.js takes precedence
+      writeFiles(DIR, {[relativeelricConfigPath]: ''});
 
       mockedConsoleWarn.mockClear();
       // absolute
       expect(
         resolveConfigPath(path.dirname(absolutePackageJsonPath), DIR),
-      ).toBe(absoluteJestConfigPath);
+      ).toBe(absoluteelricConfigPath);
 
       // relative
       expect(
         resolveConfigPath(path.dirname(relativePackageJsonPath), DIR),
-      ).toBe(absoluteJestConfigPath);
+      ).toBe(absoluteelricConfigPath);
       expect(mockedConsoleWarn).not.toBeCalled();
 
-      // jest.config.js and package.json with 'jest' cannot be used together
-      writeFiles(DIR, {[relativePackageJsonPath]: JSON.stringify({jest: {}})});
+      // elric.config.js and package.json with 'elric' cannot be used together
+      writeFiles(DIR, {[relativePackageJsonPath]: JSON.stringify({elric: {}})});
 
       // absolute
       mockedConsoleWarn.mockClear();
       expect(
         resolveConfigPath(path.dirname(absolutePackageJsonPath), DIR),
-      ).toBe(absoluteJestConfigPath);
+      ).toBe(absoluteelricConfigPath);
       expect(mockedConsoleWarn).toBeCalledTimes(1);
       expect(mockedConsoleWarn.mock.calls[0].join()).toMatch(
         MULTIPLE_CONFIGS_ERROR_PATTERN,
@@ -125,7 +125,7 @@ describe.each(JEST_CONFIG_EXT_ORDER.slice(0))(
       mockedConsoleWarn.mockClear();
       expect(
         resolveConfigPath(path.dirname(relativePackageJsonPath), DIR),
-      ).toBe(absoluteJestConfigPath);
+      ).toBe(absoluteelricConfigPath);
       expect(mockedConsoleWarn).toBeCalledTimes(1);
       expect(mockedConsoleWarn.mock.calls[0].join()).toMatch(
         MULTIPLE_CONFIGS_ERROR_PATTERN,
@@ -157,27 +157,27 @@ test('pickPairsWithSameOrder', () => {
   ]);
 });
 
-describe.each(pickPairsWithSameOrder(JEST_CONFIG_EXT_ORDER))(
+describe.each(pickPairsWithSameOrder(elric_CONFIG_EXT_ORDER))(
   'Using multiple configs shows warning',
   (extension1, extension2) => {
-    test(`Using jest.config${extension1} and jest.config${extension2} shows warning`, () => {
+    test(`Using elric.config${extension1} and elric.config${extension2} shows warning`, () => {
       const mockedConsoleWarn = mockConsoleWarn();
 
-      const relativeJestConfigPaths = [
-        `a/b/c/jest.config${extension1}`,
-        `a/b/c/jest.config${extension2}`,
+      const relativeelricConfigPaths = [
+        `a/b/c/elric.config${extension1}`,
+        `a/b/c/elric.config${extension2}`,
       ];
 
       writeFiles(DIR, {
-        [relativeJestConfigPaths[0]]: '',
-        [relativeJestConfigPaths[1]]: '',
+        [relativeelricConfigPaths[0]]: '',
+        [relativeelricConfigPaths[1]]: '',
       });
 
       // multiple configs here, should print warning
       mockedConsoleWarn.mockClear();
       expect(
-        resolveConfigPath(path.dirname(relativeJestConfigPaths[0]), DIR),
-      ).toBe(path.resolve(DIR, relativeJestConfigPaths[0]));
+        resolveConfigPath(path.dirname(relativeelricConfigPaths[0]), DIR),
+      ).toBe(path.resolve(DIR, relativeelricConfigPaths[0]));
       expect(mockedConsoleWarn).toBeCalledTimes(1);
       expect(mockedConsoleWarn.mock.calls[0].join()).toMatch(
         MULTIPLE_CONFIGS_ERROR_PATTERN,

@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "jest": {
+  "elric": {
     "watchPlugins": [
       "./my-watch-plugin.js"
     ]

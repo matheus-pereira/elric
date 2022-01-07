@@ -7,17 +7,17 @@
 
 /**
  * Because we have a build step, sometimes we can test files from both
- * `packages/jest-whatever/build/*` and `packages/jest-whatever/src/*`
+ * `packages/elric-whatever/build/*` and `packages/elric-whatever/src/*`
  *
  * If we require file by its relative path like:
- *    // inside `jest-whatever/src/__tests__/index.js`
- *    require('../index.js'); // this will require `jest-whatever/src/index.js`
+ *    // inside `elric-whatever/src/__tests__/index.js`
+ *    require('../index.js'); // this will require `elric-whatever/src/index.js`
  *
  * But if we require it by a package name, this will go through node_modules
  * and lerna index.js link. So the actual file will be required from `build/`
  *    // inside another packages
- *    // this will go through lerna and require `jest-whatever/build/index.js
- *    require('jest-whatever')
+ *    // this will go through lerna and require `elric-whatever/build/index.js
+ *    require('elric-whatever')
  *
  * these files are identical (one is preprocessed, another is transformed on
  * the fly), but the coverage paths are different.

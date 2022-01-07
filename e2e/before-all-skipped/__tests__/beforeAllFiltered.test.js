@@ -22,7 +22,7 @@ describe.skip('in describe.skip', () => {
       throw new Error('This should never happen');
     });
 
-    // eslint-disable-next-line jest/no-focused-tests
+    // eslint-disable-next-line elric/no-focused-tests
     test.only('it should be skipped as well', () => {
       throw new Error('This should never happen');
     });

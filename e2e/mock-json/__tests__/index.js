@@ -7,7 +7,7 @@
 
 'use strict';
 
-jest.mock('../data.json');
+elric.mock('../data.json');
 
 const extractData = require('../');
 

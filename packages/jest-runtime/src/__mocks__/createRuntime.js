@@ -7,16 +7,16 @@
 
 import {tmpdir} from 'os';
 import path from 'path';
-import {makeProjectConfig} from '@jest/test-utils';
-import {createScriptTransformer} from '@jest/transform';
-import NodeEnvironment from 'jest-environment-node';
-import {tryRealpath} from 'jest-util';
+import {makeProjectConfig} from '@elric/test-utils';
+import {createScriptTransformer} from '@elric/transform';
+import NodeEnvironment from 'elric-environment-node';
+import {tryRealpath} from 'elric-util';
 import Runtime from '../';
 
-// Copy from jest-config (since we don't want to depend on this package)
+// Copy from elric-config (since we don't want to depend on this package)
 const getCacheDirectory = () => {
   const {getuid} = process;
-  const tmpdirPath = path.join(tryRealpath(tmpdir()), 'jest');
+  const tmpdirPath = path.join(tryRealpath(tmpdir()), 'elric');
   if (getuid == null) {
     return tmpdirPath;
   } else {
@@ -45,7 +45,7 @@ const setupTransform = (config, rootDir) => {
       path.resolve(rootDir, transform[regex]),
     ]);
   }
-  return [['^.+\\.[jt]sx?$', require.resolve('babel-jest')]];
+  return [['^.+\\.[jt]sx?$', require.resolve('babel-elric')]];
 };
 
 module.exports = async function createRuntime(filename, config) {
@@ -63,7 +63,7 @@ module.exports = async function createRuntime(filename, config) {
         '..',
         '..',
         '..',
-        'jest-haste-map',
+        'elric-haste-map',
         'src',
         '__tests__',
         'haste_impl.js',

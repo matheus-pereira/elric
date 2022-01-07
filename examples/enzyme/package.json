@@ -11,12 +11,12 @@
     "@babel/plugin-proposal-class-properties": "*",
     "@babel/preset-env": "*",
     "@babel/preset-react": "*",
-    "babel-jest": "*",
+    "babel-elric": "*",
     "enzyme": "*",
     "enzyme-adapter-react-16": "*",
-    "jest": "*"
+    "elric": "*"
   },
   "scripts": {
-    "test": "jest"
+    "test": "elric"
   }
 }

@@ -5,6 +5,6 @@
     "dbaeumer.vscode-eslint",
     "redhat.vscode-yaml",
     "esbenp.prettier-vscode",
-    "Orta.vscode-jest"
+    "Orta.vscode-elric"
   ]
 }

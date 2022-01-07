@@ -23,7 +23,7 @@ const defaultConfig = {
   automock: false,
   bail: 0,
   browser: false,
-  cacheDirectory: path.join(tmpdir(), 'jest'),
+  cacheDirectory: path.join(tmpdir(), 'elric'),
   clearMocks: false,
   coveragePathIgnorePatterns: [NODE_MODULES_REGEXP],
   coverageReporters: ['json', 'text', 'lcov', 'clover'],
@@ -44,7 +44,7 @@ const defaultConfig = {
   restoreMocks: false,
   roots: ['<rootDir>'],
   snapshotSerializers: [],
-  testEnvironment: 'jest-environment-jsdom',
+  testEnvironment: 'elric-environment-jsdom',
   testPathIgnorePatterns: [NODE_MODULES_REGEXP],
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$',
   testResultsProcessor: null,
@@ -62,7 +62,7 @@ const validConfig = {
   bail: 0,
   browser: false,
   cache: true,
-  cacheDirectory: '/tmp/user/jest',
+  cacheDirectory: '/tmp/user/elric',
   clearMocks: false,
   collectCoverage: true,
   collectCoverageFrom: ['src', '!public'],
@@ -106,7 +106,7 @@ const validConfig = {
   setupFilesAfterEnv: ['<rootDir>/testSetupFile.js'],
   silent: true,
   snapshotSerializers: ['my-serializer-module'],
-  testEnvironment: 'jest-environment-jsdom',
+  testEnvironment: 'elric-environment-jsdom',
   testNamePattern: 'test signature',
   testPathIgnorePatterns: [NODE_MODULES_REGEXP],
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$',
@@ -138,7 +138,7 @@ const deprecatedConfig = {
       'transformIgnorePatterns',
     )}, which support multiple preprocessors.
 
-  Jest now treats your current configuration as:
+  elric now treats your current configuration as:
   {
     ${chalk.bold('"transformIgnorePatterns"')}: ${chalk.bold(
       `${format(config.preprocessorIgnorePatterns)}`,
@@ -152,7 +152,7 @@ const deprecatedConfig = {
       'transform',
     )}, which support multiple preprocessors.
 
-  Jest now treats your current configuration as:
+  elric now treats your current configuration as:
   {
     ${chalk.bold('"transform"')}: ${chalk.bold(
       `{".*": ${format(config.scriptPreprocessor)}}`,

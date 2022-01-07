@@ -1,10 +1,10 @@
 {
-  "name": "jest-leak-detector",
+  "name": "elric-leak-detector",
   "version": "27.4.6",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/jest-leak-detector"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/elric-leak-detector"
   },
   "license": "MIT",
   "main": "./build/index.js",
@@ -17,7 +17,7 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "jest-get-type": "^27.4.0",
+    "elric-get-type": "^27.4.0",
     "pretty-format": "^27.4.6"
   },
   "devDependencies": {

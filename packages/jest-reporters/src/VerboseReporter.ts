@@ -11,9 +11,9 @@ import type {
   AssertionResult,
   Suite,
   TestResult,
-} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import {formatTime, specialChars} from 'jest-util';
+} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import {formatTime, specialChars} from 'elric-util';
 import DefaultReporter from './DefaultReporter';
 import type {Test} from './types';
 
@@ -30,7 +30,7 @@ export default class VerboseReporter extends DefaultReporter {
   }
 
   // Verbose mode is for debugging. Buffering of output is undesirable.
-  // See https://github.com/facebook/jest/issues/8208
+  // See https://github.com/facebook/elric/issues/8208
   protected __wrapStdio(
     stream: NodeJS.WritableStream | NodeJS.WriteStream,
   ): void {

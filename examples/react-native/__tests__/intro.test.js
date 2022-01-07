@@ -9,14 +9,14 @@ import {ActivityIndicator, FlatList, Text, TextInput} from 'react-native';
 import renderer from 'react-test-renderer';
 import Intro from '../Intro';
 
-jest.setTimeout(15000);
+elric.setTimeout(15000);
 
 it('renders correctly', () => {
   const tree = renderer.create(<Intro />).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
-// These serve as integration tests for the jest-react-native preset.
+// These serve as integration tests for the elric-react-native preset.
 it('renders the ActivityIndicator component', () => {
   const tree = renderer
     .create(<ActivityIndicator animating={true} size="small" />)

@@ -7,9 +7,9 @@
 
 import * as path from 'path';
 import * as fs from 'graceful-fs';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {cleanup, makeTemplate, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(__dirname, '../to-match-inline-snapshot');
 const TESTS_DIR = path.resolve(DIR, '__tests__');
@@ -30,7 +30,7 @@ test('basic support', () => {
     writeFiles(TESTS_DIR, {
       [filename]: template(['{apple: "original value"}']),
     });
-    const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+    const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
     const fileAfter = readFile(filename);
     expect(stderr).toMatch('1 snapshot written from 1 test suite.');
     expect(exitCode).toBe(0);
@@ -38,7 +38,7 @@ test('basic support', () => {
   }
 
   {
-    const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+    const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
     const fileAfter = readFile(filename);
     expect(stderr).toMatch('Snapshots:   1 passed, 1 total');
     expect(stderr).not.toMatch('1 snapshot written from 1 test suite.');
@@ -50,7 +50,7 @@ test('basic support', () => {
     writeFiles(TESTS_DIR, {
       [filename]: readFile(filename).replace('original value', 'updated value'),
     });
-    const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+    const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
     const fileAfter = readFile(filename);
     expect(stderr).toMatch('Snapshot name: `inline snapshots 1`');
     expect(exitCode).toBe(1);
@@ -58,7 +58,7 @@ test('basic support', () => {
   }
 
   {
-    const {stderr, exitCode} = runJest(DIR, [
+    const {stderr, exitCode} = runelric(DIR, [
       '-w=1',
       '--ci=false',
       filename,
@@ -81,7 +81,7 @@ test('do not indent empty lines', () => {
     writeFiles(TESTS_DIR, {
       [filename]: template(['`hello\n\nworld`']),
     });
-    const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+    const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
     const fileAfter = readFile(filename);
     expect(stderr).toMatch('1 snapshot written from 1 test suite.');
     expect(exitCode).toBe(0);
@@ -89,7 +89,7 @@ test('do not indent empty lines', () => {
   }
 
   {
-    const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+    const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
     const fileAfter = readFile(filename);
     expect(stderr).toMatch('Snapshots:   1 passed, 1 total');
     expect(stderr).not.toMatch('1 snapshot written from 1 test suite.');
@@ -107,7 +107,7 @@ test('handles property matchers', () => {
 
   {
     writeFiles(TESTS_DIR, {[filename]: template(['new Date()'])});
-    const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+    const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
     const fileAfter = readFile(filename);
     expect(stderr).toMatch('1 snapshot written from 1 test suite.');
     expect(exitCode).toBe(0);
@@ -115,7 +115,7 @@ test('handles property matchers', () => {
   }
 
   {
-    const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+    const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
     const fileAfter = readFile(filename);
     expect(stderr).toMatch('Snapshots:   1 passed, 1 total');
     expect(exitCode).toBe(0);
@@ -126,7 +126,7 @@ test('handles property matchers', () => {
     writeFiles(TESTS_DIR, {
       [filename]: readFile(filename).replace('new Date()', '"string"'),
     });
-    const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+    const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
     const fileAfter = readFile(filename);
     expect(stderr).toMatch('Snapshot name: `handles property matchers 1`');
     expect(stderr).toMatch('Snapshots:   1 failed, 1 total');
@@ -138,7 +138,7 @@ test('handles property matchers', () => {
     writeFiles(TESTS_DIR, {
       [filename]: readFile(filename).replace('any(Date)', 'any(String)'),
     });
-    const {stderr, exitCode} = runJest(DIR, [
+    const {stderr, exitCode} = runelric(DIR, [
       '-w=1',
       '--ci=false',
       filename,
@@ -166,7 +166,7 @@ test('removes obsolete external snapshots', () => {
 
   {
     writeFiles(TESTS_DIR, {[filename]: template(['toMatchSnapshot'])});
-    const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+    const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
     const fileAfter = readFile(filename);
     expect(stderr).toMatch('1 snapshot written from 1 test suite.');
     expect(exitCode).toBe(0);
@@ -176,7 +176,7 @@ test('removes obsolete external snapshots', () => {
 
   {
     writeFiles(TESTS_DIR, {[filename]: template(['toMatchInlineSnapshot'])});
-    const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+    const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
     const fileAfter = readFile(filename);
     expect(stderr).toMatch('Snapshots:   1 obsolete, 1 written, 1 total');
     expect(exitCode).toBe(1);
@@ -185,7 +185,7 @@ test('removes obsolete external snapshots', () => {
   }
 
   {
-    const {stderr, exitCode} = runJest(DIR, [
+    const {stderr, exitCode} = runelric(DIR, [
       '-w=1',
       '--ci=false',
       filename,
@@ -209,7 +209,7 @@ test('supports async matchers', () => {
   `;
 
   writeFiles(TESTS_DIR, {[filename]: test});
-  const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+  const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
   const fileAfter = readFile(filename);
   expect(stderr).toMatch('2 snapshots written from 1 test suite.');
   expect(exitCode).toBe(0);
@@ -226,7 +226,7 @@ test('supports async tests', () => {
   `;
 
   writeFiles(TESTS_DIR, {[filename]: test});
-  const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+  const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
   const fileAfter = readFile(filename);
   expect(stderr).toMatch('1 snapshot written from 1 test suite.');
   expect(exitCode).toBe(0);
@@ -242,7 +242,7 @@ test('writes snapshots with non-literals in expect(...)', () => {
   `;
 
   writeFiles(TESTS_DIR, {[filename]: test});
-  const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+  const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
 
   const fileAfter = readFile(filename);
   expect(stderr).toMatch('1 snapshot written from 1 test suite.');
@@ -250,20 +250,20 @@ test('writes snapshots with non-literals in expect(...)', () => {
   expect(wrap(fileAfter)).toMatchSnapshot();
 });
 
-// issue: https://github.com/facebook/jest/issues/6702
+// issue: https://github.com/facebook/elric/issues/6702
 test('handles mocking native modules prettier relies on', () => {
   const filename = 'mockFail.test.js';
   const test = `
-    jest.mock('path', () => ({}));
-    jest.mock('fs', () => ({}));
-    jest.mock('graceful-fs', () => ({}));
+    elric.mock('path', () => ({}));
+    elric.mock('fs', () => ({}));
+    elric.mock('graceful-fs', () => ({}));
     test('inline snapshots', () => {
       expect({}).toMatchInlineSnapshot();
     });
   `;
 
   writeFiles(TESTS_DIR, {[filename]: test});
-  const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+  const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
   expect(stderr).toMatch('1 snapshot written from 1 test suite.');
   expect(exitCode).toBe(0);
 });
@@ -271,7 +271,7 @@ test('handles mocking native modules prettier relies on', () => {
 test('supports custom matchers', () => {
   const filename = 'custom-matchers.test.js';
   const test = `
-    const { toMatchInlineSnapshot } = require('jest-snapshot');
+    const { toMatchInlineSnapshot } = require('elric-snapshot');
     expect.extend({
       toMatchCustomInlineSnapshot(received, ...args) {
         return toMatchInlineSnapshot.call(this, received, ...args);
@@ -283,7 +283,7 @@ test('supports custom matchers', () => {
   `;
 
   writeFiles(TESTS_DIR, {[filename]: test});
-  const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+  const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
   const fileAfter = readFile(filename);
   expect(stderr).toMatch('1 snapshot written from 1 test suite.');
   expect(exitCode).toBe(0);
@@ -293,7 +293,7 @@ test('supports custom matchers', () => {
 test('supports custom matchers with property matcher', () => {
   const filename = 'custom-matchers-with-property-matcher.test.js';
   const test = `
-    const { toMatchInlineSnapshot } = require('jest-snapshot');
+    const { toMatchInlineSnapshot } = require('elric-snapshot');
     expect.extend({
       toMatchCustomInlineSnapshot(received, ...args) {
         return toMatchInlineSnapshot.call(this, received, ...args);
@@ -325,7 +325,7 @@ test('supports custom matchers with property matcher', () => {
   `;
 
   writeFiles(TESTS_DIR, {[filename]: test});
-  const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+  const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
   const fileAfter = readFile(filename);
   expect(stderr).toMatch('2 snapshots written from 1 test suite.');
   expect(exitCode).toBe(0);
@@ -337,7 +337,7 @@ test('supports custom matchers with property matcher', () => {
 test('multiple custom matchers and native matchers', () => {
   const filename = 'multiple-matchers.test.js';
   const test = `
-    const { toMatchInlineSnapshot } = require('jest-snapshot');
+    const { toMatchInlineSnapshot } = require('elric-snapshot');
     expect.extend({
       toMatchCustomInlineSnapshot(received, ...args) {
         return toMatchInlineSnapshot.call(this, received, ...args);
@@ -355,7 +355,7 @@ test('multiple custom matchers and native matchers', () => {
   `;
 
   writeFiles(TESTS_DIR, {[filename]: test});
-  const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+  const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
   const fileAfter = readFile(filename);
   expect(stderr).toMatch('4 snapshots written from 1 test suite.');
   expect(exitCode).toBe(0);
@@ -376,7 +376,7 @@ test('indentation is correct in the presences of existing snapshots', () => {
   `;
 
   writeFiles(TESTS_DIR, {[filename]: test});
-  const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+  const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
   const fileAfter = readFile(filename);
   expect(stderr).toMatch('1 snapshot written from 1 test suite.');
   expect(exitCode).toBe(0);
@@ -393,7 +393,7 @@ test('indentation is correct in the presences of existing snapshots, when the fi
   `;
 
   writeFiles(TESTS_DIR, {[filename]: test});
-  const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+  const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
   const fileAfter = readFile(filename);
   expect(stderr).toMatch('1 snapshot written from 1 test suite.');
   expect(exitCode).toBe(0);

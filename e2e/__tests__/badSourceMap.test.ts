@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('suite with test cases that contain malformed sourcemaps', () => {
-  const result = runJest('bad-source-map');
+  const result = runelric('bad-source-map');
   expect(result.stderr).not.toMatch('ENOENT');
 });

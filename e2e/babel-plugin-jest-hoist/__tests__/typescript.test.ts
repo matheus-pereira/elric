@@ -11,14 +11,14 @@
 import {color} from '../entry';
 import type {Color} from '../types';
 
-jest.mock('some-module', () => ({} as Partial<{}>), {virtual: true});
+elric.mock('some-module', () => ({} as Partial<{}>), {virtual: true});
 
-jest.mock('../entry', () => {
+elric.mock('../entry', () => {
   const color: Color = 'blue';
   return {color};
 });
 
-describe('babel-plugin-jest-hoist', () => {
+describe('babel-plugin-elric-hoist', () => {
   it('works even with type imports', () => {
     expect(color).toBe('blue');
   });

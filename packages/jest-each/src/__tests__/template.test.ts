@@ -16,28 +16,28 @@ const get = (object, lensPath) =>
 
 const getGlobalTestMocks = () => {
   const globals: any = {
-    describe: jest.fn(),
-    fdescribe: jest.fn(),
-    fit: jest.fn(),
-    it: jest.fn(),
-    test: jest.fn(),
-    xdescribe: jest.fn(),
-    xit: jest.fn(),
-    xtest: jest.fn(),
+    describe: elric.fn(),
+    fdescribe: elric.fn(),
+    fit: elric.fn(),
+    it: elric.fn(),
+    test: elric.fn(),
+    xdescribe: elric.fn(),
+    xit: elric.fn(),
+    xtest: elric.fn(),
   };
-  globals.test.only = jest.fn();
-  globals.test.skip = jest.fn();
-  globals.test.concurrent = jest.fn();
-  globals.test.concurrent.only = jest.fn();
-  globals.test.concurrent.skip = jest.fn();
-  globals.it.only = jest.fn();
-  globals.it.skip = jest.fn();
-  globals.describe.only = jest.fn();
-  globals.describe.skip = jest.fn();
+  globals.test.only = elric.fn();
+  globals.test.skip = elric.fn();
+  globals.test.concurrent = elric.fn();
+  globals.test.concurrent.only = elric.fn();
+  globals.test.concurrent.skip = elric.fn();
+  globals.it.only = elric.fn();
+  globals.it.skip = elric.fn();
+  globals.describe.only = elric.fn();
+  globals.describe.skip = elric.fn();
   return globals;
 };
 
-describe('jest-each', () => {
+describe('elric-each', () => {
   [
     ['test'],
     ['test', 'concurrent'],
@@ -59,7 +59,7 @@ describe('jest-each', () => {
           ${1}          | ${1} | ${2}
         `;
         const testFunction = get(eachObject, keyPath);
-        const testCallBack = jest.fn();
+        const testCallBack = elric.fn();
         testFunction('this will blow up :(', testCallBack);
 
         const globalMock = get(globalTestMocks, keyPath);
@@ -77,7 +77,7 @@ describe('jest-each', () => {
           ${1}          | ${1} | ${2}
         `;
         const testFunction = get(eachObject, keyPath);
-        const testCallBack = jest.fn();
+        const testCallBack = elric.fn();
         testFunction('accept multibyte characters', testCallBack);
 
         const globalMock = get(globalTestMocks, keyPath);
@@ -97,7 +97,7 @@ describe('jest-each', () => {
           ${1}          | ${1} | ${2}
         `;
         const testFunction = get(eachObject, keyPath);
-        const testCallBack = jest.fn();
+        const testCallBack = elric.fn();
         testFunction('this will blow up :(', testCallBack);
 
         const globalMock = get(globalTestMocks, keyPath);
@@ -115,7 +115,7 @@ describe('jest-each', () => {
           ${1} | ${1}           | ${2}
         `;
         const testFunction = get(eachObject, keyPath);
-        const testCallBack = jest.fn();
+        const testCallBack = elric.fn();
         testFunction('accept multibyte characters', testCallBack);
 
         const globalMock = get(globalTestMocks, keyPath);
@@ -135,7 +135,7 @@ describe('jest-each', () => {
           ${1}          | ${1} | ${2}
         `;
         const testFunction = get(eachObject, keyPath);
-        const testCallBack = jest.fn();
+        const testCallBack = elric.fn();
         testFunction('this will blow up :(', testCallBack);
 
         const globalMock = get(globalTestMocks, keyPath);
@@ -153,7 +153,7 @@ describe('jest-each', () => {
           ${1} | ${1} | ${2}
         `;
         const testFunction = get(eachObject, keyPath);
-        const testCallBack = jest.fn();
+        const testCallBack = elric.fn();
         testFunction('accept multibyte characters', testCallBack);
 
         const globalMock = get(globalTestMocks, keyPath);
@@ -175,7 +175,7 @@ describe('jest-each', () => {
           ${1} | ${1} | ${2}
         `;
         const testFunction = get(eachObject, keyPath);
-        const testCallBack = jest.fn();
+        const testCallBack = elric.fn();
         testFunction('test title', testCallBack);
 
         const globalMock = get(globalTestMocks, keyPath);
@@ -195,7 +195,7 @@ describe('jest-each', () => {
           ${1}
         `;
         const testFunction = get(eachObject, keyPath);
-        const testCallBack = jest.fn();
+        const testCallBack = elric.fn();
         testFunction('test title', testCallBack);
 
         const globalMock = get(globalTestMocks, keyPath);
@@ -216,7 +216,7 @@ describe('jest-each', () => {
           ${1}
         `;
         const testFunction = get(eachObject, keyPath);
-        const testCallBack = jest.fn();
+        const testCallBack = elric.fn();
         testFunction('test title $a', testCallBack);
 
         const globalMock = get(globalTestMocks, keyPath);
@@ -235,7 +235,7 @@ describe('jest-each', () => {
           a    | b    | expected
         `;
         const testFunction = get(eachObject, keyPath);
-        const testCallBack = jest.fn();
+        const testCallBack = elric.fn();
         testFunction('this will blow up :(', testCallBack);
 
         const globalMock = get(globalTestMocks, keyPath);
@@ -253,7 +253,7 @@ describe('jest-each', () => {
           ${0} | ${1} |
         `;
         const testFunction = get(eachObject, keyPath);
-        const testCallBack = jest.fn();
+        const testCallBack = elric.fn();
         testFunction('this will blow up :(', testCallBack);
 
         const globalMock = get(globalTestMocks, keyPath);
@@ -272,7 +272,7 @@ describe('jest-each', () => {
           ${1} | ${1} |
         `;
         const testFunction = get(eachObject, keyPath);
-        const testCallBack = jest.fn();
+        const testCallBack = elric.fn();
         testFunction('this will blow up :(', testCallBack);
 
         const globalMock = get(globalTestMocks, keyPath);
@@ -287,7 +287,7 @@ describe('jest-each', () => {
         const globalTestMocks = getGlobalTestMocks();
         const eachObject = each.withGlobal(globalTestMocks)`   `;
         const testFunction = get(eachObject, keyPath);
-        const testCallBack = jest.fn();
+        const testCallBack = elric.fn();
         testFunction('this will blow up :(', testCallBack);
 
         const globalMock = get(globalTestMocks, keyPath);
@@ -432,7 +432,7 @@ describe('jest-each', () => {
 
       test('calls global with cb function with object built from table headings and values', () => {
         const globalTestMocks = getGlobalTestMocks();
-        const testCallBack = jest.fn();
+        const testCallBack = elric.fn();
         const eachObject = each.withGlobal(globalTestMocks)`
           a    | b    | expected
           ${0} | ${1} | ${1}

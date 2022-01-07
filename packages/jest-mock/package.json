@@ -1,16 +1,16 @@
 {
-  "name": "jest-mock",
+  "name": "elric-mock",
   "version": "27.4.6",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/jest-mock"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/elric-mock"
   },
   "engines": {
     "node": "^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0"
   },
   "dependencies": {
-    "@jest/types": "^27.4.2",
+    "@elric/types": "^27.4.2",
     "@types/node": "*"
   },
   "license": "MIT",

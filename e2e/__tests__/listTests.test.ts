@@ -6,8 +6,8 @@
  */
 
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
-import runJest from '../runJest';
+import {wrap} from 'elric-snapshot-serializer-raw';
+import runelric from '../runelric';
 
 const testRootDir = path.resolve(__dirname, '..', '..');
 
@@ -20,7 +20,7 @@ const normalizePaths = (rawPaths: string) =>
 
 describe('--listTests flag', () => {
   it('causes tests to be printed in different lines', () => {
-    const {exitCode, stdout} = runJest('list-tests', ['--listTests']);
+    const {exitCode, stdout} = runelric('list-tests', ['--listTests']);
 
     expect(exitCode).toBe(0);
     expect(
@@ -29,7 +29,7 @@ describe('--listTests flag', () => {
   });
 
   it('causes tests to be printed out as JSON when using the --json flag', () => {
-    const {exitCode, stdout} = runJest('list-tests', ['--listTests', '--json']);
+    const {exitCode, stdout} = runelric('list-tests', ['--listTests', '--json']);
 
     expect(exitCode).toBe(0);
     expect(() => JSON.parse(stdout)).not.toThrow();

@@ -2,7 +2,7 @@
 
 'use strict';
 
-jest.mock('../request');
+elric.mock('../request');
 
 import * as user from '../user';
 

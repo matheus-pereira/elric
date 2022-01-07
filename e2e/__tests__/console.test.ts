@@ -6,12 +6,12 @@
  */
 
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {extractSummary, runYarnInstall} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('console printing', () => {
-  const {stderr, exitCode} = runJest('console');
+  const {stderr, exitCode} = runelric('console');
   const {summary, rest} = extractSummary(stderr);
 
   expect(exitCode).toBe(0);
@@ -20,7 +20,7 @@ test('console printing', () => {
 });
 
 test('console printing with --verbose', () => {
-  const {stderr, stdout, exitCode} = runJest('console', [
+  const {stderr, stdout, exitCode} = runelric('console', [
     '--verbose',
     '--no-cache',
   ]);
@@ -33,7 +33,7 @@ test('console printing with --verbose', () => {
 });
 
 test('does not print to console with --silent', () => {
-  const {stderr, stdout, exitCode} = runJest('console', [
+  const {stderr, stdout, exitCode} = runelric('console', [
     // Need to pass --config because console test specifies `verbose: false`
     '--config=' +
       JSON.stringify({
@@ -51,7 +51,7 @@ test('does not print to console with --silent', () => {
 });
 
 test('respects --noStackTrace', () => {
-  const {stderr, stdout, exitCode} = runJest('console', [
+  const {stderr, stdout, exitCode} = runelric('console', [
     // Need to pass --config because console test specifies `verbose: false`
     '--config=' +
       JSON.stringify({
@@ -69,7 +69,7 @@ test('respects --noStackTrace', () => {
 });
 
 test('respects noStackTrace in config', () => {
-  const {stderr, stdout, exitCode} = runJest('console', [
+  const {stderr, stdout, exitCode} = runelric('console', [
     // Need to pass --config because console test specifies `verbose: false`
     '--config=' +
       JSON.stringify({
@@ -86,9 +86,9 @@ test('respects noStackTrace in config', () => {
   expect(wrap(summary)).toMatchSnapshot();
 });
 
-// issue: https://github.com/facebook/jest/issues/5223
+// issue: https://github.com/facebook/elric/issues/5223
 test('the jsdom console is the same as the test console', () => {
-  const {stderr, stdout, exitCode} = runJest('console-jsdom');
+  const {stderr, stdout, exitCode} = runelric('console-jsdom');
   const {summary, rest} = extractSummary(stderr);
 
   expect(exitCode).toBe(0);
@@ -100,7 +100,7 @@ test('the jsdom console is the same as the test console', () => {
 test('does not error out when using winston', () => {
   const dir = path.resolve(__dirname, '../console-winston');
   runYarnInstall(dir);
-  const {stderr, stdout, exitCode} = runJest(dir);
+  const {stderr, stdout, exitCode} = runelric(dir);
   const {summary, rest} = extractSummary(stderr);
 
   expect(exitCode).toBe(0);

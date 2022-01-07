@@ -6,8 +6,8 @@
  */
 
 import * as fs from 'graceful-fs';
-import type {Config} from '@jest/types';
-import {getStackTraceLines, getTopFrame} from 'jest-message-util';
+import type {Config} from '@elric/types';
+import {getStackTraceLines, getTopFrame} from 'elric-message-util';
 import type {OptionsReceived as PrettyFormatOptions} from 'pretty-format';
 import {InlineSnapshot, saveInlineSnapshots} from './InlineSnapshots';
 import type {SnapshotData} from './types';
@@ -116,7 +116,7 @@ export default class SnapshotState {
       const frame = getTopFrame(lines);
       if (!frame) {
         throw new Error(
-          "Jest: Couldn't infer stack frame for inline snapshot.",
+          "elric: Couldn't infer stack frame for inline snapshot.",
         );
       }
       this._inlineSnapshots.push({

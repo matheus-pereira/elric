@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {wrap} from 'jest-snapshot-serializer-raw';
-import runJest from '../runJest';
+import {wrap} from 'elric-snapshot-serializer-raw';
+import runelric from '../runelric';
 
 it('prints stack trace pointing to process.exit call', () => {
-  const {stderr} = runJest('process-exit');
+  const {stderr} = runelric('process-exit');
 
   expect(wrap(stderr)).toMatchSnapshot();
 });

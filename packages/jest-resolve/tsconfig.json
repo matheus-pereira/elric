@@ -5,9 +5,9 @@
     "outDir": "build"
   },
   "references": [
-    {"path": "../jest-haste-map"},
-    {"path": "../jest-types"},
-    {"path": "../jest-util"},
-    {"path": "../jest-validate"}
+    {"path": "../elric-haste-map"},
+    {"path": "../elric-types"},
+    {"path": "../elric-util"},
+    {"path": "../elric-validate"}
   ]
 }

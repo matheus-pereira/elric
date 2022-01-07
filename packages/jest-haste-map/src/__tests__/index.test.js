@@ -8,21 +8,21 @@
 
 import crypto from 'crypto';
 import * as path from 'path';
-import wrap from 'jest-snapshot-serializer-raw';
+import wrap from 'elric-snapshot-serializer-raw';
 
 function mockHashContents(contents) {
   return crypto.createHash('sha1').update(contents).digest('hex');
 }
 
-jest.mock('child_process', () => ({
+elric.mock('child_process', () => ({
   // If this does not throw, we'll use the (mocked) watchman crawler
   execSync() {},
 }));
 
-jest.mock('jest-worker', () => ({
-  Worker: jest.fn(worker => {
-    mockWorker = jest.fn((...args) => require(worker).worker(...args));
-    mockEnd = jest.fn();
+elric.mock('elric-worker', () => ({
+  Worker: elric.fn(worker => {
+    mockWorker = elric.fn((...args) => require(worker).worker(...args));
+    mockEnd = elric.fn();
 
     return {
       end: mockEnd,
@@ -31,9 +31,9 @@ jest.mock('jest-worker', () => ({
   }),
 }));
 
-jest.mock('../crawlers/node');
-jest.mock('../crawlers/watchman', () =>
-  jest.fn(options => {
+elric.mock('../crawlers/node');
+elric.mock('../crawlers/watchman', () =>
+  elric.fn(options => {
     const path = require('path');
 
     const {data, ignore, rootDir, roots, computeSha1} = options;
@@ -69,22 +69,22 @@ jest.mock('../crawlers/watchman', () =>
   }),
 );
 
-const mockWatcherConstructor = jest.fn(root => {
+const mockWatcherConstructor = elric.fn(root => {
   const EventEmitter = require('events').EventEmitter;
   mockEmitters[root] = new EventEmitter();
-  mockEmitters[root].close = jest.fn();
+  mockEmitters[root].close = elric.fn();
   setTimeout(() => mockEmitters[root].emit('ready'), 0);
   return mockEmitters[root];
 });
 
-jest.mock('../watchers/NodeWatcher', () => mockWatcherConstructor);
-jest.mock('../watchers/WatchmanWatcher', () => mockWatcherConstructor);
+elric.mock('../watchers/NodeWatcher', () => mockWatcherConstructor);
+elric.mock('../watchers/WatchmanWatcher', () => mockWatcherConstructor);
 
 let mockChangedFiles;
 let mockFs;
 
-jest.mock('graceful-fs', () => ({
-  existsSync: jest.fn(path => {
+elric.mock('graceful-fs', () => ({
+  existsSync: elric.fn(path => {
     // A file change can be triggered by writing into the
     // mockChangedFiles object.
     if (mockChangedFiles && path in mockChangedFiles) {
@@ -97,7 +97,7 @@ jest.mock('graceful-fs', () => ({
 
     return false;
   }),
-  readFileSync: jest.fn((path, options) => {
+  readFileSync: elric.fn((path, options) => {
     // A file change can be triggered by writing into the
     // mockChangedFiles object.
     if (mockChangedFiles && path in mockChangedFiles) {
@@ -112,7 +112,7 @@ jest.mock('graceful-fs', () => ({
     error.code = 'ENOENT';
     throw error;
   }),
-  writeFileSync: jest.fn((path, data, options) => {
+  writeFileSync: elric.fn((path, data, options) => {
     expect(options).toBe(require('v8').serialize ? undefined : 'utf8');
     mockFs[path] = data;
   }),
@@ -122,7 +122,7 @@ const cacheFilePath = '/cache-file';
 const object = data => Object.assign(Object.create(null), data);
 const createMap = obj => new Map(Object.keys(obj).map(key => [key, obj[key]]));
 
-// Jest toEqual does not match Map instances from different contexts
+// elric toEqual does not match Map instances from different contexts
 // This normalizes them for the uses cases in this test
 const useBuitinsInContext = value => {
   const stringTag = Object.prototype.toString.call(value);
@@ -158,7 +158,7 @@ let getCacheFilePath;
 
 describe('HasteMap', () => {
   beforeEach(() => {
-    jest.resetModules();
+    elric.resetModules();
 
     mockEmitters = Object.create(null);
     mockFs = object({
@@ -195,14 +195,14 @@ describe('HasteMap', () => {
     consoleWarn = console.warn;
     consoleError = console.error;
 
-    console.warn = jest.fn();
-    console.error = jest.fn();
+    console.warn = elric.fn();
+    console.error = elric.fn();
 
     HasteMap = require('../').default;
     H = HasteMap.H;
 
     getCacheFilePath = HasteMap.getCacheFilePath;
-    HasteMap.getCacheFilePath = jest.fn(() => cacheFilePath);
+    HasteMap.getCacheFilePath = elric.fn(() => cacheFilePath);
 
     defaultConfig = {
       extensions: ['js', 'json'],
@@ -230,7 +230,7 @@ describe('HasteMap', () => {
   });
 
   it('creates valid cache file paths', () => {
-    jest.resetModules();
+    elric.resetModules();
     HasteMap = require('../').default;
 
     expect(
@@ -243,7 +243,7 @@ describe('HasteMap', () => {
   });
 
   it('creates different cache file paths for different roots', () => {
-    jest.resetModules();
+    elric.resetModules();
     const HasteMap = require('../').default;
     const hasteMap1 = new HasteMap({...defaultConfig, rootDir: '/root1'});
     const hasteMap2 = new HasteMap({...defaultConfig, rootDir: '/root2'});
@@ -251,7 +251,7 @@ describe('HasteMap', () => {
   });
 
   it('creates different cache file paths for different dependency extractor cache keys', () => {
-    jest.resetModules();
+    elric.resetModules();
     const HasteMap = require('../').default;
     const dependencyExtractor = require('./dependencyExtractor');
     const config = {
@@ -266,7 +266,7 @@ describe('HasteMap', () => {
   });
 
   it('creates different cache file paths for different values of computeDependencies', () => {
-    jest.resetModules();
+    elric.resetModules();
     const HasteMap = require('../').default;
     const hasteMap1 = new HasteMap({
       ...defaultConfig,
@@ -280,7 +280,7 @@ describe('HasteMap', () => {
   });
 
   it('creates different cache file paths for different hasteImplModulePath cache keys', () => {
-    jest.resetModules();
+    elric.resetModules();
     const HasteMap = require('../').default;
     const hasteImpl = require('./haste_impl');
     hasteImpl.setCacheKey('foo');
@@ -291,7 +291,7 @@ describe('HasteMap', () => {
   });
 
   it('creates different cache file paths for different projects', () => {
-    jest.resetModules();
+    elric.resetModules();
     const HasteMap = require('../').default;
     const hasteMap1 = new HasteMap({...defaultConfig, name: '@scoped/package'});
     const hasteMap2 = new HasteMap({...defaultConfig, name: '-scoped-package'});
@@ -357,7 +357,7 @@ describe('HasteMap', () => {
       await new HasteMap(config).build();
     } catch (err) {
       expect(err.message).toBe(
-        'jest-haste-map: the `ignorePattern` option must be a RegExp',
+        'elric-haste-map: the `ignorePattern` option must be a RegExp',
       );
     }
   });
@@ -430,7 +430,7 @@ describe('HasteMap', () => {
       }
     `;
     mockFs[
-      path.join('/', 'project', 'fruits', 'node_modules', 'jest', 'Jest.js')
+      path.join('/', 'project', 'fruits', 'node_modules', 'elric', 'elric.js')
     ] = `
       const Test = require("Test");
     `;
@@ -1225,7 +1225,7 @@ describe('HasteMap', () => {
   });
 
   it('distributes work across workers', async () => {
-    const jestWorker = require('jest-worker').Worker;
+    const elricWorker = require('elric-worker').Worker;
     const path = require('path');
     const dependencyExtractor = path.join(__dirname, 'dependencyExtractor.js');
     const {__hasteMapForTest: data} = await new HasteMap({
@@ -1235,7 +1235,7 @@ describe('HasteMap', () => {
       maxWorkers: 4,
     }).build();
 
-    expect(jestWorker.mock.calls.length).toBe(1);
+    expect(elricWorker.mock.calls.length).toBe(1);
 
     expect(mockWorker.mock.calls.length).toBe(5);
 

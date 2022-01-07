@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
-import {constants, isJSONString} from 'jest-config';
+import type {Config} from '@elric/types';
+import {constants, isJSONString} from 'elric-config';
 
 export function check(argv: Config.Argv): true {
   if (argv.runInBand && argv.hasOwnProperty('maxWorkers')) {
@@ -41,7 +41,7 @@ export function check(argv: Config.Argv): true {
   if (argv.findRelatedTests && argv._.length === 0) {
     throw new Error(
       'The --findRelatedTests option requires file paths to be specified.\n' +
-        'Example usage: jest --findRelatedTests ./src/source.js ' +
+        'Example usage: elric --findRelatedTests ./src/source.js ' +
         './src/index.js.',
     );
   }
@@ -49,8 +49,8 @@ export function check(argv: Config.Argv): true {
   if (argv.hasOwnProperty('maxWorkers') && argv.maxWorkers === undefined) {
     throw new Error(
       'The --maxWorkers (-w) option requires a number or string to be specified.\n' +
-        'Example usage: jest --maxWorkers 2\n' +
-        'Example usage: jest --maxWorkers 50%\n' +
+        'Example usage: elric --maxWorkers 2\n' +
+        'Example usage: elric --maxWorkers 50%\n' +
         'Or did you mean --watch?',
     );
   }
@@ -58,7 +58,7 @@ export function check(argv: Config.Argv): true {
   if (argv.selectProjects && argv.selectProjects.length === 0) {
     throw new Error(
       'The --selectProjects option requires the name of at least one project to be specified.\n' +
-        'Example usage: jest --selectProjects my-first-project my-second-project',
+        'Example usage: elric --selectProjects my-first-project my-second-project',
     );
   }
 
@@ -67,7 +67,7 @@ export function check(argv: Config.Argv): true {
     !isJSONString(argv.config) &&
     !argv.config.match(
       new RegExp(
-        `\\.(${constants.JEST_CONFIG_EXT_ORDER.map(e => e.substring(1)).join(
+        `\\.(${constants.elric_CONFIG_EXT_ORDER.map(e => e.substring(1)).join(
           '|',
         )})$`,
         'i',
@@ -75,9 +75,9 @@ export function check(argv: Config.Argv): true {
     )
   ) {
     throw new Error(
-      `The --config option requires a JSON string literal, or a file path with one of these extensions: ${constants.JEST_CONFIG_EXT_ORDER.join(
+      `The --config option requires a JSON string literal, or a file path with one of these extensions: ${constants.elric_CONFIG_EXT_ORDER.join(
         ', ',
-      )}.\nExample usage: jest --config ./jest.config.js`,
+      )}.\nExample usage: elric --config ./elric.config.js`,
     );
   }
 
@@ -86,14 +86,14 @@ export function check(argv: Config.Argv): true {
 
 export const usage =
   'Usage: $0 [--config=<pathToConfigFile>] [TestPathPattern]';
-export const docs = 'Documentation: https://jestjs.io/';
+export const docs = 'Documentation: https://elricjs.io/';
 
-// The default values are all set in jest-config
+// The default values are all set in elric-config
 export const options = {
   all: {
     description:
       'The opposite of `onlyChanged`. If `onlyChanged` is set by ' +
-      'default, running jest with `--all` will force Jest to run all tests ' +
+      'default, running elric with `--all` will force elric to run all tests ' +
       'instead of running only tests related to changed files.',
     type: 'boolean',
   },
@@ -115,7 +115,7 @@ export const options = {
   },
   cacheDirectory: {
     description:
-      'The directory where Jest should store its cached ' +
+      'The directory where elric should store its cached ' +
       ' dependency information.',
     type: 'string',
   },
@@ -135,21 +135,21 @@ export const options = {
   },
   ci: {
     description:
-      'Whether to run Jest in continuous integration (CI) mode. ' +
+      'Whether to run elric in continuous integration (CI) mode. ' +
       'This option is on by default in most popular CI environments. It will ' +
       'prevent snapshots from being written unless explicitly requested.',
     type: 'boolean',
   },
   clearCache: {
     description:
-      'Clears the configured Jest cache directory and then exits. ' +
-      'Default directory can be found by calling jest --showConfig',
+      'Clears the configured elric cache directory and then exits. ' +
+      'Default directory can be found by calling elric --showConfig',
     type: 'boolean',
   },
   clearMocks: {
     description:
       'Automatically clear mock calls, instances and results before every test. ' +
-      'Equivalent to calling jest.clearAllMocks() before each test.',
+      'Equivalent to calling elric.clearAllMocks() before each test.',
     type: 'boolean',
   },
   collectCoverage: {
@@ -180,10 +180,10 @@ export const options = {
   config: {
     alias: 'c',
     description:
-      'The path to a jest config file specifying how to find ' +
+      'The path to a elric config file specifying how to find ' +
       'and execute tests. If no rootDir is set in the config, the directory ' +
       'containing the config file is assumed to be the rootDir for the project.' +
-      'This can also be a JSON encoded value which Jest will use as configuration.',
+      'This can also be a JSON encoded value which elric will use as configuration.',
     type: 'string',
   },
   coverage: {
@@ -193,7 +193,7 @@ export const options = {
     type: 'boolean',
   },
   coverageDirectory: {
-    description: 'The directory where Jest should output its coverage files.',
+    description: 'The directory where elric should output its coverage files.',
     type: 'string',
   },
   coveragePathIgnorePatterns: {
@@ -210,7 +210,7 @@ export const options = {
   },
   coverageReporters: {
     description:
-      'A list of reporter names that Jest uses when writing ' +
+      'A list of reporter names that elric uses when writing ' +
       'coverage reports. Any istanbul reporter can be used.',
     string: true,
     type: 'array',
@@ -222,7 +222,7 @@ export const options = {
     type: 'string',
   },
   debug: {
-    description: 'Print debugging info about your jest config.',
+    description: 'Print debugging info about your elric config.',
     type: 'boolean',
   },
   detectLeaks: {
@@ -234,7 +234,7 @@ export const options = {
   },
   detectOpenHandles: {
     description:
-      'Print out remaining open handles preventing Jest from exiting at the ' +
+      'Print out remaining open handles preventing elric from exiting at the ' +
       'end of a test run. Implies `runInBand`.',
     type: 'boolean',
   },
@@ -271,7 +271,7 @@ export const options = {
   },
   forceExit: {
     description:
-      'Force Jest to exit after all tests have completed running. ' +
+      'Force elric to exit after all tests have completed running. ' +
       'This is useful when resources set up by test code cannot be ' +
       'adequately cleaned up.',
     type: 'boolean',
@@ -300,7 +300,7 @@ export const options = {
     type: 'boolean',
   },
   injectGlobals: {
-    description: 'Should Jest inject global variables or not',
+    description: 'Should elric inject global variables or not',
     type: 'boolean',
   },
   json: {
@@ -317,9 +317,9 @@ export const options = {
   },
   listTests: {
     description:
-      'Lists all tests Jest will run given the arguments and ' +
+      'Lists all tests elric will run given the arguments and ' +
       'exits. Most useful in a CI system together with `--findRelatedTests` ' +
-      'to determine the tests Jest will run based on specific files',
+      'to determine the tests elric will run based on specific files',
     type: 'boolean',
   },
   logHeapUsage: {
@@ -355,7 +355,7 @@ export const options = {
     description:
       'An array of file extensions your modules use. If you ' +
       'require modules without specifying a file extension, these are the ' +
-      'extensions Jest will look for. ',
+      'extensions elric will look for. ',
     string: true,
     type: 'array',
   },
@@ -419,7 +419,7 @@ export const options = {
     type: 'boolean',
   },
   preset: {
-    description: "A preset that is used as a base for Jest's configuration.",
+    description: "A preset that is used as a base for elric's configuration.",
     type: 'string',
   },
   prettierPath: {
@@ -428,8 +428,8 @@ export const options = {
   },
   projects: {
     description:
-      'A list of projects that use Jest to run all tests of all ' +
-      'projects in a single instance of Jest.',
+      'A list of projects that use elric to run all tests of all ' +
+      'projects in a single instance of elric.',
     string: true,
     type: 'array',
   },
@@ -441,7 +441,7 @@ export const options = {
   resetMocks: {
     description:
       'Automatically reset mock state before every test. ' +
-      'Equivalent to calling jest.resetAllMocks() before each test.',
+      'Equivalent to calling elric.resetAllMocks() before each test.',
     type: 'boolean',
   },
   resetModules: {
@@ -457,18 +457,18 @@ export const options = {
   restoreMocks: {
     description:
       'Automatically restore mock state and implementation before every test. ' +
-      'Equivalent to calling jest.restoreAllMocks() before each test.',
+      'Equivalent to calling elric.restoreAllMocks() before each test.',
     type: 'boolean',
   },
   rootDir: {
     description:
-      'The root directory that Jest should scan for tests and ' +
+      'The root directory that elric should scan for tests and ' +
       'modules within.',
     type: 'string',
   },
   roots: {
     description:
-      'A list of paths to directories that Jest should use to ' +
+      'A list of paths to directories that elric should use to ' +
       'search for files in.',
     string: true,
     type: 'array',
@@ -491,13 +491,13 @@ export const options = {
   },
   runner: {
     description:
-      "Allows to use a custom runner instead of Jest's default test runner.",
+      "Allows to use a custom runner instead of elric's default test runner.",
     type: 'string',
   },
   selectProjects: {
     description:
       'Run only the tests of the specified projects.' +
-      'Jest uses the attribute `displayName` in the configuration to identify each project.',
+      'elric uses the attribute `displayName` in the configuration to identify each project.',
     string: true,
     type: 'array',
   },
@@ -516,7 +516,7 @@ export const options = {
     type: 'array',
   },
   showConfig: {
-    description: 'Print your jest config and then exits.',
+    description: 'Print your elric config and then exits.',
     type: 'boolean',
   },
   silent: {
@@ -531,7 +531,7 @@ export const options = {
   },
   snapshotSerializers: {
     description:
-      'A list of paths to snapshot serializer modules Jest should ' +
+      'A list of paths to snapshot serializer modules elric should ' +
       'use for snapshot testing.',
     string: true,
     type: 'array',
@@ -547,7 +547,7 @@ export const options = {
     type: 'string',
   },
   testFailureExitCode: {
-    description: 'Exit code of `jest` command if the test run failed',
+    description: 'Exit code of `elric` command if the test run failed',
     type: 'string', // number
   },
   testLocationInResults: {
@@ -555,7 +555,7 @@ export const options = {
     type: 'boolean',
   },
   testMatch: {
-    description: 'The glob patterns Jest uses to detect test files.',
+    description: 'The glob patterns elric uses to detect test files.',
     string: true,
     type: 'array',
   },
@@ -581,7 +581,7 @@ export const options = {
   },
   testRegex: {
     description:
-      'A string or array of string regexp patterns that Jest uses to detect test files.',
+      'A string or array of string regexp patterns that elric uses to detect test files.',
     string: true,
     type: 'array',
   },
@@ -595,14 +595,14 @@ export const options = {
   testRunner: {
     description:
       'Allows to specify a custom test runner. The default is' +
-      ' `jest-circus/runner`. A path to a custom test runner can be provided:' +
+      ' `elric-circus/runner`. A path to a custom test runner can be provided:' +
       ' `<rootDir>/path/to/testRunner.js`.',
     type: 'string',
   },
   testSequencer: {
     description:
       'Allows to specify a custom test sequencer. The default is ' +
-      '`@jest/test-sequencer`. A path to a custom test sequencer can be ' +
+      '`@elric/test-sequencer`. A path to a custom test sequencer can be ' +
       'provided: `<rootDir>/path/to/testSequencer.js`',
     type: 'string',
   },

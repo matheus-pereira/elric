@@ -8,11 +8,11 @@ import crypto from 'crypto';
 import os from 'os';
 import path from 'path';
 import fs from 'graceful-fs';
-import jestUtil from 'jest-util';
+import elricUtil from 'elric-util';
 
-const {createDirectory} = jestUtil;
+const {createDirectory} = elricUtil;
 
-const DIR = path.join(os.tmpdir(), 'jest-global-teardown-esm');
+const DIR = path.join(os.tmpdir(), 'elric-global-teardown-esm');
 
 export default function () {
   return new Promise(resolve => {

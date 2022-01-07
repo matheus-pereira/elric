@@ -6,7 +6,7 @@
  */
 
 import chalk from 'chalk';
-import {specialChars} from 'jest-util';
+import {specialChars} from 'elric-util';
 import FailedTestsInteractiveMode from '../FailedTestsInteractiveMode';
 
 const {ARROW} = specialChars;
@@ -14,7 +14,7 @@ const {ARROW} = specialChars;
 describe('FailedTestsInteractiveMode', () => {
   describe('updateWithResults', () => {
     it('renders usage information when all failures resolved', () => {
-      const mockWrite = jest.fn();
+      const mockWrite = elric.fn();
 
       new FailedTestsInteractiveMode({write: mockWrite}).updateWithResults({
         numFailedTests: 1,

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest, {json as runWithJson} from '../runJest';
+import runelric, {json as runWithJson} from '../runelric';
 
 describe('async jasmine', () => {
   it('works with beforeAll', () => {
@@ -164,7 +164,7 @@ describe('async jasmine', () => {
   });
 
   it('generator test', () => {
-    const result = runJest('jasmine-async', ['generator.test.js']);
+    const result = runelric('jasmine-async', ['generator.test.js']);
 
     expect(result.exitCode).toBe(0);
   });

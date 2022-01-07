@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`.rejects fails for promise that resolves 1`] = `
 <d>expect(</><r>received</><d>).</>rejects<d>.</>toBe<d>()</>
@@ -3434,8 +3434,8 @@ Received value: <r>"\\"That cartoon\\""</>
 
 exports[`.toHaveProperty() {pass: false} expect({"children": ["Roses are red.
 Violets are blue.
-Testing with Jest is good for you."], "props": null, "type": "pre"}).toHaveProperty('children,0', "Roses are red, violets are blue.
-Testing with Jest
+Testing with elric is good for you."], "props": null, "type": "pre"}).toHaveProperty('children,0', "Roses are red, violets are blue.
+Testing with elric
 Is good for you.") 1`] = `
 <d>expect(</><r>received</><d>).</>toHaveProperty<d>(</><g>path</><d>, </><g>value</><d>)</>
 
@@ -3447,9 +3447,9 @@ Expected path: <g>["children", 0]</>
 <g>- Roses are red<i>, v</i>iolets are blue.</>
 <r>+ Roses are red<i>.</i></>
 <r>+ <i>V</i>iolets are blue.</>
-<g>- Testing with Jest</>
+<g>- Testing with elric</>
 <g>- <i>I</i>s good for you.</>
-<r>+ Testing with Jest<i> i</i>s good for you.</>
+<r>+ Testing with elric<i> i</i>s good for you.</>
 `;
 
 exports[`.toHaveProperty() {pass: false} expect({"key": 1}).toHaveProperty('not') 1`] = `
@@ -3919,8 +3919,8 @@ Received string:    <r>"bar"</>
 exports[`.toStrictEqual() displays substring diff 1`] = `
 <d>expect(</><r>received</><d>).</>toStrictEqual<d>(</><g>expected</><d>) // deep equality</>
 
-Expected: <g>"<i>Another caveat is that</i> Jest will not typecheck your tests."</>
-Received: <r>"<i>Because TypeScript support in Babel is just transpilation,</i> Jest will not type<i>-</i>check your tests<i> as they run</i>."</>
+Expected: <g>"<i>Another caveat is that</i> elric will not typecheck your tests."</>
+Received: <r>"<i>Because TypeScript support in Babel is just transpilation,</i> elric will not type<i>-</i>check your tests<i> as they run</i>."</>
 `;
 
 exports[`.toStrictEqual() displays substring diff for multiple lines 1`] = `
@@ -4040,7 +4040,7 @@ exports[`toMatchObject() {pass: false} expect({"a": "a", "c": "d"}).toMatchObjec
 <d>  }</>
 `;
 
-exports[`toMatchObject() {pass: false} expect({"a": "b", "c": "d", Symbol(jest): "jest"}).toMatchObject({"a": "c", Symbol(jest): Any<String>}) 1`] = `
+exports[`toMatchObject() {pass: false} expect({"a": "b", "c": "d", Symbol(elric): "elric"}).toMatchObject({"a": "c", Symbol(elric): Any<String>}) 1`] = `
 <d>expect(</><r>received</><d>).</>toMatchObject<d>(</><g>expected</><d>)</>
 
 <g>- Expected  - 2</>
@@ -4048,7 +4048,7 @@ exports[`toMatchObject() {pass: false} expect({"a": "b", "c": "d", Symbol(jest):
 
 <d>  Object {</>
 <g>-   "a": "c",</>
-<g>-   Symbol(jest): Any<String>,</>
+<g>-   Symbol(elric): Any<String>,</>
 <r>+   "a": "b",</>
 <d>  }</>
 `;
@@ -4355,17 +4355,17 @@ exports[`toMatchObject() {pass: true} expect([Error: foo]).toMatchObject([Error:
 Expected: not <g>[Error: foo]</>
 `;
 
-exports[`toMatchObject() {pass: true} expect({"a": "b", "c": "d", Symbol(jest): "jest"}).toMatchObject({"a": "b", "c": "d", Symbol(jest): "jest"}) 1`] = `
+exports[`toMatchObject() {pass: true} expect({"a": "b", "c": "d", Symbol(elric): "elric"}).toMatchObject({"a": "b", "c": "d", Symbol(elric): "elric"}) 1`] = `
 <d>expect(</><r>received</><d>).</>not<d>.</>toMatchObject<d>(</><g>expected</><d>)</>
 
-Expected: not <g>{"a": "b", "c": "d", Symbol(jest): "jest"}</>
+Expected: not <g>{"a": "b", "c": "d", Symbol(elric): "elric"}</>
 `;
 
-exports[`toMatchObject() {pass: true} expect({"a": "b", "c": "d", Symbol(jest): "jest"}).toMatchObject({"a": "b", Symbol(jest): "jest"}) 1`] = `
+exports[`toMatchObject() {pass: true} expect({"a": "b", "c": "d", Symbol(elric): "elric"}).toMatchObject({"a": "b", Symbol(elric): "elric"}) 1`] = `
 <d>expect(</><r>received</><d>).</>not<d>.</>toMatchObject<d>(</><g>expected</><d>)</>
 
-Expected: not <g>{"a": "b", Symbol(jest): "jest"}</>
-Received:     <r>{"a": "b", "c": "d", Symbol(jest): "jest"}</>
+Expected: not <g>{"a": "b", Symbol(elric): "elric"}</>
+Received:     <r>{"a": "b", "c": "d", Symbol(elric): "elric"}</>
 `;
 
 exports[`toMatchObject() {pass: true} expect({"a": "b", "c": "d"}).toMatchObject({"a": "b", "c": "d"}) 1`] = `

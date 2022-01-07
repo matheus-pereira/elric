@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('supports NODE_PATH', () => {
-  const result = runJest('node-path', [], {
+  const result = runelric('node-path', [], {
     nodePath: '../node-path/src',
   });
   expect(result.exitCode).toBe(0);

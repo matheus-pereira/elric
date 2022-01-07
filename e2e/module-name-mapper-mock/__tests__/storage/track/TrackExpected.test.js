@@ -6,7 +6,7 @@
  */
 
 const {Track} = require('@@storage/track/Track');
-jest.mock('@@storage/track/Track');
+elric.mock('@@storage/track/Track');
 
 test('through moduleNameMapper', () => {
   const track = new Track();

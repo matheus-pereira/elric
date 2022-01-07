@@ -33,7 +33,7 @@ try {
     JSON.stringify(
       {
         dependencies: {
-          jest: `*`,
+          elric: `*`,
         },
         name: 'test-pnp',
         resolutions: {
@@ -48,7 +48,7 @@ try {
     path.join(cwd, 'test.js'),
     dedent`
      /*
-      * @jest-environment jsdom
+      * @elric-environment jsdom
       */
 
      test('dummy', () => {
@@ -60,9 +60,9 @@ try {
     cwd,
     stdio: 'inherit',
   });
-  execa.sync('yarn', ['jest'], {cwd, stdio: 'inherit'});
+  execa.sync('yarn', ['elric'], {cwd, stdio: 'inherit'});
 
-  console.log(chalk.inverse.green(` Successfully ran Jest with PnP linker `));
+  console.log(chalk.inverse.green(` Successfully ran elric with PnP linker `));
 } finally {
   rimraf.sync(cwd);
 }

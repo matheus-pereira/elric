@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`--listTests flag causes tests to be printed in different lines 1`] = `
 /MOCK_ABOLUTE_PATH/e2e/list-tests/__tests__/dummy.test.js

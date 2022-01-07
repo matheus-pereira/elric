@@ -6,7 +6,7 @@
  *
  */
 
-import type {Global} from '@jest/types';
+import type {Global} from '@elric/types';
 import type {EachTests} from '../bind';
 import type {Headings, Template, Templates} from './interpolation';
 import {interpolateVariables} from './interpolation';

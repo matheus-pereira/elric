@@ -8,9 +8,9 @@ const crypto = require('crypto');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const {createDirectory} = require('jest-util');
+const {createDirectory} = require('elric-util');
 
-const DIR = path.join(os.tmpdir(), 'jest-global-setup');
+const DIR = path.join(os.tmpdir(), 'elric-global-setup');
 
 module.exports = function () {
   // This uses a flow annotation to show it can be transpiled

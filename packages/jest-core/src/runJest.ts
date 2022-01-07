@@ -9,21 +9,21 @@ import * as path from 'path';
 import chalk = require('chalk');
 import exit = require('exit');
 import * as fs from 'graceful-fs';
-import {CustomConsole} from '@jest/console';
+import {CustomConsole} from '@elric/console';
 import {
   AggregatedResult,
   Test,
   TestResultsProcessor,
   formatTestResults,
   makeEmptyAggregatedTestResult,
-} from '@jest/test-result';
-import type TestSequencer from '@jest/test-sequencer';
-import type {Config} from '@jest/types';
-import type {ChangedFiles, ChangedFilesPromise} from 'jest-changed-files';
-import Resolver from 'jest-resolve';
-import type {Context} from 'jest-runtime';
-import {requireOrImportModule, tryRealpath} from 'jest-util';
-import {JestHook, JestHookEmitter} from 'jest-watcher';
+} from '@elric/test-result';
+import type TestSequencer from '@elric/test-sequencer';
+import type {Config} from '@elric/types';
+import type {ChangedFiles, ChangedFilesPromise} from 'elric-changed-files';
+import Resolver from 'elric-resolve';
+import type {Context} from 'elric-runtime';
+import {requireOrImportModule, tryRealpath} from 'elric-util';
+import {elricHook, elricHookEmitter} from 'elric-watcher';
 import type FailedTestsCache from './FailedTestsCache';
 import SearchSource from './SearchSource';
 import {TestSchedulerContext, createTestScheduler} from './TestScheduler';
@@ -38,16 +38,16 @@ const getTestPaths = async (
   source: SearchSource,
   outputStream: NodeJS.WriteStream,
   changedFiles: ChangedFiles | undefined,
-  jestHooks: JestHookEmitter,
+  elricHooks: elricHookEmitter,
   filter?: Filter,
 ) => {
   const data = await source.getTestPaths(globalConfig, changedFiles, filter);
 
   if (!data.tests.length && globalConfig.onlyChanged && data.noSCM) {
     new CustomConsole(outputStream, outputStream).log(
-      'Jest can only find uncommitted changed files in a git or hg ' +
+      'elric can only find uncommitted changed files in a git or hg ' +
         'repository. If you make your project a git or hg ' +
-        'repository (`git init` or `hg init`), Jest will be able ' +
+        'repository (`git init` or `hg init`), elric will be able ' +
         'to only run tests related to files changed since the last ' +
         'commit.',
     );
@@ -55,7 +55,7 @@ const getTestPaths = async (
 
   const shouldTestArray = await Promise.all(
     data.tests.map(test =>
-      jestHooks.shouldRunTestSuite({
+      elricHooks.shouldRunTestSuite({
         config: test.context.config,
         duration: test.duration,
         testPath: test.path,
@@ -124,12 +124,12 @@ const testSchedulerContext: TestSchedulerContext = {
   previousSuccess: true,
 };
 
-export default async function runJest({
+export default async function runelric({
   contexts,
   globalConfig,
   outputStream,
   testWatcher,
-  jestHooks = new JestHook().getEmitter(),
+  elricHooks = new elricHook().getEmitter(),
   startRun,
   changedFilesPromise,
   onComplete,
@@ -140,7 +140,7 @@ export default async function runJest({
   contexts: Array<Context>;
   outputStream: NodeJS.WriteStream;
   testWatcher: TestWatcher;
-  jestHooks?: JestHookEmitter;
+  elricHooks?: elricHookEmitter;
   startRun: (globalConfig: Config.GlobalConfig) => void;
   changedFilesPromise?: ChangedFilesPromise;
   onComplete: (testResults: AggregatedResult) => void;
@@ -148,7 +148,7 @@ export default async function runJest({
   filter?: Filter;
 }): Promise<void> {
   // Clear cache for required modules - there might be different resolutions
-  // from Jest's config loading to running the tests
+  // from elric's config loading to running the tests
   Resolver.clearDefaultResolverCache();
 
   const Sequencer: typeof TestSequencer = await requireOrImportModule(
@@ -184,7 +184,7 @@ export default async function runJest({
         searchSource,
         outputStream,
         changedFilesPromise && (await changedFilesPromise),
-        jestHooks,
+        elricHooks,
         filter,
       );
       allTests = allTests.concat(matches.tests);

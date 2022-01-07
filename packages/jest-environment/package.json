@@ -1,10 +1,10 @@
 {
-  "name": "@jest/environment",
+  "name": "@elric/environment",
   "version": "27.4.6",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/jest-environment"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/elric-environment"
   },
   "license": "MIT",
   "main": "./build/index.js",
@@ -17,10 +17,10 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@jest/fake-timers": "^27.4.6",
-    "@jest/types": "^27.4.2",
+    "@elric/fake-timers": "^27.4.6",
+    "@elric/types": "^27.4.2",
     "@types/node": "*",
-    "jest-mock": "^27.4.6"
+    "elric-mock": "^27.4.6"
   },
   "engines": {
     "node": "^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0"

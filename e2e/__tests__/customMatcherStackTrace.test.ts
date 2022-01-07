@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {extractSummary} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('works with custom matchers', () => {
-  const {stderr} = runJest('custom-matcher-stack-trace', ['sync.test.js']);
+  const {stderr} = runelric('custom-matcher-stack-trace', ['sync.test.js']);
 
   let {rest} = extractSummary(stderr);
 
@@ -23,7 +23,7 @@ test('works with custom matchers', () => {
 });
 
 test('custom async matchers', () => {
-  const {stderr} = runJest('custom-matcher-stack-trace', [
+  const {stderr} = runelric('custom-matcher-stack-trace', [
     'asynchronous.test.js',
   ]);
 

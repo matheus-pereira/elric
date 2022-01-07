@@ -7,13 +7,13 @@
 
 import * as path from 'path';
 import {extractSummary} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const dir = path.resolve(__dirname, '..', 'native-async-mock');
 
 test('mocks async functions', () => {
   // --no-cache because babel can cache stuff and result in false green
-  const {stderr} = runJest(dir, ['--no-cache']);
+  const {stderr} = runelric(dir, ['--no-cache']);
   expect(extractSummary(stderr).summary).toMatch(
     'Test Suites: 1 passed, 1 total',
   );

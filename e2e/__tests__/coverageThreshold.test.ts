@@ -6,9 +6,9 @@
  */
 
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {cleanup, extractSummary, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(__dirname, '../coverage-threshold');
 
@@ -17,7 +17,7 @@ afterAll(() => cleanup(DIR));
 
 test('exits with 1 if coverage threshold is not met', () => {
   const pkgJson = {
-    jest: {
+    elric: {
       collectCoverage: true,
       collectCoverageFrom: ['**/*.js'],
       coverageThreshold: {
@@ -41,7 +41,7 @@ test('exits with 1 if coverage threshold is not met', () => {
     'package.json': JSON.stringify(pkgJson, null, 2),
   });
 
-  const {stdout, stderr, exitCode} = runJest(
+  const {stdout, stderr, exitCode} = runelric(
     DIR,
     ['--coverage', '--ci=false'],
     {stripAnsi: true},
@@ -56,7 +56,7 @@ test('exits with 1 if coverage threshold is not met', () => {
 
 test('exits with 1 if path threshold group is not found in coverage data', () => {
   const pkgJson = {
-    jest: {
+    elric: {
       collectCoverage: true,
       collectCoverageFrom: ['**/*.js'],
       coverageThreshold: {
@@ -80,7 +80,7 @@ test('exits with 1 if path threshold group is not found in coverage data', () =>
     'package.json': JSON.stringify(pkgJson, null, 2),
   });
 
-  const {stdout, stderr, exitCode} = runJest(
+  const {stdout, stderr, exitCode} = runelric(
     DIR,
     ['--coverage', '--ci=false'],
     {stripAnsi: true},
@@ -95,7 +95,7 @@ test('exits with 1 if path threshold group is not found in coverage data', () =>
 
 test('exits with 0 if global threshold group is not found in coverage data', () => {
   const pkgJson = {
-    jest: {
+    elric: {
       collectCoverage: true,
       collectCoverageFrom: ['**/*.js'],
       coverageThreshold: {
@@ -122,7 +122,7 @@ test('exits with 0 if global threshold group is not found in coverage data', () 
     'package.json': JSON.stringify(pkgJson, null, 2),
   });
 
-  const {stdout, exitCode} = runJest(DIR, ['--coverage', '--ci=false'], {
+  const {stdout, exitCode} = runelric(DIR, ['--coverage', '--ci=false'], {
     stripAnsi: true,
   });
 
@@ -132,7 +132,7 @@ test('exits with 0 if global threshold group is not found in coverage data', () 
 
 test('excludes tests matched by path threshold groups from global group', () => {
   const pkgJson = {
-    jest: {
+    elric: {
       collectCoverage: true,
       collectCoverageFrom: ['**/*.js'],
       coverageThreshold: {
@@ -164,7 +164,7 @@ test('excludes tests matched by path threshold groups from global group', () => 
     'package.json': JSON.stringify(pkgJson, null, 2),
   });
 
-  const {stdout, stderr, exitCode} = runJest(
+  const {stdout, stderr, exitCode} = runelric(
     DIR,
     ['--coverage', '--ci=false'],
     {stripAnsi: true},
@@ -179,7 +179,7 @@ test('excludes tests matched by path threshold groups from global group', () => 
 
 test('file is matched by all path and glob threshold groups', () => {
   const pkgJson = {
-    jest: {
+    elric: {
       collectCoverage: true,
       collectCoverageFrom: ['**/*.js'],
       coverageThreshold: {
@@ -209,7 +209,7 @@ test('file is matched by all path and glob threshold groups', () => {
     'package.json': JSON.stringify(pkgJson, null, 2),
   });
 
-  const {stdout, stderr, exitCode} = runJest(
+  const {stdout, stderr, exitCode} = runelric(
     DIR,
     ['--coverage', '--ci=false'],
     {stripAnsi: true},

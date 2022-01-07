@@ -1,10 +1,10 @@
 {
-  "name": "jest-util",
+  "name": "elric-util",
   "version": "27.4.2",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/jest-util"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/elric-util"
   },
   "license": "MIT",
   "main": "./build/index.js",
@@ -17,7 +17,7 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@jest/types": "^27.4.2",
+    "@elric/types": "^27.4.2",
     "@types/node": "*",
     "chalk": "^4.0.0",
     "ci-info": "^3.2.0",

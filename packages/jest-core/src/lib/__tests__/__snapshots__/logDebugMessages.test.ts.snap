@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`prints the config object 1`] = `
 {
@@ -35,7 +35,7 @@ exports[`prints the config object 1`] = `
     "roots": [
       "path/to/dir/test"
     ],
-    "runner": "jest-runner",
+    "runner": "elric-runner",
     "setupFiles": [],
     "setupFilesAfterEnv": [],
     "skipFilter": false,
@@ -99,7 +99,7 @@ exports[`prints the config object 1`] = `
     "testFailureExitCode": 1,
     "testNamePattern": "",
     "testPathPattern": "",
-    "testSequencer": "@jest/test-sequencer",
+    "testSequencer": "@elric/test-sequencer",
     "testTimeout": 5000,
     "updateSnapshot": "none",
     "useStderr": false,

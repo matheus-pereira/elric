@@ -8,7 +8,7 @@
 
 /* eslint-disable local/prefer-spread-eventually */
 
-import * as matcherUtils from 'jest-matcher-utils';
+import * as matcherUtils from 'elric-matcher-utils';
 import {
   any,
   anything,
@@ -29,7 +29,7 @@ import {
   getState,
   setMatchers,
   setState,
-} from './jestMatchersObject';
+} from './elricMatchersObject';
 import matchers from './matchers';
 import spyMatchers from './spyMatchers';
 import toThrowMatchers, {
@@ -39,7 +39,7 @@ import type {
   AsyncExpectationResult,
   Expect,
   ExpectationResult,
-  MatcherState as JestMatcherState,
+  MatcherState as elricMatcherState,
   Matchers as MatcherInterface,
   MatchersObject,
   PromiseMatcherFn,
@@ -49,7 +49,7 @@ import type {
 } from './types';
 import {iterableEquality, subsetEquality} from './utils';
 
-class JestAssertionError extends Error {
+class elricAssertionError extends Error {
   matcherResult?: Omit<SyncExpectationResult, 'message'> & {message: string};
 }
 
@@ -62,7 +62,7 @@ const createToThrowErrorMatchingSnapshotMatcher = function (
   matcher: RawMatcherFn,
 ) {
   return function (
-    this: JestMatcherState,
+    this: elricMatcherState,
     received: any,
     testNameOrInlineSnapshot?: string,
   ) {
@@ -95,7 +95,7 @@ const expect: any = (actual: any, ...rest: Array<any>) => {
     resolves: {not: {}},
   };
 
-  const err = new JestAssertionError();
+  const err = new elricAssertionError();
 
   Object.keys(allMatchers).forEach(name => {
     const matcher = allMatchers[name];
@@ -147,7 +147,7 @@ const makeResolveMatcher =
     matcher: RawMatcherFn,
     isNot: boolean,
     actual: Promise<any>,
-    outerErr: JestAssertionError,
+    outerErr: elricAssertionError,
   ): PromiseMatcherFn =>
   (...args) => {
     const options = {
@@ -156,7 +156,7 @@ const makeResolveMatcher =
     };
 
     if (!isPromise(actual)) {
-      throw new JestAssertionError(
+      throw new elricAssertionError(
         matcherUtils.matcherErrorMessage(
           matcherUtils.matcherHint(matcherName, undefined, '', options),
           `${matcherUtils.RECEIVED_COLOR('received')} value must be a promise`,
@@ -169,7 +169,7 @@ const makeResolveMatcher =
       );
     }
 
-    const innerErr = new JestAssertionError();
+    const innerErr = new elricAssertionError();
 
     return actual.then(
       result =>
@@ -194,7 +194,7 @@ const makeRejectMatcher =
     matcher: RawMatcherFn,
     isNot: boolean,
     actual: Promise<any> | (() => Promise<any>),
-    outerErr: JestAssertionError,
+    outerErr: elricAssertionError,
   ): PromiseMatcherFn =>
   (...args) => {
     const options = {
@@ -206,7 +206,7 @@ const makeRejectMatcher =
       typeof actual === 'function' ? actual() : actual;
 
     if (!isPromise(actualWrapper)) {
-      throw new JestAssertionError(
+      throw new elricAssertionError(
         matcherUtils.matcherErrorMessage(
           matcherUtils.matcherHint(matcherName, undefined, '', options),
           `${matcherUtils.RECEIVED_COLOR(
@@ -221,7 +221,7 @@ const makeRejectMatcher =
       );
     }
 
-    const innerErr = new JestAssertionError();
+    const innerErr = new elricAssertionError();
 
     return actualWrapper.then(
       result => {
@@ -245,13 +245,13 @@ const makeThrowingMatcher = (
   isNot: boolean,
   promise: string,
   actual: any,
-  err?: JestAssertionError,
+  err?: elricAssertionError,
 ): ThrowingMatcherFn =>
   function throwingMatcher(...args): any {
     let throws = true;
     const utils = {...matcherUtils, iterableEquality, subsetEquality};
 
-    const matcherContext: JestMatcherState = {
+    const matcherContext: elricMatcherState = {
       // When throws is disabled, the matcher will not throw errors during test
       // execution but instead add them to the global matcher state. If a
       // matcher throws, test execution is normally stopped immediately. The
@@ -268,7 +268,7 @@ const makeThrowingMatcher = (
 
     const processResult = (
       result: SyncExpectationResult,
-      asyncError?: JestAssertionError,
+      asyncError?: elricAssertionError,
     ) => {
       _validateResult(result);
 
@@ -286,7 +286,7 @@ const makeThrowingMatcher = (
           error = asyncError;
           error.message = message;
         } else {
-          error = new JestAssertionError(message);
+          error = new elricAssertionError(message);
 
           // Try to remove this function from the stack trace frame.
           // Guard for some environments (browsers) that do not support this feature.
@@ -310,7 +310,7 @@ const makeThrowingMatcher = (
     const handleError = (error: Error) => {
       if (
         matcher[INTERNAL_MATCHER_FLAG] === true &&
-        !(error instanceof JestAssertionError) &&
+        !(error instanceof elricAssertionError) &&
         error.name !== 'PrettyFormatPluginError' &&
         // Guard for some environments (browsers) that do not support this feature.
         Error.captureStackTrace
@@ -336,7 +336,7 @@ const makeThrowingMatcher = (
 
       if (isPromise(potentialResult)) {
         const asyncResult = potentialResult as AsyncExpectationResult;
-        const asyncError = new JestAssertionError();
+        const asyncError = new elricAssertionError();
         if (Error.captureStackTrace) {
           Error.captureStackTrace(asyncError, throwingMatcher);
         }
@@ -354,7 +354,7 @@ const makeThrowingMatcher = (
     }
   };
 
-expect.extend = <T extends JestMatcherState = JestMatcherState>(
+expect.extend = <T extends elricMatcherState = elricMatcherState>(
   matchers: MatchersObject<T>,
 ): void => setMatchers(matchers, false, expect);
 
@@ -415,7 +415,7 @@ function hasAssertions(...args: Array<any>) {
   });
 }
 
-// add default jest matchers
+// add default elric matchers
 setMatchers(matchers, true, expect as Expect);
 setMatchers(spyMatchers, true, expect as Expect);
 setMatchers(toThrowMatchers, true, expect as Expect);
@@ -430,7 +430,7 @@ expect.extractExpectedAssertionsErrors = extractExpectedAssertionsErrors;
 const expectExport = expect as Expect;
 
 declare namespace expectExport {
-  export type MatcherState = JestMatcherState;
+  export type MatcherState = elricMatcherState;
   export interface Matchers<R, T = unknown> extends MatcherInterface<R, T> {}
 }
 

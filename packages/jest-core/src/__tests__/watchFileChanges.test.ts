@@ -10,20 +10,20 @@ import {tmpdir} from 'os';
 import * as path from 'path';
 import * as fs from 'graceful-fs';
 import rimraf = require('rimraf');
-import type {AggregatedResult} from '@jest/test-result';
-import {normalize} from 'jest-config';
-import type HasteMap from 'jest-haste-map';
-import Runtime from 'jest-runtime';
-import {interopRequireDefault} from 'jest-util';
-import {JestHook} from 'jest-watcher';
+import type {AggregatedResult} from '@elric/test-result';
+import {normalize} from 'elric-config';
+import type HasteMap from 'elric-haste-map';
+import Runtime from 'elric-runtime';
+import {interopRequireDefault} from 'elric-util';
+import {elricHook} from 'elric-watcher';
 
 describe('Watch mode flows with changed files', () => {
-  jest.resetModules();
+  elric.resetModules();
 
   let watch: unknown;
   let pipe: NodeJS.ReadStream;
   let stdin: MockStdin;
-  const testDirectory = path.resolve(tmpdir(), 'jest-tmp');
+  const testDirectory = path.resolve(tmpdir(), 'elric-tmp');
   const fileTargetPath = path.resolve(testDirectory, 'lost-file.js');
   const fileTargetPath2 = path.resolve(
     testDirectory,
@@ -34,7 +34,7 @@ describe('Watch mode flows with changed files', () => {
 
   beforeEach(() => {
     watch = interopRequireDefault(require('../watch')).default;
-    pipe = {write: jest.fn()} as unknown;
+    pipe = {write: elric.fn()} as unknown;
     stdin = new MockStdin();
     rimraf.sync(cacheDirectory);
     rimraf.sync(testDirectory);
@@ -43,7 +43,7 @@ describe('Watch mode flows with changed files', () => {
   });
 
   afterEach(() => {
-    jest.resetModules();
+    elric.resetModules();
     if (hasteMapInstance) {
       hasteMapInstance.end();
     }
@@ -99,7 +99,7 @@ describe('Watch mode flows with changed files', () => {
       resolver: Runtime.createResolver(config, hasteMap.moduleMap),
     }));
 
-    const hook = new JestHook();
+    const hook = new elricHook();
     const firstErrorPromise = new Promise(resolve => {
       hook.getSubscriber().onTestRunComplete(resolve);
     });

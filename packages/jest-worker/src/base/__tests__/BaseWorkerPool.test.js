@@ -10,9 +10,9 @@
 import {CHILD_MESSAGE_END} from '../../types';
 import BaseWorkerPool from '../BaseWorkerPool';
 
-const Worker = jest.fn();
+const Worker = elric.fn();
 
-const mockSend = jest.fn();
+const mockSend = elric.fn();
 
 class MockWorkerPool extends BaseWorkerPool {
   createWorker(...args) {
@@ -27,10 +27,10 @@ describe('BaseWorkerPool', () => {
   beforeEach(() => {
     Worker.mockClear();
     Worker.mockImplementation(() => ({
-      forceExit: jest.fn(),
+      forceExit: elric.fn(),
       getStderr: () => ({once() {}, pipe() {}}),
       getStdout: () => ({once() {}, pipe() {}}),
-      send: jest.fn(),
+      send: elric.fn(),
       waitForExit: () => Promise.resolve(),
     }));
   });
@@ -169,8 +169,8 @@ describe('BaseWorkerPool', () => {
     expect(out.length).toBe(2);
     expect(err.length).toBe(2);
 
-    const stdout = jest.fn();
-    const stderr = jest.fn();
+    const stdout = elric.fn();
+    const stderr = elric.fn();
 
     farm.getStdout().on('data', stdout);
     farm.getStderr().on('data', stderr);
@@ -227,10 +227,10 @@ describe('BaseWorkerPool', () => {
 
     it('resolves with forceExited=false if workers exited gracefully', async () => {
       Worker.mockImplementation(() => ({
-        forceExit: jest.fn(),
+        forceExit: elric.fn(),
         getStderr: () => null,
         getStdout: () => null,
-        send: jest.fn(),
+        send: elric.fn(),
         waitForExit: () => Promise.resolve(),
       }));
 
@@ -254,13 +254,13 @@ describe('BaseWorkerPool', () => {
         },
         getStderr: () => null,
         getStdout: () => null,
-        send: jest.fn(),
+        send: elric.fn(),
         waitForExit: () => new Promise(resolve => (worker0Exited = resolve)),
       })).mockImplementation(() => ({
-        forceExit: jest.fn(),
+        forceExit: elric.fn(),
         getStderr: () => null,
         getStdout: () => null,
-        send: jest.fn(),
+        send: elric.fn(),
         waitForExit: () => Promise.resolve(),
       }));
 

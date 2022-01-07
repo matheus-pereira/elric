@@ -17,6 +17,6 @@ describe('error stack trace', () => {
   });
 
   it('tests', () => {
-    jest.unmock('this-module-does-not-exist');
+    elric.unmock('this-module-does-not-exist');
   });
 });

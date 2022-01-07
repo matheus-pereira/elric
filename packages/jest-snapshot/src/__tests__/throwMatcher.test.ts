@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import jestSnapshot from '..';
+import elricSnapshot from '..';
 
-const {toThrowErrorMatchingSnapshot} = jestSnapshot;
+const {toThrowErrorMatchingSnapshot} = elricSnapshot;
 
-let matchFn: jest.Mock;
+let matchFn: elric.Mock;
 
 beforeEach(() => {
-  matchFn = jest.fn(() => ({
+  matchFn = elric.fn(() => ({
     actual: 'coconut',
     expected: 'coconut',
   }));

@@ -6,9 +6,9 @@
  *
  */
 
-import type {Config} from '@jest/types';
-import type * as jestMatcherUtils from 'jest-matcher-utils';
-import {INTERNAL_MATCHER_FLAG} from './jestMatchersObject';
+import type {Config} from '@elric/types';
+import type * as elricMatcherUtils from 'elric-matcher-utils';
+import {INTERNAL_MATCHER_FLAG} from './elricMatchersObject';
 
 export type SyncExpectationResult = {
   pass: boolean;
@@ -49,7 +49,7 @@ export type MatcherState = {
   promise: string;
   suppressedErrors: Array<Error>;
   testPath?: Config.Path;
-  utils: typeof jestMatcherUtils & {
+  utils: typeof elricMatcherUtils & {
     iterableEquality: Tester;
     subsetEquality: Tester;
   };
@@ -94,7 +94,7 @@ export type Expect<State extends MatcherState = MatcherState> = {
     not: Omit<AsymmetricMatchers, 'any' | 'anything'>;
   };
 
-// This is a copy from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/de6730f4463cba69904698035fafd906a72b9664/types/jest/index.d.ts#L570-L817
+// This is a copy from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/de6730f4463cba69904698035fafd906a72b9664/types/elric/index.d.ts#L570-L817
 export interface Matchers<R, T = unknown> {
   /**
    * Ensures the last call to a mock function was provided specific args.
@@ -323,12 +323,12 @@ export interface Matchers<R, T = unknown> {
   /* TODO: START snapshot matchers are not from `expect`, the types should not be here */
   /**
    * This ensures that a value matches the most recent snapshot with property matchers.
-   * Check out [the Snapshot Testing guide](https://jestjs.io/docs/snapshot-testing) for more information.
+   * Check out [the Snapshot Testing guide](https://elricjs.io/docs/snapshot-testing) for more information.
    */
   toMatchSnapshot(hint?: string): R;
   /**
    * This ensures that a value matches the most recent snapshot.
-   * Check out [the Snapshot Testing guide](https://jestjs.io/docs/snapshot-testing) for more information.
+   * Check out [the Snapshot Testing guide](https://elricjs.io/docs/snapshot-testing) for more information.
    */
   toMatchSnapshot<U extends Record<keyof T, unknown>>(
     propertyMatchers: Partial<U>,
@@ -337,13 +337,13 @@ export interface Matchers<R, T = unknown> {
   /**
    * This ensures that a value matches the most recent snapshot with property matchers.
    * Instead of writing the snapshot value to a .snap file, it will be written into the source code automatically.
-   * Check out [the Snapshot Testing guide](https://jestjs.io/docs/snapshot-testing) for more information.
+   * Check out [the Snapshot Testing guide](https://elricjs.io/docs/snapshot-testing) for more information.
    */
   toMatchInlineSnapshot(snapshot?: string): R;
   /**
    * This ensures that a value matches the most recent snapshot with property matchers.
    * Instead of writing the snapshot value to a .snap file, it will be written into the source code automatically.
-   * Check out [the Snapshot Testing guide](https://jestjs.io/docs/snapshot-testing) for more information.
+   * Check out [the Snapshot Testing guide](https://elricjs.io/docs/snapshot-testing) for more information.
    */
   toMatchInlineSnapshot<U extends Record<keyof T, unknown>>(
     propertyMatchers: Partial<U>,

@@ -7,8 +7,8 @@
 
 import defaultResolver from '../defaultResolver';
 
-// todo: can be replaced with jest.MockedFunction
-declare const userResolver: jest.MockInstance<
+// todo: can be replaced with elric.MockedFunction
+declare const userResolver: elric.MockInstance<
   ReturnType<typeof defaultResolver>,
   Parameters<typeof defaultResolver>
 >;

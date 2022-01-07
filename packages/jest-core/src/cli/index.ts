@@ -8,14 +8,14 @@
 import chalk = require('chalk');
 import exit = require('exit');
 import rimraf = require('rimraf');
-import {CustomConsole} from '@jest/console';
-import type {AggregatedResult} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import type {ChangedFilesPromise} from 'jest-changed-files';
-import {readConfigs} from 'jest-config';
-import type HasteMap from 'jest-haste-map';
-import Runtime, {Context} from 'jest-runtime';
-import {createDirectory, preRunMessage} from 'jest-util';
+import {CustomConsole} from '@elric/console';
+import type {AggregatedResult} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import type {ChangedFilesPromise} from 'elric-changed-files';
+import {readConfigs} from 'elric-config';
+import type HasteMap from 'elric-haste-map';
+import Runtime, {Context} from 'elric-runtime';
+import {createDirectory, preRunMessage} from 'elric-util';
 import TestWatcher from '../TestWatcher';
 import {formatHandleErrors} from '../collectHandles';
 import getChangedFilesPromise from '../getChangedFilesPromise';
@@ -26,7 +26,7 @@ import createContext from '../lib/createContext';
 import handleDeprecationWarnings from '../lib/handleDeprecationWarnings';
 import logDebugMessages from '../lib/logDebugMessages';
 import pluralize from '../pluralize';
-import runJest from '../runJest';
+import runelric from '../runelric';
 import type {Filter} from '../types';
 import watch from '../watch';
 
@@ -116,7 +116,7 @@ export async function runCLI(
 
     const message =
       chalk.red(
-        `\nJest has detected the following ${openHandlesString} potentially keeping Jest from exiting:\n\n`,
+        `\nelric has detected the following ${openHandlesString} potentially keeping elric from exiting:\n\n`,
       ) + formatted.join('\n\n');
 
     console.error(message);
@@ -268,7 +268,7 @@ const runWithoutWatch = async (
     if (!globalConfig.listTests) {
       preRunMessagePrint(outputStream);
     }
-    return runJest({
+    return runelric({
       changedFilesPromise,
       contexts,
       failedTestsCache: undefined,

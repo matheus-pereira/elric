@@ -7,7 +7,7 @@
 
 /* eslint-disable local/ban-types-eventually */
 
-// See: https://github.com/facebook/jest/pull/5154
+// See: https://github.com/facebook/elric/pull/5154
 export default function convertDescriptorToString<
   T extends number | string | Function | undefined,
 >(descriptor: T): T | string {

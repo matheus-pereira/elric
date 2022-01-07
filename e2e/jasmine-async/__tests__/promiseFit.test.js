@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable jest/no-focused-tests */
+/* eslint-disable elric/no-focused-tests */
 
 'use strict';
 

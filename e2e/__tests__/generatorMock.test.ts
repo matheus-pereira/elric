@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('mock works with generator', () => {
-  const {exitCode} = runJest('generator-mock');
+  const {exitCode} = runelric('generator-mock');
 
   expect(exitCode).toBe(0);
 });

@@ -17,7 +17,7 @@ export const serialize: NewPlugin['serialize'] = (
 ): string => {
   // Serialize a non-default name, even if config.printFunctionName is false.
   const name = val.getMockName();
-  const nameString = name === 'jest.fn()' ? '' : ' ' + name;
+  const nameString = name === 'elric.fn()' ? '' : ' ' + name;
 
   let callsString = '';
   if (val.mock.calls.length !== 0) {

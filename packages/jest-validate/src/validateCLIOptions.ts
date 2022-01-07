@@ -8,7 +8,7 @@
 import camelcase = require('camelcase');
 import chalk = require('chalk');
 import type {Options} from 'yargs';
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import defaultConfig from './defaultConfig';
 import {deprecationWarning} from './deprecated';
 import type {DeprecatedOptionFunc, DeprecatedOptions} from './types';
@@ -16,7 +16,7 @@ import {ValidationError, createDidYouMeanMessage, format} from './utils';
 
 const BULLET: string = chalk.bold('\u25cf');
 export const DOCUMENTATION_NOTE = `  ${chalk.bold('CLI Options Documentation:')}
-  https://jestjs.io/docs/cli
+  https://elricjs.io/docs/cli
 `;
 
 const createCLIValidationError = (
@@ -27,7 +27,7 @@ const createCLIValidationError = (
   let message;
   const comment =
     `  ${chalk.bold('CLI Options Documentation')}:\n` +
-    `  https://jestjs.io/docs/cli\n`;
+    `  https://elricjs.io/docs/cli\n`;
 
   if (unrecognizedOptions.length === 1) {
     const unrecognized = unrecognizedOptions[0];

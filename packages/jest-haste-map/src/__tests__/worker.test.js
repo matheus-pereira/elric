@@ -13,7 +13,7 @@ import * as fs from 'graceful-fs';
 import H from '../constants';
 import {getSha1, worker} from '../worker';
 
-jest.mock('graceful-fs', () => {
+elric.mock('graceful-fs', () => {
   const path = require('path');
   const mockFs = {
     [path.join('/project', 'fruits', 'Banana.js')]: `
@@ -39,8 +39,8 @@ jest.mock('graceful-fs', () => {
   };
 
   return {
-    ...jest.createMockFromModule('graceful-fs'),
-    readFileSync: jest.fn((path, options) => {
+    ...elric.createMockFromModule('graceful-fs'),
+    readFileSync: elric.fn((path, options) => {
       if (mockFs[path]) {
         return options === 'utf8' ? mockFs[path] : Buffer.from(mockFs[path]);
       }
@@ -54,7 +54,7 @@ const rootDir = '/project';
 
 describe('worker', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    elric.clearAllMocks();
   });
 
   it('parses JavaScript files and extracts module information', async () => {

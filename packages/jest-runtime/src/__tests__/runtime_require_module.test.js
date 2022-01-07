@@ -12,7 +12,7 @@ import {builtinModules, createRequire} from 'module';
 import path from 'path';
 import {pathToFileURL} from 'url';
 import slash from 'slash';
-import {onNodeVersions} from '@jest/test-utils';
+import {onNodeVersions} from '@elric/test-utils';
 
 let createRuntime;
 
@@ -245,8 +245,8 @@ describe('Runtime requireModule', () => {
       automock: true,
     });
     const root = runtime.requireModule(runtime.__mockRootPath, './root.js');
-    root.jest.resetModules();
-    root.jest.unmock('ManuallyMocked');
+    root.elric.resetModules();
+    root.elric.unmock('ManuallyMocked');
     const exports = runtime.requireModule(
       runtime.__mockRootPath,
       'ManuallyMocked',

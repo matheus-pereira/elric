@@ -7,12 +7,12 @@
 
 import {sync as spawnSync} from 'execa';
 
-const JEST_RUNTIME = require.resolve('../../bin/jest-runtime-cli.js');
+const elric_RUNTIME = require.resolve('../../bin/elric-runtime-cli.js');
 
 const timeout = 10_000;
 
 const run = args =>
-  spawnSync(JEST_RUNTIME, args, {
+  spawnSync(elric_RUNTIME, args, {
     cwd: process.cwd(),
     env: process.env,
     reject: false,
@@ -21,8 +21,8 @@ const run = args =>
 
 describe('Runtime CLI', () => {
   beforeAll(() => {
-    jest.retryTimes(3);
-    jest.setTimeout(timeout);
+    elric.retryTimes(3);
+    elric.setTimeout(timeout);
   });
 
   it('fails with no path', () => {

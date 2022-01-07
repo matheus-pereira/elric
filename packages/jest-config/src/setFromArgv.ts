@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import {isJSONString} from './utils';
 
 const specialArgs = ['_', '$0', 'h', 'help', 'config'];

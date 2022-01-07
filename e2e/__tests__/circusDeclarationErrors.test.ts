@@ -5,15 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {wrap} from 'jest-snapshot-serializer-raw';
-import {skipSuiteOnJasmine} from '@jest/test-utils';
+import {wrap} from 'elric-snapshot-serializer-raw';
+import {skipSuiteOnJasmine} from '@elric/test-utils';
 import {extractSummary} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 skipSuiteOnJasmine();
 
 it('defining tests and hooks asynchronously throws', () => {
-  const result = runJest('circus-declaration-errors', [
+  const result = runelric('circus-declaration-errors', [
     'asyncDefinition.test.js',
   ]);
 

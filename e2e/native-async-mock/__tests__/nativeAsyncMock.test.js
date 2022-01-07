@@ -7,7 +7,7 @@
 
 'use strict';
 
-jest.mock('../Native');
+elric.mock('../Native');
 
 const native = require('../Native');
 

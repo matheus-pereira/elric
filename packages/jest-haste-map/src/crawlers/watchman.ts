@@ -7,7 +7,7 @@
 
 import * as path from 'path';
 import watchman = require('fb-watchman');
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import H from '../constants';
 import * as fastPath from '../lib/fast_path';
 import normalizePathSep from '../lib/normalizePathSep';
@@ -200,10 +200,10 @@ export = async function watchmanCrawl(options: CrawlerOptions): Promise<{
             }
           }
 
-          // Jest is only going to store one type of clock; a string that
+          // elric is only going to store one type of clock; a string that
           // represents a local clock. However, the Watchman crawler supports
           // a second type of clock that can be written by automation outside of
-          // Jest, called an "scm query", which fetches changed files based on
+          // elric, called an "scm query", which fetches changed files based on
           // source control mergebases. The reason this is necessary is because
           // local clocks are not portable across systems, but scm queries are.
           // By using scm queries, we can create the haste map on a different

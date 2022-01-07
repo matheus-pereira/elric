@@ -6,7 +6,7 @@
  */
 
 import * as path from 'path';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 describe('Custom Haste Integration', () => {
   test('valid test with fake module resolutions', () => {
@@ -20,7 +20,7 @@ describe('Custom Haste Integration', () => {
       },
     };
 
-    const {exitCode} = runJest('custom-haste-map', [
+    const {exitCode} = runelric('custom-haste-map', [
       '--config',
       JSON.stringify(config),
       'hasteExample.test.js',

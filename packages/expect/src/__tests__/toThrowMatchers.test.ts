@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {alignedAnsiStyleSerializer} from '@jest/test-utils';
-import jestExpect from '../';
+import {alignedAnsiStyleSerializer} from '@elric/test-utils';
+import elricExpect from '../';
 
 expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 
@@ -17,7 +17,7 @@ class CustomError extends Error {
     this.name = 'Error';
     this.stack =
       'Error\n' +
-      '  at jestExpect' +
+      '  at elricExpect' +
       ' (packages/expect/src/__tests__/toThrowMatchers-test.js:24:74)';
   }
 }
@@ -31,32 +31,32 @@ matchers.forEach(toThrow => {
     class Err2 extends CustomError {}
 
     test('to throw or not to throw', () => {
-      jestExpect(() => {
+      elricExpect(() => {
         throw new CustomError('apple');
       })[toThrow]();
-      jestExpect(() => {}).not[toThrow]();
+      elricExpect(() => {}).not[toThrow]();
     });
 
     describe('substring', () => {
       it('passes', () => {
-        jestExpect(() => {
+        elricExpect(() => {
           throw new CustomError('apple');
         })[toThrow]('apple');
-        jestExpect(() => {
+        elricExpect(() => {
           throw new CustomError('banana');
         }).not[toThrow]('apple');
-        jestExpect(() => {}).not[toThrow]('apple');
+        elricExpect(() => {}).not[toThrow]('apple');
       });
 
       test('did not throw at all', () => {
         expect(() =>
-          jestExpect(() => {})[toThrow]('apple'),
+          elricExpect(() => {})[toThrow]('apple'),
         ).toThrowErrorMatchingSnapshot();
       });
 
       test('threw, but message did not match (error)', () => {
         expect(() => {
-          jestExpect(() => {
+          elricExpect(() => {
             throw new CustomError('apple');
           })[toThrow]('banana');
         }).toThrowErrorMatchingSnapshot();
@@ -64,7 +64,7 @@ matchers.forEach(toThrow => {
 
       test('threw, but message did not match (non-error falsey)', () => {
         expect(() => {
-          jestExpect(() => {
+          elricExpect(() => {
             // eslint-disable-next-line no-throw-literal
             throw '';
           })[toThrow]('Server Error');
@@ -72,14 +72,14 @@ matchers.forEach(toThrow => {
       });
 
       it('properly escapes strings when matching against errors', () => {
-        jestExpect(() => {
+        elricExpect(() => {
           throw new TypeError('"this"? throws.');
         })[toThrow]('"this"? throws.');
       });
 
       test('threw, but message should not match (error)', () => {
         expect(() => {
-          jestExpect(() => {
+          elricExpect(() => {
             throw new CustomError('Invalid array length');
           }).not[toThrow]('array');
         }).toThrowErrorMatchingSnapshot();
@@ -87,7 +87,7 @@ matchers.forEach(toThrow => {
 
       test('threw, but message should not match (non-error truthy)', () => {
         expect(() => {
-          jestExpect(() => {
+          elricExpect(() => {
             // eslint-disable-next-line no-throw-literal
             throw 'Internal Server Error';
           }).not[toThrow]('Server Error');
@@ -97,24 +97,24 @@ matchers.forEach(toThrow => {
 
     describe('regexp', () => {
       it('passes', () => {
-        jestExpect(() => {
+        elricExpect(() => {
           throw new CustomError('apple');
         })[toThrow](/apple/);
-        jestExpect(() => {
+        elricExpect(() => {
           throw new CustomError('banana');
         }).not[toThrow](/apple/);
-        jestExpect(() => {}).not[toThrow](/apple/);
+        elricExpect(() => {}).not[toThrow](/apple/);
       });
 
       test('did not throw at all', () => {
         expect(() =>
-          jestExpect(() => {})[toThrow](/apple/),
+          elricExpect(() => {})[toThrow](/apple/),
         ).toThrowErrorMatchingSnapshot();
       });
 
       test('threw, but message did not match (error)', () => {
         expect(() => {
-          jestExpect(() => {
+          elricExpect(() => {
             throw new CustomError('apple');
           })[toThrow](/banana/);
         }).toThrowErrorMatchingSnapshot();
@@ -122,7 +122,7 @@ matchers.forEach(toThrow => {
 
       test('threw, but message did not match (non-error falsey)', () => {
         expect(() => {
-          jestExpect(() => {
+          elricExpect(() => {
             // eslint-disable-next-line no-throw-literal
             throw 0;
           })[toThrow](/^[123456789]\d*/);
@@ -131,7 +131,7 @@ matchers.forEach(toThrow => {
 
       test('threw, but message should not match (error)', () => {
         expect(() => {
-          jestExpect(() => {
+          elricExpect(() => {
             throw new CustomError('Invalid array length');
           }).not[toThrow](/ array /);
         }).toThrowErrorMatchingSnapshot();
@@ -139,7 +139,7 @@ matchers.forEach(toThrow => {
 
       test('threw, but message should not match (non-error truthy)', () => {
         expect(() => {
-          jestExpect(() => {
+          elricExpect(() => {
             // eslint-disable-next-line no-throw-literal
             throw 404;
           }).not[toThrow](/^[123456789]\d*/);
@@ -167,16 +167,16 @@ matchers.forEach(toThrow => {
       }
 
       it('passes', () => {
-        jestExpect(() => {
+        elricExpect(() => {
           throw new Err();
         })[toThrow](Err);
-        jestExpect(() => {
+        elricExpect(() => {
           throw new Err();
         })[toThrow](CustomError);
-        jestExpect(() => {
+        elricExpect(() => {
           throw new Err();
         }).not[toThrow](Err2);
-        jestExpect(() => {}).not[toThrow](Err);
+        elricExpect(() => {}).not[toThrow](Err);
       });
 
       test('did not throw at all', () => {
@@ -187,7 +187,7 @@ matchers.forEach(toThrow => {
 
       test('threw, but class did not match (error)', () => {
         expect(() => {
-          jestExpect(() => {
+          elricExpect(() => {
             throw new Err('apple');
           })[toThrow](Err2);
         }).toThrowErrorMatchingSnapshot();
@@ -195,7 +195,7 @@ matchers.forEach(toThrow => {
 
       test('threw, but class did not match (non-error falsey)', () => {
         expect(() => {
-          jestExpect(() => {
+          elricExpect(() => {
             // eslint-disable-next-line no-throw-literal
             throw undefined;
           })[toThrow](Err2);
@@ -204,7 +204,7 @@ matchers.forEach(toThrow => {
 
       test('threw, but class should not match (error)', () => {
         expect(() => {
-          jestExpect(() => {
+          elricExpect(() => {
             throw new Err('apple');
           }).not[toThrow](Err);
         }).toThrowErrorMatchingSnapshot();
@@ -212,7 +212,7 @@ matchers.forEach(toThrow => {
 
       test('threw, but class should not match (error subclass)', () => {
         expect(() => {
-          jestExpect(() => {
+          elricExpect(() => {
             throw new SubErr('apple');
           }).not[toThrow](Err);
         }).toThrowErrorMatchingSnapshot();
@@ -220,7 +220,7 @@ matchers.forEach(toThrow => {
 
       test('threw, but class should not match (error subsubclass)', () => {
         expect(() => {
-          jestExpect(() => {
+          elricExpect(() => {
             throw new SubSubErr('apple');
           }).not[toThrow](Err);
         }).toThrowErrorMatchingSnapshot();
@@ -239,13 +239,13 @@ matchers.forEach(toThrow => {
 
       describe('pass', () => {
         test('isNot false', () => {
-          jestExpect(() => {
+          elricExpect(() => {
             throw new ErrorMessage('apple');
           })[toThrow](expected);
         });
 
         test('isNot true', () => {
-          jestExpect(() => {
+          elricExpect(() => {
             throw new ErrorMessage('banana');
           }).not[toThrow](expected);
         });
@@ -254,7 +254,7 @@ matchers.forEach(toThrow => {
       describe('fail', () => {
         test('isNot false', () => {
           expect(() =>
-            jestExpect(() => {
+            elricExpect(() => {
               throw new ErrorMessage('banana');
             })[toThrow](expected),
           ).toThrowErrorMatchingSnapshot();
@@ -263,20 +263,20 @@ matchers.forEach(toThrow => {
         test('isNot true', () => {
           const message = 'Invalid array length';
           expect(() =>
-            jestExpect(() => {
+            elricExpect(() => {
               throw new ErrorMessage(message);
             }).not[toThrow]({message}),
           ).toThrowErrorMatchingSnapshot();
         });
 
         test('multiline diff highlight incorrect expected space', () => {
-          // jest/issues/2673
+          // elric/issues/2673
           const a =
             "There is no route defined for key Settings. \nMust be one of: 'Home'";
           const b =
             "There is no route defined for key Settings.\nMust be one of: 'Home'";
           expect(() =>
-            jestExpect(() => {
+            elricExpect(() => {
               throw new ErrorMessage(b);
             })[toThrow]({message: a}),
           ).toThrowErrorMatchingSnapshot();
@@ -288,13 +288,13 @@ matchers.forEach(toThrow => {
       describe('any-Class', () => {
         describe('pass', () => {
           test('isNot false', () => {
-            jestExpect(() => {
+            elricExpect(() => {
               throw new Err('apple');
             })[toThrow](expect.any(Err));
           });
 
           test('isNot true', () => {
-            jestExpect(() => {
+            elricExpect(() => {
               throw new Err('apple');
             }).not[toThrow](expect.any(Err2));
           });
@@ -303,7 +303,7 @@ matchers.forEach(toThrow => {
         describe('fail', () => {
           test('isNot false', () => {
             expect(() =>
-              jestExpect(() => {
+              elricExpect(() => {
                 throw new Err('apple');
               })[toThrow](expect.any(Err2)),
             ).toThrowErrorMatchingSnapshot();
@@ -311,7 +311,7 @@ matchers.forEach(toThrow => {
 
           test('isNot true', () => {
             expect(() =>
-              jestExpect(() => {
+              elricExpect(() => {
                 throw new Err('apple');
               }).not[toThrow](expect.any(Err)),
             ).toThrowErrorMatchingSnapshot();
@@ -322,14 +322,14 @@ matchers.forEach(toThrow => {
       describe('anything', () => {
         describe('pass', () => {
           test('isNot false', () => {
-            jestExpect(() => {
+            elricExpect(() => {
               throw new CustomError('apple');
             })[toThrow](expect.anything());
           });
 
           test('isNot true', () => {
-            jestExpect(() => {}).not[toThrow](expect.anything());
-            jestExpect(() => {
+            elricExpect(() => {}).not[toThrow](expect.anything());
+            elricExpect(() => {
               // eslint-disable-next-line no-throw-literal
               throw null;
             }).not[toThrow](expect.anything());
@@ -339,7 +339,7 @@ matchers.forEach(toThrow => {
         describe('fail', () => {
           test('isNot false', () => {
             expect(() =>
-              jestExpect(() => {
+              elricExpect(() => {
                 // eslint-disable-next-line no-throw-literal
                 throw null;
               })[toThrow](expect.anything()),
@@ -348,7 +348,7 @@ matchers.forEach(toThrow => {
 
           test('isNot true', () => {
             expect(() =>
-              jestExpect(() => {
+              elricExpect(() => {
                 throw new CustomError('apple');
               }).not[toThrow](expect.anything()),
             ).toThrowErrorMatchingSnapshot();
@@ -358,7 +358,7 @@ matchers.forEach(toThrow => {
 
       describe('no-symbol', () => {
         // Test serialization of asymmetric matcher which has no property:
-        // this.$$typeof = Symbol.for('jest.asymmetricMatcher')
+        // this.$$typeof = Symbol.for('elric.asymmetricMatcher')
         const matchError = {
           asymmetricMatch(received: Error | null | undefined) {
             return (
@@ -380,13 +380,13 @@ matchers.forEach(toThrow => {
 
         describe('pass', () => {
           test('isNot false', () => {
-            jestExpect(() => {
+            elricExpect(() => {
               throw new CustomError('apple');
             })[toThrow](matchError);
           });
 
           test('isNot true', () => {
-            jestExpect(() => {
+            elricExpect(() => {
               throw new CustomError('apple');
             }).not[toThrow](matchNotError);
           });
@@ -395,7 +395,7 @@ matchers.forEach(toThrow => {
         describe('fail', () => {
           test('isNot false', () => {
             expect(() =>
-              jestExpect(() => {
+              elricExpect(() => {
                 throw new CustomError('apple');
               })[toThrow](matchNotError),
             ).toThrowErrorMatchingSnapshot();
@@ -403,7 +403,7 @@ matchers.forEach(toThrow => {
 
           test('isNot true', () => {
             expect(() =>
-              jestExpect(() => {
+              elricExpect(() => {
                 throw new CustomError('apple');
               }).not[toThrow](matchError),
             ).toThrowErrorMatchingSnapshot();
@@ -421,13 +421,13 @@ matchers.forEach(toThrow => {
 
         describe('pass', () => {
           test('isNot false', () => {
-            jestExpect(() => {
+            elricExpect(() => {
               throw new CustomError('apple');
             })[toThrow](matchError);
           });
 
           test('isNot true', () => {
-            jestExpect(() => {
+            elricExpect(() => {
               throw new CustomError('apple');
             }).not[toThrow](matchNotError);
           });
@@ -436,7 +436,7 @@ matchers.forEach(toThrow => {
         describe('fail', () => {
           test('isNot false', () => {
             expect(() =>
-              jestExpect(() => {
+              elricExpect(() => {
                 throw new CustomError('apple');
               })[toThrow](matchNotError),
             ).toThrowErrorMatchingSnapshot();
@@ -444,7 +444,7 @@ matchers.forEach(toThrow => {
 
           test('isNot true', () => {
             expect(() =>
-              jestExpect(() => {
+              elricExpect(() => {
                 throw new CustomError('apple');
               }).not[toThrow](matchError),
             ).toThrowErrorMatchingSnapshot();
@@ -468,58 +468,58 @@ matchers.forEach(toThrow => {
 
       test('passes', async () => {
         expect.assertions(24);
-        await jestExpect(Promise.reject(new Error())).rejects[toThrow]();
+        await elricExpect(Promise.reject(new Error())).rejects[toThrow]();
 
-        await jestExpect(asyncFn(true)).rejects[toThrow]();
-        await jestExpect(asyncFn(true)).rejects[toThrow](Err);
-        await jestExpect(asyncFn(true)).rejects[toThrow](Error);
-        await jestExpect(asyncFn(true)).rejects[toThrow]('apple');
-        await jestExpect(asyncFn(true)).rejects[toThrow](/app/);
+        await elricExpect(asyncFn(true)).rejects[toThrow]();
+        await elricExpect(asyncFn(true)).rejects[toThrow](Err);
+        await elricExpect(asyncFn(true)).rejects[toThrow](Error);
+        await elricExpect(asyncFn(true)).rejects[toThrow]('apple');
+        await elricExpect(asyncFn(true)).rejects[toThrow](/app/);
 
-        await jestExpect(asyncFn(true)).rejects.not[toThrow](Err2);
-        await jestExpect(asyncFn(true)).rejects.not[toThrow]('banana');
-        await jestExpect(asyncFn(true)).rejects.not[toThrow](/banana/);
+        await elricExpect(asyncFn(true)).rejects.not[toThrow](Err2);
+        await elricExpect(asyncFn(true)).rejects.not[toThrow]('banana');
+        await elricExpect(asyncFn(true)).rejects.not[toThrow](/banana/);
 
-        await jestExpect(asyncFn(true, true)).resolves[toThrow]();
+        await elricExpect(asyncFn(true, true)).resolves[toThrow]();
 
-        await jestExpect(asyncFn(false, true)).resolves.not[toThrow]();
-        await jestExpect(asyncFn(false, true)).resolves.not[toThrow](Error);
-        await jestExpect(asyncFn(false, true)).resolves.not[toThrow]('apple');
-        await jestExpect(asyncFn(false, true)).resolves.not[toThrow](/apple/);
-        await jestExpect(asyncFn(false, true)).resolves.not[toThrow]('banana');
-        await jestExpect(asyncFn(false, true)).resolves.not[toThrow](/banana/);
+        await elricExpect(asyncFn(false, true)).resolves.not[toThrow]();
+        await elricExpect(asyncFn(false, true)).resolves.not[toThrow](Error);
+        await elricExpect(asyncFn(false, true)).resolves.not[toThrow]('apple');
+        await elricExpect(asyncFn(false, true)).resolves.not[toThrow](/apple/);
+        await elricExpect(asyncFn(false, true)).resolves.not[toThrow]('banana');
+        await elricExpect(asyncFn(false, true)).resolves.not[toThrow](/banana/);
 
-        await jestExpect(asyncFn()).rejects.not[toThrow]();
-        await jestExpect(asyncFn()).rejects.not[toThrow](Error);
-        await jestExpect(asyncFn()).rejects.not[toThrow]('apple');
-        await jestExpect(asyncFn()).rejects.not[toThrow](/apple/);
-        await jestExpect(asyncFn()).rejects.not[toThrow]('banana');
-        await jestExpect(asyncFn()).rejects.not[toThrow](/banana/);
+        await elricExpect(asyncFn()).rejects.not[toThrow]();
+        await elricExpect(asyncFn()).rejects.not[toThrow](Error);
+        await elricExpect(asyncFn()).rejects.not[toThrow]('apple');
+        await elricExpect(asyncFn()).rejects.not[toThrow](/apple/);
+        await elricExpect(asyncFn()).rejects.not[toThrow]('banana');
+        await elricExpect(asyncFn()).rejects.not[toThrow](/banana/);
 
         // Works with nested functions inside promises
-        await jestExpect(
+        await elricExpect(
           Promise.reject(() => {
             throw new Error();
           }),
         ).rejects[toThrow]();
-        await jestExpect(Promise.reject(() => {})).rejects.not[toThrow]();
+        await elricExpect(Promise.reject(() => {})).rejects.not[toThrow]();
       });
 
       test('did not throw at all', async () => {
         await expect(
-          jestExpect(asyncFn()).rejects[toThrow](),
+          elricExpect(asyncFn()).rejects[toThrow](),
         ).rejects.toThrowErrorMatchingSnapshot();
       });
 
       test('threw, but class did not match', async () => {
         await expect(
-          jestExpect(asyncFn(true)).rejects[toThrow](Err2),
+          elricExpect(asyncFn(true)).rejects[toThrow](Err2),
         ).rejects.toThrowErrorMatchingSnapshot();
       });
 
       test('threw, but should not have', async () => {
         await expect(
-          jestExpect(asyncFn(true)).rejects.not[toThrow](),
+          elricExpect(asyncFn(true)).rejects.not[toThrow](),
         ).rejects.toThrowErrorMatchingSnapshot();
       });
     });
@@ -527,7 +527,7 @@ matchers.forEach(toThrow => {
     describe('expected is undefined', () => {
       test('threw, but should not have (non-error falsey)', () => {
         expect(() => {
-          jestExpect(() => {
+          elricExpect(() => {
             // eslint-disable-next-line no-throw-literal
             throw null;
           }).not[toThrow]();
@@ -537,13 +537,13 @@ matchers.forEach(toThrow => {
 
     test('invalid arguments', () => {
       expect(() =>
-        jestExpect(() => {}).not[toThrow](111),
+        elricExpect(() => {}).not[toThrow](111),
       ).toThrowErrorMatchingSnapshot();
     });
 
     test('invalid actual', () => {
       expect(() =>
-        jestExpect('a string')[toThrow](),
+        elricExpect('a string')[toThrow](),
       ).toThrowErrorMatchingSnapshot();
     });
   });

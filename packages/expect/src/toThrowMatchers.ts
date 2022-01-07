@@ -18,8 +18,8 @@ import {
   printExpected,
   printReceived,
   printWithType,
-} from 'jest-matcher-utils';
-import {formatStackTrace, separateMessageFromStack} from 'jest-message-util';
+} from 'elric-matcher-utils';
+import {formatStackTrace, separateMessageFromStack} from 'elric-message-util';
 import {
   printExpectedConstructorName,
   printExpectedConstructorNameNot,

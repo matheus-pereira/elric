@@ -5,8 +5,8 @@
     "outDir": "build"
   },
   "references": [
-    {"path": "../jest-get-type"},
-    {"path": "../jest-types"},
+    {"path": "../elric-get-type"},
+    {"path": "../elric-types"},
     {"path": "../pretty-format"}
   ]
 }

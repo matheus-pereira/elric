@@ -21,7 +21,7 @@ it('returns the same value for primitive or function values', () => {
 });
 
 it('does not execute getters/setters, but copies them', () => {
-  const fn = jest.fn();
+  const fn = elric.fn();
   const obj = {
     // @ts-expect-error
     get foo() {
@@ -94,7 +94,7 @@ it('does not keep the prototype by default when top level is object', () => {
     this.length = 0;
   })();
 
-  const spy = jest
+  const spy = elric
     .spyOn(Array, 'isArray')
     .mockImplementation(object => object === sourceObject.nestedArray);
 
@@ -122,7 +122,7 @@ it('does not keep the prototype by default when top level is object', () => {
 });
 
 it('does not keep the prototype by default when top level is array', () => {
-  const spy = jest.spyOn(Array, 'isArray').mockImplementation(() => true);
+  const spy = elric.spyOn(Array, 'isArray').mockImplementation(() => true);
 
   // @ts-expect-error
   const sourceArray = new (function () {
@@ -140,7 +140,7 @@ it('does not keep the prototype by default when top level is array', () => {
 });
 
 it('does not keep the prototype of arrays when keepPrototype = false', () => {
-  const spy = jest.spyOn(Array, 'isArray').mockImplementation(() => true);
+  const spy = elric.spyOn(Array, 'isArray').mockImplementation(() => true);
 
   // @ts-expect-error
   const sourceArray = new (function () {
@@ -158,7 +158,7 @@ it('does not keep the prototype of arrays when keepPrototype = false', () => {
 });
 
 it('keeps the prototype of arrays when keepPrototype = true', () => {
-  const spy = jest.spyOn(Array, 'isArray').mockImplementation(() => true);
+  const spy = elric.spyOn(Array, 'isArray').mockImplementation(() => true);
 
   // @ts-expect-error
   const sourceArray = new (function () {
@@ -183,7 +183,7 @@ it('does not keep the prototype for objects when keepPrototype = false', () => {
     this.length = 0;
   })();
 
-  const spy = jest
+  const spy = elric
     .spyOn(Array, 'isArray')
     .mockImplementation(object => object === sourceobject.nestedArray);
 
@@ -220,7 +220,7 @@ it('keeps the prototype for objects when keepPrototype = true', () => {
     this.length = 0;
   })();
 
-  const spy = jest
+  const spy = elric
     .spyOn(Array, 'isArray')
     .mockImplementation(object => object === sourceObject.nestedArray);
 

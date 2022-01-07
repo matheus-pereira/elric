@@ -4,8 +4,8 @@ import {AppComponent} from './app.component';
 import {DataService} from './shared/data.service';
 
 const title = 'Test';
-const getTitleFn = jest.fn().mockReturnValue(title);
-const dataServiceSpy = jest.fn().mockImplementation(
+const getTitleFn = elric.fn().mockReturnValue(title);
+const dataServiceSpy = elric.fn().mockImplementation(
   (): Partial<DataService> => ({
     getTitle: getTitleFn,
   }),

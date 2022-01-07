@@ -5,25 +5,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {JestEnvironment} from '@jest/environment';
-import type {TestFileEvent, TestResult} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import type Runtime from 'jest-runtime';
-import type {SnapshotStateType} from 'jest-snapshot';
-import {deepCyclicCopy} from 'jest-util';
+import type {elricEnvironment} from '@elric/environment';
+import type {TestFileEvent, TestResult} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import type Runtime from 'elric-runtime';
+import type {SnapshotStateType} from 'elric-snapshot';
+import {deepCyclicCopy} from 'elric-util';
 
-const FRAMEWORK_INITIALIZER = require.resolve('./jestAdapterInit');
+const FRAMEWORK_INITIALIZER = require.resolve('./elricAdapterInit');
 
-const jestAdapter = async (
+const elricAdapter = async (
   globalConfig: Config.GlobalConfig,
   config: Config.ProjectConfig,
-  environment: JestEnvironment,
+  environment: elricEnvironment,
   runtime: Runtime,
   testPath: string,
-  sendMessageToJest?: TestFileEvent,
+  sendMessageToelric?: TestFileEvent,
 ): Promise<TestResult> => {
-  const {initialize, runAndTransformResultsToJestFormat} =
-    runtime.requireInternalModule<typeof import('./jestAdapterInit')>(
+  const {initialize, runAndTransformResultsToelricFormat} =
+    runtime.requireInternalModule<typeof import('./elricAdapterInit')>(
       FRAMEWORK_INITIALIZER,
     );
 
@@ -33,7 +33,7 @@ const jestAdapter = async (
     globalConfig,
     localRequire: runtime.requireModule.bind(runtime),
     parentProcess: process,
-    sendMessageToJest,
+    sendMessageToelric,
     setGlobalsForRuntime: runtime.setGlobalsForRuntime.bind(runtime),
     testPath,
   });
@@ -85,7 +85,7 @@ const jestAdapter = async (
     runtime.requireModule(testPath);
   }
 
-  const results = await runAndTransformResultsToJestFormat({
+  const results = await runAndTransformResultsToelricFormat({
     config,
     globalConfig,
     testPath,
@@ -128,4 +128,4 @@ const _addSnapshotData = (
   results.snapshot.uncheckedKeys = Array.from(uncheckedKeys);
 };
 
-export = jestAdapter;
+export = elricAdapter;

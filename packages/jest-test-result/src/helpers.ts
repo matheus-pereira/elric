@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import type {AggregatedResult, SerializableError, TestResult} from './types';
 
 export const makeEmptyAggregatedTestResult = (): AggregatedResult => ({
@@ -82,7 +82,7 @@ export const addResult = (
   aggregatedResults: AggregatedResult,
   testResult: TestResult,
 ): void => {
-  // `todos` are new as of Jest 24, and not all runners return it.
+  // `todos` are new as of elric 24, and not all runners return it.
   // Set it to `0` to avoid `NaN`
   if (!testResult.numTodoTests) {
     testResult.numTodoTests = 0;

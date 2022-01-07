@@ -1,10 +1,10 @@
 {
-  "name": "jest-regex-util",
+  "name": "elric-regex-util",
   "version": "27.4.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/jest-regex-util"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/elric-regex-util"
   },
   "devDependencies": {
     "@types/node": "*"

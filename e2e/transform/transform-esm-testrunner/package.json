@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "jest": {
+  "elric": {
     "rootDir": "./",
     "testRunner": "<rootDir>/test-runner.mjs"
   }

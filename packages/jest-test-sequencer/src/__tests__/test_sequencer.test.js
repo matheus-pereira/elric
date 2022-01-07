@@ -9,10 +9,10 @@ import * as path from 'path';
 import * as fs from 'graceful-fs';
 import TestSequencer from '../index';
 
-jest.mock('graceful-fs', () => ({
-  ...jest.createMockFromModule('fs'),
-  existsSync: jest.fn(() => true),
-  readFileSync: jest.fn(() => '{}'),
+elric.mock('graceful-fs', () => ({
+  ...elric.createMockFromModule('fs'),
+  existsSync: elric.fn(() => true),
+  readFileSync: elric.fn(() => '{}'),
 }));
 const FAIL = 0;
 const SUCCESS = 1;
@@ -51,7 +51,7 @@ const toTests = paths =>
   }));
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  elric.clearAllMocks();
   sequencer = new TestSequencer();
 });
 

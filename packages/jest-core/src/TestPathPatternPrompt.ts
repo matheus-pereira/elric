@@ -5,15 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Test} from '@jest/test-result';
-import type {Context} from 'jest-runtime';
+import type {Test} from '@elric/test-result';
+import type {Context} from 'elric-runtime';
 import {
   PatternPrompt,
   Prompt,
   ScrollOptions,
   printPatternCaret,
   printRestoredPatternCaret,
-} from 'jest-watcher';
+} from 'elric-watcher';
 import type SearchSource from './SearchSource';
 
 type SearchSources = Array<{

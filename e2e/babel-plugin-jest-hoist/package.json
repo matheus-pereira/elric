@@ -5,14 +5,14 @@
     "@babel/preset-typescript": "^7.0.0",
     "react": "*"
   },
-  "jest": {
+  "elric": {
     "automock": true,
     "testEnvironment": "node",
     "transformIgnorePatterns": [
-      "jest-circus",
-      "jest-environment-node",
-      "jest-jasmine2",
-      "jest-runner"
+      "elric-circus",
+      "elric-environment-node",
+      "elric-jasmine2",
+      "elric-runner"
     ]
   }
 }

@@ -1,5 +1,5 @@
 {
-  "jest": {
+  "elric": {
     "reporters": [
       [
         "<rootDir>/reporters/TestReporter.js",

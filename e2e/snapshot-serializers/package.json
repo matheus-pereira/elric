@@ -1,5 +1,5 @@
 {
-  "jest": {
+  "elric": {
     "testEnvironment": "node",
     "transform": {
       "\\.js$": "<rootDir>/transformer.js"

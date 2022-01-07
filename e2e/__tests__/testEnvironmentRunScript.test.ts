@@ -6,11 +6,11 @@
  */
 
 import {resolve, sep} from 'path';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 it('throw error if test env does not have getVmContext', () => {
   const DIR = resolve(__dirname, '../test-environment-run-script');
-  const {exitCode, stderr} = runJest(DIR);
+  const {exitCode, stderr} = runelric(DIR);
 
   expect(stderr.replace(`${DIR}${sep}`, '<rootDir>/')).toMatchSnapshot();
   expect(exitCode).toBe(1);

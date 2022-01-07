@@ -6,9 +6,9 @@
  */
 
 import chalk = require('chalk');
-import type {Config} from '@jest/types';
-import {ChangedFilesPromise, getChangedFilesForRoots} from 'jest-changed-files';
-import {formatExecError} from 'jest-message-util';
+import type {Config} from '@elric/types';
+import {ChangedFilesPromise, getChangedFilesForRoots} from 'elric-changed-files';
+import {formatExecError} from 'elric-message-util';
 
 export default (
   globalConfig: Config.GlobalConfig,

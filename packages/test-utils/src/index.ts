@@ -8,9 +8,9 @@
 export {alignedAnsiStyleSerializer} from './alignedAnsiStyleSerializer';
 
 export {
-  isJestJasmineRun,
+  iselricJasmineRun,
   skipSuiteOnJasmine,
-  skipSuiteOnJestCircus,
+  skipSuiteOnelricCircus,
   onNodeVersions,
 } from './ConditionalTest';
 

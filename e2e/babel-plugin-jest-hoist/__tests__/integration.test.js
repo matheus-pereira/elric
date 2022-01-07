@@ -16,24 +16,24 @@ import b from '../__test_modules__/b';
 import c from '../__test_modules__/c';
 import d from '../__test_modules__/d';
 import f from '../__test_modules__/f';
-import jestBackticks from '../__test_modules__/jestBackticks';
+import elricBackticks from '../__test_modules__/elricBackticks';
 // The virtual mock call below will be hoisted above this `require` call.
 const virtualModule = require('virtual-module');
 
 // These will all be hoisted above imports
-jest.unmock('react');
-jest.deepUnmock('../__test_modules__/Unmocked');
-jest.unmock('../__test_modules__/c').unmock('../__test_modules__/d');
+elric.unmock('react');
+elric.deepUnmock('../__test_modules__/Unmocked');
+elric.unmock('../__test_modules__/c').unmock('../__test_modules__/d');
 
 let e;
 (function () {
-  const _getJestObj = 42;
+  const _getelricObj = 42;
   e = require('../__test_modules__/e').default;
   // hoisted to the top of the function scope
-  jest.unmock('../__test_modules__/e');
+  elric.unmock('../__test_modules__/e');
 })();
 
-jest.mock('../__test_modules__/f', () => {
+elric.mock('../__test_modules__/f', () => {
   if (!global.CALLS) {
     global.CALLS = 0;
   }
@@ -42,30 +42,30 @@ jest.mock('../__test_modules__/f', () => {
   return {
     _isMock: true,
     fn: () => {
-      // The `jest.mock` transform will allow require, built-ins and globals.
+      // The `elric.mock` transform will allow require, built-ins and globals.
       const path = require('path');
       const array = new Array(3);
       array[0] = path.sep;
-      return jest.fn(() => array);
+      return elric.fn(() => array);
     },
   };
 });
-jest.mock(`../__test_modules__/jestBackticks`);
-jest.mock('virtual-module', () => 'kiwi', {virtual: true});
+elric.mock(`../__test_modules__/elricBackticks`);
+elric.mock('virtual-module', () => 'kiwi', {virtual: true});
 // This has types that should be ignored by the out-of-scope variables check.
-jest.mock('has-flow-types', () => (props: {children: unknown}) => 3, {
+elric.mock('has-flow-types', () => (props: {children: unknown}) => 3, {
   virtual: true,
 });
 
 // These will not be hoisted
-jest.unmock('../__test_modules__/a').dontMock('../__test_modules__/b');
+elric.unmock('../__test_modules__/a').dontMock('../__test_modules__/b');
 // eslint-disable-next-line no-useless-concat
-jest.unmock('../__test_modules__/' + 'a');
-jest.dontMock('../__test_modules__/Mocked');
+elric.unmock('../__test_modules__/' + 'a');
+elric.dontMock('../__test_modules__/Mocked');
 {
-  const jest = {unmock: () => {}};
+  const elric = {unmock: () => {}};
   // Would error (used before initialization) if hoisted to the top of the scope
-  jest.unmock('../__test_modules__/a');
+  elric.unmock('../__test_modules__/a');
 }
 
 // This must not throw an error
@@ -74,9 +74,9 @@ myObject.mock('apple', 27);
 
 // Variable names prefixed with `mock` (ignore case) should not throw as out-of-scope
 const MockMethods = () => {};
-jest.mock('../__test_modules__/g', () => MockMethods);
+elric.mock('../__test_modules__/g', () => MockMethods);
 
-describe('babel-plugin-jest-hoist', () => {
+describe('babel-plugin-elric-hoist', () => {
   it('does not throw during transform', () => {
     const object = {};
     object.__defineGetter__('foo', () => 'bar');
@@ -112,7 +112,7 @@ describe('babel-plugin-jest-hoist', () => {
   });
 
   it('only executes the module factories once', () => {
-    jest.resetModules();
+    elric.resetModules();
 
     global.CALLS = 0;
 
@@ -136,7 +136,7 @@ describe('babel-plugin-jest-hoist', () => {
     expect(b()).toEqual(undefined);
   });
 
-  it('requires modules that also call jest.mock', () => {
+  it('requires modules that also call elric.mock', () => {
     require('../mockFile');
     const mock = require('../banana');
     expect(mock).toEqual('apple');
@@ -147,6 +147,6 @@ describe('babel-plugin-jest-hoist', () => {
   });
 
   it('works if the file name is mocked via backticks and defined in the "__mocks__" directory', () => {
-    expect(jestBackticks.name).toBe('backticks-with-jest');
+    expect(elricBackticks.name).toBe('backticks-with-elric');
   });
 });

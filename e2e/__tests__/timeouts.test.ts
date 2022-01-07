@@ -6,9 +6,9 @@
  */
 
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {cleanup, extractSummary, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(__dirname, '../timeouts');
 
@@ -18,7 +18,7 @@ afterAll(() => cleanup(DIR));
 test('exceeds the timeout', () => {
   writeFiles(DIR, {
     '__tests__/a-banana.js': `
-      jest.setTimeout(20);
+      elric.setTimeout(20);
 
       test('banana', () => {
         return new Promise(resolve => {
@@ -29,10 +29,10 @@ test('exceeds the timeout', () => {
     'package.json': '{}',
   });
 
-  const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false']);
+  const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false']);
   const {rest, summary} = extractSummary(stderr);
   expect(rest).toMatch(
-    /(jest\.setTimeout|jasmine\.DEFAULT_TIMEOUT_INTERVAL|Exceeded timeout)/,
+    /(elric\.setTimeout|jasmine\.DEFAULT_TIMEOUT_INTERVAL|Exceeded timeout)/,
   );
   expect(wrap(summary)).toMatchSnapshot();
   expect(exitCode).toBe(1);
@@ -41,7 +41,7 @@ test('exceeds the timeout', () => {
 test('does not exceed the timeout', () => {
   writeFiles(DIR, {
     '__tests__/a-banana.js': `
-      jest.setTimeout(1000);
+      elric.setTimeout(1000);
 
       test('banana', () => {
         return new Promise(resolve => {
@@ -52,7 +52,7 @@ test('does not exceed the timeout', () => {
     'package.json': '{}',
   });
 
-  const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false']);
+  const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false']);
   const {rest, summary} = extractSummary(stderr);
   expect(wrap(rest)).toMatchSnapshot();
   expect(wrap(summary)).toMatchSnapshot();
@@ -72,14 +72,14 @@ test('exceeds the command line testTimeout', () => {
     'package.json': '{}',
   });
 
-  const {stderr, exitCode} = runJest(DIR, [
+  const {stderr, exitCode} = runelric(DIR, [
     '-w=1',
     '--ci=false',
     '--testTimeout=200',
   ]);
   const {rest, summary} = extractSummary(stderr);
   expect(rest).toMatch(
-    /(jest\.setTimeout|jasmine\.DEFAULT_TIMEOUT_INTERVAL|Exceeded timeout)/,
+    /(elric\.setTimeout|jasmine\.DEFAULT_TIMEOUT_INTERVAL|Exceeded timeout)/,
   );
   expect(wrap(summary)).toMatchSnapshot();
   expect(exitCode).toBe(1);
@@ -98,7 +98,7 @@ test('does not exceed the command line testTimeout', () => {
     'package.json': '{}',
   });
 
-  const {stderr, exitCode} = runJest(DIR, [
+  const {stderr, exitCode} = runelric(DIR, [
     '-w=1',
     '--ci=false',
     '--testTimeout=1000',

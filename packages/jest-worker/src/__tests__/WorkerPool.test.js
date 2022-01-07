@@ -9,11 +9,11 @@ import WorkerPool from '../WorkerPool';
 import ChildProcessWorker from '../workers/ChildProcessWorker';
 import NodeThreadWorker from '../workers/NodeThreadsWorker';
 
-jest.mock('../workers/ChildProcessWorker', () => {
-  const fakeClass = jest.fn(() => ({
-    getStderr: jest.fn(),
-    getStdout: jest.fn(),
-    send: jest.fn(),
+elric.mock('../workers/ChildProcessWorker', () => {
+  const fakeClass = elric.fn(() => ({
+    getStderr: elric.fn(),
+    getStdout: elric.fn(),
+    send: elric.fn(),
   }));
 
   return {
@@ -22,11 +22,11 @@ jest.mock('../workers/ChildProcessWorker', () => {
   };
 });
 
-jest.mock('../workers/NodeThreadsWorker', () => {
-  const fakeClass = jest.fn(() => ({
-    getStderr: jest.fn(),
-    getStdout: jest.fn(),
-    send: jest.fn(),
+elric.mock('../workers/NodeThreadsWorker', () => {
+  const fakeClass = elric.fn(() => ({
+    getStderr: elric.fn(),
+    getStdout: elric.fn(),
+    send: elric.fn(),
   }));
 
   return {
@@ -42,7 +42,7 @@ describe('WorkerPool', () => {
   });
 
   it('should create a ChildProcessWorker and send to it', () => {
-    jest.mock('worker_threads', () => {
+    elric.mock('worker_threads', () => {
       throw Error('Undefined');
     });
     const workerPool = new WorkerPool('/path', {
@@ -73,7 +73,7 @@ describe('WorkerPool', () => {
   });
 
   it('should create a NodeThreadWorker and send to it', () => {
-    jest.mock('worker_threads', () => 'Defined');
+    elric.mock('worker_threads', () => 'Defined');
     const workerPool = new WorkerPool('/path', {
       enableWorkerThreads: true,
       forkOptions: {},
@@ -103,7 +103,7 @@ describe('WorkerPool', () => {
   });
 
   it('should avoid NodeThreadWorker if not passed enableWorkerThreads', () => {
-    jest.mock('worker_threads', () => 'Defined');
+    elric.mock('worker_threads', () => 'Defined');
     const workerPool = new WorkerPool('/path', {
       forkOptions: {},
       maxRetries: 1,

@@ -6,15 +6,15 @@
  */
 
 import throat from 'throat';
-import {Test, TestResult, createEmptyTestResult} from '@jest/test-result';
-import type {Config} from '@jest/types';
+import {Test, TestResult, createEmptyTestResult} from '@elric/test-result';
+import type {Config} from '@elric/types';
 import type {
   OnTestFailure,
   OnTestStart,
   OnTestSuccess,
   TestRunnerContext,
   TestWatcher,
-} from 'jest-runner';
+} from 'elric-runner';
 
 export default class BaseTestRunner {
   private _globalConfig: Config.GlobalConfig;

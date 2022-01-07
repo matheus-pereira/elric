@@ -2,12 +2,12 @@
 
 'use strict';
 
-jest.useFakeTimers();
+elric.useFakeTimers();
 
 it('schedules a 10-second timer after 1 second', () => {
-  jest.spyOn(global, 'setTimeout');
+  elric.spyOn(global, 'setTimeout');
   const infiniteTimerGame = require('../infiniteTimerGame');
-  const callback = jest.fn();
+  const callback = elric.fn();
 
   infiniteTimerGame(callback);
 
@@ -18,7 +18,7 @@ it('schedules a 10-second timer after 1 second', () => {
 
   // Fast forward and exhaust only currently pending timers
   // (but not any new timers that get created during that process)
-  jest.runOnlyPendingTimers();
+  elric.runOnlyPendingTimers();
 
   // At this point, our 1-second timer should have fired its callback
   expect(callback).toBeCalled();

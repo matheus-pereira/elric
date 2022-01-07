@@ -18,7 +18,7 @@ body:
     id: solution
     attributes:
       label: Motivation
-      description: Outline your motivation for the proposal. How will it make Jest better?
+      description: Outline your motivation for the proposal. How will it make elric better?
     validations:
       required: true
   - type: textarea
@@ -33,7 +33,7 @@ body:
     attributes:
       label: Pitch
       description: |
-        Why does this feature belong in the [Jest core platform](https://www.youtube.com/watch?v=NtjyeojAOBs)?
+        Why does this feature belong in the [elric core platform](https://www.youtube.com/watch?v=NtjyeojAOBs)?
     validations:
       required: true
   - type: markdown
@@ -41,6 +41,6 @@ body:
       value: |
         Common proposals that do not typically make it to core:
 
-        - New matchers (see [jest-extended](https://github.com/jest-community/jest-extended))
+        - New matchers (see [elric-extended](https://github.com/elric-community/elric-extended))
         - Changes to the default reporter (use custom reporters instead)
         - Changes to node/jsdom test environments (use custom environments instead)

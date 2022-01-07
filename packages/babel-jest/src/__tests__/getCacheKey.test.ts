@@ -6,15 +6,15 @@
  */
 
 import type {TransformOptions as BabelTransformOptions} from '@babel/core';
-import type {TransformOptions as JestTransformOptions} from '@jest/transform';
-import babelJest from '../index';
+import type {TransformOptions as elricTransformOptions} from '@elric/transform';
+import babelelric from '../index';
 
 const processVersion = process.version;
 const nodeEnv = process.env.NODE_ENV;
 const babelEnv = process.env.BABEL_ENV;
 
 afterEach(() => {
-  jest.resetModules();
+  elric.resetModules();
 
   if (process.version === 'new-node-version') {
     process.version = processVersion;
@@ -37,9 +37,9 @@ describe('getCacheKey', () => {
     config: {rootDir: 'mock-root-dir'},
     configString: 'mock-config-string',
     instrument: true,
-  } as JestTransformOptions;
+  } as elricTransformOptions;
 
-  const oldCacheKey = babelJest.getCacheKey(
+  const oldCacheKey = babelelric.getCacheKey(
     sourceText,
     sourcePath,
     transformOptions,
@@ -50,13 +50,13 @@ describe('getCacheKey', () => {
   });
 
   test('if `THIS_FILE` value is changing', () => {
-    jest.doMock('graceful-fs', () => ({
+    elric.doMock('graceful-fs', () => ({
       readFileSync: () => 'new this file',
     }));
 
-    const {default: babelJest}: typeof import('../index') = require('../index');
+    const {default: babelelric}: typeof import('../index') = require('../index');
 
-    const newCacheKey = babelJest.getCacheKey(
+    const newCacheKey = babelelric.getCacheKey(
       sourceText,
       sourcePath,
       transformOptions,
@@ -66,7 +66,7 @@ describe('getCacheKey', () => {
   });
 
   test('if `babelOptions.options` value is changing', () => {
-    jest.doMock('../loadBabelConfig', () => {
+    elric.doMock('../loadBabelConfig', () => {
       const babel: typeof import('@babel/core') = require('@babel/core');
 
       return {
@@ -77,9 +77,9 @@ describe('getCacheKey', () => {
       };
     });
 
-    const {default: babelJest}: typeof import('../index') = require('../index');
+    const {default: babelelric}: typeof import('../index') = require('../index');
 
-    const newCacheKey = babelJest.getCacheKey(
+    const newCacheKey = babelelric.getCacheKey(
       sourceText,
       sourcePath,
       transformOptions,
@@ -89,7 +89,7 @@ describe('getCacheKey', () => {
   });
 
   test('if `sourceText` value is changing', () => {
-    const newCacheKey = babelJest.getCacheKey(
+    const newCacheKey = babelelric.getCacheKey(
       'new source text',
       sourcePath,
       transformOptions,
@@ -99,7 +99,7 @@ describe('getCacheKey', () => {
   });
 
   test('if `sourcePath` value is changing', () => {
-    const newCacheKey = babelJest.getCacheKey(
+    const newCacheKey = babelelric.getCacheKey(
       sourceText,
       'new-source-path.js',
       transformOptions,
@@ -109,7 +109,7 @@ describe('getCacheKey', () => {
   });
 
   test('if `configString` value is changing', () => {
-    const newCacheKey = babelJest.getCacheKey(sourceText, sourcePath, {
+    const newCacheKey = babelelric.getCacheKey(sourceText, sourcePath, {
       ...transformOptions,
       configString: 'new-config-string',
     });
@@ -118,7 +118,7 @@ describe('getCacheKey', () => {
   });
 
   test('if `babelOptions.config` value is changing', () => {
-    jest.doMock('../loadBabelConfig', () => {
+    elric.doMock('../loadBabelConfig', () => {
       const babel: typeof import('@babel/core') = require('@babel/core');
 
       return {
@@ -129,9 +129,9 @@ describe('getCacheKey', () => {
       };
     });
 
-    const {default: babelJest}: typeof import('../index') = require('../index');
+    const {default: babelelric}: typeof import('../index') = require('../index');
 
-    const newCacheKey = babelJest.getCacheKey(
+    const newCacheKey = babelelric.getCacheKey(
       sourceText,
       sourcePath,
       transformOptions,
@@ -141,7 +141,7 @@ describe('getCacheKey', () => {
   });
 
   test('if `babelOptions.babelrc` value is changing', () => {
-    jest.doMock('../loadBabelConfig', () => {
+    elric.doMock('../loadBabelConfig', () => {
       const babel: typeof import('@babel/core') = require('@babel/core');
 
       return {
@@ -152,9 +152,9 @@ describe('getCacheKey', () => {
       };
     });
 
-    const {default: babelJest}: typeof import('../index') = require('../index');
+    const {default: babelelric}: typeof import('../index') = require('../index');
 
-    const newCacheKey = babelJest.getCacheKey(
+    const newCacheKey = babelelric.getCacheKey(
       sourceText,
       sourcePath,
       transformOptions,
@@ -164,7 +164,7 @@ describe('getCacheKey', () => {
   });
 
   test('if `instrument` value is changing', () => {
-    const newCacheKey = babelJest.getCacheKey(sourceText, sourcePath, {
+    const newCacheKey = babelelric.getCacheKey(sourceText, sourcePath, {
       ...transformOptions,
       instrument: false,
     });
@@ -175,7 +175,7 @@ describe('getCacheKey', () => {
   test('if `process.env.NODE_ENV` value is changing', () => {
     process.env.NODE_ENV = 'NEW_NODE_ENV';
 
-    const newCacheKey = babelJest.getCacheKey(
+    const newCacheKey = babelelric.getCacheKey(
       sourceText,
       sourcePath,
       transformOptions,
@@ -187,7 +187,7 @@ describe('getCacheKey', () => {
   test('if `process.env.BABEL_ENV` value is changing', () => {
     process.env.BABEL_ENV = 'NEW_BABEL_ENV';
 
-    const newCacheKey = babelJest.getCacheKey(
+    const newCacheKey = babelelric.getCacheKey(
       sourceText,
       sourcePath,
       transformOptions,
@@ -200,7 +200,7 @@ describe('getCacheKey', () => {
     delete process.version;
     process.version = 'new-node-version';
 
-    const newCacheKey = babelJest.getCacheKey(
+    const newCacheKey = babelelric.getCacheKey(
       sourceText,
       sourcePath,
       transformOptions,

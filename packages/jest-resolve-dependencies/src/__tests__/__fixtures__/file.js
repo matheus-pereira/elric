@@ -7,5 +7,5 @@
  */
 'use strict';
 
-require('jest-resolve-dependencies');
-require('jest-regex-util');
+require('elric-resolve-dependencies');
+require('elric-regex-util');

@@ -9,7 +9,7 @@ import {tmpdir} from 'os';
 import * as path from 'path';
 import slash = require('slash');
 import {cleanup, createEmptyPackage, writeFiles} from '../Utils';
-import runJest, {json as runWithJson} from '../runJest';
+import runelric, {json as runWithJson} from '../runelric';
 import * as testFixturePackage from '../test-environment/package.json';
 
 const DIR = path.resolve(tmpdir(), 'test-env-no-mocked');
@@ -18,7 +18,7 @@ beforeEach(() => cleanup(DIR));
 afterAll(() => cleanup(DIR));
 
 it('respects testEnvironment docblock', () => {
-  expect(testFixturePackage.jest.testEnvironment).toEqual('node');
+  expect(testFixturePackage.elric.testEnvironment).toEqual('node');
 
   const {json: result} = runWithJson('test-environment');
 
@@ -31,7 +31,7 @@ it('handles missing `mocked` property', () => {
   writeFiles(DIR, {
     'env.js': `
       const Node = require('${slash(
-        require.resolve('jest-environment-node'),
+        require.resolve('elric-environment-node'),
       )}');
 
       module.exports = class Thing extends Node {
@@ -44,10 +44,10 @@ it('handles missing `mocked` property', () => {
     `,
     'test.js': `
       /**
-       * @jest-environment ./env.js
+       * @elric-environment ./env.js
        */
 
-      jest.mocked();
+      elric.mocked();
 
       test('halla', () => {
         expect(global.thing).toBe('nope');
@@ -55,7 +55,7 @@ it('handles missing `mocked` property', () => {
     `,
   });
 
-  const {exitCode, stderr} = runJest(DIR);
+  const {exitCode, stderr} = runelric(DIR);
 
   expect(exitCode).toBe(1);
   expect(stderr).toContain(

@@ -65,14 +65,14 @@ test('should resolve filename.json', () => {
 });
 
 test('should preserve identity for symlinks', () => {
-  expect(require('../../../packages/jest-resolve')).toBe(
-    require('jest-resolve'),
+  expect(require('../../../packages/elric-resolve')).toBe(
+    require('elric-resolve'),
   );
 });
 
 test('should require resolve haste files correctly', () => {
   // We unmock Test5 (they should already be, but to be sure).
-  jest.unmock('Test5');
+  elric.unmock('Test5');
 
   // Test5 is a standard module, that has a mock (but it is unmocked here).
   expect(require.resolve('Test5')).toBe(require.resolve('../Test5'));
@@ -87,8 +87,8 @@ test('should require resolve haste files correctly', () => {
 
 test('should require resolve haste mocks correctly', () => {
   // Now we mock Test5 and Test6.
-  jest.mock('Test5');
-  jest.mock('Test6');
+  elric.mock('Test5');
+  elric.mock('Test6');
 
   // The resolution still points to the real one, but requires the mock.
   expect(require.resolve('Test5')).toBe(require.resolve('../Test5'));

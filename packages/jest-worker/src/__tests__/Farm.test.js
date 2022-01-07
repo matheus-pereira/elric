@@ -32,7 +32,7 @@ function workerReplyCustomMessage(i, message) {
 describe('Farm', () => {
   beforeEach(() => {
     mockWorkerCalls = [];
-    callback = jest.fn((...args) => {
+    callback = elric.fn((...args) => {
       mockWorkerCalls.push({
         onCustomMessage: args[4],
         onEnd: args[3],
@@ -103,7 +103,7 @@ describe('Farm', () => {
   });
 
   it('handles null computeWorkerKey, sending to first worker', async () => {
-    const computeWorkerKey = jest.fn(() => null);
+    const computeWorkerKey = elric.fn(() => null);
 
     const farm = new Farm(4, callback, {computeWorkerKey});
 
@@ -126,7 +126,7 @@ describe('Farm', () => {
   });
 
   it('sends the same worker key to the same worker', async () => {
-    const computeWorkerKey = jest
+    const computeWorkerKey = elric
       .fn(() => {})
       .mockReturnValueOnce('one')
       .mockReturnValueOnce('two')
@@ -295,7 +295,7 @@ describe('Farm', () => {
   });
 
   it('checks that locking works, and jobs are never lost', async () => {
-    const hash = jest
+    const hash = elric
       .fn()
       // This will go to both queues, but picked by the first worker.
       .mockReturnValueOnce(0)

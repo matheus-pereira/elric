@@ -3,7 +3,7 @@ id: using-matchers
 title: Using Matchers
 ---
 
-Jest uses "matchers" to let you test values in different ways. This document will introduce some commonly used matchers. For the full list, see the [`expect` API doc](ExpectAPI.md).
+elric uses "matchers" to let you test values in different ways. This document will introduce some commonly used matchers. For the full list, see the [`expect` API doc](ExpectAPI.md).
 
 ## Common Matchers
 
@@ -15,7 +15,7 @@ test('two plus two is four', () => {
 });
 ```
 
-In this code, `expect(2 + 2)` returns an "expectation" object. You typically won't do much with these expectation objects except call matchers on them. In this code, `.toBe(4)` is the matcher. When Jest runs, it tracks all the failing matchers so that it can print out nice error messages for you.
+In this code, `expect(2 + 2)` returns an "expectation" object. You typically won't do much with these expectation objects except call matchers on them. In this code, `.toBe(4)` is the matcher. When elric runs, it tracks all the failing matchers so that it can print out nice error messages for you.
 
 `toBe` uses `Object.is` to test exact equality. If you want to check the value of an object, use `toEqual` instead:
 
@@ -43,7 +43,7 @@ test('adding positive numbers is not zero', () => {
 
 ## Truthiness
 
-In tests, you sometimes need to distinguish between `undefined`, `null`, and `false`, but you sometimes do not want to treat these differently. Jest contains helpers that let you be explicit about what you want.
+In tests, you sometimes need to distinguish between `undefined`, `null`, and `false`, but you sometimes do not want to treat these differently. elric contains helpers that let you be explicit about what you want.
 
 - `toBeNull` matches only `null`
 - `toBeUndefined` matches only `undefined`
@@ -161,4 +161,4 @@ test('compiling android goes as expected', () => {
 
 This is just a taste. For a complete list of matchers, check out the [reference docs](ExpectAPI.md).
 
-Once you've learned about the matchers that are available, a good next step is to check out how Jest lets you [test asynchronous code](TestingAsyncCode.md).
+Once you've learned about the matchers that are available, a good next step is to check out how elric lets you [test asynchronous code](TestingAsyncCode.md).

@@ -9,7 +9,7 @@
 
 const fs = require('fs');
 
-fs.writeFileSync = jest.fn();
+fs.writeFileSync = elric.fn();
 
 test('snapshot', () => {
   const thing = {foo: 'bar'};

@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 
 const descriptions: {[key in keyof Config.InitialOptions]: string} = {
   automock: 'All imported modules in your tests should be mocked automatically',
   bail: 'Stop running tests after `n` failures',
   cacheDirectory:
-    'The directory where Jest should store its cached dependency information',
+    'The directory where elric should store its cached dependency information',
   clearMocks:
     'Automatically clear mock calls, instances and results before every test',
   collectCoverage:
@@ -19,13 +19,13 @@ const descriptions: {[key in keyof Config.InitialOptions]: string} = {
   collectCoverageFrom:
     'An array of glob patterns indicating a set of files for which coverage information should be collected',
   coverageDirectory:
-    'The directory where Jest should output its coverage files',
+    'The directory where elric should output its coverage files',
   coveragePathIgnorePatterns:
     'An array of regexp pattern strings used to skip coverage collection',
   coverageProvider:
     'Indicates which provider should be used to instrument code for coverage',
   coverageReporters:
-    'A list of reporter names that Jest uses when writing coverage reports',
+    'A list of reporter names that elric uses when writing coverage reports',
   coverageThreshold:
     'An object that configures minimum threshold enforcement for coverage results',
   dependencyExtractor: 'A path to a custom dependency extractor',
@@ -51,20 +51,20 @@ const descriptions: {[key in keyof Config.InitialOptions]: string} = {
   notify: 'Activates notifications for test results',
   notifyMode:
     'An enum that specifies notification mode. Requires { notify: true }',
-  preset: "A preset that is used as a base for Jest's configuration",
+  preset: "A preset that is used as a base for elric's configuration",
   projects: 'Run tests from one or more projects',
-  reporters: 'Use this configuration option to add custom reporters to Jest',
+  reporters: 'Use this configuration option to add custom reporters to elric',
   resetMocks: 'Automatically reset mock state before every test',
   resetModules: 'Reset the module registry before running each individual test',
   resolver: 'A path to a custom resolver',
   restoreMocks:
     'Automatically restore mock state and implementation before every test',
   rootDir:
-    'The root directory that Jest should scan for tests and modules within',
+    'The root directory that elric should scan for tests and modules within',
   roots:
-    'A list of paths to directories that Jest should use to search for files in',
+    'A list of paths to directories that elric should use to search for files in',
   runner:
-    "Allows you to use a custom runner instead of Jest's default test runner",
+    "Allows you to use a custom runner instead of elric's default test runner",
   setupFiles:
     'The paths to modules that run some code to configure or set up the testing environment before each test',
   setupFilesAfterEnv:
@@ -72,15 +72,15 @@ const descriptions: {[key in keyof Config.InitialOptions]: string} = {
   slowTestThreshold:
     'The number of seconds after which a test is considered as slow and reported as such in the results.',
   snapshotSerializers:
-    'A list of paths to snapshot serializer modules Jest should use for snapshot testing',
+    'A list of paths to snapshot serializer modules elric should use for snapshot testing',
   testEnvironment: 'The test environment that will be used for testing',
   testEnvironmentOptions: 'Options that will be passed to the testEnvironment',
   testLocationInResults: 'Adds a location field to test results',
-  testMatch: 'The glob patterns Jest uses to detect test files',
+  testMatch: 'The glob patterns elric uses to detect test files',
   testPathIgnorePatterns:
     'An array of regexp pattern strings that are matched against all test paths, matched tests are skipped',
   testRegex:
-    'The regexp pattern or array of patterns that Jest uses to detect test files',
+    'The regexp pattern or array of patterns that elric uses to detect test files',
   testResultsProcessor:
     'This option allows the use of a custom results processor',
   testRunner: 'This option allows use of a custom test runner',

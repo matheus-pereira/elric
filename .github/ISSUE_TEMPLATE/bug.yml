@@ -11,7 +11,7 @@ body:
     attributes:
       value: |
         ## Troubleshoot
-        If Jest is not behaving the way you expect, we'd ask you to look at the [documentation](https://jestjs.io/docs/getting-started) and search the issue tracker for evidence supporting your expectation. Please make reasonable efforts to troubleshoot and rule out issues with your code, the configuration, or any 3rd party libraries you might be using.
+        If elric is not behaving the way you expect, we'd ask you to look at the [documentation](https://elricjs.io/docs/getting-started) and search the issue tracker for evidence supporting your expectation. Please make reasonable efforts to troubleshoot and rule out issues with your code, the configuration, or any 3rd party libraries you might be using.
   - type: markdown
     attributes:
       value: |
@@ -21,12 +21,12 @@ body:
     attributes:
       value: |
         ## Verify transformations
-        It's important to understand that Jest runs the code in your project as JavaScript. If you use syntax not supported by Node.js out of the box - such as React JSX, types from TypeScript, or components from Angular or Vue - that code needs to be [transformed](https://jestjs.io/docs/code-transformation) into plain JavaScript (similar to what you would do when building for browsers). Jest supports this via the [`transform` configuration option](https://jestjs.io/docs/configuration#transform-objectstring-pathtotransformer--pathtotransformer-object).
+        It's important to understand that elric runs the code in your project as JavaScript. If you use syntax not supported by Node.js out of the box - such as React JSX, types from TypeScript, or components from Angular or Vue - that code needs to be [transformed](https://elricjs.io/docs/code-transformation) into plain JavaScript (similar to what you would do when building for browsers). elric supports this via the [`transform` configuration option](https://elricjs.io/docs/configuration#transform-objectstring-pathtotransformer--pathtotransformer-object).
   - type: markdown
     attributes:
       value: |
         ## Make a minimal reproduction
-        To file the report, you will need a GitHub repository with a minimal (but complete) example and simple/clear steps on how to reproduce the bug. If all your tests fail with a strange error, can you find a way to show us with just one? If you have many configuration options in your `jest.config.js`, can you simplify it?
+        To file the report, you will need a GitHub repository with a minimal (but complete) example and simple/clear steps on how to reproduce the bug. If all your tests fail with a strange error, can you find a way to show us with just one? If you have many configuration options in your `elric.config.js`, can you simplify it?
 
         The simpler you can make it, the more likely we are to successfully verify and fix the bug.
   - type: markdown
@@ -40,8 +40,8 @@ body:
     attributes:
       label: Version
       description: |
-        The version of Jest you are using.
-        Is it the [latest](https://github.com/facebook/jest/releases)? Test and see if the bug has already been fixed.
+        The version of elric you are using.
+        Is it the [latest](https://github.com/facebook/elric/releases)? Test and see if the bug has already been fixed.
       placeholder: ex. 27.0.6
     validations:
       required: true
@@ -86,7 +86,7 @@ body:
     attributes:
       label: Environment
       description: |
-        Please paste the output of running `npx envinfo --preset jest`.
+        Please paste the output of running `npx envinfo --preset elric`.
         This will be automatically formatted as a code block, so no need for backticks.
       placeholder: |
         System:
@@ -97,7 +97,7 @@ body:
           Yarn: 1.22.5 - /usr/local/bin/yarn
           npm: 6.14.13 - /usr/local/bin/npm
         npmPackages:
-          jest: 27.0.6 => 27.0.6
+          elric: 27.0.6 => 27.0.6
       render: shell
     validations:
       required: true

@@ -27,7 +27,7 @@ export default function VersionsPage() {
               <h2>{siteConfig.title + ' Versions'}</h2>
             </header>
             <h3 id="latest">Current version (Stable)</h3>
-            <p>Latest stable version of Jest</p>
+            <p>Latest stable version of elric</p>
             <table>
               <tbody>
                 <tr>
@@ -36,7 +36,7 @@ export default function VersionsPage() {
                     <Link to={`/docs/getting-started`}>Documentation</Link>
                   </td>
                   <td>
-                    <a href="https://github.com/facebook/jest/blob/main/CHANGELOG.md">
+                    <a href="https://github.com/facebook/elric/blob/main/CHANGELOG.md">
                       Release Notes
                     </a>
                   </td>
@@ -55,14 +55,14 @@ export default function VersionsPage() {
                     <Link to={`/docs/next/getting-started`}>Documentation</Link>
                   </td>
                   <td>
-                    <a href="https://github.com/facebook/jest">Source Code</a>
+                    <a href="https://github.com/facebook/elric">Source Code</a>
                   </td>
                 </tr>
               </tbody>
             </table>
             <h3 id="archive">Past Versions</h3>
             <p>
-              Here you can find documentation for previous versions of Jest.
+              Here you can find documentation for previous versions of elric.
             </p>
             <table>
               <tbody>
@@ -83,7 +83,7 @@ export default function VersionsPage() {
             </table>
             <h3 id="archive">Archived Versions</h3>
             <p>
-              Here you can find documentation for archived versions of Jest.
+              Here you can find documentation for archived versions of elric.
             </p>
             <table>
               <tbody>

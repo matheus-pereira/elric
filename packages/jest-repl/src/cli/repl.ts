@@ -5,15 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-declare const jestGlobalConfig: Config.GlobalConfig;
-declare const jestProjectConfig: Config.ProjectConfig;
+declare const elricGlobalConfig: Config.GlobalConfig;
+declare const elricProjectConfig: Config.ProjectConfig;
 
 import * as path from 'path';
 import * as repl from 'repl';
 import {runInThisContext} from 'vm';
-import type {SyncTransformer} from '@jest/transform';
-import type {Config} from '@jest/types';
-import {interopRequireDefault} from 'jest-util';
+import type {SyncTransformer} from '@elric/transform';
+import type {Config} from '@elric/types';
+import {interopRequireDefault} from 'elric-util';
 
 // TODO: support async as well
 let transformer: SyncTransformer;
@@ -30,11 +30,11 @@ const evalCommand: repl.REPLEval = (
     if (transformer) {
       const transformResult = transformer.process(
         cmd,
-        jestGlobalConfig.replname || 'jest.js',
+        elricGlobalConfig.replname || 'elric.js',
         {
           cacheFS: new Map<string, string>(),
-          config: jestProjectConfig,
-          configString: JSON.stringify(jestProjectConfig),
+          config: elricProjectConfig,
+          configString: JSON.stringify(elricProjectConfig),
           instrument: false,
           supportsDynamicImport: false,
           supportsExportNamespaceFrom: false,
@@ -68,12 +68,12 @@ const isRecoverableError = (error: Error) => {
   return false;
 };
 
-if (jestProjectConfig.transform) {
+if (elricProjectConfig.transform) {
   let transformerPath = null;
-  for (let i = 0; i < jestProjectConfig.transform.length; i++) {
-    if (new RegExp(jestProjectConfig.transform[i][0]).test('foobar.js')) {
-      transformerPath = jestProjectConfig.transform[i][1];
-      transformerConfig = jestProjectConfig.transform[i][2];
+  for (let i = 0; i < elricProjectConfig.transform.length; i++) {
+    if (new RegExp(elricProjectConfig.transform[i][0]).test('foobar.js')) {
+      transformerPath = elricProjectConfig.transform[i][1];
+      transformerConfig = elricProjectConfig.transform[i][2];
       break;
     }
   }
@@ -81,7 +81,7 @@ if (jestProjectConfig.transform) {
     transformer = interopRequireDefault(require(transformerPath)).default;
     if (typeof transformer.process !== 'function') {
       throw new TypeError(
-        'Jest: a transformer must export a `process` function.',
+        'elric: a transformer must export a `process` function.',
       );
     }
   }

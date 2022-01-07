@@ -13,7 +13,7 @@ import {createRequire} from 'module';
 import {dirname, resolve} from 'path';
 import {fileURLToPath} from 'url';
 import prefixDns from 'node:dns';
-import {jest as jestObject} from '@jest/globals';
+import {elric as elricObject} from '@elric/globals';
 import staticImportedStatefulFromCjs from '../fromCjs.mjs';
 import {double} from '../index';
 import defaultFromCjs, {half, namedFunction} from '../namedExport.cjs';
@@ -26,7 +26,7 @@ import staticImportedStatefulWithAnotherQuery from '../stateful.mjs?query=2';
 
 test('should have correct import.meta', () => {
   expect(typeof require).toBe('undefined');
-  expect(typeof jest).toBe('undefined');
+  expect(typeof elric).toBe('undefined');
   expect(import.meta).toEqual({
     url: expect.any(String),
   });
@@ -44,7 +44,7 @@ test('should support importing node core modules', () => {
   const packageJsonPath = resolve(dir, '../package.json');
 
   expect(JSON.parse(readFileSync(packageJsonPath, 'utf8'))).toEqual({
-    jest: {
+    elric: {
       testEnvironment: 'node',
       transform: {},
     },
@@ -114,8 +114,8 @@ test('handle unlinked dynamic imports', async () => {
   expect(deepDouble(4)).toBe(8);
 });
 
-test('can import `jest` object', () => {
-  expect(jestObject).toBeDefined();
+test('can import `elric` object', () => {
+  expect(elricObject).toBeDefined();
 });
 
 test('handle dynamic imports of the same module in parallel', async () => {
@@ -182,7 +182,7 @@ test('require of ESM should throw correct error', () => {
 });
 
 test('can mock module', async () => {
-  jestObject.unstable_mockModule('../mockedModule.mjs', () => ({foo: 'bar'}), {
+  elricObject.unstable_mockModule('../mockedModule.mjs', () => ({foo: 'bar'}), {
     virtual: true,
   });
 

@@ -6,14 +6,14 @@
  */
 
 import {resolve} from 'path';
-import {onNodeVersions} from '@jest/test-utils';
-import runJest from '../runJest';
+import {onNodeVersions} from '@elric/test-utils';
+import runelric from '../runelric';
 
 // The versions where vm.Module exists and commonjs with "exports" is not broken
 onNodeVersions('>=12.16.0', () => {
   it('support test environment written in ESM', () => {
     const DIR = resolve(__dirname, '../test-environment-esm');
-    const {exitCode} = runJest(DIR);
+    const {exitCode} = runelric(DIR);
 
     expect(exitCode).toBe(0);
   });

@@ -7,9 +7,9 @@
 
 import * as path from 'path';
 import micromatch = require('micromatch');
-import type {Config} from '@jest/types';
-import {escapePathForRegex} from 'jest-regex-util';
-import {globsToMatcher, replacePathSepForGlob} from 'jest-util';
+import type {Config} from '@elric/types';
+import {escapePathForRegex} from 'elric-regex-util';
+import {globsToMatcher, replacePathSepForGlob} from 'elric-util';
 import type {ShouldInstrumentOptions} from './types';
 
 const MOCKS_PATTERN = new RegExp(

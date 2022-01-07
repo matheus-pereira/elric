@@ -98,7 +98,7 @@ jobs:
         run: yarn test-ci-partial:parallel --max-workers ${{ steps.cpu-cores.outputs.count }}
 
   test-jasmine:
-    name: Node LTS on ${{ matrix.os }} using jest-jasmine2
+    name: Node LTS on ${{ matrix.os }} using elric-jasmine2
     strategy:
       fail-fast: false
       matrix:
@@ -126,5 +126,5 @@ jobs:
       - name: Get number of CPU cores
         id: cpu-cores
         uses: SimenB/github-actions-cpu-cores@v1
-      - name: run tests using jest-jasmine
-        run: yarn jest-jasmine-ci --max-workers ${{ steps.cpu-cores.outputs.count }}
+      - name: run tests using elric-jasmine
+        run: yarn elric-jasmine-ci --max-workers ${{ steps.cpu-cores.outputs.count }}

@@ -9,11 +9,11 @@ import {tmpdir} from 'os';
 import * as path from 'path';
 import semver = require('semver');
 import {cleanup, run, testIfHg, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
-const DIR = path.resolve(tmpdir(), 'jest_only_changed');
-const GIT = 'git -c user.name=jest_test -c user.email=jest_test@test.com';
-const HG = 'hg --config ui.username=jest_test';
+const DIR = path.resolve(tmpdir(), 'elric_only_changed');
+const GIT = 'git -c user.name=elric_test -c user.email=elric_test@test.com';
+const HG = 'hg --config ui.username=elric_test';
 
 const gitVersionSupportsInitialBranch = (() => {
   const {stdout} = run(`${GIT} --version`);
@@ -55,12 +55,12 @@ test('run for "onlyChanged" and "changedSince"', () => {
   run(`${GIT} add .`, DIR);
   run(`${GIT} commit --no-gpg-sign -m "first"`, DIR);
 
-  let stdout = runJest(DIR, ['-o']).stdout;
+  let stdout = runelric(DIR, ['-o']).stdout;
   expect(stdout).toMatch(
     /No tests found related to files changed since last commit./,
   );
 
-  stdout = runJest(DIR, [`--changedSince=${mainBranchName}`]).stdout;
+  stdout = runelric(DIR, [`--changedSince=${mainBranchName}`]).stdout;
   expect(stdout).toMatch(
     `No tests found related to files changed since "${mainBranchName}".`,
   );
@@ -76,17 +76,17 @@ test('run only changed files', () => {
   let stderr;
   let stdout;
 
-  ({stdout} = runJest(DIR, ['-o']));
-  expect(stdout).toMatch(/Jest can only find uncommitted changed files/);
+  ({stdout} = runelric(DIR, ['-o']));
+  expect(stdout).toMatch(/elric can only find uncommitted changed files/);
 
   gitInit(DIR);
   run(`${GIT} add .`, DIR);
   run(`${GIT} commit --no-gpg-sign -m "first"`, DIR);
 
-  ({stdout} = runJest(DIR, ['-o']));
+  ({stdout} = runelric(DIR, ['-o']));
   expect(stdout).toMatch('No tests found related to files');
 
-  ({stderr} = runJest(DIR, ['-o', '--lastCommit']));
+  ({stderr} = runelric(DIR, ['-o', '--lastCommit']));
   expect(stderr).toMatch(/PASS __tests__(\/|\\)file1.test.js/);
 
   writeFiles(DIR, {
@@ -96,7 +96,7 @@ test('run only changed files', () => {
     'file3.js': `require('./file2')`,
   });
 
-  ({stderr} = runJest(DIR, ['-o']));
+  ({stderr} = runelric(DIR, ['-o']));
 
   expect(stderr).not.toMatch(/PASS __tests__(\/|\\)file1.test.js/);
   expect(stderr).toMatch(/PASS __tests__(\/|\\)file2.test.js/);
@@ -105,14 +105,14 @@ test('run only changed files', () => {
   run(`${GIT} add .`, DIR);
   run(`${GIT} commit --no-gpg-sign -m "second"`, DIR);
 
-  ({stderr} = runJest(DIR, ['-o']));
+  ({stderr} = runelric(DIR, ['-o']));
   expect(stdout).toMatch('No tests found related to files');
 
   writeFiles(DIR, {
     'file2.js': 'module.exports = {modified: true}',
   });
 
-  ({stderr} = runJest(DIR, ['-o']));
+  ({stderr} = runelric(DIR, ['-o']));
   expect(stderr).not.toMatch(/PASS __tests__(\/|\\)file1.test.j/);
   expect(stderr).toMatch(/PASS __tests__(\/|\\)file2.test.js/);
   expect(stderr).toMatch(/PASS __tests__(\/|\\)file3.test.js/);
@@ -132,7 +132,7 @@ test('report test coverage for only changed files', () => {
     'a.js': 'module.exports = {}',
     'b.js': 'module.exports = {}',
     'package.json': JSON.stringify({
-      jest: {
+      elric: {
         collectCoverage: true,
         coverageReporters: ['text'],
         testEnvironment: 'node',
@@ -150,13 +150,13 @@ test('report test coverage for only changed files', () => {
 
   let stdout;
 
-  ({stdout} = runJest(DIR));
+  ({stdout} = runelric(DIR));
 
   // both a.js and b.js should be in the coverage
   expect(stdout).toMatch('a.js');
   expect(stdout).toMatch('b.js');
 
-  ({stdout} = runJest(DIR, ['-o']));
+  ({stdout} = runelric(DIR, ['-o']));
 
   // coverage should be collected only for a.js
   expect(stdout).toMatch('a.js');
@@ -171,7 +171,7 @@ test('report test coverage of source on test file change under only changed file
   `,
     'a.js': 'module.exports = {}',
     'package.json': JSON.stringify({
-      jest: {
+      elric: {
         collectCoverage: true,
         coverageReporters: ['text'],
         testEnvironment: 'node',
@@ -191,7 +191,7 @@ test('report test coverage of source on test file change under only changed file
   `,
   });
 
-  const {stdout} = runJest(DIR, ['--only-changed']);
+  const {stdout} = runelric(DIR, ['--only-changed']);
 
   expect(stdout).toMatch('a.js');
 });
@@ -212,7 +212,7 @@ test('do not pickup non-tested files when reporting coverage on only changed fil
     'package.json': JSON.stringify({name: 'new name'}),
   });
 
-  const {stderr, stdout, exitCode} = runJest(DIR, ['-o', '--coverage']);
+  const {stderr, stdout, exitCode} = runelric(DIR, ['-o', '--coverage']);
   expect(stderr).toEqual(
     expect.not.stringContaining('Failed to collect coverage from'),
   );
@@ -225,7 +225,7 @@ test('collect test coverage when using onlyChanged', () => {
     'a.js': 'module.exports = {}',
     'b.test.js': 'module.exports = {}',
     'package.json': JSON.stringify({
-      jest: {collectCoverageFrom: ['a.js']},
+      elric: {collectCoverageFrom: ['a.js']},
       name: 'original name',
     }),
   });
@@ -239,7 +239,7 @@ test('collect test coverage when using onlyChanged', () => {
     'b.test.js': 'it("passes", () => {expect(1).toBe(1)})',
   });
 
-  const {stderr, exitCode} = runJest(DIR, ['-o', '--coverage']);
+  const {stderr, exitCode} = runelric(DIR, ['-o', '--coverage']);
   expect(stderr).toEqual(
     expect.not.stringContaining('Failed to collect coverage from'),
   );
@@ -251,25 +251,25 @@ test('onlyChanged in config is overwritten by --all or testPathPattern', () => {
     '.watchmanconfig': '',
     '__tests__/file1.test.js': `require('../file1'); test('file1', () => {});`,
     'file1.js': 'module.exports = {}',
-    'package.json': JSON.stringify({jest: {onlyChanged: true}}),
+    'package.json': JSON.stringify({elric: {onlyChanged: true}}),
   });
   let stderr;
   let stdout;
 
-  ({stdout} = runJest(DIR));
-  expect(stdout).toMatch(/Jest can only find uncommitted changed files/);
+  ({stdout} = runelric(DIR));
+  expect(stdout).toMatch(/elric can only find uncommitted changed files/);
 
   gitInit(DIR);
   run(`${GIT} add .`, DIR);
   run(`${GIT} commit --no-gpg-sign -m "first"`, DIR);
 
-  ({stdout, stderr} = runJest(DIR));
+  ({stdout, stderr} = runelric(DIR));
   expect(stdout).toMatch('No tests found related to files');
   expect(stderr).not.toMatch(
     'Unknown option "onlyChanged" with value true was found',
   );
 
-  ({stderr} = runJest(DIR, ['--lastCommit']));
+  ({stderr} = runelric(DIR, ['--lastCommit']));
   expect(stderr).toMatch(/PASS __tests__(\/|\\)file1.test.js/);
 
   writeFiles(DIR, {
@@ -279,7 +279,7 @@ test('onlyChanged in config is overwritten by --all or testPathPattern', () => {
     'file3.js': `require('./file2')`,
   });
 
-  ({stderr} = runJest(DIR));
+  ({stderr} = runelric(DIR));
 
   expect(stderr).not.toMatch(/PASS __tests__(\/|\\)file1.test.js/);
   expect(stderr).toMatch(/PASS __tests__(\/|\\)file2.test.js/);
@@ -288,10 +288,10 @@ test('onlyChanged in config is overwritten by --all or testPathPattern', () => {
   run(`${GIT} add .`, DIR);
   run(`${GIT} commit --no-gpg-sign -m "second"`, DIR);
 
-  ({stderr} = runJest(DIR));
+  ({stderr} = runelric(DIR));
   expect(stdout).toMatch('No tests found related to files');
 
-  ({stderr, stdout} = runJest(DIR, ['file2.test.js']));
+  ({stderr, stdout} = runelric(DIR, ['file2.test.js']));
   expect(stdout).not.toMatch('No tests found related to files');
   expect(stderr).toMatch(/PASS __tests__(\/|\\)file2.test.js/);
   expect(stderr).toMatch('1 total');
@@ -300,12 +300,12 @@ test('onlyChanged in config is overwritten by --all or testPathPattern', () => {
     'file2.js': 'module.exports = {modified: true}',
   });
 
-  ({stderr} = runJest(DIR));
+  ({stderr} = runelric(DIR));
   expect(stderr).not.toMatch(/PASS __tests__(\/|\\)file1.test.js/);
   expect(stderr).toMatch(/PASS __tests__(\/|\\)file2.test.js/);
   expect(stderr).toMatch(/PASS __tests__(\/|\\)file3.test.js/);
 
-  ({stderr} = runJest(DIR, ['--all']));
+  ({stderr} = runelric(DIR, ['--all']));
   expect(stderr).toMatch(/PASS __tests__(\/|\\)file1.test.js/);
   expect(stderr).toMatch(/PASS __tests__(\/|\\)file2.test.js/);
   expect(stderr).toMatch(/PASS __tests__(\/|\\)file3.test.js/);
@@ -323,7 +323,7 @@ testIfHg('gets changed files for hg', async () => {
     '.watchmanconfig': '',
     '__tests__/file1.test.js': `require('../file1'); test('file1', () => {});`,
     'file1.js': 'module.exports = {}',
-    'package.json': JSON.stringify({jest: {testEnvironment: 'node'}}),
+    'package.json': JSON.stringify({elric: {testEnvironment: 'node'}}),
   });
 
   run(`${HG} init`, DIR);
@@ -333,7 +333,7 @@ testIfHg('gets changed files for hg', async () => {
   let stdout;
   let stderr;
 
-  ({stdout, stderr} = runJest(DIR, ['-o']));
+  ({stdout, stderr} = runelric(DIR, ['-o']));
   expect(stdout).toMatch('No tests found related to files changed');
 
   writeFiles(DIR, {
@@ -342,7 +342,7 @@ testIfHg('gets changed files for hg', async () => {
     'file3.js': `require('./file2')`,
   });
 
-  ({stdout, stderr} = runJest(DIR, ['-o']));
+  ({stdout, stderr} = runelric(DIR, ['-o']));
   expect(stderr).toMatch(/PASS __tests__(\/|\\)file2.test.js/);
 
   run(`${HG} add .`, DIR);
@@ -352,11 +352,11 @@ testIfHg('gets changed files for hg', async () => {
     '__tests__/file3.test.js': `require('../file3'); test('file3', () => {});`,
   });
 
-  ({stdout, stderr} = runJest(DIR, ['-o']));
+  ({stdout, stderr} = runelric(DIR, ['-o']));
   expect(stderr).toMatch(/PASS __tests__(\/|\\)file3.test.js/);
   expect(stderr).not.toMatch(/PASS __tests__(\/|\\)file2.test.js/);
 
-  ({stdout, stderr} = runJest(DIR, ['-o', '--changedFilesWithAncestor']));
+  ({stdout, stderr} = runelric(DIR, ['-o', '--changedFilesWithAncestor']));
   expect(stderr).toMatch(/PASS __tests__(\/|\\)file2.test.js/);
   expect(stderr).toMatch(/PASS __tests__(\/|\\)file3.test.js/);
 });
@@ -381,7 +381,7 @@ test('path on Windows is case-insensitive', () => {
   run(`${GIT} add .`, modifiedDIR);
   run(`${GIT} commit --no-gpg-sign -m "first"`, modifiedDIR);
 
-  const {stdout} = runJest(incorrectModifiedDIR, ['-o']);
+  const {stdout} = runelric(incorrectModifiedDIR, ['-o']);
   expect(stdout).toMatch('No tests found related to files');
 
   writeFiles(modifiedDIR, {
@@ -391,7 +391,7 @@ test('path on Windows is case-insensitive', () => {
     'file3.js': `require('./file2')`,
   });
 
-  const {stderr} = runJest(incorrectModifiedDIR, ['-o']);
+  const {stderr} = runelric(incorrectModifiedDIR, ['-o']);
 
   expect(stderr).not.toMatch(/PASS __tests__(\/|\\)file1.test.js/);
   expect(stderr).toMatch(/PASS __tests__(\/|\\)file2.test.js/);

@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "jest": {
+  "elric": {
     "testEnvironment": "<rootDir>/EnvESM.js",
     "transform": {}
   }

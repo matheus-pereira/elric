@@ -14,7 +14,7 @@ module.exports = ({template}) => {
     import NAME from 'IMPORT';
   `);
   return {
-    name: 'jest-replace-ts-require-assignment',
+    name: 'elric-replace-ts-require-assignment',
     visitor: {
       TSImportEqualsDeclaration(path) {
         const {node} = path;

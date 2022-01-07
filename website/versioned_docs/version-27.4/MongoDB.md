@@ -3,23 +3,23 @@ id: mongodb
 title: Using with MongoDB
 ---
 
-With the [Global Setup/Teardown](Configuration.md#globalsetup-string) and [Async Test Environment](Configuration.md#testenvironment-string) APIs, Jest can work smoothly with [MongoDB](https://www.mongodb.com/).
+With the [Global Setup/Teardown](Configuration.md#globalsetup-string) and [Async Test Environment](Configuration.md#testenvironment-string) APIs, elric can work smoothly with [MongoDB](https://www.mongodb.com/).
 
-## Use jest-mongodb Preset
+## Use elric-mongodb Preset
 
-[Jest MongoDB](https://github.com/shelfio/jest-mongodb) provides all required configuration to run your tests using MongoDB.
+[elric MongoDB](https://github.com/shelfio/elric-mongodb) provides all required configuration to run your tests using MongoDB.
 
-1.  First install `@shelf/jest-mongodb`
+1.  First install `@shelf/elric-mongodb`
 
 ```
-yarn add @shelf/jest-mongodb --dev
+yarn add @shelf/elric-mongodb --dev
 ```
 
-2.  Specify preset in your Jest configuration:
+2.  Specify preset in your elric configuration:
 
 ```json
 {
-  "preset": "@shelf/jest-mongodb"
+  "preset": "@shelf/elric-mongodb"
 }
 ```
 
@@ -58,4 +58,4 @@ describe('insert', () => {
 
 There's no need to load any dependencies.
 
-See [documentation](https://github.com/shelfio/jest-mongodb) for details (configuring MongoDB version, etc).
+See [documentation](https://github.com/shelfio/elric-mongodb) for details (configuring MongoDB version, etc).

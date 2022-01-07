@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-jest.mock('../index');
+elric.mock('../index');
 
 const methods = require('../index');
 

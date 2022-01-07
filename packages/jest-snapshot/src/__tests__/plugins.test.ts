@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-beforeEach(() => jest.resetModules());
+beforeEach(() => elric.resetModules());
 
 const testPath = (names: Array<string>) => {
   const {addSerializer, getSerializers} = require('../plugins');
@@ -14,7 +14,7 @@ const testPath = (names: Array<string>) => {
     require(require.resolve(`./plugins/${name}`)),
   );
 
-  // Jest tests snapshotSerializers in order preceding built-in serializers.
+  // elric tests snapshotSerializers in order preceding built-in serializers.
   // Therefore, add in reverse because the last added is the first tested.
   added
     .concat()

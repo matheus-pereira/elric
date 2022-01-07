@@ -6,13 +6,13 @@
  */
 
 import * as path from 'path';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(__dirname, '../empty-suite-error');
 
 describe('JSON Reporter', () => {
   it('fails the test suite if it contains no tests', () => {
-    const {stderr} = runJest(DIR, []);
+    const {stderr} = runelric(DIR, []);
     expect(stderr).toMatch('Test suite failed to run');
     expect(stderr).toMatch('Your test suite must contain at least one test.');
   });

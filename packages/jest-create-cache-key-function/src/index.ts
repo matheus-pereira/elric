@@ -10,14 +10,14 @@ import {createHash} from 'crypto';
 // eslint-disable-next-line no-restricted-imports
 import {readFileSync} from 'fs';
 import {relative} from 'path';
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 
 type OldCacheKeyOptions = {
   config: Config.ProjectConfig;
   instrument: boolean;
 };
 
-// Should mirror `import('@jest/transform').TransformOptions`
+// Should mirror `import('@elric/transform').TransformOptions`
 type NewCacheKeyOptions = {
   config: Config.ProjectConfig;
   configString: string;
@@ -31,7 +31,7 @@ type OldGetCacheKeyFunction = (
   options: OldCacheKeyOptions,
 ) => string;
 
-// Should mirror `import('@jest/transform').Transformer['getCacheKey']`
+// Should mirror `import('@elric/transform').Transformer['getCacheKey']`
 type NewGetCacheKeyFunction = (
   sourceText: string,
   sourcePath: Config.Path,
@@ -56,8 +56,8 @@ function getGlobalCacheKey(files: Array<string>, values: Array<string>) {
 
 function getCacheKeyFunction(globalCacheKey: string): GetCacheKeyFunction {
   return (sourceText, sourcePath, configString, options) => {
-    // Jest 27 passes a single options bag which contains `configString` rather than as a separate argument.
-    // We can hide that API difference, though, so this module is usable for both jest@<27 and jest@>=27
+    // elric 27 passes a single options bag which contains `configString` rather than as a separate argument.
+    // We can hide that API difference, though, so this module is usable for both elric@<27 and elric@>=27
     const inferredOptions = options || configString;
     const {config, instrument} = inferredOptions;
 

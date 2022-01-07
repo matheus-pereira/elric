@@ -13,7 +13,7 @@
  *
  * Example:
  *  node ./scripts/build.js
- *  node ./scripts/build.js /users/123/jest/packages/jest-111/src/111.js
+ *  node ./scripts/build.js /users/123/elric/packages/elric-111/src/111.js
  *
  * NOTE: this script is node@6 compatible
  */
@@ -38,7 +38,7 @@ const IGNORE_PATTERN = '**/__{tests,mocks}__/**';
 const PACKAGES_DIR = path.resolve(__dirname, '../packages');
 
 const INLINE_REQUIRE_EXCLUDE_LIST =
-  /packages\/expect|(jest-(circus|diff|get-type|jasmine2|matcher-utils|message-util|regex-util|snapshot))|pretty-format\//;
+  /packages\/expect|(elric-(circus|diff|get-type|jasmine2|matcher-utils|message-util|regex-util|snapshot))|pretty-format\//;
 
 const prettierConfig = prettier.resolveConfig.sync(__filename);
 prettierConfig.trailingComma = 'none';
@@ -104,7 +104,7 @@ function buildFile(file, silent) {
       // The excluded modules are injected into the user's sandbox
       // We need to guard some globals there.
       options.plugins.push(
-        require.resolve('./babel-plugin-jest-native-globals'),
+        require.resolve('./babel-plugin-elric-native-globals'),
       );
     } else {
       options.plugins = options.plugins.map(plugin => {

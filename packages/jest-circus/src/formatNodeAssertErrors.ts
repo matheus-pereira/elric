@@ -7,13 +7,13 @@
 
 import {AssertionError} from 'assert';
 import chalk = require('chalk');
-import type {Circus} from '@jest/types';
+import type {Circus} from '@elric/types';
 import {
   DiffOptions,
   diff,
   printExpected,
   printReceived,
-} from 'jest-matcher-utils';
+} from 'elric-matcher-utils';
 import {format as prettyFormat} from 'pretty-format';
 
 interface AssertionErrorWithStack extends AssertionError {

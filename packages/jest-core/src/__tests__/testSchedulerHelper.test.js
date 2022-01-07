@@ -11,10 +11,10 @@ import {shouldRunInBand} from '../testSchedulerHelper';
 const getTestMock = () => ({
   context: {
     config: {
-      runner: 'jest-runner-parallel',
+      runner: 'elric-runner-parallel',
     },
     hasteFS: {
-      matchFiles: jest.fn(() => []),
+      matchFiles: elric.fn(() => []),
     },
   },
   path: './test/path.js',

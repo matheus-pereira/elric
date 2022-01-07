@@ -1,10 +1,10 @@
 {
-  "name": "jest-resolve",
+  "name": "elric-resolve",
   "version": "27.4.6",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/jest-resolve"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/elric-resolve"
   },
   "license": "MIT",
   "main": "./build/index.js",
@@ -17,13 +17,13 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@jest/types": "^27.4.2",
+    "@elric/types": "^27.4.2",
     "chalk": "^4.0.0",
     "graceful-fs": "^4.2.9",
-    "jest-haste-map": "^27.4.6",
-    "jest-pnp-resolver": "^1.2.2",
-    "jest-util": "^27.4.2",
-    "jest-validate": "^27.4.6",
+    "elric-haste-map": "^27.4.6",
+    "elric-pnp-resolver": "^1.2.2",
+    "elric-util": "^27.4.2",
+    "elric-validate": "^27.4.6",
     "resolve": "^1.20.0",
     "resolve.exports": "^1.1.0",
     "slash": "^3.0.0"

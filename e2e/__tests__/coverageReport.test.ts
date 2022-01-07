@@ -7,9 +7,9 @@
 
 import * as path from 'path';
 import * as fs from 'graceful-fs';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {extractSummary, runYarnInstall} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(__dirname, '../coverage-report');
 
@@ -18,7 +18,7 @@ beforeAll(() => {
 });
 
 test('outputs coverage report', () => {
-  const {stdout, exitCode} = runJest(DIR, ['--no-cache', '--coverage'], {
+  const {stdout, exitCode} = runelric(DIR, ['--no-cache', '--coverage'], {
     stripAnsi: true,
   });
   const coverageDir = path.join(DIR, 'coverage');
@@ -35,7 +35,7 @@ test('outputs coverage report', () => {
 });
 
 test('collects coverage only from specified file', () => {
-  const {stdout} = runJest(
+  const {stdout} = runelric(
     DIR,
     [
       '--no-cache',
@@ -51,7 +51,7 @@ test('collects coverage only from specified file', () => {
 });
 
 test('collects coverage only from multiple specified files', () => {
-  const {stdout} = runJest(
+  const {stdout} = runelric(
     DIR,
     [
       '--no-cache',
@@ -68,7 +68,7 @@ test('collects coverage only from multiple specified files', () => {
 });
 
 test('collects coverage only from specified files avoiding dependencies', () => {
-  const {stdout} = runJest(
+  const {stdout} = runelric(
     DIR,
     [
       '--no-cache',
@@ -86,7 +86,7 @@ test('collects coverage only from specified files avoiding dependencies', () => 
 });
 
 test('json reporter printing with --coverage', () => {
-  const {stderr, exitCode} = runJest('json-reporter', ['--coverage'], {
+  const {stderr, exitCode} = runelric('json-reporter', ['--coverage'], {
     stripAnsi: true,
   });
   const {summary} = extractSummary(stderr);
@@ -95,7 +95,7 @@ test('json reporter printing with --coverage', () => {
 });
 
 test('outputs coverage report as json', () => {
-  const {stdout, exitCode} = runJest(
+  const {stdout, exitCode} = runelric(
     DIR,
     ['--no-cache', '--coverage', '--json'],
     {stripAnsi: true},
@@ -105,7 +105,7 @@ test('outputs coverage report as json', () => {
 });
 
 test('outputs coverage report when text is requested', () => {
-  const {stdout, exitCode} = runJest(
+  const {stdout, exitCode} = runelric(
     DIR,
     [
       '--no-cache',
@@ -121,7 +121,7 @@ test('outputs coverage report when text is requested', () => {
 });
 
 test('outputs coverage report when text-summary is requested', () => {
-  const {stdout, exitCode} = runJest(
+  const {stdout, exitCode} = runelric(
     DIR,
     ['--no-cache', '--coverage', '--coverageReporters=text-summary'],
     {stripAnsi: true},
@@ -132,7 +132,7 @@ test('outputs coverage report when text-summary is requested', () => {
 });
 
 test('outputs coverage report when text and text-summary is requested', () => {
-  const {stdout, exitCode} = runJest(
+  const {stdout, exitCode} = runelric(
     DIR,
     [
       '--no-cache',
@@ -149,7 +149,7 @@ test('outputs coverage report when text and text-summary is requested', () => {
 });
 
 test('does not output coverage report when html is requested', () => {
-  const {stdout, exitCode} = runJest(
+  const {stdout, exitCode} = runelric(
     DIR,
     ['--no-cache', '--coverage', '--coverageReporters=html'],
     {stripAnsi: true},
@@ -173,16 +173,16 @@ test('collects coverage from duplicate files avoiding shared cache', () => {
     'identical.test.js',
   ];
   // Run once to prime the cache
-  runJest(DIR, args, {stripAnsi: true});
+  runelric(DIR, args, {stripAnsi: true});
 
   // Run for the second time
-  const {stdout, exitCode} = runJest(DIR, args, {stripAnsi: true});
+  const {stdout, exitCode} = runelric(DIR, args, {stripAnsi: true});
   expect(wrap(stdout)).toMatchSnapshot();
   expect(exitCode).toBe(0);
 });
 
 test('generates coverage when using the testRegex config param ', () => {
-  const {stdout, exitCode} = runJest(DIR, [
+  const {stdout, exitCode} = runelric(DIR, [
     '--no-cache',
     '--testRegex=__tests__',
     '--coverage',

@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-module.exports = require('babel-jest');
+module.exports = require('babel-elric');

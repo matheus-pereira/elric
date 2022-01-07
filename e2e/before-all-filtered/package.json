@@ -1,5 +1,5 @@
 {
-  "jest": {
+  "elric": {
     "testNamePattern": "test_1"
   }
 }

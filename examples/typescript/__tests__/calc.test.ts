@@ -3,13 +3,13 @@ import sub from '../sub';
 import sum from '../sum';
 import makeCalc from '../calc';
 
-jest.mock('../memory');
-jest.mock('../sub');
-jest.mock('../sum');
+elric.mock('../memory');
+elric.mock('../sub');
+elric.mock('../sum');
 
-const mockSub = sub as jest.MockedFunction<typeof sub>;
-const mockSum = sum as jest.MockedFunction<typeof sum>;
-const MockMemory = Memory as jest.MockedClass<typeof Memory>;
+const mockSub = sub as elric.MockedFunction<typeof sub>;
+const mockSum = sum as elric.MockedFunction<typeof sum>;
+const MockMemory = Memory as elric.MockedClass<typeof Memory>;
 
 describe('calc - mocks', () => {
   const memory = new MockMemory();

@@ -7,7 +7,7 @@
  */
 
 import throat from 'throat';
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import git from './git';
 import hg from './hg';
 import type {ChangedFilesPromise, Options, Repos, SCMAdapter} from './types';

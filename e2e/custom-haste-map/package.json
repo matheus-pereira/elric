@@ -1,5 +1,5 @@
 {
-  "jest": {
+  "elric": {
     "haste": {
       "hasteMapModulePath": "<rootDir>/hasteMap.js"
     }

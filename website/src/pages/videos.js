@@ -98,7 +98,7 @@ class Videos extends React.Component {
                 <Translate>
                   We understand that reading through docs can be boring
                   sometimes. Here is a community curated list of talks & videos
-                  around Jest.
+                  around elric.
                 </Translate>
               </p>
             </div>

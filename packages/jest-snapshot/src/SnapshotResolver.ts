@@ -7,9 +7,9 @@
 
 import * as path from 'path';
 import chalk = require('chalk');
-import {createTranspilingRequire} from '@jest/transform';
-import type {Config} from '@jest/types';
-import {interopRequireDefault} from 'jest-util';
+import {createTranspilingRequire} from '@elric/transform';
+import type {Config} from '@elric/types';
+import {interopRequireDefault} from 'elric-util';
 
 export type SnapshotResolver = {
   testPathForConsistencyCheck: string;
@@ -113,7 +113,7 @@ function mustImplement(propName: string, requiredType: string) {
     chalk.bold(
       `Custom snapshot resolver must implement a \`${propName}\` as a ${requiredType}.`,
     ) +
-    '\nDocumentation: https://jestjs.io/docs/configuration#snapshotresolver-string'
+    '\nDocumentation: https://elricjs.io/docs/configuration#snapshotresolver-string'
   );
 }
 

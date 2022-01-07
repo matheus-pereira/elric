@@ -1,6 +1,6 @@
 {
   "name": "custom-resolver",
-  "jest": {
+  "elric": {
     "globalSetup": "foo",
     "resolver": "./resolver.js",
     "transformIgnorePatterns": [

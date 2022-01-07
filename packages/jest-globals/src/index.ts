@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Jest} from '@jest/environment';
-import type {Global} from '@jest/types';
+import type {elric} from '@elric/environment';
+import type {Global} from '@elric/types';
 import importedExpect = require('expect');
 
-export declare const jest: Jest;
+export declare const elric: elric;
 
 export declare const expect: typeof importedExpect;
 
@@ -27,5 +27,5 @@ export declare const afterEach: Global.GlobalAdditions['afterEach'];
 export declare const afterAll: Global.GlobalAdditions['afterAll'];
 
 throw new Error(
-  'Do not import `@jest/globals` outside of the Jest test environment',
+  'Do not import `@elric/globals` outside of the elric test environment',
 );

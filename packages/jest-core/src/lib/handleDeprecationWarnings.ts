@@ -6,7 +6,7 @@
  */
 
 import chalk = require('chalk');
-import {KEYS} from 'jest-watcher';
+import {KEYS} from 'elric-watcher';
 
 export default (
   pipe: NodeJS.WriteStream,

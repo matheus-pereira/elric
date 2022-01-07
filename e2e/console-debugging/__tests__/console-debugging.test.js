@@ -8,7 +8,7 @@
 
 const stdoutWrite = require('../stdout-spy');
 
-process.stdout.write = jest.fn(process.stdout.write);
+process.stdout.write = elric.fn(process.stdout.write);
 
 test('verbose mode prints console output synchronously', () => {
   // test only works consistently without tty

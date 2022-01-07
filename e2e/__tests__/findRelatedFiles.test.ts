@@ -7,9 +7,9 @@
 
 import {tmpdir} from 'os';
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {cleanup, extractSummary, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(tmpdir(), 'find-related-tests-test');
 
@@ -25,13 +25,13 @@ describe('--findRelatedTests flag', () => {
       test('a', () => {});
     `,
       'a.js': 'module.exports = {};',
-      'package.json': JSON.stringify({jest: {testEnvironment: 'node'}}),
+      'package.json': JSON.stringify({elric: {testEnvironment: 'node'}}),
     });
 
-    const {stdout} = runJest(DIR, ['a.js']);
+    const {stdout} = runelric(DIR, ['a.js']);
     expect(stdout).toMatch('');
 
-    const {stderr} = runJest(DIR, ['--findRelatedTests', 'a.js']);
+    const {stderr} = runelric(DIR, ['--findRelatedTests', 'a.js']);
     expect(stderr).toMatch('PASS __tests__/test.test.js');
 
     const summaryMsg = 'Ran all test suites related to files matching /a.js/i.';
@@ -51,13 +51,13 @@ describe('--findRelatedTests flag', () => {
       test('a', () => {});
     `,
       'a.js': 'module.exports = {};',
-      'package.json': JSON.stringify({jest: {testEnvironment: 'node'}}),
+      'package.json': JSON.stringify({elric: {testEnvironment: 'node'}}),
     });
 
-    const {stdout} = runJest(DIR, ['A.JS']);
+    const {stdout} = runelric(DIR, ['A.JS']);
     expect(stdout).toMatch('');
 
-    const {stderr} = runJest(DIR, ['--findRelatedTests', 'A.JS']);
+    const {stderr} = runelric(DIR, ['--findRelatedTests', 'A.JS']);
     expect(stderr).toMatch('PASS __tests__/test.test.js');
 
     const summaryMsg = 'Ran all test suites related to files matching /A.JS/i.';
@@ -99,17 +99,17 @@ describe('--findRelatedTests flag', () => {
         };
       `,
       'package.json': JSON.stringify({
-        jest: {
+        elric: {
           dependencyExtractor: '<rootDir>/dependencyExtractor.js',
           testEnvironment: 'node',
         },
       }),
     });
 
-    const {stdout} = runJest(DIR, ['a.js']);
+    const {stdout} = runelric(DIR, ['a.js']);
     expect(stdout).toMatch('');
 
-    const {stderr} = runJest(DIR, ['--findRelatedTests', 'a.js']);
+    const {stderr} = runelric(DIR, ['--findRelatedTests', 'a.js']);
     expect(stderr).toMatch('PASS __tests__/test.test.js');
     expect(stderr).not.toMatch('PASS __tests__/test-skip-deps.test.js');
 
@@ -132,14 +132,14 @@ describe('--findRelatedTests flag', () => {
       'a.js': 'module.exports = {}',
       'b.js': 'module.exports = {}',
       'package.json': JSON.stringify({
-        jest: {collectCoverage: true, testEnvironment: 'node'},
+        elric: {collectCoverage: true, testEnvironment: 'node'},
       }),
     });
 
     let stdout;
     let stderr;
 
-    ({stdout, stderr} = runJest(DIR, [], {stripAnsi: true}));
+    ({stdout, stderr} = runelric(DIR, [], {stripAnsi: true}));
     let summary;
     let rest;
     ({summary, rest} = extractSummary(stderr));
@@ -157,7 +157,7 @@ describe('--findRelatedTests flag', () => {
     // both a.js and b.js should be in the coverage
     expect(wrap(stdout)).toMatchSnapshot();
 
-    ({stdout, stderr} = runJest(DIR, ['--findRelatedTests', 'a.js'], {
+    ({stdout, stderr} = runelric(DIR, ['--findRelatedTests', 'a.js'], {
       stripAnsi: true,
     }));
 
@@ -180,7 +180,7 @@ describe('--findRelatedTests flag', () => {
       'a.js': 'module.exports = {}',
       'b.js': 'module.exports = {}',
       'package.json': JSON.stringify({
-        jest: {
+        elric: {
           collectCoverage: true,
           collectCoverageFrom: ['!b.js', 'a.js'],
           testEnvironment: 'node',
@@ -190,7 +190,7 @@ describe('--findRelatedTests flag', () => {
 
     let stdout;
     let stderr;
-    ({stdout, stderr} = runJest(DIR, ['--findRelatedTests', 'a.js', 'b.js'], {
+    ({stdout, stderr} = runelric(DIR, ['--findRelatedTests', 'a.js', 'b.js'], {
       stripAnsi: true,
     }));
 
@@ -211,7 +211,7 @@ describe('--findRelatedTests flag', () => {
     expect(stdout).toMatch('a.js');
     expect(stdout).not.toMatch('b.js');
 
-    ({stdout, stderr} = runJest(DIR, ['--findRelatedTests', 'b.js']));
+    ({stdout, stderr} = runelric(DIR, ['--findRelatedTests', 'b.js']));
 
     // Neither a.js or b.js should be in the report
     expect(stdout).toMatch('No tests found');

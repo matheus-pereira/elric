@@ -7,10 +7,10 @@
 
 describe('timers', () => {
   it('should work before calling resetAllMocks', () => {
-    const f = jest.fn();
-    jest.useFakeTimers();
+    const f = elric.fn();
+    elric.useFakeTimers();
     setTimeout(f, 0);
-    jest.runAllTimers();
+    elric.runAllTimers();
     expect(f).toHaveBeenCalledTimes(1);
   });
 });

@@ -10,11 +10,11 @@ describe('replacePathSepForRegex()', () => {
 
   describe('posix', () => {
     beforeAll(() => {
-      jest.mock('path', () => ({
-        ...jest.createMockFromModule('path'),
+      elric.mock('path', () => ({
+        ...elric.createMockFromModule('path'),
         sep: '/',
       }));
-      jest.isolateModules(() => {
+      elric.isolateModules(() => {
         replacePathSepForRegex = require('../').replacePathSepForRegex;
       });
     });
@@ -27,11 +27,11 @@ describe('replacePathSepForRegex()', () => {
 
   describe('win32', () => {
     beforeAll(() => {
-      jest.mock('path', () => ({
-        ...jest.createMockFromModule('path'),
+      elric.mock('path', () => ({
+        ...elric.createMockFromModule('path'),
         sep: '\\',
       }));
-      jest.isolateModules(() => {
+      elric.isolateModules(() => {
         replacePathSepForRegex = require('../').replacePathSepForRegex;
       });
     });

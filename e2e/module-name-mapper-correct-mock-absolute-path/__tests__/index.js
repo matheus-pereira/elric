@@ -9,7 +9,7 @@
 
 const importedFn = require('../');
 
-jest.mock('/components/Button');
+elric.mock('/components/Button');
 
 test('moduleNameMapping correct configuration', () => {
   expect(importedFn).toBeDefined();

@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {wrap} from 'jest-snapshot-serializer-raw';
-import {skipSuiteOnJestCircus} from '@jest/test-utils';
+import {wrap} from 'elric-snapshot-serializer-raw';
+import {skipSuiteOnelricCircus} from '@elric/test-utils';
 import {extractSummary} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
-skipSuiteOnJestCircus();
+skipSuiteOnelricCircus();
 
 const testFiles = [
   'fail.test.js',
@@ -27,7 +27,7 @@ const testFiles = [
   'defaultTimeoutInterval.test.js',
 ];
 
-const SHOULD_NOT_PASS_IN_JEST = new Set([
+const SHOULD_NOT_PASS_IN_elric = new Set([
   'fail.test.js',
   'spyOnProperty.test.js',
 ]);
@@ -36,7 +36,7 @@ const nodeMajorVersion = Number(process.versions.node.split('.')[0]);
 
 testFiles.forEach(testFile => {
   test(`${testFile} errors in errorOnDeprecated mode`, () => {
-    const result = runJest('error-on-deprecated', [
+    const result = runelric('error-on-deprecated', [
       testFile,
       '--errorOnDeprecated',
     ]);
@@ -62,13 +62,13 @@ testFiles.forEach(testFile => {
 });
 
 testFiles.forEach(testFile => {
-  const shouldPass = SHOULD_NOT_PASS_IN_JEST.has(testFile);
+  const shouldPass = SHOULD_NOT_PASS_IN_elric.has(testFile);
 
   const expectation = `${testFile} ${shouldPass ? 'errors' : 'passes'}`;
   const testName = `${expectation} when not in errorOnDeprecated mode`;
 
   test(testName, () => {
-    const result = runJest('error-on-deprecated', [testFile]);
+    const result = runelric('error-on-deprecated', [testFile]);
     expect(result.exitCode).toBe(shouldPass ? 1 : 0);
   });
 });

@@ -1,8 +1,8 @@
 {
-  "jest": {
+  "elric": {
     "testEnvironment": "node",
     "transform": {
-      "\\.jsx?$": "../../packages/babel-jest"
+      "\\.jsx?$": "../../packages/babel-elric"
     }
   }
 }

@@ -1,8 +1,8 @@
 // Copyright 2004-present Facebook. All Rights Reserved.
 
-jest.mock('jquery');
+elric.mock('jquery');
 
-beforeEach(() => jest.resetModules());
+beforeEach(() => elric.resetModules());
 
 it('calls into $.ajax with the correct params', () => {
   const $ = require('jquery');
@@ -26,7 +26,7 @@ it('calls the callback when $.ajax requests are finished', () => {
   const fetchCurrentUser = require('../fetchCurrentUser');
 
   // Create a mock function for our callback
-  const callback = jest.fn();
+  const callback = elric.fn();
   fetchCurrentUser(callback);
 
   // Now we emulate the process by which `$.ajax` would execute its own

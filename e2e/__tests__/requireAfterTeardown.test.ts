@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {wrap} from 'jest-snapshot-serializer-raw';
-import runJest from '../runJest';
+import {wrap} from 'elric-snapshot-serializer-raw';
+import runelric from '../runelric';
 
 test('prints useful error for requires after test is done', () => {
-  const {stderr} = runJest('require-after-teardown');
+  const {stderr} = runelric('require-after-teardown');
 
   const interestingLines = stderr.split('\n').slice(9, 18).join('\n');
 

@@ -6,14 +6,14 @@
  */
 
 import type {Context} from 'vm';
-import type {LegacyFakeTimers, ModernFakeTimers} from '@jest/fake-timers';
-import type {Circus, Config, Global} from '@jest/types';
+import type {LegacyFakeTimers, ModernFakeTimers} from '@elric/fake-timers';
+import type {Circus, Config, Global} from '@elric/types';
 import type {
-  fn as JestMockFn,
-  mocked as JestMockMocked,
-  spyOn as JestMockSpyOn,
+  fn as elricMockFn,
+  mocked as elricMockMocked,
+  spyOn as elricMockSpyOn,
   ModuleMocker,
-} from 'jest-mock';
+} from 'elric-mock';
 
 export type EnvironmentContext = {
   console: Console;
@@ -21,7 +21,7 @@ export type EnvironmentContext = {
   testPath: Config.Path;
 };
 
-// Different Order than https://nodejs.org/api/modules.html#modules_the_module_wrapper , however needs to be in the form [jest-transform]ScriptTransformer accepts
+// Different Order than https://nodejs.org/api/modules.html#modules_the_module_wrapper , however needs to be in the form [elric-transform]ScriptTransformer accepts
 export type ModuleWrapper = (
   this: Module['exports'],
   module: Module,
@@ -29,11 +29,11 @@ export type ModuleWrapper = (
   require: Module['require'],
   __dirname: string,
   __filename: Module['filename'],
-  jest?: Jest,
+  elric?: elric,
   ...extraGlobals: Array<Global.Global[keyof Global.Global]>
 ) => unknown;
 
-export declare class JestEnvironment<Timer = unknown> {
+export declare class elricEnvironment<Timer = unknown> {
   constructor(config: Config.ProjectConfig, context?: EnvironmentContext);
   global: Global.Global;
   fakeTimers: LegacyFakeTimers<Timer> | null;
@@ -49,7 +49,7 @@ export declare class JestEnvironment<Timer = unknown> {
 export type Module = NodeModule;
 
 // TODO: Move to some separate package
-export interface Jest {
+export interface elric {
   /**
    * Advances all timers by the needed milliseconds so that only the next timeouts/intervals will run.
    * Optionally, you can provide steps, so it will run steps amount of next timeouts/intervals.
@@ -58,16 +58,16 @@ export interface Jest {
   /**
    * Disables automatic mocking in the module loader.
    */
-  autoMockOff(): Jest;
+  autoMockOff(): elric;
   /**
    * Enables automatic mocking in the module loader.
    */
-  autoMockOn(): Jest;
+  autoMockOn(): elric;
   /**
    * Clears the mock.calls and mock.instances properties of all mocks.
    * Equivalent to calling .mockClear() on every mocked function.
    */
-  clearAllMocks(): Jest;
+  clearAllMocks(): elric;
   /**
    * Removes any pending timers from the timer system. If any timers have been
    * scheduled, they will be cleared and will never have the opportunity to
@@ -79,34 +79,34 @@ export interface Jest {
    * of the specified module, including all of the specified module's
    * dependencies.
    */
-  deepUnmock(moduleName: string): Jest;
+  deepUnmock(moduleName: string): elric;
   /**
    * Disables automatic mocking in the module loader.
    *
    * After this method is called, all `require()`s will return the real
    * versions of each module (rather than a mocked version).
    */
-  disableAutomock(): Jest;
+  disableAutomock(): elric;
   /**
-   * When using `babel-jest`, calls to mock will automatically be hoisted to
+   * When using `babel-elric`, calls to mock will automatically be hoisted to
    * the top of the code block. Use this method if you want to explicitly avoid
    * this behavior.
    */
-  doMock(moduleName: string, moduleFactory?: () => unknown): Jest;
+  doMock(moduleName: string, moduleFactory?: () => unknown): elric;
   /**
    * Indicates that the module system should never return a mocked version
    * of the specified module from require() (e.g. that it should always return
    * the real module).
    */
-  dontMock(moduleName: string): Jest;
+  dontMock(moduleName: string): elric;
   /**
    * Enables automatic mocking in the module loader.
    */
-  enableAutomock(): Jest;
+  enableAutomock(): elric;
   /**
    * Creates a mock function. Optionally takes a mock implementation.
    */
-  fn: typeof JestMockFn;
+  fn: typeof elricMockFn;
   /**
    * Given the name of a module, use the automatic mocking system to generate a
    * mocked version of the module for you.
@@ -114,7 +114,7 @@ export interface Jest {
    * This is useful when you want to create a manual mock that extends the
    * automatic mock's behavior.
    *
-   * @deprecated Use `jest.createMockFromModule()` instead
+   * @deprecated Use `elric.createMockFromModule()` instead
    */
   genMockFromModule(moduleName: string): unknown;
   /**
@@ -130,7 +130,7 @@ export interface Jest {
    */
   isMockFunction(
     fn: (...args: Array<any>) => unknown,
-  ): fn is ReturnType<typeof JestMockFn>;
+  ): fn is ReturnType<typeof elricMockFn>;
   /**
    * Mocks a module with an auto-mocked version when it is being required.
    */
@@ -138,7 +138,7 @@ export interface Jest {
     moduleName: string,
     moduleFactory?: () => unknown,
     options?: {virtual?: boolean},
-  ): Jest;
+  ): elric;
   /**
    * Mocks a module with the provided module factory when it is being imported.
    */
@@ -146,20 +146,20 @@ export interface Jest {
     moduleName: string,
     moduleFactory: () => Promise<T> | T,
     options?: {virtual?: boolean},
-  ): Jest;
+  ): elric;
   /**
    * Returns the actual module instead of a mock, bypassing all checks on
    * whether the module should receive a mock implementation or not.
    *
    * @example
    ```
-    jest.mock('../myModule', () => {
+    elric.mock('../myModule', () => {
     // Require the original module to not be mocked...
-    const originalModule = jest.requireActual(moduleName);
+    const originalModule = elric.requireActual(moduleName);
       return {
         __esModule: true, // Use it when dealing with esModules
         ...originalModule,
-        getRandom: jest.fn().mockReturnValue(10),
+        getRandom: elric.fn().mockReturnValue(10),
       };
     });
 
@@ -178,26 +178,26 @@ export interface Jest {
    * Resets the state of all mocks.
    * Equivalent to calling .mockReset() on every mocked function.
    */
-  resetAllMocks(): Jest;
+  resetAllMocks(): elric;
   /**
    * Resets the module registry - the cache of all required modules. This is
    * useful to isolate modules where local state might conflict between tests.
    */
-  resetModules(): Jest;
+  resetModules(): elric;
   /**
    * Restores all mocks back to their original value. Equivalent to calling
    * `.mockRestore` on every mocked function.
    *
-   * Beware that jest.restoreAllMocks() only works when the mock was created with
-   * jest.spyOn; other mocks will require you to manually restore them.
+   * Beware that elric.restoreAllMocks() only works when the mock was created with
+   * elric.spyOn; other mocks will require you to manually restore them.
    */
-  restoreAllMocks(): Jest;
-  mocked: typeof JestMockMocked;
+  restoreAllMocks(): elric;
+  mocked: typeof elricMockMocked;
   /**
    * Runs failed tests n-times until they pass or until the max number of
-   * retries is exhausted. This only works with `jest-circus`!
+   * retries is exhausted. This only works with `elric-circus`!
    */
-  retryTimes(numRetries: number): Jest;
+  retryTimes(numRetries: number): elric;
   /**
    * Exhausts tasks queued by setImmediate().
    *
@@ -235,11 +235,11 @@ export interface Jest {
    * Explicitly supplies the mock object that the module system should return
    * for the specified module.
    *
-   * Note It is recommended to use `jest.mock()` instead. The `jest.mock`
+   * Note It is recommended to use `elric.mock()` instead. The `elric.mock`
    * API's second argument is a module factory instead of the expected
    * exported module object.
    */
-  setMock(moduleName: string, moduleExports: unknown): Jest;
+  setMock(moduleName: string, moduleExports: unknown): elric;
   /**
    * Set the default timeout interval for tests and before/after hooks in
    * milliseconds.
@@ -247,36 +247,36 @@ export interface Jest {
    * Note: The default timeout interval is 5 seconds if this method is not
    * called.
    */
-  setTimeout(timeout: number): Jest;
+  setTimeout(timeout: number): elric;
   /**
-   * Creates a mock function similar to `jest.fn` but also tracks calls to
+   * Creates a mock function similar to `elric.fn` but also tracks calls to
    * `object[methodName]`.
    *
-   * Note: By default, jest.spyOn also calls the spied method. This is
+   * Note: By default, elric.spyOn also calls the spied method. This is
    * different behavior from most other test libraries.
    */
-  spyOn: typeof JestMockSpyOn;
+  spyOn: typeof elricMockSpyOn;
   /**
    * Indicates that the module system should never return a mocked version of
    * the specified module from require() (e.g. that it should always return the
    * real module).
    */
-  unmock(moduleName: string): Jest;
+  unmock(moduleName: string): elric;
   /**
-   * Instructs Jest to use fake versions of the standard timer functions.
+   * Instructs elric to use fake versions of the standard timer functions.
    */
-  useFakeTimers(implementation?: 'modern' | 'legacy'): Jest;
+  useFakeTimers(implementation?: 'modern' | 'legacy'): elric;
   /**
-   * Instructs Jest to use the real versions of the standard timer functions.
+   * Instructs elric to use the real versions of the standard timer functions.
    */
-  useRealTimers(): Jest;
+  useRealTimers(): elric;
   /**
-   * `jest.isolateModules(fn)` goes a step further than `jest.resetModules()`
+   * `elric.isolateModules(fn)` goes a step further than `elric.resetModules()`
    * and creates a sandbox registry for the modules that are loaded inside
    * the callback function. This is useful to isolate specific modules for
    * every test so that local module state doesn't conflict between tests.
    */
-  isolateModules(fn: () => void): Jest;
+  isolateModules(fn: () => void): elric;
 
   /**
    * When mocking time, `Date.now()` will also be mocked. If you for some reason need access to the real current time, you can invoke this function.
@@ -286,7 +286,7 @@ export interface Jest {
   getRealSystemTime(): number;
 
   /**
-   *  Set the current system time used by fake timers. Simulates a user changing the system clock while your program is running. It affects the current time but it does not in itself cause e.g. timers to fire; they will fire exactly as they would have done without the call to `jest.setSystemTime()`.
+   *  Set the current system time used by fake timers. Simulates a user changing the system clock while your program is running. It affects the current time but it does not in itself cause e.g. timers to fire; they will fire exactly as they would have done without the call to `elric.setSystemTime()`.
    *
    *  > Note: This function is only available when using Lolex as fake timers implementation
    */

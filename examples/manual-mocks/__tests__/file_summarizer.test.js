@@ -2,7 +2,7 @@
 
 'use strict';
 
-jest.mock('fs');
+elric.mock('fs');
 
 describe('listFilesInDirectorySync', () => {
   const MOCK_FILE_INFO = {

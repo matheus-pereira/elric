@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import getNoTestFound from './getNoTestFound';
 import getNoTestFoundFailed from './getNoTestFoundFailed';
 import getNoTestFoundPassWithNoTests from './getNoTestFoundPassWithNoTests';

@@ -7,7 +7,7 @@
  */
 
 import chalk = require('chalk');
-import {alignedAnsiStyleSerializer} from '@jest/test-utils';
+import {alignedAnsiStyleSerializer} from '@elric/test-utils';
 import {format as prettyFormat} from 'pretty-format';
 import {
   MatcherHintOptions,
@@ -209,11 +209,11 @@ describe('ensureNoExpected()', () => {
   });
 });
 
-jest.mock('jest-diff', () => ({
+elric.mock('elric-diff', () => ({
   diff: () => 'diff output',
 }));
 describe('diff', () => {
-  test('forwards to jest-diff', () => {
+  test('forwards to elric-diff', () => {
     [
       ['a', 'b'],
       ['a', {}],
@@ -303,7 +303,7 @@ describe('matcherHint', () => {
     const expectedArgument = 'n';
     const received = matcherHint(
       'toHaveBeenNthCalledWith',
-      'jest.fn()',
+      'elric.fn()',
       expectedArgument,
       {expectedColor, secondArgument: '...expected'},
     );

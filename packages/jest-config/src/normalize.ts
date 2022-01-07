@@ -12,21 +12,21 @@ import merge = require('deepmerge');
 import {sync as glob} from 'glob';
 import {statSync} from 'graceful-fs';
 import micromatch = require('micromatch');
-import type {Config} from '@jest/types';
-import {replacePathSepForRegex} from 'jest-regex-util';
+import type {Config} from '@elric/types';
+import {replacePathSepForRegex} from 'elric-regex-util';
 import Resolver, {
   resolveRunner,
   resolveSequencer,
   resolveTestEnvironment,
   resolveWatchPlugin,
-} from 'jest-resolve';
+} from 'elric-resolve';
 import {
   clearLine,
   replacePathSepForGlob,
   requireOrImportModule,
   tryRealpath,
-} from 'jest-util';
-import {ValidationError, validate} from 'jest-validate';
+} from 'elric-util';
+import {ValidationError, validate} from 'elric-validate';
 import DEFAULT_CONFIG from './Defaults';
 import DEPRECATED_CONFIG from './Deprecated';
 import {validateReporters} from './ReporterValidationErrors';
@@ -47,7 +47,7 @@ import validatePattern from './validatePattern';
 
 const ERROR = `${BULLET}Validation Error`;
 const PRESET_EXTENSIONS = ['.json', '.js', '.cjs', '.mjs'];
-const PRESET_NAME = 'jest-preset';
+const PRESET_NAME = 'elric-preset';
 
 type AllOptions = Config.ProjectConfig & Config.GlobalConfig;
 
@@ -169,7 +169,7 @@ const setupPreset = async (
           throw createConfigError(
             `  Module ${chalk.bold(
               presetPath,
-            )} should have "jest-preset.js" or "jest-preset.json" file at the root.`,
+            )} should have "elric-preset.js" or "elric-preset.json" file at the root.`,
           );
         }
         throw createConfigError(
@@ -210,9 +210,9 @@ const setupPreset = async (
   return {...preset, ...options};
 };
 
-const setupBabelJest = (options: Config.InitialOptionsWithRootDir) => {
+const setupBabelelric = (options: Config.InitialOptionsWithRootDir) => {
   const transform = options.transform;
-  let babelJest;
+  let babelelric;
   if (transform) {
     const customJSPattern = Object.keys(transform).find(pattern => {
       const regex = new RegExp(pattern);
@@ -227,26 +227,26 @@ const setupBabelJest = (options: Config.InitialOptionsWithRootDir) => {
       if (pattern) {
         const customTransformer = transform[pattern];
         if (Array.isArray(customTransformer)) {
-          if (customTransformer[0] === 'babel-jest') {
-            babelJest = require.resolve('babel-jest');
-            customTransformer[0] = babelJest;
-          } else if (customTransformer[0].includes('babel-jest')) {
-            babelJest = customTransformer[0];
+          if (customTransformer[0] === 'babel-elric') {
+            babelelric = require.resolve('babel-elric');
+            customTransformer[0] = babelelric;
+          } else if (customTransformer[0].includes('babel-elric')) {
+            babelelric = customTransformer[0];
           }
         } else {
-          if (customTransformer === 'babel-jest') {
-            babelJest = require.resolve('babel-jest');
-            transform[pattern] = babelJest;
-          } else if (customTransformer.includes('babel-jest')) {
-            babelJest = customTransformer;
+          if (customTransformer === 'babel-elric') {
+            babelelric = require.resolve('babel-elric');
+            transform[pattern] = babelelric;
+          } else if (customTransformer.includes('babel-elric')) {
+            babelelric = customTransformer;
           }
         }
       }
     });
   } else {
-    babelJest = require.resolve('babel-jest');
+    babelelric = require.resolve('babel-elric');
     options.transform = {
-      [DEFAULT_JS_PATTERN]: babelJest,
+      [DEFAULT_JS_PATTERN]: babelelric,
     };
   }
 };
@@ -626,18 +626,18 @@ export default async function normalize(
   if (
     !options.testRunner ||
     options.testRunner === 'circus' ||
-    options.testRunner === 'jest-circus'
+    options.testRunner === 'elric-circus'
   ) {
-    options.testRunner = require.resolve('jest-circus/runner');
+    options.testRunner = require.resolve('elric-circus/runner');
   } else if (options.testRunner === 'jasmine2') {
-    options.testRunner = require.resolve('jest-jasmine2');
+    options.testRunner = require.resolve('elric-jasmine2');
   }
 
   if (!options.coverageDirectory) {
     options.coverageDirectory = path.resolve(options.rootDir, 'coverage');
   }
 
-  setupBabelJest(options);
+  setupBabelelric(options);
   // TODO: Type this properly
   const newOptions = {
     ...DEFAULT_CONFIG,
@@ -874,7 +874,7 @@ export default async function normalize(
         if (
           Array.isArray(value) && // If it's the wrong type, it can throw at a later time
           (options.runner === undefined ||
-            options.runner === DEFAULT_CONFIG.runner) && // Only require 'js' for the default jest-runner
+            options.runner === DEFAULT_CONFIG.runner) && // Only require 'js' for the default elric-runner
           !value.includes('js')
         ) {
           const errorMessage =
@@ -882,7 +882,7 @@ export default async function normalize(
             `  but instead received:\n` +
             `    ${chalk.bold.red(JSON.stringify(value))}`;
 
-          // If `js` is not included, any dependency Jest itself injects into
+          // If `js` is not included, any dependency elric itself injects into
           // the environment, like jasmine or sourcemap-support, will need to
           // `require` its modules with a file extension. This is not plausible
           // in the long run, so it's way easier to just fail hard early.
@@ -904,7 +904,7 @@ export default async function normalize(
           value = bail ? 1 : 0;
         } else if (typeof bail === 'string') {
           value = 1;
-          // If Jest is invoked as `jest --bail someTestPattern` then need to
+          // If elric is invoked as `elric --bail someTestPattern` then need to
           // move the pattern from the `bail` configuration and into `argv._`
           // to be processed as an extra parameter
           argv._.push(bail);

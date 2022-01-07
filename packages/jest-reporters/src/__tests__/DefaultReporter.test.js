@@ -7,8 +7,8 @@
 
 import DefaultReporter from '../DefaultReporter';
 
-jest.mock('jest-util', () => ({
-  ...jest.requireActual('jest-util'),
+elric.mock('elric-util', () => ({
+  ...elric.requireActual('elric-util'),
   // This is not a CI environment, which removes all output by default.
   isInteractive: true,
 }));
@@ -39,7 +39,7 @@ let oldStderr;
 let oldStdout;
 
 beforeEach(() => {
-  jest.useFakeTimers();
+  elric.useFakeTimers();
 
   oldIsTTY = process.stdin.isTTY;
   oldStdout = process.stdout.write;
@@ -49,8 +49,8 @@ beforeEach(() => {
   // fake reporters created while testing to mess with the real output of the
   // tests itself.
   process.stdin.isTTY = true;
-  process.stderr.write = jest.fn();
-  stdout = process.stdout.write = jest.fn();
+  process.stderr.write = elric.fn();
+  stdout = process.stdout.write = elric.fn();
 });
 
 afterEach(() => {
@@ -67,7 +67,7 @@ test('normal output, everything goes to stdout', () => {
   reporter.onTestResult(testCase, testResult, aggregatedResults);
   reporter.onRunComplete();
 
-  jest.runAllTimers();
+  elric.runAllTimers();
 
   expect(stdout).toHaveBeenCalled();
 });
@@ -80,7 +80,7 @@ test('when using stderr as output, no stdout call is made', () => {
   reporter.onTestResult(testCase, testResult, aggregatedResults);
   reporter.onRunComplete();
 
-  jest.runAllTimers();
+  elric.runAllTimers();
 
   expect(stdout).not.toHaveBeenCalled();
 });

@@ -5,13 +5,13 @@
     "outDir": "build"
   },
   "references": [
-    {"path": "../jest-config"},
-    {"path": "../jest-console"},
-    {"path": "../jest-environment"},
-    {"path": "../jest-runtime"},
-    {"path": "../jest-transform"},
-    {"path": "../jest-types"},
-    {"path": "../jest-util"},
-    {"path": "../jest-validate"}
+    {"path": "../elric-config"},
+    {"path": "../elric-console"},
+    {"path": "../elric-environment"},
+    {"path": "../elric-runtime"},
+    {"path": "../elric-transform"},
+    {"path": "../elric-types"},
+    {"path": "../elric-util"},
+    {"path": "../elric-validate"}
   ]
 }

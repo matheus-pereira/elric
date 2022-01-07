@@ -9,16 +9,16 @@ const path = require('path');
 const i18n = require('./i18n');
 const ArchivedVersions = require('./archivedVersions.json');
 
-const JestThemeColor = '#15c213';
+const elricThemeColor = '#15c213';
 
 module.exports = {
   i18n,
-  title: 'Jest',
+  title: 'elric',
   titleDelimiter: '·',
   tagline: '🃏 Delightful JavaScript Testing',
-  url: 'https://jestjs.io',
+  url: 'https://elricjs.io',
   baseUrl: '/',
-  projectName: 'jest',
+  projectName: 'elric',
   favicon: 'img/favicon/favicon.ico',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
@@ -32,9 +32,9 @@ module.exports = {
           showLastUpdateTime: true,
           editUrl: ({locale, versionDocsDirPath, docPath}) => {
             if (locale !== 'en') {
-              return `https://crowdin.com/project/jest-v2/${locale}`;
+              return `https://crowdin.com/project/elric-v2/${locale}`;
             }
-            return `https://github.com/facebook/jest/edit/main/website/${versionDocsDirPath}/${docPath}`;
+            return `https://github.com/facebook/elric/edit/main/website/${versionDocsDirPath}/${docPath}`;
           },
           path: '../docs',
           sidebarPath: path.resolve(__dirname, './sidebars.json'),
@@ -49,7 +49,7 @@ module.exports = {
             path.resolve('src/css/algoliaDocSearchTheme.css'),
             path.resolve('src/components/v1/legacyCSS.css'),
             path.resolve('static/css/custom.css'),
-            path.resolve('static/css/jest.css'),
+            path.resolve('static/css/elric.css'),
           ],
         },
       },
@@ -70,7 +70,7 @@ module.exports = {
           {
             tagName: 'link',
             rel: 'icon',
-            href: 'img/jest.png',
+            href: 'img/elric.png',
           },
           {
             tagName: 'link',
@@ -95,18 +95,18 @@ module.exports = {
           {
             tagName: 'link',
             rel: 'apple-touch-icon',
-            href: 'img/jest.png',
+            href: 'img/elric.png',
           },
           {
             tagName: 'link',
             rel: 'mask-icon',
-            href: 'img/jest.svg',
-            color: JestThemeColor,
+            href: 'img/elric.svg',
+            color: elricThemeColor,
           },
           {
             tagName: 'meta',
             name: 'msapplication-TileImage',
-            content: 'img/jest.png',
+            content: 'img/elric.png',
           },
           {
             tagName: 'meta',
@@ -119,7 +119,7 @@ module.exports = {
   ],
   themeConfig: {
     navbar: {
-      title: 'Jest',
+      title: 'elric',
       items: [
         // left items
         {
@@ -160,7 +160,7 @@ module.exports = {
         {to: 'blog', label: 'Blog', position: 'right'},
         {type: 'localeDropdown', position: 'right'},
         {
-          href: 'https://github.com/facebook/jest',
+          href: 'https://github.com/facebook/elric',
           position: 'right',
           className: 'header-github-link',
           'aria-label': 'GitHub repository',
@@ -197,7 +197,7 @@ module.exports = {
           items: [
             {
               label: 'Stack Overflow',
-              to: 'https://stackoverflow.com/questions/tagged/jestjs',
+              to: 'https://stackoverflow.com/questions/tagged/elricjs',
             },
             {
               label: 'Reactiflux',
@@ -205,7 +205,7 @@ module.exports = {
             },
             {
               label: 'Twitter',
-              to: 'https://twitter.com/fbjest',
+              to: 'https://twitter.com/fbelric',
             },
           ],
         },
@@ -218,11 +218,11 @@ module.exports = {
             },
             {
               label: 'GitHub',
-              to: 'https://github.com/facebook/jest',
+              to: 'https://github.com/facebook/elric',
             },
             {
               label: 'Twitter',
-              to: 'https://twitter.com/fbjest',
+              to: 'https://twitter.com/fbelric',
             },
           ],
         },
@@ -241,7 +241,7 @@ module.exports = {
         },
       ],
       logo: {
-        //         src: 'img/jest-outline.svg',
+        //         src: 'img/elric-outline.svg',
         alt: 'Facebook Open Source Logo',
         src: 'img/oss_logo.png',
         href: 'https://opensource.facebook.com',
@@ -249,7 +249,7 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc. Built with Docusaurus.`,
     },
     algolia: {
-      indexName: 'jest-v2',
+      indexName: 'elric-v2',
       apiKey: '833906d7486e4059359fa58823c4ef56',
       contextualSearch: true,
     },

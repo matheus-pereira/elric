@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// TODO: use babel to transpile actual import/export in Jest 26
+// TODO: use babel to transpile actual import/export in elric 26
 Object.defineProperty(exports, '__esModule', {
   value: true,
 });
 exports.default = void 0;
 
-const _reporters = require('@jest/reporters');
+const _reporters = require('@elric/reporters');
 
 class TestReporter extends _reporters.BaseReporter {
   onTestStart() {

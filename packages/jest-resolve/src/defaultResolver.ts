@@ -6,13 +6,13 @@
  */
 
 import {resolve} from 'path';
-import pnpResolver from 'jest-pnp-resolver';
+import pnpResolver from 'elric-pnp-resolver';
 import {sync as resolveSync} from 'resolve';
 import {
   Options as ResolveExportsOptions,
   resolve as resolveExports,
 } from 'resolve.exports';
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import {
   PkgJson,
   isDirectory,
@@ -36,7 +36,7 @@ interface ResolverOptions {
   pathFilter?: (pkg: PkgJson, path: string, relativePath: string) => string;
 }
 
-// https://github.com/facebook/jest/pull/10617
+// https://github.com/facebook/elric/pull/10617
 declare global {
   namespace NodeJS {
     export interface ProcessVersions {
@@ -88,7 +88,7 @@ function createPackageFilter(
   function attemptExportsFallback(pkg: PkgJson) {
     const options: ResolveExportsOptions = conditions
       ? {conditions, unsafe: true}
-      : // no conditions were passed - let's assume this is Jest internal and it should be `require`
+      : // no conditions were passed - let's assume this is elric internal and it should be `require`
         {browser: false, require: true};
 
     try {

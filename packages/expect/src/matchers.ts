@@ -8,7 +8,7 @@
 
 /* eslint-disable local/ban-types-eventually */
 
-import {getType, isPrimitive} from 'jest-get-type';
+import {getType, isPrimitive} from 'elric-get-type';
 import {
   DIM_COLOR,
   EXPECTED_COLOR,
@@ -26,7 +26,7 @@ import {
   printReceived,
   printWithType,
   stringify,
-} from 'jest-matcher-utils';
+} from 'elric-matcher-utils';
 import {equals} from './jasmineUtils';
 import {
   printCloseTo,

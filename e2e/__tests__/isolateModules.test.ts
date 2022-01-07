@@ -8,7 +8,7 @@
 import {tmpdir} from 'os';
 import * as path from 'path';
 import {cleanup, createEmptyPackage, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(tmpdir(), 'isolate-modules.test');
 
@@ -33,7 +33,7 @@ test('works with mocks', () => {
       console.log("was " + value);
     `,
     'test.js': `
-      jest.mock('./config');
+      elric.mock('./config');
       const config = require('./config');
 
       test('dummy test', () => {
@@ -41,7 +41,7 @@ test('works with mocks', () => {
           return true;
         });
 
-        jest.isolateModules(() => {
+        elric.isolateModules(() => {
           require("./read");
         });
 
@@ -49,7 +49,7 @@ test('works with mocks', () => {
       })
     `,
   });
-  const {exitCode} = runJest(DIR);
+  const {exitCode} = runelric(DIR);
 
   expect(exitCode).toBe(0);
 });

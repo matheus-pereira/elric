@@ -21,14 +21,14 @@ let workerThreads;
 let originalExecArgv;
 
 beforeEach(() => {
-  jest.mock('worker_threads', () => {
-    const fakeClass = jest.fn(() => {
+  elric.mock('worker_threads', () => {
+    const fakeClass = elric.fn(() => {
       const EventEmitter = require('events');
       const {PassThrough} = require('stream');
 
       const thread = new EventEmitter();
-      thread.postMessage = jest.fn();
-      thread.terminate = jest.fn();
+      thread.postMessage = elric.fn();
+      thread.terminate = elric.fn();
       thread.stdout = new PassThrough();
       thread.stderr = new PassThrough();
       return thread;
@@ -41,13 +41,13 @@ beforeEach(() => {
   originalExecArgv = process.execArgv;
 
   workerThreads = require('worker_threads').Worker;
-  workerThreads.postMessage = jest.fn();
+  workerThreads.postMessage = elric.fn();
 
   Worker = require('../NodeThreadsWorker').default;
 });
 
 afterEach(() => {
-  jest.resetModules();
+  elric.resetModules();
   process.execArgv = originalExecArgv;
 });
 
@@ -64,7 +64,7 @@ it('passes fork options down to worker_threads.Worker, adding the defaults', () 
     workerData: {
       foo: 'bar',
     },
-    workerId: process.env.JEST_WORKER_ID - 1,
+    workerId: process.env.elric_WORKER_ID - 1,
     workerPath: '/tmp/foo/bar/baz.js',
   });
 
@@ -109,8 +109,8 @@ it('stops initializing the worker after the amount of retries is exceeded', () =
   });
 
   const request = [CHILD_MESSAGE_CALL, false, 'foo', []];
-  const onProcessStart = jest.fn();
-  const onProcessEnd = jest.fn();
+  const onProcessStart = elric.fn();
+  const onProcessEnd = elric.fn();
 
   worker.send(request, onProcessStart, onProcessEnd);
 
@@ -139,14 +139,14 @@ it('provides stdout and stderr from the threads', async () => {
   const stderr = worker.getStderr();
 
   worker._worker.stdout.end('Hello ', 'utf8');
-  worker._worker.stderr.end('Jest ', 'utf8');
+  worker._worker.stderr.end('elric ', 'utf8');
   worker._worker.emit('exit');
   worker._worker.stdout.end('World!', 'utf8');
   worker._worker.stderr.end('Workers!', 'utf8');
   worker._worker.emit('exit', 0);
 
   await expect(getStream(stdout)).resolves.toEqual('Hello World!');
-  await expect(getStream(stderr)).resolves.toEqual('Jest Workers!');
+  await expect(getStream(stderr)).resolves.toEqual('elric Workers!');
 });
 
 it('sends the task to the thread', () => {
@@ -202,8 +202,8 @@ it('calls the onProcessStart method synchronously if the queue is empty', () => 
     workerPath: '/tmp/foo',
   });
 
-  const onProcessStart = jest.fn();
-  const onProcessEnd = jest.fn();
+  const onProcessStart = elric.fn();
+  const onProcessEnd = elric.fn();
 
   worker.send(
     [CHILD_MESSAGE_CALL, false, 'foo', []],
@@ -228,9 +228,9 @@ it('can send multiple messages to parent', () => {
     workerPath: '/tmp/foo',
   });
 
-  const onProcessStart = jest.fn();
-  const onProcessEnd = jest.fn();
-  const onCustomMessage = jest.fn();
+  const onProcessStart = elric.fn();
+  const onProcessEnd = elric.fn();
+  const onCustomMessage = elric.fn();
 
   worker.send(
     [CHILD_MESSAGE_CALL, false, 'foo', []],
@@ -265,9 +265,9 @@ it('creates error instances for known errors', () => {
     workerPath: '/tmp/foo',
   });
 
-  const callback1 = jest.fn();
-  const callback2 = jest.fn();
-  const callback3 = jest.fn();
+  const callback1 = elric.fn();
+  const callback2 = elric.fn();
+  const callback3 = elric.fn();
 
   // Testing a generic ECMAScript error.
   worker.send([CHILD_MESSAGE_CALL, false, 'method', []], () => {}, callback1);

@@ -8,11 +8,11 @@
 'use strict';
 
 test('fake timers', () => {
-  jest.setSystemTime(0);
+  elric.setSystemTime(0);
 
   expect(Date.now()).toBe(0);
 
-  jest.setSystemTime(1000);
+  elric.setSystemTime(1000);
 
   expect(Date.now()).toBe(1000);
 });

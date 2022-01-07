@@ -7,9 +7,9 @@
 
 import {tmpdir} from 'os';
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {cleanup, extractSummaries, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(tmpdir(), 'watch-mode-only-failed');
 const pluginPath = path.resolve(__dirname, '../MockStdinWatchPlugin');
@@ -31,7 +31,7 @@ const setupFiles = (input: Array<{keys: Array<string>}>) => {
       test('foo 1', () => { expect('foo').toBe('foo'); });
     `,
     'package.json': JSON.stringify({
-      jest: {
+      elric: {
         testEnvironment: 'node',
         watchPlugins: [[pluginPath, {input}]],
       },
@@ -43,7 +43,7 @@ test('can press "f" to run only failed tests', () => {
   const input = [{keys: ['f']}, {keys: ['q']}];
   setupFiles(input);
 
-  const {exitCode, stderr} = runJest(DIR, ['--no-watchman', '--watchAll']);
+  const {exitCode, stderr} = runelric(DIR, ['--no-watchman', '--watchAll']);
   const results = extractSummaries(stderr);
 
   expect(results).toHaveLength(2);

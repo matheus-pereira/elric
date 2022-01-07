@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// eslint-disable-next-line jest/no-focused-tests
+// eslint-disable-next-line elric/no-focused-tests
 describe.only.each([
   [true, true],
   [true, true],

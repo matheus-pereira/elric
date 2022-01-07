@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {getConfig} from '../runJest';
+import {getConfig} from '../runelric';
 
 test('reads config from cjs file', () => {
   const {configs} = getConfig(

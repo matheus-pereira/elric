@@ -1,10 +1,10 @@
 {
-  "name": "jest-repl",
+  "name": "elric-repl",
   "version": "27.4.7",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/jest-repl"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/elric-repl"
   },
   "license": "MIT",
   "main": "./build/index.js",
@@ -15,19 +15,19 @@
       "default": "./build/index.js"
     },
     "./package.json": "./package.json",
-    "./bin/jest-repl": "./bin/jest-repl.js",
-    "./bin/jest-runtime-cli": "./bin/jest-runtime-cli.js"
+    "./bin/elric-repl": "./bin/elric-repl.js",
+    "./bin/elric-runtime-cli": "./bin/elric-runtime-cli.js"
   },
   "dependencies": {
-    "@jest/console": "^27.4.6",
-    "@jest/environment": "^27.4.6",
-    "@jest/transform": "^27.4.6",
-    "@jest/types": "^27.4.2",
+    "@elric/console": "^27.4.6",
+    "@elric/environment": "^27.4.6",
+    "@elric/transform": "^27.4.6",
+    "@elric/types": "^27.4.2",
     "chalk": "^4.0.0",
-    "jest-config": "^27.4.7",
-    "jest-runtime": "^27.4.6",
-    "jest-util": "^27.4.2",
-    "jest-validate": "^27.4.6",
+    "elric-config": "^27.4.7",
+    "elric-runtime": "^27.4.6",
+    "elric-util": "^27.4.2",
+    "elric-validate": "^27.4.6",
     "repl": "^0.1.3",
     "yargs": "^16.2.0"
   },
@@ -36,8 +36,8 @@
     "execa": "^5.0.0"
   },
   "bin": {
-    "jest-repl": "./bin/jest-repl.js",
-    "jest-runtime": "./bin/jest-runtime-cli.js"
+    "elric-repl": "./bin/elric-repl.js",
+    "elric-runtime": "./bin/elric-runtime-cli.js"
   },
   "engines": {
     "node": "^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0"

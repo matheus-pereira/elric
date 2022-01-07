@@ -1,131 +1,131 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`jest-each .describe throws an error when called with an empty array 1`] = `
+exports[`elric-each .describe throws an error when called with an empty array 1`] = `
 "Error: \`.each\` called with an empty Array of table data.
 "
 `;
 
-exports[`jest-each .describe throws an error when not called with an array 1`] = `
+exports[`elric-each .describe throws an error when not called with an array 1`] = `
 "\`.each\` must be called with an Array or Tagged Template Literal.
 
 Instead was called with: undefined
 "
 `;
 
-exports[`jest-each .describe.only throws an error when called with an empty array 1`] = `
+exports[`elric-each .describe.only throws an error when called with an empty array 1`] = `
 "Error: \`.each\` called with an empty Array of table data.
 "
 `;
 
-exports[`jest-each .describe.only throws an error when not called with an array 1`] = `
+exports[`elric-each .describe.only throws an error when not called with an array 1`] = `
 "\`.each\` must be called with an Array or Tagged Template Literal.
 
 Instead was called with: undefined
 "
 `;
 
-exports[`jest-each .fdescribe throws an error when called with an empty array 1`] = `
+exports[`elric-each .fdescribe throws an error when called with an empty array 1`] = `
 "Error: \`.each\` called with an empty Array of table data.
 "
 `;
 
-exports[`jest-each .fdescribe throws an error when not called with an array 1`] = `
+exports[`elric-each .fdescribe throws an error when not called with an array 1`] = `
 "\`.each\` must be called with an Array or Tagged Template Literal.
 
 Instead was called with: undefined
 "
 `;
 
-exports[`jest-each .fit throws an error when called with an empty array 1`] = `
+exports[`elric-each .fit throws an error when called with an empty array 1`] = `
 "Error: \`.each\` called with an empty Array of table data.
 "
 `;
 
-exports[`jest-each .fit throws an error when not called with an array 1`] = `
+exports[`elric-each .fit throws an error when not called with an array 1`] = `
 "\`.each\` must be called with an Array or Tagged Template Literal.
 
 Instead was called with: undefined
 "
 `;
 
-exports[`jest-each .it throws an error when called with an empty array 1`] = `
+exports[`elric-each .it throws an error when called with an empty array 1`] = `
 "Error: \`.each\` called with an empty Array of table data.
 "
 `;
 
-exports[`jest-each .it throws an error when not called with an array 1`] = `
+exports[`elric-each .it throws an error when not called with an array 1`] = `
 "\`.each\` must be called with an Array or Tagged Template Literal.
 
 Instead was called with: undefined
 "
 `;
 
-exports[`jest-each .it.only throws an error when called with an empty array 1`] = `
+exports[`elric-each .it.only throws an error when called with an empty array 1`] = `
 "Error: \`.each\` called with an empty Array of table data.
 "
 `;
 
-exports[`jest-each .it.only throws an error when not called with an array 1`] = `
+exports[`elric-each .it.only throws an error when not called with an array 1`] = `
 "\`.each\` must be called with an Array or Tagged Template Literal.
 
 Instead was called with: undefined
 "
 `;
 
-exports[`jest-each .test throws an error when called with an empty array 1`] = `
+exports[`elric-each .test throws an error when called with an empty array 1`] = `
 "Error: \`.each\` called with an empty Array of table data.
 "
 `;
 
-exports[`jest-each .test throws an error when not called with an array 1`] = `
+exports[`elric-each .test throws an error when not called with an array 1`] = `
 "\`.each\` must be called with an Array or Tagged Template Literal.
 
 Instead was called with: undefined
 "
 `;
 
-exports[`jest-each .test.concurrent throws an error when called with an empty array 1`] = `
+exports[`elric-each .test.concurrent throws an error when called with an empty array 1`] = `
 "Error: \`.each\` called with an empty Array of table data.
 "
 `;
 
-exports[`jest-each .test.concurrent throws an error when not called with an array 1`] = `
+exports[`elric-each .test.concurrent throws an error when not called with an array 1`] = `
 "\`.each\` must be called with an Array or Tagged Template Literal.
 
 Instead was called with: undefined
 "
 `;
 
-exports[`jest-each .test.concurrent.only throws an error when called with an empty array 1`] = `
+exports[`elric-each .test.concurrent.only throws an error when called with an empty array 1`] = `
 "Error: \`.each\` called with an empty Array of table data.
 "
 `;
 
-exports[`jest-each .test.concurrent.only throws an error when not called with an array 1`] = `
+exports[`elric-each .test.concurrent.only throws an error when not called with an array 1`] = `
 "\`.each\` must be called with an Array or Tagged Template Literal.
 
 Instead was called with: undefined
 "
 `;
 
-exports[`jest-each .test.concurrent.skip throws an error when called with an empty array 1`] = `
+exports[`elric-each .test.concurrent.skip throws an error when called with an empty array 1`] = `
 "Error: \`.each\` called with an empty Array of table data.
 "
 `;
 
-exports[`jest-each .test.concurrent.skip throws an error when not called with an array 1`] = `
+exports[`elric-each .test.concurrent.skip throws an error when not called with an array 1`] = `
 "\`.each\` must be called with an Array or Tagged Template Literal.
 
 Instead was called with: undefined
 "
 `;
 
-exports[`jest-each .test.only throws an error when called with an empty array 1`] = `
+exports[`elric-each .test.only throws an error when called with an empty array 1`] = `
 "Error: \`.each\` called with an empty Array of table data.
 "
 `;
 
-exports[`jest-each .test.only throws an error when not called with an array 1`] = `
+exports[`elric-each .test.only throws an error when not called with an array 1`] = `
 "\`.each\` must be called with an Array or Tagged Template Literal.
 
 Instead was called with: undefined

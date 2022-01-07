@@ -23,11 +23,11 @@ const runtimeCLIOptions: Record<
   },
   config: {
     alias: 'c',
-    description: 'The path to a Jest config file.',
+    description: 'The path to a elric config file.',
     type: 'string',
   },
   debug: {
-    description: 'Print debugging info about your jest config.',
+    description: 'Print debugging info about your elric config.',
     type: 'boolean',
   },
   version: {

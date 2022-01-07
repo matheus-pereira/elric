@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('use the custom resolver', () => {
-  const result = runJest('custom-resolver');
+  const result = runelric('custom-resolver');
   expect(result.exitCode).toBe(0);
 });

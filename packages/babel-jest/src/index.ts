@@ -17,14 +17,14 @@ import chalk = require('chalk');
 import * as fs from 'graceful-fs';
 import slash = require('slash');
 import type {
-  TransformOptions as JestTransformOptions,
+  TransformOptions as elricTransformOptions,
   SyncTransformer,
-} from '@jest/transform';
-import type {Config} from '@jest/types';
+} from '@elric/transform';
+import type {Config} from '@elric/types';
 import {loadPartialConfig, loadPartialConfigAsync} from './loadBabelConfig';
 
 const THIS_FILE = fs.readFileSync(__filename);
-const jestPresetPath = require.resolve('babel-preset-jest');
+const elricPresetPath = require.resolve('babel-preset-elric');
 const babelIstanbulPlugin = require.resolve('babel-plugin-istanbul');
 
 type CreateTransformer = SyncTransformer<TransformOptions>['createTransformer'];
@@ -36,9 +36,9 @@ function assertLoadedBabelConfig(
 ): asserts babelConfig {
   if (!babelConfig) {
     throw new Error(
-      `babel-jest: Babel ignores ${chalk.bold(
+      `babel-elric: Babel ignores ${chalk.bold(
         slash(path.relative(cwd, filename)),
-      )} - make sure to include the file in Jest's ${chalk.bold(
+      )} - make sure to include the file in elric's ${chalk.bold(
         'transformIgnorePatterns',
       )} as well.`,
     );
@@ -47,12 +47,12 @@ function assertLoadedBabelConfig(
 
 function addIstanbulInstrumentation(
   babelOptions: TransformOptions,
-  transformOptions: JestTransformOptions,
+  transformOptions: elricTransformOptions,
 ): TransformOptions {
   if (transformOptions.instrument) {
     const copiedBabelOptions: TransformOptions = {...babelOptions};
     copiedBabelOptions.auxiliaryCommentBefore = ' istanbul ignore next ';
-    // Copied from jest-runtime transform.js
+    // Copied from elric-runtime transform.js
     copiedBabelOptions.plugins = (copiedBabelOptions.plugins || []).concat([
       [
         babelIstanbulPlugin,
@@ -74,7 +74,7 @@ function getCacheKeyFromConfig(
   sourceText: string,
   sourcePath: Config.Path,
   babelOptions: PartialConfig,
-  transformOptions: JestTransformOptions,
+  transformOptions: elricTransformOptions,
 ): string {
   const {config, configString, instrument} = transformOptions;
 
@@ -131,22 +131,22 @@ function loadBabelOptions(
   cwd: Config.Path,
   filename: Config.Path,
   transformOptions: TransformOptions,
-  jestTransformOptions: JestTransformOptions,
+  elricTransformOptions: elricTransformOptions,
 ): TransformOptions {
   const {options} = loadBabelConfig(cwd, filename, transformOptions);
 
-  return addIstanbulInstrumentation(options, jestTransformOptions);
+  return addIstanbulInstrumentation(options, elricTransformOptions);
 }
 
 async function loadBabelOptionsAsync(
   cwd: Config.Path,
   filename: Config.Path,
   transformOptions: TransformOptions,
-  jestTransformOptions: JestTransformOptions,
+  elricTransformOptions: elricTransformOptions,
 ): Promise<TransformOptions> {
   const {options} = await loadBabelConfigAsync(cwd, filename, transformOptions);
 
-  return addIstanbulInstrumentation(options, jestTransformOptions);
+  return addIstanbulInstrumentation(options, elricTransformOptions);
 }
 
 const createTransformer: CreateTransformer = userOptions => {
@@ -155,7 +155,7 @@ const createTransformer: CreateTransformer = userOptions => {
   const options = {
     ...inputOptions,
     caller: {
-      name: 'babel-jest',
+      name: 'babel-elric',
       supportsDynamicImport: false,
       supportsExportNamespaceFrom: false,
       supportsStaticESM: false,
@@ -164,13 +164,13 @@ const createTransformer: CreateTransformer = userOptions => {
     },
     compact: false,
     plugins: inputOptions.plugins ?? [],
-    presets: (inputOptions.presets ?? []).concat(jestPresetPath),
+    presets: (inputOptions.presets ?? []).concat(elricPresetPath),
     sourceMaps: 'both',
   } as const;
 
   function mergeBabelTransformOptions(
     filename: Config.Path,
-    transformOptions: JestTransformOptions,
+    transformOptions: elricTransformOptions,
   ): TransformOptions {
     const {cwd} = transformOptions.config;
     // `cwd` first to allow incoming options to override it

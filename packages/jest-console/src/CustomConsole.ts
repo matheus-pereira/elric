@@ -9,7 +9,7 @@ import assert = require('assert');
 import {Console} from 'console';
 import {InspectOptions, format, formatWithOptions, inspect} from 'util';
 import chalk = require('chalk');
-import {clearLine, formatTime} from 'jest-util';
+import {clearLine, formatTime} from 'elric-util';
 import type {LogCounters, LogMessage, LogTimers, LogType} from './types';
 
 type Formatter = (type: LogType, message: LogMessage) => string;

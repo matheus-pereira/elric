@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import wrap from 'jest-snapshot-serializer-raw';
+import wrap from 'elric-snapshot-serializer-raw';
 import {extractSummary} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const extractMessage = (str: string) =>
   wrap(
@@ -24,7 +24,7 @@ const extractMessage = (str: string) =>
   );
 
 it('errors if describe returns a Promise', () => {
-  const result = runJest('declaration-errors', [
+  const result = runelric('declaration-errors', [
     'describeReturnPromise.test.js',
   ]);
 
@@ -33,7 +33,7 @@ it('errors if describe returns a Promise', () => {
 });
 
 it('errors if describe returns something', () => {
-  const result = runJest('declaration-errors', [
+  const result = runelric('declaration-errors', [
     'describeReturnSomething.test.js',
   ]);
 
@@ -42,7 +42,7 @@ it('errors if describe returns something', () => {
 });
 
 it('errors if describe throws', () => {
-  const result = runJest('declaration-errors', ['describeThrow.test.js']);
+  const result = runelric('declaration-errors', ['describeThrow.test.js']);
 
   expect(result.exitCode).toBe(1);
   expect(result.stderr).toContain('whoops');

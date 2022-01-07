@@ -7,9 +7,9 @@ test('implementation created by automock', () => {
   expect(utils.isAuthorized()).toBeUndefined();
 });
 
-test('implementation created by jest.createMockFromModule', () => {
-  const utils = jest.createMockFromModule('../utils').default;
-  utils.isAuthorized = jest.fn(secret => secret === 'not wizard');
+test('implementation created by elric.createMockFromModule', () => {
+  const utils = elric.createMockFromModule('../utils').default;
+  utils.isAuthorized = elric.fn(secret => secret === 'not wizard');
 
   expect(utils.authorize.mock).toBeTruthy();
   expect(utils.isAuthorized('not wizard')).toEqual(true);

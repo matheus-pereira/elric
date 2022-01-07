@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 const VERSION = require('../../package.json').version;
 
-// if the output here changes, update `getConfig` in e2e/runJest.ts
+// if the output here changes, update `getConfig` in e2e/runelric.ts
 export default function logDebugMessages(
   globalConfig: Config.GlobalConfig,
   configs: Array<Config.ProjectConfig> | Config.ProjectConfig,

@@ -4,7 +4,7 @@
 
 'use strict';
 
-jest.mock('../fetchCurrentUser.js');
+elric.mock('../fetchCurrentUser.js');
 
 it('displays a user after a click', () => {
   // Set up our document body

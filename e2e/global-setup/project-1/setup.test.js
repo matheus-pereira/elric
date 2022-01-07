@@ -10,7 +10,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
-const DIR = path.join(os.tmpdir(), 'jest-global-setup-project-1');
+const DIR = path.join(os.tmpdir(), 'elric-global-setup-project-1');
 
 test('should exist setup file', () => {
   const files = fs.readdirSync(DIR);

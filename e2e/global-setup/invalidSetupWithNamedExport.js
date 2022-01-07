@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-function invalidSetupWithNamedExport(jestConfig): void {
-  console.log(jestConfig.testPathPattern);
+function invalidSetupWithNamedExport(elricConfig): void {
+  console.log(elricConfig.testPathPattern);
 }
 
 export {invalidSetupWithNamedExport};

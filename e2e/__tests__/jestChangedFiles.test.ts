@@ -9,14 +9,14 @@ import {tmpdir} from 'os';
 import * as path from 'path';
 import semver = require('semver');
 import slash = require('slash');
-import {findRepos, getChangedFilesForRoots} from 'jest-changed-files';
+import {findRepos, getChangedFilesForRoots} from 'elric-changed-files';
 import {cleanup, run, testIfHg, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
-const DIR = path.resolve(tmpdir(), 'jest-changed-files-test-dir');
+const DIR = path.resolve(tmpdir(), 'elric-changed-files-test-dir');
 
-const GIT = 'git -c user.name=jest_test -c user.email=jest_test@test.com';
-const HG = 'hg --config ui.username=jest_test';
+const GIT = 'git -c user.name=elric_test -c user.email=elric_test@test.com';
+const HG = 'hg --config ui.username=elric_test';
 
 const gitVersionSupportsInitialBranch = (() => {
   const {stdout} = run(`${GIT} --version`);
@@ -82,10 +82,10 @@ testIfHg('gets hg SCM roots and dedupes them', async () => {
   // os tmp directory.
   expect(hgRepos).toHaveLength(2);
   expect(slash(hgRepos[0])).toMatch(
-    /\/jest-changed-files-test-dir\/first-repo\/?$/,
+    /\/elric-changed-files-test-dir\/first-repo\/?$/,
   );
   expect(slash(hgRepos[1])).toMatch(
-    /\/jest-changed-files-test-dir\/second-repo\/?$/,
+    /\/elric-changed-files-test-dir\/second-repo\/?$/,
   );
 });
 
@@ -120,10 +120,10 @@ test('gets git SCM roots and dedupes them', async () => {
   // os tmp directory.
   expect(gitRepos).toHaveLength(2);
   expect(slash(gitRepos[0])).toMatch(
-    /\/jest-changed-files-test-dir\/first-repo\/?$/,
+    /\/elric-changed-files-test-dir\/first-repo\/?$/,
   );
   expect(slash(gitRepos[1])).toMatch(
-    /\/jest-changed-files-test-dir\/second-repo\/?$/,
+    /\/elric-changed-files-test-dir\/second-repo\/?$/,
   );
 });
 
@@ -157,10 +157,10 @@ testIfHg('gets mixed git and hg SCM roots and dedupes them', async () => {
   expect(gitRepos).toHaveLength(1);
   expect(hgRepos).toHaveLength(1);
   expect(slash(gitRepos[0])).toMatch(
-    /\/jest-changed-files-test-dir\/first-repo\/?$/,
+    /\/elric-changed-files-test-dir\/first-repo\/?$/,
   );
   expect(slash(hgRepos[0])).toMatch(
-    /\/jest-changed-files-test-dir\/second-repo\/?$/,
+    /\/elric-changed-files-test-dir\/second-repo\/?$/,
   );
 });
 
@@ -306,18 +306,18 @@ it('does not find changes in files with no diff, for git', async () => {
   run(`${GIT} add file1.txt`, DIR);
   run(`${GIT} commit --no-gpg-sign -m "initial"`, DIR);
 
-  // check out a new branch, jestChangedFilesSpecBase, to use later in diff
-  run(`${GIT} checkout -b jestChangedFilesSpecBase`, DIR);
+  // check out a new branch, elricChangedFilesSpecBase, to use later in diff
+  run(`${GIT} checkout -b elricChangedFilesSpecBase`, DIR);
 
-  // check out second branch, jestChangedFilesSpecMod, modify file & commit
-  run(`${GIT} checkout -b jestChangedFilesSpecMod`, DIR);
+  // check out second branch, elricChangedFilesSpecMod, modify file & commit
+  run(`${GIT} checkout -b elricChangedFilesSpecMod`, DIR);
   writeFiles(DIR, {
     'file1.txt': 'modified file1',
   });
   run(`${GIT} add file1.txt`, DIR);
   run(`${GIT} commit --no-gpg-sign -m "modified"`, DIR);
 
-  // still on jestChangedFilesSpecMod branch, "revert" back to empty file and commit
+  // still on elricChangedFilesSpecMod branch, "revert" back to empty file and commit
   writeFiles(DIR, {
     'file1.txt': '',
   });
@@ -328,11 +328,11 @@ it('does not find changes in files with no diff, for git', async () => {
   const {changedFiles: files} = await getChangedFilesForRoots(roots, {});
   expect(Array.from(files)).toEqual([]);
 
-  // check that in diff from `jestChangedFilesSpecBase` branch, no changed files are reported
+  // check that in diff from `elricChangedFilesSpecBase` branch, no changed files are reported
   const {changedFiles: filesExplicitBaseBranch} = await getChangedFilesForRoots(
     roots,
     {
-      changedSince: 'jestChangedFilesSpecBase',
+      changedSince: 'elricChangedFilesSpecBase',
     },
   );
   expect(Array.from(filesExplicitBaseBranch)).toEqual([]);
@@ -350,7 +350,7 @@ test('handles a bad revision for "changedSince", for git', async () => {
   run(`${GIT} add .`, DIR);
   run(`${GIT} commit --no-gpg-sign -m "first"`, DIR);
 
-  const {exitCode, stderr} = runJest(DIR, ['--changedSince=^blablabla']);
+  const {exitCode, stderr} = runelric(DIR, ['--changedSince=^blablabla']);
 
   expect(exitCode).toBe(1);
   expect(stderr).toContain('Test suite failed to run');
@@ -503,7 +503,7 @@ testIfHg('handles a bad revision for "changedSince", for hg', async () => {
   run(`${HG} add .`, DIR);
   run(`${HG} commit -m "first"`, DIR);
 
-  const {exitCode, stderr} = runJest(DIR, ['--changedSince=blablabla']);
+  const {exitCode, stderr} = runelric(DIR, ['--changedSince=blablabla']);
 
   expect(exitCode).toBe(1);
   expect(stderr).toContain('Test suite failed to run');

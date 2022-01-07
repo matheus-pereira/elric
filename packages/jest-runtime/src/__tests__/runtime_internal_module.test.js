@@ -14,7 +14,7 @@ let createRuntime;
 
 describe('Runtime', () => {
   beforeEach(() => {
-    jest.resetModules();
+    elric.resetModules();
 
     createRuntime = require('createRuntime');
   });

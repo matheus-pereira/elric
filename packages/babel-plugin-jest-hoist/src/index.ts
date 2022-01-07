@@ -24,14 +24,14 @@ import {
   variableDeclaration,
 } from '@babel/types';
 
-const JEST_GLOBAL_NAME = 'jest';
-const JEST_GLOBALS_MODULE_NAME = '@jest/globals';
-const JEST_GLOBALS_MODULE_JEST_EXPORT_NAME = 'jest';
+const elric_GLOBAL_NAME = 'elric';
+const elric_GLOBALS_MODULE_NAME = '@elric/globals';
+const elric_GLOBALS_MODULE_elric_EXPORT_NAME = 'elric';
 
 const hoistedVariables = new WeakSet<VariableDeclarator>();
 
-// We allow `jest`, `expect`, `require`, all default Node.js globals and all
-// ES2015 built-ins to be used inside of a `jest.mock` factory.
+// We allow `elric`, `expect`, `require`, all default Node.js globals and all
+// ES2015 built-ins to be used inside of a `elric.mock` factory.
 // We also allow variables prefixed with `mock` as an escape-hatch.
 const ALLOWED_IDENTIFIERS = new Set<string>(
   [
@@ -82,7 +82,7 @@ const ALLOWED_IDENTIFIERS = new Set<string>(
     'console',
     'expect',
     'isNaN',
-    'jest',
+    'elric',
     'parseFloat',
     'parseInt',
     'exports',
@@ -118,7 +118,7 @@ FUNCTIONS.mock = args => {
 
     if (!moduleFactory.isFunction()) {
       throw moduleFactory.buildCodeFrameError(
-        'The second argument of `jest.mock` must be an inline function.\n',
+        'The second argument of `elric.mock` must be an inline function.\n',
         TypeError,
       );
     }
@@ -164,7 +164,7 @@ FUNCTIONS.mock = args => {
 
         if (!isAllowedIdentifier) {
           throw id.buildCodeFrameError(
-            'The module factory of `jest.mock()` is not allowed to ' +
+            'The module factory of `elric.mock()` is not allowed to ' +
               'reference any out-of-scope variables.\n' +
               'Invalid variable access: ' +
               name +
@@ -191,41 +191,41 @@ FUNCTIONS.deepUnmock = args => args.length === 1 && args[0].isStringLiteral();
 FUNCTIONS.disableAutomock = FUNCTIONS.enableAutomock = args =>
   args.length === 0;
 
-const createJestObjectGetter = statement`
+const createelricObjectGetter = statement`
 function GETTER_NAME() {
-  const { JEST_GLOBALS_MODULE_JEST_EXPORT_NAME } = require("JEST_GLOBALS_MODULE_NAME");
-  GETTER_NAME = () => JEST_GLOBALS_MODULE_JEST_EXPORT_NAME;
-  return JEST_GLOBALS_MODULE_JEST_EXPORT_NAME;
+  const { elric_GLOBALS_MODULE_elric_EXPORT_NAME } = require("elric_GLOBALS_MODULE_NAME");
+  GETTER_NAME = () => elric_GLOBALS_MODULE_elric_EXPORT_NAME;
+  return elric_GLOBALS_MODULE_elric_EXPORT_NAME;
 }
 `;
 
-const isJestObject = (expression: NodePath<Expression>): boolean => {
+const iselricObject = (expression: NodePath<Expression>): boolean => {
   // global
   if (
     expression.isIdentifier() &&
-    expression.node.name === JEST_GLOBAL_NAME &&
-    !expression.scope.hasBinding(JEST_GLOBAL_NAME)
+    expression.node.name === elric_GLOBAL_NAME &&
+    !expression.scope.hasBinding(elric_GLOBAL_NAME)
   ) {
     return true;
   }
-  // import { jest } from '@jest/globals'
+  // import { elric } from '@elric/globals'
   if (
     expression.referencesImport(
-      JEST_GLOBALS_MODULE_NAME,
-      JEST_GLOBALS_MODULE_JEST_EXPORT_NAME,
+      elric_GLOBALS_MODULE_NAME,
+      elric_GLOBALS_MODULE_elric_EXPORT_NAME,
     )
   ) {
     return true;
   }
-  // import * as JestGlobals from '@jest/globals'
+  // import * as elricGlobals from '@elric/globals'
   if (
     expression.isMemberExpression() &&
     !expression.node.computed &&
     expression
       .get<'object'>('object')
-      .referencesImport(JEST_GLOBALS_MODULE_NAME, '*') &&
+      .referencesImport(elric_GLOBALS_MODULE_NAME, '*') &&
     expression.node.property.type === 'Identifier' &&
-    expression.node.property.name === JEST_GLOBALS_MODULE_JEST_EXPORT_NAME
+    expression.node.property.name === elric_GLOBALS_MODULE_elric_EXPORT_NAME
   ) {
     return true;
   }
@@ -233,7 +233,7 @@ const isJestObject = (expression: NodePath<Expression>): boolean => {
   return false;
 };
 
-const extractJestObjExprIfHoistable = <T extends Node>(
+const extractelricObjExprIfHoistable = <T extends Node>(
   expr: NodePath<T>,
 ): NodePath<Expression> | null => {
   if (!expr.isCallExpression()) {
@@ -251,55 +251,55 @@ const extractJestObjExprIfHoistable = <T extends Node>(
   const property = callee.get<'property'>('property') as NodePath<Identifier>;
   const propertyName = property.node.name;
 
-  const jestObjExpr = isJestObject(object)
+  const elricObjExpr = iselricObject(object)
     ? object
-    : // The Jest object could be returned from another call since the functions are all chainable.
-      extractJestObjExprIfHoistable(object);
-  if (!jestObjExpr) {
+    : // The elric object could be returned from another call since the functions are all chainable.
+      extractelricObjExprIfHoistable(object);
+  if (!elricObjExpr) {
     return null;
   }
 
   // Important: Call the function check last
   // It might throw an error to display to the user,
-  // which should only happen if we're already sure it's a call on the Jest object.
+  // which should only happen if we're already sure it's a call on the elric object.
   const functionLooksHoistable = FUNCTIONS[propertyName]?.(args);
 
-  return functionLooksHoistable ? jestObjExpr : null;
+  return functionLooksHoistable ? elricObjExpr : null;
 };
 
 /* eslint-disable sort-keys */
 export default (): PluginObj<{
-  declareJestObjGetterIdentifier: () => Identifier;
-  jestObjGetterIdentifier?: Identifier;
+  declareelricObjGetterIdentifier: () => Identifier;
+  elricObjGetterIdentifier?: Identifier;
 }> => ({
   pre({path: program}) {
-    this.declareJestObjGetterIdentifier = () => {
-      if (this.jestObjGetterIdentifier) {
-        return this.jestObjGetterIdentifier;
+    this.declareelricObjGetterIdentifier = () => {
+      if (this.elricObjGetterIdentifier) {
+        return this.elricObjGetterIdentifier;
       }
 
-      this.jestObjGetterIdentifier =
-        program.scope.generateUidIdentifier('getJestObj');
+      this.elricObjGetterIdentifier =
+        program.scope.generateUidIdentifier('getelricObj');
 
       program.unshiftContainer('body', [
-        createJestObjectGetter({
-          GETTER_NAME: this.jestObjGetterIdentifier.name,
-          JEST_GLOBALS_MODULE_JEST_EXPORT_NAME,
-          JEST_GLOBALS_MODULE_NAME,
+        createelricObjectGetter({
+          GETTER_NAME: this.elricObjGetterIdentifier.name,
+          elric_GLOBALS_MODULE_elric_EXPORT_NAME,
+          elric_GLOBALS_MODULE_NAME,
         }),
       ]);
 
-      return this.jestObjGetterIdentifier;
+      return this.elricObjGetterIdentifier;
     };
   },
   visitor: {
     ExpressionStatement(exprStmt) {
-      const jestObjExpr = extractJestObjExprIfHoistable(
+      const elricObjExpr = extractelricObjExprIfHoistable(
         exprStmt.get('expression'),
       );
-      if (jestObjExpr) {
-        jestObjExpr.replaceWith(
-          callExpression(this.declareJestObjGetterIdentifier(), []),
+      if (elricObjExpr) {
+        elricObjExpr.replaceWith(
+          callExpression(this.declareelricObjGetterIdentifier(), []),
         );
       }
     },
@@ -332,7 +332,7 @@ export default (): PluginObj<{
         } = callExpr;
         if (
           isIdentifier(callee) &&
-          callee.name === self.jestObjGetterIdentifier?.name
+          callee.name === self.elricObjGetterIdentifier?.name
         ) {
           const mockStmt = callExpr.getStatementParent();
 

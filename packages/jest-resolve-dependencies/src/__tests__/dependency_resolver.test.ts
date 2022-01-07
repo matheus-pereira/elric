@@ -7,32 +7,32 @@
 
 import {tmpdir} from 'os';
 import * as path from 'path';
-import {makeProjectConfig} from '@jest/test-utils';
-import type {Config} from '@jest/types';
-import type Resolver from 'jest-resolve';
-import {buildSnapshotResolver} from 'jest-snapshot';
+import {makeProjectConfig} from '@elric/test-utils';
+import type {Config} from '@elric/types';
+import type Resolver from 'elric-resolve';
+import {buildSnapshotResolver} from 'elric-snapshot';
 import {DependencyResolver} from '../index';
 
 const maxWorkers = 1;
 let dependencyResolver: DependencyResolver;
 let runtimeContextResolver: Resolver;
-let Runtime: typeof import('jest-runtime');
+let Runtime: typeof import('elric-runtime');
 let config: Config.ProjectConfig;
-const cases: Record<string, jest.Mock> = {
-  fancyCondition: jest.fn(path => path.length > 10),
-  testRegex: jest.fn(path => /.test.js$/.test(path)),
+const cases: Record<string, elric.Mock> = {
+  fancyCondition: elric.fn(path => path.length > 10),
+  testRegex: elric.fn(path => /.test.js$/.test(path)),
 };
 const filter = (path: Config.Path) =>
   Object.keys(cases).every(key => cases[key](path));
 
 beforeEach(async () => {
-  Runtime = require('jest-runtime').default;
+  Runtime = require('elric-runtime').default;
   config = makeProjectConfig({
-    cacheDirectory: path.resolve(tmpdir(), 'jest-resolve-dependencies-test'),
+    cacheDirectory: path.resolve(tmpdir(), 'elric-resolve-dependencies-test'),
     moduleDirectories: ['node_modules'],
     moduleNameMapper: [['^\\$asdf/(.*)$', '<rootDir>/$1']],
     rootDir: '.',
-    roots: ['./packages/jest-resolve-dependencies'],
+    roots: ['./packages/elric-resolve-dependencies'],
   });
   const runtimeContext = await Runtime.createContext(config, {
     maxWorkers,
@@ -57,8 +57,8 @@ test('resolves dependencies for existing path', () => {
     path.resolve(__dirname, '__fixtures__', 'file.js'),
   );
   expect(resolved).toEqual([
-    expect.stringContaining('jest-resolve-dependencies'),
-    expect.stringContaining('jest-regex-util'),
+    expect.stringContaining('elric-resolve-dependencies'),
+    expect.stringContaining('elric-regex-util'),
   ]);
 });
 
@@ -137,10 +137,10 @@ test('resolves inverse dependencies from available snapshot', () => {
 });
 
 test('resolves dependencies correctly when dependency resolution fails', () => {
-  jest.spyOn(runtimeContextResolver, 'resolveModule').mockImplementation(() => {
+  elric.spyOn(runtimeContextResolver, 'resolveModule').mockImplementation(() => {
     throw new Error('resolveModule has failed');
   });
-  jest.spyOn(runtimeContextResolver, 'getMockModule').mockImplementation(() => {
+  elric.spyOn(runtimeContextResolver, 'getMockModule').mockImplementation(() => {
     throw new Error('getMockModule has failed');
   });
 
@@ -152,7 +152,7 @@ test('resolves dependencies correctly when dependency resolution fails', () => {
 });
 
 test('resolves dependencies correctly when mock dependency resolution fails', () => {
-  jest.spyOn(runtimeContextResolver, 'getMockModule').mockImplementation(() => {
+  elric.spyOn(runtimeContextResolver, 'getMockModule').mockImplementation(() => {
     throw new Error('getMockModule has failed');
   });
 

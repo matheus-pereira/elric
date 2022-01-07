@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 
 export type ProjectPackageJson = {
-  jest?: Partial<Config.InitialOptions>;
+  elric?: Partial<Config.InitialOptions>;
   scripts?: Record<string, string>;
   type?: 'commonjs' | 'module';
 };

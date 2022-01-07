@@ -6,9 +6,9 @@
  */
 
 import * as util from 'util';
-import type {Test} from '@jest/test-result';
-import {createScriptTransformer} from '@jest/transform';
-import type {Config} from '@jest/types';
+import type {Test} from '@elric/test-result';
+import {createScriptTransformer} from '@elric/transform';
+import type {Config} from '@elric/types';
 import prettyFormat from 'pretty-format';
 
 export default async ({
@@ -60,13 +60,13 @@ export default async ({
         );
       } catch (error: unknown) {
         if (util.types.isNativeError(error)) {
-          error.message = `Jest: Got error running ${moduleName} - ${modulePath}, reason: ${error.message}`;
+          error.message = `elric: Got error running ${moduleName} - ${modulePath}, reason: ${error.message}`;
 
           throw error;
         }
 
         throw new Error(
-          `Jest: Got error running ${moduleName} - ${modulePath}, reason: ${prettyFormat(
+          `elric: Got error running ${moduleName} - ${modulePath}, reason: ${prettyFormat(
             error,
             {maxDepth: 3},
           )}`,

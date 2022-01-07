@@ -7,6 +7,6 @@
 
 import nullReturningFunc from '../only-file-to-transform.js';
 
-it('strips flowtypes using babel-jest', () => {
+it('strips flowtypes using babel-elric', () => {
   expect(nullReturningFunc()).toBe(null);
 });

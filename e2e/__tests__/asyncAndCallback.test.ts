@@ -5,15 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import wrap from 'jest-snapshot-serializer-raw';
-import {skipSuiteOnJasmine} from '@jest/test-utils';
+import wrap from 'elric-snapshot-serializer-raw';
+import {skipSuiteOnJasmine} from '@elric/test-utils';
 import {extractSummary} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 skipSuiteOnJasmine();
 
 test('errors when a test both returns a promise and takes a callback', () => {
-  const result = runJest('promise-and-callback');
+  const result = runelric('promise-and-callback');
 
   const {rest} = extractSummary(result.stderr);
   expect(wrap(rest)).toMatchSnapshot();

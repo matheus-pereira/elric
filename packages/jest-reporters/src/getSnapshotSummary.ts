@@ -6,9 +6,9 @@
  */
 
 import chalk = require('chalk');
-import type {SnapshotSummary} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import {pluralize} from 'jest-util';
+import type {SnapshotSummary} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import {pluralize} from 'elric-util';
 import {formatTestPath} from './utils';
 
 const ARROW = ' \u203A ';

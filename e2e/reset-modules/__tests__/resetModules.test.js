@@ -15,6 +15,6 @@ global.testObject = new Proxy(
     },
   },
 );
-test('jest.resetModules should not error when _isMockFunction is defined but not boolean', () => {
-  jest.resetModules();
+test('elric.resetModules should not error when _isMockFunction is defined but not boolean', () => {
+  elric.resetModules();
 });

@@ -9,10 +9,10 @@
 
 const fs = require('fs');
 const os = require('os');
-const JSDOMEnvironment = require('jest-environment-jsdom');
-const {createDirectory} = require('jest-util');
+const JSDOMEnvironment = require('elric-environment-jsdom');
+const {createDirectory} = require('elric-util');
 
-const DIR = os.tmpdir() + '/jest-test-environment';
+const DIR = os.tmpdir() + '/elric-test-environment';
 
 class TestEnvironment extends JSDOMEnvironment {
   constructor(config, context) {

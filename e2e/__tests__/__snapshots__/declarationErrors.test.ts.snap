@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`errors if describe returns a Promise 1`] = `
     Returning a Promise from "describe" is not supported. Tests must be defined synchronously.

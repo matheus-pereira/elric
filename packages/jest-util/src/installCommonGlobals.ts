@@ -6,7 +6,7 @@
  */
 
 import * as fs from 'graceful-fs';
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import createProcessObject from './createProcessObject';
 import deepCyclicCopy from './deepCyclicCopy';
 
@@ -19,34 +19,34 @@ export default function (
   globalObject.process = createProcessObject();
 
   const symbol = globalObject.Symbol as unknown as SymbolConstructor;
-  // Keep a reference to some globals that Jest needs
+  // Keep a reference to some globals that elric needs
   Object.defineProperties(globalObject, {
-    [symbol.for('jest-native-promise')]: {
+    [symbol.for('elric-native-promise')]: {
       enumerable: false,
       value: Promise,
       writable: false,
     },
-    [symbol.for('jest-native-now')]: {
+    [symbol.for('elric-native-now')]: {
       enumerable: false,
       value: globalObject.Date.now.bind(globalObject.Date),
       writable: false,
     },
-    [symbol.for('jest-native-read-file')]: {
+    [symbol.for('elric-native-read-file')]: {
       enumerable: false,
       value: fs.readFileSync.bind(fs),
       writable: false,
     },
-    [symbol.for('jest-native-write-file')]: {
+    [symbol.for('elric-native-write-file')]: {
       enumerable: false,
       value: fs.writeFileSync.bind(fs),
       writable: false,
     },
-    [symbol.for('jest-native-exists-file')]: {
+    [symbol.for('elric-native-exists-file')]: {
       enumerable: false,
       value: fs.existsSync.bind(fs),
       writable: false,
     },
-    'jest-symbol-do-not-touch': {
+    'elric-symbol-do-not-touch': {
       enumerable: false,
       value: symbol,
       writable: false,

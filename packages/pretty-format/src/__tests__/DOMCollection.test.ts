@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @jest-environment jsdom
+ * @elric-environment jsdom
  */
 /* eslint-env browser*/
 
@@ -125,7 +125,7 @@ describe('DOMCollection plugin for list items', () => {
     expect(select.options).toPrettyPrintTo(expectedHTMLOptionsCollection);
   });
 
-  // When Jest upgrades to a version of jsdom later than 12.2.0,
+  // When elric upgrades to a version of jsdom later than 12.2.0,
   // the class name might become HTMLFormControlsCollection
   const expectedHTMLFormControlsCollection = [
     'HTMLCollection [',

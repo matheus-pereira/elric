@@ -8,7 +8,7 @@
 import * as path from 'path';
 import * as fs from 'graceful-fs';
 import {writeFiles} from '../Utils';
-import {json as runWithJson} from '../runJest';
+import {json as runWithJson} from '../runelric';
 
 const DIR = path.resolve(__dirname, '../setup-files-after-env-config');
 
@@ -24,7 +24,7 @@ afterAll(() => {
 describe('setupFilesAfterEnv', () => {
   it('requires multiple setup files before each file in the suite', () => {
     const pkgJson = {
-      jest: {
+      elric: {
         setupFilesAfterEnv: ['./setup1.js', './setup2.js'],
       },
     };
@@ -46,7 +46,7 @@ describe('setupFilesAfterEnv', () => {
 
   it('requires setup files *after* the test runners are required', () => {
     const pkgJson = {
-      jest: {
+      elric: {
         setupFilesAfterEnv: ['./setupHooksIntoRunner.js'],
       },
     };

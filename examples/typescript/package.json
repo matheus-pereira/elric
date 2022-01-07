@@ -12,14 +12,14 @@
     "@babel/preset-env": "*",
     "@babel/preset-react": "*",
     "@babel/preset-typescript": "*",
-    "@types/jest": "*",
-    "babel-jest": "*",
-    "jest": "*"
+    "@types/elric": "*",
+    "babel-elric": "*",
+    "elric": "*"
   },
   "scripts": {
-    "test": "jest"
+    "test": "elric"
   },
-  "jest": {
+  "elric": {
     "testEnvironment": "jsdom"
   }
 }

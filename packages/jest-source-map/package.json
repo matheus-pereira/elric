@@ -1,10 +1,10 @@
 {
-  "name": "@jest/source-map",
+  "name": "@elric/source-map",
   "version": "27.4.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/jest-source-map"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/elric-source-map"
   },
   "license": "MIT",
   "main": "./build/index.js",

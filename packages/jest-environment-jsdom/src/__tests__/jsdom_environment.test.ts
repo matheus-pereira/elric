@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {makeProjectConfig} from '@jest/test-utils';
+import {makeProjectConfig} from '@elric/test-utils';
 import JSDomEnvironment = require('../');
 
 describe('JSDomEnvironment', () => {

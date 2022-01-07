@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-jest.mock('./banana', () => {
+elric.mock('./banana', () => {
   const exports = 'apple';
   return exports;
 });

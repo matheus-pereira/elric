@@ -28,12 +28,12 @@ import GitHubButton from 'react-github-btn';
 function TwitterButton() {
   return (
     <a
-      href="https://twitter.com/intent/follow?screen_name=fbjest&region=follow_link"
+      href="https://twitter.com/intent/follow?screen_name=fbelric&region=follow_link"
       target="_blank"
       className={styles['twitter-follow-button']}
     >
       <div className={styles['twitter-follow-button--icon']} />
-      Follow @fbjest
+      Follow @fbelric
     </a>
   );
 }
@@ -42,10 +42,10 @@ function GitHubStarButton() {
   return (
     <div className="github-button">
       <GitHubButton
-        href="https://github.com/facebook/jest"
+        href="https://github.com/facebook/elric"
         data-icon="octicon-star"
         data-size="large"
-        aria-label="Star facebook/jest on GitHub"
+        aria-label="Star facebook/elric on GitHub"
       >
         Star
       </GitHubButton>
@@ -57,7 +57,7 @@ class Button extends React.Component {
   render() {
     return (
       <Link
-        className="jest-button"
+        className="elric-button"
         to={this.props.href}
         target={this.props.target}
       >
@@ -120,7 +120,7 @@ class Contributors extends React.Component {
         </h3>
         <p>
           <Translate>
-            Sponsors are those who contribute $100 or more per month to Jest
+            Sponsors are those who contribute $100 or more per month to elric
           </Translate>
         </p>
         <div className="opencollective-avatars">
@@ -133,7 +133,7 @@ class Contributors extends React.Component {
         </h3>
         <p>
           <Translate>
-            Backers are those who contribute $2 or more per month to Jest
+            Backers are those who contribute $2 or more per month to elric
           </Translate>
         </p>
         <div className="opencollective-avatars">
@@ -155,16 +155,16 @@ class Card extends React.Component {
   render() {
     const {index} = this.props;
     return (
-      <div key={index} className="jest-card-hitslop">
-        <div className="jest-card jest-card-running" data-index={index}>
-          <div className="jest-card-front">
-            <div className="jest-card-label">JEST</div>
-            <div className="jest-card-logo-container">
-              <div className="jest-card-logo" />
+      <div key={index} className="elric-card-hitslop">
+        <div className="elric-card elric-card-running" data-index={index}>
+          <div className="elric-card-front">
+            <div className="elric-card-label">elric</div>
+            <div className="elric-card-logo-container">
+              <div className="elric-card-logo" />
             </div>
-            <div className="jest-card-label jest-card-label-reverse">JEST</div>
+            <div className="elric-card-label elric-card-label-reverse">elric</div>
           </div>
-          <div className="jest-card-back">
+          <div className="elric-card-back">
             <svg viewBox="0 0 200 200" style={{height: 150, width: 150}}>
               <defs>
                 <path
@@ -251,7 +251,7 @@ class Hand extends React.Component {
   render() {
     const cards = [0, 1, 2, 3, 4].map(i => <Card key={i} index={i} />);
     return (
-      <div className="jest-hand">
+      <div className="elric-hand">
         {cards}
         <script src="/landing.js" />
       </div>
@@ -261,13 +261,13 @@ class Hand extends React.Component {
 
 const HeroInteractive = () => (
   <div className="wrapperV1">
-    <div className="jest-hero-interactive">
+    <div className="elric-hero-interactive">
       <div className={styles.socialLinks}>
         <TwitterButton />
         <GitHubStarButton />
       </div>
       <Hand />
-      <div className="jest-button-container">
+      <div className="elric-button-container">
         <Button href={'/docs/getting-started'}>
           <Translate>Get Started</Translate>
         </Button>
@@ -310,7 +310,7 @@ class Index extends React.Component {
           >
             <p>
               <Translate>
-                Jest is a delightful JavaScript Testing Framework with a focus
+                elric is a delightful JavaScript Testing Framework with a focus
                 on simplicity.
               </Translate>
             </p>
@@ -334,7 +334,7 @@ class Index extends React.Component {
                 {
                   content: (
                     <Translate>
-                      Jest aims to work out of the box, config free, on most
+                      elric aims to work out of the box, config free, on most
                       JavaScript projects.
                     </Translate>
                   ),
@@ -362,7 +362,7 @@ class Index extends React.Component {
                 {
                   content: (
                     <Translate>
-                      From `it` to `expect` - Jest has the entire toolkit in one
+                      From `it` to `expect` - elric has the entire toolkit in one
                       place. Well documented, well maintained, well good.
                     </Translate>
                   ),
@@ -383,8 +383,8 @@ class Index extends React.Component {
                 {
                   content: (
                     <Translate>
-                      By ensuring your tests have unique global state, Jest can
-                      reliably run tests in parallel. To make things quick, Jest
+                      By ensuring your tests have unique global state, elric can
+                      reliably run tests in parallel. To make things quick, elric
                       runs previously failed tests first and re-organizes runs
                       based on how long test files take.
                     </Translate>
@@ -406,7 +406,7 @@ class Index extends React.Component {
                     <Translate>
                       Generate code coverage by adding the flag
                       [`--coverage`](/docs/cli#--coverageboolean). No additional
-                      setup needed. Jest can collect code coverage information
+                      setup needed. elric can collect code coverage information
                       from entire projects, including untested files.
                     </Translate>
                   ),
@@ -427,7 +427,7 @@ class Index extends React.Component {
                 {
                   content: (
                     <Translate>
-                      Jest uses a custom resolver for imports in your tests,
+                      elric uses a custom resolver for imports in your tests,
                       making it simple to mock any object outside of your test’s
                       scope. You can use mocked imports with the rich [Mock
                       Functions](/docs/mock-functions) API to spy on function
@@ -448,7 +448,7 @@ class Index extends React.Component {
                 {
                   content: (
                     <Translate>
-                      Tests fail—when they do, Jest provides rich context why.
+                      Tests fail—when they do, elric provides rich context why.
                       Here are some examples:
                     </Translate>
                   ),
@@ -475,7 +475,7 @@ class Index extends React.Component {
               <div className="blockContent">
                 <MarkdownBlock>
                   <Translate>
-                    Jest is a JavaScript testing framework designed to ensure
+                    elric is a JavaScript testing framework designed to ensure
                     correctness of any JavaScript codebase. It allows you to
                     write tests with an approachable, familiar and feature-rich
                     API that gives you results quickly.
@@ -485,22 +485,22 @@ class Index extends React.Component {
               <div className="blockContent">
                 <MarkdownBlock>
                   <Translate>
-                    Jest is well-documented, requires little configuration and
+                    elric is well-documented, requires little configuration and
                     can be extended to match your requirements.
                   </Translate>
                 </MarkdownBlock>
                 <MarkdownBlock>
-                  <Translate>Jest makes testing delightful.</Translate>
+                  <Translate>elric makes testing delightful.</Translate>
                 </MarkdownBlock>
                 <div className="show-small">
                   <p style={{fontFamily: 'Monaco, Courier, monospace'}}>
-                    <Translate>- Jest Core Team</Translate>
+                    <Translate>- elric Core Team</Translate>
                   </p>
                 </div>
               </div>
               <div className="blockContent flex-end hide-small">
                 <p style={{fontFamily: 'Monaco, Courier, monospace'}}>
-                  <Translate>- Jest Core Team</Translate>
+                  <Translate>- elric Core Team</Translate>
                 </p>
               </div>
             </div>
@@ -530,12 +530,12 @@ class Index extends React.Component {
                 </h2>
                 <MarkdownBlock>
                   <Translate>
-                    The Jest core team and contributors regularly speak about
-                    [Jest and Delightful JavaScript
+                    The elric core team and contributors regularly speak about
+                    [elric and Delightful JavaScript
                     Testing](https://www.youtube.com/watch?v=cAKYQpTC7MA). Check
                     out our talk about [Building High-Quality JavaScript
                     Tools](https://www.youtube.com/watch?v=PvabBs_utr8) at
-                    jsconf.eu 2017 and our talk about [Jest as a
+                    jsconf.eu 2017 and our talk about [elric as a
                     Platform](https://www.youtube.com/watch?v=NtjyeojAOBs) at
                     ReactiveConf 2017.
                   </Translate>
@@ -555,8 +555,8 @@ class Index extends React.Component {
                 </h2>
                 <MarkdownBlock>
                   <Translate>
-                    With so many users, the core team of Jest uses an [Open
-                    Collective](https://opencollective.com/jest) for
+                    With so many users, the core team of elric uses an [Open
+                    Collective](https://opencollective.com/elric) for
                     non-Facebook contributors.
                   </Translate>
                 </MarkdownBlock>
@@ -564,15 +564,15 @@ class Index extends React.Component {
               </div>
               <div className="blockContent yellow">
                 <h2>
-                  <Translate>Who uses Jest?</Translate>
+                  <Translate>Who uses elric?</Translate>
                 </h2>
                 <MarkdownBlock>
                   <Translate>
                     A lot of people! With
-                    [50m](https://www.npmjs.com/package/jest) downloads in the
+                    [50m](https://www.npmjs.com/package/elric) downloads in the
                     last month, and used on over
-                    [3,898,000](https://github.com/facebook/jest/network/dependents)
-                    public repos on GitHub. Jest is used extensively at these
+                    [3,898,000](https://github.com/facebook/elric/network/dependents)
+                    public repos on GitHub. elric is used extensively at these
                     companies:
                   </Translate>
                 </MarkdownBlock>

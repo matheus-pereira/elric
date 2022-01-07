@@ -5,11 +5,11 @@
     "rootDir": "src"
   },
   "references": [
-    {"path": "../jest-environment"},
-    {"path": "../jest-fake-timers"},
-    {"path": "../jest-mock"},
-    {"path": "../jest-types"},
-    {"path": "../jest-util"},
+    {"path": "../elric-environment"},
+    {"path": "../elric-fake-timers"},
+    {"path": "../elric-mock"},
+    {"path": "../elric-types"},
+    {"path": "../elric-util"},
     {"path": "../test-utils"}
   ]
 }

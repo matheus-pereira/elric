@@ -7,7 +7,7 @@
  */
 
 import chalk = require('chalk');
-import type {Global} from '@jest/types';
+import type {Global} from '@elric/types';
 import {format as pretty} from 'pretty-format';
 
 type TemplateData = Global.TemplateData;

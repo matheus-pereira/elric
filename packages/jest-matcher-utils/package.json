@@ -1,11 +1,11 @@
 {
-  "name": "jest-matcher-utils",
+  "name": "elric-matcher-utils",
   "description": "A set of utility functions for expect and related packages",
   "version": "27.4.6",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/jest-matcher-utils"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/elric-matcher-utils"
   },
   "engines": {
     "node": "^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0"
@@ -22,12 +22,12 @@
   },
   "dependencies": {
     "chalk": "^4.0.0",
-    "jest-diff": "^27.4.6",
-    "jest-get-type": "^27.4.0",
+    "elric-diff": "^27.4.6",
+    "elric-get-type": "^27.4.0",
     "pretty-format": "^27.4.6"
   },
   "devDependencies": {
-    "@jest/test-utils": "^27.4.6",
+    "@elric/test-utils": "^27.4.6",
     "@types/node": "*"
   },
   "publishConfig": {

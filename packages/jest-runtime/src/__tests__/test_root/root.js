@@ -21,5 +21,5 @@ const lazyRequire = () => {
   require('dog.png');
 };
 
-exports.jest = jest;
+exports.elric = elric;
 exports.lazyRequire = lazyRequire;

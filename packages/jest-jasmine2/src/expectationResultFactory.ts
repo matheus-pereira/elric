@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {FailedAssertion} from '@jest/test-result';
+import type {FailedAssertion} from '@elric/test-result';
 import {format as prettyFormat} from 'pretty-format';
 
 function messageFormatter({error, message, passed}: Options) {

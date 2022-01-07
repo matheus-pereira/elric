@@ -8,15 +8,15 @@
 import * as path from 'path';
 import * as util from 'util';
 import exit = require('exit');
-import type {AggregatedResult} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import {pluralize} from 'jest-util';
+import type {AggregatedResult} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import {pluralize} from 'elric-util';
 import BaseReporter from './BaseReporter';
 import type {Context, TestSchedulerContext} from './types';
 
 const isDarwin = process.platform === 'darwin';
 
-const icon = path.resolve(__dirname, '../assets/jest_logo.png');
+const icon = path.resolve(__dirname, '../assets/elric_logo.png');
 
 export default class NotifyReporter extends BaseReporter {
   private _notifier = loadNotifier();

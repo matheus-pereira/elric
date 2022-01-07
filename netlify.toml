@@ -4,7 +4,7 @@
 # production build
 [build]
   base = "/"
-  command = "yarn workspace jest-website netlify:ci:production"
+  command = "yarn workspace elric-website netlify:ci:production"
   publish = "/website/build"
 
 [build.environment]
@@ -17,7 +17,7 @@
 
 # deploy preview build (faster config)
 [context.deploy-preview]
-  command = "yarn workspace jest-website netlify:ci:deployPreview"
+  command = "yarn workspace elric-website netlify:ci:deployPreview"
 
 
 [[plugins]]

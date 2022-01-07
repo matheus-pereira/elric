@@ -5,7 +5,7 @@ import defaultExport, {apple, strawberry} from '../fruit';
 /**
  * This file illustrates a full mock of a module.
  */
-jest.mock('../fruit');
+elric.mock('../fruit');
 
 it('does a full mock', () => {
   expect(defaultExport()).toBe(undefined);

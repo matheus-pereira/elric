@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {alignedAnsiStyleSerializer} from '@jest/test-utils';
+import {alignedAnsiStyleSerializer} from '@elric/test-utils';
 import {INVERTED_COLOR, printDiffOrStringify} from '../index';
 
 expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
@@ -117,26 +117,26 @@ describe('printDiffOrStringify', () => {
       expect(testDiffOrStringify(expected, received)).toMatchSnapshot();
     });
 
-    test('jest asymmetricMatcher', () => {
+    test('elric asymmetricMatcher', () => {
       const expected = {
         a: expect.any(Number),
         b: expect.anything(),
         c: expect.arrayContaining([1, 3]),
-        d: 'jest is awesome',
-        e: 'jest is awesome',
+        d: 'elric is awesome',
+        e: 'elric is awesome',
         f: {
           a: new Date(),
-          b: 'jest is awesome',
+          b: 'elric is awesome',
         },
         g: true,
-        [Symbol.for('h')]: 'jest is awesome',
+        [Symbol.for('h')]: 'elric is awesome',
       };
       const received = {
         a: 1,
         b: 'anything',
         c: [1, 2, 3],
-        d: expect.stringContaining('jest'),
-        e: expect.stringMatching(/^jest/),
+        d: expect.stringContaining('elric'),
+        e: expect.stringMatching(/^elric/),
         f: expect.objectContaining({
           a: expect.any(Date),
         }),

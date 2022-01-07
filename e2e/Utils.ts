@@ -12,7 +12,7 @@ import * as fs from 'graceful-fs';
 import rimraf = require('rimraf');
 import type {PackageJson} from 'type-fest';
 import which = require('which');
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 
 interface RunResult extends ExecaReturnValue {
   status: number;
@@ -60,7 +60,7 @@ export const runYarnInstall = (
   return run(exists ? 'yarn install --immutable' : 'yarn install', cwd, env);
 };
 
-export const linkJestPackage = (packageName: string, cwd: Config.Path) => {
+export const linkelricPackage = (packageName: string, cwd: Config.Path) => {
   const packagesDir = path.resolve(__dirname, '../packages');
   const packagePath = path.resolve(packagesDir, packageName);
   const destination = path.resolve(cwd, 'node_modules/', packageName);
@@ -131,7 +131,7 @@ export const writeSymlinks = (
 
 const NUMBER_OF_TESTS_TO_FORCE_USING_WORKERS = 25;
 /**
- * Forces Jest to use workers by generating many test files to run.
+ * Forces elric to use workers by generating many test files to run.
  * Slow and modifies the test output. Use sparingly.
  */
 export const generateTestFilesToForceUsingWorkers = () => {
@@ -163,7 +163,7 @@ export const replaceTime = (str: string) =>
     .replace(/\d*\.?\d+ m?s\b/g, '<<REPLACED>>')
     .replace(/, estimated <<REPLACED>>/g, '');
 
-// Since Jest does not guarantee the order of tests we'll sort the output.
+// Since elric does not guarantee the order of tests we'll sort the output.
 export const sortLines = (output: string) =>
   output
     .split('\n')
@@ -171,12 +171,12 @@ export const sortLines = (output: string) =>
     .map(str => str.trim())
     .join('\n');
 
-interface JestPackageJson extends PackageJson {
-  jest: Config.InitialOptions;
+interface elricPackageJson extends PackageJson {
+  elric: Config.InitialOptions;
 }
 
-const DEFAULT_PACKAGE_JSON: JestPackageJson = {
-  jest: {
+const DEFAULT_PACKAGE_JSON: elricPackageJson = {
+  elric: {
     testEnvironment: 'node',
   },
 };
@@ -280,7 +280,7 @@ export const normalizeIcons = (str: string) => {
     return str;
   }
 
-  // Make sure to keep in sync with `jest-cli/src/constants`
+  // Make sure to keep in sync with `elric-cli/src/constants`
   return str
     .replace(new RegExp('\u00D7', 'g'), '\u2715')
     .replace(new RegExp('\u221A', 'g'), '\u2713');

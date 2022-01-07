@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Correct BeforeAll run ensures the BeforeAll of ignored suite is not run 1`] = `
   console.log

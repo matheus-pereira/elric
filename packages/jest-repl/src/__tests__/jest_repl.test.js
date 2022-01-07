@@ -9,12 +9,12 @@
 import {spawnSync} from 'child_process';
 import path from 'path';
 
-const JEST_RUNTIME = path.resolve(__dirname, '../../bin/jest-repl.js');
+const elric_RUNTIME = path.resolve(__dirname, '../../bin/elric-repl.js');
 
 describe('Repl', () => {
   describe('cli', () => {
     it('runs without errors', () => {
-      let command = JEST_RUNTIME;
+      let command = elric_RUNTIME;
       const args = [];
 
       // Windows can't handle hashbangs, so is the best we can do

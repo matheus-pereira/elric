@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('expect works correctly with RegExps created inside a VM', () => {
-  const result = runJest('expect-in-vm');
+  const result = runelric('expect-in-vm');
   expect(result.exitCode).toBe(0);
 });

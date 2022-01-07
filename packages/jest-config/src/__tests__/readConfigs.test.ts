@@ -6,10 +6,10 @@
  */
 import {readConfigs} from '../index';
 
-jest.mock('graceful-fs', () => ({
-  ...jest.requireActual('fs'),
-  existsSync: jest.fn(() => true),
-  lstatSync: jest.fn(() => ({
+elric.mock('graceful-fs', () => ({
+  ...elric.requireActual('fs'),
+  existsSync: elric.fn(() => true),
+  lstatSync: elric.fn(() => ({
     isDirectory: () => false,
   })),
 }));
@@ -18,5 +18,5 @@ test('readConfigs() throws when called without project paths', async () => {
   await expect(
     // @ts-expect-error
     readConfigs(null /* argv */, [] /* projectPaths */),
-  ).rejects.toThrowError('jest: No configuration found for any project.');
+  ).rejects.toThrowError('elric: No configuration found for any project.');
 });

@@ -6,19 +6,19 @@
  *
  */
 
-import {wrap} from 'jest-snapshot-serializer-raw';
-import {makeGlobalConfig, makeProjectConfig} from '@jest/test-utils';
-import type {Config} from '@jest/types';
+import {wrap} from 'elric-snapshot-serializer-raw';
+import {makeGlobalConfig, makeProjectConfig} from '@elric/test-utils';
+import type {Config} from '@elric/types';
 import type {Options, ShouldInstrumentOptions, Transformer} from '../types';
 
-jest
+elric
   .mock('graceful-fs', () =>
     // Node 10.5.x compatibility
     ({
-      ...jest.createMockFromModule('fs'),
-      ReadStream: jest.requireActual('fs').ReadStream,
-      WriteStream: jest.requireActual('fs').WriteStream,
-      readFileSync: jest.fn(path => {
+      ...elric.createMockFromModule('fs'),
+      ReadStream: elric.requireActual('fs').ReadStream,
+      WriteStream: elric.requireActual('fs').WriteStream,
+      readFileSync: elric.fn(path => {
         if (mockFs[path]) {
           return mockFs[path];
         }
@@ -32,12 +32,12 @@ jest
     }),
   )
   .mock('graceful-fs', () => ({
-    ...jest.requireActual('graceful-fs'),
+    ...elric.requireActual('graceful-fs'),
     realPathSync: {
       native: dirInput => dirInput,
     },
   }))
-  .mock('jest-haste-map', () => ({
+  .mock('elric-haste-map', () => ({
     getStatic() {
       return {
         getCacheFilePath: (cacheDir: string, baseDir: string) =>
@@ -45,19 +45,19 @@ jest
       };
     },
   }))
-  .mock('jest-util', () => ({
-    ...jest.requireActual('jest-util'),
-    createDirectory: jest.fn(),
+  .mock('elric-util', () => ({
+    ...elric.requireActual('elric-util'),
+    createDirectory: elric.fn(),
   }))
-  .mock('path', () => jest.requireActual('path').posix);
+  .mock('path', () => elric.requireActual('path').posix);
 
-jest.mock(
+elric.mock(
   'test_preprocessor',
   () => {
     const escapeStrings = (str: string) => str.replace(/'/, `'`);
 
     const transformer: Transformer = {
-      getCacheKey: jest.fn(() => 'ab'),
+      getCacheKey: elric.fn(() => 'ab'),
       process: (content, filename, config) => require('dedent')`
           const TRANSFORMED = {
             filename: '${escapeStrings(filename)}',
@@ -72,13 +72,13 @@ jest.mock(
   {virtual: true},
 );
 
-jest.mock(
+elric.mock(
   'test_async_preprocessor',
   () => {
     const escapeStrings = (str: string) => str.replace(/'/, `'`);
 
     const transformer: Transformer = {
-      getCacheKeyAsync: jest.fn().mockResolvedValue('ab'),
+      getCacheKeyAsync: elric.fn().mockResolvedValue('ab'),
       processAsync: async (content, filename, config) =>
         require('dedent')`
           const TRANSFORMED = {
@@ -94,58 +94,58 @@ jest.mock(
   {virtual: true},
 );
 
-jest.mock(
+elric.mock(
   'configureable-preprocessor',
   () => ({
-    createTransformer: jest.fn(() => ({
-      process: jest.fn(() => 'processedCode'),
+    createTransformer: elric.fn(() => ({
+      process: elric.fn(() => 'processedCode'),
     })),
   }),
   {virtual: true},
 );
 
-jest.mock(
+elric.mock(
   'cache_fs_preprocessor',
   () => ({
-    getCacheKey: jest.fn(() => 'ab'),
-    process: jest.fn(() => 'processedCode'),
+    getCacheKey: elric.fn(() => 'ab'),
+    process: elric.fn(() => 'processedCode'),
   }),
   {virtual: true},
 );
 
-jest.mock(
+elric.mock(
   'cache_fs_async_preprocessor',
   () => ({
-    getCacheKeyAsync: jest.fn().mockResolvedValue('ab'),
-    processAsync: jest.fn().mockResolvedValue('processedCode'),
+    getCacheKeyAsync: elric.fn().mockResolvedValue('ab'),
+    processAsync: elric.fn().mockResolvedValue('processedCode'),
   }),
   {virtual: true},
 );
 
-jest.mock(
+elric.mock(
   'preprocessor-with-sourcemaps',
   () => ({
-    getCacheKey: jest.fn(() => 'ab'),
-    process: jest.fn(),
+    getCacheKey: elric.fn(() => 'ab'),
+    process: elric.fn(),
   }),
   {virtual: true},
 );
 
-jest.mock(
+elric.mock(
   'async-preprocessor-with-sourcemaps',
   () => ({
-    getCacheKeyAsync: jest.fn(() => 'ab'),
-    processAsync: jest.fn(),
+    getCacheKeyAsync: elric.fn(() => 'ab'),
+    processAsync: elric.fn(),
   }),
   {virtual: true},
 );
 
-jest.mock(
+elric.mock(
   'css-preprocessor',
   () => {
     const transformer: Transformer = {
-      getCacheKey: jest.fn(() => 'cd'),
-      process: (content, filename) => jest.requireActual('dedent')`
+      getCacheKey: elric.fn(() => 'cd'),
+      process: (content, filename) => elric.requireActual('dedent')`
           module.exports = {
             filename: ${filename},
             rawFirstLine: ${content.split('\n')[0]},
@@ -158,29 +158,29 @@ jest.mock(
   {virtual: true},
 );
 
-jest.mock('passthrough-preprocessor', () => ({process: jest.fn()}), {
+elric.mock('passthrough-preprocessor', () => ({process: elric.fn()}), {
   virtual: true,
 });
 
 // Bad preprocessor
-jest.mock('skipped-required-props-preprocessor', () => ({}), {virtual: true});
+elric.mock('skipped-required-props-preprocessor', () => ({}), {virtual: true});
 
 // Bad preprocessor
-jest.mock(
+elric.mock(
   'skipped-required-props-preprocessor-only-sync',
   () => ({process: () => ''}),
   {virtual: true},
 );
 
 // Bad preprocessor
-jest.mock(
+elric.mock(
   'skipped-required-props-preprocessor-only-async',
   () => ({processAsync: async () => ''}),
   {virtual: true},
 );
 
 // Bad preprocessor
-jest.mock(
+elric.mock(
   'skipped-required-create-transformer-props-preprocessor',
   () => ({
     createTransformer() {
@@ -190,21 +190,21 @@ jest.mock(
   {virtual: true},
 );
 
-jest.mock(
+elric.mock(
   'skipped-process-method-preprocessor',
   () => ({
     createTransformer() {
-      return {process: jest.fn(() => 'code')};
+      return {process: elric.fn(() => 'code')};
     },
   }),
   {virtual: true},
 );
 
-jest.mock(
+elric.mock(
   'factory-for-async-preprocessor',
   () => ({
     createTransformer() {
-      return {processAsync: jest.fn().mockResolvedValue('code')};
+      return {processAsync: elric.fn().mockResolvedValue('code')};
     },
   }),
   {virtual: true},
@@ -229,15 +229,15 @@ let mockFs: Record<Config.Path, string>;
 let object: <T>(input: T) => T;
 let writeFileAtomic: typeof import('write-file-atomic');
 
-jest.mock('write-file-atomic', () => ({
-  sync: jest.fn().mockImplementation((filePath, data) => {
+elric.mock('write-file-atomic', () => ({
+  sync: elric.fn().mockImplementation((filePath, data) => {
     mockFs[filePath] = data;
   }),
 }));
 
 describe('ScriptTransformer', () => {
   const reset = () => {
-    jest.resetModules();
+    elric.resetModules();
 
     object = data => Object.assign(Object.create(null), data);
 
@@ -258,7 +258,7 @@ describe('ScriptTransformer', () => {
     });
 
     fs = require('graceful-fs');
-    fs.readFileSync = jest.fn((path, options) => {
+    fs.readFileSync = elric.fn((path, options) => {
       invariant(typeof path === 'string');
 
       expect(options).toBe('utf8');
@@ -268,14 +268,14 @@ describe('ScriptTransformer', () => {
 
       throw new Error(`Cannot read path '${path}'.`);
     });
-    fs.writeFileSync = jest.fn((path, data, options) => {
+    fs.writeFileSync = elric.fn((path, data, options) => {
       invariant(typeof path === 'string');
       expect(options).toBe('utf8');
       mockFs[path] = data;
     });
 
-    fs.unlinkSync = jest.fn();
-    fs.statSync = jest.fn(path => ({
+    fs.unlinkSync = elric.fn();
+    fs.statSync = elric.fn(path => ({
       isFile() {
         invariant(typeof path === 'string');
         return !!mockFs[path];
@@ -283,7 +283,7 @@ describe('ScriptTransformer', () => {
       mtime: {getTime: () => 42, toString: () => '42'},
     }));
 
-    fs.existsSync = jest.fn(path => {
+    fs.existsSync = elric.fn(path => {
       invariant(typeof path === 'string');
 
       return !!mockFs[path];
@@ -304,7 +304,7 @@ describe('ScriptTransformer', () => {
   };
 
   beforeEach(reset);
-  afterEach(() => jest.unmock('../shouldInstrument'));
+  afterEach(() => elric.unmock('../shouldInstrument'));
 
   it('transforms a file properly', async () => {
     const scriptTransformer = await createScriptTransformer(config);
@@ -450,10 +450,10 @@ describe('ScriptTransformer', () => {
         '-',
       )}`;
 
-      jest.doMock(
+      elric.doMock(
         processorName,
         () => ({
-          processAsync: jest.fn(),
+          processAsync: elric.fn(),
         }),
         {virtual: true},
       );
@@ -475,7 +475,7 @@ describe('ScriptTransformer', () => {
     const promisesToReject = incorrectReturnValues
       .map(buildPromise)
       .map(promise =>
-        // Jest must throw error
+        // elric must throw error
         expect(promise).rejects.toThrow(),
       );
 
@@ -893,7 +893,7 @@ describe('ScriptTransformer', () => {
 
   it('warns of unparseable inlined source maps from the preprocessor', async () => {
     const warn = console.warn;
-    console.warn = jest.fn();
+    console.warn = elric.fn();
 
     config = {
       ...config,
@@ -928,7 +928,7 @@ describe('ScriptTransformer', () => {
 
   it('in async mode, warns of unparseable inlined source maps from the preprocessor', async () => {
     const warn = console.warn;
-    console.warn = jest.fn();
+    console.warn = elric.fn();
 
     config = {
       ...config,
@@ -963,7 +963,7 @@ describe('ScriptTransformer', () => {
 
   it('warns of unparseable inlined source maps from the async preprocessor', async () => {
     const warn = console.warn;
-    console.warn = jest.fn();
+    console.warn = elric.fn();
 
     config = {
       ...config,
@@ -1418,7 +1418,7 @@ describe('ScriptTransformer', () => {
 
     // Cache the state in `mockFsCopy`
     const mockFsCopy = mockFs;
-    jest.resetModules();
+    elric.resetModules();
     reset();
 
     // Restore the cached fs
@@ -1432,7 +1432,7 @@ describe('ScriptTransformer', () => {
     expect(writeFileAtomic.sync).not.toBeCalled();
 
     // Don't read from the cache when `config.cache` is false.
-    jest.resetModules();
+    elric.resetModules();
     reset();
     mockFs = mockFsCopy;
     transformConfig.cache = false;
@@ -1462,7 +1462,7 @@ describe('ScriptTransformer', () => {
 
     // Cache the state in `mockFsCopy`
     const mockFsCopy = mockFs;
-    jest.resetModules();
+    elric.resetModules();
     reset();
 
     // Restore the cached fs
@@ -1479,7 +1479,7 @@ describe('ScriptTransformer', () => {
     expect(writeFileAtomic.sync).not.toBeCalled();
 
     // Don't read from the cache when `config.cache` is false.
-    jest.resetModules();
+    elric.resetModules();
     reset();
     mockFs = mockFsCopy;
     transformConfig.cache = false;
@@ -1512,7 +1512,7 @@ describe('ScriptTransformer', () => {
 
     // Cache the state in `mockFsCopy`
     const mockFsCopy = mockFs;
-    jest.resetModules();
+    elric.resetModules();
     reset();
 
     // Restore the cached fs
@@ -1529,7 +1529,7 @@ describe('ScriptTransformer', () => {
     expect(writeFileAtomic.sync).not.toBeCalled();
 
     // Don't read from the cache when `config.cache` is false.
-    jest.resetModules();
+    elric.resetModules();
     reset();
     mockFs = mockFsCopy;
     transformConfig.cache = false;
@@ -1562,7 +1562,7 @@ describe('ScriptTransformer', () => {
 
     // Cache the state in `mockFsCopy`
     const mockFsCopy = mockFs;
-    jest.resetModules();
+    elric.resetModules();
     reset();
 
     // Restore the cached fs
@@ -1593,7 +1593,7 @@ describe('ScriptTransformer', () => {
 
     // Cache the state in `mockFsCopy`
     const mockFsCopy = mockFs;
-    jest.resetModules();
+    elric.resetModules();
     reset();
 
     // Restore the cached fs
@@ -1624,7 +1624,7 @@ describe('ScriptTransformer', () => {
 
     // Cache the state in `mockFsCopy`
     const mockFsCopy = mockFs;
-    jest.resetModules();
+    elric.resetModules();
     reset();
 
     // Restore the cached fs

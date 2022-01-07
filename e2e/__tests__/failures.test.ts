@@ -6,9 +6,9 @@
  */
 
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {extractSummary, runYarnInstall} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const dir = path.resolve(__dirname, '../failures');
 
@@ -17,7 +17,7 @@ const normalizeDots = (text: string) => text.replace(/\.{1,}$/gm, '.');
 function cleanStderr(stderr: string) {
   const {rest} = extractSummary(stderr);
   return rest
-    .replace(/.*(jest-jasmine2|jest-circus).*\n/g, '')
+    .replace(/.*(elric-jasmine2|elric-circus).*\n/g, '')
     .replace(new RegExp('Failed: Object {', 'g'), 'thrown: Object {');
 }
 
@@ -29,15 +29,15 @@ beforeAll(() => {
 
 test('not throwing Error objects', () => {
   let stderr;
-  stderr = runJest(dir, ['throwNumber.test.js']).stderr;
+  stderr = runelric(dir, ['throwNumber.test.js']).stderr;
   expect(wrap(cleanStderr(stderr))).toMatchSnapshot();
-  stderr = runJest(dir, ['throwString.test.js']).stderr;
+  stderr = runelric(dir, ['throwString.test.js']).stderr;
   expect(wrap(cleanStderr(stderr))).toMatchSnapshot();
-  stderr = runJest(dir, ['throwObject.test.js']).stderr;
+  stderr = runelric(dir, ['throwObject.test.js']).stderr;
   expect(wrap(cleanStderr(stderr))).toMatchSnapshot();
-  stderr = runJest(dir, ['assertionCount.test.js']).stderr;
+  stderr = runelric(dir, ['assertionCount.test.js']).stderr;
   expect(wrap(cleanStderr(stderr))).toMatchSnapshot();
-  stderr = runJest(dir, ['duringTests.test.js']).stderr;
+  stderr = runelric(dir, ['duringTests.test.js']).stderr;
 
   if (nodeMajorVersion < 12) {
     const lineEntry = '(__tests__/duringTests.test.js:43:8)';
@@ -51,25 +51,25 @@ test('not throwing Error objects', () => {
   }
 
   expect(wrap(cleanStderr(stderr))).toMatchSnapshot();
-  stderr = runJest(dir, ['throwObjectWithStackProp.test.js']).stderr;
+  stderr = runelric(dir, ['throwObjectWithStackProp.test.js']).stderr;
   expect(wrap(cleanStderr(stderr))).toMatchSnapshot();
 });
 
 test('works with node assert', () => {
-  const {stderr} = runJest(dir, ['assertionError.test.js']);
+  const {stderr} = runelric(dir, ['assertionError.test.js']);
   const summary = normalizeDots(cleanStderr(stderr));
 
   expect(wrap(summary)).toMatchSnapshot();
 });
 
 test('works with assertions in separate files', () => {
-  const {stderr} = runJest(dir, ['testMacro.test.js']);
+  const {stderr} = runelric(dir, ['testMacro.test.js']);
 
   expect(wrap(normalizeDots(cleanStderr(stderr)))).toMatchSnapshot();
 });
 
 test('works with async failures', () => {
-  const {stderr} = runJest(dir, ['asyncFailures.test.js']);
+  const {stderr} = runelric(dir, ['asyncFailures.test.js']);
 
   const rest = cleanStderr(stderr)
     .split('\n')
@@ -79,14 +79,14 @@ test('works with async failures', () => {
   // Remove replacements when jasmine is gone
   const result = normalizeDots(rest)
     .replace(/.*thrown:.*\n/, '')
-    .replace(/.*Use jest\.setTimeout\(newTimeout\).*/, '<REPLACED>')
+    .replace(/.*Use elric\.setTimeout\(newTimeout\).*/, '<REPLACED>')
     .replace(/.*Timeout - Async callback was not.*/, '<REPLACED>');
 
   expect(wrap(result)).toMatchSnapshot();
 });
 
 test('works with snapshot failures', () => {
-  const {stderr} = runJest(dir, ['snapshot.test.js']);
+  const {stderr} = runelric(dir, ['snapshot.test.js']);
 
   const result = normalizeDots(cleanStderr(stderr));
 
@@ -96,7 +96,7 @@ test('works with snapshot failures', () => {
 });
 
 test('works with snapshot failures with hint', () => {
-  const {stderr} = runJest(dir, ['snapshotWithHint.test.js']);
+  const {stderr} = runelric(dir, ['snapshotWithHint.test.js']);
 
   const result = normalizeDots(cleanStderr(stderr));
 
@@ -106,7 +106,7 @@ test('works with snapshot failures with hint', () => {
 });
 
 test('errors after test has completed', () => {
-  const {stderr} = runJest(dir, ['errorAfterTestComplete.test.js']);
+  const {stderr} = runelric(dir, ['errorAfterTestComplete.test.js']);
 
   expect(stderr).toMatch(
     /Error: Caught error after test environment was torn down/,

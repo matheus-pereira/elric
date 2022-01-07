@@ -1,14 +1,14 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`babel-plugin-jest-hoist automatic react runtime: automatic react runtime 1`] = `
+exports[`babel-plugin-elric-hoist automatic react runtime: automatic react runtime 1`] = `
 
-jest.mock('./App', () => () => <div>Hello world</div>);
+elric.mock('./App', () => () => <div>Hello world</div>);
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
 var _jsxFileName = "/root/project/src/file.js";
 
-_getJestObj().mock(
+_getelricObj().mock(
   "./App",
   () => () =>
     /*#__PURE__*/ _jsxDEV(
@@ -29,36 +29,36 @@ _getJestObj().mock(
 
 import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
 
-function _getJestObj() {
-  const { jest } = require("@jest/globals");
+function _getelricObj() {
+  const { elric } = require("@elric/globals");
 
-  _getJestObj = () => jest;
+  _getelricObj = () => elric;
 
-  return jest;
+  return elric;
 }
 
 
 `;
 
-exports[`babel-plugin-jest-hoist top level mocking: top level mocking 1`] = `
+exports[`babel-plugin-elric-hoist top level mocking: top level mocking 1`] = `
 
 require('x');
 
-jest.enableAutomock();
-jest.disableAutomock();
+elric.enableAutomock();
+elric.disableAutomock();
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-_getJestObj().enableAutomock();
+_getelricObj().enableAutomock();
 
-_getJestObj().disableAutomock();
+_getelricObj().disableAutomock();
 
-function _getJestObj() {
-  const { jest } = require("@jest/globals");
+function _getelricObj() {
+  const { elric } = require("@elric/globals");
 
-  _getJestObj = () => jest;
+  _getelricObj = () => elric;
 
-  return jest;
+  return elric;
 }
 
 require("x");
@@ -66,48 +66,48 @@ require("x");
 
 `;
 
-exports[`babel-plugin-jest-hoist within a block with no siblings: within a block with no siblings 1`] = `
+exports[`babel-plugin-elric-hoist within a block with no siblings: within a block with no siblings 1`] = `
 
 beforeEach(() => {
-  jest.mock('someNode')
+  elric.mock('someNode')
 })
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-function _getJestObj() {
-  const { jest } = require("@jest/globals");
+function _getelricObj() {
+  const { elric } = require("@elric/globals");
 
-  _getJestObj = () => jest;
+  _getelricObj = () => elric;
 
-  return jest;
+  return elric;
 }
 
 beforeEach(() => {
-  _getJestObj().mock("someNode");
+  _getelricObj().mock("someNode");
 });
 
 
 `;
 
-exports[`babel-plugin-jest-hoist within a block: within a block 1`] = `
+exports[`babel-plugin-elric-hoist within a block: within a block 1`] = `
 
 beforeEach(() => {
   require('x')
-  jest.mock('someNode')
+  elric.mock('someNode')
 })
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-function _getJestObj() {
-  const { jest } = require("@jest/globals");
+function _getelricObj() {
+  const { elric } = require("@elric/globals");
 
-  _getJestObj = () => jest;
+  _getelricObj = () => elric;
 
-  return jest;
+  return elric;
 }
 
 beforeEach(() => {
-  _getJestObj().mock("someNode");
+  _getelricObj().mock("someNode");
 
   require("x");
 });

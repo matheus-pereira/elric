@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {interopRequireDefault} from 'jest-util';
+import {interopRequireDefault} from 'elric-util';
 
 let NODE_ENV: string;
 let BABEL_ENV: string;

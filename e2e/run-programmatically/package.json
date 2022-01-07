@@ -2,5 +2,5 @@
   "name": "run-programmatically",
   "version": "1.0.0",
   "dependencies": {},
-  "jest": {}
+  "elric": {}
 }

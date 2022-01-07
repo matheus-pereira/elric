@@ -9,7 +9,7 @@
 
 require('../this-directory-is-covered/ExcludedFromCoverage');
 
-it('strips flowtypes using babel-jest and config passed to transformer', () => {
+it('strips flowtypes using babel-elric and config passed to transformer', () => {
   const a: string = 'a';
   expect(a).toBe('a');
 });

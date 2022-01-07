@@ -14,7 +14,7 @@ module.exports = {
     const name = path.parse(filePath).name;
     const isMock = filePath.indexOf('__mocks__') !== -1;
 
-    // Mocks are automatically parsed by Jest already.
+    // Mocks are automatically parsed by elric already.
     return name.startsWith('Test') && !isMock ? name : null;
   },
 };

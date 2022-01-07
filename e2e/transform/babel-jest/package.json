@@ -2,7 +2,7 @@
   "dependencies": {
     "@babel/preset-flow": "^7.0.0"
   },
-  "jest": {
+  "elric": {
     "collectCoverageOnlyFrom": {
       "<rootDir>/this-directory-is-covered/covered.js": true,
       "<rootDir>/this-directory-is-covered/excludedFromCoverage.js": true

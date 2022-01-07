@@ -66,7 +66,7 @@ describe('snapshot serializers', () => {
       },
       type: 'div',
     };
-    // Add plugin that overrides foo specified by Jest config in package.json
+    // Add plugin that overrides foo specified by elric config in package.json
     expect.addSnapshotSerializer({
       print: (val, serialize) => `Foo: ${serialize(val.foo)}`,
       test: val => val && val.hasOwnProperty('foo'),

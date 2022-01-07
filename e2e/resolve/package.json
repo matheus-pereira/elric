@@ -1,6 +1,6 @@
 {
   "name": "custom-resolve",
-  "jest": {
+  "elric": {
     "haste": {
       "platforms": [
         "native"

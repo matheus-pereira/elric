@@ -28,7 +28,7 @@ export async function worker(data: WorkerMessage): Promise<WorkerMetadata> {
     data.hasteImplModulePath !== hasteImplModulePath
   ) {
     if (hasteImpl) {
-      throw new Error('jest-haste-map: hasteImplModulePath changed');
+      throw new Error('elric-haste-map: hasteImplModulePath changed');
     }
     hasteImplModulePath = data.hasteImplModulePath;
     hasteImpl = require(hasteImplModulePath);

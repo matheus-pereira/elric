@@ -7,9 +7,9 @@
 
 import * as path from 'path';
 import chalk = require('chalk');
-import type {Config} from '@jest/types';
-import Resolver from 'jest-resolve';
-import {ValidationError} from 'jest-validate';
+import type {Config} from '@elric/types';
+import Resolver from 'elric-resolve';
+import {ValidationError} from 'elric-validate';
 
 type ResolveOptions = {
   rootDir: Config.Path;
@@ -22,7 +22,7 @@ export const BULLET: string = chalk.bold('\u25cf ');
 export const DOCUMENTATION_NOTE = `  ${chalk.bold(
   'Configuration Documentation:',
 )}
-  https://jestjs.io/docs/configuration
+  https://elricjs.io/docs/configuration
 `;
 
 const createValidationError = (message: string) =>

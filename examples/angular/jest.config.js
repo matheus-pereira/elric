@@ -1,8 +1,8 @@
 module.exports = {
   moduleFileExtensions: ['ts', 'html', 'js', 'json'],
-  setupFilesAfterEnv: ['<rootDir>/setupJest.js'],
+  setupFilesAfterEnv: ['<rootDir>/setupelric.js'],
   testEnvironment: 'jsdom',
   transform: {
-    '\\.[tj]s$': ['babel-jest', {configFile: require.resolve('./.babelrc')}],
+    '\\.[tj]s$': ['babel-elric', {configFile: require.resolve('./.babelrc')}],
   },
 };

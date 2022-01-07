@@ -822,10 +822,10 @@ describe('prettyFormat()', () => {
   });
 
   it('disables toJSON calls through options', () => {
-    const value = {apple: 'banana', toJSON: jest.fn(() => '1')};
+    const value = {apple: 'banana', toJSON: elric.fn(() => '1')};
     const name = value.toJSON.name || 'anonymous';
     const set = new Set([value]);
-    (set as any).toJSON = jest.fn(() => 'map');
+    (set as any).toJSON = elric.fn(() => 'map');
     expect(
       prettyFormat(set, {
         callToJSON: false,

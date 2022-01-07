@@ -6,7 +6,7 @@
  */
 
 import {cpus} from 'os';
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 
 export default function getMaxWorkers(
   argv: Partial<
@@ -21,7 +21,7 @@ export default function getMaxWorkers(
   } else if (defaultOptions && defaultOptions.maxWorkers) {
     return parseWorkers(defaultOptions.maxWorkers);
   } else {
-    // In watch mode, Jest should be unobtrusive and not use all available CPUs.
+    // In watch mode, elric should be unobtrusive and not use all available CPUs.
     const cpusInfo = cpus();
     const numCpus = cpusInfo?.length ?? 1;
     const isWatchModeEnabled = argv.watch || argv.watchAll;

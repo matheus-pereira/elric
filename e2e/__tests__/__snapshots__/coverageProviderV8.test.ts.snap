@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`on node >=12.16.0 prints correct coverage report, if a TS module is transpiled by custom transformer to ESM put under test 1`] = `
   console.log

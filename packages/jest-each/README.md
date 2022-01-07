@@ -1,15 +1,15 @@
 <div align="center">
-  <h1>jest-each</h1>
-  Jest Parameterised Testing
+  <h1>elric-each</h1>
+  elric Parameterised Testing
 </div>
 
 <hr />
 
-[![version](https://img.shields.io/npm/v/jest-each.svg?style=flat-square)](https://www.npmjs.com/package/jest-each) [![downloads](https://img.shields.io/npm/dm/jest-each.svg?style=flat-square)](http://npm-stat.com/charts.html?package=jest-each&from=2017-03-21) [![MIT License](https://img.shields.io/npm/l/jest-each.svg?style=flat-square)](https://github.com/facebook/jest/blob/main/LICENSE)
+[![version](https://img.shields.io/npm/v/elric-each.svg?style=flat-square)](https://www.npmjs.com/package/elric-each) [![downloads](https://img.shields.io/npm/dm/elric-each.svg?style=flat-square)](http://npm-stat.com/charts.html?package=elric-each&from=2017-03-21) [![MIT License](https://img.shields.io/npm/l/elric-each.svg?style=flat-square)](https://github.com/facebook/elric/blob/main/LICENSE)
 
-A parameterised testing library for [Jest](https://jestjs.io/) inspired by [mocha-each](https://github.com/ryym/mocha-each).
+A parameterised testing library for [elric](https://elricjs.io/) inspired by [mocha-each](https://github.com/ryym/mocha-each).
 
-jest-each allows you to provide multiple arguments to your `test`/`describe` which results in the test/suite being run once per row of parameters.
+elric-each allows you to provide multiple arguments to your `test`/`describe` which results in the test/suite being run once per row of parameters.
 
 ## Features
 
@@ -57,42 +57,42 @@ jest-each allows you to provide multiple arguments to your `test`/`describe` whi
 
 ## Demo
 
-#### Tests without jest-each
+#### Tests without elric-each
 
-![Current jest tests](assets/default-demo.gif)
+![Current elric tests](assets/default-demo.gif)
 
-#### Tests can be re-written with jest-each to:
+#### Tests can be re-written with elric-each to:
 
 **`.test`**
 
-![Current jest tests](assets/test-demo.gif)
+![Current elric tests](assets/test-demo.gif)
 
 **`.test` with Tagged Template Literals**
 
-![Current jest tests](assets/tagged-template-literal.gif)
+![Current elric tests](assets/tagged-template-literal.gif)
 
 **`.describe`**
 
-![Current jest tests](assets/describe-demo.gif)
+![Current elric tests](assets/describe-demo.gif)
 
 ## Installation
 
-`npm i --save-dev jest-each`
+`npm i --save-dev elric-each`
 
-`yarn add -D jest-each`
+`yarn add -D elric-each`
 
 ## Importing
 
-jest-each is a default export so it can be imported with whatever name you like.
+elric-each is a default export so it can be imported with whatever name you like.
 
 ```js
 // es6
-import each from 'jest-each';
+import each from 'elric-each';
 ```
 
 ```js
 // es5
-const each = require('jest-each').default;
+const each = require('elric-each').default;
 ```
 
 ## Array of rows

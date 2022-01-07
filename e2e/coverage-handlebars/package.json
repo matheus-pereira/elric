@@ -1,5 +1,5 @@
 {
-  "jest": {
+  "elric": {
     "transform": {
       "\\.hbs$": "<rootDir>/transform-handlebars.js"
     },

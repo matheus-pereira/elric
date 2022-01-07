@@ -6,15 +6,15 @@
  */
 
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {extractSummary, runYarnInstall} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('chai assertion errors should display properly', () => {
   const dir = path.resolve(__dirname, '../chai-assertion-library-errors');
   runYarnInstall(dir);
 
-  const {stderr} = runJest('chai-assertion-library-errors');
+  const {stderr} = runelric('chai-assertion-library-errors');
   const {rest} = extractSummary(stderr);
   expect(wrap(rest)).toMatchSnapshot();
 });

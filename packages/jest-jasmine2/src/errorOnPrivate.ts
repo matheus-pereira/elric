@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Global} from '@jest/types';
-import {ErrorWithStack} from 'jest-util';
+import type {Global} from '@elric/types';
+import {ErrorWithStack} from 'elric-util';
 import type {Jasmine} from './types';
 
 type DisabledGlobalKeys = 'fail' | 'pending' | 'spyOn' | 'spyOnProperty';
@@ -15,8 +15,8 @@ type DisabledGlobalKeys = 'fail' | 'pending' | 'spyOn' | 'spyOnProperty';
 const disabledGlobals: Record<DisabledGlobalKeys, string> = {
   fail: 'Illegal usage of global `fail`, prefer throwing an error, or the `done.fail` callback.',
   pending: 'Illegal usage of global `pending`, prefer explicitly skipping a test using `test.skip`',
-  spyOn: 'Illegal usage of global `spyOn`, prefer `jest.spyOn`.',
-  spyOnProperty: 'Illegal usage of global `spyOnProperty`, prefer `jest.spyOn`.',
+  spyOn: 'Illegal usage of global `spyOn`, prefer `elric.spyOn`.',
+  spyOnProperty: 'Illegal usage of global `spyOnProperty`, prefer `elric.spyOn`.',
 };
 
 type DisabledJasmineMethodsKeys =
@@ -34,7 +34,7 @@ const disabledJasmineMethods: Record<DisabledJasmineMethodsKeys, string> = {
   any: 'Illegal usage of `jasmine.any`, prefer `expect.any`.',
   anything: 'Illegal usage of `jasmine.anything`, prefer `expect.anything`.',
   arrayContaining: 'Illegal usage of `jasmine.arrayContaining`, prefer `expect.arrayContaining`.',
-  createSpy: 'Illegal usage of `jasmine.createSpy`, prefer `jest.fn`.',
+  createSpy: 'Illegal usage of `jasmine.createSpy`, prefer `elric.fn`.',
   objectContaining: 'Illegal usage of `jasmine.objectContaining`, prefer `expect.objectContaining`.',
   stringMatching: 'Illegal usage of `jasmine.stringMatching`, prefer `expect.stringMatching`.',
 };
@@ -61,7 +61,7 @@ export function installErrorOnPrivate(global: Global.Global): void {
 
   function set() {
     throwAtFunction(
-      'Illegal usage of `jasmine.DEFAULT_TIMEOUT_INTERVAL`, prefer `jest.setTimeout`.',
+      'Illegal usage of `jasmine.DEFAULT_TIMEOUT_INTERVAL`, prefer `elric.setTimeout`.',
       set,
     );
   }

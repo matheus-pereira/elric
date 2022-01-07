@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
-import type {FS as HasteFS, ModuleMap} from 'jest-haste-map';
-import type Resolver from 'jest-resolve';
+import type {Config} from '@elric/types';
+import type {FS as HasteFS, ModuleMap} from 'elric-haste-map';
+import type Resolver from 'elric-resolve';
 
 export type Context = {
   config: Config.ProjectConfig;

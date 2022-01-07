@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
-import type {UsageData, WatchPlugin} from 'jest-watcher';
+import type {Config} from '@elric/types';
+import type {UsageData, WatchPlugin} from 'elric-watcher';
 
 export const filterInteractivePlugins = (
   watchPlugins: Array<WatchPlugin>,

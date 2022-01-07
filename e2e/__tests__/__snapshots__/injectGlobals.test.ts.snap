@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`globals are undefined if passed \`false\` from CLI 1`] = `
 PASS __tests__/test.js

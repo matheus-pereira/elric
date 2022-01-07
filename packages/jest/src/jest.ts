@@ -11,6 +11,6 @@ export {
   createTestScheduler,
   getVersion,
   runCLI,
-} from '@jest/core';
+} from '@elric/core';
 
-export {run} from 'jest-cli';
+export {run} from 'elric-cli';

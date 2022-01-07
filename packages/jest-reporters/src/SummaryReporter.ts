@@ -6,9 +6,9 @@
  */
 
 import chalk = require('chalk');
-import type {AggregatedResult, SnapshotSummary} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import {testPathPatternToRegExp} from 'jest-util';
+import type {AggregatedResult, SnapshotSummary} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import {testPathPatternToRegExp} from 'elric-util';
 import BaseReporter from './BaseReporter';
 import getResultHeader from './getResultHeader';
 import getSnapshotSummary from './getSnapshotSummary';
@@ -137,18 +137,18 @@ export default class SummaryReporter extends BaseReporter {
         typeof npm_config_user_agent === 'string' &&
         npm_config_user_agent.includes('yarn');
       const client = isYarn ? 'yarn' : 'npm';
-      const scriptUsesJest =
+      const scriptUseselric =
         typeof npm_lifecycle_script === 'string' &&
-        npm_lifecycle_script.includes('jest');
+        npm_lifecycle_script.includes('elric');
 
       if (globalConfig.watch || globalConfig.watchAll) {
         updateCommand = 'press `u`';
-      } else if (event && scriptUsesJest) {
+      } else if (event && scriptUseselric) {
         updateCommand = `run \`${
           client + ' ' + prefix + event + (isYarn ? '' : ' --')
         } -u\``;
       } else {
-        updateCommand = 're-run jest with `-u`';
+        updateCommand = 're-run elric with `-u`';
       }
 
       const snapshotSummary = getSnapshotSummary(

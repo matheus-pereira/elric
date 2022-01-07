@@ -4,8 +4,8 @@ import {DataService} from './data.service';
 import {SubService} from './sub.service';
 
 const title = 'SubTest';
-const getTitleFn = jest.fn().mockReturnValue(title);
-const subServiceSpy = jest.fn().mockImplementation(() => ({
+const getTitleFn = elric.fn().mockReturnValue(title);
+const subServiceSpy = elric.fn().mockImplementation(() => ({
   getTitle: getTitleFn,
 }));
 

@@ -9,27 +9,27 @@
 import * as path from 'path';
 import * as fs from 'graceful-fs';
 import {sync as resolveSync} from 'resolve';
-import {ModuleMap} from 'jest-haste-map';
+import {ModuleMap} from 'elric-haste-map';
 import userResolver from '../__mocks__/userResolver';
 import defaultResolver from '../defaultResolver';
 import nodeModulesPaths from '../nodeModulesPaths';
 import Resolver from '../resolver';
 import type {ResolverConfig} from '../types';
 
-jest.mock('../__mocks__/userResolver');
+elric.mock('../__mocks__/userResolver');
 
-// Do not fully mock `resolve` because it is used by Jest. Doing it will crash
+// Do not fully mock `resolve` because it is used by elric. Doing it will crash
 // in very strange ways. Instead just spy on the method `sync`.
-jest.mock('resolve', () => {
-  const originalModule = jest.requireActual('resolve');
+elric.mock('resolve', () => {
+  const originalModule = elric.requireActual('resolve');
   return {
     ...originalModule,
-    sync: jest.spyOn(originalModule, 'sync'),
+    sync: elric.spyOn(originalModule, 'sync'),
   };
 });
 
 const mockResolveSync = <
-  jest.Mock<ReturnType<typeof resolveSync>, Parameters<typeof resolveSync>>
+  elric.Mock<ReturnType<typeof resolveSync>, Parameters<typeof resolveSync>>
 >resolveSync;
 
 beforeEach(() => {
@@ -127,7 +127,7 @@ describe('findNodeModule', () => {
   });
 
   it('wraps passed packageFilter to the resolve module when using the default resolver', () => {
-    const packageFilter = jest.fn();
+    const packageFilter = elric.fn();
 
     // A resolver that delegates to defaultResolver with a packageFilter implementation
     userResolver.mockImplementation((request, opts) =>
@@ -313,7 +313,7 @@ describe('Resolver.getModulePaths() -> nodeModulesPaths()', () => {
   let moduleMap: ModuleMap;
 
   beforeEach(() => {
-    jest.resetModules();
+    elric.resetModules();
 
     moduleMap = ModuleMap.create('/');
 
@@ -321,8 +321,8 @@ describe('Resolver.getModulePaths() -> nodeModulesPaths()', () => {
     // pathstrings instead of actually trying to access the physical directory.
     // This test suite won't work otherwise, since we cannot make assumptions
     // about the test environment when it comes to absolute paths.
-    jest.doMock('graceful-fs', () => ({
-      ...jest.requireActual('graceful-fs'),
+    elric.doMock('graceful-fs', () => ({
+      ...elric.requireActual('graceful-fs'),
       realPathSync: {
         native: (dirInput: string) => dirInput,
       },
@@ -330,12 +330,12 @@ describe('Resolver.getModulePaths() -> nodeModulesPaths()', () => {
   });
 
   afterAll(() => {
-    jest.resetModules();
-    jest.dontMock('path');
+    elric.resetModules();
+    elric.dontMock('path');
   });
 
   it('can resolve node modules relative to absolute paths in "moduleDirectories" on Windows platforms', () => {
-    jest.doMock('path', () => _path.win32);
+    elric.doMock('path', () => _path.win32);
     const path = require('path');
     const Resolver = require('../').default;
 
@@ -355,7 +355,7 @@ describe('Resolver.getModulePaths() -> nodeModulesPaths()', () => {
   });
 
   it('can resolve node modules relative to absolute paths in "moduleDirectories" on Posix platforms', () => {
-    jest.doMock('path', () => _path.posix);
+    elric.doMock('path', () => _path.posix);
     const path = require('path');
     const Resolver = require('../').default;
 

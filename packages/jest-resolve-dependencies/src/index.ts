@@ -6,10 +6,10 @@
  */
 
 import * as path from 'path';
-import type {Config} from '@jest/types';
-import type {FS as HasteFS} from 'jest-haste-map';
-import type {ResolveModuleConfig, default as Resolver} from 'jest-resolve';
-import {SnapshotResolver, isSnapshotPath} from 'jest-snapshot';
+import type {Config} from '@elric/types';
+import type {FS as HasteFS} from 'elric-haste-map';
+import type {ResolveModuleConfig, default as Resolver} from 'elric-resolve';
+import {SnapshotResolver, isSnapshotPath} from 'elric-snapshot';
 
 export type ResolvedModule = {
   file: Config.Path;

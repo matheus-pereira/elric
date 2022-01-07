@@ -100,7 +100,7 @@ const createPatchMark = (
     `@@ -${aStart + 1},${aEnd - aStart} +${bStart + 1},${bEnd - bStart} @@`,
   );
 
-// jest --no-expand
+// elric --no-expand
 //
 // Given array of aligned strings with inverse highlight formatting,
 // return joined lines with diff formatting (and patch marks, if needed).
@@ -277,7 +277,7 @@ export const joinAlignedDiffsNoExpand = (
   return lines.join('\n');
 };
 
-// jest --expand
+// elric --expand
 //
 // Given array of aligned strings with inverse highlight formatting,
 // return joined lines with diff formatting.

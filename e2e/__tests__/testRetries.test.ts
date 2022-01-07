@@ -7,8 +7,8 @@
 
 import * as path from 'path';
 import * as fs from 'graceful-fs';
-import {skipSuiteOnJasmine} from '@jest/test-utils';
-import runJest from '../runJest';
+import {skipSuiteOnJasmine} from '@elric/test-utils';
+import runelric from '../runelric';
 
 skipSuiteOnJasmine();
 
@@ -25,7 +25,7 @@ describe('Test Retries', () => {
   });
 
   it('retries failed tests', () => {
-    const result = runJest('test-retries', ['e2e.test.js']);
+    const result = runelric('test-retries', ['e2e.test.js']);
 
     expect(result.exitCode).toEqual(0);
     expect(result.failed).toBe(false);
@@ -40,7 +40,7 @@ describe('Test Retries', () => {
       ],
     };
 
-    runJest('test-retries', [
+    runelric('test-retries', [
       '--config',
       JSON.stringify(reporterConfig),
       'retry.test.js',
@@ -71,7 +71,7 @@ describe('Test Retries', () => {
       ],
     };
 
-    runJest('test-retries', [
+    runelric('test-retries', [
       '--config',
       JSON.stringify(reporterConfig),
       'control.test.js',
@@ -102,7 +102,7 @@ describe('Test Retries', () => {
       ],
     };
 
-    runJest('test-retries', [
+    runelric('test-retries', [
       '--config',
       JSON.stringify(reporterConfig),
       'beforeAllFailure.test.js',

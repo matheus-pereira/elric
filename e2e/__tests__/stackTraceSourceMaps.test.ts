@@ -7,12 +7,12 @@
 
 import * as path from 'path';
 import {runYarnInstall} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 it('processes stack traces and code frames with source maps', () => {
   const dir = path.resolve(__dirname, '../stack-trace-source-maps');
   runYarnInstall(dir);
-  const {stderr} = runJest(dir, ['--no-cache']);
+  const {stderr} = runelric(dir, ['--no-cache']);
   expect(stderr).toMatch('> 15 |   (() => expect(false).toBe(true))();');
   expect(stderr).toMatch(`at __tests__/fails.ts:15:24
       at Object.<anonymous> (__tests__/fails.ts:15:35)`);

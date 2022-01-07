@@ -8,7 +8,7 @@
 import * as path from 'path';
 import {readFileSync} from 'graceful-fs';
 import {cleanup, runYarnInstall} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const dir = path.resolve(__dirname, '../coverage-transform-instrumented');
 const coverageDir = path.join(dir, 'coverage');
@@ -19,7 +19,7 @@ beforeAll(() => {
 
 it('code coverage for transform instrumented code', () => {
   runYarnInstall(dir);
-  const result = runJest(dir, ['--coverage', '--no-cache']);
+  const result = runelric(dir, ['--coverage', '--no-cache']);
 
   expect(result.exitCode).toBe(0);
 

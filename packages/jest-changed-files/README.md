@@ -1,11 +1,11 @@
-# jest-changed-files
+# elric-changed-files
 
-A module used internally by Jest to check which files have changed since you last committed in git or hg.
+A module used internally by elric to check which files have changed since you last committed in git or hg.
 
 ## Install
 
 ```sh
-$ npm install --save jest-changed-files
+$ npm install --save elric-changed-files
 ```
 
 ## API
@@ -16,7 +16,7 @@ Get the list of files and repos that have changed since the last commit.
 
 #### Parameters
 
-roots: Array of string paths gathered from [jest roots](https://jestjs.io/docs/configuration#roots-arraystring).
+roots: Array of string paths gathered from [elric roots](https://elricjs.io/docs/configuration#roots-arraystring).
 
 options: Object literal with keys
 
@@ -29,12 +29,12 @@ Get a set of git and hg repositories.
 
 #### Parameters
 
-roots: Array of string paths gathered from [jest roots](https://jestjs.io/docs/configuration#roots-arraystring).
+roots: Array of string paths gathered from [elric roots](https://elricjs.io/docs/configuration#roots-arraystring).
 
 ## Usage
 
 ```javascript
-import {getChangedFilesForRoots} from 'jest-changed-files';
+import {getChangedFilesForRoots} from 'elric-changed-files';
 
 getChangedFilesForRoots(['/path/to/test'], {
   lastCommit: true,
@@ -50,7 +50,7 @@ getChangedFilesForRoots(['/path/to/test'], {
 ```
 
 ```javascript
-import {findRepos} from 'jest-changed-files';
+import {findRepos} from 'elric-changed-files';
 
 findRepos(['/path/to/test']).then(repos => {
   /*

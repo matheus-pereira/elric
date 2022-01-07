@@ -109,9 +109,9 @@ test('Copy cyclic Map', () => {
 
 test('return same value for built-in object type except array, map and object', () => {
   const date = new Date();
-  const buffer = Buffer.from('jest');
+  const buffer = Buffer.from('elric');
   const numberArray = new Uint8Array([1, 2, 3]);
-  const regexp = /jest/;
+  const regexp = /elric/;
   const set = new Set(['foo', 'bar']);
 
   expect(deepCyclicCopyReplaceable(date)).toBe(date);

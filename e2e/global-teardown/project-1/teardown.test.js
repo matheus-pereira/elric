@@ -10,7 +10,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
-const DIR = path.join(os.tmpdir(), 'jest-global-teardown-project-1');
+const DIR = path.join(os.tmpdir(), 'elric-global-teardown-project-1');
 
 test('should not exist teardown file', () => {
   expect(fs.existsSync(DIR)).toBe(false);

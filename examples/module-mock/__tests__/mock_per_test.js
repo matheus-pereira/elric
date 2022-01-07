@@ -9,14 +9,14 @@
  */
 describe('define mock per test', () => {
   beforeEach(() => {
-    jest.resetModules();
+    elric.resetModules();
   });
 
   it('uses mocked module', () => {
-    jest.doMock('../fruit', () => ({
+    elric.doMock('../fruit', () => ({
       apple: 'mocked apple',
-      default: jest.fn(() => 'mocked fruit'),
-      strawberry: jest.fn(() => 'mocked strawberry'),
+      default: elric.fn(() => 'mocked fruit'),
+      strawberry: elric.fn(() => 'mocked strawberry'),
     }));
     const {apple, strawberry, default: defaultExport} = require('../fruit');
 
@@ -29,7 +29,7 @@ describe('define mock per test', () => {
   });
 
   it('uses actual module', () => {
-    jest.dontMock('../fruit');
+    elric.dontMock('../fruit');
     const {apple, strawberry, default: defaultExport} = require('../fruit');
 
     const defaultExportResult = defaultExport();

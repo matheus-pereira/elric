@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import {
   BaseWatchPlugin,
   Prompt,
   UpdateConfigCallback,
   UsageData,
-} from 'jest-watcher';
+} from 'elric-watcher';
 import TestPathPatternPrompt from '../TestPathPatternPrompt';
 import activeFilters from '../lib/activeFiltersMessage';
 

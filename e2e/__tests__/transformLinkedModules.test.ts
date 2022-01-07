@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {json as runWithJson} from '../runJest';
+import {json as runWithJson} from '../runelric';
 
 it('should transform linked modules', () => {
   const {json: result} = runWithJson('transform-linked-modules', [

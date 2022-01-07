@@ -8,7 +8,7 @@
 import {tmpdir} from 'os';
 import * as path from 'path';
 import {cleanup, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(tmpdir(), 'force-exit-test');
 
@@ -23,13 +23,13 @@ test('exits the process after test are done but before timers complete', () => {
         setTimeout(() => console.log('TIMER_DONE'), 500);
       });
     `,
-    'package.json': JSON.stringify({jest: {testEnvironment: 'node'}}),
+    'package.json': JSON.stringify({elric: {testEnvironment: 'node'}}),
   });
 
   let output;
   let stdout;
   let stderr;
-  ({stdout, stderr} = runJest(DIR));
+  ({stdout, stderr} = runelric(DIR));
 
   output = `${stdout}\n${stderr}`;
 
@@ -37,11 +37,11 @@ test('exits the process after test are done but before timers complete', () => {
   expect(output).toMatch(/TIMER_DONE/);
   writeFiles(DIR, {
     'package.json': JSON.stringify({
-      jest: {forceExit: true, testEnvironment: 'node'},
+      elric: {forceExit: true, testEnvironment: 'node'},
     }),
   });
 
-  ({stdout, stderr} = runJest(DIR));
+  ({stdout, stderr} = runelric(DIR));
 
   output = `${stdout}\n${stderr}`;
 

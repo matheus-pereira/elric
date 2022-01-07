@@ -7,9 +7,9 @@
 
 import {tmpdir} from 'os';
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {cleanup, extractSummaries, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(tmpdir(), 'watch-mode-patterns');
 const pluginPath = path.resolve(__dirname, '../MockStdinWatchPlugin');
@@ -33,7 +33,7 @@ const setupFiles = (input: Array<{keys: Array<string>}>) => {
       test('foo 2', () => { expect('foo').toBe('foo'); });
     `,
     'package.json': JSON.stringify({
-      jest: {
+      elric: {
         testEnvironment: 'node',
         watchPlugins: [[pluginPath, {input}]],
       },
@@ -45,7 +45,7 @@ test('can press "p" to filter by file name', () => {
   const input = [{keys: ['p', 'b', 'a', 'r', '\r']}, {keys: ['q']}];
   setupFiles(input);
 
-  const {exitCode, stdout, stderr} = runJest(DIR, [
+  const {exitCode, stdout, stderr} = runelric(DIR, [
     '--no-watchman',
     '--watchAll',
   ]);
@@ -65,7 +65,7 @@ test('can press "t" to filter by test name', () => {
   const input = [{keys: ['t', '2', '\r']}, {keys: ['q']}];
   setupFiles(input);
 
-  const {exitCode, stdout, stderr} = runJest(DIR, [
+  const {exitCode, stdout, stderr} = runelric(DIR, [
     '--no-watchman',
     '--watchAll',
   ]);

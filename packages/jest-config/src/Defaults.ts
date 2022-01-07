@@ -7,8 +7,8 @@
 
 import {sep} from 'path';
 import {isCI} from 'ci-info';
-import type {Config} from '@jest/types';
-import {replacePathSepForRegex} from 'jest-regex-util';
+import type {Config} from '@elric/types';
+import {replacePathSepForRegex} from 'elric-regex-util';
 import {NODE_MODULES} from './constants';
 import getCacheDirectory from './getCacheDirectory';
 
@@ -57,21 +57,21 @@ const defaultOptions: Config.DefaultOptions = {
   restoreMocks: false,
   roots: ['<rootDir>'],
   runTestsByPath: false,
-  runner: 'jest-runner',
+  runner: 'elric-runner',
   setupFiles: [],
   setupFilesAfterEnv: [],
   skipFilter: false,
   slowTestThreshold: 5,
   snapshotSerializers: [],
-  testEnvironment: 'jest-environment-node',
+  testEnvironment: 'elric-environment-node',
   testEnvironmentOptions: {},
   testFailureExitCode: 1,
   testLocationInResults: false,
   testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
   testPathIgnorePatterns: [NODE_MODULES_REGEXP],
   testRegex: [],
-  testRunner: 'jest-circus/runner',
-  testSequencer: '@jest/test-sequencer',
+  testRunner: 'elric-circus/runner',
+  testSequencer: '@elric/test-sequencer',
   testURL: 'http://localhost',
   timers: 'real',
   transformIgnorePatterns: [NODE_MODULES_REGEXP, `\\.pnp\\.[^\\${sep}]+$`],

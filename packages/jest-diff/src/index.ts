@@ -6,7 +6,7 @@
  */
 
 import chalk = require('chalk');
-import {getType} from 'jest-get-type';
+import {getType} from 'elric-get-type';
 import {
   format as prettyFormat,
   plugins as prettyFormatPlugins,
@@ -68,7 +68,7 @@ export function diff(a: any, b: any, options?: DiffOptions): string | null {
   let expectedType = aType;
   let omitDifference = false;
   if (aType === 'object' && typeof a.asymmetricMatch === 'function') {
-    if (a.$$typeof !== Symbol.for('jest.asymmetricMatcher')) {
+    if (a.$$typeof !== Symbol.for('elric.asymmetricMatcher')) {
       // Do not know expected type of user-defined asymmetric matcher.
       return null;
     }

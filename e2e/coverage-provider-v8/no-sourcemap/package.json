@@ -1,10 +1,10 @@
 {
   "name": "no-sourcemap",
   "version": "1.0.0",
-  "jest": {
+  "elric": {
     "testEnvironment": "node",
     "transform": {
-      "\\.[jt]sx?$": "babel-jest",
+      "\\.[jt]sx?$": "babel-elric",
       "\\.css$": "<rootDir>/cssTransform.js"
     }
   }

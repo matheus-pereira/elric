@@ -1,14 +1,14 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    // we don't want `@types/jest` to be referenced
+    // we don't want `@types/elric` to be referenced
     "types": ["node"],
     "rootDir": "src",
     "outDir": "build"
   },
   "references": [
-    {"path": "../jest-fake-timers"},
-    {"path": "../jest-mock"},
-    {"path": "../jest-types"}
+    {"path": "../elric-fake-timers"},
+    {"path": "../elric-mock"},
+    {"path": "../elric-types"}
   ]
 }

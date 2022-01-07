@@ -1,5 +1,5 @@
 {
-  "jest": {
+  "elric": {
     "projects": [
       {
         "rootDir": "<rootDir>/foo",

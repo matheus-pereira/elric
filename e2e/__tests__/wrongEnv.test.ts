@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import wrap from 'jest-snapshot-serializer-raw';
+import wrap from 'elric-snapshot-serializer-raw';
 import {extractSummary} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 function assertFailuresAndSnapshot(args: Array<string>) {
-  const result = runJest('wrong-env', args);
+  const result = runelric('wrong-env', args);
   expect(result.exitCode).toBe(1);
   expect(wrap(extractSummary(result.stderr).rest)).toMatchSnapshot();
 }

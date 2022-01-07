@@ -6,5 +6,5 @@
  */
 
 module.exports = {
-  name: 'backticks-with-jest',
+  name: 'backticks-with-elric',
 };

@@ -7,9 +7,9 @@
 
 'use strict';
 
-jest.mock('../');
+elric.mock('../');
 const importedFn = require('../');
-const mockFn = jest.fn(importedFn).mockName('myMockedFunction');
+const mockFn = elric.fn(importedFn).mockName('myMockedFunction');
 
 test('first test', () => {
   mockFn();

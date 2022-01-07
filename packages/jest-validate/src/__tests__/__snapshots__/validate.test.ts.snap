@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Repeated types within multiple valid examples are coalesced in error report 1`] = `
 "<red><bold><bold>●</><bold> Validation Error</>:</>
@@ -32,7 +32,7 @@ exports[`displays warning for deprecated config options 1`] = `
 <yellow></>
 <yellow>  Option <bold>scriptPreprocessor</> was replaced by <bold>transform</>, which support multiple preprocessors.</>
 <yellow></>
-<yellow>  Jest now treats your current configuration as:</>
+<yellow>  elric now treats your current configuration as:</>
 <yellow>  {</>
 <yellow>    <bold>\\"transform\\"</>: <bold>{\\".*\\": \\"test\\"}</></>
 <yellow>  }</>
@@ -157,7 +157,7 @@ exports[`works with custom deprecations 1`] = `
 <yellow></>
 <yellow>  Option <bold>scriptPreprocessor</> was replaced by <bold>transform</>, which support multiple preprocessors.</>
 <yellow></>
-<yellow>  Jest now treats your current configuration as:</>
+<yellow>  elric now treats your current configuration as:</>
 <yellow>  {</>
 <yellow>    <bold>\\"transform\\"</>: <bold>{\\".*\\": \\"test\\"}</></>
 <yellow>  }</>

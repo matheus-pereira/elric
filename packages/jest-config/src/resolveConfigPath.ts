@@ -9,17 +9,17 @@ import * as path from 'path';
 import chalk = require('chalk');
 import * as fs from 'graceful-fs';
 import slash = require('slash');
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import {
-  JEST_CONFIG_BASE_NAME,
-  JEST_CONFIG_EXT_ORDER,
+  elric_CONFIG_BASE_NAME,
+  elric_CONFIG_EXT_ORDER,
   PACKAGE_JSON,
 } from './constants';
 
 const isFile = (filePath: Config.Path) =>
   fs.existsSync(filePath) && !fs.lstatSync(filePath).isDirectory();
 
-const getConfigFilename = (ext: string) => JEST_CONFIG_BASE_NAME + ext;
+const getConfigFilename = (ext: string) => elric_CONFIG_BASE_NAME + ext;
 
 export default (
   pathToResolve: Config.Path,
@@ -69,12 +69,12 @@ const resolveConfigPathByTraversing = (
   cwd: Config.Path,
   skipMultipleConfigWarning: boolean,
 ): Config.Path => {
-  const configFiles = JEST_CONFIG_EXT_ORDER.map(ext =>
+  const configFiles = elric_CONFIG_EXT_ORDER.map(ext =>
     path.resolve(pathToResolve, getConfigFilename(ext)),
   ).filter(isFile);
 
   const packageJson = findPackageJson(pathToResolve);
-  if (packageJson && hasPackageJsonJestKey(packageJson)) {
+  if (packageJson && hasPackageJsonelricKey(packageJson)) {
     configFiles.push(packageJson);
   }
 
@@ -110,10 +110,10 @@ const findPackageJson = (pathToResolve: Config.Path) => {
   return undefined;
 };
 
-const hasPackageJsonJestKey = (packagePath: Config.Path) => {
+const hasPackageJsonelricKey = (packagePath: Config.Path) => {
   const content = fs.readFileSync(packagePath, 'utf8');
   try {
-    return 'jest' in JSON.parse(content);
+    return 'elric' in JSON.parse(content);
   } catch {
     // If package is not a valid JSON
     return false;
@@ -128,14 +128,14 @@ const makeResolutionErrorMessage = (
   `path: "${initialPath}"\n` +
   `cwd: "${cwd}"\n` +
   'Config paths must be specified by either a direct path to a config\n' +
-  'file, or a path to a directory. If directory is given, Jest will try to\n' +
-  `traverse directory tree up, until it finds one of those files in exact order: ${JEST_CONFIG_EXT_ORDER.map(
+  'file, or a path to a directory. If directory is given, elric will try to\n' +
+  `traverse directory tree up, until it finds one of those files in exact order: ${elric_CONFIG_EXT_ORDER.map(
     ext => `"${getConfigFilename(ext)}"`,
   ).join(' or ')}.`;
 
 function extraIfPackageJson(configPath: Config.Path) {
   if (configPath.endsWith(PACKAGE_JSON)) {
-    return '`jest` key in ';
+    return '`elric` key in ';
   }
 
   return '';
@@ -154,7 +154,7 @@ const makeMultipleConfigsWarning = (configPaths: Array<Config.Path>) =>
       '  Either remove unused config files or select one explicitly with `--config`.',
       '',
       '  Configuration Documentation:',
-      '  https://jestjs.io/docs/configuration.html',
+      '  https://elricjs.io/docs/configuration.html',
       '',
     ].join('\n'),
   );

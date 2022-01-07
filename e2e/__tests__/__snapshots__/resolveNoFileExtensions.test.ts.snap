@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`show error message when no js moduleFileExtensions 1`] = `
 ● Validation Error:
@@ -9,7 +9,7 @@ exports[`show error message when no js moduleFileExtensions 1`] = `
   Please change your configuration to include 'js'.
 
   Configuration Documentation:
-  https://jestjs.io/docs/configuration
+  https://elricjs.io/docs/configuration
 
 `;
 
@@ -24,12 +24,12 @@ FAIL __tests__/test.js
       __tests__/test.js
 
 
-    However, Jest was able to find:
+    However, elric was able to find:
     	'./some-json-file.json'
 
     You might want to include a file extension in your import, or update your 'moduleFileExtensions', which is currently ['js'].
 
-    See https://jestjs.io/docs/configuration#modulefileextensions-arraystring
+    See https://elricjs.io/docs/configuration#modulefileextensions-arraystring
 
       6 |  */
       7 |
@@ -37,6 +37,6 @@ FAIL __tests__/test.js
         |                  ^
       9 |
 
-      at Resolver.resolveModule (../../packages/jest-resolve/build/resolver.js:324:11)
+      at Resolver.resolveModule (../../packages/elric-resolve/build/resolver.js:324:11)
       at Object.require (index.js:8:18)
 `;

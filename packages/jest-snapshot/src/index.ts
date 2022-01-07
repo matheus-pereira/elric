@@ -8,8 +8,8 @@
 /* eslint-disable local/ban-types-eventually */
 
 import * as fs from 'graceful-fs';
-import type {Config} from '@jest/types';
-import type {FS as HasteFS} from 'jest-haste-map';
+import type {Config} from '@elric/types';
+import type {FS as HasteFS} from 'elric-haste-map';
 import {
   BOLD_WEIGHT,
   EXPECTED_COLOR,
@@ -19,10 +19,10 @@ import {
   matcherHint,
   printWithType,
   stringify,
-} from 'jest-matcher-utils';
+} from 'elric-matcher-utils';
 import {
   EXTENSION,
-  SnapshotResolver as JestSnapshotResolver,
+  SnapshotResolver as elricSnapshotResolver,
   buildSnapshotResolver,
   isSnapshotPath,
 } from './SnapshotResolver';
@@ -118,7 +118,7 @@ const fileExists = (filePath: Config.Path, hasteFS: HasteFS): boolean =>
 const cleanup = (
   hasteFS: HasteFS,
   update: Config.SnapshotUpdateState,
-  snapshotResolver: JestSnapshotResolver,
+  snapshotResolver: elricSnapshotResolver,
   testPathIgnorePatterns?: Config.ProjectConfig['testPathIgnorePatterns'],
 ): {
   filesRemoved: number;
@@ -298,7 +298,7 @@ const _toMatchSnapshot = (config: MatchSnapshotConfig) => {
 
   if (snapshotState == null) {
     // Because the state is the problem, this is not a matcher error.
-    // Call generic stringify from jest-matcher-utils package
+    // Call generic stringify from elric-matcher-utils package
     // because uninitialized snapshot state does not need snapshot serializers.
     throw new Error(
       matcherHintFromConfig(config, false) +
@@ -532,7 +532,7 @@ const _toThrowErrorMatchingSnapshot = (
   });
 };
 
-const JestSnapshot = {
+const elricSnapshot = {
   EXTENSION,
   SnapshotState,
   addSerializer,
@@ -547,9 +547,9 @@ const JestSnapshot = {
   utils,
 };
 
-declare namespace JestSnapshot {
-  export type SnapshotResolver = JestSnapshotResolver;
+declare namespace elricSnapshot {
+  export type SnapshotResolver = elricSnapshotResolver;
   export type SnapshotStateType = SnapshotState;
 }
 
-export = JestSnapshot;
+export = elricSnapshot;

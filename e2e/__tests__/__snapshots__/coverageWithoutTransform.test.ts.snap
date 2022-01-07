@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`produces code coverage for uncovered files without transformer 1`] = `
 ---------------------|---------|----------|---------|---------|-------------------

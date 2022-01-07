@@ -3,7 +3,7 @@
     "@babel/core": "^7.0.0",
     "@babel/preset-flow": "^7.0.0"
   },
-  "jest": {
+  "elric": {
     "collectCoverageOnlyFrom": {
       "<rootDir>/this-directory-is-covered/Covered.js": true,
       "<rootDir>/this-directory-is-covered/ExcludedFromCoverage.js": true
@@ -14,7 +14,7 @@
     "testEnvironment": "node",
     "transform": {
       "\\.js$": [
-        "babel-jest",
+        "babel-elric",
         {
           "presets": [
             "@babel/preset-flow"

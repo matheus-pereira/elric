@@ -9,12 +9,12 @@ import * as path from 'path';
 import chalk = require('chalk');
 import exit = require('exit');
 import yargs = require('yargs');
-import {getVersion, runCLI} from '@jest/core';
-import type {AggregatedResult} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import {deprecationEntries} from 'jest-config';
-import {clearLine, tryRealpath} from 'jest-util';
-import {validateCLIOptions} from 'jest-validate';
+import {getVersion, runCLI} from '@elric/core';
+import type {AggregatedResult} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import {deprecationEntries} from 'elric-config';
+import {clearLine, tryRealpath} from 'elric-util';
+import {validateCLIOptions} from 'elric-validate';
 import init from '../init';
 import * as args from './args';
 
@@ -51,7 +51,7 @@ export async function run(
 export const buildArgv = (maybeArgv?: Array<string>): Config.Argv => {
   const version =
     getVersion() +
-    (__dirname.includes(`packages${path.sep}jest-cli`) ? '-dev' : '');
+    (__dirname.includes(`packages${path.sep}elric-cli`) ? '-dev' : '');
 
   const rawArgv: Config.Argv | Array<string> =
     maybeArgv || process.argv.slice(2);
@@ -126,7 +126,7 @@ const readResultsAndExit = (
   if (globalConfig.forceExit) {
     if (!globalConfig.detectOpenHandles) {
       console.warn(
-        chalk.bold('Force exiting Jest: ') +
+        chalk.bold('Force exiting elric: ') +
           'Have you considered using `--detectOpenHandles` to detect ' +
           'async operations that kept running after all tests finished?',
       );
@@ -137,11 +137,11 @@ const readResultsAndExit = (
     setTimeout(() => {
       console.warn(
         chalk.yellow.bold(
-          'Jest did not exit one second after the test run has completed.\n\n',
+          'elric did not exit one second after the test run has completed.\n\n',
         ) +
           chalk.yellow(
             'This usually means that there are asynchronous operations that ' +
-              "weren't stopped in your tests. Consider running Jest with " +
+              "weren't stopped in your tests. Consider running elric with " +
               '`--detectOpenHandles` to troubleshoot this issue.',
           ),
       );

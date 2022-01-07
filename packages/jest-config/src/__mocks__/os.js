@@ -7,7 +7,7 @@
 
 'use strict';
 
-const os = jest.createMockFromModule('os');
+const os = elric.createMockFromModule('os');
 
 let cpus;
 function __setCpus(newCpus) {
@@ -15,6 +15,6 @@ function __setCpus(newCpus) {
 }
 
 os.__setCpus = __setCpus;
-os.cpus = jest.fn(() => cpus);
+os.cpus = elric.fn(() => cpus);
 
 module.exports = os;

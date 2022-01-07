@@ -6,8 +6,8 @@
       "asynchronous",
       "setup-teardown",
       "mock-functions",
-      "jest-platform",
-      "jest-community",
+      "elric-platform",
+      "elric-community",
       "more-resources"
     ],
     "Guides": [
@@ -38,7 +38,7 @@
     "api",
     "expect",
     "mock-function-api",
-    "jest-object",
+    "elric-object",
     "configuration",
     "cli",
     "environment-variables",

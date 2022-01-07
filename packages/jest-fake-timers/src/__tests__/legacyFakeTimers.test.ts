@@ -7,8 +7,8 @@
 
 import * as util from 'util';
 import {runInNewContext} from 'vm';
-import wrap from 'jest-snapshot-serializer-raw';
-import {ModuleMocker} from 'jest-mock';
+import wrap from 'elric-snapshot-serializer-raw';
+import {ModuleMocker} from 'elric-mock';
 import FakeTimers from '../legacyFakeTimers';
 
 const timerConfig = {
@@ -223,8 +223,8 @@ describe('FakeTimers', () => {
       timers.useFakeTimers();
 
       const runOrder: Array<string> = [];
-      const mock1 = jest.fn(() => runOrder.push('mock1'));
-      const mock2 = jest.fn(() => runOrder.push('mock2'));
+      const mock1 = elric.fn(() => runOrder.push('mock1'));
+      const mock2 = elric.fn(() => runOrder.push('mock2'));
 
       global.process.nextTick(mock1);
       global.process.nextTick(mock2);
@@ -240,7 +240,7 @@ describe('FakeTimers', () => {
     });
 
     it('does nothing when no ticks have been scheduled', () => {
-      const nextTick = jest.fn();
+      const nextTick = elric.fn();
       const global = {
         process: {
           nextTick,
@@ -274,7 +274,7 @@ describe('FakeTimers', () => {
       });
       timers.useFakeTimers();
 
-      const mock1 = jest.fn();
+      const mock1 = elric.fn();
       global.process.nextTick(mock1);
       expect(mock1).toHaveBeenCalledTimes(0);
 
@@ -286,7 +286,7 @@ describe('FakeTimers', () => {
     });
 
     it('cancels a callback even from native nextTick', () => {
-      const nativeNextTick = jest.fn();
+      const nativeNextTick = elric.fn();
 
       const global = {
         process: {
@@ -302,7 +302,7 @@ describe('FakeTimers', () => {
       });
       timers.useFakeTimers();
 
-      const mock1 = jest.fn();
+      const mock1 = elric.fn();
       global.process.nextTick(mock1);
       timers.runAllTicks();
       expect(mock1).toHaveBeenCalledTimes(1);
@@ -315,7 +315,7 @@ describe('FakeTimers', () => {
     });
 
     it('cancels a callback even from native setImmediate', () => {
-      const nativeSetImmediate = jest.fn();
+      const nativeSetImmediate = elric.fn();
 
       const global = {
         process,
@@ -330,7 +330,7 @@ describe('FakeTimers', () => {
       });
       timers.useFakeTimers();
 
-      const mock1 = jest.fn();
+      const mock1 = elric.fn();
       global.setImmediate(mock1);
       timers.runAllImmediates();
       expect(mock1).toHaveBeenCalledTimes(1);
@@ -342,7 +342,7 @@ describe('FakeTimers', () => {
     });
 
     it('doesnt run a tick callback if native nextTick already did', () => {
-      const nativeNextTick = jest.fn();
+      const nativeNextTick = elric.fn();
 
       const global = {
         process: {
@@ -358,7 +358,7 @@ describe('FakeTimers', () => {
       });
       timers.useFakeTimers();
 
-      const mock1 = jest.fn();
+      const mock1 = elric.fn();
       global.process.nextTick(mock1);
 
       // Emulate native nextTick running...
@@ -371,7 +371,7 @@ describe('FakeTimers', () => {
     });
 
     it('doesnt run immediate if native setImmediate already did', () => {
-      const nativeSetImmediate = jest.fn();
+      const nativeSetImmediate = elric.fn();
 
       const global = {
         process,
@@ -386,7 +386,7 @@ describe('FakeTimers', () => {
       });
       timers.useFakeTimers();
 
-      const mock1 = jest.fn();
+      const mock1 = elric.fn();
       global.setImmediate(mock1);
 
       // Emulate native setImmediate running...
@@ -399,7 +399,7 @@ describe('FakeTimers', () => {
     });
 
     it('native doesnt run immediate if fake already did', () => {
-      const nativeSetImmediate = jest.fn();
+      const nativeSetImmediate = elric.fn();
 
       const global = {
         process,
@@ -414,7 +414,7 @@ describe('FakeTimers', () => {
       });
       timers.useFakeTimers();
 
-      const mock1 = jest.fn();
+      const mock1 = elric.fn();
       global.setImmediate(mock1);
 
       //run all immediates now
@@ -475,13 +475,13 @@ describe('FakeTimers', () => {
       timers.useFakeTimers();
 
       const runOrder: Array<string> = [];
-      const mock1 = jest.fn(() => runOrder.push('mock1'));
-      const mock2 = jest.fn(() => runOrder.push('mock2'));
-      const mock3 = jest.fn(() => runOrder.push('mock3'));
-      const mock4 = jest.fn(() => runOrder.push('mock4'));
-      const mock5 = jest.fn(() => runOrder.push('mock5'));
-      const mock6 = jest.fn(() => runOrder.push('mock6'));
-      const mockAnimatioNFrame = jest.fn(() => runOrder.push('animationFrame'));
+      const mock1 = elric.fn(() => runOrder.push('mock1'));
+      const mock2 = elric.fn(() => runOrder.push('mock2'));
+      const mock3 = elric.fn(() => runOrder.push('mock3'));
+      const mock4 = elric.fn(() => runOrder.push('mock4'));
+      const mock5 = elric.fn(() => runOrder.push('mock5'));
+      const mock6 = elric.fn(() => runOrder.push('mock6'));
+      const mockAnimatioNFrame = elric.fn(() => runOrder.push('animationFrame'));
 
       global.setTimeout(mock1, 100);
       global.setTimeout(mock2, NaN);
@@ -507,7 +507,7 @@ describe('FakeTimers', () => {
     });
 
     it('warns when trying to advance timers while real timers are used', () => {
-      const consoleWarn = jest
+      const consoleWarn = elric
         .spyOn(console, 'warn')
         .mockImplementation(() => {});
       const timers = new FakeTimers({
@@ -527,7 +527,7 @@ describe('FakeTimers', () => {
     });
 
     it('does nothing when no timers have been scheduled', () => {
-      const nativeSetTimeout = jest.fn();
+      const nativeSetTimeout = elric.fn();
       const global = {
         process,
         setTimeout: nativeSetTimeout,
@@ -553,7 +553,7 @@ describe('FakeTimers', () => {
       });
       timers.useFakeTimers();
 
-      const fn = jest.fn();
+      const fn = elric.fn();
       global.setTimeout(fn, 0);
       expect(fn).toHaveBeenCalledTimes(0);
 
@@ -574,7 +574,7 @@ describe('FakeTimers', () => {
       });
       timers.useFakeTimers();
 
-      const fn = jest.fn();
+      const fn = elric.fn();
       global.setTimeout(fn, 0, 'mockArg1', 'mockArg2');
 
       timers.runAllTimers();
@@ -583,7 +583,7 @@ describe('FakeTimers', () => {
     });
 
     it('doesnt pass the callback to native setTimeout', () => {
-      const nativeSetTimeout = jest.fn();
+      const nativeSetTimeout = elric.fn();
 
       const global = {
         process,
@@ -598,7 +598,7 @@ describe('FakeTimers', () => {
       });
       timers.useFakeTimers();
 
-      const mock1 = jest.fn();
+      const mock1 = elric.fn();
       global.setTimeout(mock1, 0);
 
       timers.runAllTimers();
@@ -641,7 +641,7 @@ describe('FakeTimers', () => {
       });
       timers.useFakeTimers();
 
-      const fn = jest.fn();
+      const fn = elric.fn();
       global.setTimeout(() => {
         process.nextTick(fn);
       }, 0);
@@ -668,11 +668,11 @@ describe('FakeTimers', () => {
       timers.useFakeTimers();
 
       const runOrder: Array<string | ['animationFrame', number]> = [];
-      const mock1 = jest.fn(() => runOrder.push('mock1'));
-      const mock2 = jest.fn(() => runOrder.push('mock2'));
-      const mock3 = jest.fn(() => runOrder.push('mock3'));
-      const mock4 = jest.fn(() => runOrder.push('mock4'));
-      const mockAnimationFrame = jest.fn(timestamp =>
+      const mock1 = elric.fn(() => runOrder.push('mock1'));
+      const mock2 = elric.fn(() => runOrder.push('mock2'));
+      const mock3 = elric.fn(() => runOrder.push('mock3'));
+      const mock4 = elric.fn(() => runOrder.push('mock4'));
+      const mockAnimationFrame = elric.fn(timestamp =>
         runOrder.push(['animationFrame', timestamp]),
       );
 
@@ -781,11 +781,11 @@ describe('FakeTimers', () => {
       timers.useFakeTimers();
 
       const runOrder: Array<string> = [];
-      const mock1 = jest.fn(() => runOrder.push('mock1'));
-      const mock2 = jest.fn(() => runOrder.push('mock2'));
-      const mock3 = jest.fn(() => runOrder.push('mock3'));
-      const mock4 = jest.fn(() => runOrder.push('mock4'));
-      const mockAnimationFrame = jest.fn(() => runOrder.push('animationFrame'));
+      const mock1 = elric.fn(() => runOrder.push('mock1'));
+      const mock2 = elric.fn(() => runOrder.push('mock2'));
+      const mock3 = elric.fn(() => runOrder.push('mock3'));
+      const mock4 = elric.fn(() => runOrder.push('mock4'));
+      const mockAnimationFrame = elric.fn(() => runOrder.push('animationFrame'));
 
       global.setTimeout(mock1, 100);
       global.setTimeout(mock2, 0);
@@ -844,11 +844,11 @@ describe('FakeTimers', () => {
       timers.useFakeTimers();
 
       const runOrder: Array<string> = [];
-      const mock1 = jest.fn(() => runOrder.push('mock1'));
-      const mock2 = jest.fn(() => runOrder.push('mock2'));
-      const mock3 = jest.fn(() => runOrder.push('mock3'));
-      const mock4 = jest.fn(() => runOrder.push('mock4'));
-      const mockAnimationFrame = jest.fn(() => runOrder.push('animationFrame'));
+      const mock1 = elric.fn(() => runOrder.push('mock1'));
+      const mock2 = elric.fn(() => runOrder.push('mock2'));
+      const mock3 = elric.fn(() => runOrder.push('mock3'));
+      const mock4 = elric.fn(() => runOrder.push('mock4'));
+      const mockAnimationFrame = elric.fn(() => runOrder.push('animationFrame'));
 
       global.setTimeout(mock1, 100);
       global.setTimeout(mock2, 0);
@@ -890,10 +890,10 @@ describe('FakeTimers', () => {
       timers.useFakeTimers();
 
       const runOrder: Array<string> = [];
-      const mock1 = jest.fn(() => runOrder.push('mock1'));
-      const mock2 = jest.fn(() => runOrder.push('mock2'));
-      const mock3 = jest.fn(() => runOrder.push('mock3'));
-      const mock4 = jest.fn(() => runOrder.push('mock4'));
+      const mock1 = elric.fn(() => runOrder.push('mock1'));
+      const mock2 = elric.fn(() => runOrder.push('mock2'));
+      const mock3 = elric.fn(() => runOrder.push('mock3'));
+      const mock4 = elric.fn(() => runOrder.push('mock4'));
 
       global.setTimeout(mock1, 0);
       global.setTimeout(() => {
@@ -932,7 +932,7 @@ describe('FakeTimers', () => {
       });
       timers.useFakeTimers();
 
-      const mock1 = jest.fn();
+      const mock1 = elric.fn();
       global.setTimeout(mock1, 100);
 
       timers.reset();
@@ -950,7 +950,7 @@ describe('FakeTimers', () => {
       });
       timers.useFakeTimers();
 
-      const mock1 = jest.fn();
+      const mock1 = elric.fn();
       global.setInterval(mock1, 200);
 
       timers.reset();
@@ -972,7 +972,7 @@ describe('FakeTimers', () => {
       });
       timers.useFakeTimers();
 
-      const mock1 = jest.fn();
+      const mock1 = elric.fn();
       global.requestAnimationFrame(mock1);
 
       timers.reset();
@@ -995,7 +995,7 @@ describe('FakeTimers', () => {
       });
       timers.useFakeTimers();
 
-      const mock1 = jest.fn();
+      const mock1 = elric.fn();
       global.process.nextTick(mock1);
       global.setImmediate(mock1);
 
@@ -1015,7 +1015,7 @@ describe('FakeTimers', () => {
       });
       timers.useFakeTimers();
 
-      const mock1 = jest.fn();
+      const mock1 = elric.fn();
       global.setTimeout(mock1, 100);
       timers.advanceTimersByTime(50);
 
@@ -1029,7 +1029,7 @@ describe('FakeTimers', () => {
 
   describe('runOnlyPendingTimers', () => {
     it('runs all timers in order', () => {
-      const nativeSetImmediate = jest.fn();
+      const nativeSetImmediate = elric.fn();
 
       const global = {
         cancelAnimationFrame: () => {},
@@ -1113,7 +1113,7 @@ describe('FakeTimers', () => {
       });
       timers.useFakeTimers();
 
-      const fn = jest.fn();
+      const fn = elric.fn();
       const timer = global.setTimeout(fn, 10);
       global.setTimeout(() => {
         global.clearTimeout(timer);
@@ -1126,10 +1126,10 @@ describe('FakeTimers', () => {
 
   describe('runWithRealTimers', () => {
     it('executes callback with native timers', () => {
-      const nativeClearInterval = jest.fn();
-      const nativeClearTimeout = jest.fn();
-      const nativeSetInterval = jest.fn();
-      const nativeSetTimeout = jest.fn();
+      const nativeClearInterval = elric.fn();
+      const nativeClearTimeout = elric.fn();
+      const nativeSetInterval = elric.fn();
+      const nativeSetTimeout = elric.fn();
 
       const global = {
         clearInterval: nativeClearInterval,
@@ -1176,10 +1176,10 @@ describe('FakeTimers', () => {
     });
 
     it('resets mock timers after executing callback', () => {
-      const nativeClearInterval = jest.fn();
-      const nativeClearTimeout = jest.fn();
-      const nativeSetInterval = jest.fn();
-      const nativeSetTimeout = jest.fn();
+      const nativeClearInterval = elric.fn();
+      const nativeClearTimeout = elric.fn();
+      const nativeSetInterval = elric.fn();
+      const nativeSetTimeout = elric.fn();
 
       const global = {
         clearInterval: nativeClearInterval,
@@ -1242,7 +1242,7 @@ describe('FakeTimers', () => {
     });
 
     it('resets mock timer functions even if callback throws', () => {
-      const nativeSetTimeout = jest.fn();
+      const nativeSetTimeout = elric.fn();
       const global = {
         process,
         setTimeout: nativeSetTimeout,
@@ -1272,10 +1272,10 @@ describe('FakeTimers', () => {
 
   describe('useRealTimers', () => {
     it('resets native timer APIs', () => {
-      const nativeSetTimeout = jest.fn();
-      const nativeSetInterval = jest.fn();
-      const nativeClearTimeout = jest.fn();
-      const nativeClearInterval = jest.fn();
+      const nativeSetTimeout = elric.fn();
+      const nativeSetInterval = elric.fn();
+      const nativeClearTimeout = elric.fn();
+      const nativeClearInterval = elric.fn();
 
       const global = {
         clearInterval: nativeClearInterval,
@@ -1308,7 +1308,7 @@ describe('FakeTimers', () => {
     });
 
     it('resets native process.nextTick when present', () => {
-      const nativeProcessNextTick = jest.fn();
+      const nativeProcessNextTick = elric.fn();
 
       const global = {
         process: {nextTick: nativeProcessNextTick},
@@ -1331,8 +1331,8 @@ describe('FakeTimers', () => {
     });
 
     it('resets native setImmediate when present', () => {
-      const nativeSetImmediate = jest.fn();
-      const nativeClearImmediate = jest.fn();
+      const nativeSetImmediate = elric.fn();
+      const nativeClearImmediate = elric.fn();
 
       const global = {
         clearImmediate: nativeClearImmediate,
@@ -1359,8 +1359,8 @@ describe('FakeTimers', () => {
     });
 
     it('resets native requestAnimationFrame when present', () => {
-      const nativeCancelAnimationFrame = jest.fn();
-      const nativeRequestAnimationFrame = jest.fn();
+      const nativeCancelAnimationFrame = elric.fn();
+      const nativeRequestAnimationFrame = elric.fn();
 
       const global = {
         cancelAnimationFrame: nativeCancelAnimationFrame,
@@ -1391,10 +1391,10 @@ describe('FakeTimers', () => {
 
   describe('useFakeTimers', () => {
     it('resets mock timer APIs', () => {
-      const nativeSetTimeout = jest.fn();
-      const nativeSetInterval = jest.fn();
-      const nativeClearTimeout = jest.fn();
-      const nativeClearInterval = jest.fn();
+      const nativeSetTimeout = elric.fn();
+      const nativeSetInterval = elric.fn();
+      const nativeClearTimeout = elric.fn();
+      const nativeClearInterval = elric.fn();
 
       const global = {
         clearInterval: nativeClearInterval,
@@ -1427,7 +1427,7 @@ describe('FakeTimers', () => {
     });
 
     it('resets mock process.nextTick when present', () => {
-      const nativeProcessNextTick = jest.fn();
+      const nativeProcessNextTick = elric.fn();
 
       const global = {
         process: {nextTick: nativeProcessNextTick},
@@ -1450,8 +1450,8 @@ describe('FakeTimers', () => {
     });
 
     it('resets mock setImmediate when present', () => {
-      const nativeSetImmediate = jest.fn();
-      const nativeClearImmediate = jest.fn();
+      const nativeSetImmediate = elric.fn();
+      const nativeClearImmediate = elric.fn();
 
       const global = {
         clearImmediate: nativeClearImmediate,
@@ -1478,8 +1478,8 @@ describe('FakeTimers', () => {
     });
 
     it('resets mock requestAnimationFrame when present', () => {
-      const nativeCancelAnimationFrame = jest.fn();
-      const nativeRequestAnimationFrame = jest.fn();
+      const nativeCancelAnimationFrame = elric.fn();
+      const nativeRequestAnimationFrame = elric.fn();
 
       const global = {
         cancelAnimationFrame: nativeCancelAnimationFrame,

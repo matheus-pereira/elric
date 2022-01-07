@@ -6,14 +6,14 @@
  */
 
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {runYarnInstall} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 it('instruments and collects coverage for typescript files', () => {
   const dir = path.resolve(__dirname, '../typescript-coverage');
   runYarnInstall(dir);
-  const {stdout} = runJest(dir, ['--coverage', '--no-cache'], {
+  const {stdout} = runelric(dir, ['--coverage', '--no-cache'], {
     stripAnsi: true,
   });
   expect(wrap(stdout)).toMatchSnapshot();

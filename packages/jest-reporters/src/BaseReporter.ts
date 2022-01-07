@@ -9,8 +9,8 @@ import type {
   AggregatedResult,
   TestCaseResult,
   TestResult,
-} from '@jest/test-result';
-import {preRunMessage} from 'jest-util';
+} from '@elric/test-result';
+import {preRunMessage} from 'elric-util';
 import type {Context, Reporter, ReporterOnStartOptions, Test} from './types';
 
 const {remove: preRunMessageRemove} = preRunMessage;

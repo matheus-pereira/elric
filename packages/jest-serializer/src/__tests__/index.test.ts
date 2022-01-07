@@ -29,7 +29,7 @@ const objs = [
   {buf: Buffer.from([0, 255, 127])},
 ];
 
-const file = path.join(tmpdir(), '__jest-serialize-test__');
+const file = path.join(tmpdir(), '__elric-serialize-test__');
 
 afterEach(() => {
   try {

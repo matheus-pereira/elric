@@ -6,7 +6,7 @@
  */
 
 import picomatch = require('picomatch');
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import replacePathSepForGlob from './replacePathSepForGlob';
 
 type Matcher = (str: Config.Path) => boolean;

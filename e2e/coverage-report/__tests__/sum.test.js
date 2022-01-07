@@ -6,7 +6,7 @@
  */
 'use strict';
 
-jest.mock('../sumDependency.js'); // call mock explicitly
+elric.mock('../sumDependency.js'); // call mock explicitly
 
 const {sum} = require('../sum');
 

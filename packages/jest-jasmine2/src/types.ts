@@ -6,7 +6,7 @@
  */
 
 import type {AssertionError} from 'assert';
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import expect = require('expect');
 import type CallTracker from './jasmine/CallTracker';
 import type Env from './jasmine/Env';
@@ -25,7 +25,7 @@ export interface AssertionErrorWithStack extends AssertionError {
   stack: string;
 }
 
-// TODO Add expect types to @jest/types or leave it here
+// TODO Add expect types to @elric/types or leave it here
 // Borrowed from "expect"
 // -------START-------
 export type SyncExpectationResult = {

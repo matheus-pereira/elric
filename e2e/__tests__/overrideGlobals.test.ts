@@ -5,16 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
-test('overriding native promise does not freeze Jest', () => {
-  const run = runJest('override-globals');
+test('overriding native promise does not freeze elric', () => {
+  const run = runelric('override-globals');
   expect(run.stderr).toMatch(/PASS __tests__(\/|\\)index.js/);
 });
 
 test('has a duration even if time is faked', () => {
   const regex = /works well \((\d+) ms\)/;
-  const {stderr} = runJest('override-globals', ['--verbose']);
+  const {stderr} = runelric('override-globals', ['--verbose']);
 
   expect(stderr).toMatch(regex);
 

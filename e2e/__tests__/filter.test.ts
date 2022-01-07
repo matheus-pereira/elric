@@ -5,18 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 describe('Dynamic test filtering', () => {
   it('uses the default JSON option', () => {
-    const result = runJest('filter', []);
+    const result = runelric('filter', []);
 
     expect(result.exitCode).toBe(0);
     expect(result.stderr).toContain('1 total');
   });
 
   it('uses the CLI option', () => {
-    const result = runJest('filter', [
+    const result = runelric('filter', [
       '--filter=<rootDir>/my-secondary-filter.js',
     ]);
 
@@ -25,7 +25,7 @@ describe('Dynamic test filtering', () => {
   });
 
   it('ignores the filter if requested to do so', () => {
-    const result = runJest('filter', [
+    const result = runelric('filter', [
       '--filter=<rootDir>/my-secondary-filter.js',
       '--skipFilter',
     ]);
@@ -35,7 +35,7 @@ describe('Dynamic test filtering', () => {
   });
 
   it('throws when you return clowny stuff', () => {
-    const result = runJest('filter', [
+    const result = runelric('filter', [
       '--filter=<rootDir>/my-clowny-filter.js',
     ]);
 
@@ -45,14 +45,14 @@ describe('Dynamic test filtering', () => {
   });
 
   it('will call setup on filter before filtering', () => {
-    const result = runJest('filter', ['--filter=<rootDir>/my-setup-filter.js']);
+    const result = runelric('filter', ['--filter=<rootDir>/my-setup-filter.js']);
 
     expect(result.exitCode).toBe(0);
     expect(result.stderr).toContain('1 total');
   });
 
   it('will print error when filter throws', () => {
-    const result = runJest('filter', [
+    const result = runelric('filter', [
       '--filter=<rootDir>/my-broken-filter.js',
     ]);
 
@@ -61,7 +61,7 @@ describe('Dynamic test filtering', () => {
   });
 
   it('will return no results when setup hook throws', () => {
-    const result = runJest('filter', [
+    const result = runelric('filter', [
       '--filter=<rootDir>/my-broken-setup-filter.js',
     ]);
 

@@ -5,6 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Running Jest like this is not officially supported,
+// Running elric like this is not officially supported,
 // but it is common practice until there is a proper API as a substitute.
-require('jest').run(process.argv);
+require('elric').run(process.argv);

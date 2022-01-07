@@ -5,16 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-jest
+elric
   .mock('istanbul-lib-source-maps')
   .mock('istanbul-lib-report', () => ({
-    ...jest.requireActual('istanbul-lib-report'),
-    createContext: jest.fn(),
-    summarizers: {pkg: jest.fn(() => ({visit: jest.fn()}))},
+    ...elric.requireActual('istanbul-lib-report'),
+    createContext: elric.fn(),
+    summarizers: {pkg: elric.fn(() => ({visit: elric.fn()}))},
   }))
   .mock('istanbul-reports', () => ({
-    ...jest.createMockFromModule('istanbul-reports'),
-    create: jest.fn(() => ({execute: jest.fn()})),
+    ...elric.createMockFromModule('istanbul-reports'),
+    create: elric.fn(() => ({execute: elric.fn()})),
   }));
 
 let libCoverage;
@@ -71,7 +71,7 @@ describe('onRunComplete', () => {
       testResults: [],
     };
 
-    libCoverage.createCoverageMap = jest.fn(() => {
+    libCoverage.createCoverageMap = elric.fn(() => {
       const covSummary = {
         branches: {covered: 0, pct: 0, skipped: 0, total: 0},
         functions: {covered: 0, pct: 0, skipped: 0, total: 0},
@@ -122,7 +122,7 @@ describe('onRunComplete', () => {
       };
     });
 
-    libSourceMaps.createSourceMapStore = jest.fn(() => ({
+    libSourceMaps.createSourceMapStore = elric.fn(() => ({
       transformCoverage(map) {
         return Promise.resolve(map);
       },
@@ -143,7 +143,7 @@ describe('onRunComplete', () => {
         maxWorkers: 2,
       },
     );
-    testReporter.log = jest.fn();
+    testReporter.log = elric.fn();
     return testReporter
       .onRunComplete(new Set(), {}, mockAggResults)
       .then(() => {
@@ -173,7 +173,7 @@ describe('onRunComplete', () => {
         maxWorkers: 2,
       },
     );
-    testReporter.log = jest.fn();
+    testReporter.log = elric.fn();
     return testReporter
       .onRunComplete(new Set(), {}, mockAggResults)
       .then(() => {
@@ -203,7 +203,7 @@ describe('onRunComplete', () => {
         maxWorkers: 2,
       },
     );
-    testReporter.log = jest.fn();
+    testReporter.log = elric.fn();
     return testReporter
       .onRunComplete(new Set(), {}, mockAggResults)
       .then(() => {
@@ -225,7 +225,7 @@ describe('onRunComplete', () => {
         maxWorkers: 2,
       },
     );
-    testReporter.log = jest.fn();
+    testReporter.log = elric.fn();
     return testReporter
       .onRunComplete(new Set(), {}, mockAggResults)
       .then(() => {
@@ -247,7 +247,7 @@ describe('onRunComplete', () => {
         maxWorkers: 2,
       },
     );
-    testReporter.log = jest.fn();
+    testReporter.log = elric.fn();
     return testReporter
       .onRunComplete(new Set(), {}, mockAggResults)
       .then(() => {
@@ -269,7 +269,7 @@ describe('onRunComplete', () => {
         maxWorkers: 2,
       },
     );
-    testReporter.log = jest.fn();
+    testReporter.log = elric.fn();
     return testReporter
       .onRunComplete(new Set(), {}, mockAggResults)
       .then(() => {
@@ -291,7 +291,7 @@ describe('onRunComplete', () => {
         maxWorkers: 2,
       },
     );
-    testReporter.log = jest.fn();
+    testReporter.log = elric.fn();
     return testReporter
       .onRunComplete(new Set(), {}, mockAggResults)
       .then(() => {
@@ -318,7 +318,7 @@ describe('onRunComplete', () => {
         maxWorkers: 2,
       },
     );
-    testReporter.log = jest.fn();
+    testReporter.log = elric.fn();
     return testReporter
       .onRunComplete(new Set(), {}, mockAggResults)
       .then(() => {
@@ -352,7 +352,7 @@ describe('onRunComplete', () => {
         maxWorkers: 2,
       },
     );
-    testReporter.log = jest.fn();
+    testReporter.log = elric.fn();
     return testReporter
       .onRunComplete(new Set(), {}, mockAggResults)
       .then(() => {
@@ -379,7 +379,7 @@ describe('onRunComplete', () => {
         maxWorkers: 2,
       },
     );
-    testReporter.log = jest.fn();
+    testReporter.log = elric.fn();
     // 100% coverage file is removed from overall coverage so
     // coverage drops to < 50%
     return testReporter
@@ -412,7 +412,7 @@ describe('onRunComplete', () => {
         maxWorkers: 2,
       },
     );
-    testReporter.log = jest.fn();
+    testReporter.log = elric.fn();
     return testReporter
       .onRunComplete(new Set(), {}, mockAggResults)
       .then(() => {
@@ -424,7 +424,7 @@ describe('onRunComplete', () => {
     const testReporter = new CoverageReporter({
       coverageReporters: ['json', ['lcov', {maxCols: 10, projectRoot: './'}]],
     });
-    testReporter.log = jest.fn();
+    testReporter.log = elric.fn();
     return testReporter
       .onRunComplete(new Set(), {}, mockAggResults)
       .then(() => {

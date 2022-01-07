@@ -6,13 +6,13 @@
  */
 
 export {default as BaseWatchPlugin} from './BaseWatchPlugin';
-export {default as JestHook} from './JestHooks';
+export {default as elricHook} from './elricHooks';
 export {default as PatternPrompt} from './PatternPrompt';
 export * from './constants';
 export type {
   AllowedConfigOptions,
-  JestHookEmitter,
-  JestHookSubscriber,
+  elricHookEmitter,
+  elricHookSubscriber,
   ScrollOptions,
   UpdateConfigCallback,
   UsageData,

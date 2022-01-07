@@ -6,11 +6,11 @@
  */
 
 // Used as type
-import type {Circus} from '@jest/types';
+import type {Circus} from '@elric/types';
 import expect = require('expect');
 
 export const STATE_SYM = Symbol(
-  'JEST_STATE_SYMBOL',
+  'elric_STATE_SYMBOL',
 ) as unknown as 'STATE_SYM_SYMBOL';
 export const RETRY_TIMES = Symbol.for(
   'RETRY_TIMES',

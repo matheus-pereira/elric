@@ -26,7 +26,7 @@ const defaultQuestions: Array<PromptObject> = [
   },
   {
     initial: false,
-    message: 'Do you want Jest to add coverage reports?',
+    message: 'Do you want elric to add coverage reports?',
     name: 'coverage',
     type: 'confirm',
   },
@@ -54,7 +54,7 @@ export default defaultQuestions;
 export const testScriptQuestion: PromptObject = {
   initial: true,
   message:
-    'Would you like to use Jest when running "test" script in "package.json"?',
+    'Would you like to use elric when running "test" script in "package.json"?',
   name: 'scripts',
   type: 'confirm',
 };

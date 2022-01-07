@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {getType, isPrimitive} from 'jest-get-type';
+import {getType, isPrimitive} from 'elric-get-type';
 import {
   DIM_COLOR,
   EXPECTED_COLOR,
@@ -20,7 +20,7 @@ import {
   printReceived,
   printWithType,
   stringify,
-} from 'jest-matcher-utils';
+} from 'elric-matcher-utils';
 import {equals} from './jasmineUtils';
 import type {
   MatcherState,
@@ -268,7 +268,7 @@ const isLineDiffableCall = (
     (arg, i) => i < received.length && isLineDiffableArg(arg, received[i]),
   );
 
-// Almost redundant with function in jest-matcher-utils,
+// Almost redundant with function in elric-matcher-utils,
 // except no line diff for any strings.
 const isLineDiffableArg = (expected: unknown, received: unknown): boolean => {
   const expectedType = getType(expected);

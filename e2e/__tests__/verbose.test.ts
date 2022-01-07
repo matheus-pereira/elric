@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('Verbose Reporter', () => {
-  const {exitCode, stderr} = runJest('verbose-reporter');
+  const {exitCode, stderr} = runelric('verbose-reporter');
 
   expect(exitCode).toBe(1);
   expect(stderr).toMatch('works just fine');

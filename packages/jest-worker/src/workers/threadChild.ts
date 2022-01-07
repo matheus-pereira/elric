@@ -41,7 +41,7 @@ const messageListener = (request: any) => {
       const init: ChildMessageInitialize = request;
       file = init[2];
       setupArgs = request[3];
-      process.env.JEST_WORKER_ID = request[4];
+      process.env.elric_WORKER_ID = request[4];
       break;
 
     case CHILD_MESSAGE_CALL:

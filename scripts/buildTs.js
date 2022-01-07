@@ -53,18 +53,18 @@ const readFilePromise = util.promisify(fs.readFile);
       `\`main\` and \`types\` field of ${pkg.name} does not match`,
     );
 
-    const jestDependenciesOfPackage = Object.keys(pkg.dependencies || {})
+    const elricDependenciesOfPackage = Object.keys(pkg.dependencies || {})
       .concat(Object.keys(pkg.devDependencies || {}))
       .filter(dep => workspacesWithTs.has(dep))
       .filter(dep => {
         // nothing should depend on these
-        if (dep === 'jest-circus' || dep === 'jest-jasmine2') {
+        if (dep === 'elric-circus' || dep === 'elric-jasmine2') {
           return false;
         }
 
         // these are just `require.resolve`-ed
-        if (pkg.name === 'jest-config') {
-          if (dep === '@jest/test-sequencer' || dep === 'babel-jest') {
+        if (pkg.name === 'elric-config') {
+          if (dep === '@elric/test-sequencer' || dep === 'babel-elric') {
             return false;
           }
         }
@@ -76,7 +76,7 @@ const readFilePromise = util.promisify(fs.readFile);
       )
       .sort();
 
-    if (jestDependenciesOfPackage.length > 0) {
+    if (elricDependenciesOfPackage.length > 0) {
       const tsConfig = JSON.parse(
         stripJsonComments(fs.readFileSync(`${pkgDir}/tsconfig.json`, 'utf8')),
       );
@@ -85,12 +85,12 @@ const readFilePromise = util.promisify(fs.readFile);
 
       assert.deepStrictEqual(
         references,
-        jestDependenciesOfPackage,
+        elricDependenciesOfPackage,
         `Expected declared references to match dependencies in packages ${
           pkg.name
         }. Got:\n\n${references.join(
           '\n',
-        )}\nExpected:\n\n${jestDependenciesOfPackage.join('\n')}`,
+        )}\nExpected:\n\n${elricDependenciesOfPackage.join('\n')}`,
       );
     }
   });

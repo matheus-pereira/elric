@@ -7,16 +7,16 @@
  */
 
 import chalk from 'chalk';
-import {JestHook, KEYS} from 'jest-watcher';
+import {elricHook, KEYS} from 'elric-watcher';
 // eslint-disable-next-line import/order
 import TestWatcher from '../TestWatcher';
 
-const runJestMock = jest.fn();
+const runelricMock = elric.fn();
 const watchPluginPath = `${__dirname}/__fixtures__/watchPlugin`;
 const watchPlugin2Path = `${__dirname}/__fixtures__/watchPlugin2`;
 let results;
 
-jest.mock(
+elric.mock(
   '../SearchSource',
   () =>
     class {
@@ -41,14 +41,14 @@ jest.mock(
     },
 );
 
-jest.doMock('chalk', () => new chalk.Instance({level: 0}));
-jest.doMock(
-  '../runJest',
+elric.doMock('chalk', () => new chalk.Instance({level: 0}));
+elric.doMock(
+  '../runelric',
   () =>
     function () {
       const args = Array.from(arguments);
       const [{onComplete}] = args;
-      runJestMock.apply(null, args);
+      runelricMock.apply(null, args);
 
       // Call the callback
       onComplete(results);
@@ -57,7 +57,7 @@ jest.doMock(
     },
 );
 
-jest.doMock(
+elric.doMock(
   watchPluginPath,
   () =>
     class WatchPlugin1 {
@@ -71,7 +71,7 @@ jest.doMock(
   {virtual: true},
 );
 
-jest.doMock(
+elric.doMock(
   watchPlugin2Path,
   () =>
     class WatchPlugin2 {
@@ -86,20 +86,20 @@ jest.doMock(
 );
 
 const regularUpdateGlobalConfig = require('../lib/updateGlobalConfig').default;
-const updateGlobalConfig = jest.fn(regularUpdateGlobalConfig);
-jest.doMock('../lib/updateGlobalConfig', () => updateGlobalConfig);
+const updateGlobalConfig = elric.fn(regularUpdateGlobalConfig);
+elric.doMock('../lib/updateGlobalConfig', () => updateGlobalConfig);
 
 const nextTick = () => new Promise(res => process.nextTick(res));
 
 beforeAll(() => {
-  jest.spyOn(process, 'on').mockImplementation(() => {});
+  elric.spyOn(process, 'on').mockImplementation(() => {});
 });
 
 afterAll(() => {
-  jest.restoreAllMocks();
+  elric.restoreAllMocks();
 });
 
-afterEach(runJestMock.mockReset);
+afterEach(runelricMock.mockReset);
 
 describe('Watch mode flows', () => {
   let watch;
@@ -112,7 +112,7 @@ describe('Watch mode flows', () => {
 
   beforeEach(() => {
     isInteractive = true;
-    jest.doMock('jest-util/build/isInteractive', () => isInteractive);
+    elric.doMock('elric-util/build/isInteractive', () => isInteractive);
     watch = require('../watch').default;
     const config = {
       rootDir: __dirname,
@@ -120,7 +120,7 @@ describe('Watch mode flows', () => {
       testPathIgnorePatterns: [],
       testRegex: [],
     };
-    pipe = {write: jest.fn()};
+    pipe = {write: elric.fn()};
     globalConfig = {watch: true};
     hasteMapInstances = [{on: () => {}}];
     contexts = [{config}];
@@ -129,7 +129,7 @@ describe('Watch mode flows', () => {
   });
 
   afterEach(() => {
-    jest.resetModules();
+    elric.resetModules();
   });
 
   it('Correctly passing test path pattern', () => {
@@ -137,7 +137,7 @@ describe('Watch mode flows', () => {
 
     watch(globalConfig, contexts, pipe, hasteMapInstances, stdin);
 
-    expect(runJestMock.mock.calls[0][0]).toMatchObject({
+    expect(runelricMock.mock.calls[0][0]).toMatchObject({
       contexts,
       globalConfig,
       onComplete: expect.any(Function),
@@ -151,7 +151,7 @@ describe('Watch mode flows', () => {
 
     watch(globalConfig, contexts, pipe, hasteMapInstances, stdin);
 
-    expect(runJestMock.mock.calls[0][0]).toMatchObject({
+    expect(runelricMock.mock.calls[0][0]).toMatchObject({
       contexts,
       globalConfig,
       onComplete: expect.any(Function),
@@ -160,9 +160,9 @@ describe('Watch mode flows', () => {
     });
   });
 
-  it('Runs Jest once by default and shows usage', () => {
+  it('Runs elric once by default and shows usage', () => {
     watch(globalConfig, contexts, pipe, hasteMapInstances, stdin);
-    expect(runJestMock.mock.calls[0][0]).toMatchObject({
+    expect(runelricMock.mock.calls[0][0]).toMatchObject({
       contexts,
       globalConfig,
       onComplete: expect.any(Function),
@@ -172,13 +172,13 @@ describe('Watch mode flows', () => {
     expect(pipe.write.mock.calls.reverse()[0]).toMatchSnapshot();
   });
 
-  it('Runs Jest in a non-interactive environment not showing usage', () => {
-    jest.resetModules();
+  it('Runs elric in a non-interactive environment not showing usage', () => {
+    elric.resetModules();
     isInteractive = false;
 
     watch = require('../watch').default;
     watch(globalConfig, contexts, pipe, hasteMapInstances, stdin);
-    expect(runJestMock.mock.calls[0][0]).toMatchObject({
+    expect(runelricMock.mock.calls[0][0]).toMatchObject({
       contexts,
       globalConfig,
       onComplete: expect.any(Function),
@@ -296,10 +296,10 @@ describe('Watch mode flows', () => {
     expect(pipeMockCalls.slice(determiningTestsToRun + 1)).toMatchSnapshot();
   });
 
-  it('allows WatchPlugins to hook into JestHook', async () => {
-    const apply = jest.fn();
+  it('allows WatchPlugins to hook into elricHook', async () => {
+    const apply = elric.fn();
     const pluginPath = `${__dirname}/__fixtures__/plugin_path_register`;
-    jest.doMock(
+    elric.doMock(
       pluginPath,
       () =>
         class WatchPlugin {
@@ -328,9 +328,9 @@ describe('Watch mode flows', () => {
   });
 
   it('allows WatchPlugins to override eligible internal plugins', async () => {
-    const run = jest.fn(() => Promise.resolve());
+    const run = elric.fn(() => Promise.resolve());
     const pluginPath = `${__dirname}/__fixtures__/plugin_path_override`;
-    jest.doMock(
+    elric.doMock(
       pluginPath,
       () =>
         class WatchPlugin {
@@ -378,9 +378,9 @@ describe('Watch mode flows', () => {
     `(
       'forbids WatchPlugins overriding reserved internal plugins',
       async ({key}) => {
-        const run = jest.fn(() => Promise.resolve());
+        const run = elric.fn(() => Promise.resolve());
         const pluginPath = `${__dirname}/__fixtures__/plugin_bad_override_${key}`;
-        jest.doMock(
+        elric.doMock(
           pluginPath,
           () =>
             class OffendingWatchPlugin {
@@ -419,7 +419,7 @@ describe('Watch mode flows', () => {
     );
 
     // The jury's still out on 'a', 'c', 'f', 'o', 'w' and '?'…
-    // See https://github.com/facebook/jest/issues/6693
+    // See https://github.com/facebook/elric/issues/6693
     it.each`
       key    | plugin
       ${'t'} | ${'TestNamePattern'}
@@ -427,9 +427,9 @@ describe('Watch mode flows', () => {
     `(
       'allows WatchPlugins to override non-reserved internal plugins',
       ({key}) => {
-        const run = jest.fn(() => Promise.resolve());
+        const run = elric.fn(() => Promise.resolve());
         const pluginPath = `${__dirname}/__fixtures__/plugin_valid_override_${key}`;
-        jest.doMock(
+        elric.doMock(
           pluginPath,
           () =>
             class ValidWatchPlugin {
@@ -462,9 +462,9 @@ describe('Watch mode flows', () => {
 
     it('forbids third-party WatchPlugins overriding each other', async () => {
       const pluginPaths = ['Foo', 'Bar'].map(ident => {
-        const run = jest.fn(() => Promise.resolve());
+        const run = elric.fn(() => Promise.resolve());
         const pluginPath = `${__dirname}/__fixtures__/plugin_bad_override_${ident.toLowerCase()}`;
-        jest.doMock(
+        elric.doMock(
           pluginPath,
           () => {
             class OffendingThirdPartyWatchPlugin {
@@ -506,7 +506,7 @@ describe('Watch mode flows', () => {
 
   it('allows WatchPlugins to be configured', async () => {
     const pluginPath = `${__dirname}/__fixtures__/plugin_path_with_config`;
-    jest.doMock(
+    elric.doMock(
       pluginPath,
       () =>
         class WatchPlugin {
@@ -547,14 +547,14 @@ describe('Watch mode flows', () => {
   });
 
   it('allows WatchPlugins to hook into file system changes', async () => {
-    const onFileChange = jest.fn();
+    const onFileChange = elric.fn();
     const pluginPath = `${__dirname}/__fixtures__/plugin_path_fs_change`;
-    jest.doMock(
+    elric.doMock(
       pluginPath,
       () =>
         class WatchPlugin {
-          apply(jestHooks) {
-            jestHooks.onFileChange(onFileChange);
+          apply(elricHooks) {
+            elricHooks.onFileChange(onFileChange);
           }
         },
       {virtual: true},
@@ -658,7 +658,7 @@ describe('Watch mode flows', () => {
       ok = ok === '✔︎';
       const pluginPath = `${__dirname}/__fixtures__/plugin_path_config_updater_${option}`;
 
-      jest.doMock(
+      elric.doMock(
         pluginPath,
         () =>
           class WatchPlugin {
@@ -686,7 +686,7 @@ describe('Watch mode flows', () => {
       stdin.emit('x');
       await nextTick();
 
-      // We need the penultimate call as Jest forces a final call to restore
+      // We need the penultimate call as elric forces a final call to restore
       // updateSnapshot because it's not sticky after a run…?
       const lastCall = updateGlobalConfig.mock.calls.slice(-2)[0];
       let expector = expect(lastCall[1]);
@@ -698,9 +698,9 @@ describe('Watch mode flows', () => {
   );
 
   it('triggers enter on a WatchPlugin when its key is pressed', async () => {
-    const run = jest.fn(() => Promise.resolve());
+    const run = elric.fn(() => Promise.resolve());
     const pluginPath = `${__dirname}/__fixtures__/plugin_path`;
-    jest.doMock(
+    elric.doMock(
       pluginPath,
       () =>
         class WatchPlugin1 {
@@ -736,11 +736,11 @@ describe('Watch mode flows', () => {
     expect(run).toHaveBeenCalled();
   });
 
-  it('prevents Jest from handling keys when active and returns control when end is called', async () => {
+  it('prevents elric from handling keys when active and returns control when end is called', async () => {
     let resolveShowPrompt;
-    const run = jest.fn(() => new Promise(res => (resolveShowPrompt = res)));
+    const run = elric.fn(() => new Promise(res => (resolveShowPrompt = res)));
     const pluginPath = `${__dirname}/__fixtures__/plugin_path_1`;
-    jest.doMock(
+    elric.doMock(
       pluginPath,
       () =>
         class WatchPlugin1 {
@@ -758,9 +758,9 @@ describe('Watch mode flows', () => {
       {virtual: true},
     );
 
-    const showPrompt2 = jest.fn(() => Promise.resolve());
+    const showPrompt2 = elric.fn(() => Promise.resolve());
     const pluginPath2 = `${__dirname}/__fixtures__/plugin_path_2`;
-    jest.doMock(
+    elric.doMock(
       pluginPath2,
       () =>
         class WatchPlugin1 {
@@ -806,12 +806,12 @@ describe('Watch mode flows', () => {
 
   it('Pressing "o" runs test in "only changed files" mode', () => {
     watch(globalConfig, contexts, pipe, hasteMapInstances, stdin);
-    runJestMock.mockReset();
+    runelricMock.mockReset();
 
     stdin.emit('o');
 
-    expect(runJestMock).toBeCalled();
-    expect(runJestMock.mock.calls[0][0].globalConfig).toMatchObject({
+    expect(runelricMock).toBeCalled();
+    expect(runelricMock.mock.calls[0][0].globalConfig).toMatchObject({
       onlyChanged: true,
       watch: true,
       watchAll: false,
@@ -820,12 +820,12 @@ describe('Watch mode flows', () => {
 
   it('Pressing "a" runs test in "watch all" mode', () => {
     watch(globalConfig, contexts, pipe, hasteMapInstances, stdin);
-    runJestMock.mockReset();
+    runelricMock.mockReset();
 
     stdin.emit('a');
 
-    expect(runJestMock).toBeCalled();
-    expect(runJestMock.mock.calls[0][0].globalConfig).toMatchObject({
+    expect(runelricMock).toBeCalled();
+    expect(runelricMock.mock.calls[0][0].globalConfig).toMatchObject({
       onlyChanged: false,
       watch: false,
       watchAll: true,
@@ -834,23 +834,23 @@ describe('Watch mode flows', () => {
 
   it('Pressing "ENTER" reruns the tests', () => {
     watch(globalConfig, contexts, pipe, hasteMapInstances, stdin);
-    expect(runJestMock).toHaveBeenCalledTimes(1);
+    expect(runelricMock).toHaveBeenCalledTimes(1);
     stdin.emit(KEYS.ENTER);
-    expect(runJestMock).toHaveBeenCalledTimes(2);
+    expect(runelricMock).toHaveBeenCalledTimes(2);
   });
 
   it('Pressing "t" reruns the tests in "test name pattern" mode', async () => {
-    const hooks = new JestHook();
+    const hooks = new elricHook();
 
     watch(globalConfig, contexts, pipe, hasteMapInstances, stdin, hooks);
-    runJestMock.mockReset();
+    runelricMock.mockReset();
 
     stdin.emit('t');
     ['t', 'e', 's', 't'].forEach(key => stdin.emit(key));
     stdin.emit(KEYS.ENTER);
     await nextTick();
 
-    expect(runJestMock.mock.calls[0][0].globalConfig).toMatchObject({
+    expect(runelricMock.mock.calls[0][0].globalConfig).toMatchObject({
       testNamePattern: 'test',
       watch: true,
       watchAll: false,
@@ -858,17 +858,17 @@ describe('Watch mode flows', () => {
   });
 
   it('Pressing "p" reruns the tests in "filename pattern" mode', async () => {
-    const hooks = new JestHook();
+    const hooks = new elricHook();
 
     watch(globalConfig, contexts, pipe, hasteMapInstances, stdin, hooks);
-    runJestMock.mockReset();
+    runelricMock.mockReset();
 
     stdin.emit('p');
     ['f', 'i', 'l', 'e'].forEach(key => stdin.emit(key));
     stdin.emit(KEYS.ENTER);
     await nextTick();
 
-    expect(runJestMock.mock.calls[0][0].globalConfig).toMatchObject({
+    expect(runelricMock.mock.calls[0][0].globalConfig).toMatchObject({
       testPathPattern: 'file',
       watch: true,
       watchAll: false,
@@ -876,10 +876,10 @@ describe('Watch mode flows', () => {
   });
 
   it('Can combine "p" and "t" filters', async () => {
-    const hooks = new JestHook();
+    const hooks = new elricHook();
 
     watch(globalConfig, contexts, pipe, hasteMapInstances, stdin, hooks);
-    runJestMock.mockReset();
+    runelricMock.mockReset();
 
     stdin.emit('p');
     ['f', 'i', 'l', 'e'].forEach(key => stdin.emit(key));
@@ -891,7 +891,7 @@ describe('Watch mode flows', () => {
     stdin.emit(KEYS.ENTER);
     await nextTick();
 
-    expect(runJestMock.mock.calls[1][0].globalConfig).toMatchObject({
+    expect(runelricMock.mock.calls[1][0].globalConfig).toMatchObject({
       testNamePattern: 'test',
       testPathPattern: 'file',
       watch: true,
@@ -900,19 +900,19 @@ describe('Watch mode flows', () => {
   });
 
   it('Pressing "u" reruns the tests in "update snapshot" mode', async () => {
-    const hooks = new JestHook();
+    const hooks = new elricHook();
 
     globalConfig.updateSnapshot = 'new';
 
     watch(globalConfig, contexts, pipe, hasteMapInstances, stdin, hooks);
-    runJestMock.mockReset();
+    runelricMock.mockReset();
 
     hooks.getEmitter().onTestRunComplete({snapshot: {failure: true}});
 
     stdin.emit('u');
     await nextTick();
 
-    expect(runJestMock.mock.calls[0][0].globalConfig).toMatchObject({
+    expect(runelricMock.mock.calls[0][0].globalConfig).toMatchObject({
       updateSnapshot: 'all',
       watch: true,
       watchAll: false,
@@ -922,7 +922,7 @@ describe('Watch mode flows', () => {
 
     await nextTick();
     // updateSnapshot is not sticky after a run.
-    expect(runJestMock.mock.calls[1][0].globalConfig).toMatchObject({
+    expect(runelricMock.mock.calls[1][0].globalConfig).toMatchObject({
       updateSnapshot: 'new',
       watch: false,
       watchAll: true,
@@ -933,11 +933,11 @@ describe('Watch mode flows', () => {
     stdin.emit('a');
     await nextTick();
 
-    runJestMock.mockReset();
+    runelricMock.mockReset();
     stdin.emit('u');
     await nextTick();
 
-    expect(runJestMock.mock.calls[0][0].globalConfig).toMatchObject({
+    expect(runelricMock.mock.calls[0][0].globalConfig).toMatchObject({
       updateSnapshot: 'all',
       watch: false,
       watchAll: true,
@@ -948,7 +948,7 @@ describe('Watch mode flows', () => {
     globalConfig.passWithNoTests = false;
     watch(globalConfig, contexts, pipe, hasteMapInstances, stdin);
     globalConfig.passWithNoTests = true;
-    expect(runJestMock.mock.calls[0][0]).toMatchObject({
+    expect(runelricMock.mock.calls[0][0]).toMatchObject({
       globalConfig,
     });
   });

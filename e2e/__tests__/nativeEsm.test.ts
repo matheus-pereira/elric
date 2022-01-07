@@ -6,10 +6,10 @@
  */
 
 import {resolve} from 'path';
-import wrap from 'jest-snapshot-serializer-raw';
-import {onNodeVersions} from '@jest/test-utils';
+import wrap from 'elric-snapshot-serializer-raw';
+import {onNodeVersions} from '@elric/test-utils';
 import {extractSummary} from '../Utils';
-import runJest, {getConfig} from '../runJest';
+import runelric, {getConfig} from '../runelric';
 
 const DIR = resolve(__dirname, '../native-esm');
 
@@ -23,7 +23,7 @@ test('test config is without transform', () => {
 // The versions where vm.Module exists and commonjs with "exports" is not broken
 onNodeVersions('>=12.16.0', () => {
   test('runs test with native ESM', () => {
-    const {exitCode, stderr, stdout} = runJest(DIR, ['native-esm.test.js'], {
+    const {exitCode, stderr, stdout} = runelric(DIR, ['native-esm.test.js'], {
       nodeOptions: '--experimental-vm-modules --no-warnings',
     });
 
@@ -38,7 +38,7 @@ onNodeVersions('>=12.16.0', () => {
 // The versions where TLA is supported
 onNodeVersions('>=14.3.0', () => {
   test('supports top-level await', () => {
-    const {exitCode, stderr, stdout} = runJest(
+    const {exitCode, stderr, stdout} = runelric(
       DIR,
       ['native-esm.tla.test.js'],
       {nodeOptions: '--experimental-vm-modules --no-warnings'},

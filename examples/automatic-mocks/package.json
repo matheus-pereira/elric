@@ -5,13 +5,13 @@
   "devDependencies": {
     "@babel/core": "*",
     "@babel/preset-env": "*",
-    "babel-jest": "*",
-    "jest": "*"
+    "babel-elric": "*",
+    "elric": "*"
   },
   "scripts": {
-    "test": "jest"
+    "test": "elric"
   },
-  "jest": {
+  "elric": {
     "automock": true
   }
 }

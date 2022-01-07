@@ -7,9 +7,9 @@
 
 import {tmpdir} from 'os';
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {cleanup, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(tmpdir(), 'show-config-test');
 
@@ -19,10 +19,10 @@ afterEach(() => cleanup(DIR));
 test('--showConfig outputs config info and exits', () => {
   writeFiles(DIR, {
     '__tests__/test.test.js': `test('test', () => {});`,
-    'package.json': JSON.stringify({jest: {environment: 'node'}}),
+    'package.json': JSON.stringify({elric: {environment: 'node'}}),
   });
 
-  let {stdout} = runJest(DIR, [
+  let {stdout} = runelric(DIR, [
     '--showConfig',
     '--no-cache',
     // Make the snapshot flag stable on CI.
@@ -33,12 +33,12 @@ test('--showConfig outputs config info and exits', () => {
     .replace(/\\\\node_modules\\\\/g, 'node_modules')
     .replace(/\\\\\.pnp\\\\\.\[\^[/\\]+\]\+\$/g, '<<REPLACED_PNP_PATH>>')
     .replace(/\\\\(?:([^.]+?)|$)/g, '/$1')
-    .replace(/"cacheDirectory": "(.+)"/g, '"cacheDirectory": "/tmp/jest"')
+    .replace(/"cacheDirectory": "(.+)"/g, '"cacheDirectory": "/tmp/elric"')
     .replace(/"name": "(.+)"/g, '"name": "[md5 hash]"')
     .replace(/"version": "(.+)"/g, '"version": "[version]"')
     .replace(/"maxWorkers": (\d+)/g, '"maxWorkers": "[maxWorkers]"')
     .replace(/"\S*show-config-test/gm, '"<<REPLACED_ROOT_DIR>>')
-    .replace(/"\S*\/jest\/packages/gm, '"<<REPLACED_JEST_PACKAGES_DIR>>');
+    .replace(/"\S*\/elric\/packages/gm, '"<<REPLACED_elric_PACKAGES_DIR>>');
 
   expect(wrap(stdout)).toMatchSnapshot();
 });

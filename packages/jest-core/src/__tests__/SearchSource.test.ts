@@ -7,16 +7,16 @@
  */
 
 import * as path from 'path';
-import type {Test} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import {normalize} from 'jest-config';
-import Runtime from 'jest-runtime';
+import type {Test} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import {normalize} from 'elric-config';
+import Runtime from 'elric-runtime';
 import SearchSource, {SearchResult} from '../SearchSource';
 
-jest.setTimeout(15000);
+elric.setTimeout(15000);
 
-jest.mock('graceful-fs', () => {
-  const realFs = jest.requireActual('fs');
+elric.mock('graceful-fs', () => {
+  const realFs = elric.requireActual('fs');
 
   return {
     ...realFs,
@@ -487,7 +487,7 @@ describe('SearchSource', () => {
       '..',
       '..',
       '..',
-      'jest-runtime',
+      'elric-runtime',
       'src',
       '__tests__',
       'test_root',
@@ -503,7 +503,7 @@ describe('SearchSource', () => {
               '..',
               '..',
               '..',
-              'jest-haste-map',
+              'elric-haste-map',
               'src',
               '__tests__',
               'haste_impl.js',
@@ -597,7 +597,7 @@ describe('SearchSource', () => {
     });
 
     it('finds tests for a single file', async () => {
-      const input = ['packages/jest-core/src/__tests__/test_root/module.jsx'];
+      const input = ['packages/elric-core/src/__tests__/test_root/module.jsx'];
       const data = await searchSource.findRelatedTestsFromPattern(input, false);
       expect(toPaths(data.tests).sort()).toEqual([
         path.join(rootDir, '__testtests__', 'test.js'),
@@ -607,8 +607,8 @@ describe('SearchSource', () => {
 
     it('finds tests for multiple files', async () => {
       const input = [
-        'packages/jest-core/src/__tests__/test_root/module.jsx',
-        'packages/jest-core/src/__tests__/test_root/module.foobar',
+        'packages/elric-core/src/__tests__/test_root/module.jsx',
+        'packages/elric-core/src/__tests__/test_root/module.foobar',
       ];
       const data = await searchSource.findRelatedTestsFromPattern(input, false);
       expect(toPaths(data.tests).sort()).toEqual([
@@ -645,7 +645,7 @@ describe('SearchSource', () => {
   describe('findRelatedSourcesFromTestsInChangedFiles', () => {
     const rootDir = path.resolve(
       __dirname,
-      '../../../jest-runtime/src/__tests__/test_root',
+      '../../../elric-runtime/src/__tests__/test_root',
     );
 
     beforeEach(async () => {
@@ -654,7 +654,7 @@ describe('SearchSource', () => {
           haste: {
             hasteImplModulePath: path.resolve(
               __dirname,
-              '../../../jest-haste-map/src/__tests__/haste_impl.js',
+              '../../../elric-haste-map/src/__tests__/haste_impl.js',
             ),
           },
           name: 'SearchSource-findRelatedSourcesFromTestsInChangedFiles-tests',

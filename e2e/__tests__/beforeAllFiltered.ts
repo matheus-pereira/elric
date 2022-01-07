@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {wrap} from 'jest-snapshot-serializer-raw';
-import runJest from '../runJest';
+import {wrap} from 'elric-snapshot-serializer-raw';
+import runelric from '../runelric';
 
 describe('Correct BeforeAll run', () => {
   it('ensures the BeforeAll of ignored suite is not run', () => {
-    let {stdout} = runJest('before-all-filtered');
+    let {stdout} = runelric('before-all-filtered');
 
     // for some reason Circus does not have the `Object` part
     stdout = stdout.replace(/at Object.log \(/g, 'at log (');

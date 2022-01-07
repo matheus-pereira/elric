@@ -4,8 +4,8 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import {onNodeVersions} from '@jest/test-utils';
-import {runContinuous} from '../runJest';
+import {onNodeVersions} from '@elric/test-utils';
+import {runContinuous} from '../runelric';
 
 const testCompletedRE = /Ran all test suites./g;
 const numberOfTestRuns = (stderr: string): number => {

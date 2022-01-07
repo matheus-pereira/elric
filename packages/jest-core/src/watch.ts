@@ -10,27 +10,27 @@ import ansiEscapes = require('ansi-escapes');
 import chalk = require('chalk');
 import exit = require('exit');
 import slash = require('slash');
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import type {
   ChangeEvent as HasteChangeEvent,
   default as HasteMap,
-} from 'jest-haste-map';
-import {formatExecError} from 'jest-message-util';
-import type {Context} from 'jest-runtime';
+} from 'elric-haste-map';
+import {formatExecError} from 'elric-message-util';
+import type {Context} from 'elric-runtime';
 import {
   isInteractive,
   preRunMessage,
   requireOrImportModule,
   specialChars,
-} from 'jest-util';
-import {ValidationError} from 'jest-validate';
+} from 'elric-util';
+import {ValidationError} from 'elric-validate';
 import {
   AllowedConfigOptions,
-  JestHook,
+  elricHook,
   KEYS,
   WatchPlugin,
   WatchPluginClass,
-} from 'jest-watcher';
+} from 'elric-watcher';
 import FailedTestsCache from './FailedTestsCache';
 import SearchSource from './SearchSource';
 import TestWatcher from './TestWatcher';
@@ -49,7 +49,7 @@ import TestNamePatternPlugin from './plugins/TestNamePattern';
 import TestPathPatternPlugin from './plugins/TestPathPattern';
 import UpdateSnapshotsPlugin from './plugins/UpdateSnapshots';
 import UpdateSnapshotsInteractivePlugin from './plugins/UpdateSnapshotsInteractive';
-import runJest from './runJest';
+import runelric from './runelric';
 import type {Filter} from './types';
 
 type ReservedInfo = {
@@ -95,7 +95,7 @@ export default async function watch(
   outputStream: NodeJS.WriteStream,
   hasteMapInstances: Array<HasteMap>,
   stdin: NodeJS.ReadStream = process.stdin,
-  hooks: JestHook = new JestHook(),
+  hooks: elricHook = new elricHook(),
   filter?: Filter,
 ): Promise<void> {
   // `globalConfig` will be constantly updated and reassigned as a result of
@@ -294,19 +294,19 @@ export default async function watch(
     const configs = contexts.map(context => context.config);
     const changedFilesPromise = getChangedFilesPromise(globalConfig, configs);
 
-    return runJest({
+    return runelric({
       changedFilesPromise,
       contexts,
       failedTestsCache,
       filter,
       globalConfig,
-      jestHooks: hooks.getEmitter(),
+      elricHooks: hooks.getEmitter(),
       onComplete: results => {
         isRunning = false;
         hooks.getEmitter().onTestRunComplete(results);
 
         // Create a new testWatcher instance so that re-runs won't be blocked.
-        // The old instance that was passed to Jest will still be interrupted
+        // The old instance that was passed to elric will still be interrupted
         // and prevent test runs from the previous run.
         testWatcher = new TestWatcher({isWatchMode: true});
 
@@ -331,7 +331,7 @@ export default async function watch(
       startRun,
       testWatcher,
     }).catch(error =>
-      // Errors thrown inside `runJest`, e.g. by resolvers, are caught here for
+      // Errors thrown inside `runelric`, e.g. by resolvers, are caught here for
       // continuous watch mode execution. We need to reprint them to the
       // terminal and give just a little bit of extra space so they fit below
       // `preRunMessagePrint` message nicely.
@@ -353,7 +353,7 @@ export default async function watch(
     }
 
     if (activePlugin != null && activePlugin.onKey) {
-      // if a plugin is activate, Jest should let it handle keystrokes, so ignore
+      // if a plugin is activate, elric should let it handle keystrokes, so ignore
       // them here
       activePlugin.onKey(key);
       return;
@@ -382,7 +382,7 @@ export default async function watch(
         testWatcher.setState({interrupted: true});
         return;
       }
-      // "activate" the plugin, which has jest ignore keystrokes so the plugin
+      // "activate" the plugin, which has elric ignore keystrokes so the plugin
       // can handle them
       activePlugin = matchingWatchPlugin;
       if (activePlugin.run) {

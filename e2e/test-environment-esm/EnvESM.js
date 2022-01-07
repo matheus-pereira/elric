@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import NodeEnvironment from 'jest-environment-node';
+import NodeEnvironment from 'elric-environment-node';
 
 export default class Env extends NodeEnvironment {
   constructor(...args) {

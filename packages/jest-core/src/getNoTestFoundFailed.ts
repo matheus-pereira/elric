@@ -6,8 +6,8 @@
  */
 
 import chalk = require('chalk');
-import type {Config} from '@jest/types';
-import {isInteractive} from 'jest-util';
+import type {Config} from '@elric/types';
+import {isInteractive} from 'elric-util';
 
 export default function getNoTestFoundFailed(
   globalConfig: Config.GlobalConfig,
@@ -18,7 +18,7 @@ export default function getNoTestFoundFailed(
       '\n' +
         (globalConfig.watch
           ? 'Press `f` to quit "only failed tests" mode.'
-          : 'Run Jest without `--onlyFailures` or with `--all` to run all tests.'),
+          : 'Run elric without `--onlyFailures` or with `--all` to run all tests.'),
     );
   }
   return msg;

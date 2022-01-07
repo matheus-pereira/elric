@@ -10,7 +10,7 @@ import * as os from 'os';
 import * as path from 'path';
 import * as fs from 'graceful-fs';
 import {cleanup, writeFiles} from '../Utils';
-import {runContinuous} from '../runJest';
+import {runContinuous} from '../runelric';
 
 const DIR = path.resolve(os.tmpdir(), 'watch_mode_no_access');
 
@@ -30,7 +30,7 @@ const setupFiles = () => {
       module.exports = 0;
     `,
     'package.json': JSON.stringify({
-      jest: {},
+      elric: {},
     }),
   });
 };

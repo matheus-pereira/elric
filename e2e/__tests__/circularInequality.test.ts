@@ -7,14 +7,14 @@
 
 import {tmpdir} from 'os';
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {
   cleanup,
   createEmptyPackage,
   extractSortedSummary,
   writeFiles,
 } from '../Utils';
-import {runContinuous} from '../runJest';
+import {runContinuous} from '../runelric';
 
 const tempDir = path.resolve(tmpdir(), 'circular-inequality-test');
 

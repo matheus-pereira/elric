@@ -4,13 +4,13 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @jest-environment jsdom
+ * @elric-environment jsdom
  */
 /* eslint-env browser*/
 
 describe('toEqual', () => {
   describe('duck type', () => {
-    // https://github.com/facebook/jest/issues/7786
+    // https://github.com/facebook/elric/issues/7786
 
     const createElement = (name: string, ...childNodes: Array<unknown>) => ({
       childNodes,

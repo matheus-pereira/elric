@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
-import {replacePathSepForRegex} from 'jest-regex-util';
-import type {AllowedConfigOptions} from 'jest-watcher';
+import type {Config} from '@elric/types';
+import {replacePathSepForRegex} from 'elric-regex-util';
+import type {AllowedConfigOptions} from 'elric-watcher';
 
 type ExtraConfigOptions = Partial<
   Pick<Config.GlobalConfig, 'noSCM' | 'passWithNoTests'>

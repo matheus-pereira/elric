@@ -1,10 +1,10 @@
 {
-  "name": "jest-jasmine2",
+  "name": "elric-jasmine2",
   "version": "27.4.6",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/jest-jasmine2"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/elric-jasmine2"
   },
   "license": "MIT",
   "main": "./build/index.js",
@@ -17,21 +17,21 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@jest/environment": "^27.4.6",
-    "@jest/source-map": "^27.4.0",
-    "@jest/test-result": "^27.4.6",
-    "@jest/types": "^27.4.2",
+    "@elric/environment": "^27.4.6",
+    "@elric/source-map": "^27.4.0",
+    "@elric/test-result": "^27.4.6",
+    "@elric/types": "^27.4.2",
     "@types/node": "*",
     "chalk": "^4.0.0",
     "co": "^4.6.0",
     "expect": "^27.4.6",
     "is-generator-fn": "^2.0.0",
-    "jest-each": "^27.4.6",
-    "jest-matcher-utils": "^27.4.6",
-    "jest-message-util": "^27.4.6",
-    "jest-runtime": "^27.4.6",
-    "jest-snapshot": "^27.4.6",
-    "jest-util": "^27.4.2",
+    "elric-each": "^27.4.6",
+    "elric-matcher-utils": "^27.4.6",
+    "elric-message-util": "^27.4.6",
+    "elric-runtime": "^27.4.6",
+    "elric-snapshot": "^27.4.6",
+    "elric-util": "^27.4.2",
     "pretty-format": "^27.4.6",
     "throat": "^6.0.1"
   },

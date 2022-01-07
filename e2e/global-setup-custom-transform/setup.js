@@ -8,9 +8,9 @@ const crypto = require('crypto');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const {createDirectory} = require('jest-util');
+const {createDirectory} = require('elric-util');
 
-const DIR = path.join(os.tmpdir(), 'jest-global-setup-custom-transform');
+const DIR = path.join(os.tmpdir(), 'elric-global-setup-custom-transform');
 
 module.exports = function () {
   return new Promise(resolve => {

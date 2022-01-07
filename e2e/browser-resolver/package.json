@@ -1,5 +1,5 @@
 {
-  "jest": {
+  "elric": {
     "resolver": "<rootDir>/resolver.js",
     "testEnvironment": "jsdom"
   },

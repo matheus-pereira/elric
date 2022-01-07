@@ -9,12 +9,12 @@ import {format as prettyFormat} from 'pretty-format';
 import plugin from '../mockSerializer';
 
 test('mock with 0 calls and default name', () => {
-  const fn = jest.fn();
+  const fn = elric.fn();
   expect(fn).toMatchSnapshot();
 });
 
 test('mock with 2 calls, 1 return, 1 throw', () => {
-  const fn = jest.fn(value => {
+  const fn = elric.fn(value => {
     if (value % 2 === 0) {
       return value * 2;
     } else {
@@ -34,7 +34,7 @@ test('mock with 2 calls, 1 return, 1 throw', () => {
 });
 
 test('mock with 0 calls and default name in React element', () => {
-  const fn = jest.fn();
+  const fn = elric.fn();
   const val = {
     $$typeof: Symbol.for('react.test.json'),
     children: ['Mock me!'],
@@ -47,13 +47,13 @@ test('mock with 0 calls and default name in React element', () => {
 });
 
 test('mock with 0 calls and non-default name', () => {
-  const fn = jest.fn();
+  const fn = elric.fn();
   fn.mockName('MyConstructor');
   expect(fn).toMatchSnapshot();
 });
 
 test('mock with 1 calls and non-default name via new in object', () => {
-  const fn = jest.fn();
+  const fn = elric.fn();
   fn.mockName('MyConstructor');
   // eslint-disable-next-line no-new
   new fn({name: 'some fine name'});
@@ -64,7 +64,7 @@ test('mock with 1 calls and non-default name via new in object', () => {
 });
 
 test('mock with 1 calls in React element', () => {
-  const fn = jest.fn();
+  const fn = elric.fn();
   fn('Mocking you!');
   const val = {
     $$typeof: Symbol.for('react.test.json'),
@@ -78,14 +78,14 @@ test('mock with 1 calls in React element', () => {
 });
 
 test('mock with 2 calls', () => {
-  const fn = jest.fn();
+  const fn = elric.fn();
   fn();
   fn({foo: 'bar'}, 42);
   expect(fn).toMatchSnapshot();
 });
 
 test('indent option', () => {
-  const fn = jest.fn(val => val);
+  const fn = elric.fn(val => val);
   fn({key: 'value'});
   const expected = [
     '[MockFunction] {',
@@ -110,7 +110,7 @@ test('indent option', () => {
 });
 
 test('min option', () => {
-  const fn = jest.fn(val => val);
+  const fn = elric.fn(val => val);
   fn({key: 'value'});
   const expected =
     '[MockFunction] {"calls": [[{"key": "value"}]], "results": [{"type": "return", "value": {"key": "value"}}]}';
@@ -118,13 +118,13 @@ test('min option', () => {
 });
 
 test('maxDepth option', () => {
-  const fn1 = jest.fn();
+  const fn1 = elric.fn();
   fn1.mockName('atDepth1');
   fn1('primitive', {key: 'value'});
-  const fn2 = jest.fn();
+  const fn2 = elric.fn();
   fn2.mockName('atDepth2');
   fn2('primitive', {key: 'value'});
-  const fn3 = jest.fn();
+  const fn3 = elric.fn();
   fn3.mockName('atDepth3');
   fn3('primitive', {key: 'value'});
   const val = {

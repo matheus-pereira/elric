@@ -1,5 +1,5 @@
 {
-  "jest": {
+  "elric": {
     "rootDir": "./",
     "transform": {
       "\\.(js)$": "<rootDir>/preprocessor.js"
@@ -7,11 +7,11 @@
     "testRegex": "/__tests__/.*\\.(js)$",
     "testEnvironment": "node",
     "transformIgnorePatterns": [
-      "jest-circus",
-      "jest-each",
-      "jest-environment-node",
-      "jest-jasmine2",
-      "jest-runner"
+      "elric-circus",
+      "elric-each",
+      "elric-environment-node",
+      "elric-jasmine2",
+      "elric-runner"
     ],
     "moduleFileExtensions": [
       "js"

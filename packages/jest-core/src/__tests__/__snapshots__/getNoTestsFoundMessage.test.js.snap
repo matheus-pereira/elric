@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`getNoTestsFoundMessage returns correct message when monitoring only changed 1`] = `"<bold>No tests found related to files changed since last commit.</>"`;
 

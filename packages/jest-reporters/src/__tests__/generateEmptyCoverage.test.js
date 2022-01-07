@@ -9,13 +9,13 @@ import os from 'os';
 import path from 'path';
 import istanbulCoverage from 'istanbul-lib-coverage';
 import libSourceMaps from 'istanbul-lib-source-maps';
-import {makeGlobalConfig, makeProjectConfig} from '@jest/test-utils';
-import {shouldInstrument} from '@jest/transform';
+import {makeGlobalConfig, makeProjectConfig} from '@elric/test-utils';
+import {shouldInstrument} from '@elric/transform';
 import generateEmptyCoverage from '../generateEmptyCoverage';
 
-jest.mock('@jest/transform', () => ({
-  ...jest.requireActual('@jest/transform'),
-  shouldInstrument: jest.fn(),
+elric.mock('@elric/transform', () => ({
+  ...elric.requireActual('@elric/transform'),
+  shouldInstrument: elric.fn(),
 }));
 
 describe('generateEmptyCoverage', () => {
@@ -50,7 +50,7 @@ describe('generateEmptyCoverage', () => {
         cacheDirectory: os.tmpdir(),
         cwd: rootDir,
         rootDir,
-        transform: [['\\.js$', require.resolve('babel-jest')]],
+        transform: [['\\.js$', require.resolve('babel-elric')]],
       }),
     );
 
@@ -94,7 +94,7 @@ describe('generateEmptyCoverage', () => {
         cacheDirectory: os.tmpdir(),
         cwd: rootDir,
         rootDir,
-        transform: [['\\.js$', require.resolve('babel-jest')]],
+        transform: [['\\.js$', require.resolve('babel-elric')]],
       }),
     );
 
@@ -123,7 +123,7 @@ describe('generateEmptyCoverage', () => {
         cacheDirectory: os.tmpdir(),
         cwd: rootDir,
         rootDir,
-        transform: [['\\.js$', require.resolve('babel-jest')]],
+        transform: [['\\.js$', require.resolve('babel-elric')]],
       }),
     );
 

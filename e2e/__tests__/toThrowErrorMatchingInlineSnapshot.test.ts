@@ -7,9 +7,9 @@
 
 import * as path from 'path';
 import * as fs from 'graceful-fs';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {cleanup, makeTemplate, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(
   __dirname,
@@ -36,7 +36,7 @@ test('works fine when function throws error', () => {
 
   {
     writeFiles(TESTS_DIR, {[filename]: template()});
-    const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+    const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
     const fileAfter = readFile(filename);
     expect(stderr).toMatch('1 snapshot written from 1 test suite.');
     expect(wrap(fileAfter)).toMatchSnapshot('initial write');
@@ -57,7 +57,7 @@ test('updates existing snapshot', () => {
 
   {
     writeFiles(TESTS_DIR, {[filename]: template()});
-    const {stderr, exitCode} = runJest(DIR, [
+    const {stderr, exitCode} = runelric(DIR, [
       '-w=1',
       '--ci=false',
       filename,
@@ -82,7 +82,7 @@ test('cannot be used with .not', () => {
 
   {
     writeFiles(TESTS_DIR, {[filename]: template()});
-    const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+    const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
     expect(stderr).toMatch('Snapshot matchers cannot be used with not');
     expect(exitCode).toBe(1);
   }
@@ -98,7 +98,7 @@ test('should support rejecting promises', () => {
   `);
 
   writeFiles(TESTS_DIR, {[filename]: template()});
-  const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false', filename]);
+  const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false', filename]);
   const fileAfter = readFile(filename);
   expect(stderr).toMatch('1 snapshot written from 1 test suite.');
   expect(wrap(fileAfter)).toMatchSnapshot();

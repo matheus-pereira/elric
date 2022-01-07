@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {Circus} from '@jest/types';
+import {Circus} from '@elric/types';
 import circus from '../';
 
 describe.each(['beforeEach', 'beforeAll', 'afterEach', 'afterAll'])(

@@ -12,9 +12,9 @@ import Prompt from '../Prompt';
 it('calls handler on change value', () => {
   const options = {max: 10, offset: -1};
   const prompt = new Prompt();
-  const onChange = jest.fn();
+  const onChange = elric.fn();
 
-  prompt.enter(onChange, jest.fn(), jest.fn());
+  prompt.enter(onChange, elric.fn(), elric.fn());
 
   expect(onChange).toHaveBeenLastCalledWith('', options);
 
@@ -35,9 +35,9 @@ it('calls handler on change value', () => {
 
 it('calls handler on success prompt', () => {
   const prompt = new Prompt();
-  const onSuccess = jest.fn();
+  const onSuccess = elric.fn();
 
-  prompt.enter(jest.fn(), onSuccess, jest.fn());
+  prompt.enter(elric.fn(), onSuccess, elric.fn());
 
   prompt.put('t');
   prompt.put('e');
@@ -50,9 +50,9 @@ it('calls handler on success prompt', () => {
 
 it('calls handler on cancel prompt', () => {
   const prompt = new Prompt();
-  const onCancel = jest.fn();
+  const onCancel = elric.fn();
 
-  prompt.enter(jest.fn(), jest.fn(), onCancel);
+  prompt.enter(elric.fn(), elric.fn(), onCancel);
 
   prompt.put('t');
   prompt.put('e');
@@ -65,10 +65,10 @@ it('calls handler on cancel prompt', () => {
 
 it('clears the line when CONTROL_U is pressed', () => {
   const prompt = new Prompt();
-  const onChange = jest.fn();
+  const onChange = elric.fn();
   const options = {max: 10, offset: -1};
 
-  prompt.enter(onChange, jest.fn(), jest.fn());
+  prompt.enter(onChange, elric.fn(), elric.fn());
 
   prompt.put('t');
   prompt.put('e');

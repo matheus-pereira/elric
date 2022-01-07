@@ -6,14 +6,14 @@
  */
 
 import * as path from 'path';
-import {onNodeVersions} from '@jest/test-utils';
+import {onNodeVersions} from '@elric/test-utils';
 import {extractSummary} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 const dir = path.resolve(__dirname, '../custom-esm-test-sequencer');
 
 onNodeVersions('>=12.16.0', () => {
   test('run prioritySequence', () => {
-    const result = runJest(dir, ['-i'], {
+    const result = runelric(dir, ['-i'], {
       nodeOptions: '--experimental-vm-modules --no-warnings',
     });
 

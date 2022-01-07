@@ -6,15 +6,15 @@
  *
  */
 
-import {alignedAnsiStyleSerializer} from '@jest/test-utils';
-import * as matcherUtils from 'jest-matcher-utils';
-import jestExpect from '../';
+import {alignedAnsiStyleSerializer} from '@elric/test-utils';
+import * as matcherUtils from 'elric-matcher-utils';
+import elricExpect from '../';
 import {equals} from '../jasmineUtils';
 import {iterableEquality, subsetEquality} from '../utils';
 
 expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 
-jestExpect.extend({
+elricExpect.extend({
   toBeDivisibleBy(actual: number, expected: number) {
     const pass = actual % expected === 0;
     const message = pass
@@ -53,26 +53,26 @@ jestExpect.extend({
 });
 
 it('is available globally when matcher is unary', () => {
-  jestExpect(15).toBeDivisibleBy(5);
-  jestExpect(15).toBeDivisibleBy(3);
-  jestExpect(15).not.toBeDivisibleBy(6);
+  elricExpect(15).toBeDivisibleBy(5);
+  elricExpect(15).toBeDivisibleBy(3);
+  elricExpect(15).not.toBeDivisibleBy(6);
 
-  jestExpect(() =>
-    jestExpect(15).toBeDivisibleBy(2),
+  elricExpect(() =>
+    elricExpect(15).toBeDivisibleBy(2),
   ).toThrowErrorMatchingSnapshot();
 });
 
 it('is available globally when matcher is variadic', () => {
-  jestExpect(15).toBeWithinRange(10, 20);
-  jestExpect(15).not.toBeWithinRange(6);
+  elricExpect(15).toBeWithinRange(10, 20);
+  elricExpect(15).not.toBeWithinRange(6);
 
-  jestExpect(() =>
-    jestExpect(15).toBeWithinRange(1, 3),
+  elricExpect(() =>
+    elricExpect(15).toBeWithinRange(1, 3),
   ).toThrowErrorMatchingSnapshot();
 });
 
 it('exposes matcherUtils in context', () => {
-  jestExpect.extend({
+  elricExpect.extend({
     _shouldNotError(_actual: unknown, _expected: unknown) {
       const pass = this.equals(
         this.utils,
@@ -89,70 +89,70 @@ it('exposes matcherUtils in context', () => {
     },
   });
 
-  jestExpect()._shouldNotError();
+  elricExpect()._shouldNotError();
 });
 
 it('is ok if there is no message specified', () => {
-  jestExpect.extend({
+  elricExpect.extend({
     toFailWithoutMessage(_expected: unknown) {
       return {pass: false};
     },
   });
 
   expect(() =>
-    jestExpect(true).toFailWithoutMessage(),
+    elricExpect(true).toFailWithoutMessage(),
   ).toThrowErrorMatchingSnapshot();
 });
 
 it('exposes an equality function to custom matchers', () => {
-  // jestExpect and expect share the same global state
+  // elricExpect and expect share the same global state
   expect.assertions(3);
-  jestExpect.extend({
+  elricExpect.extend({
     toBeOne() {
       expect(this.equals).toBe(equals);
       return {pass: !!this.equals(1, 1)};
     },
   });
 
-  expect(() => jestExpect().toBeOne()).not.toThrow();
+  expect(() => elricExpect().toBeOne()).not.toThrow();
 });
 
 it('defines asymmetric unary matchers', () => {
   expect(() =>
-    jestExpect({value: 2}).toEqual({value: jestExpect.toBeDivisibleBy(2)}),
+    elricExpect({value: 2}).toEqual({value: elricExpect.toBeDivisibleBy(2)}),
   ).not.toThrow();
   expect(() =>
-    jestExpect({value: 3}).toEqual({value: jestExpect.toBeDivisibleBy(2)}),
+    elricExpect({value: 3}).toEqual({value: elricExpect.toBeDivisibleBy(2)}),
   ).toThrowErrorMatchingSnapshot();
 });
 
 it('defines asymmetric unary matchers that can be prefixed by not', () => {
   expect(() =>
-    jestExpect({value: 2}).toEqual({value: jestExpect.not.toBeDivisibleBy(2)}),
+    elricExpect({value: 2}).toEqual({value: elricExpect.not.toBeDivisibleBy(2)}),
   ).toThrowErrorMatchingSnapshot();
   expect(() =>
-    jestExpect({value: 3}).toEqual({value: jestExpect.not.toBeDivisibleBy(2)}),
+    elricExpect({value: 3}).toEqual({value: elricExpect.not.toBeDivisibleBy(2)}),
   ).not.toThrow();
 });
 
 it('defines asymmetric variadic matchers', () => {
   expect(() =>
-    jestExpect({value: 2}).toEqual({value: jestExpect.toBeWithinRange(1, 3)}),
+    elricExpect({value: 2}).toEqual({value: elricExpect.toBeWithinRange(1, 3)}),
   ).not.toThrow();
   expect(() =>
-    jestExpect({value: 3}).toEqual({value: jestExpect.toBeWithinRange(4, 11)}),
+    elricExpect({value: 3}).toEqual({value: elricExpect.toBeWithinRange(4, 11)}),
   ).toThrowErrorMatchingSnapshot();
 });
 
 it('defines asymmetric variadic matchers that can be prefixed by not', () => {
   expect(() =>
-    jestExpect({value: 2}).toEqual({
-      value: jestExpect.not.toBeWithinRange(1, 3),
+    elricExpect({value: 2}).toEqual({
+      value: elricExpect.not.toBeWithinRange(1, 3),
     }),
   ).toThrowErrorMatchingSnapshot();
   expect(() =>
-    jestExpect({value: 3}).toEqual({
-      value: jestExpect.not.toBeWithinRange(5, 7),
+    elricExpect({value: 3}).toEqual({
+      value: elricExpect.not.toBeWithinRange(5, 7),
     }),
   ).not.toThrow();
 });
@@ -162,26 +162,26 @@ it('prints the Symbol into the error message', () => {
   const bar = Symbol('bar');
 
   expect(() =>
-    jestExpect({a: foo}).toEqual({
-      a: jestExpect.toBeSymbol(bar),
+    elricExpect({a: foo}).toEqual({
+      a: elricExpect.toBeSymbol(bar),
     }),
   ).toThrowErrorMatchingSnapshot();
 });
 
 it('allows overriding existing extension', () => {
-  jestExpect.extend({
+  elricExpect.extend({
     toAllowOverridingExistingMatcher(_expected: unknown) {
       return {pass: _expected === 'bar'};
     },
   });
 
-  jestExpect('foo').not.toAllowOverridingExistingMatcher();
+  elricExpect('foo').not.toAllowOverridingExistingMatcher();
 
-  jestExpect.extend({
+  elricExpect.extend({
     toAllowOverridingExistingMatcher(_expected: unknown) {
       return {pass: _expected === 'foo'};
     },
   });
 
-  jestExpect('foo').toAllowOverridingExistingMatcher();
+  elricExpect('foo').toAllowOverridingExistingMatcher();
 });

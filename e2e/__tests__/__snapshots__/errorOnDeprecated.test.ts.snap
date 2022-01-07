@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`defaultTimeoutInterval.test.js errors in errorOnDeprecated mode 1`] = `
 FAIL __tests__/defaultTimeoutInterval.test.js
@@ -6,7 +6,7 @@ FAIL __tests__/defaultTimeoutInterval.test.js
 
   ● Default Timeout Interval
 
-    Illegal usage of \`jasmine.DEFAULT_TIMEOUT_INTERVAL\`, prefer \`jest.setTimeout\`.
+    Illegal usage of \`jasmine.DEFAULT_TIMEOUT_INTERVAL\`, prefer \`elric.setTimeout\`.
 
        8 |
        9 | test('Default Timeout Interval', () => {
@@ -115,7 +115,7 @@ FAIL __tests__/jasmine.createSpy.test.js
 
   ● jasmine.createSpy
 
-    Illegal usage of \`jasmine.createSpy\`, prefer \`jest.fn\`.
+    Illegal usage of \`jasmine.createSpy\`, prefer \`elric.fn\`.
 
        8 |
        9 | test('jasmine.createSpy', () => {
@@ -190,7 +190,7 @@ FAIL __tests__/spyOn.test.js
 
   ● spyOn
 
-    Illegal usage of global \`spyOn\`, prefer \`jest.spyOn\`.
+    Illegal usage of global \`spyOn\`, prefer \`elric.spyOn\`.
 
       13 |
       14 | test('spyOn', () => {
@@ -209,7 +209,7 @@ FAIL __tests__/spyOnProperty.test.js
 
   ● spyOnProperty
 
-    Illegal usage of global \`spyOnProperty\`, prefer \`jest.spyOn\`.
+    Illegal usage of global \`spyOnProperty\`, prefer \`elric.spyOn\`.
 
       22 |   };
       23 |

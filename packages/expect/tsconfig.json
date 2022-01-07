@@ -5,10 +5,10 @@
     "outDir": "build"
   },
   "references": [
-    {"path": "../jest-get-type"},
-    {"path": "../jest-matcher-utils"},
-    {"path": "../jest-message-util"},
-    {"path": "../jest-types"},
+    {"path": "../elric-get-type"},
+    {"path": "../elric-matcher-utils"},
+    {"path": "../elric-message-util"},
+    {"path": "../elric-types"},
     {"path": "../test-utils"}
   ]
 }

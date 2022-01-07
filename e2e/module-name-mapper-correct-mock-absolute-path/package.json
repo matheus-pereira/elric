@@ -1,5 +1,5 @@
 {
-  "jest": {
+  "elric": {
     "moduleNameMapper": {
       "^/(.*)$": "<rootDir>/src/$1"
     }

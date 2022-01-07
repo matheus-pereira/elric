@@ -8,6 +8,6 @@
 
 import {foo} from '../src/module';
 
-it('can be used with mjs files using babel-jest', () => {
+it('can be used with mjs files using babel-elric', () => {
   expect(foo()).toBe('a');
 });

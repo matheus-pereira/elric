@@ -7,7 +7,7 @@
 
 import chalk = require('chalk');
 import stripAnsi = require('strip-ansi');
-import {alignedAnsiStyleSerializer} from '@jest/test-utils';
+import {alignedAnsiStyleSerializer} from '@elric/test-utils';
 import {diff} from '../';
 import {NO_DIFF_MESSAGE} from '../constants';
 import {diffLinesUnified, diffLinesUnified2} from '../diffLines';
@@ -549,7 +549,7 @@ describe('indentation in React elements (snapshot)', () => {
   ].join('\n');
 
   describe('from less to more', () => {
-    // We intend to improve snapshot diff in the next version of Jest.
+    // We intend to improve snapshot diff in the next version of elric.
     const expected = [
       '  <span>',
       '-   <span>',
@@ -572,7 +572,7 @@ describe('indentation in React elements (snapshot)', () => {
   });
 
   describe('from more to less', () => {
-    // We intend to improve snapshot diff in the next version of Jest.
+    // We intend to improve snapshot diff in the next version of elric.
     const expected = [
       '  <span>',
       '-   <strong>',
@@ -599,7 +599,7 @@ describe('outer React element (non-snapshot)', () => {
   const a = {
     $$typeof: elementSymbol,
     props: {
-      children: 'Jest',
+      children: 'elric',
     },
     type: 'h1',
   };
@@ -625,7 +625,7 @@ describe('outer React element (non-snapshot)', () => {
       '+ <header>',
       // following 3 lines are unchanged, except for more indentation
       '    <h1>',
-      '      Jest',
+      '      elric',
       '    </h1>',
       '+   <h2>',
       '+     Delightful JavaScript Testing',
@@ -646,7 +646,7 @@ describe('outer React element (non-snapshot)', () => {
       '- <header>',
       // following 3 lines are unchanged, except for less indentation
       '  <h1>',
-      '    Jest',
+      '    elric',
       '  </h1>',
       '-   <h2>',
       '-     Delightful JavaScript Testing',

@@ -46,7 +46,7 @@ function getExposedMethods(
 }
 
 /**
- * The Jest farm (publicly called "Worker") is a class that allows you to queue
+ * The elric farm (publicly called "Worker") is a class that allows you to queue
  * methods across multiple child processes, in order to parallelize work. This
  * is done by providing an absolute path to a module that will be loaded on each
  * of the child processes, and bridged to the main process.

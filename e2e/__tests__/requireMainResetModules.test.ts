@@ -5,18 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test("`require.main` on using `--resetModules='true'` should not be undefined", () => {
-  const {exitCode} = runJest('require-main-reset-modules', [
+  const {exitCode} = runelric('require-main-reset-modules', [
     `--resetModules='true'`,
     'resetModulesFlag',
   ]);
   expect(exitCode).toBe(0);
 });
 
-test('`require.main` on using `jest.resetModules()` should not be undefined', () => {
-  const {exitCode} = runJest('require-main-reset-modules', [
+test('`require.main` on using `elric.resetModules()` should not be undefined', () => {
+  const {exitCode} = runelric('require-main-reset-modules', [
     'resetModulesCall',
   ]);
   expect(exitCode).toBe(0);

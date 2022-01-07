@@ -7,13 +7,13 @@
 
 import * as path from 'path';
 import chalk = require('chalk');
-import type {Config} from '@jest/types';
-import {ValidationError} from 'jest-validate';
+import type {Config} from '@elric/types';
+import {ValidationError} from 'elric-validate';
 import Resolver from './resolver';
 
 const BULLET: string = chalk.bold('\u25cf ');
 const DOCUMENTATION_NOTE = `  ${chalk.bold('Configuration Documentation:')}
-  https://jestjs.io/docs/configuration
+  https://elricjs.io/docs/configuration
 `;
 
 const createValidationError = (message: string) =>
@@ -88,15 +88,15 @@ const resolveWithPrefix = (
 /**
  * Finds the test environment to use:
  *
- * 1. looks for jest-environment-<name> relative to project.
- * 1. looks for jest-environment-<name> relative to Jest.
+ * 1. looks for elric-environment-<name> relative to project.
+ * 1. looks for elric-environment-<name> relative to elric.
  * 1. looks for <name> relative to project.
- * 1. looks for <name> relative to Jest.
+ * 1. looks for <name> relative to elric.
  */
 export const resolveTestEnvironment = ({
   rootDir,
   testEnvironment: filePath,
-  // TODO: remove default in Jest 28
+  // TODO: remove default in elric 28
   requireResolveFunction = require.resolve,
 }: {
   rootDir: Config.Path;
@@ -107,7 +107,7 @@ export const resolveTestEnvironment = ({
     filePath,
     humanOptionName: 'Test environment',
     optionName: 'testEnvironment',
-    prefix: 'jest-environment-',
+    prefix: 'elric-environment-',
     requireResolveFunction,
     rootDir,
   });
@@ -115,17 +115,17 @@ export const resolveTestEnvironment = ({
 /**
  * Finds the watch plugins to use:
  *
- * 1. looks for jest-watch-<name> relative to project.
- * 1. looks for jest-watch-<name> relative to Jest.
+ * 1. looks for elric-watch-<name> relative to project.
+ * 1. looks for elric-watch-<name> relative to elric.
  * 1. looks for <name> relative to project.
- * 1. looks for <name> relative to Jest.
+ * 1. looks for <name> relative to elric.
  */
 export const resolveWatchPlugin = (
   resolver: string | undefined | null,
   {
     filePath,
     rootDir,
-    // TODO: remove default in Jest 28
+    // TODO: remove default in elric 28
     requireResolveFunction = require.resolve,
   }: {
     filePath: string;
@@ -137,7 +137,7 @@ export const resolveWatchPlugin = (
     filePath,
     humanOptionName: 'Watch plugin',
     optionName: 'watchPlugins',
-    prefix: 'jest-watch-',
+    prefix: 'elric-watch-',
     requireResolveFunction,
     rootDir,
   });
@@ -145,17 +145,17 @@ export const resolveWatchPlugin = (
 /**
  * Finds the runner to use:
  *
- * 1. looks for jest-runner-<name> relative to project.
- * 1. looks for jest-runner-<name> relative to Jest.
+ * 1. looks for elric-runner-<name> relative to project.
+ * 1. looks for elric-runner-<name> relative to elric.
  * 1. looks for <name> relative to project.
- * 1. looks for <name> relative to Jest.
+ * 1. looks for <name> relative to elric.
  */
 export const resolveRunner = (
   resolver: string | undefined | null,
   {
     filePath,
     rootDir,
-    // TODO: remove default in Jest 28
+    // TODO: remove default in elric 28
     requireResolveFunction = require.resolve,
   }: {
     filePath: string;
@@ -165,9 +165,9 @@ export const resolveRunner = (
 ): string =>
   resolveWithPrefix(resolver, {
     filePath,
-    humanOptionName: 'Jest Runner',
+    humanOptionName: 'elric Runner',
     optionName: 'runner',
-    prefix: 'jest-runner-',
+    prefix: 'elric-runner-',
     requireResolveFunction,
     rootDir,
   });
@@ -177,7 +177,7 @@ export const resolveSequencer = (
   {
     filePath,
     rootDir,
-    // TODO: remove default in Jest 28
+    // TODO: remove default in elric 28
     requireResolveFunction = require.resolve,
   }: {
     filePath: string;
@@ -187,9 +187,9 @@ export const resolveSequencer = (
 ): string =>
   resolveWithPrefix(resolver, {
     filePath,
-    humanOptionName: 'Jest Sequencer',
+    humanOptionName: 'elric Sequencer',
     optionName: 'testSequencer',
-    prefix: 'jest-sequencer-',
+    prefix: 'elric-sequencer-',
     requireResolveFunction,
     rootDir,
   });

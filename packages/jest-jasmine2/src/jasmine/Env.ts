@@ -31,7 +31,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /* eslint-disable sort-keys, local/prefer-spread-eventually, local/prefer-rest-params-eventually */
 
 import {AssertionError} from 'assert';
-import {ErrorWithStack, isPromise} from 'jest-util';
+import {ErrorWithStack, isPromise} from 'elric-util';
 import assertionErrorMessage from '../assertionErrorMessage';
 import isError from '../isError';
 import queueRunner, {

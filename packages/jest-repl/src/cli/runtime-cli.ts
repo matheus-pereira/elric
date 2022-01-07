@@ -9,14 +9,14 @@ import {cpus} from 'os';
 import * as path from 'path';
 import chalk = require('chalk');
 import yargs = require('yargs');
-import {CustomConsole} from '@jest/console';
-import type {JestEnvironment} from '@jest/environment';
-import {createScriptTransformer} from '@jest/transform';
-import type {Config} from '@jest/types';
-import {deprecationEntries, readConfig} from 'jest-config';
-import Runtime from 'jest-runtime';
-import {setGlobal, tryRealpath} from 'jest-util';
-import {validateCLIOptions} from 'jest-validate';
+import {CustomConsole} from '@elric/console';
+import type {elricEnvironment} from '@elric/environment';
+import {createScriptTransformer} from '@elric/transform';
+import type {Config} from '@elric/types';
+import {deprecationEntries, readConfig} from 'elric-config';
+import Runtime from 'elric-runtime';
+import {setGlobal, tryRealpath} from 'elric-util';
+import {validateCLIOptions} from 'elric-validate';
 import * as args from './args';
 import {VERSION} from './version';
 
@@ -58,7 +58,7 @@ export async function run(
 
   if (argv.debug) {
     const info = cliInfo ? ', ' + cliInfo.join(', ') : '';
-    console.log(`Using Jest Runtime v${VERSION}${info}`);
+    console.log(`Using elric Runtime v${VERSION}${info}`);
   }
   const options = await readConfig(argv, root);
   const globalConfig = options.globalConfig;
@@ -75,7 +75,7 @@ export async function run(
     });
 
     const transformer = await createScriptTransformer(config);
-    const Environment: typeof JestEnvironment =
+    const Environment: typeof elricEnvironment =
       await transformer.requireAndTranspileModule(config.testEnvironment);
 
     const environment = new Environment(config);
@@ -86,12 +86,12 @@ export async function run(
     );
     setGlobal(
       environment.global as unknown as typeof globalThis,
-      'jestProjectConfig',
+      'elricProjectConfig',
       config,
     );
     setGlobal(
       environment.global as unknown as typeof globalThis,
-      'jestGlobalConfig',
+      'elricGlobalConfig',
       globalConfig,
     );
 

@@ -1,14 +1,14 @@
 ---
 id: configuration
-title: Configuring Jest
+title: Configuring elric
 ---
 
-Jest's configuration can be defined in the `package.json` file of your project, or through a `jest.config.js`, or `jest.config.ts` file or through the `--config <path/to/file.js|ts|cjs|mjs|json>` option. If you'd like to use your `package.json` to store Jest's config, the `"jest"` key should be used on the top level so Jest will know how to find your settings:
+elric's configuration can be defined in the `package.json` file of your project, or through a `elric.config.js`, or `elric.config.ts` file or through the `--config <path/to/file.js|ts|cjs|mjs|json>` option. If you'd like to use your `package.json` to store elric's config, the `"elric"` key should be used on the top level so elric will know how to find your settings:
 
 ```json
 {
   "name": "my-project",
-  "jest": {
+  "elric": {
     "verbose": true
   }
 }
@@ -16,9 +16,9 @@ Jest's configuration can be defined in the `package.json` file of your project, 
 
 Or through JavaScript:
 
-```js title="jest.config.js"
+```js title="elric.config.js"
 // Sync object
-/** @type {import('@jest/types').Config.InitialOptions} */
+/** @type {import('@elric/types').Config.InitialOptions} */
 const config = {
   verbose: true,
 };
@@ -35,8 +35,8 @@ module.exports = async () => {
 
 Or through TypeScript (if `ts-node` is installed):
 
-```ts title="jest.config.ts"
-import type {Config} from '@jest/types';
+```ts title="elric.config.ts"
+import type {Config} from '@elric/types';
 
 // Sync object
 const config: Config.InitialOptions = {
@@ -54,7 +54,7 @@ export default async (): Promise<Config.InitialOptions> => {
 
 Please keep in mind that the resulting configuration must be JSON-serializable.
 
-When using the `--config` option, the JSON file must not contain a "jest" key:
+When using the `--config` option, the JSON file must not contain a "elric" key:
 
 ```json
 {
@@ -65,14 +65,14 @@ When using the `--config` option, the JSON file must not contain a "jest" key:
 
 ## Options
 
-These options let you control Jest's behavior in your `package.json` file. The Jest philosophy is to work great by default, but sometimes you just need more configuration power.
+These options let you control elric's behavior in your `package.json` file. The elric philosophy is to work great by default, but sometimes you just need more configuration power.
 
 ### Defaults
 
-You can retrieve Jest's default options to expand them if needed:
+You can retrieve elric's default options to expand them if needed:
 
-```js title="jest.config.js"
-const {defaults} = require('jest-config');
+```js title="elric.config.js"
+const {defaults} = require('elric-config');
 module.exports = {
   // ...
   moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx'],
@@ -92,7 +92,7 @@ import TOCInline from "@theme/TOCInline"
 
 Default: `false`
 
-This option tells Jest that all imported modules in your tests should be mocked automatically. All modules used in your tests will have a replacement implementation, keeping the API surface.
+This option tells elric that all imported modules in your tests should be mocked automatically. All modules used in your tests will have a replacement implementation, keeping the API surface.
 
 Example:
 
@@ -126,27 +126,27 @@ test('if utils mocked automatically', () => {
 
 _Note: Node modules are automatically mocked when you have a manual mock in place (e.g.: `__mocks__/lodash.js`). More info [here](manual-mocks#mocking-node-modules)._
 
-_Note: Core modules, like `fs`, are not mocked by default. They can be mocked explicitly, like `jest.mock('fs')`._
+_Note: Core modules, like `fs`, are not mocked by default. They can be mocked explicitly, like `elric.mock('fs')`._
 
 ### `bail` \[number | boolean]
 
 Default: `0`
 
-By default, Jest runs all tests and produces all errors into the console upon completion. The bail config option can be used here to have Jest stop running tests after `n` failures. Setting bail to `true` is the same as setting bail to `1`.
+By default, elric runs all tests and produces all errors into the console upon completion. The bail config option can be used here to have elric stop running tests after `n` failures. Setting bail to `true` is the same as setting bail to `1`.
 
 ### `cacheDirectory` \[string]
 
 Default: `"/tmp/<path>"`
 
-The directory where Jest should store its cached dependency information.
+The directory where elric should store its cached dependency information.
 
-Jest attempts to scan your dependency tree once (up-front) and cache it in order to ease some of the filesystem raking that needs to happen while running tests. This config option lets you customize where Jest stores that cache data on disk.
+elric attempts to scan your dependency tree once (up-front) and cache it in order to ease some of the filesystem raking that needs to happen while running tests. This config option lets you customize where elric stores that cache data on disk.
 
 ### `clearMocks` \[boolean]
 
 Default: `false`
 
-Automatically clear mock calls, instances and results before every test. Equivalent to calling [`jest.clearAllMocks()`](JestObjectAPI.md#jestclearallmocks) before each test. This does not remove any mock implementation that may have been provided.
+Automatically clear mock calls, instances and results before every test. Equivalent to calling [`elric.clearAllMocks()`](elricObjectAPI.md#elricclearallmocks) before each test. This does not remove any mock implementation that may have been provided.
 
 ### `collectCoverage` \[boolean]
 
@@ -176,7 +176,7 @@ This will collect coverage information for all the files inside the project's `r
 
 _Note: Each glob pattern is applied in the order they are specified in the config. (For example `["!**/__tests__/**", "**/*.js"]` will not exclude `__tests__` because the negation is overwritten with the second pattern. In order to make the negated glob work in this example it has to come after `**/*.js`.)_
 
-_Note: This option requires `collectCoverage` to be set to true or Jest to be invoked with `--coverage`._
+_Note: This option requires `collectCoverage` to be set to true or elric to be invoked with `--coverage`._
 
 <details>
   <summary>Help:</summary>
@@ -189,7 +189,7 @@ Branches     : Unknown% ( 0/0 )
 Functions    : Unknown% ( 0/0 )
 Lines        : Unknown% ( 0/0 )
 ================================================================================
-Jest: Coverage data for global was not found.
+elric: Coverage data for global was not found.
 ```
 
 Most likely your glob patterns are not matching any files. Refer to the [micromatch](https://github.com/micromatch/micromatch) documentation to ensure your globs are compatible.
@@ -200,7 +200,7 @@ Most likely your glob patterns are not matching any files. Refer to the [microma
 
 Default: `undefined`
 
-The directory where Jest should output its coverage files.
+The directory where elric should output its coverage files.
 
 ### `coveragePathIgnorePatterns` \[array&lt;string&gt;]
 
@@ -220,7 +220,7 @@ Note that using `v8` is considered experimental. This uses V8's builtin code cov
 
 Default: `["clover", "json", "lcov", "text"]`
 
-A list of reporter names that Jest uses when writing coverage reports. Any [istanbul reporter](https://github.com/istanbuljs/istanbuljs/tree/master/packages/istanbul-reports/lib) can be used.
+A list of reporter names that elric uses when writing coverage reports. Any [istanbul reporter](https://github.com/istanbuljs/istanbuljs/tree/master/packages/istanbul-reports/lib) can be used.
 
 _Note: Setting this option overwrites the default values. Add `"text"` or `"text-summary"` to see a coverage summary in the console output._
 
@@ -232,20 +232,20 @@ Additional options can be passed using the tuple form. For example, you may hide
 }
 ```
 
-For more information about the options object shape refer to `CoverageReporterWithOptions` type in the [type definitions](https://github.com/facebook/jest/tree/main/packages/jest-types/src/Config.ts).
+For more information about the options object shape refer to `CoverageReporterWithOptions` type in the [type definitions](https://github.com/facebook/elric/tree/main/packages/elric-types/src/Config.ts).
 
 ### `coverageThreshold` \[object]
 
 Default: `undefined`
 
-This will be used to configure minimum threshold enforcement for coverage results. Thresholds can be specified as `global`, as a [glob](https://github.com/isaacs/node-glob#glob-primer), and as a directory or file path. If thresholds aren't met, jest will fail. Thresholds specified as a positive number are taken to be the minimum percentage required. Thresholds specified as a negative number represent the maximum number of uncovered entities allowed.
+This will be used to configure minimum threshold enforcement for coverage results. Thresholds can be specified as `global`, as a [glob](https://github.com/isaacs/node-glob#glob-primer), and as a directory or file path. If thresholds aren't met, elric will fail. Thresholds specified as a positive number are taken to be the minimum percentage required. Thresholds specified as a negative number represent the maximum number of uncovered entities allowed.
 
-For example, with the following configuration jest will fail if there is less than 80% branch, line, and function coverage, or if there are more than 10 uncovered statements:
+For example, with the following configuration elric will fail if there is less than 80% branch, line, and function coverage, or if there are more than 10 uncovered statements:
 
 ```json
 {
   ...
-  "jest": {
+  "elric": {
     "coverageThreshold": {
       "global": {
         "branches": 80,
@@ -265,7 +265,7 @@ For example, with the following configuration:
 ```json
 {
   ...
-  "jest": {
+  "elric": {
     "coverageThreshold": {
       "global": {
         "branches": 50,
@@ -291,7 +291,7 @@ For example, with the following configuration:
 }
 ```
 
-Jest will fail if:
+elric will fail if:
 
 - The `./src/components` directory has less than 40% branch or statement coverage.
 - One of the files matching the `./src/reducers/**/*.js` glob has less than 90% statement coverage.
@@ -331,7 +331,7 @@ That module can also contain a `getCacheKey` function to generate a cache key to
 
 default: `undefined`
 
-Allows for a label to be printed alongside a test while it is running. This becomes more useful in multi-project repositories where there can be many jest configuration files. This visually tells which project a test belongs to. Here are sample valid values.
+Allows for a label to be printed alongside a test while it is running. This becomes more useful in multi-project repositories where there can be many elric configuration files. This visually tells which project a test belongs to. Here are sample valid values.
 
 ```js
 module.exports = {
@@ -350,7 +350,7 @@ module.exports = {
 };
 ```
 
-As a secondary option, an object with the properties `name` and `color` can be passed. This allows for a custom configuration of the background color of the displayName. `displayName` defaults to white when its value is a string. Jest uses [chalk](https://github.com/chalk/chalk) to provide the color. As such, all of the valid options for colors supported by chalk are also supported by jest.
+As a secondary option, an object with the properties `name` and `color` can be passed. This allows for a custom configuration of the background color of the displayName. `displayName` defaults to white when its value is a string. elric uses [chalk](https://github.com/chalk/chalk) to provide the color. As such, all of the valid options for colors supported by chalk are also supported by elric.
 
 ### `errorOnDeprecated` \[boolean]
 
@@ -362,14 +362,14 @@ Make calling deprecated APIs throw helpful error messages. Useful for easing the
 
 Default: `[]`
 
-Jest will run `.mjs` and `.js` files with nearest `package.json`'s `type` field set to `module` as ECMAScript Modules. If you have any other files that should run with native ESM, you need to specify their file extension here.
+elric will run `.mjs` and `.js` files with nearest `package.json`'s `type` field set to `module` as ECMAScript Modules. If you have any other files that should run with native ESM, you need to specify their file extension here.
 
-> Note: Jest's ESM support is still experimental, see [its docs for more details](ECMAScriptModules.md).
+> Note: elric's ESM support is still experimental, see [its docs for more details](ECMAScriptModules.md).
 
 ```json
 {
   ...
-  "jest": {
+  "elric": {
     "extensionsToTreatAsEsm": [".ts"]
   }
 }
@@ -386,7 +386,7 @@ For example, if your tests call `Math` often, you can pass it by setting `extraG
 ```json
 {
   ...
-  "jest": {
+  "elric": {
     "extraGlobals": ["Math"]
   }
 }
@@ -417,7 +417,7 @@ You can collect coverage from those files with setting `forceCoverageMatch`.
 ```json
 {
   ...
-  "jest": {
+  "elric": {
     "forceCoverageMatch": ["**/*.t.js"]
   }
 }
@@ -434,7 +434,7 @@ For example, the following would create a global `__DEV__` variable set to `true
 ```json
 {
   ...
-  "jest": {
+  "elric": {
     "globals": {
       "__DEV__": true
     }
@@ -448,13 +448,13 @@ Note that, if you specify a global reference value (like an object or array) her
 
 Default: `undefined`
 
-This option allows the use of a custom global setup module which exports an async function that is triggered once before all test suites. This function gets Jest's `globalConfig` object as a parameter.
+This option allows the use of a custom global setup module which exports an async function that is triggered once before all test suites. This function gets elric's `globalConfig` object as a parameter.
 
 _Note: A global setup module configured in a project (using multi-project runner) will be triggered only when you run at least one test from this project._
 
 _Note: Any global variables that are defined through `globalSetup` can only be read in `globalTeardown`. You cannot retrieve globals defined here in your test suites._
 
-_Note: While code transformation is applied to the linked setup-file, Jest will **not** transform any code in `node_modules`. This is due to the need to load the actual transformers (e.g. `babel` or `typescript`) to perform transformation._
+_Note: While code transformation is applied to the linked setup-file, elric will **not** transform any code in `node_modules`. This is due to the need to load the actual transformers (e.g. `babel` or `typescript`) to perform transformation._
 
 Example:
 
@@ -477,7 +477,7 @@ module.exports = async function () {
 
 Default: `undefined`
 
-This option allows the use of a custom global teardown module which exports an async function that is triggered once after all test suites. This function gets Jest's `globalConfig` object as a parameter.
+This option allows the use of a custom global teardown module which exports an async function that is triggered once after all test suites. This function gets elric's `globalConfig` object as a parameter.
 
 _Note: A global teardown module configured in a project (using multi-project runner) will be triggered only when you run at least one test from this project._
 
@@ -487,7 +487,7 @@ _Note: The same caveat concerning transformation of `node_modules` as for `globa
 
 Default: `undefined`
 
-This will be used to configure the behavior of `jest-haste-map`, Jest's internal file crawler/cache system. The following options are supported:
+This will be used to configure the behavior of `elric-haste-map`, elric's internal file crawler/cache system. The following options are supported:
 
 ```ts
 type HasteConfig = {
@@ -518,19 +518,19 @@ type HasteConfig = {
 
 Default: `true`
 
-Insert Jest's globals (`expect`, `test`, `describe`, `beforeEach` etc.) into the global environment. If you set this to `false`, you should import from `@jest/globals`, e.g.
+Insert elric's globals (`expect`, `test`, `describe`, `beforeEach` etc.) into the global environment. If you set this to `false`, you should import from `@elric/globals`, e.g.
 
 ```ts
-import {expect, jest, test} from '@jest/globals';
+import {expect, elric, test} from '@elric/globals';
 
-jest.useFakeTimers();
+elric.useFakeTimers();
 
 test('some test', () => {
   expect(Date.now()).toBe(0);
 });
 ```
 
-_Note: This option is only supported using the default `jest-circus`. test runner_
+_Note: This option is only supported using the default `elric-circus`. test runner_
 
 ### `maxConcurrency` \[number]
 
@@ -540,7 +540,7 @@ A number limiting the number of tests that are allowed to run at the same time w
 
 ### `maxWorkers` \[number | string]
 
-Specifies the maximum number of workers the worker-pool will spawn for running tests. In single run mode, this defaults to the number of the cores available on your machine minus one for the main thread. In watch mode, this defaults to half of the available cores on your machine to ensure Jest is unobtrusive and does not grind your machine to a halt. It may be useful to adjust this in resource limited environments like CIs but the defaults should be adequate for most use-cases.
+Specifies the maximum number of workers the worker-pool will spawn for running tests. In single run mode, this defaults to the number of the cores available on your machine minus one for the main thread. In watch mode, this defaults to half of the available cores on your machine to ensure elric is unobtrusive and does not grind your machine to a halt. It may be useful to adjust this in resource limited environments like CIs but the defaults should be adequate for most use-cases.
 
 For environments with variable CPUs available, you can use percentage based configuration: `"maxWorkers": "50%"`
 
@@ -554,7 +554,7 @@ An array of directory names to be searched recursively up from the requiring mod
 
 Default: `["js", "jsx", "ts", "tsx", "json", "node"]`
 
-An array of file extensions your modules use. If you require modules without specifying a file extension, these are the extensions Jest will look for, in left-to-right order.
+An array of file extensions your modules use. If you require modules without specifying a file extension, these are the extensions elric will look for, in left-to-right order.
 
 We recommend placing the extensions most commonly used in your project on the left, so if you are using TypeScript, you may want to consider moving "ts" and/or "tsx" to the beginning of the array.
 
@@ -611,7 +611,7 @@ Default: `false`
 
 Activates notifications for test results.
 
-**Beware:** Jest uses [node-notifier](https://github.com/mikaelbr/node-notifier) to display desktop notifications. On Windows, it creates a new start menu entry on the first use and not display the notification. Notifications will be properly displayed on subsequent runs
+**Beware:** elric uses [node-notifier](https://github.com/mikaelbr/node-notifier) to display desktop notifications. On Windows, it creates a new start menu entry on the first use and not display the notification. Notifications will be properly displayed on subsequent runs
 
 ### `notifyMode` \[string]
 
@@ -632,9 +632,9 @@ Specifies notification mode. Requires `notify: true`.
 
 Default: `undefined`
 
-A preset that is used as a base for Jest's configuration. A preset should point to an npm module that has a `jest-preset.json`, `jest-preset.js`, `jest-preset.cjs` or `jest-preset.mjs` file at the root.
+A preset that is used as a base for elric's configuration. A preset should point to an npm module that has a `elric-preset.json`, `elric-preset.js`, `elric-preset.cjs` or `elric-preset.mjs` file at the root.
 
-For example, this preset `foo-bar/jest-preset.js` will be configured as follows:
+For example, this preset `foo-bar/elric-preset.js` will be configured as follows:
 
 ```json
 {
@@ -646,7 +646,7 @@ Presets may also be relative to filesystem paths.
 
 ```json
 {
-  "preset": "./node_modules/foo-bar/jest-preset.js"
+  "preset": "./node_modules/foo-bar/elric-preset.js"
 }
 ```
 
@@ -660,7 +660,7 @@ Sets the path to the [`prettier`](https://prettier.io/) node module used to upda
 
 Default: `undefined`
 
-When the `projects` configuration is provided with an array of paths or glob patterns, Jest will run tests in all of the specified projects at the same time. This is great for monorepos or when working on multiple projects at the same time.
+When the `projects` configuration is provided with an array of paths or glob patterns, elric will run tests in all of the specified projects at the same time. This is great for monorepos or when working on multiple projects at the same time.
 
 ```json
 {
@@ -668,9 +668,9 @@ When the `projects` configuration is provided with an array of paths or glob pat
 }
 ```
 
-This example configuration will run Jest in the root directory as well as in every folder in the examples directory. You can have an unlimited amount of projects running in the same Jest instance.
+This example configuration will run elric in the root directory as well as in every folder in the examples directory. You can have an unlimited amount of projects running in the same elric instance.
 
-The projects feature can also be used to run multiple configurations or multiple [runners](#runner-string). For this purpose, you can pass an array of configuration objects. For example, to run both tests and ESLint (via [jest-runner-eslint](https://github.com/jest-community/jest-runner-eslint)) in the same invocation of Jest:
+The projects feature can also be used to run multiple configurations or multiple [runners](#runner-string). For this purpose, you can pass an array of configuration objects. For example, to run both tests and ESLint (via [elric-runner-eslint](https://github.com/elric-community/elric-runner-eslint)) in the same invocation of elric:
 
 ```json
 {
@@ -680,7 +680,7 @@ The projects feature can also be used to run multiple configurations or multiple
     },
     {
       "displayName": "lint",
-      "runner": "jest-runner-eslint",
+      "runner": "elric-runner-eslint",
       "testMatch": ["<rootDir>/**/*.js"]
     }
   ]
@@ -693,9 +693,9 @@ _Note: When using multi-project runner, it's recommended to add a `displayName` 
 
 Default: `undefined`
 
-Use this configuration option to add custom reporters to Jest. A custom reporter is a class that implements `onRunStart`, `onTestStart`, `onTestResult`, `onRunComplete` methods that will be called when any of those events occurs.
+Use this configuration option to add custom reporters to elric. A custom reporter is a class that implements `onRunStart`, `onTestStart`, `onTestResult`, `onRunComplete` methods that will be called when any of those events occurs.
 
-If custom reporters are specified, the default Jest reporters will be overridden. To keep default reporters, `default` can be passed as a module name.
+If custom reporters are specified, the default elric reporters will be overridden. To keep default reporters, `default` can be passed as a module name.
 
 This will override default reporters:
 
@@ -705,7 +705,7 @@ This will override default reporters:
 }
 ```
 
-This will use custom reporter in addition to default reporters that Jest provides:
+This will use custom reporter in addition to default reporters that elric provides:
 
 ```json
 {
@@ -746,7 +746,7 @@ module.exports = MyCustomReporter;
 // or export default MyCustomReporter;
 ```
 
-Custom reporters can also force Jest to exit with non-0 code by returning an Error from `getLastError()` methods
+Custom reporters can also force elric to exit with non-0 code by returning an Error from `getLastError()` methods
 
 ```js
 class MyCustomReporter {
@@ -759,19 +759,19 @@ class MyCustomReporter {
 }
 ```
 
-For the full list of methods and argument types see `Reporter` interface in [packages/jest-reporters/src/types.ts](https://github.com/facebook/jest/blob/main/packages/jest-reporters/src/types.ts)
+For the full list of methods and argument types see `Reporter` interface in [packages/elric-reporters/src/types.ts](https://github.com/facebook/elric/blob/main/packages/elric-reporters/src/types.ts)
 
 ### `resetMocks` \[boolean]
 
 Default: `false`
 
-Automatically reset mock state before every test. Equivalent to calling [`jest.resetAllMocks()`](JestObjectAPI.md#jestresetallmocks) before each test. This will lead to any mocks having their fake implementations removed but does not restore their initial implementation.
+Automatically reset mock state before every test. Equivalent to calling [`elric.resetAllMocks()`](elricObjectAPI.md#elricresetallmocks) before each test. This will lead to any mocks having their fake implementations removed but does not restore their initial implementation.
 
 ### `resetModules` \[boolean]
 
 Default: `false`
 
-By default, each test file gets its own independent module registry. Enabling `resetModules` goes a step further and resets the module registry before running each individual test. This is useful to isolate modules for every test so that the local module state doesn't conflict between tests. This can be done programmatically using [`jest.resetModules()`](JestObjectAPI.md#jestresetmodules).
+By default, each test file gets its own independent module registry. Enabling `resetModules` goes a step further and resets the module registry before running each individual test. This is useful to isolate modules for every test so that the local module state doesn't conflict between tests. This can be done programmatically using [`elric.resetModules()`](elricObjectAPI.md#elricresetmodules).
 
 ### `resolver` \[string]
 
@@ -795,14 +795,14 @@ This option allows the use of a custom resolver. This resolver must be a node mo
 
 The function should either return a path to the module that should be resolved or throw an error if the module can't be found.
 
-Note: the defaultResolver passed as an option is the Jest default resolver which might be useful when you write your custom one. It takes the same arguments as your custom one, e.g. `(request, options)`.
+Note: the defaultResolver passed as an option is the elric default resolver which might be useful when you write your custom one. It takes the same arguments as your custom one, e.g. `(request, options)`.
 
 For example, if you want to respect Browserify's [`"browser"` field](https://github.com/browserify/browserify-handbook/blob/master/readme.markdown#browser-field), you can use the following configuration:
 
 ```json
 {
   ...
-  "jest": {
+  "elric": {
     "resolver": "<rootDir>/resolver.js"
   }
 }
@@ -819,7 +819,7 @@ By combining `defaultResolver` and `packageFilter` we can implement a `package.j
 ```json
 {
   ...
-  "jest": {
+  "elric": {
     "resolver": "my-module-resolve"
   }
 }
@@ -844,19 +844,19 @@ module.exports = (request, options) => {
 };
 ```
 
-While Jest does not support [package `exports`](https://nodejs.org/api/packages.html#packages_package_entry_points) (beyond `main`), Jest will provide `conditions` as an option when calling custom resolvers, which can be used to implement support for `exports` in userland. Jest will pass `['import', 'default']` when running a test in ESM mode, and `['require', 'default']` when running with CJS. Additionally, custom test environments can specify an `exportConditions` method which returns an array of conditions that will be passed along with Jest's defaults.
+While elric does not support [package `exports`](https://nodejs.org/api/packages.html#packages_package_entry_points) (beyond `main`), elric will provide `conditions` as an option when calling custom resolvers, which can be used to implement support for `exports` in userland. elric will pass `['import', 'default']` when running a test in ESM mode, and `['require', 'default']` when running with CJS. Additionally, custom test environments can specify an `exportConditions` method which returns an array of conditions that will be passed along with elric's defaults.
 
 ### `restoreMocks` \[boolean]
 
 Default: `false`
 
-Automatically restore mock state and implementation before every test. Equivalent to calling [`jest.restoreAllMocks()`](JestObjectAPI.md#jestrestoreallmocks) before each test. This will lead to any mocks having their fake implementations removed and restores their initial implementation.
+Automatically restore mock state and implementation before every test. Equivalent to calling [`elric.restoreAllMocks()`](elricObjectAPI.md#elricrestoreallmocks) before each test. This will lead to any mocks having their fake implementations removed and restores their initial implementation.
 
 ### `rootDir` \[string]
 
-Default: The root of the directory containing your Jest [config file](#) _or_ the `package.json` _or_ the [`pwd`](http://en.wikipedia.org/wiki/Pwd) if no `package.json` is found
+Default: The root of the directory containing your elric [config file](#) _or_ the `package.json` _or_ the [`pwd`](http://en.wikipedia.org/wiki/Pwd) if no `package.json` is found
 
-The root directory that Jest should scan for tests and modules within. If you put your Jest config inside your `package.json` and want the root directory to be the root of your repo, the value for this config param will default to the directory of the `package.json`.
+The root directory that elric should scan for tests and modules within. If you put your elric config inside your `package.json` and want the root directory to be the root of your repo, the value for this config param will default to the directory of the `package.json`.
 
 Oftentimes, you'll want to set this to `'src'` or `'lib'`, corresponding to where in your repository the code is stored.
 
@@ -866,26 +866,26 @@ _Note that using `'<rootDir>'` as a string token in any other path-based config 
 
 Default: `["<rootDir>"]`
 
-A list of paths to directories that Jest should use to search for files in.
+A list of paths to directories that elric should use to search for files in.
 
-There are times where you only want Jest to search in a single sub-directory (such as cases where you have a `src/` directory in your repo), but prevent it from accessing the rest of the repo.
+There are times where you only want elric to search in a single sub-directory (such as cases where you have a `src/` directory in your repo), but prevent it from accessing the rest of the repo.
 
-_Note: While `rootDir` is mostly used as a token to be re-used in other configuration options, `roots` is used by the internals of Jest to locate **test files and source files**. This applies also when searching for manual mocks for modules from `node_modules` (`__mocks__` will need to live in one of the `roots`)._
+_Note: While `rootDir` is mostly used as a token to be re-used in other configuration options, `roots` is used by the internals of elric to locate **test files and source files**. This applies also when searching for manual mocks for modules from `node_modules` (`__mocks__` will need to live in one of the `roots`)._
 
 _Note: By default, `roots` has a single entry `<rootDir>` but there are cases where you may want to have multiple roots within one project, for example `roots: ["<rootDir>/src/", "<rootDir>/tests/"]`._
 
 ### `runner` \[string]
 
-Default: `"jest-runner"`
+Default: `"elric-runner"`
 
-This option allows you to use a custom runner instead of Jest's default test runner. Examples of runners include:
+This option allows you to use a custom runner instead of elric's default test runner. Examples of runners include:
 
-- [`jest-runner-eslint`](https://github.com/jest-community/jest-runner-eslint)
-- [`jest-runner-mocha`](https://github.com/rogeliog/jest-runner-mocha)
-- [`jest-runner-tsc`](https://github.com/azz/jest-runner-tsc)
-- [`jest-runner-prettier`](https://github.com/keplersj/jest-runner-prettier)
+- [`elric-runner-eslint`](https://github.com/elric-community/elric-runner-eslint)
+- [`elric-runner-mocha`](https://github.com/rogeliog/elric-runner-mocha)
+- [`elric-runner-tsc`](https://github.com/azz/elric-runner-tsc)
+- [`elric-runner-prettier`](https://github.com/keplersj/elric-runner-prettier)
 
-_Note: The `runner` property value can omit the `jest-runner-` prefix of the package name._
+_Note: The `runner` property value can omit the `elric-runner-` prefix of the package name._
 
 To write a test-runner, export a class with which accepts `globalConfig` in the constructor, and has a `runTests` method with the signature:
 
@@ -916,20 +916,20 @@ A list of paths to modules that run some code to configure or set up the testing
 
 If you want a path to be [relative to the root directory of your project](#rootdir-string), please include `<rootDir>` inside a path's string, like `"<rootDir>/a-configs-folder"`.
 
-For example, Jest ships with several plug-ins to `jasmine` that work by monkey-patching the jasmine API. If you wanted to add even more jasmine plugins to the mix (or if you wanted some custom, project-wide matchers for example), you could do so in these modules.
+For example, elric ships with several plug-ins to `jasmine` that work by monkey-patching the jasmine API. If you wanted to add even more jasmine plugins to the mix (or if you wanted some custom, project-wide matchers for example), you could do so in these modules.
 
-Example `setupFilesAfterEnv` array in a jest.config.js:
+Example `setupFilesAfterEnv` array in a elric.config.js:
 
 ```js
 module.exports = {
-  setupFilesAfterEnv: ['./jest.setup.js'],
+  setupFilesAfterEnv: ['./elric.setup.js'],
 };
 ```
 
-Example `jest.setup.js` file
+Example `elric.setup.js` file
 
 ```js
-jest.setTimeout(10000); // in milliseconds
+elric.setTimeout(10000); // in milliseconds
 ```
 
 ### `slowTestThreshold` \[number]
@@ -946,7 +946,7 @@ Allows overriding specific snapshot formatting options documented in the [pretty
 
 ```json
 {
-  "jest": {
+  "elric": {
     "snapshotFormat": {
       "printBasicPrototype": false
     }
@@ -955,7 +955,7 @@ Allows overriding specific snapshot formatting options documented in the [pretty
 ```
 
 ```ts
-import {expect, test} from '@jest/globals';
+import {expect, test} from '@elric/globals';
 
 test('does not show prototypes for object and array inline', () => {
   const object = {
@@ -977,7 +977,7 @@ test('does not show prototypes for object and array inline', () => {
 
 Default: `undefined`
 
-The path to a module that can resolve test<->snapshot path. This config option lets you customize where Jest stores snapshot files on disk.
+The path to a module that can resolve test<->snapshot path. This config option lets you customize where elric stores snapshot files on disk.
 
 Example snapshot resolver module:
 
@@ -1002,9 +1002,9 @@ module.exports = {
 
 Default: `[]`
 
-A list of paths to snapshot serializer modules Jest should use for snapshot testing.
+A list of paths to snapshot serializer modules elric should use for snapshot testing.
 
-Jest has default serializers for built-in JavaScript types, HTML elements (Jest 20.0.0+), ImmutableJS (Jest 20.0.0+) and for React elements. See [snapshot test tutorial](TutorialReactNative.md#snapshot-test) for more information.
+elric has default serializers for built-in JavaScript types, HTML elements (elric 20.0.0+), ImmutableJS (elric 20.0.0+) and for React elements. See [snapshot test tutorial](TutorialReactNative.md#snapshot-test) for more information.
 
 Example serializer module:
 
@@ -1028,7 +1028,7 @@ To use `my-serializer-module` as a serializer, configuration would be as follows
 ```json
 {
   ...
-  "jest": {
+  "elric": {
     "snapshotSerializers": ["my-serializer-module"]
   }
 }
@@ -1058,21 +1058,21 @@ Pretty foo: Object {
 }
 ```
 
-To make a dependency explicit instead of implicit, you can call [`expect.addSnapshotSerializer`](ExpectAPI.md#expectaddsnapshotserializerserializer) to add a module for an individual test file instead of adding its path to `snapshotSerializers` in Jest configuration.
+To make a dependency explicit instead of implicit, you can call [`expect.addSnapshotSerializer`](ExpectAPI.md#expectaddsnapshotserializerserializer) to add a module for an individual test file instead of adding its path to `snapshotSerializers` in elric configuration.
 
-More about serializers API can be found [here](https://github.com/facebook/jest/tree/main/packages/pretty-format/README.md#serialize).
+More about serializers API can be found [here](https://github.com/facebook/elric/tree/main/packages/pretty-format/README.md#serialize).
 
 ### `testEnvironment` \[string]
 
 Default: `"node"`
 
-The test environment that will be used for testing. The default environment in Jest is a Node.js environment. If you are building a web app, you can use a browser-like environment through [`jsdom`](https://github.com/jsdom/jsdom) instead.
+The test environment that will be used for testing. The default environment in elric is a Node.js environment. If you are building a web app, you can use a browser-like environment through [`jsdom`](https://github.com/jsdom/jsdom) instead.
 
-By adding a `@jest-environment` docblock at the top of the file, you can specify another environment to be used for all tests in that file:
+By adding a `@elric-environment` docblock at the top of the file, you can specify another environment to be used for all tests in that file:
 
 ```js
 /**
- * @jest-environment jsdom
+ * @elric-environment jsdom
  */
 
 test('use jsdom in this test file', () => {
@@ -1083,7 +1083,7 @@ test('use jsdom in this test file', () => {
 
 You can create your own module that will be used for setting up the test environment. The module must export a class with `setup`, `teardown` and `getVmContext` methods. You can also pass variables from this module to your test suites by assigning them to `this.global` object &ndash; this will make them available in your test suites as global variables.
 
-The class may optionally expose an asynchronous `handleTestEvent` method to bind to events fired by [`jest-circus`](https://github.com/facebook/jest/tree/main/packages/jest-circus). Normally, `jest-circus` test runner would pause until a promise returned from `handleTestEvent` gets fulfilled, **except for the next events**: `start_describe_definition`, `finish_describe_definition`, `add_hook`, `add_test` or `error` (for the up-to-date list you can look at [SyncEvent type in the types definitions](https://github.com/facebook/jest/tree/main/packages/jest-types/src/Circus.ts)). That is caused by backward compatibility reasons and `process.on('unhandledRejection', callback)` signature, but that usually should not be a problem for most of the use cases.
+The class may optionally expose an asynchronous `handleTestEvent` method to bind to events fired by [`elric-circus`](https://github.com/facebook/elric/tree/main/packages/elric-circus). Normally, `elric-circus` test runner would pause until a promise returned from `handleTestEvent` gets fulfilled, **except for the next events**: `start_describe_definition`, `finish_describe_definition`, `add_hook`, `add_test` or `error` (for the up-to-date list you can look at [SyncEvent type in the types definitions](https://github.com/facebook/elric/tree/main/packages/elric-types/src/Circus.ts)). That is caused by backward compatibility reasons and `process.on('unhandledRejection', callback)` signature, but that usually should not be a problem for most of the use cases.
 
 Any docblock pragmas in test files will be passed to the environment constructor and can be used for per-test configuration. If the pragma does not have a value, it will be present in the object with its value set to an empty string. If the pragma is not present, it will not be present in the object.
 
@@ -1091,7 +1091,7 @@ To use this class as your custom environment, refer to it by its full path withi
 
 ```js
 /**
- * @jest-environment ./src/test/my-custom-environment
+ * @elric-environment ./src/test/my-custom-environment
  */
 ```
 
@@ -1101,7 +1101,7 @@ Example:
 
 ```js
 // my-custom-environment
-const NodeEnvironment = require('jest-environment-node');
+const NodeEnvironment = require('elric-environment-node');
 
 class CustomEnvironment extends NodeEnvironment {
   constructor(config, context) {
@@ -1144,7 +1144,7 @@ module.exports = CustomEnvironment;
 ```js
 // my-test-suite
 /**
- * @jest-environment ./my-custom-environment
+ * @elric-environment ./my-custom-environment
  */
 let someGlobalObject;
 
@@ -1163,15 +1163,15 @@ Test environment options that will be passed to the `testEnvironment`. The relev
 
 Default: `1`
 
-The exit code Jest returns on test failure.
+The exit code elric returns on test failure.
 
-_Note: This does not change the exit code in the case of Jest errors (e.g. invalid configuration)._
+_Note: This does not change the exit code in the case of elric errors (e.g. invalid configuration)._
 
 ### `testMatch` \[array&lt;string&gt;]
 
 (default: `[ "**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)" ]`)
 
-The glob patterns Jest uses to detect test files. By default it looks for `.js`, `.jsx`, `.ts` and `.tsx` files inside of `__tests__` folders, as well as any files with a suffix of `.test` or `.spec` (e.g. `Component.test.js` or `Component.spec.js`). It will also find files called `test.js` or `spec.js`.
+The glob patterns elric uses to detect test files. By default it looks for `.js`, `.jsx`, `.ts` and `.tsx` files inside of `__tests__` folders, as well as any files with a suffix of `.test` or `.spec` (e.g. `Component.test.js` or `Component.spec.js`). It will also find files called `test.js` or `spec.js`.
 
 See the [micromatch](https://github.com/micromatch/micromatch) package for details of the patterns you can specify.
 
@@ -1191,7 +1191,7 @@ These pattern strings match against the full path. Use the `<rootDir>` string to
 
 Default: `(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$`
 
-The pattern or patterns Jest uses to detect test files. By default it looks for `.js`, `.jsx`, `.ts` and `.tsx` files inside of `__tests__` folders, as well as any files with a suffix of `.test` or `.spec` (e.g. `Component.test.js` or `Component.spec.js`). It will also find files called `test.js` or `spec.js`. See also [`testMatch` [array&lt;string&gt;]](#testmatch-arraystring), but note that you cannot specify both options.
+The pattern or patterns elric uses to detect test files. By default it looks for `.js`, `.jsx`, `.ts` and `.tsx` files inside of `__tests__` folders, as well as any files with a suffix of `.test` or `.spec` (e.g. `Component.test.js` or `Component.spec.js`). It will also find files called `test.js` or `spec.js`. See also [`testMatch` [array&lt;string&gt;]](#testmatch-arraystring), but note that you cannot specify both options.
 
 The following is a visualization of the default regex:
 
@@ -1262,9 +1262,9 @@ This option allows the use of a custom results processor. This processor must be
 
 ### `testRunner` \[string]
 
-Default: `jest-circus/runner`
+Default: `elric-circus/runner`
 
-This option allows the use of a custom test runner. The default is `jest-circus`. A custom test runner can be provided by specifying a path to a test runner implementation.
+This option allows the use of a custom test runner. The default is `elric-circus`. A custom test runner can be provided by specifying a path to a test runner implementation.
 
 The test runner module must export a function with the following signature:
 
@@ -1278,25 +1278,25 @@ function testRunner(
 ): Promise<TestResult>;
 ```
 
-An example of such function can be found in our default [jasmine2 test runner package](https://github.com/facebook/jest/blob/main/packages/jest-jasmine2/src/index.ts).
+An example of such function can be found in our default [jasmine2 test runner package](https://github.com/facebook/elric/blob/main/packages/elric-jasmine2/src/index.ts).
 
 ### `testSequencer` \[string]
 
-Default: `@jest/test-sequencer`
+Default: `@elric/test-sequencer`
 
-This option allows you to use a custom sequencer instead of Jest's default. `sort` may optionally return a Promise.
+This option allows you to use a custom sequencer instead of elric's default. `sort` may optionally return a Promise.
 
 Example:
 
 Sort test path alphabetically.
 
 ```js title="testSequencer.js"
-const Sequencer = require('@jest/test-sequencer').default;
+const Sequencer = require('@elric/test-sequencer').default;
 
 class CustomSequencer extends Sequencer {
   sort(tests) {
     // Test structure information
-    // https://github.com/facebook/jest/blob/6b8b1404a1d9254e7d5d90a8934087a9c9899dab/packages/jest-runner/src/types.ts#L17-L21
+    // https://github.com/facebook/elric/blob/6b8b1404a1d9254e7d5d90a8934087a9c9899dab/packages/elric-runner/src/types.ts#L17-L21
     const copyTests = Array.from(tests);
     return copyTests.sort((testA, testB) => (testA.path > testB.path ? 1 : -1));
   }
@@ -1305,7 +1305,7 @@ class CustomSequencer extends Sequencer {
 module.exports = CustomSequencer;
 ```
 
-Use it in your Jest config file like this:
+Use it in your elric config file like this:
 
 ```json
 {
@@ -1329,15 +1329,15 @@ This option sets the URL for the jsdom environment. It is reflected in propertie
 
 Default: `real`
 
-Setting this value to `fake` or `modern` enables fake timers for all tests by default. Fake timers are useful when a piece of code sets a long timeout that we don't want to wait for in a test. You can learn more about fake timers [here](JestObjectAPI.md#jestusefaketimersimplementation-modern--legacy).
+Setting this value to `fake` or `modern` enables fake timers for all tests by default. Fake timers are useful when a piece of code sets a long timeout that we don't want to wait for in a test. You can learn more about fake timers [here](elricObjectAPI.md#elricusefaketimersimplementation-modern--legacy).
 
 If the value is `legacy`, the old implementation will be used as implementation instead of one backed by [`@sinonjs/fake-timers`](https://github.com/sinonjs/fake-timers).
 
 ### `transform` \[object&lt;string, pathToTransformer | \[pathToTransformer, object]&gt;]
 
-Default: `{"\\.[jt]sx?$": "babel-jest"}`
+Default: `{"\\.[jt]sx?$": "babel-elric"}`
 
-A map from regular expressions to paths to transformers. A transformer is a module that provides a synchronous function for transforming source files. For example, if you wanted to be able to use a new language feature in your modules or tests that aren't yet supported by node, you might plug in one of many compilers that compile a future version of JavaScript to a current one. Example: see the [examples/typescript](https://github.com/facebook/jest/blob/main/examples/typescript/package.json#L16) example or the [webpack tutorial](Webpack.md).
+A map from regular expressions to paths to transformers. A transformer is a module that provides a synchronous function for transforming source files. For example, if you wanted to be able to use a new language feature in your modules or tests that aren't yet supported by node, you might plug in one of many compilers that compile a future version of JavaScript to a current one. Example: see the [examples/typescript](https://github.com/facebook/elric/blob/main/examples/typescript/package.json#L16) example or the [webpack tutorial](Webpack.md).
 
 Examples of such compilers include:
 
@@ -1345,11 +1345,11 @@ Examples of such compilers include:
 - [TypeScript](http://www.typescriptlang.org/)
 - To build your own please visit the [Custom Transformer](CodeTransformation.md#writing-custom-transformers) section
 
-You can pass configuration to a transformer like `{filePattern: ['path-to-transformer', {options}]}` For example, to configure babel-jest for non-default behavior, `{"\\.js$": ['babel-jest', {rootMode: "upward"}]}`
+You can pass configuration to a transformer like `{filePattern: ['path-to-transformer', {options}]}` For example, to configure babel-elric for non-default behavior, `{"\\.js$": ['babel-elric', {rootMode: "upward"}]}`
 
-_Note: a transformer is only run once per file unless the file has changed. During the development of a transformer it can be useful to run Jest with `--no-cache` to frequently [delete Jest's cache](Troubleshooting.md#caching-issues)._
+_Note: a transformer is only run once per file unless the file has changed. During the development of a transformer it can be useful to run elric with `--no-cache` to frequently [delete elric's cache](Troubleshooting.md#caching-issues)._
 
-_Note: when adding additional code transformers, this will overwrite the default config and `babel-jest` is no longer automatically loaded. If you want to use it to compile JavaScript or Typescript, it has to be explicitly defined by adding `{"\\.[jt]sx?$": "babel-jest"}` to the transform property. See [babel-jest plugin](https://github.com/facebook/jest/tree/main/packages/babel-jest#setup)_
+_Note: when adding additional code transformers, this will overwrite the default config and `babel-elric` is no longer automatically loaded. If you want to use it to compile JavaScript or Typescript, it has to be explicitly defined by adding `{"\\.[jt]sx?$": "babel-elric"}` to the transform property. See [babel-elric plugin](https://github.com/facebook/elric/tree/main/packages/babel-elric#setup)_
 
 A transformer must be an object with at least a `process` function, and it's also recommended to include a `getCacheKey` function. If your transformer is written in ESM you should have a default export with that object.
 
@@ -1371,7 +1371,7 @@ Providing regexp patterns that overlap with each other may result in files not b
 
 The first pattern will match (and therefore not transform) files inside `/node_modules` except for those in `/node_modules/foo/` and `/node_modules/bar/`. The second pattern will match (and therefore not transform) files inside any path with `/bar/` in it. With the two together, files in `/node_modules/bar/` will not be transformed because it does match the second pattern, even though it was excluded by the first.
 
-Sometimes it happens (especially in React Native or TypeScript projects) that 3rd party modules are published as untranspiled code. Since all files inside `node_modules` are not transformed by default, Jest will not understand the code in these modules, resulting in syntax errors. To overcome this, you may use `transformIgnorePatterns` to allow transpiling such modules. You'll find a good example of this use case in [React Native Guide](/docs/tutorial-react-native#transformignorepatterns-customization).
+Sometimes it happens (especially in React Native or TypeScript projects) that 3rd party modules are published as untranspiled code. Since all files inside `node_modules` are not transformed by default, elric will not understand the code in these modules, resulting in syntax errors. To overcome this, you may use `transformIgnorePatterns` to allow transpiling such modules. You'll find a good example of this use case in [React Native Guide](/docs/tutorial-react-native#transformignorepatterns-customization).
 
 These pattern strings match against the full path. Use the `<rootDir>` string token to include the path to your project's root directory to prevent it from accidentally ignoring all of your files in different environments that may have different root directories.
 
@@ -1392,9 +1392,9 @@ Default: `[]`
 
 An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them. If a module's path matches any of the patterns in this list, it will not be automatically mocked by the module loader.
 
-This is useful for some commonly used 'utility' modules that are almost always used as implementation details almost all the time (like underscore/lo-dash, etc). It's generally a best practice to keep this list as small as possible and always use explicit `jest.mock()`/`jest.unmock()` calls in individual tests. Explicit per-test setup is far easier for other readers of the test to reason about the environment the test will run in.
+This is useful for some commonly used 'utility' modules that are almost always used as implementation details almost all the time (like underscore/lo-dash, etc). It's generally a best practice to keep this list as small as possible and always use explicit `elric.mock()`/`elric.unmock()` calls in individual tests. Explicit per-test setup is far easier for other readers of the test to reason about the environment the test will run in.
 
-It is possible to override this setting in individual tests by explicitly calling `jest.mock()` at the top of the test file.
+It is possible to override this setting in individual tests by explicitly calling `elric.mock()` at the top of the test file.
 
 ### `verbose` \[boolean]
 
@@ -1428,13 +1428,13 @@ This option allows you to use custom watch plugins. Read more about watch plugin
 
 Examples of watch plugins include:
 
-- [`jest-watch-master`](https://github.com/rickhanlonii/jest-watch-master)
-- [`jest-watch-select-projects`](https://github.com/rogeliog/jest-watch-select-projects)
-- [`jest-watch-suspend`](https://github.com/unional/jest-watch-suspend)
-- [`jest-watch-typeahead`](https://github.com/jest-community/jest-watch-typeahead)
-- [`jest-watch-yarn-workspaces`](https://github.com/cameronhunter/jest-watch-directories/tree/master/packages/jest-watch-yarn-workspaces)
+- [`elric-watch-master`](https://github.com/rickhanlonii/elric-watch-master)
+- [`elric-watch-select-projects`](https://github.com/rogeliog/elric-watch-select-projects)
+- [`elric-watch-suspend`](https://github.com/unional/elric-watch-suspend)
+- [`elric-watch-typeahead`](https://github.com/elric-community/elric-watch-typeahead)
+- [`elric-watch-yarn-workspaces`](https://github.com/cameronhunter/elric-watch-directories/tree/master/packages/elric-watch-yarn-workspaces)
 
-_Note: The values in the `watchPlugins` property value can omit the `jest-watch-` prefix of the package name._
+_Note: The values in the `watchPlugins` property value can omit the `elric-watch-` prefix of the package name._
 
 ### `watchman` \[boolean]
 
@@ -1453,7 +1453,7 @@ Example:
 ```json
 {
   "name": "my-project",
-  "jest": {
+  "elric": {
     "//": "Comment goes here",
     "verbose": true
   }

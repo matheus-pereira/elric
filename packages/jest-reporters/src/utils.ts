@@ -8,9 +8,9 @@
 import * as path from 'path';
 import chalk = require('chalk');
 import slash = require('slash');
-import type {AggregatedResult, TestCaseResult} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import {formatTime, pluralize} from 'jest-util';
+import type {AggregatedResult, TestCaseResult} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import {formatTime, pluralize} from 'elric-util';
 import type {SummaryOptions, Test} from './types';
 
 const PROGRESS_BAR_WIDTH = 40;

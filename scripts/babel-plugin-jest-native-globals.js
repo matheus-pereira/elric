@@ -25,7 +25,7 @@ module.exports = ({template}) => {
         return Function('return this')();
       }
     }())
-    var Promise = global[Symbol.for('jest-native-promise')] || global.Promise;
+    var Promise = global[Symbol.for('elric-native-promise')] || global.Promise;
   `);
   const symbolDeclaration = template(`
     var global = (function() {
@@ -41,7 +41,7 @@ module.exports = ({template}) => {
         return Function('return this')();
       }
     }())
-    var Symbol = global['jest-symbol-do-not-touch'] || global.Symbol;
+    var Symbol = global['elric-symbol-do-not-touch'] || global.Symbol;
   `);
   const nowDeclaration = template(`
     var global = (function() {
@@ -57,7 +57,7 @@ module.exports = ({template}) => {
         return Function('return this')();
       }
     }())
-    var jestNow = global[Symbol.for('jest-native-now')] || global.Date.now;
+    var elricNow = global[Symbol.for('elric-native-now')] || global.Date.now;
   `);
   const fsReadFileDeclaration = template(`
     var global = (function() {
@@ -73,7 +73,7 @@ module.exports = ({template}) => {
         return Function('return this')();
       }
     }())
-    var jestReadFile = global[Symbol.for('jest-native-read-file')] || fs.readFileSync;
+    var elricReadFile = global[Symbol.for('elric-native-read-file')] || fs.readFileSync;
   `);
   const fsWriteFileDeclaration = template(`
     var global = (function() {
@@ -89,7 +89,7 @@ module.exports = ({template}) => {
         return Function('return this')();
       }
     }())
-    var jestWriteFile = global[Symbol.for('jest-native-write-file')] || fs.writeFileSync;
+    var elricWriteFile = global[Symbol.for('elric-native-write-file')] || fs.writeFileSync;
   `);
   const fsExistsFileDeclaration = template(`
     var global = (function() {
@@ -105,15 +105,15 @@ module.exports = ({template}) => {
         return Function('return this')();
       }
     }())
-    var jestExistsFile = global[Symbol.for('jest-native-exists-file')] || fs.existsSync;
+    var elricExistsFile = global[Symbol.for('elric-native-exists-file')] || fs.existsSync;
   `);
 
   return {
-    name: 'jest-native-globals',
+    name: 'elric-native-globals',
     visitor: {
       ReferencedIdentifier(path, state) {
-        if (path.node.name === 'Promise' && !state.jestInjectedPromise) {
-          state.jestInjectedPromise = true;
+        if (path.node.name === 'Promise' && !state.elricInjectedPromise) {
+          state.elricInjectedPromise = true;
           path
             .findParent(p => p.isProgram())
             .unshiftContainer('body', promiseDeclaration());
@@ -121,8 +121,8 @@ module.exports = ({template}) => {
             .findParent(p => p.isProgram())
             .unshiftContainer('body', symbolDeclaration());
         }
-        if (path.node.name === 'Symbol' && !state.jestInjectedSymbol) {
-          state.jestInjectedSymbol = true;
+        if (path.node.name === 'Symbol' && !state.elricInjectedSymbol) {
+          state.elricInjectedSymbol = true;
           path
             .findParent(p => p.isProgram())
             .unshiftContainer('body', symbolDeclaration());
@@ -132,8 +132,8 @@ module.exports = ({template}) => {
           path.parent.property &&
           path.parent.property.name === 'now'
         ) {
-          if (!state.jestInjectedNow) {
-            state.jestInjectedNow = true;
+          if (!state.elricInjectedNow) {
+            state.elricInjectedNow = true;
             path
               .findParent(p => p.isProgram())
               .unshiftContainer('body', nowDeclaration());
@@ -142,7 +142,7 @@ module.exports = ({template}) => {
               .unshiftContainer('body', symbolDeclaration());
           }
 
-          path.parentPath.replaceWithSourceString('jestNow');
+          path.parentPath.replaceWithSourceString('elricNow');
         }
         if (
           path.node.name === 'fs' &&
@@ -152,10 +152,10 @@ module.exports = ({template}) => {
           )
         ) {
           if (
-            !state.jestInjectedRead &&
+            !state.elricInjectedRead &&
             path.parent.property.name === 'readFileSync'
           ) {
-            state.jestInjectedRead = true;
+            state.elricInjectedRead = true;
             path
               .findParent(p => p.isProgram())
               .unshiftContainer('body', fsReadFileDeclaration());
@@ -163,13 +163,13 @@ module.exports = ({template}) => {
               .findParent(p => p.isProgram())
               .unshiftContainer('body', symbolDeclaration());
 
-            path.parentPath.replaceWithSourceString('jestReadFile');
+            path.parentPath.replaceWithSourceString('elricReadFile');
           }
           if (
-            !state.jestInjectedWrite &&
+            !state.elricInjectedWrite &&
             path.parent.property.name === 'writeFileSync'
           ) {
-            state.jestInjectedWrite = true;
+            state.elricInjectedWrite = true;
             path
               .findParent(p => p.isProgram())
               .unshiftContainer('body', fsWriteFileDeclaration());
@@ -177,13 +177,13 @@ module.exports = ({template}) => {
               .findParent(p => p.isProgram())
               .unshiftContainer('body', symbolDeclaration());
 
-            path.parentPath.replaceWithSourceString('jestWriteFile');
+            path.parentPath.replaceWithSourceString('elricWriteFile');
           }
           if (
-            !state.jestInjectedExists &&
+            !state.elricInjectedExists &&
             path.parent.property.name === 'existsSync'
           ) {
-            state.jestInjectedExists = true;
+            state.elricInjectedExists = true;
             path
               .findParent(p => p.isProgram())
               .unshiftContainer('body', fsExistsFileDeclaration());
@@ -191,7 +191,7 @@ module.exports = ({template}) => {
               .findParent(p => p.isProgram())
               .unshiftContainer('body', symbolDeclaration());
 
-            path.parentPath.replaceWithSourceString('jestExistsFile');
+            path.parentPath.replaceWithSourceString('elricExistsFile');
           }
         }
       },

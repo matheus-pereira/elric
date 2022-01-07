@@ -8,13 +8,13 @@
 import {tmpdir} from 'os';
 import * as path from 'path';
 import {cleanup, createEmptyPackage, writeFiles} from '../Utils';
-import {json as runJest} from '../runJest';
+import {json as runelric} from '../runelric';
 
 const DIR = path.resolve(tmpdir(), 'extra-globals');
 
 beforeEach(() => {
   cleanup(DIR);
-  createEmptyPackage(DIR, {jest: {extraGlobals: ['Math']}});
+  createEmptyPackage(DIR, {elric: {extraGlobals: ['Math']}});
 });
 
 afterAll(() => cleanup(DIR));
@@ -28,7 +28,7 @@ test('works with injected globals', () => {
   `,
   });
 
-  const {exitCode} = runJest(DIR);
+  const {exitCode} = runelric(DIR);
 
   expect(exitCode).toBe(0);
 });

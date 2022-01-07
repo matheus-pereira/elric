@@ -6,7 +6,7 @@
  */
 
 import * as fs from 'graceful-fs';
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 
 export default function createDirectory(path: Config.Path): void {
   try {

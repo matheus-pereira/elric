@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
-import {globsToMatcher, replacePathSepForGlob} from 'jest-util';
+import type {Config} from '@elric/types';
+import {globsToMatcher, replacePathSepForGlob} from 'elric-util';
 import H from './constants';
 import * as fastPath from './lib/fast_path';
 import type {FileData} from './types';

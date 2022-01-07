@@ -3,7 +3,7 @@
 bin/
 flow-typed/**
 packages/*/build/**
-packages/jest-diff/src/cleanupSemantic.ts
+packages/elric-diff/src/cleanupSemantic.ts
 website/.docusaurus
 website/blog
 website/build

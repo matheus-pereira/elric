@@ -7,7 +7,7 @@
 
 'use strict';
 
-const {modulePathIgnorePatterns} = require('./jest.config');
+const {modulePathIgnorePatterns} = require('./elric.config');
 
 module.exports = {
   displayName: {
@@ -16,6 +16,6 @@ module.exports = {
   },
   modulePathIgnorePatterns,
   roots: ['<rootDir>/packages'],
-  runner: 'jest-runner-tsd',
+  runner: 'elric-runner-tsd',
   testMatch: ['**/__typechecks__/**/*.ts'],
 };

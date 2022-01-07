@@ -99,10 +99,10 @@ describe('Replaceable', () => {
 
   describe('forEach', () => {
     test('object forEach', () => {
-      const symbolKey = Symbol('jest');
+      const symbolKey = Symbol('elric');
       const object = {a: 1, b: 2, [symbolKey]: 3};
       const replaceable = new Replaceable(object);
-      const cb = jest.fn();
+      const cb = elric.fn();
       replaceable.forEach(cb);
       expect(cb).toHaveBeenCalledTimes(3);
       expect(cb.mock.calls[0]).toEqual([1, 'a', object]);
@@ -112,7 +112,7 @@ describe('Replaceable', () => {
 
     test('array forEach', () => {
       const replaceable = new Replaceable([1, 2, 3]);
-      const cb = jest.fn();
+      const cb = elric.fn();
       replaceable.forEach(cb);
       expect(cb).toHaveBeenCalledTimes(3);
       expect(cb.mock.calls[0]).toEqual([1, 0, [1, 2, 3]]);
@@ -126,7 +126,7 @@ describe('Replaceable', () => {
         ['b', 2],
       ]);
       const replaceable = new Replaceable(map);
-      const cb = jest.fn();
+      const cb = elric.fn();
       replaceable.forEach(cb);
       expect(cb).toHaveBeenCalledTimes(2);
       expect(cb.mock.calls[0]).toEqual([1, 'a', map]);
@@ -134,7 +134,7 @@ describe('Replaceable', () => {
     });
 
     test('forEach should ignore nonenumerable property', () => {
-      const symbolKey = Symbol('jest');
+      const symbolKey = Symbol('elric');
       const symbolKey2 = Symbol('awesome');
       const object = {a: 1, [symbolKey]: 3};
       Object.defineProperty(object, 'b', {
@@ -150,7 +150,7 @@ describe('Replaceable', () => {
         writable: true,
       });
       const replaceable = new Replaceable(object);
-      const cb = jest.fn();
+      const cb = elric.fn();
       replaceable.forEach(cb);
       expect(cb).toHaveBeenCalledTimes(2);
       expect(cb.mock.calls[0]).toEqual([1, 'a', object]);

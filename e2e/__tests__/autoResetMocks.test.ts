@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('suite with auto-reset', () => {
-  const result = runJest('auto-reset-mocks/with-auto-reset');
+  const result = runelric('auto-reset-mocks/with-auto-reset');
   expect(result.exitCode).toBe(0);
 });
 
 test('suite without auto-reset', () => {
-  const result = runJest('auto-reset-mocks/without-auto-reset');
+  const result = runelric('auto-reset-mocks/without-auto-reset');
   expect(result.exitCode).toBe(0);
 });

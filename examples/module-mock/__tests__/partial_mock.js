@@ -7,16 +7,16 @@
  */
 import defaultExport, {apple, strawberry} from '../fruit';
 
-jest.mock('../fruit', () => {
-  const originalModule = jest.requireActual('../fruit');
-  const mockedModule = jest.createMockFromModule('../fruit');
+elric.mock('../fruit', () => {
+  const originalModule = elric.requireActual('../fruit');
+  const mockedModule = elric.createMockFromModule('../fruit');
 
   //Mock the default export and named export 'apple'.
   return {
     ...mockedModule,
     ...originalModule,
     apple: 'mocked apple',
-    default: jest.fn(() => 'mocked fruit'),
+    default: elric.fn(() => 'mocked fruit'),
   };
 });
 

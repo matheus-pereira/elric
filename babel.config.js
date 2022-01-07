@@ -19,7 +19,7 @@ module.exports = {
       plugins: [
         'babel-plugin-replace-ts-export-assignment',
         require.resolve(
-          './scripts/babel-plugin-jest-replace-ts-require-assignment.js',
+          './scripts/babel-plugin-elric-replace-ts-require-assignment.js',
         ),
       ],
       presets: [
@@ -39,7 +39,7 @@ module.exports = {
   plugins: [
     ['@babel/plugin-transform-modules-commonjs', {allowTopLevelThis: true}],
     '@babel/plugin-proposal-class-properties',
-    require.resolve('./scripts/babel-plugin-jest-require-outside-vm'),
+    require.resolve('./scripts/babel-plugin-elric-require-outside-vm'),
   ],
   presets: [
     [

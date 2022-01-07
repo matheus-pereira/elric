@@ -8,10 +8,10 @@
 const {transformSync: babelTransform} = require('@babel/core');
 const {default: babelIstanbulPlugin} = require('babel-plugin-istanbul');
 // This is imported from this repo
-const jestPreset = require.resolve('babel-preset-jest');
+const elricPreset = require.resolve('babel-preset-elric');
 
 const options = {
-  presets: ['@babel/preset-env', jestPreset],
+  presets: ['@babel/preset-env', elricPreset],
   retainLines: true,
   sourceMaps: 'inline',
 };

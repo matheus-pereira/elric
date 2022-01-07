@@ -6,7 +6,7 @@
  */
 
 import * as path from 'path';
-import {json as runWithJson} from '../runJest';
+import {json as runWithJson} from '../runelric';
 
 const dir = path.resolve(__dirname, '../dynamic-require-dependencies');
 

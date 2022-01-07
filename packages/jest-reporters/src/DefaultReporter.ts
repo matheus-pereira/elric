@@ -6,14 +6,14 @@
  */
 
 import chalk = require('chalk');
-import {getConsoleOutput} from '@jest/console';
+import {getConsoleOutput} from '@elric/console';
 import type {
   AggregatedResult,
   TestCaseResult,
   TestResult,
-} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import {clearLine, isInteractive} from 'jest-util';
+} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import {clearLine, isInteractive} from 'elric-util';
 import BaseReporter from './BaseReporter';
 import Status from './Status';
 import getResultHeader from './getResultHeader';

@@ -11,8 +11,8 @@ import {
   RECEIVED_COLOR,
   matcherHint,
   pluralize,
-} from 'jest-matcher-utils';
-import {getState, setState} from './jestMatchersObject';
+} from 'elric-matcher-utils';
+import {getState, setState} from './elricMatchersObject';
 import type {Expect, ExpectedAssertionsErrors} from './types';
 
 const resetAssertionsLocalState = () => {

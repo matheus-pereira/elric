@@ -1,15 +1,15 @@
-# jest-matcher-utils
+# elric-matcher-utils
 
-This package's exports are most notably used by `expect`'s [`this.utils`](https://jestjs.io/docs/expect#thisutils).
+This package's exports are most notably used by `expect`'s [`this.utils`](https://elricjs.io/docs/expect#thisutils).
 
 ## Installation
 
 To add this package as a dependency of a project, run either of the following commands:
 
-- `npm install jest-matcher-utils`
-- `yarn add jest-matcher-utils`
+- `npm install elric-matcher-utils`
+- `yarn add elric-matcher-utils`
 
-## Exports ([src/index.ts](https://github.com/facebook/jest/blob/HEAD/packages/jest-matcher-utils/src/index.ts))
+## Exports ([src/index.ts](https://github.com/facebook/elric/blob/HEAD/packages/elric-matcher-utils/src/index.ts))
 
 ### Functions
 

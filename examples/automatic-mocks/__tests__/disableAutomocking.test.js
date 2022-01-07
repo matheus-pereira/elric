@@ -2,7 +2,7 @@
 
 import utils from '../utils';
 
-jest.disableAutomock();
+elric.disableAutomock();
 
 test('original implementation', () => {
   expect(utils.authorize()).toBe('token');

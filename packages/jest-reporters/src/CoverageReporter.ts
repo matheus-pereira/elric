@@ -21,10 +21,10 @@ import type {
   RuntimeTransformResult,
   TestResult,
   V8CoverageResult,
-} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import {clearLine, isInteractive} from 'jest-util';
-import {Worker} from 'jest-worker';
+} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import {clearLine, isInteractive} from 'elric-util';
+import {Worker} from 'elric-worker';
 import BaseReporter from './BaseReporter';
 import getWatermarks from './getWatermarks';
 import type {
@@ -248,13 +248,13 @@ export default class CoverageReporter extends BaseReporter {
             if (threshold < 0) {
               if (threshold * -1 < actualUncovered) {
                 errors.push(
-                  `Jest: Uncovered count for ${key} (${actualUncovered}) ` +
+                  `elric: Uncovered count for ${key} (${actualUncovered}) ` +
                     `exceeds ${name} threshold (${-1 * threshold})`,
                 );
               }
             } else if (actual < threshold) {
               errors.push(
-                `Jest: "${name}" coverage threshold for ${key} (${threshold}%) not met: ${actual}%`,
+                `elric: "${name}" coverage threshold for ${key} (${threshold}%) not met: ${actual}%`,
               );
             }
           }
@@ -399,7 +399,7 @@ export default class CoverageReporter extends BaseReporter {
             // If the file specified by path is not found, error is returned.
             if (thresholdGroup !== THRESHOLD_GROUP_TYPES.GLOBAL) {
               errors = errors.concat(
-                `Jest: Coverage data for ${thresholdGroup} was not found.`,
+                `elric: Coverage data for ${thresholdGroup} was not found.`,
               );
             }
           // Sometimes all files in the coverage data are matched by

@@ -6,10 +6,10 @@
  */
 
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import rimraf = require('rimraf');
 import {extractSummary} from '../Utils';
-import {json as runJestJson} from '../runJest';
+import {json as runelricJson} from '../runelric';
 
 const DIR = path.resolve(__dirname, '../snapshot-mock-fs');
 const snapshotDir = path.resolve(DIR, '__tests__/__snapshots__');
@@ -19,7 +19,7 @@ beforeEach(() => rimraf.sync(snapshotDir));
 afterAll(() => rimraf.sync(snapshotDir));
 
 test('store snapshot even if fs is mocked', () => {
-  const {json, exitCode, stderr} = runJestJson(DIR, ['--ci=false']);
+  const {json, exitCode, stderr} = runelricJson(DIR, ['--ci=false']);
 
   expect(exitCode).toBe(0);
   expect(json.numTotalTests).toBe(1);

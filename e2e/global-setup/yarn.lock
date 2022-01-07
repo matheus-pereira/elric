@@ -1267,9 +1267,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/types@npm:^27.4.2":
+"@elric/types@npm:^27.4.2":
   version: 27.4.2
-  resolution: "@jest/types@npm:27.4.2"
+  resolution: "@elric/types@npm:27.4.2"
   dependencies:
     "@types/istanbul-lib-coverage": ^2.0.0
     "@types/istanbul-reports": ^3.0.0
@@ -1629,11 +1629,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-util@npm:*":
+"elric-util@npm:*":
   version: 27.4.2
-  resolution: "jest-util@npm:27.4.2"
+  resolution: "elric-util@npm:27.4.2"
   dependencies:
-    "@jest/types": ^27.4.2
+    "@elric/types": ^27.4.2
     "@types/node": "*"
     chalk: ^4.0.0
     ci-info: ^3.2.0
@@ -1838,7 +1838,7 @@ resolve@^1.14.2:
     "@babel/core": ^7.0.0
     "@babel/preset-env": ^7.0.0
     "@babel/preset-flow": ^7.0.0
-    jest-util: "*"
+    elric-util: "*"
   languageName: unknown
   linkType: soft
 

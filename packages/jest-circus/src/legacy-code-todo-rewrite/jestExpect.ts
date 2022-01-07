@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import expect = require('expect');
 import {
   addSerializer,
@@ -13,7 +13,7 @@ import {
   toMatchSnapshot,
   toThrowErrorMatchingInlineSnapshot,
   toThrowErrorMatchingSnapshot,
-} from 'jest-snapshot';
+} from 'elric-snapshot';
 
 export type Expect = typeof expect;
 

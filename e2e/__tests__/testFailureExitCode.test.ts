@@ -8,7 +8,7 @@
 import {tmpdir} from 'os';
 import * as path from 'path';
 import {cleanup, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(tmpdir(), 'test-failure-exit-code-test');
 
@@ -19,23 +19,23 @@ test('exits with a specified code when test fail', () => {
   writeFiles(DIR, {
     '__tests__/test.test.js': `test('test', () => { expect(1).toBe(2); });`,
     'package.json': JSON.stringify({
-      jest: {testEnvironment: 'node', testFailureExitCode: 99},
+      elric: {testEnvironment: 'node', testFailureExitCode: 99},
     }),
   });
 
-  let {exitCode} = runJest(DIR);
+  let {exitCode} = runelric(DIR);
   expect(exitCode).toBe(99);
 
-  ({exitCode} = runJest(DIR, ['--testFailureExitCode', '77']));
+  ({exitCode} = runelric(DIR, ['--testFailureExitCode', '77']));
   expect(exitCode).toBe(77);
 
   writeFiles(DIR, {
     '__tests__/test.test.js': `test('test', () => { expect(1).toBe(2); });`,
     'package.json': JSON.stringify({
-      jest: {testEnvironment: 'node'},
+      elric: {testEnvironment: 'node'},
     }),
   });
-  ({exitCode} = runJest(DIR));
+  ({exitCode} = runelric(DIR));
   expect(exitCode).toBe(1);
 });
 
@@ -44,23 +44,23 @@ test('exits with a specified code when bailing from a failed test', () => {
     '__tests__/test.test.js': `test('test', () => { expect(1).toBe(2); });`,
     '__tests__/test2.test.js': `test('test2', () => { expect(1).toBe(2); });`,
     'package.json': JSON.stringify({
-      jest: {testEnvironment: 'node', testFailureExitCode: 99},
+      elric: {testEnvironment: 'node', testFailureExitCode: 99},
     }),
   });
 
-  let {exitCode} = runJest(DIR, ['--bail']);
+  let {exitCode} = runelric(DIR, ['--bail']);
   expect(exitCode).toBe(99);
 
-  ({exitCode} = runJest(DIR, ['--bail', '--testFailureExitCode', '77']));
+  ({exitCode} = runelric(DIR, ['--bail', '--testFailureExitCode', '77']));
   expect(exitCode).toBe(77);
 
   writeFiles(DIR, {
     '__tests__/test.test.js': `test('test', () => { expect(1).toBe(2); });`,
     '__tests__/test2.test.js': `test('test2', () => { expect(1).toBe(2); });`,
     'package.json': JSON.stringify({
-      jest: {testEnvironment: 'node'},
+      elric: {testEnvironment: 'node'},
     }),
   });
-  ({exitCode} = runJest(DIR));
+  ({exitCode} = runelric(DIR));
   expect(exitCode).toBe(1);
 });

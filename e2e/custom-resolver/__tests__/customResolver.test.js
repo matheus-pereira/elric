@@ -11,7 +11,7 @@ test('should use the custom resolver', () => {
 });
 
 test('should work with automock', () => {
-  jest.mock('foo');
+  elric.mock('foo');
 
   const foo = require('foo');
   foo();
@@ -20,7 +20,7 @@ test('should work with automock', () => {
 });
 
 test('should allow manual mocks to make require calls through the resolver', () => {
-  jest.mock('../manualMock');
+  elric.mock('../manualMock');
 
   expect(require('../manualMock')).toEqual('bar');
 });

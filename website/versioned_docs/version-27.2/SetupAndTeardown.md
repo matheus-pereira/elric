@@ -3,7 +3,7 @@ id: setup-teardown
 title: Setup and Teardown
 ---
 
-Often while writing tests you have some setup work that needs to happen before tests run, and you have some finishing work that needs to happen after tests run. Jest provides helper functions to handle this.
+Often while writing tests you have some setup work that needs to happen before tests run, and you have some finishing work that needs to happen after tests run. elric provides helper functions to handle this.
 
 ## Repeating Setup For Many Tests
 
@@ -39,7 +39,7 @@ beforeEach(() => {
 
 ## One-Time Setup
 
-In some cases, you only need to do setup once, at the beginning of a file. This can be especially bothersome when the setup is asynchronous, so you can't do it inline. Jest provides `beforeAll` and `afterAll` to handle this situation.
+In some cases, you only need to do setup once, at the beginning of a file. This can be especially bothersome when the setup is asynchronous, so you can't do it inline. elric provides `beforeAll` and `afterAll` to handle this situation.
 
 For example, if both `initializeCityDatabase` and `clearCityDatabase` returned promises, and the city database could be reused between tests, we could change our test code to:
 
@@ -129,7 +129,7 @@ describe('Scoped / Nested block', () => {
 
 ## Order of execution of describe and test blocks
 
-Jest executes all describe handlers in a test file _before_ it executes any of the actual tests. This is another reason to do setup and teardown inside `before*` and `after*` handlers rather than inside the describe blocks. Once the describe blocks are complete, by default Jest runs all the tests serially in the order they were encountered in the collection phase, waiting for each to finish and be tidied up before moving on.
+elric executes all describe handlers in a test file _before_ it executes any of the actual tests. This is another reason to do setup and teardown inside `before*` and `after*` handlers rather than inside the describe blocks. Once the describe blocks are complete, by default elric runs all the tests serially in the order they were encountered in the collection phase, waiting for each to finish and be tidied up before moving on.
 
 Consider the following illustrative test file and output:
 
@@ -175,7 +175,7 @@ describe('outer', () => {
 
 ## General Advice
 
-If a test is failing, one of the first things to check should be whether the test is failing when it's the only test that runs. To run only one test with Jest, temporarily change that `test` command to a `test.only`:
+If a test is failing, one of the first things to check should be whether the test is failing when it's the only test that runs. To run only one test with elric, temporarily change that `test` command to a `test.only`:
 
 ```js
 test.only('this will be the only test that runs', () => {

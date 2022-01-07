@@ -16,14 +16,14 @@ import * as fs from 'graceful-fs';
 import {addHook} from 'pirates';
 import slash = require('slash');
 import {sync as writeFileAtomic} from 'write-file-atomic';
-import type {Config} from '@jest/types';
-import HasteMap from 'jest-haste-map';
+import type {Config} from '@elric/types';
+import HasteMap from 'elric-haste-map';
 import {
   createDirectory,
   isPromise,
   requireOrImportModule,
   tryRealpath,
-} from 'jest-util';
+} from 'elric-util';
 import handlePotentialSyntaxError from './enhanceUnexpectedTokenMessage';
 import {
   makeInvalidReturnValueError,
@@ -203,7 +203,7 @@ class ScriptTransformer {
     const HasteMapClass = HasteMap.getStatic(this._config);
     const baseCacheDir = HasteMapClass.getCacheFilePath(
       this._config.cacheDirectory,
-      'jest-transform-cache-' + this._config.name,
+      'elric-transform-cache-' + this._config.name,
       VERSION,
     );
     // Create sub folders based on the cacheKey to avoid creating one
@@ -287,7 +287,7 @@ class ScriptTransformer {
   private _getTransformer(filename: Config.Path) {
     if (!this._transformsAreLoaded) {
       throw new Error(
-        'Jest: Transformers have not been loaded yet - make sure to run `loadTransformers` and wait for it to complete before starting to transform files',
+        'elric: Transformers have not been loaded yet - make sure to run `loadTransformers` and wait for it to complete before starting to transform files',
       );
     }
 
@@ -307,7 +307,7 @@ class ScriptTransformer {
     }
 
     throw new Error(
-      `Jest was unable to load the transformer defined for ${filename}. This is a bug in Jest, please open up an issue`,
+      `elric was unable to load the transformer defined for ${filename}. This is a bug in elric, please open up an issue`,
     );
   }
 
@@ -324,7 +324,7 @@ class ScriptTransformer {
       auxiliaryCommentBefore: ' istanbul ignore next ',
       babelrc: false,
       caller: {
-        name: '@jest/transform',
+        name: '@elric/transform',
         supportsDynamicImport: options.supportsDynamicImport,
         supportsExportNamespaceFrom: options.supportsExportNamespaceFrom,
         supportsStaticESM: options.supportsStaticESM,
@@ -384,7 +384,7 @@ class ScriptTransformer {
     if (!transformed.map) {
       try {
         //Could be a potential freeze here.
-        //See: https://github.com/facebook/jest/pull/5177#discussion_r158883570
+        //See: https://github.com/facebook/elric/pull/5177#discussion_r158883570
         const inlineSourceMap = sourcemapFromSource(transformed.code);
         if (inlineSourceMap) {
           transformed.map = inlineSourceMap.toObject();
@@ -407,7 +407,7 @@ class ScriptTransformer {
     if (!transformWillInstrument && options.instrument) {
       /**
        * We can map the original source code to the instrumented code ONLY if
-       * - the process of transforming the code produced a source map e.g. ts-jest
+       * - the process of transforming the code produced a source map e.g. ts-elric
        * - we did not transform the source code
        *
        * Otherwise we cannot make any statements about how the instrumented code corresponds to the original code,
@@ -868,7 +868,7 @@ function writeCodeCacheFile(cachePath: Config.Path, code: string) {
 /**
  * Read counterpart of `writeCodeCacheFile`. We verify that the content of the
  * file matches the checksum, in case some kind of corruption happened. This
- * could happen if an older version of `jest-runtime` writes non-atomically to
+ * could happen if an older version of `elric-runtime` writes non-atomically to
  * the same cache, for example.
  */
 function readCodeCacheFile(cachePath: Config.Path): string | null {
@@ -899,7 +899,7 @@ const writeCacheFile = (cachePath: Config.Path, fileData: string) => {
     }
 
     e.message =
-      'jest: failed to cache transform results in: ' +
+      'elric: failed to cache transform results in: ' +
       cachePath +
       '\nFailure message: ' +
       e.message;
@@ -932,7 +932,7 @@ const readCacheFile = (cachePath: Config.Path): string | null => {
     fileData = fs.readFileSync(cachePath, 'utf8');
   } catch (e: any) {
     e.message =
-      'jest: failed to read cache file: ' +
+      'elric: failed to read cache file: ' +
       cachePath +
       '\nFailure message: ' +
       e.message;

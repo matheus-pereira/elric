@@ -1,14 +1,14 @@
 {
-  "jest": {
+  "elric": {
     "testEnvironment": "<rootDir>/environment.ts",
     "transformIgnorePatterns": [
-      "jest-environment-node"
+      "elric-environment-node"
     ],
     "rootDir": "./"
   },
   "dependencies": {
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-typescript": "^7.0.0",
-    "jest-environment-node": "file:../../../packages/jest-environment-node"
+    "elric-environment-node": "file:../../../packages/elric-environment-node"
   }
 }

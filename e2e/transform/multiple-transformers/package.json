@@ -1,5 +1,5 @@
 {
-  "jest": {
+  "elric": {
     "transform": {
       "\\.css$": "<rootDir>/cssPreprocessor.js",
       "\\.js$": "<rootDir>/jsPreprocessor.js",
@@ -7,10 +7,10 @@
     },
     "testEnvironment": "node",
     "transformIgnorePatterns": [
-      "jest-circus",
-      "jest-environment-node",
-      "jest-jasmine2",
-      "jest-runner"
+      "elric-circus",
+      "elric-environment-node",
+      "elric-jasmine2",
+      "elric-runner"
     ]
   },
   "dependencies": {

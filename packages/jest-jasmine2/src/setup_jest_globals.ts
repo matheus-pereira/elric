@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config, Global} from '@jest/types';
+import type {Config, Global} from '@elric/types';
 import {extractExpectedAssertionsErrors, getState, setState} from 'expect';
 import {
   SnapshotState,
   SnapshotStateType,
   addSerializer,
   buildSnapshotResolver,
-} from 'jest-snapshot';
+} from 'elric-snapshot';
 import type {Plugin} from 'pretty-format';
 import type {
   Attributes,
@@ -30,7 +30,7 @@ export type SetupOptions = {
   testPath: Config.Path;
 };
 
-// Get suppressed errors form  jest-matchers that weren't throw during
+// Get suppressed errors form  elric-matchers that weren't throw during
 // test execution and add them to the test result, potentially failing
 // a passing test.
 const addSuppressedErrors = (result: SpecResult) => {
@@ -95,7 +95,7 @@ export default async ({
   localRequire,
   testPath,
 }: SetupOptions): Promise<SnapshotStateType> => {
-  // Jest tests snapshotSerializers in order preceding built-in serializers.
+  // elric tests snapshotSerializers in order preceding built-in serializers.
   // Therefore, add in reverse because the last added is the first tested.
   config.snapshotSerializers
     .concat()
@@ -115,7 +115,7 @@ export default async ({
     snapshotFormat,
     updateSnapshot,
   });
-  // @ts-expect-error: snapshotState is a jest extension of `expect`
+  // @ts-expect-error: snapshotState is a elric extension of `expect`
   setState({snapshotState, testPath});
   // Return it back to the outer scope (test runner outside the VM).
   return snapshotState;

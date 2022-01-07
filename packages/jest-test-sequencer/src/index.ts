@@ -6,9 +6,9 @@
  */
 
 import * as fs from 'graceful-fs';
-import type {AggregatedResult, Test} from '@jest/test-result';
-import HasteMap from 'jest-haste-map';
-import type {Context} from 'jest-runtime';
+import type {AggregatedResult, Test} from '@elric/test-result';
+import HasteMap from 'elric-haste-map';
+import type {Context} from 'elric-runtime';
 
 const FAIL = 0;
 const SUCCESS = 1;

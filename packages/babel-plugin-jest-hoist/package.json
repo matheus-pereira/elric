@@ -1,10 +1,10 @@
 {
-  "name": "babel-plugin-jest-hoist",
+  "name": "babel-plugin-elric-hoist",
   "version": "27.4.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/babel-plugin-jest-hoist"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/babel-plugin-elric-hoist"
   },
   "engines": {
     "node": "^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0"

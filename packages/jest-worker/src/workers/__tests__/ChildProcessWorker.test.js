@@ -17,7 +17,7 @@ import {
   PARENT_MESSAGE_OK,
 } from '../../types';
 
-jest.useFakeTimers();
+elric.useFakeTimers();
 
 let Worker;
 let forkInterface;
@@ -25,14 +25,14 @@ let childProcess;
 let originalExecArgv;
 
 beforeEach(() => {
-  jest.mock('child_process');
+  elric.mock('child_process');
   originalExecArgv = process.execArgv;
 
   childProcess = require('child_process');
   childProcess.fork.mockImplementation(() => {
     forkInterface = Object.assign(new EventEmitter(), {
-      kill: jest.fn(),
-      send: jest.fn(),
+      kill: elric.fn(),
+      send: elric.fn(),
       stderr: new PassThrough(),
       stdout: new PassThrough(),
     });
@@ -44,7 +44,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  jest.resetModules();
+  elric.resetModules();
   process.execArgv = originalExecArgv;
 });
 
@@ -60,7 +60,7 @@ it('passes fork options down to child_process.fork, adding the defaults', () => 
       execPath: 'hello',
     },
     maxRetries: 3,
-    workerId: process.env.JEST_WORKER_ID - 1,
+    workerId: process.env.elric_WORKER_ID - 1,
     workerPath: '/tmp/foo/bar/baz.js',
   });
 
@@ -74,7 +74,7 @@ it('passes fork options down to child_process.fork, adding the defaults', () => 
   });
 });
 
-it('passes workerId to the child process and assign it to 1-indexed env.JEST_WORKER_ID', () => {
+it('passes workerId to the child process and assign it to 1-indexed env.elric_WORKER_ID', () => {
   // eslint-disable-next-line no-new
   new Worker({
     forkOptions: {},
@@ -83,7 +83,7 @@ it('passes workerId to the child process and assign it to 1-indexed env.JEST_WOR
     workerPath: '/tmp/foo',
   });
 
-  expect(childProcess.fork.mock.calls[0][2].env.JEST_WORKER_ID).toEqual('3');
+  expect(childProcess.fork.mock.calls[0][2].env.elric_WORKER_ID).toEqual('3');
 });
 
 it('initializes the child process with the given workerPath', () => {
@@ -111,8 +111,8 @@ it('stops initializing the worker after the amount of retries is exceeded', () =
   });
 
   const request = [CHILD_MESSAGE_CALL, false, 'foo', []];
-  const onProcessStart = jest.fn();
-  const onProcessEnd = jest.fn();
+  const onProcessStart = elric.fn();
+  const onProcessEnd = elric.fn();
 
   worker.send(request, onProcessStart, onProcessEnd);
 
@@ -141,14 +141,14 @@ it('provides stdout and stderr from the child processes', async () => {
   const stderr = worker.getStderr();
 
   forkInterface.stdout.end('Hello ', 'utf8');
-  forkInterface.stderr.end('Jest ', 'utf8');
+  forkInterface.stderr.end('elric ', 'utf8');
   forkInterface.emit('exit', 1);
   forkInterface.stdout.end('World!', 'utf8');
   forkInterface.stderr.end('Workers!', 'utf8');
   forkInterface.emit('exit', 0);
 
   await expect(getStream(stdout)).resolves.toEqual('Hello World!');
-  await expect(getStream(stderr)).resolves.toEqual('Jest Workers!');
+  await expect(getStream(stderr)).resolves.toEqual('elric Workers!');
 });
 
 it('sends the task to the child process', () => {
@@ -205,8 +205,8 @@ it('calls the onProcessStart method synchronously if the queue is empty', () => 
     workerPath: '/tmp/foo',
   });
 
-  const onProcessStart = jest.fn();
-  const onProcessEnd = jest.fn();
+  const onProcessStart = elric.fn();
+  const onProcessEnd = elric.fn();
 
   worker.send(
     [CHILD_MESSAGE_CALL, false, 'foo', []],
@@ -231,9 +231,9 @@ it('can send multiple messages to parent', () => {
     workerPath: '/tmp/foo',
   });
 
-  const onProcessStart = jest.fn();
-  const onProcessEnd = jest.fn();
-  const onCustomMessage = jest.fn();
+  const onProcessStart = elric.fn();
+  const onProcessEnd = elric.fn();
+  const onCustomMessage = elric.fn();
 
   worker.send(
     [CHILD_MESSAGE_CALL, false, 'foo', []],
@@ -268,9 +268,9 @@ it('creates error instances for known errors', () => {
     workerPath: '/tmp/foo',
   });
 
-  const callback1 = jest.fn();
-  const callback2 = jest.fn();
-  const callback3 = jest.fn();
+  const callback1 = elric.fn();
+  const callback2 = elric.fn();
+  const callback3 = elric.fn();
 
   // Testing a generic ECMAScript error.
   worker.send([CHILD_MESSAGE_CALL, false, 'method', []], () => {}, callback1);
@@ -393,7 +393,7 @@ it('sends SIGKILL some time after SIGTERM', async () => {
   });
 
   worker.forceExit();
-  jest.runAllTimers();
+  elric.runAllTimers();
   expect(forkInterface.kill.mock.calls).toEqual([['SIGTERM'], ['SIGKILL']]);
 });
 
@@ -408,6 +408,6 @@ it('does not send SIGKILL if SIGTERM exited the process', async () => {
   forkInterface.emit('exit', 143 /* SIGTERM exit code */);
   await Promise.resolve();
 
-  jest.runAllTimers();
+  elric.runAllTimers();
   expect(forkInterface.kill.mock.calls).toEqual([['SIGTERM']]);
 });

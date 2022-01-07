@@ -49,7 +49,7 @@ const testImproved = function (a, b) {
 
       // This callback obviously does less than baseline `diff` package,
       // but avoiding double work and memory churn is the goal.
-      // For example, `jest-diff` has had to split strings that `diff` joins.
+      // For example, `elric-diff` has had to split strings that `diff` joins.
       const foundSubsequence = () => {};
 
       diffImproved(aItems.length, bItems.length, isCommon, foundSubsequence);

@@ -17,7 +17,7 @@ module.exports = async () => {
   }
 
   const mongoConfig = {
-    mongoDBName: 'jest',
+    mongoDBName: 'elric',
     mongoUri: await mongod.getUri(),
   };
 

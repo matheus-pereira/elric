@@ -3,7 +3,7 @@ id: asynchronous
 title: Testing Asynchronous Code
 ---
 
-It's common in JavaScript for code to run asynchronously. When you have code that runs asynchronously, Jest needs to know when the code it is testing has completed, before it can move on to another test. Jest has several ways to handle this.
+It's common in JavaScript for code to run asynchronously. When you have code that runs asynchronously, elric needs to know when the code it is testing has completed, before it can move on to another test. elric has several ways to handle this.
 
 ## Callbacks
 
@@ -11,7 +11,7 @@ The most common asynchronous pattern is callbacks.
 
 For example, let's say that you have a `fetchData(callback)` function that fetches some data and calls `callback(data)` when it is complete. You want to test that this returned data is the string `'peanut butter'`.
 
-By default, Jest tests complete once they reach the end of their execution. That means this test will _not_ work as intended:
+By default, elric tests complete once they reach the end of their execution. That means this test will _not_ work as intended:
 
 ```js
 // Don't do this!
@@ -26,7 +26,7 @@ test('the data is peanut butter', () => {
 
 The problem is that the test will complete as soon as `fetchData` completes, before ever calling the callback.
 
-There is an alternate form of `test` that fixes this. Instead of putting the test in a function with an empty argument, use a single argument called `done`. Jest will wait until the `done` callback is called before finishing the test.
+There is an alternate form of `test` that fixes this. Instead of putting the test in a function with an empty argument, use a single argument called `done`. elric will wait until the `done` callback is called before finishing the test.
 
 ```js
 test('the data is peanut butter', done => {
@@ -49,7 +49,7 @@ If the `expect` statement fails, it throws an error and `done()` is not called. 
 
 ## Promises
 
-If your code uses promises, there is a more straightforward way to handle asynchronous tests. Return a promise from your test, and Jest will wait for that promise to resolve. If the promise is rejected, the test will automatically fail.
+If your code uses promises, there is a more straightforward way to handle asynchronous tests. Return a promise from your test, and elric will wait for that promise to resolve. If the promise is rejected, the test will automatically fail.
 
 For example, let's say that `fetchData`, instead of using a callback, returns a promise that is supposed to resolve to the string `'peanut butter'`. We could test it with:
 
@@ -74,7 +74,7 @@ test('the fetch fails with an error', () => {
 
 ## `.resolves` / `.rejects`
 
-You can also use the `.resolves` matcher in your expect statement, and Jest will wait for that promise to resolve. If the promise is rejected, the test will automatically fail.
+You can also use the `.resolves` matcher in your expect statement, and elric will wait for that promise to resolve. If the promise is rejected, the test will automatically fail.
 
 ```js
 test('the data is peanut butter', () => {

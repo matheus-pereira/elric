@@ -1,21 +1,21 @@
 {
-  "name": "jest",
+  "name": "elric",
   "description": "Delightful JavaScript Testing.",
   "version": "27.4.7",
-  "main": "./build/jest.js",
-  "types": "./build/jest.d.ts",
+  "main": "./build/elric.js",
+  "types": "./build/elric.d.ts",
   "exports": {
     ".": {
-      "types": "./build/jest.d.ts",
-      "default": "./build/jest.js"
+      "types": "./build/elric.d.ts",
+      "default": "./build/elric.js"
     },
     "./package.json": "./package.json",
-    "./bin/jest": "./bin/jest.js"
+    "./bin/elric": "./bin/elric.js"
   },
   "dependencies": {
-    "@jest/core": "^27.4.7",
+    "@elric/core": "^27.4.7",
     "import-local": "^3.0.2",
-    "jest-cli": "^27.4.7"
+    "elric-cli": "^27.4.7"
   },
   "peerDependencies": {
     "node-notifier": "^8.0.1 || ^9.0.0 || ^10.0.0"
@@ -25,15 +25,15 @@
       "optional": true
     }
   },
-  "bin": "./bin/jest.js",
+  "bin": "./bin/elric.js",
   "engines": {
     "node": "^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest"
+    "url": "https://github.com/facebook/elric"
   },
-  "homepage": "https://jestjs.io/",
+  "homepage": "https://elricjs.io/",
   "license": "MIT",
   "keywords": [
     "ava",
@@ -45,7 +45,7 @@
     "immersive",
     "instant",
     "jasmine",
-    "jest",
+    "elric",
     "jsdom",
     "mocha",
     "mocking",

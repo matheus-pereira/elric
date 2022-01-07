@@ -19,17 +19,17 @@ describe('Runtime', () => {
     createRuntime = require('createRuntime');
   });
 
-  describe('jest.mock', () => {
+  describe('elric.mock', () => {
     it('uses explicitly set mocks instead of automocking', async () => {
       const runtime = await createRuntime(__filename);
       const mockReference = {isMock: true};
       const root = runtime.requireModule(runtime.__mockRootPath, rootJsPath);
       // Erase module registry because root.js requires most other modules.
-      root.jest.resetModules();
+      root.elric.resetModules();
 
-      root.jest.mock('RegularModule', () => mockReference);
-      root.jest.mock('ManuallyMocked', () => mockReference);
-      root.jest.mock('nested1/nested2/nested3');
+      root.elric.mock('RegularModule', () => mockReference);
+      root.elric.mock('ManuallyMocked', () => mockReference);
+      root.elric.mock('nested1/nested2/nested3');
 
       expect(
         runtime.requireModuleOrMock(runtime.__mockRootPath, 'RegularModule'),
@@ -53,11 +53,11 @@ describe('Runtime', () => {
       const virtual = true;
       const root = runtime.requireModule(runtime.__mockRootPath, rootJsPath);
       // Erase module registry because root.js requires most other modules.
-      root.jest.resetModules();
+      root.elric.resetModules();
 
-      root.jest.mock('NotInstalledModule', () => mockReference, {virtual});
-      root.jest.mock('../ManuallyMocked', () => mockReference, {virtual});
-      root.jest.mock('/AbsolutePath/Mock', () => mockReference, {virtual});
+      root.elric.mock('NotInstalledModule', () => mockReference, {virtual});
+      root.elric.mock('../ManuallyMocked', () => mockReference, {virtual});
+      root.elric.mock('/AbsolutePath/Mock', () => mockReference, {virtual});
 
       expect(
         runtime.requireModuleOrMock(
@@ -87,11 +87,11 @@ describe('Runtime', () => {
       const virtual = true;
       const root = runtime.requireModule(runtime.__mockRootPath, rootJsPath);
       // Erase module registry because root.js requires most other modules.
-      root.jest.resetModules();
+      root.elric.resetModules();
 
-      root.jest.mock('NotInstalledModule', () => mockReference, {virtual});
-      root.jest.mock('../ManuallyMocked', () => mockReference, {virtual});
-      root.jest.mock('/AbsolutePath/Mock', () => mockReference, {virtual});
+      root.elric.mock('NotInstalledModule', () => mockReference, {virtual});
+      root.elric.mock('../ManuallyMocked', () => mockReference, {virtual});
+      root.elric.mock('/AbsolutePath/Mock', () => mockReference, {virtual});
 
       expect(
         runtime.requireModuleOrMock(
@@ -116,16 +116,16 @@ describe('Runtime', () => {
     });
   });
 
-  describe('jest.setMock', () => {
+  describe('elric.setMock', () => {
     it('uses explicitly set mocks instead of automocking', async () => {
       const runtime = await createRuntime(__filename);
       const mockReference = {isMock: true};
       const root = runtime.requireModule(runtime.__mockRootPath, rootJsPath);
       // Erase module registry because root.js requires most other modules.
-      root.jest.resetModules();
+      root.elric.resetModules();
 
-      root.jest.setMock('RegularModule', mockReference);
-      root.jest.setMock('ManuallyMocked', mockReference);
+      root.elric.setMock('RegularModule', mockReference);
+      root.elric.setMock('ManuallyMocked', mockReference);
 
       expect(
         runtime.requireModuleOrMock(runtime.__mockRootPath, 'RegularModule'),

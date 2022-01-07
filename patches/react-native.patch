@@ -1,7 +1,7 @@
-diff --git a/jest/preprocessor.js b/jest/preprocessor.js
+diff --git a/elric/preprocessor.js b/elric/preprocessor.js
 index 5920c0a6f23c056f27366fabf32dd13c6f86465b..2658e52f9127ac58849e7f830f6342d8b683672c 100644
---- a/jest/preprocessor.js
-+++ b/jest/preprocessor.js
+--- a/elric/preprocessor.js
++++ b/elric/preprocessor.js
 @@ -64,8 +64,6 @@ module.exports = {
          [require('@babel/plugin-transform-flow-strip-types')],
          [

@@ -7,8 +7,8 @@
 
 import * as path from 'path';
 import * as fs from 'graceful-fs';
-import type {FormattedTestResults} from '@jest/test-result';
-import runJest from '../runJest';
+import type {FormattedTestResults} from '@elric/test-result';
+import runelric from '../runelric';
 
 describe('JSON Reporter', () => {
   const outputFileName = 'sum.result.json';
@@ -25,7 +25,7 @@ describe('JSON Reporter', () => {
   it('writes test result to sum.result.json', () => {
     let jsonResult: FormattedTestResults;
 
-    runJest('json-reporter', ['--json', `--outputFile=${outputFileName}`]);
+    runelric('json-reporter', ['--json', `--outputFile=${outputFileName}`]);
     const testOutput = fs.readFileSync(outputFilePath, 'utf8');
 
     try {
@@ -63,7 +63,7 @@ describe('JSON Reporter', () => {
   });
 
   it('outputs coverage report', () => {
-    const result = runJest('json-reporter', ['--json']);
+    const result = runelric('json-reporter', ['--json']);
     let jsonResult: FormattedTestResults;
 
     expect(result.stderr).toMatch(/1 failed, 2 passed/);

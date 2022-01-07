@@ -5,12 +5,12 @@
     "outDir": "build"
   },
   "references": [
-    {"path": "../jest-haste-map"},
-    {"path": "../jest-regex-util"},
-    {"path": "../jest-resolve"},
-    {"path": "../jest-runtime"},
-    {"path": "../jest-snapshot"},
-    {"path": "../jest-types"},
+    {"path": "../elric-haste-map"},
+    {"path": "../elric-regex-util"},
+    {"path": "../elric-resolve"},
+    {"path": "../elric-runtime"},
+    {"path": "../elric-snapshot"},
+    {"path": "../elric-types"},
     {"path": "../test-utils"}
   ]
 }

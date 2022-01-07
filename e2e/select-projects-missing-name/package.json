@@ -1,6 +1,6 @@
 {
   "description": "Testing the behaviour of --selectProjects when a project does not have a name",
-  "jest": {
+  "elric": {
     "projects": [
       {
         "displayName": "first-project",

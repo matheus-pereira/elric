@@ -10,10 +10,10 @@ import type {
   SerializableError,
   TestCaseResult,
   TestResult,
-} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import type {FS as HasteFS, ModuleMap} from 'jest-haste-map';
-import type Resolver from 'jest-resolve';
+} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import type {FS as HasteFS, ModuleMap} from 'elric-haste-map';
+import type Resolver from 'elric-resolve';
 import type {worker} from './CoverageWorker';
 
 export type ReporterOnStartOptions = {

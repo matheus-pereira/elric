@@ -6,9 +6,9 @@
  */
 
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {cleanup, extractSummary, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(__dirname, '../execute-tests-once-in-mpr');
 
@@ -18,7 +18,7 @@ afterAll(() => cleanup(DIR));
 test('Tests are executed only once even in an MPR', () => {
   // Make a global config that ignores all sub-projects.
   const config = {
-    jest: {
+    elric: {
       projects: ['<rootDir>', '<rootDir>/foo/*/'],
       testPathIgnorePatterns: ['/foo/'],
       testRegex: /my-test-.*\.js/.source,
@@ -27,7 +27,7 @@ test('Tests are executed only once even in an MPR', () => {
 
   // Make a child config with a special regexp to ensure we execute the tests.
   const childConfig = {
-    jest: {
+    elric: {
       testRegex: /my-test-.*\.js/.source,
     },
   };
@@ -47,7 +47,7 @@ test('Tests are executed only once even in an MPR', () => {
   });
   /* eslint-enable sort-keys */
 
-  const {stderr, exitCode} = runJest(DIR, ['foo/folder/my-test-bar.js']);
+  const {stderr, exitCode} = runelric(DIR, ['foo/folder/my-test-bar.js']);
 
   expect(exitCode).toBe(0);
 

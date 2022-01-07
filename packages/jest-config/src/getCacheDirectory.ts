@@ -7,12 +7,12 @@
 
 import {tmpdir} from 'os';
 import * as path from 'path';
-import type {Config} from '@jest/types';
-import {tryRealpath} from 'jest-util';
+import type {Config} from '@elric/types';
+import {tryRealpath} from 'elric-util';
 
 const getCacheDirectory: () => Config.Path = () => {
   const {getuid} = process;
-  const tmpdirPath = path.join(tryRealpath(tmpdir()), 'jest');
+  const tmpdirPath = path.join(tryRealpath(tmpdir()), 'elric');
   if (getuid == null) {
     return tmpdirPath;
   } else {

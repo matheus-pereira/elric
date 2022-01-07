@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {SnapshotResolver} from 'jest-snapshot';
+import {SnapshotResolver} from 'elric-snapshot';
 
 const snapshotResolver: SnapshotResolver = {
   resolveSnapshotPath: (testPath, snapshotExtension) =>

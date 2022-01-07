@@ -7,7 +7,7 @@
 
 import exit = require('exit');
 import * as fs from 'graceful-fs';
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import generateEmptyCoverage, {
   CoverageWorkerResult,
 } from './generateEmptyCoverage';

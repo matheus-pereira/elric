@@ -11,8 +11,8 @@ import type {
   AggregatedResult,
   TestCaseResult,
   TestResult,
-} from '@jest/test-result';
-import type {Config} from '@jest/types';
+} from '@elric/test-result';
+import type {Config} from '@elric/types';
 import type {ReporterOnStartOptions, Test} from './types';
 import {
   getSummary,

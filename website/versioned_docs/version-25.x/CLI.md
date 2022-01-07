@@ -1,9 +1,9 @@
 ---
 id: cli
-title: Jest CLI Options
+title: elric CLI Options
 ---
 
-The `jest` command line runner has a number of useful options. You can run `jest --help` to view all available options. Many of the options shown below can also be used together to run tests exactly the way you want. Every one of Jest's [Configuration](Configuration.md) options can also be specified through the CLI.
+The `elric` command line runner has a number of useful options. You can run `elric --help` to view all available options. Many of the options shown below can also be used together to run tests exactly the way you want. Every one of elric's [Configuration](Configuration.md) options can also be specified through the CLI.
 
 Here is a brief overview:
 
@@ -12,51 +12,51 @@ Here is a brief overview:
 Run all tests (default):
 
 ```bash
-jest
+elric
 ```
 
 Run only the tests that were specified with a pattern or filename:
 
 ```bash
-jest my-test #or
-jest path/to/my-test.js
+elric my-test #or
+elric path/to/my-test.js
 ```
 
 Run tests related to changed files based on hg/git (uncommitted files):
 
 ```bash
-jest -o
+elric -o
 ```
 
 Run tests related to `path/to/fileA.js` and `path/to/fileB.js`:
 
 ```bash
-jest --findRelatedTests path/to/fileA.js path/to/fileB.js
+elric --findRelatedTests path/to/fileA.js path/to/fileB.js
 ```
 
 Run tests that match this spec name (match against the name in `describe` or `test`, basically).
 
 ```bash
-jest -t name-of-spec
+elric -t name-of-spec
 ```
 
 Run watch mode:
 
 ```bash
-jest --watch #runs jest -o by default
-jest --watchAll #runs all tests
+elric --watch #runs elric -o by default
+elric --watchAll #runs all tests
 ```
 
 Watch mode also enables to specify the name or path to a file to focus on a specific set of tests.
 
 ## Using with yarn
 
-If you run Jest via `yarn test`, you can pass the command line arguments directly as Jest arguments.
+If you run elric via `yarn test`, you can pass the command line arguments directly as elric arguments.
 
 Instead of:
 
 ```bash
-jest -u -t="ColorPicker"
+elric -u -t="ColorPicker"
 ```
 
 you can use:
@@ -67,12 +67,12 @@ yarn test -u -t="ColorPicker"
 
 ## Using with npm scripts
 
-If you run Jest via `npm test`, you can still use the command line arguments by inserting a `--` between `npm test` and the Jest arguments.
+If you run elric via `npm test`, you can still use the command line arguments by inserting a `--` between `npm test` and the elric arguments.
 
 Instead of:
 
 ```bash
-jest -u -t="ColorPicker"
+elric -u -t="ColorPicker"
 ```
 
 you can use:
@@ -83,17 +83,17 @@ npm test -- -u -t="ColorPicker"
 
 ## Camelcase & dashed args support
 
-Jest supports both camelcase and dashed arg formats. The following examples will have an equal result:
+elric supports both camelcase and dashed arg formats. The following examples will have an equal result:
 
 ```bash
-jest --collect-coverage
-jest --collectCoverage
+elric --collect-coverage
+elric --collectCoverage
 ```
 
 Arguments can also be mixed:
 
 ```bash
-jest --update-snapshot --detectOpenHandles
+elric --update-snapshot --detectOpenHandles
 ```
 
 ## Options
@@ -108,9 +108,9 @@ import TOCInline from "@theme/TOCInline"
 
 ## Reference
 
-### `jest <regexForTestFiles>`
+### `elric <regexForTestFiles>`
 
-When you run `jest` with an argument, that argument is treated as a regular expression to match against files in your project. It is possible to run test suites by providing a pattern. Only the files that the pattern matches will be picked up and executed. Depending on your terminal, you may need to quote this argument: `jest "my.*(complex)?pattern"`. On Windows, you will need to use `/` as a path separator or escape `\` as `\\`.
+When you run `elric` with an argument, that argument is treated as a regular expression to match against files in your project. It is possible to run test suites by providing a pattern. Only the files that the pattern matches will be picked up and executed. Depending on your terminal, you may need to quote this argument: `elric "my.*(complex)?pattern"`. On Windows, you will need to use `/` as a path separator or escape `\` as `\\`.
 
 ### `--bail`
 
@@ -118,7 +118,7 @@ Alias: `-b`. Exit the test suite immediately upon `n` number of failing test sui
 
 ### `--cache`
 
-Whether to use the cache. Defaults to true. Disable the cache using `--no-cache`. _Note: the cache should only be disabled if you are experiencing caching related problems. On average, disabling the cache makes Jest at least two times slower._
+Whether to use the cache. Defaults to true. Disable the cache using `--no-cache`. _Note: the cache should only be disabled if you are experiencing caching related problems. On average, disabling the cache makes elric at least two times slower._
 
 If you want to inspect the cache, use `--showConfig` and look at the `cacheDirectory` value. If you need to clear the cache, use `--clearCache`.
 
@@ -132,15 +132,15 @@ Runs tests related to the changes since the provided branch or commit hash. If t
 
 ### `--ci`
 
-When this option is provided, Jest will assume it is running in a CI environment. This changes the behavior when a new snapshot is encountered. Instead of the regular behavior of storing a new snapshot automatically, it will fail the test and require Jest to be run with `--updateSnapshot`.
+When this option is provided, elric will assume it is running in a CI environment. This changes the behavior when a new snapshot is encountered. Instead of the regular behavior of storing a new snapshot automatically, it will fail the test and require elric to be run with `--updateSnapshot`.
 
 ### `--clearCache`
 
-Deletes the Jest cache directory and then exits without running tests. Will delete `cacheDirectory` if the option is passed, or Jest's default cache directory. The default cache directory can be found by calling `jest --showConfig`. _Note: clearing the cache will reduce performance._
+Deletes the elric cache directory and then exits without running tests. Will delete `cacheDirectory` if the option is passed, or elric's default cache directory. The default cache directory can be found by calling `elric --showConfig`. _Note: clearing the cache will reduce performance._
 
 ### `--clearMocks`
 
-Automatically clear mock calls, instances and results before every test. Equivalent to calling [`jest.clearAllMocks()`](JestObjectAPI.md#jestclearallmocks) before each test. This does not remove any mock implementation that may have been provided.
+Automatically clear mock calls, instances and results before every test. Equivalent to calling [`elric.clearAllMocks()`](elricObjectAPI.md#elricclearallmocks) before each test. This does not remove any mock implementation that may have been provided.
 
 ### `--collectCoverageFrom=<glob>`
 
@@ -152,7 +152,7 @@ Forces test results output highlighting even if stdout is not a TTY.
 
 ### `--config=<path>`
 
-Alias: `-c`. The path to a Jest config file specifying how to find and execute tests. If no `rootDir` is set in the config, the directory containing the config file is assumed to be the `rootDir` for the project. This can also be a JSON-encoded value which Jest will use as configuration.
+Alias: `-c`. The path to a elric config file specifying how to find and execute tests. If no `rootDir` is set in the config, the directory containing the config file is assumed to be the `rootDir` for the project. This can also be a JSON-encoded value which elric will use as configuration.
 
 ### `--coverage[=<boolean>]`
 
@@ -165,16 +165,16 @@ Indicates which provider should be used to instrument code for coverage. Allowed
 Note that using `v8` is considered experimental. This uses V8's builtin code coverage rather than one based on Babel and comes with a few caveats
 
 1. Your node version must include `vm.compileFunction`, which was introduced in [node 10.10](https://nodejs.org/dist/latest-v12.x/docs/api/vm.html#vm_vm_compilefunction_code_params_options)
-1. Tests needs to run in Node test environment (support for `jsdom` requires [`jest-environment-jsdom-sixteen`](https://www.npmjs.com/package/jest-environment-jsdom-sixteen))
+1. Tests needs to run in Node test environment (support for `jsdom` requires [`elric-environment-jsdom-sixteen`](https://www.npmjs.com/package/elric-environment-jsdom-sixteen))
 1. V8 has way better data in the later versions, so using the latest versions of node (v13 at the time of this writing) will yield better results
 
 ### `--debug`
 
-Print debugging info about your Jest config.
+Print debugging info about your elric config.
 
 ### `--detectOpenHandles`
 
-Attempt to collect and print open handles preventing Jest from exiting cleanly. Use this in cases where you need to use `--forceExit` in order for Jest to exit to potentially track down the reason. This implies `--runInBand`, making tests run serially. Implemented using [`async_hooks`](https://nodejs.org/api/async_hooks.html). This option has a significant performance penalty and should only be used for debugging.
+Attempt to collect and print open handles preventing elric from exiting cleanly. Use this in cases where you need to use `--forceExit` in order for elric to exit to potentially track down the reason. This implies `--runInBand`, making tests run serially. Implemented using [`async_hooks`](https://nodejs.org/api/async_hooks.html). This option has a significant performance penalty and should only be used for debugging.
 
 ### `--env=<environment>`
 
@@ -198,7 +198,7 @@ Find and run the tests that cover a space separated list of source files that we
 
 ### `--forceExit`
 
-Force Jest to exit after all tests have completed running. This is useful when resources set up by test code cannot be adequately cleaned up. _Note: This feature is an escape-hatch. If Jest doesn't exit at the end of a test run, it means external resources are still being held on to or timers are still pending in your code. It is advised to tear down external resources after each test to make sure Jest can shut down cleanly. You can use `--detectOpenHandles` to help track it down._
+Force elric to exit after all tests have completed running. This is useful when resources set up by test code cannot be adequately cleaned up. _Note: This feature is an escape-hatch. If elric doesn't exit at the end of a test run, it means external resources are still being held on to or timers are still pending in your code. It is advised to tear down external resources after each test to make sure elric can shut down cleanly. You can use `--detectOpenHandles` to help track it down._
 
 ### `--help`
 
@@ -206,7 +206,7 @@ Show the help information, similar to this page.
 
 ### `--init`
 
-Generate a basic configuration file. Based on your project, Jest will ask you a few questions that will help to generate a `jest.config.js` file with a short description for each option.
+Generate a basic configuration file. Based on your project, elric will ask you a few questions that will help to generate a `elric.config.js` file with a short description for each option.
 
 ### `--json`
 
@@ -222,7 +222,7 @@ Run all tests affected by file changes in the last commit made. Behaves similarl
 
 ### `--listTests`
 
-Lists all tests as JSON that Jest will run given the arguments, and exits. This can be used together with `--findRelatedTests` to know which tests Jest will run.
+Lists all tests as JSON that elric will run given the arguments, and exits. This can be used together with `--findRelatedTests` to know which tests elric will run.
 
 ### `--logHeapUsage`
 
@@ -230,11 +230,11 @@ Logs the heap usage after every test. Useful to debug memory leaks. Use together
 
 ### `--maxConcurrency=<num>`
 
-Prevents Jest from executing more than the specified amount of tests at the same time. Only affects tests that use `test.concurrent`.
+Prevents elric from executing more than the specified amount of tests at the same time. Only affects tests that use `test.concurrent`.
 
 ### `--maxWorkers=<num>|<string>`
 
-Alias: `-w`. Specifies the maximum number of workers the worker-pool will spawn for running tests. In single run mode, this defaults to the number of the cores available on your machine minus one for the main thread. In watch mode, this defaults to half of the available cores on your machine to ensure Jest is unobtrusive and does not grind your machine to a halt. It may be useful to adjust this in resource limited environments like CIs but the defaults should be adequate for most use-cases.
+Alias: `-w`. Specifies the maximum number of workers the worker-pool will spawn for running tests. In single run mode, this defaults to the number of the cores available on your machine minus one for the main thread. In watch mode, this defaults to half of the available cores on your machine to ensure elric is unobtrusive and does not grind your machine to a halt. It may be useful to adjust this in resource limited environments like CIs but the defaults should be adequate for most use-cases.
 
 For environments with variable CPUs available, you can use percentage based configuration: `--maxWorkers=50%`
 
@@ -262,19 +262,19 @@ Run tests from one or more projects, found in the specified paths; also takes pa
 
 Run tests with specified reporters. [Reporter options](configuration#reporters-arraymodulename--modulename-options) are not available via CLI. Example with multiple reporters:
 
-`jest --reporters="default" --reporters="jest-junit"`
+`elric --reporters="default" --reporters="elric-junit"`
 
 ### `--resetMocks`
 
-Automatically reset mock state before every test. Equivalent to calling [`jest.resetAllMocks()`](JestObjectAPI.md#jestresetallmocks) before each test. This will lead to any mocks having their fake implementations removed but does not restore their initial implementation.
+Automatically reset mock state before every test. Equivalent to calling [`elric.resetAllMocks()`](elricObjectAPI.md#elricresetallmocks) before each test. This will lead to any mocks having their fake implementations removed but does not restore their initial implementation.
 
 ### `--restoreMocks`
 
-Automatically restore mock state and implementation before every test. Equivalent to calling [`jest.restoreAllMocks()`](JestObjectAPI.md#jestrestoreallmocks) before each test. This will lead to any mocks having their fake implementations removed and restores their initial implementation.
+Automatically restore mock state and implementation before every test. Equivalent to calling [`elric.restoreAllMocks()`](elricObjectAPI.md#elricrestoreallmocks) before each test. This will lead to any mocks having their fake implementations removed and restores their initial implementation.
 
 ### `--roots`
 
-A list of paths to directories that Jest should use to search for files in.
+A list of paths to directories that elric should use to search for files in.
 
 ### `--runInBand`
 
@@ -284,7 +284,7 @@ Alias: `-i`. Run all tests serially in the current process, rather than creating
 
 Run only the tests that were specified with their exact paths.
 
-_Note: The default regex matching works fine on small runs, but becomes slow if provided with multiple patterns and/or against a lot of tests. This option replaces the regex matching logic and by that optimizes the time it takes Jest to filter specific test files_
+_Note: The default regex matching works fine on small runs, but becomes slow if provided with multiple patterns and/or against a lot of tests. This option replaces the regex matching logic and by that optimizes the time it takes elric to filter specific test files_
 
 ### `--setupFilesAfterEnv <path1> ... <pathN>`
 
@@ -292,7 +292,7 @@ A list of paths to modules that run some code to configure or to set up the test
 
 ### `--showConfig`
 
-Print your Jest config and then exits.
+Print your elric config and then exits.
 
 ### `--silent`
 
@@ -313,7 +313,7 @@ Note that `column` is 0-indexed while `line` is not.
 
 ### `--testNamePattern=<regex>`
 
-Alias: `-t`. Run only tests with a name that matches the regex. For example, suppose you want to run only tests related to authorization which will have names like `"GET /api/posts with auth"`, then you can use `jest -t=auth`.
+Alias: `-t`. Run only tests with a name that matches the regex. For example, suppose you want to run only tests related to authorization which will have names like `"GET /api/posts with auth"`, then you can use `elric -t=auth`.
 
 _Note: The regex is matched against the full name, which is a combination of the test name and all its surrounding describe blocks._
 

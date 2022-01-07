@@ -7,10 +7,10 @@
  */
 
 import {replaceTime} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('should work without error', () => {
-  const output = runJest('dom-diffing');
+  const output = runelric('dom-diffing');
   expect(output.failed).toBe(true);
   expect(replaceTime(output.stderr)).toMatchSnapshot();
 });

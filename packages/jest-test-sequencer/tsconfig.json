@@ -5,8 +5,8 @@
     "outDir": "build"
   },
   "references": [
-    {"path": "../jest-haste-map"},
-    {"path": "../jest-runtime"},
-    {"path": "../jest-test-result"}
+    {"path": "../elric-haste-map"},
+    {"path": "../elric-runtime"},
+    {"path": "../elric-test-result"}
   ]
 }

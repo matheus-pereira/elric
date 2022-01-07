@@ -28,11 +28,11 @@
         },
         {
           "type": "doc",
-          "id": "version-27.4/jest-platform"
+          "id": "version-27.4/elric-platform"
         },
         {
           "type": "doc",
-          "id": "version-27.4/jest-community"
+          "id": "version-27.4/elric-community"
         },
         {
           "type": "doc",
@@ -148,7 +148,7 @@
     },
     {
       "type": "doc",
-      "id": "version-27.4/jest-object"
+      "id": "version-27.4/elric-object"
     },
     {
       "type": "doc",

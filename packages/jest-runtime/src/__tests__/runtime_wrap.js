@@ -6,7 +6,7 @@
  *
  */
 
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 let createRuntime;
 
 describe('Runtime', () => {

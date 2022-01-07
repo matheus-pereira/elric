@@ -2,11 +2,11 @@
 
 'use strict';
 
-jest.useFakeTimers();
+elric.useFakeTimers();
 
 describe('timerGame', () => {
   beforeEach(() => {
-    jest.spyOn(global, 'setTimeout');
+    elric.spyOn(global, 'setTimeout');
   });
   it('waits 1 second before ending the game', () => {
     const timerGame = require('../timerGame');
@@ -18,7 +18,7 @@ describe('timerGame', () => {
 
   it('calls the callback after 1 second via runAllTimers', () => {
     const timerGame = require('../timerGame');
-    const callback = jest.fn();
+    const callback = elric.fn();
 
     timerGame(callback);
 
@@ -26,7 +26,7 @@ describe('timerGame', () => {
     expect(callback).not.toBeCalled();
 
     // Fast-forward until all timers have been executed
-    jest.runAllTimers();
+    elric.runAllTimers();
 
     // Now our callback should have been called!
     expect(callback).toBeCalled();
@@ -35,7 +35,7 @@ describe('timerGame', () => {
 
   it('calls the callback after 1 second via advanceTimersByTime', () => {
     const timerGame = require('../timerGame');
-    const callback = jest.fn();
+    const callback = elric.fn();
 
     timerGame(callback);
 
@@ -43,7 +43,7 @@ describe('timerGame', () => {
     expect(callback).not.toBeCalled();
 
     // Fast-forward until all timers have been executed
-    jest.advanceTimersByTime(1000);
+    elric.advanceTimersByTime(1000);
 
     // Now our callback should have been called!
     expect(callback).toBeCalled();

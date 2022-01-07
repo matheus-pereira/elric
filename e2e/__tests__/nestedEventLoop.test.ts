@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 test('works with nested event loops', () => {
-  const result = runJest('nested-event-loop');
+  const result = runelric('nested-event-loop');
   expect(result.exitCode).toBe(0);
 });

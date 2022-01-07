@@ -1,10 +1,10 @@
 {
-  "name": "jest-message-util",
+  "name": "elric-message-util",
   "version": "27.4.6",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/jest-message-util"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/elric-message-util"
   },
   "engines": {
     "node": "^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0"
@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@babel/code-frame": "^7.12.13",
-    "@jest/types": "^27.4.2",
+    "@elric/types": "^27.4.2",
     "@types/stack-utils": "^2.0.0",
     "chalk": "^4.0.0",
     "graceful-fs": "^4.2.9",

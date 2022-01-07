@@ -8,7 +8,7 @@
 import {tmpdir} from 'os';
 import * as path from 'path';
 import {cleanup, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(tmpdir(), 'use-stderr-test');
 
@@ -19,12 +19,12 @@ test('no tests found message is redirected to stderr', () => {
   writeFiles(DIR, {
     '.watchmanconfig': '',
     'file1.js': 'module.exports = {}',
-    'package.json': JSON.stringify({jest: {testEnvironment: 'node'}}),
+    'package.json': JSON.stringify({elric: {testEnvironment: 'node'}}),
   });
   let stderr;
   let stdout;
 
-  ({stdout, stderr} = runJest(DIR, ['--useStderr']));
+  ({stdout, stderr} = runelric(DIR, ['--useStderr']));
   expect(stdout).toBe('');
   expect(stderr).toMatch('No tests found');
 
@@ -32,7 +32,7 @@ test('no tests found message is redirected to stderr', () => {
     '__tests__/test.test.js': `require('../file1'); test('file1', () => {});`,
   });
 
-  ({stdout, stderr} = runJest(DIR, ['--useStderr']));
+  ({stdout, stderr} = runelric(DIR, ['--useStderr']));
   expect(stdout).toBe('');
   expect(stderr).toMatch(/PASS.*test\.test\.js/);
 });

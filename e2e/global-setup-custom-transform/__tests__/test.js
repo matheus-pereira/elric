@@ -11,7 +11,7 @@ const os = require('os');
 const path = require('path');
 const greeting = require('../');
 
-const DIR = path.join(os.tmpdir(), 'jest-global-setup-custom-transform');
+const DIR = path.join(os.tmpdir(), 'elric-global-setup-custom-transform');
 
 test('should exist setup file', () => {
   const files = fs.readdirSync(DIR);

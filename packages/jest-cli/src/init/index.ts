@@ -9,8 +9,8 @@ import * as path from 'path';
 import chalk = require('chalk');
 import * as fs from 'graceful-fs';
 import prompts = require('prompts');
-import {constants} from 'jest-config';
-import {tryRealpath} from 'jest-util';
+import {constants} from 'elric-config';
+import {tryRealpath} from 'elric-util';
 import {MalformedPackageJsonError, NotFoundPackageJsonError} from './errors';
 import generateConfigFile from './generateConfigFile';
 import modifyPackageJson from './modifyPackageJson';
@@ -18,11 +18,11 @@ import defaultQuestions, {testScriptQuestion} from './questions';
 import type {ProjectPackageJson} from './types';
 
 const {
-  JEST_CONFIG_BASE_NAME,
-  JEST_CONFIG_EXT_MJS,
-  JEST_CONFIG_EXT_JS,
-  JEST_CONFIG_EXT_TS,
-  JEST_CONFIG_EXT_ORDER,
+  elric_CONFIG_BASE_NAME,
+  elric_CONFIG_EXT_MJS,
+  elric_CONFIG_EXT_JS,
+  elric_CONFIG_EXT_TS,
+  elric_CONFIG_EXT_ORDER,
   PACKAGE_JSON,
 } = constants;
 
@@ -35,7 +35,7 @@ type PromptsResults = {
   scripts: boolean;
 };
 
-const getConfigFilename = (ext: string) => JEST_CONFIG_BASE_NAME + ext;
+const getConfigFilename = (ext: string) => elric_CONFIG_BASE_NAME + ext;
 
 export default async (
   rootDir: string = tryRealpath(process.cwd()),
@@ -48,7 +48,7 @@ export default async (
   }
 
   const questions = defaultQuestions.slice(0);
-  let hasJestProperty = false;
+  let haselricProperty = false;
   let projectPackageJson: ProjectPackageJson;
 
   try {
@@ -59,19 +59,19 @@ export default async (
     throw new MalformedPackageJsonError(projectPackageJsonPath);
   }
 
-  if (projectPackageJson.jest) {
-    hasJestProperty = true;
+  if (projectPackageJson.elric) {
+    haselricProperty = true;
   }
 
-  const existingJestConfigExt = JEST_CONFIG_EXT_ORDER.find(ext =>
+  const existingelricConfigExt = elric_CONFIG_EXT_ORDER.find(ext =>
     fs.existsSync(path.join(rootDir, getConfigFilename(ext))),
   );
 
-  if (hasJestProperty || existingJestConfigExt) {
+  if (haselricProperty || existingelricConfigExt) {
     const result: {continue: boolean} = await prompts({
       initial: true,
       message:
-        'It seems that you already have a jest configuration, do you want to override it?',
+        'It seems that you already have a elric configuration, do you want to override it?',
       name: 'continue',
       type: 'confirm',
     });
@@ -86,7 +86,7 @@ export default async (
   // Add test script installation only if needed
   if (
     !projectPackageJson.scripts ||
-    projectPackageJson.scripts.test !== 'jest'
+    projectPackageJson.scripts.test !== 'elric'
   ) {
     questions.unshift(testScriptQuestion);
   }
@@ -95,7 +95,7 @@ export default async (
   console.log();
   console.log(
     chalk.underline(
-      `The following questions will help Jest to create a suitable configuration for your project\n`,
+      `The following questions will help elric to create a suitable configuration for your project\n`,
     ),
   );
 
@@ -114,21 +114,21 @@ export default async (
     return;
   }
 
-  // Determine if Jest should use JS or TS for the config file
-  const jestConfigFileExt = results.useTypescript
-    ? JEST_CONFIG_EXT_TS
+  // Determine if elric should use JS or TS for the config file
+  const elricConfigFileExt = results.useTypescript
+    ? elric_CONFIG_EXT_TS
     : projectPackageJson.type === 'module'
-    ? JEST_CONFIG_EXT_MJS
-    : JEST_CONFIG_EXT_JS;
+    ? elric_CONFIG_EXT_MJS
+    : elric_CONFIG_EXT_JS;
 
-  // Determine Jest config path
-  const jestConfigPath = existingJestConfigExt
-    ? getConfigFilename(existingJestConfigExt)
-    : path.join(rootDir, getConfigFilename(jestConfigFileExt));
+  // Determine elric config path
+  const elricConfigPath = existingelricConfigExt
+    ? getConfigFilename(existingelricConfigExt)
+    : path.join(rootDir, getConfigFilename(elricConfigFileExt));
 
   const shouldModifyScripts = results.scripts;
 
-  if (shouldModifyScripts || hasJestProperty) {
+  if (shouldModifyScripts || haselricProperty) {
     const modifiedPackageJson = modifyPackageJson({
       projectPackageJson,
       shouldModifyScripts,
@@ -143,13 +143,13 @@ export default async (
   const generatedConfig = generateConfigFile(
     results,
     projectPackageJson.type === 'module' ||
-      jestConfigPath.endsWith(JEST_CONFIG_EXT_MJS),
+      elricConfigPath.endsWith(elric_CONFIG_EXT_MJS),
   );
 
-  fs.writeFileSync(jestConfigPath, generatedConfig);
+  fs.writeFileSync(elricConfigPath, generatedConfig);
 
   console.log('');
   console.log(
-    `📝  Configuration file created at ${chalk.cyan(jestConfigPath)}`,
+    `📝  Configuration file created at ${chalk.cyan(elricConfigPath)}`,
   );
 };

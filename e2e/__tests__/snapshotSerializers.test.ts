@@ -7,7 +7,7 @@
 
 import * as path from 'path';
 import {cleanup} from '../Utils';
-import {json as runWithJson} from '../runJest';
+import {json as runWithJson} from '../runelric';
 
 const testDir = path.resolve(__dirname, '../snapshot-serializers');
 const snapshotsDir = path.resolve(testDir, '__tests__/__snapshots__');

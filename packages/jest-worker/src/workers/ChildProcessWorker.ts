@@ -87,7 +87,7 @@ export default class ChildProcessWorker implements WorkerInterface {
       cwd: process.cwd(),
       env: {
         ...process.env,
-        JEST_WORKER_ID: String(this._options.workerId + 1), // 0-indexed workerId, 1-indexed JEST_WORKER_ID
+        elric_WORKER_ID: String(this._options.workerId + 1), // 0-indexed workerId, 1-indexed elric_WORKER_ID
         ...forceColor,
       } as NodeJS.ProcessEnv,
       // Suppress --debug / --inspect flags while preserving others (like --harmony).
@@ -135,7 +135,7 @@ export default class ChildProcessWorker implements WorkerInterface {
     // the queue, and scheduling the next call.
     if (this._retries > this._options.maxRetries) {
       const error = new Error(
-        `Jest worker encountered ${this._retries} child process exceptions, exceeding retry limit`,
+        `elric worker encountered ${this._retries} child process exceptions, exceeding retry limit`,
       );
 
       this._onMessage([

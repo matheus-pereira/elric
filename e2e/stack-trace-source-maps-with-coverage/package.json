@@ -1,5 +1,5 @@
 {
-  "jest": {
+  "elric": {
     "rootDir": "./",
     "transform": {
       "\\.(ts)$": "<rootDir>/preprocessor.js"

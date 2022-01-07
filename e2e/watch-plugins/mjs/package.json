@@ -1,5 +1,5 @@
 {
-  "jest": {
+  "elric": {
     "watchPlugins": [
       "./my-watch-plugin.mjs"
     ]

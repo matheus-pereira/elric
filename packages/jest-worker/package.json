@@ -1,10 +1,10 @@
 {
-  "name": "jest-worker",
+  "name": "elric-worker",
   "version": "27.4.6",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/jest-worker"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/elric-worker"
   },
   "license": "MIT",
   "main": "./build/index.js",
@@ -25,7 +25,7 @@
     "@types/merge-stream": "^1.1.2",
     "@types/supports-color": "^8.1.0",
     "get-stream": "^6.0.0",
-    "jest-leak-detector": "^27.4.6",
+    "elric-leak-detector": "^27.4.6",
     "worker-farm": "^1.6.0"
   },
   "engines": {

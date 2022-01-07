@@ -7,9 +7,9 @@
 
 import chalk = require('chalk');
 import terminalLink = require('terminal-link');
-import type {TestResult} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import {formatTime} from 'jest-util';
+import type {TestResult} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import {formatTime} from 'elric-util';
 import {formatTestPath, printDisplayName} from './utils';
 
 const LONG_TEST_COLOR = chalk.reset.bold.bgRed;

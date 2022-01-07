@@ -3,7 +3,7 @@ id: api
 title: Globals
 ---
 
-In your test files, Jest puts each of these methods and objects into the global environment. You don't have to require or import anything to use them. However, if you prefer explicit imports, you can do `import {describe, expect, test} from '@jest/globals'`.
+In your test files, elric puts each of these methods and objects into the global environment. You don't have to require or import anything to use them. However, if you prefer explicit imports, you can do `import {describe, expect, test} from '@elric/globals'`.
 
 ## Methods
 
@@ -17,7 +17,7 @@ import TOCInline from "@theme/TOCInline"
 
 ### `afterAll(fn, timeout)`
 
-Runs a function after all the tests in this file have completed. If the function returns a promise or is a generator, Jest waits for that promise to resolve before continuing.
+Runs a function after all the tests in this file have completed. If the function returns a promise or is a generator, elric waits for that promise to resolve before continuing.
 
 Optionally, you can provide a `timeout` (in milliseconds) for specifying how long to wait before aborting. _Note: The default timeout is 5 seconds._
 
@@ -57,7 +57,7 @@ If you want to run some cleanup after every test instead of after all tests, use
 
 ### `afterEach(fn, timeout)`
 
-Runs a function after each one of the tests in this file completes. If the function returns a promise or is a generator, Jest waits for that promise to resolve before continuing.
+Runs a function after each one of the tests in this file completes. If the function returns a promise or is a generator, elric waits for that promise to resolve before continuing.
 
 Optionally, you can provide a `timeout` (in milliseconds) for specifying how long to wait before aborting. _Note: The default timeout is 5 seconds._
 
@@ -97,7 +97,7 @@ If you want to run some cleanup just once, after all of the tests run, use `afte
 
 ### `beforeAll(fn, timeout)`
 
-Runs a function before any of the tests in this file run. If the function returns a promise or is a generator, Jest waits for that promise to resolve before running tests.
+Runs a function before any of the tests in this file run. If the function returns a promise or is a generator, elric waits for that promise to resolve before running tests.
 
 Optionally, you can provide a `timeout` (in milliseconds) for specifying how long to wait before aborting. _Note: The default timeout is 5 seconds._
 
@@ -110,7 +110,7 @@ const globalDatabase = makeGlobalDatabase();
 
 beforeAll(() => {
   // Clears the database and adds some testing data.
-  // Jest will wait for this promise to resolve before running tests.
+  // elric will wait for this promise to resolve before running tests.
   return globalDatabase.clear().then(() => {
     return globalDatabase.insert({testData: 'foo'});
   });
@@ -125,7 +125,7 @@ test('can find things', () => {
 });
 ```
 
-Here the `beforeAll` ensures that the database is set up before tests run. If setup was synchronous, you could do this without `beforeAll`. The key is that Jest will wait for a promise to resolve, so you can have asynchronous setup as well.
+Here the `beforeAll` ensures that the database is set up before tests run. If setup was synchronous, you could do this without `beforeAll`. The key is that elric will wait for a promise to resolve, so you can have asynchronous setup as well.
 
 If `beforeAll` is inside a `describe` block, it runs at the beginning of the describe block.
 
@@ -133,7 +133,7 @@ If you want to run something before every test instead of before any test runs, 
 
 ### `beforeEach(fn, timeout)`
 
-Runs a function before each of the tests in this file runs. If the function returns a promise or is a generator, Jest waits for that promise to resolve before running the test.
+Runs a function before each of the tests in this file runs. If the function returns a promise or is a generator, elric waits for that promise to resolve before running the test.
 
 Optionally, you can provide a `timeout` (in milliseconds) for specifying how long to wait before aborting. _Note: The default timeout is 5 seconds._
 
@@ -146,7 +146,7 @@ const globalDatabase = makeGlobalDatabase();
 
 beforeEach(() => {
   // Clears the database and adds some testing data.
-  // Jest will wait for this promise to resolve before running tests.
+  // elric will wait for this promise to resolve before running tests.
   return globalDatabase.clear().then(() => {
     return globalDatabase.insert({testData: 'foo'});
   });
@@ -477,7 +477,7 @@ test('did not rain', () => {
 
 The first argument is the test name; the second argument is a function that contains the expectations to test. The third argument (optional) is `timeout` (in milliseconds) for specifying how long to wait before aborting. _Note: The default timeout is 5 seconds._
 
-> Note: If a **promise is returned** from `test`, Jest will wait for the promise to resolve before letting the test complete. Jest will also wait if you **provide an argument to the test function**, usually called `done`. This could be handy when you want to test callbacks. See how to test async code [here](TestingAsyncCode.md#callbacks).
+> Note: If a **promise is returned** from `test`, elric will wait for the promise to resolve before letting the test complete. elric will also wait if you **provide an argument to the test function**, usually called `done`. This could be handy when you want to test callbacks. See how to test async code [here](TestingAsyncCode.md#callbacks).
 
 For example, let's say `fetchBeverageList()` returns a promise that is supposed to resolve to a list that has `lemon` in it. You can test this with:
 
@@ -497,7 +497,7 @@ Also under the alias: `it.concurrent(name, fn, timeout)`
 
 Use `test.concurrent` if you want the test to run concurrently.
 
-> Note: `test.concurrent` is considered experimental - see [here](https://github.com/facebook/jest/labels/Area%3A%20Concurrent) for details on missing features and other issues
+> Note: `test.concurrent` is considered experimental - see [here](https://github.com/facebook/elric/labels/Area%3A%20Concurrent) for details on missing features and other issues
 
 The first argument is the test name; the second argument is an asynchronous function that contains the expectations to test. The third argument (optional) is `timeout` (in milliseconds) for specifying how long to wait before aborting. _Note: The default timeout is 5 seconds._
 
@@ -511,7 +511,7 @@ test.concurrent('subtraction 2 numbers', async () => {
 });
 ```
 
-> Note: Use `maxConcurrency` in configuration to prevents Jest from executing more than the specified amount of tests at the same time
+> Note: Use `maxConcurrency` in configuration to prevents elric from executing more than the specified amount of tests at the same time
 
 ### `test.concurrent.each(table)(name, fn, timeout)`
 

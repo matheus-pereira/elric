@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 it('prints a usable stack trace even if no Error.captureStackTrace', () => {
-  const {stderr, exitCode} = runJest('stack-trace-no-capture-stack-trace');
+  const {stderr, exitCode} = runelric('stack-trace-no-capture-stack-trace');
   expect(stderr).not.toMatch('Error.captureStackTrace is not a function');
   expect(exitCode).toBe(1);
 });

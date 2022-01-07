@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {getType} from 'jest-get-type';
+import {getType} from 'elric-get-type';
 
 const supportTypes = ['map', 'array', 'object'];
 

@@ -32,7 +32,7 @@ const lazyRequire = () => {
 exports.filename = module.filename;
 exports.getModuleStateValue = getModuleStateValue;
 exports.isRealModule = true;
-exports.jest = jest;
+exports.elric = elric;
 exports.lazyRequire = lazyRequire;
 exports.object = {};
 exports.parent = module.parent;

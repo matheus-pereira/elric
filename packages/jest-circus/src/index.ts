@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Circus, Global} from '@jest/types';
-import {bind as bindEach} from 'jest-each';
-import {ErrorWithStack, isPromise} from 'jest-util';
+import type {Circus, Global} from '@elric/types';
+import {bind as bindEach} from 'elric-each';
+import {ErrorWithStack, isPromise} from 'elric-util';
 import {dispatchSync} from './state';
 
 export {setState, getState, resetState} from './state';

@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {wrap} from 'jest-snapshot-serializer-raw';
-import {isJestJasmineRun} from '@jest/test-utils';
+import {wrap} from 'elric-snapshot-serializer-raw';
+import {iselricJasmineRun} from '@elric/test-utils';
 import {extractSummary} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const cleanupRunnerStack = (stderr: string) =>
   wrap(
@@ -16,14 +16,14 @@ const cleanupRunnerStack = (stderr: string) =>
       .split('\n')
       .filter(
         line =>
-          !line.includes('packages/jest-jasmine2/build') &&
-          !line.includes('packages/jest-circus/build'),
+          !line.includes('packages/elric-jasmine2/build') &&
+          !line.includes('packages/elric-circus/build'),
       )
       .join('\n'),
   );
 
 test('print correct error message with nested test definitions outside describe', () => {
-  const result = runJest('nested-test-definitions', ['outside']);
+  const result = runelric('nested-test-definitions', ['outside']);
 
   expect(result.exitCode).toBe(1);
 
@@ -33,7 +33,7 @@ test('print correct error message with nested test definitions outside describe'
 });
 
 test('print correct error message with nested test definitions inside describe', () => {
-  const result = runJest('nested-test-definitions', ['within']);
+  const result = runelric('nested-test-definitions', ['within']);
 
   expect(result.exitCode).toBe(1);
 
@@ -42,10 +42,10 @@ test('print correct error message with nested test definitions inside describe',
   expect(cleanupRunnerStack(summary.rest)).toMatchSnapshot();
 });
 
-(isJestJasmineRun() ? test.skip : test)(
+(iselricJasmineRun() ? test.skip : test)(
   'print correct message when nesting describe inside it',
   () => {
-    const result = runJest('nested-test-definitions', ['nestedDescribeInTest']);
+    const result = runelric('nested-test-definitions', ['nestedDescribeInTest']);
 
     expect(result.exitCode).toBe(1);
 
@@ -55,10 +55,10 @@ test('print correct error message with nested test definitions inside describe',
   },
 );
 
-(isJestJasmineRun() ? test.skip : test)(
+(iselricJasmineRun() ? test.skip : test)(
   'print correct message when nesting a hook inside it',
   () => {
-    const result = runJest('nested-test-definitions', ['nestedHookInTest']);
+    const result = runelric('nested-test-definitions', ['nestedHookInTest']);
 
     expect(result.exitCode).toBe(1);
 

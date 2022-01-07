@@ -7,16 +7,16 @@
  */
 
 import {multipleValidOptions} from '../condition';
-import jestValidateDefaultConfig from '../defaultConfig';
-import jestValidateExampleConfig from '../exampleConfig';
+import elricValidateDefaultConfig from '../defaultConfig';
+import elricValidateExampleConfig from '../exampleConfig';
 import validate from '../validate';
 const {
   defaultConfig,
   validConfig,
   deprecatedConfig,
-} = require('./fixtures/jestConfig');
+} = require('./fixtures/elricConfig');
 
-test('recursively validates default Jest config', () => {
+test('recursively validates default elric config', () => {
   expect(
     validate(defaultConfig, {
       exampleConfig: validConfig,
@@ -27,10 +27,10 @@ test('recursively validates default Jest config', () => {
   });
 });
 
-test('recursively validates default jest-validate config', () => {
+test('recursively validates default elric-validate config', () => {
   expect(
-    validate(jestValidateDefaultConfig, {
-      exampleConfig: jestValidateExampleConfig,
+    validate(elricValidateDefaultConfig, {
+      exampleConfig: elricValidateExampleConfig,
     }),
   ).toEqual({
     hasDeprecationWarnings: false,
@@ -102,7 +102,7 @@ test.each([
 
 test('respects recursiveDenylist', () => {
   const warn = console.warn;
-  console.warn = jest.fn();
+  console.warn = elric.fn();
   const config = {
     something: {
       nested: {
@@ -138,7 +138,7 @@ test('displays warning for unknown config options', () => {
   const config = {unkwon: {}};
   const validConfig = {unknown: 'string'};
   const warn = console.warn;
-  console.warn = jest.fn();
+  console.warn = elric.fn();
 
   validate(config, {exampleConfig: validConfig});
 
@@ -149,7 +149,7 @@ test('displays warning for unknown config options', () => {
 test('displays warning for deprecated config options', () => {
   const config = {scriptPreprocessor: 'test'};
   const warn = console.warn;
-  console.warn = jest.fn();
+  console.warn = elric.fn();
 
   expect(
     validate(config, {
@@ -177,7 +177,7 @@ test('works with custom warnings', () => {
       warning: 'My Custom Warning',
     },
   };
-  console.warn = jest.fn();
+  console.warn = elric.fn();
 
   validate(config, options);
 
@@ -211,7 +211,7 @@ test('works with custom deprecations', () => {
       deprecation: 'My Custom Deprecation Warning',
     },
   };
-  console.warn = jest.fn();
+  console.warn = elric.fn();
 
   validate(config, options);
 
@@ -279,7 +279,7 @@ test('Repeated types within multiple valid examples are coalesced in error repor
 });
 
 test('Comments in config JSON using "//" key are not warned', () => {
-  jest.spyOn(console, 'warn').mockImplementation(() => {});
+  elric.spyOn(console, 'warn').mockImplementation(() => {});
   const config = {'//': 'a comment'};
 
   validate(config, {

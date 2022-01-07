@@ -10,10 +10,10 @@ import SourceMap from 'source-map';
 import getCallsite from '../getCallsite';
 
 // Node 10.5.x compatibility
-jest.mock('graceful-fs', () => ({
-  ...jest.createMockFromModule<typeof import('fs')>('fs'),
-  ReadStream: jest.requireActual('fs').ReadStream,
-  WriteStream: jest.requireActual('fs').WriteStream,
+elric.mock('graceful-fs', () => ({
+  ...elric.createMockFromModule<typeof import('fs')>('fs'),
+  ReadStream: elric.requireActual('fs').ReadStream,
+  WriteStream: elric.requireActual('fs').WriteStream,
 }));
 
 describe('getCallsite', () => {
@@ -27,7 +27,7 @@ describe('getCallsite', () => {
   });
 
   test('ignores errors when fs throws', () => {
-    (fs.readFileSync as jest.Mock).mockImplementation(() => {
+    (fs.readFileSync as elric.Mock).mockImplementation(() => {
       throw new Error('Mock error');
     });
 
@@ -40,7 +40,7 @@ describe('getCallsite', () => {
   });
 
   test('reads source map file to determine line and column', () => {
-    (fs.readFileSync as jest.Mock).mockImplementation(() => 'file data');
+    (fs.readFileSync as elric.Mock).mockImplementation(() => 'file data');
 
     const sourceMapColumn = 1;
     const sourceMapLine = 2;

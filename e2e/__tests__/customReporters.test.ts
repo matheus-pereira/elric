@@ -7,10 +7,10 @@
 
 import {tmpdir} from 'os';
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
-import {onNodeVersions} from '@jest/test-utils';
+import {wrap} from 'elric-snapshot-serializer-raw';
+import {onNodeVersions} from '@elric/test-utils';
 import {cleanup, extractSummary, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(tmpdir(), 'custom-reporters-test-dir');
 
@@ -23,7 +23,7 @@ describe('Custom Reporters Integration', () => {
       reporters: ['<rootDir>/reporters/TestReporter.js'],
     };
 
-    const {exitCode} = runJest('custom-reporters', [
+    const {exitCode} = runelric('custom-reporters', [
       '--config',
       JSON.stringify(reporterConfig),
       'add.test.js',
@@ -39,7 +39,7 @@ describe('Custom Reporters Integration', () => {
       ],
     };
 
-    const {exitCode, stdout} = runJest('custom-reporters', [
+    const {exitCode, stdout} = runelric('custom-reporters', [
       '--config',
       JSON.stringify(reporterConfig),
       'add.test.js',
@@ -54,7 +54,7 @@ describe('Custom Reporters Integration', () => {
       reporters: [[3243242]],
     };
 
-    const {exitCode, stderr} = runJest('custom-reporters', [
+    const {exitCode, stderr} = runelric('custom-reporters', [
       '--config',
       JSON.stringify(reporterConfig),
       'add.test.js',
@@ -65,7 +65,7 @@ describe('Custom Reporters Integration', () => {
   });
 
   test('default reporters enabled', () => {
-    const {stderr, stdout, exitCode} = runJest('custom-reporters', [
+    const {stderr, stdout, exitCode} = runelric('custom-reporters', [
       '--config',
       JSON.stringify({
         reporters: ['default', '<rootDir>/reporters/TestReporter.js'],
@@ -83,7 +83,7 @@ describe('Custom Reporters Integration', () => {
   });
 
   test('TestReporter with all tests passing', () => {
-    const {stdout, exitCode, stderr} = runJest('custom-reporters', [
+    const {stdout, exitCode, stderr} = runelric('custom-reporters', [
       'add.test.js',
     ]);
 
@@ -95,7 +95,7 @@ describe('Custom Reporters Integration', () => {
   });
 
   test('TestReporter with all tests failing', () => {
-    const {stdout, exitCode, stderr} = runJest('custom-reporters', [
+    const {stdout, exitCode, stderr} = runelric('custom-reporters', [
       'addFail.test.js',
     ]);
 
@@ -107,7 +107,7 @@ describe('Custom Reporters Integration', () => {
   });
 
   test('IncompleteReporter for flexibility', () => {
-    const {stderr, stdout, exitCode} = runJest('custom-reporters', [
+    const {stderr, stdout, exitCode} = runelric('custom-reporters', [
       '--no-cache',
       '--config',
       JSON.stringify({
@@ -123,7 +123,7 @@ describe('Custom Reporters Integration', () => {
   });
 
   test('reporters can be default exports', () => {
-    const {stderr, stdout, exitCode} = runJest('custom-reporters', [
+    const {stderr, stdout, exitCode} = runelric('custom-reporters', [
       '--no-cache',
       '--config',
       JSON.stringify({
@@ -141,7 +141,7 @@ describe('Custom Reporters Integration', () => {
     writeFiles(DIR, {
       '__tests__/test.test.js': `test('test', () => {});`,
       'package.json': JSON.stringify({
-        jest: {
+        elric: {
           reporters: ['default', '<rootDir>/reporter.js'],
           testEnvironment: 'node',
         },
@@ -156,7 +156,7 @@ describe('Custom Reporters Integration', () => {
       `,
     });
 
-    const {stderr, exitCode} = runJest(DIR);
+    const {stderr, exitCode} = runelric(DIR);
     expect(stderr).toMatch(/ON_RUN_START_ERROR/);
     expect(exitCode).toBe(1);
   });
@@ -166,7 +166,7 @@ describe('Custom Reporters Integration', () => {
       writeFiles(DIR, {
         '__tests__/test.test.js': `test('test', () => {});`,
         'package.json': JSON.stringify({
-          jest: {
+          elric: {
             reporters: ['default', '<rootDir>/reporter.mjs'],
             testEnvironment: 'node',
           },
@@ -180,7 +180,7 @@ describe('Custom Reporters Integration', () => {
       `,
       });
 
-      const {stderr, exitCode} = runJest(DIR);
+      const {stderr, exitCode} = runelric(DIR);
       expect(stderr).toMatch(/ON_RUN_START_ERROR/);
       expect(exitCode).toBe(1);
     });

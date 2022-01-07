@@ -10,14 +10,14 @@
     "@babel/plugin-proposal-class-properties": "*",
     "@babel/preset-env": "*",
     "@babel/preset-react": "*",
-    "babel-jest": "*",
-    "jest": "*",
+    "babel-elric": "*",
+    "elric": "*",
     "react-test-renderer": "*"
   },
   "scripts": {
-    "test": "jest"
+    "test": "elric"
   },
-  "jest": {
+  "elric": {
     "testEnvironment": "node"
   }
 }

@@ -6,9 +6,9 @@
  */
 import {tmpdir} from 'os';
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {cleanup, writeFiles, writeSymlinks} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(tmpdir(), 'crawl-symlinks-test');
 
@@ -17,7 +17,7 @@ beforeEach(() => {
 
   writeFiles(DIR, {
     'package.json': JSON.stringify({
-      jest: {
+      elric: {
         testMatch: ['<rootDir>/test-files/test.js'],
       },
     }),
@@ -44,7 +44,7 @@ test('Node crawler picks up symlinked files when option is set as flag', () => {
     return;
   }
 
-  const {stdout, stderr, exitCode} = runJest(DIR, [
+  const {stdout, stderr, exitCode} = runelric(DIR, [
     '--haste={"enableSymlinks": true}',
     '--no-watchman',
   ]);
@@ -55,7 +55,7 @@ test('Node crawler picks up symlinked files when option is set as flag', () => {
 });
 
 test('Node crawler does not pick up symlinked files by default', () => {
-  const {stdout, stderr, exitCode} = runJest(DIR, ['--no-watchman']);
+  const {stdout, stderr, exitCode} = runelric(DIR, ['--no-watchman']);
   expect(stdout).toContain('No tests found, exiting with code 1');
   expect(stderr).toEqual('');
   expect(exitCode).toEqual(1);
@@ -63,8 +63,8 @@ test('Node crawler does not pick up symlinked files by default', () => {
 
 test('Should throw if watchman used with haste.enableSymlinks', () => {
   // it should throw both if watchman is explicitly provided and not
-  const run1 = runJest(DIR, ['--haste={"enableSymlinks": true}']);
-  const run2 = runJest(DIR, ['--haste={"enableSymlinks": true}', '--watchman']);
+  const run1 = runelric(DIR, ['--haste={"enableSymlinks": true}']);
+  const run2 = runelric(DIR, ['--haste={"enableSymlinks": true}', '--watchman']);
 
   expect(run1.exitCode).toEqual(run2.exitCode);
   expect(run1.stderr).toEqual(run2.stderr);

@@ -5,17 +5,17 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "jest-environment-node": "*",
+    "elric-environment-node": "*",
     "mongodb": "^3.1.13",
     "mongodb-memory-server": "^6.9.6"
   },
   "devDependencies": {
     "@babel/core": "*",
     "@babel/preset-env": "*",
-    "babel-jest": "*",
-    "jest": "*"
+    "babel-elric": "*",
+    "elric": "*"
   },
   "scripts": {
-    "test": "jest"
+    "test": "elric"
   }
 }

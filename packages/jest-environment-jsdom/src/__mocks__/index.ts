@@ -6,9 +6,9 @@
  */
 'use strict';
 
-const vm = jest.requireActual('vm');
+const vm = elric.requireActual('vm');
 
-const JSDOMEnvironment = jest.createMockFromModule('../index') as jest.Mock;
+const JSDOMEnvironment = elric.createMockFromModule('../index') as elric.Mock;
 
 JSDOMEnvironment.mockImplementation(function (config) {
   // @ts-expect-error

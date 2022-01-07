@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`formats args with pretty format when given %p 1`] = `
 PASS __tests__/pretty.test.js

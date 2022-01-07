@@ -1,5 +1,5 @@
 {
-  "jest": {
+  "elric": {
     "filter": "<rootDir>/my-filter.js"
   }
 }

@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`basic support: initial write 1`] = `
 test('inline snapshots', () =>
@@ -149,7 +149,7 @@ test('existing snapshot', () => {
 `;
 
 exports[`multiple custom matchers and native matchers: multiple matchers 1`] = `
-const {toMatchInlineSnapshot} = require('jest-snapshot');
+const {toMatchInlineSnapshot} = require('elric-snapshot');
 expect.extend({
   toMatchCustomInlineSnapshot(received, ...args) {
     return toMatchInlineSnapshot.call(this, received, ...args);
@@ -222,7 +222,7 @@ test('inline snapshots', async () => {
 `;
 
 exports[`supports custom matchers with property matcher: custom matchers with property matcher 1`] = `
-const {toMatchInlineSnapshot} = require('jest-snapshot');
+const {toMatchInlineSnapshot} = require('elric-snapshot');
 expect.extend({
   toMatchCustomInlineSnapshot(received, ...args) {
     return toMatchInlineSnapshot.call(this, received, ...args);
@@ -270,7 +270,7 @@ test('inline snapshots', () => {
 `;
 
 exports[`supports custom matchers: custom matchers 1`] = `
-const {toMatchInlineSnapshot} = require('jest-snapshot');
+const {toMatchInlineSnapshot} = require('elric-snapshot');
 expect.extend({
   toMatchCustomInlineSnapshot(received, ...args) {
     return toMatchInlineSnapshot.call(this, received, ...args);

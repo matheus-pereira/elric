@@ -7,20 +7,20 @@
 
 'use strict';
 
-jest.mock('fs');
+elric.mock('fs');
 
 describe('Runtime internal module registry', () => {
-  it('behaves correctly when requiring a module that is used by jest internals', () => {
+  it('behaves correctly when requiring a module that is used by elric internals', () => {
     const fs = require('fs');
 
-    // We require from this crazy path so that we can mimick Jest (and it's
+    // We require from this crazy path so that we can mimick elric (and it's
     // transitive deps) being installed along side a projects deps (e.g. with an
     // NPM3 flat dep tree)
-    const jestUtil = require('../../../packages/jest-util');
+    const elricUtil = require('../../../packages/elric-util');
 
     // If FS is mocked correctly, this folder won't actually be created on the
     // filesystem
-    jestUtil.createDirectory('./dont-create-this-folder');
+    elricUtil.createDirectory('./dont-create-this-folder');
 
     expect(fs.__wasMkdirCalled()).toBe(true);
   });

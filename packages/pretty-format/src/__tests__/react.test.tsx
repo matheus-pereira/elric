@@ -357,7 +357,7 @@ test('supports a single element with React elements with array children', () => 
 
 test('supports array of elements', () => {
   const val = [
-    React.createElement('dt', null, 'jest'),
+    React.createElement('dt', null, 'elric'),
     React.createElement('dd', null, 'to talk in a playful manner'),
     React.createElement(
       'dd',
@@ -368,7 +368,7 @@ test('supports array of elements', () => {
   const expected = [
     'Array [',
     '  <dt>',
-    '    jest',
+    '    elric',
     '  </dt>,',
     '  <dd>',
     '    to talk in a playful manner',
@@ -468,12 +468,12 @@ describe('maxDepth option', () => {
       // ++depth === 1
       'dl',
       null,
-      React.createElement('dt', {id: 'jest'}, 'jest'), // ++depth === 2
+      React.createElement('dt', {id: 'elric'}, 'elric'), // ++depth === 2
       React.createElement(
         // ++depth === 2
         'dd',
         {
-          id: 'jest-1',
+          id: 'elric-1',
         },
         'to talk in a ',
         React.createElement('em', null, 'playful'), // ++depth === 3
@@ -483,7 +483,7 @@ describe('maxDepth option', () => {
         // ++ depth === 2
         'dd',
         {
-          id: 'jest-2',
+          id: 'elric-2',
           style: {
             // ++depth === 3
             color: '#99424F',
@@ -496,19 +496,19 @@ describe('maxDepth option', () => {
     const expected = [
       '<dl>',
       '  <dt',
-      '    id="jest"',
+      '    id="elric"',
       '  >',
-      '    jest',
+      '    elric',
       '  </dt>',
       '  <dd',
-      '    id="jest-1"',
+      '    id="elric-1"',
       '  >',
       '    to talk in a ',
       '    <em … />',
       '     manner',
       '  </dd>',
       '  <dd',
-      '    id="jest-2"',
+      '    id="elric-2"',
       '    style={[Object]}',
       '  >',
       '    <em … />',
@@ -526,7 +526,7 @@ describe('maxDepth option', () => {
         // ++depth === 2
         'dd',
         {
-          id: 'jest-1',
+          id: 'elric-1',
         },
         'to talk in a ',
         React.createElement('em', null, 'playful'), // ++depth === 3
@@ -536,7 +536,7 @@ describe('maxDepth option', () => {
         // ++ depth === 2
         'dd',
         {
-          id: 'jest-2',
+          id: 'elric-2',
           style: {
             // ++depth === 3
             color: '#99424F',
@@ -549,14 +549,14 @@ describe('maxDepth option', () => {
     const expected = [
       'Array [',
       '  <dd',
-      '    id="jest-1"',
+      '    id="elric-1"',
       '  >',
       '    to talk in a ',
       '    <em … />',
       '     manner',
       '  </dd>,',
       '  <dd',
-      '    id="jest-2"',
+      '    id="elric-2"',
       '    style={[Object]}',
       '  >',
       '    <em … />',

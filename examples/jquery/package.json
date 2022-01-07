@@ -5,16 +5,16 @@
   "devDependencies": {
     "@babel/core": "*",
     "@babel/preset-env": "*",
-    "babel-jest": "*",
-    "jest": "*"
+    "babel-elric": "*",
+    "elric": "*"
   },
   "dependencies": {
     "jquery": "*"
   },
   "scripts": {
-    "test": "jest"
+    "test": "elric"
   },
-  "jest": {
+  "elric": {
     "testEnvironment": "jsdom"
   }
 }

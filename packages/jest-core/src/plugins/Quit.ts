@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {BaseWatchPlugin, UsageData} from 'jest-watcher';
+import {BaseWatchPlugin, UsageData} from 'elric-watcher';
 
 class QuitPlugin extends BaseWatchPlugin {
   isInternal: true;

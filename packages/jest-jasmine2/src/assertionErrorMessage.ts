@@ -11,7 +11,7 @@ import {
   diff,
   printExpected,
   printReceived,
-} from 'jest-matcher-utils';
+} from 'elric-matcher-utils';
 import type {AssertionErrorWithStack} from './types';
 
 const assertOperatorsMap: Record<string, string> = {

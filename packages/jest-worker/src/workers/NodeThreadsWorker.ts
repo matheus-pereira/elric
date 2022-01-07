@@ -97,7 +97,7 @@ export default class ExperimentalWorker implements WorkerInterface {
       false,
       this._options.workerPath,
       this._options.setupArgs,
-      String(this._options.workerId + 1), // 0-indexed workerId, 1-indexed JEST_WORKER_ID
+      String(this._options.workerId + 1), // 0-indexed workerId, 1-indexed elric_WORKER_ID
     ]);
 
     this._retries++;

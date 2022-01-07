@@ -5,16 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {makeProjectConfig} from '@jest/test-utils';
-import babelJest from '../index';
+import {makeProjectConfig} from '@elric/test-utils';
+import babelelric from '../index';
 import {loadPartialConfig} from '../loadBabelConfig';
 
-jest.mock('../loadBabelConfig', () => {
-  const actual = jest.requireActual('@babel/core');
+elric.mock('../loadBabelConfig', () => {
+  const actual = elric.requireActual('@babel/core');
 
   return {
-    loadPartialConfig: jest.fn((...args) => actual.loadPartialConfig(...args)),
-    loadPartialConfigAsync: jest.fn((...args) =>
+    loadPartialConfig: elric.fn((...args) => actual.loadPartialConfig(...args)),
+    loadPartialConfigAsync: elric.fn((...args) =>
       actual.loadPartialConfigAsync(...args),
     ),
   };
@@ -34,11 +34,11 @@ customMultiply({a: 32, dummy: "test"}, 2);
 `;
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  elric.clearAllMocks();
 });
 
 test('Returns source string with inline maps when no transformOptions is passed', () => {
-  const result = babelJest.process(sourceString, 'dummy_path.js', {
+  const result = babelelric.process(sourceString, 'dummy_path.js', {
     config: makeProjectConfig(),
     configString: JSON.stringify(makeProjectConfig()),
     instrument: false,
@@ -53,7 +53,7 @@ test('Returns source string with inline maps when no transformOptions is passed'
 });
 
 test('Returns source string with inline maps when no transformOptions is passed async', async () => {
-  const result: any = await babelJest.processAsync!(
+  const result: any = await babelelric.processAsync!(
     sourceString,
     'dummy_path.js',
     {
@@ -108,7 +108,7 @@ describe('caller option correctly merges from defaults and options', () => {
       },
     ],
   ])('%j -> %j', (input, output) => {
-    babelJest.process(sourceString, 'dummy_path.js', {
+    babelelric.process(sourceString, 'dummy_path.js', {
       config: makeProjectConfig(),
       configString: JSON.stringify(makeProjectConfig()),
       instrument: false,
@@ -119,7 +119,7 @@ describe('caller option correctly merges from defaults and options', () => {
     expect(loadPartialConfig).toHaveBeenCalledWith(
       expect.objectContaining({
         caller: {
-          name: 'babel-jest',
+          name: 'babel-elric',
           ...output,
           supportsExportNamespaceFrom: false,
           supportsTopLevelAwait: false,
@@ -130,7 +130,7 @@ describe('caller option correctly merges from defaults and options', () => {
 });
 
 test('can pass null to createTransformer', () => {
-  const transformer = babelJest.createTransformer(null);
+  const transformer = babelelric.createTransformer(null);
   transformer.process(sourceString, 'dummy_path.js', {
     config: makeProjectConfig(),
     configString: JSON.stringify(makeProjectConfig()),
@@ -141,7 +141,7 @@ test('can pass null to createTransformer', () => {
   expect(loadPartialConfig).toHaveBeenCalledWith(
     expect.objectContaining({
       caller: {
-        name: 'babel-jest',
+        name: 'babel-elric',
         supportsDynamicImport: false,
         supportsExportNamespaceFrom: false,
         supportsStaticESM: false,

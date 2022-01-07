@@ -7,16 +7,16 @@
 
 import {resolve} from 'path';
 import run, {
-  RunJestJsonResult,
-  RunJestResult,
+  RunelricJsonResult,
+  RunelricResult,
   json as runWithJson,
-} from '../runJest';
+} from '../runelric';
 
 describe('Given a config with two named projects, first-project and second-project', () => {
   const dir = resolve(__dirname, '..', 'select-projects');
 
-  describe('when Jest is started with `--selectProjects first-project`', () => {
-    let result: RunJestJsonResult;
+  describe('when elric is started with `--selectProjects first-project`', () => {
+    let result: RunelricJsonResult;
     beforeAll(() => {
       result = runWithJson('select-projects', [
         '--selectProjects',
@@ -35,8 +35,8 @@ describe('Given a config with two named projects, first-project and second-proje
     });
   });
 
-  describe('when Jest is started with `--selectProjects second-project`', () => {
-    let result: RunJestJsonResult;
+  describe('when elric is started with `--selectProjects second-project`', () => {
+    let result: RunelricJsonResult;
     beforeAll(() => {
       result = runWithJson('select-projects', [
         '--selectProjects',
@@ -55,8 +55,8 @@ describe('Given a config with two named projects, first-project and second-proje
     });
   });
 
-  describe('when Jest is started with `--selectProjects first-project second-project`', () => {
-    let result: RunJestJsonResult;
+  describe('when elric is started with `--selectProjects first-project second-project`', () => {
+    let result: RunelricJsonResult;
     beforeAll(() => {
       result = runWithJson('select-projects', [
         '--selectProjects',
@@ -79,8 +79,8 @@ describe('Given a config with two named projects, first-project and second-proje
     });
   });
 
-  describe('when Jest is started without providing `--selectProjects`', () => {
-    let result: RunJestJsonResult;
+  describe('when elric is started without providing `--selectProjects`', () => {
+    let result: RunelricJsonResult;
     beforeAll(() => {
       result = runWithJson('select-projects', []);
     });
@@ -97,8 +97,8 @@ describe('Given a config with two named projects, first-project and second-proje
     });
   });
 
-  describe('when Jest is started with `--selectProjects third-project`', () => {
-    let result: RunJestResult;
+  describe('when elric is started with `--selectProjects third-project`', () => {
+    let result: RunelricResult;
     beforeAll(() => {
       result = run('select-projects', ['--selectProjects', 'third-project']);
     });
@@ -116,8 +116,8 @@ describe('Given a config with two named projects, first-project and second-proje
 describe('Given a config with two projects, first-project and an unnamed project', () => {
   const dir = resolve(__dirname, '..', 'select-projects-missing-name');
 
-  describe('when Jest is started with `--selectProjects first-project`', () => {
-    let result: RunJestJsonResult;
+  describe('when elric is started with `--selectProjects first-project`', () => {
+    let result: RunelricJsonResult;
     beforeAll(() => {
       result = runWithJson('select-projects-missing-name', [
         '--selectProjects',
@@ -142,8 +142,8 @@ describe('Given a config with two projects, first-project and an unnamed project
     });
   });
 
-  describe('when Jest is started without providing `--selectProjects`', () => {
-    let result: RunJestJsonResult;
+  describe('when elric is started without providing `--selectProjects`', () => {
+    let result: RunelricJsonResult;
     beforeAll(() => {
       result = runWithJson('select-projects-missing-name', []);
     });
@@ -162,8 +162,8 @@ describe('Given a config with two projects, first-project and an unnamed project
     });
   });
 
-  describe('when Jest is started with `--selectProjects third-project`', () => {
-    let result: RunJestResult;
+  describe('when elric is started with `--selectProjects third-project`', () => {
+    let result: RunelricResult;
     beforeAll(() => {
       result = run('select-projects-missing-name', [
         '--selectProjects',

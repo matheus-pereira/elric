@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {skipSuiteOnJestCircus} from '@jest/test-utils';
-import {json as runWithJson} from '../runJest';
+import {skipSuiteOnelricCircus} from '@elric/test-utils';
+import {json as runWithJson} from '../runelric';
 
 describe('async jasmine with pending during test', () => {
-  skipSuiteOnJestCircus();
+  skipSuiteOnelricCircus();
 
   it('should be reported as a pending test', () => {
     const {json} = runWithJson('jasmine-async', ['pendingInPromise.test.js']);

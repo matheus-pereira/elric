@@ -1,4 +1,4 @@
-# jest-diff
+# elric-diff
 
 Display differences clearly so people can review changes confidently.
 
@@ -18,8 +18,8 @@ Three named exports compare **arrays of strings** line-by-line:
 
 To add this package as a dependency of a project, run either of the following commands:
 
-- `npm install jest-diff`
-- `yarn add jest-diff`
+- `npm install elric-diff`
+- `yarn add elric-diff`
 
 ## Usage of `diff()`
 
@@ -31,8 +31,8 @@ Given JavaScript **values**, `diff(a, b, options?)` does the following:
 
 To use this function, write either of the following:
 
-- `const {diff} = require('jest-diff');` in CommonJS modules
-- `import {diff} from 'jest-diff';` in ECMAScript modules
+- `const {diff} = require('elric-diff');` in CommonJS modules
+- `import {diff} from 'elric-diff';` in ECMAScript modules
 
 ### Example of `diff()`
 
@@ -65,9 +65,9 @@ The returned **string** consists of:
 
 Here are edge cases for the return value:
 
-- `' Comparing two different types of values. …'` if the arguments have **different types** according to the `jest-get-type` package (instances of different classes have the same `'object'` type)
+- `' Comparing two different types of values. …'` if the arguments have **different types** according to the `elric-get-type` package (instances of different classes have the same `'object'` type)
 - `'Compared values have no visual difference.'` if the arguments have either **referential identity** according to `Object.is` method or **same serialization** according to the `pretty-format` package
-- `null` if either argument is a so-called **asymmetric matcher** in Jasmine or Jest
+- `null` if either argument is a so-called **asymmetric matcher** in Jasmine or elric
 
 ## Usage of diffStringsUnified
 
@@ -81,8 +81,8 @@ Although the function is mainly for **multiline** strings, it compares any strin
 
 Write either of the following:
 
-- `const {diffStringsUnified} = require('jest-diff');` in CommonJS modules
-- `import {diffStringsUnified} from 'jest-diff';` in ECMAScript modules
+- `const {diffStringsUnified} = require('elric-diff');` in CommonJS modules
+- `import {diffStringsUnified} from 'elric-diff';` in ECMAScript modules
 
 ### Example of diffStringsUnified
 
@@ -111,7 +111,7 @@ The returned **string** consists of:
 
 To get the benefit of **changed substrings** within the comparison lines, a character-by-character comparison has a higher computational cost (in time and space) than a line-by-line comparison.
 
-If the input strings can have **arbitrary length**, we recommend that the calling code set a limit, beyond which splits the strings, and then calls `diffLinesUnified` instead. For example, Jest falls back to line-by-line comparison if either string has length greater than 20K characters.
+If the input strings can have **arbitrary length**, we recommend that the calling code set a limit, beyond which splits the strings, and then calls `diffLinesUnified` instead. For example, elric falls back to line-by-line comparison if either string has length greater than 20K characters.
 
 ## Usage of diffLinesUnified
 
@@ -158,7 +158,7 @@ Given two **pairs** of arrays of strings, `diffLinesUnified2(aLinesDisplay, bLin
 1. **compare** the pair of `Compare` arrays line-by-line using the `diff-sequences` package
 2. **format** the corresponding lines in the pair of `Display` arrays using the `chalk` package
 
-Jest calls this function to consider lines as common instead of changed if the only difference is indentation.
+elric calls this function to consider lines as common instead of changed if the only difference is indentation.
 
 You might call this function for case insensitive or Unicode equivalence comparison of lines.
 
@@ -258,8 +258,8 @@ const diffs = diffStringsRaw('changed from', 'changed to', false);
 
 Here are all the named imports that you might need for the `diffStringsRaw` function:
 
-- `const {DIFF_DELETE, DIFF_EQUAL, DIFF_INSERT, Diff, diffStringsRaw} = require('jest-diff');` in CommonJS modules
-- `import {DIFF_DELETE, DIFF_EQUAL, DIFF_INSERT, Diff, diffStringsRaw} from 'jest-diff';` in ECMAScript modules
+- `const {DIFF_DELETE, DIFF_EQUAL, DIFF_INSERT, Diff, diffStringsRaw} = require('elric-diff');` in CommonJS modules
+- `import {DIFF_DELETE, DIFF_EQUAL, DIFF_INSERT, Diff, diffStringsRaw} from 'elric-diff';` in ECMAScript modules
 
 To write a **formatting** function, you might need the named constants (and `Diff` in TypeScript annotations).
 
@@ -308,7 +308,7 @@ Depending of your application, you might call `diffLinesRaw` with either array.
 ### Example of split method
 
 ```js
-import {diffLinesRaw} from 'jest-diff';
+import {diffLinesRaw} from 'elric-diff';
 
 const a = 'non-empty string';
 const b = '';
@@ -341,7 +341,7 @@ export const splitLines0 = string =>
 ```
 
 ```js
-import {diffLinesRaw} from 'jest-diff';
+import {diffLinesRaw} from 'elric-diff';
 
 const a = '';
 const b = 'line 1\nline 2\nline 3';
@@ -370,7 +370,7 @@ In contrast to the `diffLinesRaw` function, the `diffLinesUnified` and `diffLine
 
 ## Options
 
-The default options are for the report when an assertion fails from the `expect` package used by Jest.
+The default options are for the report when an assertion fails from the `expect` package used by elric.
 
 For other applications, you can provide an options object as a third argument:
 
@@ -424,7 +424,7 @@ const options = {
 + changed to
 ```
 
-The `jest-diff` package does not assume that the 2 labels have equal length.
+The `elric-diff` package does not assume that the 2 labels have equal length.
 
 ### Example of options for colors of changed lines
 
@@ -482,7 +482,7 @@ const options = {
 If you need the TypeScript type of a Color option:
 
 ```ts
-import {DiffOptionsColor} from 'jest-diff';
+import {DiffOptionsColor} from 'elric-diff';
 ```
 
 ### Example of options for no colors
@@ -512,7 +512,7 @@ const options = {
 };
 ```
 
-The `jest-diff` package assumes (but does not enforce) that the 3 indicators have equal length.
+The `elric-diff` package assumes (but does not enforce) that the 3 indicators have equal length.
 
 ### Example of options to limit common lines
 
@@ -596,9 +596,9 @@ If the **first** or **last** comparison line is **empty**, because the content i
 
 The replacement option is a string whose default value is `''` empty string.
 
-Because Jest trims the report when a matcher fails, it deletes an empty last line.
+Because elric trims the report when a matcher fails, it deletes an empty last line.
 
-Therefore, Jest uses as placeholder the downwards arrow with corner leftwards:
+Therefore, elric uses as placeholder the downwards arrow with corner leftwards:
 
 ```js
 const options = {

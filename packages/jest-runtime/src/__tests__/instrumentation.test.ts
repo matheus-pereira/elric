@@ -8,10 +8,10 @@
 
 import * as os from 'os';
 import * as path from 'path';
-import {makeGlobalConfig, makeProjectConfig} from '@jest/test-utils';
-import {createScriptTransformer} from '@jest/transform';
+import {makeGlobalConfig, makeProjectConfig} from '@elric/test-utils';
+import {createScriptTransformer} from '@elric/transform';
 
-jest.mock('vm');
+elric.mock('vm');
 
 const FILE_PATH_TO_INSTRUMENT = path.resolve(
   __dirname,

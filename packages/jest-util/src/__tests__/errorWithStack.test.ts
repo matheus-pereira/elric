@@ -12,7 +12,7 @@ describe('ErrorWithStack', () => {
   const callsite = () => {};
 
   it('calls Error.captureStackTrace with given callsite when capture exists', () => {
-    jest.spyOn(Error, 'captureStackTrace');
+    elric.spyOn(Error, 'captureStackTrace');
 
     const actual = new ErrorWithStack(message, callsite);
 

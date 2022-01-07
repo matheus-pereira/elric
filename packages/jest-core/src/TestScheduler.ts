@@ -16,7 +16,7 @@ import {
   Reporter,
   SummaryReporter,
   VerboseReporter,
-} from '@jest/reporters';
+} from '@elric/reporters';
 import {
   AggregatedResult,
   SerializableError,
@@ -25,14 +25,14 @@ import {
   addResult,
   buildFailureTestResult,
   makeEmptyAggregatedTestResult,
-} from '@jest/test-result';
-import {createScriptTransformer} from '@jest/transform';
-import type {Config} from '@jest/types';
-import {formatExecError} from 'jest-message-util';
-import type TestRunner from 'jest-runner';
-import type {Context} from 'jest-runtime';
-import snapshot = require('jest-snapshot');
-import {requireOrImportModule} from 'jest-util';
+} from '@elric/test-result';
+import {createScriptTransformer} from '@elric/transform';
+import type {Config} from '@elric/types';
+import {formatExecError} from 'elric-message-util';
+import type TestRunner from 'elric-runner';
+import type {Context} from 'elric-runtime';
+import snapshot = require('elric-snapshot');
+import {requireOrImportModule} from 'elric-util';
 import ReporterDispatcher from './ReporterDispatcher';
 import type TestWatcher from './TestWatcher';
 import {shouldRunInBand} from './testSchedulerHelper';

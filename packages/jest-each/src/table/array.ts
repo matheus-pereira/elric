@@ -7,7 +7,7 @@
  */
 
 import * as util from 'util';
-import type {Global} from '@jest/types';
+import type {Global} from '@elric/types';
 import {format as pretty} from 'pretty-format';
 import type {EachTests} from '../bind';
 import type {Templates} from './interpolation';
@@ -18,7 +18,7 @@ const PRETTY_PLACEHOLDER = '%p';
 const INDEX_PLACEHOLDER = '%#';
 const PLACEHOLDER_PREFIX = '%';
 const ESCAPED_PLACEHOLDER_PREFIX = /%%/g;
-const JEST_EACH_PLACEHOLDER_ESCAPE = '@@__JEST_EACH_PLACEHOLDER_ESCAPE__@@';
+const elric_EACH_PLACEHOLDER_ESCAPE = '@@__elric_EACH_PLACEHOLDER_ESCAPE__@@';
 
 export default (title: string, arrayTable: Global.ArrayTable): EachTests => {
   if (isTemplates(title, arrayTable)) {
@@ -68,13 +68,13 @@ const formatTitle = (
 
       return util.format(formattedTitle, normalisedValue);
     }, interpolateTitleIndex(interpolateEscapedPlaceholders(title), rowIndex))
-    .replace(new RegExp(JEST_EACH_PLACEHOLDER_ESCAPE, 'g'), PLACEHOLDER_PREFIX);
+    .replace(new RegExp(elric_EACH_PLACEHOLDER_ESCAPE, 'g'), PLACEHOLDER_PREFIX);
 
 const normalisePlaceholderValue = (value: unknown) =>
   typeof value === 'string'
     ? value.replace(
         new RegExp(PLACEHOLDER_PREFIX, 'g'),
-        JEST_EACH_PLACEHOLDER_ESCAPE,
+        elric_EACH_PLACEHOLDER_ESCAPE,
       )
     : value;
 
@@ -82,7 +82,7 @@ const getMatchingPlaceholders = (title: string) =>
   title.match(SUPPORTED_PLACEHOLDERS) || [];
 
 const interpolateEscapedPlaceholders = (title: string) =>
-  title.replace(ESCAPED_PLACEHOLDER_PREFIX, JEST_EACH_PLACEHOLDER_ESCAPE);
+  title.replace(ESCAPED_PLACEHOLDER_PREFIX, elric_EACH_PLACEHOLDER_ESCAPE);
 
 const interpolateTitleIndex = (title: string, index: number) =>
   title.replace(INDEX_PLACEHOLDER, index.toString());

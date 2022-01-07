@@ -7,15 +7,15 @@
 
 import * as path from 'path';
 import {runYarnInstall} from '../Utils';
-import {json as runWithJson} from '../runJest';
+import {json as runWithJson} from '../runelric';
 
-const DIR = path.resolve(__dirname, '..', 'babel-plugin-jest-hoist');
+const DIR = path.resolve(__dirname, '..', 'babel-plugin-elric-hoist');
 
 beforeEach(() => {
   runYarnInstall(DIR);
 });
 
-it('successfully runs the tests inside `babel-plugin-jest-hoist/`', () => {
+it('successfully runs the tests inside `babel-plugin-elric-hoist/`', () => {
   const {json} = runWithJson(DIR, ['--no-cache', '--coverage']);
   expect(json.success).toBe(true);
   expect(json.numTotalTestSuites).toBe(4);

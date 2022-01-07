@@ -8,7 +8,7 @@
 
 /* eslint-disable local/ban-types-eventually */
 
-import {isPrimitive} from 'jest-get-type';
+import {isPrimitive} from 'elric-get-type';
 import {
   equals,
   isA,

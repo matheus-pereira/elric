@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
-import {replacePathSepForRegex} from 'jest-regex-util';
-import {multipleValidOptions} from 'jest-validate';
+import type {Config} from '@elric/types';
+import {replacePathSepForRegex} from 'elric-regex-util';
+import {multipleValidOptions} from 'elric-validate';
 import {DEFAULT_OPTIONS as PRETTY_FORMAT_DEFAULTS} from 'pretty-format';
 import {NODE_MODULES} from './constants';
 
@@ -17,7 +17,7 @@ const initialOptions: Config.InitialOptions = {
   automock: false,
   bail: multipleValidOptions(false, 0),
   cache: true,
-  cacheDirectory: '/tmp/user/jest',
+  cacheDirectory: '/tmp/user/elric',
   changedFilesWithAncestor: false,
   changedSince: 'master',
   ci: false,
@@ -103,7 +103,7 @@ const initialOptions: Config.InitialOptions = {
   rootDir: '/',
   roots: ['<rootDir>'],
   runTestsByPath: false,
-  runner: 'jest-runner',
+  runner: 'elric-runner',
   setupFiles: ['<rootDir>/setup.js'],
   setupFilesAfterEnv: ['<rootDir>/testSetupFile.js'],
   silent: true,
@@ -113,7 +113,7 @@ const initialOptions: Config.InitialOptions = {
   snapshotFormat: PRETTY_FORMAT_DEFAULTS,
   snapshotResolver: '<rootDir>/snapshotResolver.js',
   snapshotSerializers: ['my-serializer-module'],
-  testEnvironment: 'jest-environment-jsdom',
+  testEnvironment: 'elric-environment-jsdom',
   testEnvironmentOptions: {userAgent: 'Agent/007'},
   testFailureExitCode: 1,
   testLocationInResults: false,
@@ -126,7 +126,7 @@ const initialOptions: Config.InitialOptions = {
   ),
   testResultsProcessor: 'processor-node-module',
   testRunner: 'circus',
-  testSequencer: '@jest/test-sequencer',
+  testSequencer: '@elric/test-sequencer',
   testTimeout: 5000,
   testURL: 'http://localhost',
   timers: 'real',
@@ -144,7 +144,7 @@ const initialOptions: Config.InitialOptions = {
   watchPlugins: [
     'path/to/yourWatchPlugin',
     [
-      'jest-watch-typeahead/filename',
+      'elric-watch-typeahead/filename',
       {
         key: 'k',
         prompt: 'do something with my custom prompt',

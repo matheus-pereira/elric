@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {skipSuiteOnJasmine} from '@jest/test-utils';
-import runJest from '../runJest';
+import {skipSuiteOnJasmine} from '@elric/test-utils';
+import runelric from '../runelric';
 
 skipSuiteOnJasmine();
 test('`done()` works properly in hooks', () => {
-  const {exitCode} = runJest('done-in-hooks');
+  const {exitCode} = runelric('done-in-hooks');
   expect(exitCode).toEqual(0);
 });

@@ -8,8 +8,8 @@
  */
 
 import * as path from 'path';
-import type {Config} from '@jest/types';
-import {tryRealpath} from 'jest-util';
+import type {Config} from '@elric/types';
+import {tryRealpath} from 'elric-util';
 
 type NodeModulesPathsOptions = {
   moduleDirectory?: Array<string>;

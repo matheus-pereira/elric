@@ -6,15 +6,15 @@
  */
 
 import Emittery = require('emittery');
-import type {JestEnvironment} from '@jest/environment';
+import type {elricEnvironment} from '@elric/environment';
 import type {
   SerializableError,
   Test,
   TestFileEvent,
   TestResult,
-} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import type RuntimeType from 'jest-runtime';
+} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import type RuntimeType from 'elric-runtime';
 
 export type ErrorWithCode = Error & {code?: string};
 
@@ -31,10 +31,10 @@ export type OnTestSuccess = (
 export type TestFramework = (
   globalConfig: Config.GlobalConfig,
   config: Config.ProjectConfig,
-  environment: JestEnvironment,
+  environment: elricEnvironment,
   runtime: RuntimeType,
   testPath: string,
-  sendMessageToJest?: TestFileEvent,
+  sendMessageToelric?: TestFileEvent,
 ) => Promise<TestResult>;
 
 export type TestRunnerOptions = {
@@ -52,7 +52,7 @@ export type TestRunnerSerializedContext = {
   sourcesRelatedToTestsInChangedFiles?: Array<Config.Path>;
 };
 
-// TODO: Should live in `@jest/core` or `jest-watcher`
+// TODO: Should live in `@elric/core` or `elric-watcher`
 type WatcherState = {interrupted: boolean};
 export interface TestWatcher extends Emittery<{change: WatcherState}> {
   state: WatcherState;

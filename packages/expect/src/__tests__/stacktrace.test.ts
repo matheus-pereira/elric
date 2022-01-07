@@ -6,9 +6,9 @@
  *
  */
 
-import jestExpect from '../';
+import elricExpect from '../';
 
-jestExpect.extend({
+elricExpect.extend({
   toCustomMatch(callback: () => unknown, expectation: unknown) {
     const actual = callback();
 
@@ -32,7 +32,7 @@ jestExpect.extend({
 
 it('stack trace points to correct location when using matchers', () => {
   try {
-    jestExpect(true).toBe(false);
+    elricExpect(true).toBe(false);
   } catch (error: any) {
     expect(error.stack).toContain('stacktrace.test.ts:35');
   }
@@ -40,8 +40,8 @@ it('stack trace points to correct location when using matchers', () => {
 
 it('stack trace points to correct location when using nested matchers', () => {
   try {
-    jestExpect(true).toMatchPredicate((value: unknown) => {
-      jestExpect(value).toBe(false);
+    elricExpect(true).toMatchPredicate((value: unknown) => {
+      elricExpect(value).toBe(false);
     });
   } catch (error: any) {
     expect(error.stack).toContain('stacktrace.test.ts:44');
@@ -50,7 +50,7 @@ it('stack trace points to correct location when using nested matchers', () => {
 
 it('stack trace points to correct location when throwing from a custom matcher', () => {
   try {
-    jestExpect(() => {
+    elricExpect(() => {
       const foo = () => bar();
       const bar = () => baz();
       const baz = () => {

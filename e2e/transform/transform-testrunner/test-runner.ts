@@ -4,15 +4,15 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import {JestEnvironment} from '@jest/environment';
-import {TestResult, createEmptyTestResult} from '@jest/test-result';
-import {Config} from '@jest/types';
-import Runtime from 'jest-runtime';
+import {elricEnvironment} from '@elric/environment';
+import {TestResult, createEmptyTestResult} from '@elric/test-result';
+import {Config} from '@elric/types';
+import Runtime from 'elric-runtime';
 
 export default async function testRunner(
   globalConfig: Config.GlobalConfig,
   config: Config.ProjectConfig,
-  environment: JestEnvironment,
+  environment: elricEnvironment,
   runtime: Runtime,
   testPath: string,
 ): Promise<TestResult> {

@@ -6,8 +6,8 @@
  */
 
 import chalk = require('chalk');
-import type {TestResult} from '@jest/test-result';
-import {pluralize} from 'jest-util';
+import type {TestResult} from '@elric/test-result';
+import {pluralize} from 'elric-util';
 
 const ARROW = ' \u203A ';
 const DOT = ' \u2022 ';

@@ -7,7 +7,7 @@
 
 import {resolve} from 'path';
 import {cleanup, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const workdirNodeModules = resolve(
   __dirname,
@@ -27,6 +27,6 @@ afterAll(() => {
 });
 
 test('require.resolve with paths', () => {
-  const {exitCode} = runJest('resolve-with-paths');
+  const {exitCode} = runelric('resolve-with-paths');
   expect(exitCode).toBe(0);
 });

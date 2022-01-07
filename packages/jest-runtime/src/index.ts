@@ -25,15 +25,15 @@ import * as fs from 'graceful-fs';
 import slash = require('slash');
 import stripBOM = require('strip-bom');
 import type {
-  Jest,
-  JestEnvironment,
+  elric,
+  elricEnvironment,
   Module,
   ModuleWrapper,
-} from '@jest/environment';
-import type {LegacyFakeTimers, ModernFakeTimers} from '@jest/fake-timers';
-import type * as JestGlobals from '@jest/globals';
-import type {SourceMapRegistry} from '@jest/source-map';
-import type {RuntimeTransformResult, V8CoverageResult} from '@jest/test-result';
+} from '@elric/environment';
+import type {LegacyFakeTimers, ModernFakeTimers} from '@elric/fake-timers';
+import type * as elricGlobals from '@elric/globals';
+import type {SourceMapRegistry} from '@elric/source-map';
+import type {RuntimeTransformResult, V8CoverageResult} from '@elric/test-result';
 import {
   CallerTransformOptions,
   ScriptTransformer,
@@ -42,19 +42,19 @@ import {
   TransformationOptions,
   handlePotentialSyntaxError,
   shouldInstrument,
-} from '@jest/transform';
-import type {Config, Global} from '@jest/types';
-import type {IModuleMap} from 'jest-haste-map';
-import HasteMap from 'jest-haste-map';
-import {formatStackTrace, separateMessageFromStack} from 'jest-message-util';
-import type {MockFunctionMetadata, ModuleMocker} from 'jest-mock';
-import {escapePathForRegex} from 'jest-regex-util';
-import Resolver, {ResolveModuleConfig} from 'jest-resolve';
-import Snapshot = require('jest-snapshot');
-import {createDirectory, deepCyclicCopy} from 'jest-util';
+} from '@elric/transform';
+import type {Config, Global} from '@elric/types';
+import type {IModuleMap} from 'elric-haste-map';
+import HasteMap from 'elric-haste-map';
+import {formatStackTrace, separateMessageFromStack} from 'elric-message-util';
+import type {MockFunctionMetadata, ModuleMocker} from 'elric-mock';
+import {escapePathForRegex} from 'elric-regex-util';
+import Resolver, {ResolveModuleConfig} from 'elric-resolve';
+import Snapshot = require('elric-snapshot');
+import {createDirectory, deepCyclicCopy} from 'elric-util';
 import {
-  createOutsideJestVmPath,
-  decodePossibleOutsideJestVmPath,
+  createOutsideelricVmPath,
+  decodePossibleOutsideelricVmPath,
   findSiblingsWithFileExtension,
 } from './helpers';
 import type {Context} from './types';
@@ -63,12 +63,12 @@ export type {Context} from './types';
 
 const esmIsAvailable = typeof SourceTextModule === 'function';
 
-interface JestGlobals extends Global.TestFrameworkGlobals {
-  expect: typeof JestGlobals.expect;
+interface elricGlobals extends Global.TestFrameworkGlobals {
+  expect: typeof elricGlobals.expect;
 }
 
-interface JestGlobalsWithJest extends JestGlobals {
-  jest: typeof JestGlobals.jest;
+interface elricGlobalsWithelric extends elricGlobals {
+  elric: typeof elricGlobals.elric;
 }
 
 type HasteMapOptions = {
@@ -102,14 +102,14 @@ type ModuleRegistry = Map<string, InitialModule | Module>;
 // Use /benchmarks/test-file-overhead to measure the impact.
 // Note that this only applies when they are required in an internal context;
 // users who require one of these modules in their tests will still get the module from inside the VM.
-// Prefer listing a module here only if it is impractical to use the jest-resolve-outside-vm-option where it is required,
+// Prefer listing a module here only if it is impractical to use the elric-resolve-outside-vm-option where it is required,
 // e.g. because there are many require sites spread across the dependency graph.
 const INTERNAL_MODULE_REQUIRE_OUTSIDE_OPTIMIZED_MODULES = new Set(['chalk']);
-const JEST_RESOLVE_OUTSIDE_VM_OPTION = Symbol.for(
-  'jest-resolve-outside-vm-option',
+const elric_RESOLVE_OUTSIDE_VM_OPTION = Symbol.for(
+  'elric-resolve-outside-vm-option',
 );
 type ResolveOptions = Parameters<typeof require.resolve>[1] & {
-  [JEST_RESOLVE_OUTSIDE_VM_OPTION]?: true;
+  [elric_RESOLVE_OUTSIDE_VM_OPTION]?: true;
 };
 
 const testTimeoutSymbol = Symbol.for('TEST_TIMEOUT_SYMBOL');
@@ -179,7 +179,7 @@ export default class Runtime {
   private readonly _config: Config.ProjectConfig;
   private readonly _coverageOptions: ShouldInstrumentOptions;
   private _currentlyExecutingModulePath: string;
-  private readonly _environment: JestEnvironment;
+  private readonly _environment: elricEnvironment;
   private readonly _explicitShouldMock: Map<string, boolean>;
   private readonly _explicitShouldMockModule: Map<string, boolean>;
   private _fakeTimersImplementation:
@@ -223,15 +223,15 @@ export default class Runtime {
   private readonly _virtualMocks: Map<string, boolean>;
   private readonly _virtualModuleMocks: Map<string, boolean>;
   private _moduleImplementation?: typeof nativeModule.Module;
-  private readonly jestObjectCaches: Map<string, Jest>;
-  private jestGlobals?: JestGlobals;
+  private readonly elricObjectCaches: Map<string, elric>;
+  private elricGlobals?: elricGlobals;
   private readonly esmConditions: Array<string>;
   private readonly cjsConditions: Array<string>;
   private isTornDown = false;
 
   constructor(
     config: Config.ProjectConfig,
-    environment: JestEnvironment,
+    environment: elricEnvironment,
     resolver: Resolver,
     transformer: ScriptTransformer,
     cacheFS: Map<string, string>,
@@ -272,7 +272,7 @@ export default class Runtime {
     this._fileTransformsMutex = new Map();
     this._virtualMocks = new Map();
     this._virtualModuleMocks = new Map();
-    this.jestObjectCaches = new Map();
+    this.elricObjectCaches = new Map();
 
     this._mockMetaDataCache = new Map();
     this._shouldMockModuleCache = new Map();
@@ -410,11 +410,11 @@ export default class Runtime {
   }
 
   static async runCLI(): Promise<never> {
-    throw new Error('The jest-runtime CLI has been moved into jest-repl');
+    throw new Error('The elric-runtime CLI has been moved into elric-repl');
   }
 
   static getCLIOptions(): never {
-    throw new Error('The jest-runtime CLI has been moved into jest-repl');
+    throw new Error('The elric-runtime CLI has been moved into elric-repl');
   }
 
   // unstable as it should be replaced by https://github.com/nodejs/modules/issues/393, and we don't want people to use it
@@ -459,7 +459,7 @@ export default class Runtime {
 
       invariant(
         transformResolve! && transformReject!,
-        'Promise initialization should be sync - please report this bug to Jest!',
+        'Promise initialization should be sync - please report this bug to elric!',
       );
 
       if (this._resolver.isCoreModule(modulePath)) {
@@ -489,7 +489,7 @@ export default class Runtime {
           ) => {
             invariant(
               runtimeSupportsVmModules,
-              'You need to run with a version of node that supports ES Modules in the VM API. See https://jestjs.io/docs/ecmascript-modules',
+              'You need to run with a version of node that supports ES Modules in the VM API. See https://elricjs.io/docs/ecmascript-modules',
             );
             const module = await this.resolveModule(
               specifier,
@@ -506,7 +506,7 @@ export default class Runtime {
 
         invariant(
           !this._esmoduleRegistry.has(cacheKey),
-          `Module cache already has entry ${cacheKey}. This is a bug in Jest, please report it!`,
+          `Module cache already has entry ${cacheKey}. This is a bug in elric, please report it!`,
         );
 
         this._esmoduleRegistry.set(cacheKey, module);
@@ -522,7 +522,7 @@ export default class Runtime {
 
     invariant(
       module,
-      'Module cache does not contain module. This is a bug in Jest, please open up an issue',
+      'Module cache does not contain module. This is a bug in elric, please open up an issue',
     );
 
     return module;
@@ -535,20 +535,20 @@ export default class Runtime {
   ): Promise<T> | T | void {
     if (this.isTornDown) {
       this._logFormattedReferenceError(
-        'You are trying to `import` a file after the Jest environment has been torn down.',
+        'You are trying to `import` a file after the elric environment has been torn down.',
       );
       process.exitCode = 1;
       return;
     }
 
-    if (specifier === '@jest/globals') {
-      const fromCache = this._esmoduleRegistry.get('@jest/globals');
+    if (specifier === '@elric/globals') {
+      const fromCache = this._esmoduleRegistry.get('@elric/globals');
 
       if (fromCache) {
         return fromCache;
       }
       const globals = this.getGlobalsForEsm(referencingIdentifier, context);
-      this._esmoduleRegistry.set('@jest/globals', globals);
+      this._esmoduleRegistry.set('@elric/globals', globals);
 
       return globals;
     }
@@ -589,7 +589,7 @@ export default class Runtime {
   ): Promise<VMModule | void> {
     if (this.isTornDown) {
       this._logFormattedReferenceError(
-        'You are trying to `import` a file after the Jest environment has been torn down.',
+        'You are trying to `import` a file after the elric environment has been torn down.',
       );
       process.exitCode = 1;
       return;
@@ -625,7 +625,7 @@ export default class Runtime {
   ): Promise<void> {
     invariant(
       runtimeSupportsVmModules,
-      'You need to run with a version of node that supports ES Modules in the VM API. See https://jestjs.io/docs/ecmascript-modules',
+      'You need to run with a version of node that supports ES Modules in the VM API. See https://elricjs.io/docs/ecmascript-modules',
     );
 
     const [path, query] = (moduleName ?? '').split('?');
@@ -854,9 +854,9 @@ export default class Runtime {
       if (INTERNAL_MODULE_REQUIRE_OUTSIDE_OPTIMIZED_MODULES.has(to)) {
         return require(to);
       }
-      const outsideJestVmPath = decodePossibleOutsideJestVmPath(to);
-      if (outsideJestVmPath) {
-        return require(outsideJestVmPath);
+      const outsideelricVmPath = decodePossibleOutsideelricVmPath(to);
+      if (outsideelricVmPath) {
+        return require(outsideelricVmPath);
       }
     }
 
@@ -998,7 +998,7 @@ export default class Runtime {
 
   requireModuleOrMock<T = unknown>(from: Config.Path, moduleName: string): T {
     // this module is unmockable
-    if (moduleName === '@jest/globals') {
+    if (moduleName === '@elric/globals') {
       // @ts-expect-error: we don't care that it's not assignable to T
       return this.getGlobalsForCjs(from);
     }
@@ -1103,7 +1103,7 @@ export default class Runtime {
       await this._v8CoverageInstrumenter.stopInstrumenting();
   }
 
-  getAllCoverageInfoCopy(): JestEnvironment['global']['__coverage__'] {
+  getAllCoverageInfoCopy(): elricEnvironment['global']['__coverage__'] {
     return deepCyclicCopy(this._environment.global.__coverage__);
   }
 
@@ -1214,7 +1214,7 @@ export default class Runtime {
 
     this._fileTransforms.clear();
     this._fileTransformsMutex.clear();
-    this.jestObjectCaches.clear();
+    this.elricObjectCaches.clear();
 
     this._v8CoverageResult = [];
     this._v8CoverageInstrumenter = undefined;
@@ -1319,7 +1319,7 @@ export default class Runtime {
   ) {
     if (this.isTornDown) {
       this._logFormattedReferenceError(
-        'You are trying to `import` a file after the Jest environment has been torn down.',
+        'You are trying to `import` a file after the elric environment has been torn down.',
       );
       process.exitCode = 1;
       return;
@@ -1373,18 +1373,18 @@ export default class Runtime {
 
     if (compiledFunction === null) {
       this._logFormattedReferenceError(
-        'You are trying to `import` a file after the Jest environment has been torn down.',
+        'You are trying to `import` a file after the elric environment has been torn down.',
       );
       process.exitCode = 1;
       return;
     }
 
-    const jestObject = this._createJestObjectFor(filename);
+    const elricObject = this._createelricObjectFor(filename);
 
-    this.jestObjectCaches.set(filename, jestObject);
+    this.elricObjectCaches.set(filename, elricObject);
 
-    const lastArgs: [Jest | undefined, ...Array<Global.Global>] = [
-      this._config.injectGlobals ? jestObject : undefined, // jest object
+    const lastArgs: [elric | undefined, ...Array<Global.Global>] = [
+      this._config.injectGlobals ? elricObject : undefined, // elric object
       ...this._config.extraGlobals.map<Global.Global>(globalVariable => {
         if (this._environment.global[globalVariable]) {
           return this._environment.global[globalVariable];
@@ -1495,7 +1495,7 @@ export default class Runtime {
   private createScriptFromCode(scriptSource: string, filename: string) {
     try {
       const scriptFilename = this._resolver.isCoreModule(filename)
-        ? `jest-nodejs-core-${filename}`
+        ? `elric-nodejs-core-${filename}`
         : filename;
       return new Script(this.wrapCodeInModuleWrapper(scriptSource), {
         displayErrors: true,
@@ -1504,7 +1504,7 @@ export default class Runtime {
         importModuleDynamically: async (specifier: string) => {
           invariant(
             runtimeSupportsVmModules,
-            'You need to run with a version of node that supports ES Modules in the VM API. See https://jestjs.io/docs/ecmascript-modules',
+            'You need to run with a version of node that supports ES Modules in the VM API. See https://elricjs.io/docs/ecmascript-modules',
           );
 
           const context = this._environment.getVmContext?.();
@@ -1672,7 +1672,7 @@ export default class Runtime {
       if (mockMetadata == null) {
         throw new Error(
           `Failed to get mock metadata: ${modulePath}\n\n` +
-            `See: https://jestjs.io/docs/manual-mocks#content`,
+            `See: https://elricjs.io/docs/manual-mocks#content`,
         );
       }
       this._mockMetaDataCache.set(modulePath, mockMetadata);
@@ -1765,10 +1765,10 @@ export default class Runtime {
         resolveOptions,
       );
       if (
-        resolveOptions?.[JEST_RESOLVE_OUTSIDE_VM_OPTION] &&
+        resolveOptions?.[elric_RESOLVE_OUTSIDE_VM_OPTION] &&
         options?.isInternalModule
       ) {
-        return createOutsideJestVmPath(resolved);
+        return createOutsideelricVmPath(resolved);
       }
       return resolved;
     };
@@ -1812,14 +1812,14 @@ export default class Runtime {
     return moduleRequire;
   }
 
-  private _createJestObjectFor(from: Config.Path): Jest {
+  private _createelricObjectFor(from: Config.Path): elric {
     const disableAutomock = () => {
       this._shouldAutoMock = false;
-      return jestObject;
+      return elricObject;
     };
     const enableAutomock = () => {
       this._shouldAutoMock = true;
-      return jestObject;
+      return elricObject;
     };
     const unmock = (moduleName: string) => {
       const moduleID = this._resolver.getModuleID(
@@ -1829,7 +1829,7 @@ export default class Runtime {
         {conditions: this.cjsConditions},
       );
       this._explicitShouldMock.set(moduleID, false);
-      return jestObject;
+      return elricObject;
     };
     const deepUnmock = (moduleName: string) => {
       const moduleID = this._resolver.getModuleID(
@@ -1840,9 +1840,9 @@ export default class Runtime {
       );
       this._explicitShouldMock.set(moduleID, false);
       this._transitiveShouldMock.set(moduleID, false);
-      return jestObject;
+      return elricObject;
     };
-    const mock: Jest['mock'] = (moduleName, mockFactory, options) => {
+    const mock: elric['mock'] = (moduleName, mockFactory, options) => {
       if (mockFactory !== undefined) {
         return setMockFactory(moduleName, mockFactory, options);
       }
@@ -1854,7 +1854,7 @@ export default class Runtime {
         {conditions: this.cjsConditions},
       );
       this._explicitShouldMock.set(moduleID, true);
-      return jestObject;
+      return elricObject;
     };
     const setMockFactory = (
       moduleName: string,
@@ -1862,9 +1862,9 @@ export default class Runtime {
       options?: {virtual?: boolean},
     ) => {
       this.setMock(from, moduleName, mockFactory, options);
-      return jestObject;
+      return elricObject;
     };
-    const mockModule: Jest['unstable_mockModule'] = (
+    const mockModule: elric['unstable_mockModule'] = (
       moduleName,
       mockFactory,
       options,
@@ -1874,19 +1874,19 @@ export default class Runtime {
       }
 
       this.setModuleMock(from, moduleName, mockFactory, options);
-      return jestObject;
+      return elricObject;
     };
     const clearAllMocks = () => {
       this.clearAllMocks();
-      return jestObject;
+      return elricObject;
     };
     const resetAllMocks = () => {
       this.resetAllMocks();
-      return jestObject;
+      return elricObject;
     };
     const restoreAllMocks = () => {
       this.restoreAllMocks();
-      return jestObject;
+      return elricObject;
     };
     const _getFakeTimers = () => {
       if (
@@ -1894,33 +1894,33 @@ export default class Runtime {
         !(this._environment.fakeTimers || this._environment.fakeTimersModern)
       ) {
         this._logFormattedReferenceError(
-          'You are trying to access a property or method of the Jest environment after it has been torn down.',
+          'You are trying to access a property or method of the elric environment after it has been torn down.',
         );
         process.exitCode = 1;
       }
 
       return this._fakeTimersImplementation!;
     };
-    const useFakeTimers: Jest['useFakeTimers'] = (type = 'modern') => {
+    const useFakeTimers: elric['useFakeTimers'] = (type = 'modern') => {
       if (type === 'legacy') {
         this._fakeTimersImplementation = this._environment.fakeTimers;
       } else {
         this._fakeTimersImplementation = this._environment.fakeTimersModern;
       }
       this._fakeTimersImplementation!.useFakeTimers();
-      return jestObject;
+      return elricObject;
     };
     const useRealTimers = () => {
       _getFakeTimers().useRealTimers();
-      return jestObject;
+      return elricObject;
     };
     const resetModules = () => {
       this.resetModules();
-      return jestObject;
+      return elricObject;
     };
     const isolateModules = (fn: () => void) => {
       this.isolateModules(fn);
-      return jestObject;
+      return elricObject;
     };
     const fn = this._moduleMocker.fn.bind(this._moduleMocker);
     const spyOn = this._moduleMocker.spyOn.bind(this._moduleMocker);
@@ -1939,16 +1939,16 @@ export default class Runtime {
         // @ts-expect-error: https://github.com/Microsoft/TypeScript/issues/24587
         this._environment.global[testTimeoutSymbol] = timeout;
       }
-      return jestObject;
+      return elricObject;
     };
 
     const retryTimes = (numTestRetries: number) => {
       // @ts-expect-error: https://github.com/Microsoft/TypeScript/issues/24587
       this._environment.global[retryTimesSymbol] = numTestRetries;
-      return jestObject;
+      return elricObject;
     };
 
-    const jestObject: Jest = {
+    const elricObject: elric = {
       advanceTimersByTime: (msToRun: number) =>
         _getFakeTimers().advanceTimersByTime(msToRun),
       advanceTimersToNextTimer: (steps?: number) =>
@@ -2023,7 +2023,7 @@ export default class Runtime {
       useFakeTimers,
       useRealTimers,
     };
-    return jestObject;
+    return elricObject;
   }
 
   private _logFormattedReferenceError(errorMessage: string) {
@@ -2032,7 +2032,7 @@ export default class Runtime {
       : '';
     const originalStack = new ReferenceError(`${errorMessage}${testPath}`)
       .stack!.split('\n')
-      // Remove this file from the stack (jest-message-utils will keep one line)
+      // Remove this file from the stack (elric-message-utils will keep one line)
       .filter(line => line.indexOf(__filename) === -1)
       .join('\n');
 
@@ -2061,7 +2061,7 @@ export default class Runtime {
       'require',
       '__dirname',
       '__filename',
-      this._config.injectGlobals ? 'jest' : undefined,
+      this._config.injectGlobals ? 'elric' : undefined,
       ...this._config.extraGlobals,
     ].filter(notEmpty);
   }
@@ -2084,29 +2084,29 @@ export default class Runtime {
     throw e;
   }
 
-  private getGlobalsForCjs(from: Config.Path): JestGlobalsWithJest {
-    const jest = this.jestObjectCaches.get(from);
+  private getGlobalsForCjs(from: Config.Path): elricGlobalsWithelric {
+    const elric = this.elricObjectCaches.get(from);
 
-    invariant(jest, 'There should always be a Jest object already');
+    invariant(elric, 'There should always be a elric object already');
 
-    return {...this.getGlobalsFromEnvironment(), jest};
+    return {...this.getGlobalsFromEnvironment(), elric};
   }
 
   private getGlobalsForEsm(
     from: Config.Path,
     context: VMContext,
   ): Promise<VMModule> {
-    let jest = this.jestObjectCaches.get(from);
+    let elric = this.elricObjectCaches.get(from);
 
-    if (!jest) {
-      jest = this._createJestObjectFor(from);
+    if (!elric) {
+      elric = this._createelricObjectFor(from);
 
-      this.jestObjectCaches.set(from, jest);
+      this.elricObjectCaches.set(from, elric);
     }
 
-    const globals: JestGlobalsWithJest = {
+    const globals: elricGlobalsWithelric = {
       ...this.getGlobalsFromEnvironment(),
-      jest,
+      elric,
     };
 
     const module = new SyntheticModule(
@@ -2117,15 +2117,15 @@ export default class Runtime {
           this.setExport(key, value);
         });
       },
-      {context, identifier: '@jest/globals'},
+      {context, identifier: '@elric/globals'},
     );
 
     return evaluateSyntheticModule(module);
   }
 
-  private getGlobalsFromEnvironment(): JestGlobals {
-    if (this.jestGlobals) {
-      return {...this.jestGlobals};
+  private getGlobalsFromEnvironment(): elricGlobals {
+    if (this.elricGlobals) {
+      return {...this.elricGlobals};
     }
 
     return {
@@ -2157,8 +2157,8 @@ export default class Runtime {
     return source;
   }
 
-  setGlobalsForRuntime(globals: JestGlobals): void {
-    this.jestGlobals = globals;
+  setGlobalsForRuntime(globals: elricGlobals): void {
+    this.elricGlobals = globals;
   }
 }
 

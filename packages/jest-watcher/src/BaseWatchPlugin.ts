@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import type {
-  JestHookSubscriber,
+  elricHookSubscriber,
   UpdateConfigCallback,
   UsageData,
   WatchPlugin,
@@ -28,7 +28,7 @@ abstract class BaseWatchPlugin implements WatchPlugin {
     this._stdout = stdout;
   }
 
-  apply(_hooks: JestHookSubscriber): void {}
+  apply(_hooks: elricHookSubscriber): void {}
 
   getUsageInfo(_globalConfig: Config.GlobalConfig): UsageData | null {
     return null;

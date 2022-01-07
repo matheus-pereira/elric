@@ -3,7 +3,7 @@
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.2"
   },
-  "jest": {
+  "elric": {
     "testEnvironment": "jsdom",
     "testEnvironmentOptions": {
       "html": "<div id=\"root\"></div>"

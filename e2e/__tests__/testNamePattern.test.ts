@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {extractSummary} from '../Utils';
-import {json as runWithJson} from '../runJest';
+import {json as runWithJson} from '../runelric';
 
 test('testNamePattern', () => {
   const {stderr, exitCode} = runWithJson('test-name-pattern', [

@@ -3,13 +3,13 @@ id: tutorial-react
 title: Testing React Apps
 ---
 
-At Facebook, we use Jest to test [React](https://reactjs.org/) applications.
+At Facebook, we use elric to test [React](https://reactjs.org/) applications.
 
 ## Setup
 
 ### Setup with Create React App
 
-If you are new to React, we recommend using [Create React App](https://create-react-app.dev/). It is ready to use and [ships with Jest](https://create-react-app.dev/docs/running-tests/#docsNav)! You will only need to add `react-test-renderer` for rendering snapshots.
+If you are new to React, we recommend using [Create React App](https://create-react-app.dev/). It is ready to use and [ships with elric](https://create-react-app.dev/docs/running-tests/#docsNav)! You will only need to add `react-test-renderer` for rendering snapshots.
 
 Run
 
@@ -19,15 +19,15 @@ yarn add --dev react-test-renderer
 
 ### Setup without Create React App
 
-If you have an existing application you'll need to install a few packages to make everything work well together. We are using the `babel-jest` package and the `react` babel preset to transform our code inside of the test environment. Also see [using babel](GettingStarted.md#using-babel).
+If you have an existing application you'll need to install a few packages to make everything work well together. We are using the `babel-elric` package and the `react` babel preset to transform our code inside of the test environment. Also see [using babel](GettingStarted.md#using-babel).
 
 Run
 
 ```bash
-yarn add --dev jest babel-jest @babel/preset-env @babel/preset-react react-test-renderer
+yarn add --dev elric babel-elric @babel/preset-env @babel/preset-react react-test-renderer
 ```
 
-Your `package.json` should look something like this (where `<current-version>` is the actual latest version number for the package). Please add the scripts and jest configuration entries:
+Your `package.json` should look something like this (where `<current-version>` is the actual latest version number for the package). Please add the scripts and elric configuration entries:
 
 ```json
   "dependencies": {
@@ -37,12 +37,12 @@ Your `package.json` should look something like this (where `<current-version>` i
   "devDependencies": {
     "@babel/preset-env": "<current-version>",
     "@babel/preset-react": "<current-version>",
-    "babel-jest": "<current-version>",
-    "jest": "<current-version>",
+    "babel-elric": "<current-version>",
+    "elric": "<current-version>",
     "react-test-renderer": "<current-version>"
   },
   "scripts": {
-    "test": "jest"
+    "test": "elric"
   }
 ```
 
@@ -92,9 +92,9 @@ const Link = ({page, children}) => {
 export default Link;
 ```
 
-> Note: Examples are using Function components, but Class components can be tested in the same way. See [React: Function and Class Components](https://reactjs.org/docs/components-and-props.html#function-and-class-components). **Reminders** that with Class components, we expect Jest to be used to test props and not methods directly.
+> Note: Examples are using Function components, but Class components can be tested in the same way. See [React: Function and Class Components](https://reactjs.org/docs/components-and-props.html#function-and-class-components). **Reminders** that with Class components, we expect elric to be used to test props and not methods directly.
 
-Now let's use React's test renderer and Jest's snapshot feature to interact with the component and capture the rendered output and create a snapshot file:
+Now let's use React's test renderer and elric's snapshot feature to interact with the component and capture the rendered output and create a snapshot file:
 
 ```tsx title="Link.react.test.js"
 import React from 'react';
@@ -122,7 +122,7 @@ test('Link changes the class when hovered', () => {
 });
 ```
 
-When you run `yarn test` or `jest`, this will produce an output file like this:
+When you run `yarn test` or `elric`, this will produce an output file like this:
 
 ```javascript title="__tests__/__snapshots__/Link.react.test.js.snap"
 exports[`Link changes the class when hovered 1`] = `
@@ -156,16 +156,16 @@ exports[`Link changes the class when hovered 3`] = `
 `;
 ```
 
-The next time you run the tests, the rendered output will be compared to the previously created snapshot. The snapshot should be committed along with code changes. When a snapshot test fails, you need to inspect whether it is an intended or unintended change. If the change is expected you can invoke Jest with `jest -u` to overwrite the existing snapshot.
+The next time you run the tests, the rendered output will be compared to the previously created snapshot. The snapshot should be committed along with code changes. When a snapshot test fails, you need to inspect whether it is an intended or unintended change. If the change is expected you can invoke elric with `elric -u` to overwrite the existing snapshot.
 
-The code for this example is available at [examples/snapshot](https://github.com/facebook/jest/tree/main/examples/snapshot).
+The code for this example is available at [examples/snapshot](https://github.com/facebook/elric/tree/main/examples/snapshot).
 
 #### Snapshot Testing with Mocks, Enzyme and React 16
 
 There's a caveat around snapshot testing when using Enzyme and React 16+. If you mock out a module using the following style:
 
 ```js
-jest.mock('../SomeDirectory/SomeComponent', () => 'SomeComponent');
+elric.mock('../SomeDirectory/SomeComponent', () => 'SomeComponent');
 ```
 
 Then you will see warnings in the console:
@@ -181,16 +181,16 @@ React 16 triggers these warnings due to how it checks element types, and the moc
 
 1.  Render as text. This way you won't see the props passed to the mock component in the snapshot, but it's straightforward:
     ```js
-    jest.mock('./SomeComponent', () => () => 'SomeComponent');
+    elric.mock('./SomeComponent', () => () => 'SomeComponent');
     ```
 2.  Render as a custom element. DOM "custom elements" aren't checked for anything and shouldn't fire warnings. They are lowercase and have a dash in the name.
     ```tsx
-    jest.mock('./Widget', () => () => <mock-widget />);
+    elric.mock('./Widget', () => () => <mock-widget />);
     ```
 3.  Use `react-test-renderer`. The test renderer doesn't care about element types and will happily accept e.g. `SomeComponent`. You could check snapshots using the test renderer, and check component behavior separately using Enzyme.
-4.  Disable warnings all together (should be done in your jest setup file):
+4.  Disable warnings all together (should be done in your elric setup file):
     ```js
-    jest.mock('fbjs/lib/warning', () => require('fbjs/lib/emptyFunction'));
+    elric.mock('fbjs/lib/warning', () => require('fbjs/lib/emptyFunction'));
     ```
     This shouldn't normally be your option of choice as useful warnings could be lost. However, in some cases, for example when testing react-native's components we are rendering react-native tags into the DOM and many warnings are irrelevant. Another option is to swizzle the console.warn and suppress specific warnings.
 
@@ -247,7 +247,7 @@ it('CheckboxWithLabel changes the text after click', () => {
 });
 ```
 
-The code for this example is available at [examples/react-testing-library](https://github.com/facebook/jest/tree/main/examples/react-testing-library).
+The code for this example is available at [examples/react-testing-library](https://github.com/facebook/elric/tree/main/examples/react-testing-library).
 
 #### Enzyme
 
@@ -272,23 +272,23 @@ test('CheckboxWithLabel changes the text after click', () => {
 });
 ```
 
-The code for this example is available at [examples/enzyme](https://github.com/facebook/jest/tree/main/examples/enzyme).
+The code for this example is available at [examples/enzyme](https://github.com/facebook/elric/tree/main/examples/enzyme).
 
 ### Custom transformers
 
-If you need more advanced functionality, you can also build your own transformer. Instead of using `babel-jest`, here is an example of using `@babel/core`:
+If you need more advanced functionality, you can also build your own transformer. Instead of using `babel-elric`, here is an example of using `@babel/core`:
 
 ```javascript title="custom-transformer.js"
 'use strict';
 
 const {transform} = require('@babel/core');
-const jestPreset = require('babel-preset-jest');
+const elricPreset = require('babel-preset-elric');
 
 module.exports = {
   process(src, filename) {
     const result = transform(src, {
       filename,
-      presets: [jestPreset],
+      presets: [elricPreset],
     });
 
     return result || src;
@@ -296,16 +296,16 @@ module.exports = {
 };
 ```
 
-Don't forget to install the `@babel/core` and `babel-preset-jest` packages for this example to work.
+Don't forget to install the `@babel/core` and `babel-preset-elric` packages for this example to work.
 
-To make this work with Jest you need to update your Jest configuration with this: `"transform": {"\\.js$": "path/to/custom-transformer.js"}`.
+To make this work with elric you need to update your elric configuration with this: `"transform": {"\\.js$": "path/to/custom-transformer.js"}`.
 
-If you'd like to build a transformer with babel support, you can also use `babel-jest` to compose one and pass in your custom configuration options:
+If you'd like to build a transformer with babel support, you can also use `babel-elric` to compose one and pass in your custom configuration options:
 
 ```javascript
-const babelJest = require('babel-jest');
+const babelelric = require('babel-elric');
 
-module.exports = babelJest.createTransformer({
+module.exports = babelelric.createTransformer({
   presets: ['my-custom-preset'],
 });
 ```

@@ -1,5 +1,5 @@
 {
-  "name": "@jest/test-utils",
+  "name": "@elric/test-utils",
   "version": "27.4.6",
   "private": true,
   "license": "MIT",
@@ -13,7 +13,7 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@jest/types": "^27.4.2",
+    "@elric/types": "^27.4.2",
     "@types/node": "*",
     "ansi-regex": "^5.0.1",
     "ansi-styles": "^5.0.0",

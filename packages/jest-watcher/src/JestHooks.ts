@@ -7,8 +7,8 @@
 
 import type {
   FileChange,
-  JestHookEmitter,
-  JestHookSubscriber,
+  elricHookEmitter,
+  elricHookSubscriber,
   ShouldRunTestSuite,
   TestRunComplete,
 } from './types';
@@ -18,15 +18,15 @@ type AvailableHooks =
   | 'onTestRunComplete'
   | 'shouldRunTestSuite';
 
-class JestHooks {
+class elricHooks {
   private _listeners: {
     onFileChange: Array<FileChange>;
     onTestRunComplete: Array<TestRunComplete>;
     shouldRunTestSuite: Array<ShouldRunTestSuite>;
   };
 
-  private _subscriber: JestHookSubscriber;
-  private _emitter: JestHookEmitter;
+  private _subscriber: elricHookSubscriber;
+  private _emitter: elricHookEmitter;
 
   constructor() {
     this._listeners = {
@@ -70,13 +70,13 @@ class JestHooks {
     return this._listeners[hook]?.length > 0;
   }
 
-  getSubscriber(): Readonly<JestHookSubscriber> {
+  getSubscriber(): Readonly<elricHookSubscriber> {
     return this._subscriber;
   }
 
-  getEmitter(): Readonly<JestHookEmitter> {
+  getEmitter(): Readonly<elricHookEmitter> {
     return this._emitter;
   }
 }
 
-export default JestHooks;
+export default elricHooks;

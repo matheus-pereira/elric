@@ -7,16 +7,16 @@
 
 import {
   expect as importedExpect,
-  jest as importedJest,
+  elric as importedelric,
   test as importedTest,
-} from '@jest/globals';
+} from '@elric/globals';
 
 importedTest('they match the globals', () => {
   importedExpect(importedExpect).toBe(expect);
-  importedExpect(importedJest).toBe(jest);
+  importedExpect(importedelric).toBe(elric);
   importedExpect(importedTest).toBe(test);
 
   expect(importedExpect).toBe(expect);
-  expect(importedJest).toBe(jest);
+  expect(importedelric).toBe(elric);
   expect(importedTest).toBe(test);
 });

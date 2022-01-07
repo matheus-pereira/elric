@@ -6,7 +6,7 @@
  */
 
 import {expectAssignable} from 'mlh-tsd';
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 
 expectAssignable<Config.InitialOptions>({
   coverageThreshold: {

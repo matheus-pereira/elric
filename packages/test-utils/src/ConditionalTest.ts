@@ -5,26 +5,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable jest/no-focused-tests */
+/* eslint-disable elric/no-focused-tests */
 
 import semver = require('semver');
 
-export function isJestJasmineRun(): boolean {
-  return process.env.JEST_JASMINE === '1';
+export function iselricJasmineRun(): boolean {
+  return process.env.elric_JASMINE === '1';
 }
 
 export function skipSuiteOnJasmine(): void {
-  if (isJestJasmineRun()) {
+  if (iselricJasmineRun()) {
     test.only('does not work on Jasmine', () => {
       console.warn('[SKIP] Does not work on Jasmine');
     });
   }
 }
 
-export function skipSuiteOnJestCircus(): void {
-  if (!isJestJasmineRun()) {
-    test.only('does not work on jest-circus', () => {
-      console.warn('[SKIP] Does not work on jest-circus');
+export function skipSuiteOnelricCircus(): void {
+  if (!iselricJasmineRun()) {
+    test.only('does not work on elric-circus', () => {
+      console.warn('[SKIP] Does not work on elric-circus');
     });
   }
 }

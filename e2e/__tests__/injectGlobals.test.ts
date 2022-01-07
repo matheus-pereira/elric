@@ -7,15 +7,15 @@
 
 import {tmpdir} from 'os';
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
-import {skipSuiteOnJasmine} from '@jest/test-utils';
+import {wrap} from 'elric-snapshot-serializer-raw';
+import {skipSuiteOnJasmine} from '@elric/test-utils';
 import {
   cleanup,
   createEmptyPackage,
   extractSummary,
   writeFiles,
 } from '../Utils';
-import {json as runJest} from '../runJest';
+import {json as runelric} from '../runelric';
 
 const DIR = path.resolve(tmpdir(), 'injectGlobalVariables.test');
 const TEST_DIR = path.resolve(DIR, '__tests__');
@@ -27,12 +27,12 @@ beforeEach(() => {
   createEmptyPackage(DIR);
 
   const content = `
-    const {expect: importedExpect, test: importedTest} = require('@jest/globals');
+    const {expect: importedExpect, test: importedTest} = require('@elric/globals');
 
     importedTest('no globals injected', () =>{
       importedExpect(typeof expect).toBe('undefined');
       importedExpect(typeof test).toBe('undefined');
-      importedExpect(typeof jest).toBe('undefined');
+      importedExpect(typeof elric).toBe('undefined');
       importedExpect(typeof beforeEach).toBe('undefined');
     });
   `;
@@ -47,7 +47,7 @@ test.each`
   ${'CLI'}     | ${['--inject-globals', 'false']}
   ${'config'}  | ${['--config', JSON.stringify({injectGlobals: false})]}
 `('globals are undefined if passed `false` from $configSource', ({args}) => {
-  const {json, stderr, exitCode} = runJest(DIR, args);
+  const {json, stderr, exitCode} = runelric(DIR, args);
 
   const {summary, rest} = extractSummary(stderr);
   expect(wrap(rest)).toMatchSnapshot();

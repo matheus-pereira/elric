@@ -16,7 +16,7 @@ let createLocalRuntime;
 
 describe('Runtime', () => {
   beforeEach(() => {
-    jest.resetModules();
+    elric.resetModules();
 
     createLocalRuntime = (nodePath, config) => {
       process.env.NODE_PATH = nodePath;

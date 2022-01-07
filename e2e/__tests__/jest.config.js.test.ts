@@ -6,42 +6,42 @@
  */
 
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {cleanup, extractSummary, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
-const DIR = path.resolve(__dirname, '../jest-config-js');
+const DIR = path.resolve(__dirname, '../elric-config-js');
 
 beforeEach(() => cleanup(DIR));
 afterAll(() => cleanup(DIR));
 
-test('works with jest.config.js', () => {
+test('works with elric.config.js', () => {
   writeFiles(DIR, {
     '__tests__/a-banana.js': `test('banana', () => expect(1).toBe(1));`,
-    'jest.config.js': `module.exports = {testRegex: '.*-banana.js'};`,
+    'elric.config.js': `module.exports = {testRegex: '.*-banana.js'};`,
     'package.json': '{}',
   });
 
-  const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false']);
+  const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false']);
   const {rest, summary} = extractSummary(stderr);
   expect(exitCode).toBe(0);
   expect(wrap(rest)).toMatchSnapshot();
   expect(wrap(summary)).toMatchSnapshot();
 });
 
-test('traverses directory tree up until it finds jest.config', () => {
+test('traverses directory tree up until it finds elric.config', () => {
   writeFiles(DIR, {
     '__tests__/a-banana.js': `
     const slash = require('slash');
     test('banana', () => expect(1).toBe(1));
     test('abc', () => console.log(slash(process.cwd())));
     `,
-    'jest.config.js': `module.exports = {testRegex: '.*-banana.js'};`,
+    'elric.config.js': `module.exports = {testRegex: '.*-banana.js'};`,
     'package.json': '{}',
     'some/nested/directory/file.js': '// nothing special',
   });
 
-  const {stderr, exitCode, stdout} = runJest(
+  const {stderr, exitCode, stdout} = runelric(
     path.join(DIR, 'some', 'nested', 'directory'),
     ['-w=1', '--ci=false'],
     {skipPkgJsonCheck: true},
@@ -58,14 +58,14 @@ test('traverses directory tree up until it finds jest.config', () => {
   expect(wrap(summary)).toMatchSnapshot();
 });
 
-test('invalid JS in jest.config.js', () => {
+test('invalid JS in elric.config.js', () => {
   writeFiles(DIR, {
     '__tests__/a-banana.js': `test('banana', () => expect(1).toBe(1));`,
-    'jest.config.js': `module.exports = i'll break this file yo`,
+    'elric.config.js': `module.exports = i'll break this file yo`,
     'package.json': '{}',
   });
 
-  const {stderr, exitCode} = runJest(DIR, ['-w=1', '--ci=false']);
+  const {stderr, exitCode} = runelric(DIR, ['-w=1', '--ci=false']);
   expect(stderr).toMatch('SyntaxError: ');
   expect(exitCode).toBe(1);
 });

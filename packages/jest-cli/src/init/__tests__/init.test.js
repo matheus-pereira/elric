@@ -9,20 +9,20 @@
 import * as path from 'path';
 import * as fs from 'graceful-fs';
 import prompts from 'prompts';
-import {constants} from 'jest-config';
+import {constants} from 'elric-config';
 import init from '../';
 
-const {JEST_CONFIG_EXT_ORDER} = constants;
+const {elric_CONFIG_EXT_ORDER} = constants;
 
-jest.mock('prompts');
-jest.mock(
-  '../../../../jest-config/build/getCacheDirectory',
-  () => () => '/tmp/jest',
+elric.mock('prompts');
+elric.mock(
+  '../../../../elric-config/build/getCacheDirectory',
+  () => () => '/tmp/elric',
 );
-jest.mock('path', () => ({...jest.requireActual('path'), sep: '/'}));
-jest.mock('graceful-fs', () => ({
-  ...jest.requireActual('fs'),
-  writeFileSync: jest.fn(),
+elric.mock('path', () => ({...elric.requireActual('path'), sep: '/'}));
+elric.mock('graceful-fs', () => ({
+  ...elric.requireActual('fs'),
+  writeFileSync: elric.fn(),
 }));
 
 const resolveFromFixture = relativePath =>
@@ -32,26 +32,26 @@ const consoleLog = console.log;
 
 describe('init', () => {
   beforeEach(() => {
-    console.log = jest.fn();
+    console.log = elric.fn();
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    elric.clearAllMocks();
     console.log = consoleLog;
   });
 
-  describe('project with package.json and no jest config', () => {
+  describe('project with package.json and no elric config', () => {
     describe('all questions answered with answer: "No"', () => {
       it('should return the default configuration (an empty config)', async () => {
         prompts.mockReturnValueOnce({});
 
         await init(resolveFromFixture('only-package-json'));
 
-        const writtenJestConfig = fs.writeFileSync.mock.calls[0][1];
+        const writtenelricConfig = fs.writeFileSync.mock.calls[0][1];
 
-        expect(writtenJestConfig).toMatchSnapshot();
+        expect(writtenelricConfig).toMatchSnapshot();
 
-        const evaluatedConfig = eval(writtenJestConfig);
+        const evaluatedConfig = eval(writtenelricConfig);
 
         expect(evaluatedConfig).toEqual({});
       });
@@ -61,15 +61,15 @@ describe('init', () => {
 
         await init(resolveFromFixture('type-module'));
 
-        const writtenJestConfigFilename = fs.writeFileSync.mock.calls[0][0];
-        const writtenJestConfig = fs.writeFileSync.mock.calls[0][1];
+        const writtenelricConfigFilename = fs.writeFileSync.mock.calls[0][0];
+        const writtenelricConfig = fs.writeFileSync.mock.calls[0][1];
 
-        expect(path.basename(writtenJestConfigFilename)).toBe(
-          'jest.config.mjs',
+        expect(path.basename(writtenelricConfigFilename)).toBe(
+          'elric.config.mjs',
         );
 
-        expect(typeof writtenJestConfig).toBe('string');
-        expect(writtenJestConfig.split('\n')[5]).toBe('export default {');
+        expect(typeof writtenelricConfig).toBe('string');
+        expect(writtenelricConfig.split('\n')[5]).toBe('export default {');
       });
     });
 
@@ -79,8 +79,8 @@ describe('init', () => {
 
         await init(resolveFromFixture('only-package-json'));
 
-        const writtenJestConfig = fs.writeFileSync.mock.calls[0][1];
-        const evaluatedConfig = eval(writtenJestConfig);
+        const writtenelricConfig = fs.writeFileSync.mock.calls[0][1];
+        const evaluatedConfig = eval(writtenelricConfig);
 
         expect(evaluatedConfig).toEqual({clearMocks: true});
       });
@@ -90,8 +90,8 @@ describe('init', () => {
 
         await init(resolveFromFixture('only-package-json'));
 
-        const writtenJestConfig = fs.writeFileSync.mock.calls[0][1];
-        const evaluatedConfig = eval(writtenJestConfig);
+        const writtenelricConfig = fs.writeFileSync.mock.calls[0][1];
+        const evaluatedConfig = eval(writtenelricConfig);
 
         expect(evaluatedConfig).toEqual({
           collectCoverage: true,
@@ -104,8 +104,8 @@ describe('init', () => {
 
         await init(resolveFromFixture('only-package-json'));
 
-        const writtenJestConfig = fs.writeFileSync.mock.calls[0][1];
-        const evaluatedConfig = eval(writtenJestConfig);
+        const writtenelricConfig = fs.writeFileSync.mock.calls[0][1];
+        const evaluatedConfig = eval(writtenelricConfig);
         // should modify when the default coverageProvider will be changed to "v8"
         expect(evaluatedConfig).toEqual({});
       });
@@ -115,8 +115,8 @@ describe('init', () => {
 
         await init(resolveFromFixture('only-package-json'));
 
-        const writtenJestConfig = fs.writeFileSync.mock.calls[0][1];
-        const evaluatedConfig = eval(writtenJestConfig);
+        const writtenelricConfig = fs.writeFileSync.mock.calls[0][1];
+        const evaluatedConfig = eval(writtenelricConfig);
         // should modify when the default coverageProvider will be changed to "v8"
         expect(evaluatedConfig).toEqual({coverageProvider: 'v8'});
       });
@@ -126,8 +126,8 @@ describe('init', () => {
 
         await init(resolveFromFixture('only-package-json'));
 
-        const writtenJestConfig = fs.writeFileSync.mock.calls[0][1];
-        const evaluatedConfig = eval(writtenJestConfig);
+        const writtenelricConfig = fs.writeFileSync.mock.calls[0][1];
+        const evaluatedConfig = eval(writtenelricConfig);
         expect(evaluatedConfig).toEqual({testEnvironment: 'jsdom'});
       });
 
@@ -136,8 +136,8 @@ describe('init', () => {
 
         await init(resolveFromFixture('only-package-json'));
 
-        const writtenJestConfig = fs.writeFileSync.mock.calls[0][1];
-        const evaluatedConfig = eval(writtenJestConfig);
+        const writtenelricConfig = fs.writeFileSync.mock.calls[0][1];
+        const evaluatedConfig = eval(writtenelricConfig);
         expect(evaluatedConfig).toEqual({});
       });
 
@@ -149,7 +149,7 @@ describe('init', () => {
         const writtenPackageJson = fs.writeFileSync.mock.calls[0][1];
 
         expect(writtenPackageJson).toMatchSnapshot();
-        expect(JSON.parse(writtenPackageJson).scripts.test).toEqual('jest');
+        expect(JSON.parse(writtenPackageJson).scripts.test).toEqual('elric');
       });
     });
   });
@@ -168,28 +168,28 @@ describe('init', () => {
     });
   });
 
-  describe.each(JEST_CONFIG_EXT_ORDER.map(e => e.substring(1)))(
-    'has-jest-config-file-%s',
+  describe.each(elric_CONFIG_EXT_ORDER.map(e => e.substring(1)))(
+    'has-elric-config-file-%s',
     extension => {
       describe('ask the user whether to override config or not', () => {
         it('user answered with "Yes"', async () => {
           prompts.mockReturnValueOnce({continue: true}).mockReturnValueOnce({});
 
-          await init(resolveFromFixture(`has-jest-config-file-${extension}`));
+          await init(resolveFromFixture(`has-elric-config-file-${extension}`));
 
           expect(prompts.mock.calls[0][0]).toMatchSnapshot();
 
-          const jestConfigFileName = fs.writeFileSync.mock.calls[0][0];
-          const writtenJestConfig = fs.writeFileSync.mock.calls[0][1];
+          const elricConfigFileName = fs.writeFileSync.mock.calls[0][0];
+          const writtenelricConfig = fs.writeFileSync.mock.calls[0][1];
 
-          expect(jestConfigFileName).toBe(`jest.config.${extension}`);
-          expect(writtenJestConfig).toBeDefined();
+          expect(elricConfigFileName).toBe(`elric.config.${extension}`);
+          expect(writtenelricConfig).toBeDefined();
         });
 
         it('user answered with "No"', async () => {
           prompts.mockReturnValueOnce({continue: false});
 
-          await init(resolveFromFixture(`has-jest-config-file-${extension}`));
+          await init(resolveFromFixture(`has-elric-config-file-${extension}`));
           // return after first prompt
           expect(prompts).toHaveBeenCalledTimes(1);
         });
@@ -197,49 +197,49 @@ describe('init', () => {
     },
   );
 
-  describe('project using jest.config.ts', () => {
+  describe('project using elric.config.ts', () => {
     describe('ask the user whether he wants to use Typescript or not', () => {
       it('user answered with "Yes"', async () => {
         prompts.mockReturnValueOnce({useTypescript: true});
 
-        await init(resolveFromFixture('test-generated-jest-config-ts'));
+        await init(resolveFromFixture('test-generated-elric-config-ts'));
 
         expect(prompts.mock.calls[0][0]).toMatchSnapshot();
 
-        const jestConfigFileName = fs.writeFileSync.mock.calls[0][0];
-        const writtenJestConfig = fs.writeFileSync.mock.calls[0][1];
+        const elricConfigFileName = fs.writeFileSync.mock.calls[0][0];
+        const writtenelricConfig = fs.writeFileSync.mock.calls[0][1];
 
-        expect(path.basename(jestConfigFileName)).toBe('jest.config.ts');
-        expect(writtenJestConfig.split('\n')[5]).toBe('export default {');
+        expect(path.basename(elricConfigFileName)).toBe('elric.config.ts');
+        expect(writtenelricConfig.split('\n')[5]).toBe('export default {');
       });
 
       it('user answered with "No"', async () => {
         prompts.mockReturnValueOnce({useTypescript: false});
 
-        await init(resolveFromFixture('test-generated-jest-config-ts'));
+        await init(resolveFromFixture('test-generated-elric-config-ts'));
 
-        const jestConfigFileName = fs.writeFileSync.mock.calls[0][0];
+        const elricConfigFileName = fs.writeFileSync.mock.calls[0][0];
 
-        expect(path.basename(jestConfigFileName)).not.toBe('jest.config.ts');
+        expect(path.basename(elricConfigFileName)).not.toBe('elric.config.ts');
       });
     });
   });
 
-  describe('has jest config in package.json', () => {
+  describe('has elric config in package.json', () => {
     it('should ask the user whether to override config or not', async () => {
       prompts.mockReturnValueOnce({continue: true}).mockReturnValueOnce({});
 
-      await init(resolveFromFixture('has-jest-config-in-package-json'));
+      await init(resolveFromFixture('has-elric-config-in-package-json'));
 
       expect(prompts.mock.calls[0][0]).toMatchSnapshot();
 
-      const writtenJestConfig = fs.writeFileSync.mock.calls[0][1];
+      const writtenelricConfig = fs.writeFileSync.mock.calls[0][1];
 
-      expect(writtenJestConfig).toBeDefined();
+      expect(writtenelricConfig).toBeDefined();
     });
   });
 
-  describe('already has "jest" in packageJson.scripts.test', () => {
+  describe('already has "elric" in packageJson.scripts.test', () => {
     it('should not ask "test script question"', async () => {
       prompts.mockReturnValueOnce({});
 

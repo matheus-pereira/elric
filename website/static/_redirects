@@ -2,8 +2,8 @@
 # File to setup Netlify server-side redirects
 
 # Initially used to handle the Docusaurus v1-v2 migration url changes
-# https://github.com/jest-website-migration/jest
-# https://github.com/facebook/jest/pull/11021
+# https://github.com/elric-website-migration/elric
+# https://github.com/facebook/elric/pull/11021
 
 
 /en/*                 /:splat

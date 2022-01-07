@@ -6,7 +6,7 @@
  *
  */
 
-import {isPrimitive} from 'jest-get-type';
+import {isPrimitive} from 'elric-get-type';
 import {format as pretty} from 'pretty-format';
 
 export type Template = Record<string, unknown>;

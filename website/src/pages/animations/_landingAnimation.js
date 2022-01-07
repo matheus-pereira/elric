@@ -14,8 +14,8 @@ export function setupLandingAnimation() {
   localStorage.setItem('firstRun', 'true');
   const baseMinimalTime = firstRun ? 3000 : 1500;
 
-  const hand = document.querySelector('.jest-hand');
-  const cards = hand.querySelectorAll('.jest-card');
+  const hand = document.querySelector('.elric-hand');
+  const cards = hand.querySelectorAll('.elric-card');
 
   function cardTransform(offset, handWidth) {
     const transform =
@@ -44,17 +44,17 @@ export function setupLandingAnimation() {
     setTimeout(() => {
       if (index === 2) {
         results[index] = null;
-        card.classList.add('jest-card-run');
+        card.classList.add('elric-card-run');
       } else if (results[index]) {
-        card.classList.remove('jest-card-fail');
-        card.classList.add('jest-card-pass');
-        card.querySelectorAll('.jest-card-label').forEach(el => {
+        card.classList.remove('elric-card-fail');
+        card.classList.add('elric-card-pass');
+        card.querySelectorAll('.elric-card-label').forEach(el => {
           el.innerHTML = 'PASS';
         });
       } else {
-        card.classList.remove('jest-card-pass');
-        card.classList.add('jest-card-fail');
-        card.querySelectorAll('.jest-card-label').forEach(el => {
+        card.classList.remove('elric-card-pass');
+        card.classList.add('elric-card-fail');
+        card.querySelectorAll('.elric-card-label').forEach(el => {
           el.innerHTML = 'FAIL';
         });
       }
@@ -66,11 +66,11 @@ export function setupLandingAnimation() {
 
     timeouts[index] = setTimeout(
       () => {
-        card.classList.remove('jest-card-running');
-        card.classList.add('jest-card-popping');
+        card.classList.remove('elric-card-running');
+        card.classList.add('elric-card-popping');
         setTimeout(() => {
           results[index] = results[index] || null;
-          card.classList.remove('jest-card-popping');
+          card.classList.remove('elric-card-popping');
         }, 400);
       },
       index === 2
@@ -82,7 +82,7 @@ export function setupLandingAnimation() {
   function forceRun(minTime) {
     let fails = 0;
     cards.forEach((card, index) => {
-      card.classList.add('jest-card-running');
+      card.classList.add('elric-card-running');
       const result = index === 2 || fails > 1 || Math.random() > 0.25;
       if (!result) {
         fails += 1;
@@ -93,11 +93,11 @@ export function setupLandingAnimation() {
   }
 
   function runTest(card, index) {
-    if (!card.classList.contains('jest-card-running') && !results[index]) {
+    if (!card.classList.contains('elric-card-running') && !results[index]) {
       if (index === 2) {
         return forceRun(1000);
       }
-      card.classList.add('jest-card-running');
+      card.classList.add('elric-card-running');
       if (results[index] == null) {
         results[index] = Math.random() > 0.2;
         resolveRun(card, index);
@@ -108,11 +108,11 @@ export function setupLandingAnimation() {
 
   function handleHandClick(ev) {
     let card;
-    if (ev.target.classList.contains('jest-card-hitslop')) {
+    if (ev.target.classList.contains('elric-card-hitslop')) {
       card = ev.target.firstChild;
-    } else if (ev.target.classList.contains('jest-card')) {
+    } else if (ev.target.classList.contains('elric-card')) {
       card = ev.target;
-    } else if (ev.target.classList.contains('jest-card-front')) {
+    } else if (ev.target.classList.contains('elric-card-front')) {
       card = ev.target.parentElement;
     }
     if (card) {

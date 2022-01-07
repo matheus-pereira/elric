@@ -5,7 +5,7 @@
       "@babel/preset-typescript"
     ]
   },
-  "jest": {
+  "elric": {
     "collectCoverageFrom": [
       "<rootDir>/*.ts"
     ]

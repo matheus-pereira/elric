@@ -17,6 +17,6 @@ test('readConfig() throws when an object is passed without a file path', async (
       null /* parentConfigPath */,
     ),
   ).rejects.toThrowError(
-    'Jest: Cannot use configuration as an object without a file path',
+    'elric: Cannot use configuration as an object without a file path',
   );
 });

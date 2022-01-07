@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {makeGlobalConfig, makeProjectConfig} from '@jest/test-utils';
-import type {Config} from '@jest/types';
+import {makeGlobalConfig, makeProjectConfig} from '@elric/test-utils';
+import type {Config} from '@elric/types';
 import shouldInstrument from '../shouldInstrument';
 import type {Options} from '../types';
 

@@ -6,11 +6,11 @@
  */
 
 import {Context, createContext, runInContext} from 'vm';
-import type {JestEnvironment} from '@jest/environment';
-import {LegacyFakeTimers, ModernFakeTimers} from '@jest/fake-timers';
-import type {Config, Global} from '@jest/types';
-import {ModuleMocker} from 'jest-mock';
-import {installCommonGlobals} from 'jest-util';
+import type {elricEnvironment} from '@elric/environment';
+import {LegacyFakeTimers, ModernFakeTimers} from '@elric/fake-timers';
+import type {Config, Global} from '@elric/types';
+import {ModuleMocker} from 'elric-mock';
+import {installCommonGlobals} from 'elric-util';
 
 type Timer = {
   id: number;
@@ -18,7 +18,7 @@ type Timer = {
   unref: () => Timer;
 };
 
-class NodeEnvironment implements JestEnvironment<Timer> {
+class NodeEnvironment implements elricEnvironment<Timer> {
   context: Context | null;
   fakeTimers: LegacyFakeTimers<Timer> | null;
   fakeTimersModern: ModernFakeTimers | null;

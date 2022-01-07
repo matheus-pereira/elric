@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest, {getConfig} from '../runJest';
+import runelric, {getConfig} from '../runelric';
 
 test('config as JSON', () => {
-  const result = runJest('verbose-reporter', [
+  const result = runelric('verbose-reporter', [
     '--config=' +
       JSON.stringify({
         testEnvironment: 'node',
@@ -21,7 +21,7 @@ test('config as JSON', () => {
 });
 
 test('works with sane config JSON', () => {
-  const result = runJest('verbose-reporter', [
+  const result = runelric('verbose-reporter', [
     '--config=' +
       JSON.stringify({
         testEnvironment: 'node',
@@ -33,7 +33,7 @@ test('works with sane config JSON', () => {
 });
 
 test('watchman config option is respected over default argv', () => {
-  const {stdout} = runJest('verbose-reporter', [
+  const {stdout} = runelric('verbose-reporter', [
     '--env=node',
     '--watchman=false',
     '--debug',
@@ -43,7 +43,7 @@ test('watchman config option is respected over default argv', () => {
 });
 
 test('config from argv is respected with sane config JSON', () => {
-  const {stdout} = runJest('verbose-reporter', [
+  const {stdout} = runelric('verbose-reporter', [
     '--config=' +
       JSON.stringify({
         testEnvironment: 'node',
@@ -56,18 +56,18 @@ test('config from argv is respected with sane config JSON', () => {
 });
 
 test('works with jsdom testEnvironmentOptions config JSON', () => {
-  const result = runJest('environmentOptions', [
+  const result = runelric('environmentOptions', [
     '--config=' +
       JSON.stringify({
         testEnvironment: 'jsdom',
         testEnvironmentOptions: {
-          url: 'https://jestjs.io',
+          url: 'https://elricjs.io',
         },
       }),
   ]);
 
   expect(result.exitCode).toBe(0);
-  expect(result.stderr).toContain('found url jestjs.io');
+  expect(result.stderr).toContain('found url elricjs.io');
 });
 
 test('negated flags override previous flags', () => {

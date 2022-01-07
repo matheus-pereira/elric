@@ -6,7 +6,7 @@
  */
 
 import {expectError, expectType} from 'mlh-tsd';
-import {expect} from '@jest/globals';
+import {expect} from '@elric/globals';
 
 // asymmetric matchers
 
@@ -14,9 +14,9 @@ expectType<void>(expect('value').toEqual(expect.any(String)));
 expectError(expect(123).toEqual(expect.any()));
 expectError(expect('value').toEqual(expect.not.any(Number)));
 
-expectType<void>(expect(jest.fn()).toBeCalledWith(expect.anything()));
-expectError(expect(jest.fn()).toBeCalledWith(expect.anything(true)));
-expectError(expect(jest.fn()).toBeCalledWith(expect.not.anything()));
+expectType<void>(expect(elric.fn()).toBeCalledWith(expect.anything()));
+expectError(expect(elric.fn()).toBeCalledWith(expect.anything(true)));
+expectError(expect(elric.fn()).toBeCalledWith(expect.not.anything()));
 
 expectType<void>(expect(['A', 'B']).toEqual(expect.arrayContaining(['A'])));
 expectError(expect(['A']).toEqual(expect.arrayContaining('A')));
@@ -168,69 +168,69 @@ expectType<void>(expect(() => {}).toThrowError(new Error('error')));
 
 // mock matchers
 
-expectType<void>(expect(jest.fn()).toBeCalled());
-expectError(expect(jest.fn()).toBeCalled('value'));
-expectType<void>(expect(jest.fn()).toHaveBeenCalled());
-expectError(expect(jest.fn()).toHaveBeenCalled(false));
+expectType<void>(expect(elric.fn()).toBeCalled());
+expectError(expect(elric.fn()).toBeCalled('value'));
+expectType<void>(expect(elric.fn()).toHaveBeenCalled());
+expectError(expect(elric.fn()).toHaveBeenCalled(false));
 
-expectType<void>(expect(jest.fn()).toBeCalledTimes(1));
-expectError(expect(jest.fn()).toBeCalledTimes('twice'));
-expectError(expect(jest.fn()).toBeCalledTimes());
-expectType<void>(expect(jest.fn()).toHaveBeenCalledTimes(3));
-expectError(expect(jest.fn()).toHaveBeenCalledTimes(true));
-expectError(expect(jest.fn()).toHaveBeenCalledTimes());
+expectType<void>(expect(elric.fn()).toBeCalledTimes(1));
+expectError(expect(elric.fn()).toBeCalledTimes('twice'));
+expectError(expect(elric.fn()).toBeCalledTimes());
+expectType<void>(expect(elric.fn()).toHaveBeenCalledTimes(3));
+expectError(expect(elric.fn()).toHaveBeenCalledTimes(true));
+expectError(expect(elric.fn()).toHaveBeenCalledTimes());
 
-expectType<void>(expect(jest.fn()).toBeCalledWith('value'));
-expectType<void>(expect(jest.fn()).toBeCalledWith('value', 123));
-// expectError(expect(jest.fn()).toBeCalledWith());
-expectType<void>(expect(jest.fn()).toHaveBeenCalledWith(123));
-expectType<void>(expect(jest.fn()).toHaveBeenCalledWith(123, 'value'));
-// expectError(expect(jest.fn()).toHaveBeenCalledWith());
+expectType<void>(expect(elric.fn()).toBeCalledWith('value'));
+expectType<void>(expect(elric.fn()).toBeCalledWith('value', 123));
+// expectError(expect(elric.fn()).toBeCalledWith());
+expectType<void>(expect(elric.fn()).toHaveBeenCalledWith(123));
+expectType<void>(expect(elric.fn()).toHaveBeenCalledWith(123, 'value'));
+// expectError(expect(elric.fn()).toHaveBeenCalledWith());
 
-expectType<void>(expect(jest.fn()).lastCalledWith('value'));
-expectType<void>(expect(jest.fn()).lastCalledWith('value', 123));
-// expectError(expect(jest.fn()).lastCalledWith());
-expectType<void>(expect(jest.fn()).toHaveBeenLastCalledWith(123));
-expectType<void>(expect(jest.fn()).toHaveBeenLastCalledWith(123, 'value'));
-// expectError(expect(jest.fn()).toHaveBeenLastCalledWith());
+expectType<void>(expect(elric.fn()).lastCalledWith('value'));
+expectType<void>(expect(elric.fn()).lastCalledWith('value', 123));
+// expectError(expect(elric.fn()).lastCalledWith());
+expectType<void>(expect(elric.fn()).toHaveBeenLastCalledWith(123));
+expectType<void>(expect(elric.fn()).toHaveBeenLastCalledWith(123, 'value'));
+// expectError(expect(elric.fn()).toHaveBeenLastCalledWith());
 
-expectType<void>(expect(jest.fn()).nthCalledWith(1, 'value'));
-expectType<void>(expect(jest.fn()).nthCalledWith(1, 'value', 123));
-// expectError(expect(jest.fn()).nthCalledWith());
-// expectError(expect(jest.fn()).nthCalledWith(2));
-expectType<void>(expect(jest.fn()).toHaveBeenNthCalledWith(1, 'value'));
-expectType<void>(expect(jest.fn()).toHaveBeenNthCalledWith(1, 'value', 123));
-// expectError(expect(jest.fn()).toHaveBeenNthCalledWith());
-// expectError(expect(jest.fn()).toHaveBeenNthCalledWith(2));
+expectType<void>(expect(elric.fn()).nthCalledWith(1, 'value'));
+expectType<void>(expect(elric.fn()).nthCalledWith(1, 'value', 123));
+// expectError(expect(elric.fn()).nthCalledWith());
+// expectError(expect(elric.fn()).nthCalledWith(2));
+expectType<void>(expect(elric.fn()).toHaveBeenNthCalledWith(1, 'value'));
+expectType<void>(expect(elric.fn()).toHaveBeenNthCalledWith(1, 'value', 123));
+// expectError(expect(elric.fn()).toHaveBeenNthCalledWith());
+// expectError(expect(elric.fn()).toHaveBeenNthCalledWith(2));
 
-expectType<void>(expect(jest.fn()).toReturn());
-expectError(expect(jest.fn()).toReturn('value'));
-expectType<void>(expect(jest.fn()).toHaveReturned());
-expectError(expect(jest.fn()).toHaveReturned(false));
+expectType<void>(expect(elric.fn()).toReturn());
+expectError(expect(elric.fn()).toReturn('value'));
+expectType<void>(expect(elric.fn()).toHaveReturned());
+expectError(expect(elric.fn()).toHaveReturned(false));
 
-expectType<void>(expect(jest.fn()).toReturnTimes(1));
-expectError(expect(jest.fn()).toReturnTimes('twice'));
-expectError(expect(jest.fn()).toReturnTimes());
-expectType<void>(expect(jest.fn()).toHaveReturnedTimes(3));
-expectError(expect(jest.fn()).toHaveReturnedTimes(true));
-expectError(expect(jest.fn()).toHaveReturnedTimes());
+expectType<void>(expect(elric.fn()).toReturnTimes(1));
+expectError(expect(elric.fn()).toReturnTimes('twice'));
+expectError(expect(elric.fn()).toReturnTimes());
+expectType<void>(expect(elric.fn()).toHaveReturnedTimes(3));
+expectError(expect(elric.fn()).toHaveReturnedTimes(true));
+expectError(expect(elric.fn()).toHaveReturnedTimes());
 
-expectType<void>(expect(jest.fn()).toReturnWith('value'));
-expectError(expect(jest.fn()).toReturnWith());
-expectType<void>(expect(jest.fn()).toHaveReturnedWith(123));
-expectError(expect(jest.fn()).toHaveReturnedWith());
+expectType<void>(expect(elric.fn()).toReturnWith('value'));
+expectError(expect(elric.fn()).toReturnWith());
+expectType<void>(expect(elric.fn()).toHaveReturnedWith(123));
+expectError(expect(elric.fn()).toHaveReturnedWith());
 
-expectType<void>(expect(jest.fn()).lastReturnedWith('value'));
-expectError(expect(jest.fn()).lastReturnedWith());
-expectType<void>(expect(jest.fn()).toHaveLastReturnedWith(123));
-expectError(expect(jest.fn()).toHaveLastReturnedWith());
+expectType<void>(expect(elric.fn()).lastReturnedWith('value'));
+expectError(expect(elric.fn()).lastReturnedWith());
+expectType<void>(expect(elric.fn()).toHaveLastReturnedWith(123));
+expectError(expect(elric.fn()).toHaveLastReturnedWith());
 
-expectType<void>(expect(jest.fn()).nthReturnedWith(1, 'value'));
-expectError(expect(jest.fn()).nthReturnedWith());
-expectError(expect(jest.fn()).nthReturnedWith(2));
-expectType<void>(expect(jest.fn()).toHaveNthReturnedWith(1, 'value'));
-expectError(expect(jest.fn()).toHaveNthReturnedWith());
-expectError(expect(jest.fn()).toHaveNthReturnedWith(2));
+expectType<void>(expect(elric.fn()).nthReturnedWith(1, 'value'));
+expectError(expect(elric.fn()).nthReturnedWith());
+expectError(expect(elric.fn()).nthReturnedWith(2));
+expectType<void>(expect(elric.fn()).toHaveNthReturnedWith(1, 'value'));
+expectError(expect(elric.fn()).toHaveNthReturnedWith());
+expectError(expect(elric.fn()).toHaveNthReturnedWith(2));
 
 // snapshot matchers
 
@@ -308,15 +308,15 @@ expectError(
   }),
 );
 
-expectType<void>(expect(jest.fn()).toThrowErrorMatchingSnapshot());
-expectType<void>(expect(jest.fn()).toThrowErrorMatchingSnapshot('hint'));
-expectError(expect(jest.fn()).toThrowErrorMatchingSnapshot(true));
+expectType<void>(expect(elric.fn()).toThrowErrorMatchingSnapshot());
+expectType<void>(expect(elric.fn()).toThrowErrorMatchingSnapshot('hint'));
+expectError(expect(elric.fn()).toThrowErrorMatchingSnapshot(true));
 
-expectType<void>(expect(jest.fn()).toThrowErrorMatchingInlineSnapshot());
+expectType<void>(expect(elric.fn()).toThrowErrorMatchingInlineSnapshot());
 expectType<void>(
-  expect(jest.fn()).toThrowErrorMatchingInlineSnapshot('inline snapshot here'),
+  expect(elric.fn()).toThrowErrorMatchingInlineSnapshot('inline snapshot here'),
 );
-expectError(expect(jest.fn()).toThrowErrorMatchingInlineSnapshot(true));
+expectError(expect(elric.fn()).toThrowErrorMatchingInlineSnapshot(true));
 
 // extend
 

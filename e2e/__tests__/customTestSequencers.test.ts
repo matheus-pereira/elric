@@ -7,11 +7,11 @@
 
 import * as path from 'path';
 import {extractSummary} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 const dir = path.resolve(__dirname, '../custom-test-sequencer');
 
 test('run prioritySequence first sync', () => {
-  const result = runJest(
+  const result = runelric(
     dir,
     [
       '-i',
@@ -36,7 +36,7 @@ test('run prioritySequence first sync', () => {
 });
 
 test('run prioritySequence first async', () => {
-  const result = runJest(
+  const result = runelric(
     dir,
     [
       '-i',
@@ -61,7 +61,7 @@ test('run prioritySequence first async', () => {
 });
 
 test('run failed tests async', () => {
-  const result = runJest(
+  const result = runelric(
     dir,
     [
       '--onlyFailures',

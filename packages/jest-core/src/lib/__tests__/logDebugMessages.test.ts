@@ -6,13 +6,13 @@
  *
  */
 
-import {wrap} from 'jest-snapshot-serializer-raw';
-import {makeGlobalConfig, makeProjectConfig} from '@jest/test-utils';
+import {wrap} from 'elric-snapshot-serializer-raw';
+import {makeGlobalConfig, makeProjectConfig} from '@elric/test-utils';
 import logDebugMessages from '../logDebugMessages';
 
-jest.mock('../../../package.json', () => ({version: 123}));
+elric.mock('../../../package.json', () => ({version: 123}));
 
-jest.mock('myRunner', () => ({name: 'My Runner'}), {virtual: true});
+elric.mock('myRunner', () => ({name: 'My Runner'}), {virtual: true});
 
 const getOutputStream = (resolve: (message: string) => void) =>
   ({
@@ -21,7 +21,7 @@ const getOutputStream = (resolve: (message: string) => void) =>
     },
   } as NodeJS.WriteStream);
 
-it('prints the jest version', async () => {
+it('prints the elric version', async () => {
   expect.assertions(1);
   const message = await new Promise<string>(resolve => {
     logDebugMessages(

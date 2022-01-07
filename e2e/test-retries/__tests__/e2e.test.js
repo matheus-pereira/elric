@@ -15,7 +15,7 @@ beforeAll(() => {
   fs.writeFileSync(countPath, '0', 'utf8');
 });
 
-jest.retryTimes(3);
+elric.retryTimes(3);
 
 it('retries', () => {
   const tries = parseInt(fs.readFileSync(countPath, 'utf8'), 10);

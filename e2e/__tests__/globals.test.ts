@@ -7,21 +7,21 @@
 
 import {tmpdir} from 'os';
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {
   cleanup,
   createEmptyPackage,
   extractSummary,
   writeFiles,
 } from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(tmpdir(), 'globalVariables.test');
 const TEST_DIR = path.resolve(DIR, '__tests__');
 
 function cleanStderr(stderr: string) {
   const {rest} = extractSummary(stderr);
-  return rest.replace(/.*(jest-jasmine2).*\n/g, '');
+  return rest.replace(/.*(elric-jasmine2).*\n/g, '');
 }
 
 beforeEach(() => {
@@ -44,7 +44,7 @@ test('basic test constructs', () => {
   `;
 
   writeFiles(TEST_DIR, {[filename]: content});
-  const {stderr, exitCode} = runJest(DIR);
+  const {stderr, exitCode} = runelric(DIR);
 
   const {summary, rest} = extractSummary(stderr);
   expect(wrap(rest)).toMatchSnapshot();
@@ -82,7 +82,7 @@ test('interleaved describe and test children order', () => {
   `;
 
   writeFiles(TEST_DIR, {[filename]: content});
-  const {stderr, exitCode} = runJest(DIR);
+  const {stderr, exitCode} = runelric(DIR);
 
   const {summary, rest} = extractSummary(stderr);
   expect(wrap(rest)).toMatchSnapshot();
@@ -113,7 +113,7 @@ test('skips', () => {
   `;
 
   writeFiles(TEST_DIR, {[filename]: content});
-  const {stderr, exitCode} = runJest(DIR);
+  const {stderr, exitCode} = runelric(DIR);
 
   const {summary, rest} = extractSummary(stderr);
   expect(wrap(rest)).toMatchSnapshot();
@@ -143,7 +143,7 @@ test('only', () => {
   `;
 
   writeFiles(TEST_DIR, {[filename]: content});
-  const {stderr, exitCode} = runJest(DIR);
+  const {stderr, exitCode} = runelric(DIR);
 
   const {summary, rest} = extractSummary(stderr);
   expect(wrap(rest)).toMatchSnapshot();
@@ -158,7 +158,7 @@ test('cannot have describe with no implementation', () => {
   `;
 
   writeFiles(TEST_DIR, {[filename]: content});
-  const {stderr, exitCode} = runJest(DIR);
+  const {stderr, exitCode} = runelric(DIR);
 
   const rest = cleanStderr(stderr);
   const {summary} = extractSummary(stderr);
@@ -177,7 +177,7 @@ test('cannot test with no implementation', () => {
   `;
 
   writeFiles(TEST_DIR, {[filename]: content});
-  const {stderr, exitCode} = runJest(DIR);
+  const {stderr, exitCode} = runelric(DIR);
 
   const {summary} = extractSummary(stderr);
   expect(wrap(cleanStderr(stderr))).toMatchSnapshot();
@@ -208,7 +208,7 @@ test('skips with expand arg', () => {
   `;
 
   writeFiles(TEST_DIR, {[filename]: content});
-  const {stderr, exitCode} = runJest(DIR, ['--expand']);
+  const {stderr, exitCode} = runelric(DIR, ['--expand']);
 
   const {summary, rest} = extractSummary(stderr);
   expect(wrap(rest)).toMatchSnapshot();
@@ -238,7 +238,7 @@ test('only with expand arg', () => {
   `;
 
   writeFiles(TEST_DIR, {[filename]: content});
-  const {stderr, exitCode} = runJest(DIR, ['--expand']);
+  const {stderr, exitCode} = runelric(DIR, ['--expand']);
 
   const {summary, rest} = extractSummary(stderr);
   expect(wrap(rest)).toMatchSnapshot();
@@ -255,7 +255,7 @@ test('cannot test with no implementation with expand arg', () => {
   `;
 
   writeFiles(TEST_DIR, {[filename]: content});
-  const {stderr, exitCode} = runJest(DIR, ['--expand']);
+  const {stderr, exitCode} = runelric(DIR, ['--expand']);
 
   const {summary} = extractSummary(stderr);
   expect(wrap(cleanStderr(stderr))).toMatchSnapshot();
@@ -273,7 +273,7 @@ test('function as descriptor', () => {
   `;
 
   writeFiles(TEST_DIR, {[filename]: content});
-  const {stderr, exitCode} = runJest(DIR);
+  const {stderr, exitCode} = runelric(DIR);
 
   const {summary, rest} = extractSummary(stderr);
   expect(wrap(rest)).toMatchSnapshot();

@@ -7,9 +7,9 @@
 
 /* eslint-disable local/ban-types-eventually */
 
-import type {AggregatedResult, AssertionLocation} from '@jest/test-result';
-import type {Config} from '@jest/types';
-import {BaseWatchPlugin, JestHookSubscriber, UsageData} from 'jest-watcher';
+import type {AggregatedResult, AssertionLocation} from '@elric/test-result';
+import type {Config} from '@elric/types';
+import {BaseWatchPlugin, elricHookSubscriber, UsageData} from 'elric-watcher';
 import SnapshotInteractiveMode from '../SnapshotInteractiveMode';
 
 class UpdateSnapshotInteractivePlugin extends BaseWatchPlugin {
@@ -42,7 +42,7 @@ class UpdateSnapshotInteractivePlugin extends BaseWatchPlugin {
     return failedTestPaths;
   }
 
-  apply(hooks: JestHookSubscriber): void {
+  apply(hooks: elricHookSubscriber): void {
     hooks.onTestRunComplete(results => {
       this._failedSnapshotTestAssertions =
         this.getFailedSnapshotTestAssertions(results);

@@ -7,11 +7,11 @@
 
 import type {Context} from 'vm';
 import {JSDOM, ResourceLoader, VirtualConsole} from 'jsdom';
-import type {EnvironmentContext, JestEnvironment} from '@jest/environment';
-import {LegacyFakeTimers, ModernFakeTimers} from '@jest/fake-timers';
-import type {Config, Global} from '@jest/types';
-import {ModuleMocker} from 'jest-mock';
-import {installCommonGlobals} from 'jest-util';
+import type {EnvironmentContext, elricEnvironment} from '@elric/environment';
+import {LegacyFakeTimers, ModernFakeTimers} from '@elric/fake-timers';
+import type {Config, Global} from '@elric/types';
+import {ModuleMocker} from 'elric-mock';
+import {installCommonGlobals} from 'elric-util';
 
 // The `Window` interface does not have an `Error.stackTraceLimit` property, but
 // `JSDOMEnvironment` assumes it is there.
@@ -22,7 +22,7 @@ type Win = Window &
     };
   };
 
-class JSDOMEnvironment implements JestEnvironment<number> {
+class JSDOMEnvironment implements elricEnvironment<number> {
   private dom: JSDOM | null;
   fakeTimers: LegacyFakeTimers<number> | null;
   fakeTimersModern: ModernFakeTimers | null;

@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {skipSuiteOnJasmine} from '@jest/test-utils';
-import runJest from '../runJest';
+import {skipSuiteOnJasmine} from '@elric/test-utils';
+import runelric from '../runelric';
 
 skipSuiteOnJasmine();
 
 it('calls testEnvironment handleTestEvent', () => {
-  const result = runJest('test-environment-circus');
+  const result = runelric('test-environment-circus');
   expect(result.failed).toEqual(false);
   expect(result.stdout.split('\n')).toMatchInlineSnapshot(`
     Array [

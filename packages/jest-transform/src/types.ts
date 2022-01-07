@@ -6,7 +6,7 @@
  */
 
 import type {RawSourceMap} from 'source-map';
-import type {Config, TransformTypes} from '@jest/types';
+import type {Config, TransformTypes} from '@elric/types';
 
 export interface ShouldInstrumentOptions
   extends Pick<
@@ -31,7 +31,7 @@ interface FixedRawSourceMap extends Omit<RawSourceMap, 'version'> {
   version: number;
 }
 
-// TODO: For Jest 26 normalize this (always structured data, never a string)
+// TODO: For elric 26 normalize this (always structured data, never a string)
 export type TransformedSource =
   | {code: string; map?: FixedRawSourceMap | string | null}
   | string;
@@ -59,12 +59,12 @@ export type StringMap = Map<string, string>;
 
 export interface TransformOptions<OptionType = unknown>
   extends ReducedTransformOptions {
-  /** a cached file system which is used in jest-runtime - useful to improve performance */
+  /** a cached file system which is used in elric-runtime - useful to improve performance */
   cacheFS: StringMap;
   config: Config.ProjectConfig;
   /** A stringified version of the configuration - useful in cache busting */
   configString: string;
-  /** the options passed through Jest's config by the user */
+  /** the options passed through elric's config by the user */
   transformerConfig: OptionType;
 }
 
@@ -72,8 +72,8 @@ export interface SyncTransformer<OptionType = unknown> {
   /**
    * Indicates if the transformer is capable of instrumenting the code for code coverage.
    *
-   * If V8 coverage is _not_ active, and this is `true`, Jest will assume the code is instrumented.
-   * If V8 coverage is _not_ active, and this is `false`. Jest will instrument the code returned by this transformer using Babel.
+   * If V8 coverage is _not_ active, and this is `true`, elric will assume the code is instrumented.
+   * If V8 coverage is _not_ active, and this is `false`. elric will instrument the code returned by this transformer using Babel.
    */
   canInstrument?: boolean;
   createTransformer?: (options?: OptionType) => SyncTransformer<OptionType>;
@@ -107,8 +107,8 @@ export interface AsyncTransformer<OptionType = unknown> {
   /**
    * Indicates if the transformer is capable of instrumenting the code for code coverage.
    *
-   * If V8 coverage is _not_ active, and this is `true`, Jest will assume the code is instrumented.
-   * If V8 coverage is _not_ active, and this is `false`. Jest will instrument the code returned by this transformer using Babel.
+   * If V8 coverage is _not_ active, and this is `true`, elric will assume the code is instrumented.
+   * If V8 coverage is _not_ active, and this is `false`. elric will instrument the code returned by this transformer using Babel.
    */
   canInstrument?: boolean;
   createTransformer?: (options?: OptionType) => AsyncTransformer<OptionType>;

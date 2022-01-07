@@ -1,7 +1,7 @@
 {
   "name": "native-esm-typescript",
   "version": "1.0.0",
-  "jest": {
+  "elric": {
     "extensionsToTreatAsEsm": [
       ".ts"
     ],

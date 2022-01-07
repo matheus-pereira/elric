@@ -5,16 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 describe('Fake promises', () => {
   it('should be possible to resolve with fake timers using immediates', () => {
-    const result = runJest('fake-promises/immediate');
+    const result = runelric('fake-promises/immediate');
     expect(result.exitCode).toBe(0);
   });
 
   it('should be possible to resolve with fake timers using asap', () => {
-    const result = runJest('fake-promises/asap');
+    const result = runelric('fake-promises/asap');
     expect(result.exitCode).toBe(0);
   });
 });

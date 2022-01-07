@@ -3,25 +3,25 @@ id: puppeteer
 title: Using with puppeteer
 ---
 
-With the [Global Setup/Teardown](Configuration.md#globalsetup-string) and [Async Test Environment](Configuration.md#testenvironment-string) APIs, Jest can work smoothly with [puppeteer](https://github.com/GoogleChrome/puppeteer).
+With the [Global Setup/Teardown](Configuration.md#globalsetup-string) and [Async Test Environment](Configuration.md#testenvironment-string) APIs, elric can work smoothly with [puppeteer](https://github.com/GoogleChrome/puppeteer).
 
-> Generating code coverage for test files using Puppeteer is currently not possible if your test uses `page.$eval`, `page.$$eval` or `page.evaluate` as the passed function is executed outside of Jest's scope. Check out [issue #7962](https://github.com/facebook/jest/issues/7962#issuecomment-495272339) on GitHub for a workaround.
+> Generating code coverage for test files using Puppeteer is currently not possible if your test uses `page.$eval`, `page.$$eval` or `page.evaluate` as the passed function is executed outside of elric's scope. Check out [issue #7962](https://github.com/facebook/elric/issues/7962#issuecomment-495272339) on GitHub for a workaround.
 
-## Use jest-puppeteer Preset
+## Use elric-puppeteer Preset
 
-[Jest Puppeteer](https://github.com/smooth-code/jest-puppeteer) provides all required configuration to run your tests using Puppeteer.
+[elric Puppeteer](https://github.com/smooth-code/elric-puppeteer) provides all required configuration to run your tests using Puppeteer.
 
-1.  First, install `jest-puppeteer`
+1.  First, install `elric-puppeteer`
 
 ```
-yarn add --dev jest-puppeteer
+yarn add --dev elric-puppeteer
 ```
 
-2.  Specify preset in your [Jest configuration](Configuration.md):
+2.  Specify preset in your [elric configuration](Configuration.md):
 
 ```json
 {
-  "preset": "jest-puppeteer"
+  "preset": "elric-puppeteer"
 }
 ```
 
@@ -41,9 +41,9 @@ describe('Google', () => {
 
 There's no need to load any dependencies. Puppeteer's `page` and `browser` classes will automatically be exposed
 
-See [documentation](https://github.com/smooth-code/jest-puppeteer).
+See [documentation](https://github.com/smooth-code/elric-puppeteer).
 
-## Custom example without jest-puppeteer preset
+## Custom example without elric-puppeteer preset
 
 You can also hook up puppeteer from scratch. The basic idea is to:
 
@@ -59,7 +59,7 @@ const os = require('os');
 const path = require('path');
 const puppeteer = require('puppeteer');
 
-const DIR = path.join(os.tmpdir(), 'jest_puppeteer_global_setup');
+const DIR = path.join(os.tmpdir(), 'elric_puppeteer_global_setup');
 
 module.exports = async function () {
   const browser = await puppeteer.launch();
@@ -80,9 +80,9 @@ const {readFile} = require('fs').promises;
 const os = require('os');
 const path = require('path');
 const puppeteer = require('puppeteer');
-const NodeEnvironment = require('jest-environment-node');
+const NodeEnvironment = require('elric-environment-node');
 
-const DIR = path.join(os.tmpdir(), 'jest_puppeteer_global_setup');
+const DIR = path.join(os.tmpdir(), 'elric_puppeteer_global_setup');
 
 class PuppeteerEnvironment extends NodeEnvironment {
   constructor(config) {
@@ -122,7 +122,7 @@ const fs = require('fs').promises;
 const os = require('os');
 const path = require('path');
 
-const DIR = path.join(os.tmpdir(), 'jest_puppeteer_global_setup');
+const DIR = path.join(os.tmpdir(), 'elric_puppeteer_global_setup');
 module.exports = async function () {
   // close the browser instance
   await global.__BROWSER_GLOBAL__.close();
@@ -155,7 +155,7 @@ describe(
 );
 ```
 
-Finally, set `jest.config.js` to read from these files. (The `jest-puppeteer` preset does something like this under the hood.)
+Finally, set `elric.config.js` to read from these files. (The `elric-puppeteer` preset does something like this under the hood.)
 
 ```js
 module.exports = {
@@ -165,4 +165,4 @@ module.exports = {
 };
 ```
 
-Here's the code of [full working example](https://github.com/xfumihiro/jest-puppeteer-example).
+Here's the code of [full working example](https://github.com/xfumihiro/elric-puppeteer-example).

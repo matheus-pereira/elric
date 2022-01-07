@@ -16,20 +16,20 @@ import type {
 
 // Global matchers object holds the list of available matchers and
 // the state, that can hold matcher specific values that change over time.
-const JEST_MATCHERS_OBJECT = Symbol.for('$$jest-matchers-object');
+const elric_MATCHERS_OBJECT = Symbol.for('$$elric-matchers-object');
 
-// Notes a built-in/internal Jest matcher.
-// Jest may override the stack trace of Errors thrown by internal matchers.
-export const INTERNAL_MATCHER_FLAG = Symbol.for('$$jest-internal-matcher');
+// Notes a built-in/internal elric matcher.
+// elric may override the stack trace of Errors thrown by internal matchers.
+export const INTERNAL_MATCHER_FLAG = Symbol.for('$$elric-internal-matcher');
 
-if (!global.hasOwnProperty(JEST_MATCHERS_OBJECT)) {
+if (!global.hasOwnProperty(elric_MATCHERS_OBJECT)) {
   const defaultState: Partial<MatcherState> = {
     assertionCalls: 0,
     expectedAssertionsNumber: null,
     isExpectingAssertions: false,
     suppressedErrors: [], // errors that are not thrown immediately.
   };
-  Object.defineProperty(global, JEST_MATCHERS_OBJECT, {
+  Object.defineProperty(global, elric_MATCHERS_OBJECT, {
     value: {
       matchers: Object.create(null),
       state: defaultState,
@@ -38,17 +38,17 @@ if (!global.hasOwnProperty(JEST_MATCHERS_OBJECT)) {
 }
 
 export const getState = <State extends MatcherState = MatcherState>(): State =>
-  (global as any)[JEST_MATCHERS_OBJECT].state;
+  (global as any)[elric_MATCHERS_OBJECT].state;
 
 export const setState = <State extends MatcherState = MatcherState>(
   state: Partial<State>,
 ): void => {
-  Object.assign((global as any)[JEST_MATCHERS_OBJECT].state, state);
+  Object.assign((global as any)[elric_MATCHERS_OBJECT].state, state);
 };
 
 export const getMatchers = <
   State extends MatcherState = MatcherState,
->(): MatchersObject<State> => (global as any)[JEST_MATCHERS_OBJECT].matchers;
+>(): MatchersObject<State> => (global as any)[elric_MATCHERS_OBJECT].matchers;
 
 export const setMatchers = <State extends MatcherState = MatcherState>(
   matchers: MatchersObject<State>,
@@ -112,5 +112,5 @@ export const setMatchers = <State extends MatcherState = MatcherState>(
     }
   });
 
-  Object.assign((global as any)[JEST_MATCHERS_OBJECT].matchers, matchers);
+  Object.assign((global as any)[elric_MATCHERS_OBJECT].matchers, matchers);
 };

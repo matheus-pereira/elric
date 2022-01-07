@@ -1,5 +1,5 @@
 {
-  "jest": {
+  "elric": {
     "collectCoverageFrom": [
       "*.js"
     ],

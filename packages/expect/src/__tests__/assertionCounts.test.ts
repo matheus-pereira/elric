@@ -6,39 +6,39 @@
  *
  */
 
-import {alignedAnsiStyleSerializer} from '@jest/test-utils';
-import jestExpect from '../';
+import {alignedAnsiStyleSerializer} from '@elric/test-utils';
+import elricExpect from '../';
 
 expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 
 describe('.assertions()', () => {
   it('does not throw', () => {
-    jestExpect.assertions(2);
-    jestExpect('a').not.toBe('b');
-    jestExpect('a').toBe('a');
+    elricExpect.assertions(2);
+    elricExpect('a').not.toBe('b');
+    elricExpect('a').toBe('a');
   });
 
   it('redeclares different assertion count', () => {
-    jestExpect.assertions(3);
-    jestExpect('a').not.toBe('b');
-    jestExpect('a').toBe('a');
-    jestExpect.assertions(2);
+    elricExpect.assertions(3);
+    elricExpect('a').not.toBe('b');
+    elricExpect('a').toBe('a');
+    elricExpect.assertions(2);
   });
   it('expects no assertions', () => {
-    jestExpect.assertions(0);
+    elricExpect.assertions(0);
   });
 });
 
 describe('.hasAssertions()', () => {
   it('does not throw if there is an assertion', () => {
-    jestExpect.hasAssertions();
-    jestExpect('a').toBe('a');
+    elricExpect.hasAssertions();
+    elricExpect('a').toBe('a');
   });
 
   it('throws if expected is not undefined', () => {
-    jestExpect(() => {
+    elricExpect(() => {
       // @ts-expect-error
-      jestExpect.hasAssertions(2);
+      elricExpect.hasAssertions(2);
     }).toThrowErrorMatchingSnapshot();
   });
 

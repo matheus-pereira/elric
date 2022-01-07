@@ -12,7 +12,7 @@ import {
   generateTestFilesToForceUsingWorkers,
   writeFiles,
 } from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(tmpdir(), 'fatal-worker-error');
 
@@ -34,7 +34,7 @@ test('fails a test that terminates the worker with a fatal error', () => {
     'package.json': '{}',
   });
 
-  const {exitCode, stderr} = runJest(DIR, ['--maxWorkers=2']);
+  const {exitCode, stderr} = runelric(DIR, ['--maxWorkers=2']);
 
   const numberOfTestsPassed = (stderr.match(/\bPASS\b/g) || []).length;
 
@@ -42,6 +42,6 @@ test('fails a test that terminates the worker with a fatal error', () => {
   expect(numberOfTestsPassed).toBe(Object.keys(testFiles).length - 1);
   expect(stderr).toContain('FAIL __tests__/fatalWorkerError.test.js');
   expect(stderr).toContain(
-    'Jest worker encountered 4 child process exceptions, exceeding retry limit',
+    'elric worker encountered 4 child process exceptions, exceeding retry limit',
   );
 });

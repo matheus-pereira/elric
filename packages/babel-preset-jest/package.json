@@ -1,10 +1,10 @@
 {
-  "name": "babel-preset-jest",
+  "name": "babel-preset-elric",
   "version": "27.4.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jest.git",
-    "directory": "packages/babel-preset-jest"
+    "url": "https://github.com/facebook/elric.git",
+    "directory": "packages/babel-preset-elric"
   },
   "license": "MIT",
   "main": "./index.js",
@@ -13,7 +13,7 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "babel-plugin-jest-hoist": "^27.4.0",
+    "babel-plugin-elric-hoist": "^27.4.0",
     "babel-preset-current-node-syntax": "^1.0.0"
   },
   "peerDependencies": {

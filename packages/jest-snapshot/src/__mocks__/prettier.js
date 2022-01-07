@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const prettier = jest.requireActual('prettier');
+const prettier = elric.requireActual('prettier');
 
 module.exports = {
   format: (text, opts) =>
@@ -14,6 +14,6 @@ module.exports = {
       ...opts,
     }),
   getFileInfo: {sync: () => ({inferredParser: 'babel'})},
-  resolveConfig: {sync: jest.fn()},
+  resolveConfig: {sync: elric.fn()},
   version: prettier.version,
 };

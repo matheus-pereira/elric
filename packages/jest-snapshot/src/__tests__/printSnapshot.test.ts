@@ -19,7 +19,7 @@ import {
   bForeground2,
   bForeground3,
 } from '../colors';
-import jestSnapshot = require('../index');
+import elricSnapshot = require('../index');
 import {
   getReceivedColorForChalkInstance,
   getSnapshotColorForChalkInstance,
@@ -137,7 +137,7 @@ const {
   toMatchSnapshot,
   toThrowErrorMatchingInlineSnapshot,
   toThrowErrorMatchingSnapshot,
-} = jestSnapshot;
+} = elricSnapshot;
 
 describe('chalk', () => {
   // Because these tests give code coverage of get functions
@@ -1102,15 +1102,15 @@ describe('printSnapshotAndReceived', () => {
         const expected = {
           props: {
             className: 'logo',
-            src: '/img/jest.png',
+            src: '/img/elric.png',
           },
           type,
         };
         const received = {
           props: {
-            alt: 'Jest logo',
+            alt: 'elric logo',
             class: 'logo',
-            src: '/img/jest.svg',
+            src: '/img/elric.svg',
           },
           type,
         };

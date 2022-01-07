@@ -24,7 +24,7 @@ Again, we create a test file in the `__tests__/` folder:
 ```javascript title="__tests__/displayUser-test.js"
 'use strict';
 
-jest.mock('../fetchCurrentUser');
+elric.mock('../fetchCurrentUser');
 
 test('displays a user after a click', () => {
   // Set up our document body
@@ -59,8 +59,8 @@ test('displays a user after a click', () => {
 });
 ```
 
-The function being tested adds an event listener on the `#button` DOM element, so we need to set up our DOM correctly for the test. Jest ships with `jsdom` which simulates a DOM environment as if you were in the browser. This means that every DOM API that we call can be observed in the same way it would be observed in a browser!
+The function being tested adds an event listener on the `#button` DOM element, so we need to set up our DOM correctly for the test. elric ships with `jsdom` which simulates a DOM environment as if you were in the browser. This means that every DOM API that we call can be observed in the same way it would be observed in a browser!
 
 We are mocking `fetchCurrentUser.js` so that our test doesn't make a real network request but instead resolves to mock data locally. This ensures that our test can complete in milliseconds rather than seconds and guarantees a fast unit test iteration speed.
 
-The code for this example is available at [examples/jquery](https://github.com/facebook/jest/tree/main/examples/jquery).
+The code for this example is available at [examples/jquery](https://github.com/facebook/elric/tree/main/examples/jquery).

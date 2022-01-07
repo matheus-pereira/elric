@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-jest.useRealTimers();
+elric.useRealTimers();
 
 test('bar', () => {
-  jest.runAllTimers();
+  elric.runAllTimers();
 });

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Test, TestResult} from '@jest/test-result';
+import type {Test, TestResult} from '@elric/test-result';
 
 type TestMap = Record<string, Record<string, boolean>>;
 

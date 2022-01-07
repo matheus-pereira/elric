@@ -6,7 +6,7 @@
  *
  */
 
-import type {Global} from '@jest/types';
+import type {Global} from '@elric/types';
 import bind from './bind';
 
 type Global = Global.Global;

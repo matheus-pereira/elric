@@ -7,8 +7,8 @@
 
 import {dirname, resolve} from 'path';
 import * as fs from 'graceful-fs';
-import type {Config} from '@jest/types';
-import {tryRealpath} from 'jest-util';
+import type {Config} from '@elric/types';
+import {tryRealpath} from 'elric-util';
 
 export function clearFsCache(): void {
   checkedPaths.clear();

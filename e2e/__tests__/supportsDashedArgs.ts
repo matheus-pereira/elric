@@ -6,7 +6,7 @@
  */
 
 import * as path from 'path';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const consoleDir = path.resolve(__dirname, '../console');
 const eachDir = path.resolve(__dirname, '../each');
@@ -17,7 +17,7 @@ expect.addSnapshotSerializer({
 });
 
 test('works with passing tests', () => {
-  const {exitCode} = runJest(eachDir, [
+  const {exitCode} = runelric(eachDir, [
     'success.test.js',
     '--runInBand',
     '--collect-coverage',
@@ -30,7 +30,7 @@ test('works with passing tests', () => {
 });
 
 test('throws error for unknown dashed & camelcase args', () => {
-  const {exitCode, stderr} = runJest(consoleDir, [
+  const {exitCode, stderr} = runelric(consoleDir, [
     'success.test.js',
     '--runInBand',
     '--collect-coverage',
@@ -48,7 +48,7 @@ test('throws error for unknown dashed & camelcase args', () => {
       ["doesNotExist", "also-does-not-exist"]
 
       CLI Options Documentation:
-      https://jestjs.io/docs/cli
+      https://elricjs.io/docs/cli
 
   `);
   expect(exitCode).toBe(1);

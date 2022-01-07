@@ -9,9 +9,9 @@
 import os from 'os';
 import path from 'path';
 import {promises as fs} from 'graceful-fs';
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 import type Runtime from '..';
-import {createOutsideJestVmPath} from '../helpers';
+import {createOutsideelricVmPath} from '../helpers';
 
 let createRuntime: (
   path: string,
@@ -19,7 +19,7 @@ let createRuntime: (
 ) => Promise<Runtime & {__mockRootPath: string}>;
 
 const getTmpDir = async () =>
-  await fs.mkdtemp(path.join(os.tmpdir(), 'jest-resolve-test-'));
+  await fs.mkdtemp(path.join(os.tmpdir(), 'elric-resolve-test-'));
 
 describe('Runtime require.resolve', () => {
   beforeEach(() => {
@@ -91,7 +91,7 @@ describe('Runtime require.resolve', () => {
     );
   });
 
-  describe('with the jest-resolve-outside-vm-option', () => {
+  describe('with the elric-resolve-outside-vm-option', () => {
     it('forwards to the real Node require in an internal context', async () => {
       const runtime = await createRuntime(__filename);
       const module = runtime.requireInternalModule(
@@ -116,12 +116,12 @@ describe('Runtime require.resolve', () => {
     });
 
     // make sure we also check isInternal during require, not just during resolve
-    it('does not understand a self-constructed outsideJestVmPath in an external context', async () => {
+    it('does not understand a self-constructed outsideelricVmPath in an external context', async () => {
       const runtime = await createRuntime(__filename);
       expect(() =>
         runtime.requireModule(
           runtime.__mockRootPath,
-          createOutsideJestVmPath(
+          createOutsideelricVmPath(
             require.resolve('./test_root/create_require_module.js'),
           ),
         ),

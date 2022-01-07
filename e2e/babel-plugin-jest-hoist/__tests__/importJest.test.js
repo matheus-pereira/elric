@@ -7,9 +7,9 @@
  */
 
 /* eslint-disable import/no-duplicates */
-import {jest} from '@jest/globals';
-import {jest as aliasedJest} from '@jest/globals';
-import * as JestGlobals from '@jest/globals';
+import {elric} from '@elric/globals';
+import {elric as aliasedelric} from '@elric/globals';
+import * as elricGlobals from '@elric/globals';
 /* eslint-enable import/no-duplicates */
 import a from '../__test_modules__/a';
 import b from '../__test_modules__/b';
@@ -18,15 +18,15 @@ import d from '../__test_modules__/d';
 
 // These will be hoisted above imports
 
-jest.unmock('../__test_modules__/a');
-aliasedJest.unmock('../__test_modules__/b');
-JestGlobals.jest.unmock('../__test_modules__/c');
+elric.unmock('../__test_modules__/a');
+aliasedelric.unmock('../__test_modules__/b');
+elricGlobals.elric.unmock('../__test_modules__/c');
 
 // These will not be hoisted above imports
 
 {
-  const jest = {unmock: () => {}};
-  jest.unmock('../__test_modules__/d');
+  const elric = {unmock: () => {}};
+  elric.unmock('../__test_modules__/d');
 }
 
 // tests
@@ -46,7 +46,7 @@ test('namespace import', () => {
   expect(c()).toBe('unmocked');
 });
 
-test('fake jest, shadowed import', () => {
+test('fake elric, shadowed import', () => {
   expect(d._isMockFunction).toBe(true);
   expect(d()).toBe(undefined);
 });

@@ -9,9 +9,9 @@ import {tmpdir} from 'os';
 import * as path from 'path';
 import * as fs from 'graceful-fs';
 import {cleanup} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
-const DIR = tmpdir() + '/jest-test-environment';
+const DIR = tmpdir() + '/elric-test-environment';
 
 beforeEach(() => cleanup(DIR));
 afterAll(() => cleanup(DIR));
@@ -25,7 +25,7 @@ it('triggers setup/teardown hooks', () => {
   );
   const testFile = path.join(testDir, 'custom.test.js');
 
-  const result = runJest('test-environment-async');
+  const result = runelric('test-environment-async');
   expect(result.exitCode).toBe(0);
   expect(result.stdout).toContain(`TestEnvironment.setup: ${testFile}`);
 

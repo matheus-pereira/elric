@@ -7,9 +7,9 @@
 
 import {tmpdir} from 'os';
 import * as path from 'path';
-import {wrap} from 'jest-snapshot-serializer-raw';
+import {wrap} from 'elric-snapshot-serializer-raw';
 import {cleanup, extractSummaries, writeFiles} from '../Utils';
-import runJest from '../runJest';
+import runelric from '../runelric';
 
 const DIR = path.resolve(tmpdir(), 'watch-mode-update-snapshot');
 const pluginPath = path.resolve(__dirname, '../MockStdinWatchPlugin');
@@ -24,7 +24,7 @@ expect.addSnapshotSerializer({
 
 const setupFiles = (input: Array<{keys: Array<string>}>) => {
   writeFiles(DIR, {
-    '__tests__/__snapshots__/bar.spec.js.snap': `// Jest Snapshot v1, https://goo.gl/fbAQLP
+    '__tests__/__snapshots__/bar.spec.js.snap': `// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[\`bar 1\`] = \`"foo"\`;
     `,
@@ -32,7 +32,7 @@ exports[\`bar 1\`] = \`"foo"\`;
       test('bar', () => { expect('bar').toMatchSnapshot(); });
     `,
     'package.json': JSON.stringify({
-      jest: {
+      elric: {
         testEnvironment: 'node',
         watchPlugins: [[pluginPath, {input}]],
       },
@@ -44,7 +44,7 @@ test('can press "u" to update snapshots', () => {
   const input = [{keys: ['u']}, {keys: ['q']}];
   setupFiles(input);
 
-  const {exitCode, stderr} = runJest(DIR, ['--no-watchman', '--watchAll']);
+  const {exitCode, stderr} = runelric(DIR, ['--no-watchman', '--watchAll']);
   const results = extractSummaries(stderr);
   expect(results).toHaveLength(2);
   results.forEach(({rest, summary}) => {

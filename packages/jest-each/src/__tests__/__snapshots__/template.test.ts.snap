@@ -1,11 +1,11 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`jest-each .describe throws an error when called with an empty string 1`] = `
+exports[`elric-each .describe throws an error when called with an empty string 1`] = `
 "Error: \`.each\` called with an empty Tagged Template Literal of table data.
 "
 `;
 
-exports[`jest-each .describe throws error when there are additional words in first column heading 1`] = `
+exports[`elric-each .describe throws error when there are additional words in first column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -17,7 +17,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .describe throws error when there are additional words in last column heading 1`] = `
+exports[`elric-each .describe throws error when there are additional words in last column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -29,7 +29,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .describe throws error when there are additional words in second column heading 1`] = `
+exports[`elric-each .describe throws error when there are additional words in second column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -41,7 +41,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .describe throws error when there are fewer arguments than headings over multiple rows 1`] = `
+exports[`elric-each .describe throws error when there are fewer arguments than headings over multiple rows 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -57,7 +57,7 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .describe throws error when there are fewer arguments than headings when given one row 1`] = `
+exports[`elric-each .describe throws error when there are fewer arguments than headings when given one row 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -70,17 +70,17 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .describe throws error when there are no arguments for given headings 1`] = `
+exports[`elric-each .describe throws error when there are no arguments for given headings 1`] = `
 "Error: \`.each\` called with a Tagged Template Literal with no data, remember to interpolate with \${expression} syntax.
 "
 `;
 
-exports[`jest-each .describe.only throws an error when called with an empty string 1`] = `
+exports[`elric-each .describe.only throws an error when called with an empty string 1`] = `
 "Error: \`.each\` called with an empty Tagged Template Literal of table data.
 "
 `;
 
-exports[`jest-each .describe.only throws error when there are additional words in first column heading 1`] = `
+exports[`elric-each .describe.only throws error when there are additional words in first column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -92,7 +92,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .describe.only throws error when there are additional words in last column heading 1`] = `
+exports[`elric-each .describe.only throws error when there are additional words in last column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -104,7 +104,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .describe.only throws error when there are additional words in second column heading 1`] = `
+exports[`elric-each .describe.only throws error when there are additional words in second column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -116,7 +116,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .describe.only throws error when there are fewer arguments than headings over multiple rows 1`] = `
+exports[`elric-each .describe.only throws error when there are fewer arguments than headings over multiple rows 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -132,7 +132,7 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .describe.only throws error when there are fewer arguments than headings when given one row 1`] = `
+exports[`elric-each .describe.only throws error when there are fewer arguments than headings when given one row 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -145,17 +145,17 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .describe.only throws error when there are no arguments for given headings 1`] = `
+exports[`elric-each .describe.only throws error when there are no arguments for given headings 1`] = `
 "Error: \`.each\` called with a Tagged Template Literal with no data, remember to interpolate with \${expression} syntax.
 "
 `;
 
-exports[`jest-each .fdescribe throws an error when called with an empty string 1`] = `
+exports[`elric-each .fdescribe throws an error when called with an empty string 1`] = `
 "Error: \`.each\` called with an empty Tagged Template Literal of table data.
 "
 `;
 
-exports[`jest-each .fdescribe throws error when there are additional words in first column heading 1`] = `
+exports[`elric-each .fdescribe throws error when there are additional words in first column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -167,7 +167,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .fdescribe throws error when there are additional words in last column heading 1`] = `
+exports[`elric-each .fdescribe throws error when there are additional words in last column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -179,7 +179,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .fdescribe throws error when there are additional words in second column heading 1`] = `
+exports[`elric-each .fdescribe throws error when there are additional words in second column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -191,7 +191,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .fdescribe throws error when there are fewer arguments than headings over multiple rows 1`] = `
+exports[`elric-each .fdescribe throws error when there are fewer arguments than headings over multiple rows 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -207,7 +207,7 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .fdescribe throws error when there are fewer arguments than headings when given one row 1`] = `
+exports[`elric-each .fdescribe throws error when there are fewer arguments than headings when given one row 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -220,17 +220,17 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .fdescribe throws error when there are no arguments for given headings 1`] = `
+exports[`elric-each .fdescribe throws error when there are no arguments for given headings 1`] = `
 "Error: \`.each\` called with a Tagged Template Literal with no data, remember to interpolate with \${expression} syntax.
 "
 `;
 
-exports[`jest-each .fit throws an error when called with an empty string 1`] = `
+exports[`elric-each .fit throws an error when called with an empty string 1`] = `
 "Error: \`.each\` called with an empty Tagged Template Literal of table data.
 "
 `;
 
-exports[`jest-each .fit throws error when there are additional words in first column heading 1`] = `
+exports[`elric-each .fit throws error when there are additional words in first column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -242,7 +242,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .fit throws error when there are additional words in last column heading 1`] = `
+exports[`elric-each .fit throws error when there are additional words in last column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -254,7 +254,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .fit throws error when there are additional words in second column heading 1`] = `
+exports[`elric-each .fit throws error when there are additional words in second column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -266,7 +266,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .fit throws error when there are fewer arguments than headings over multiple rows 1`] = `
+exports[`elric-each .fit throws error when there are fewer arguments than headings over multiple rows 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -282,7 +282,7 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .fit throws error when there are fewer arguments than headings when given one row 1`] = `
+exports[`elric-each .fit throws error when there are fewer arguments than headings when given one row 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -295,17 +295,17 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .fit throws error when there are no arguments for given headings 1`] = `
+exports[`elric-each .fit throws error when there are no arguments for given headings 1`] = `
 "Error: \`.each\` called with a Tagged Template Literal with no data, remember to interpolate with \${expression} syntax.
 "
 `;
 
-exports[`jest-each .it throws an error when called with an empty string 1`] = `
+exports[`elric-each .it throws an error when called with an empty string 1`] = `
 "Error: \`.each\` called with an empty Tagged Template Literal of table data.
 "
 `;
 
-exports[`jest-each .it throws error when there are additional words in first column heading 1`] = `
+exports[`elric-each .it throws error when there are additional words in first column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -317,7 +317,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .it throws error when there are additional words in last column heading 1`] = `
+exports[`elric-each .it throws error when there are additional words in last column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -329,7 +329,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .it throws error when there are additional words in second column heading 1`] = `
+exports[`elric-each .it throws error when there are additional words in second column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -341,7 +341,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .it throws error when there are fewer arguments than headings over multiple rows 1`] = `
+exports[`elric-each .it throws error when there are fewer arguments than headings over multiple rows 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -357,7 +357,7 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .it throws error when there are fewer arguments than headings when given one row 1`] = `
+exports[`elric-each .it throws error when there are fewer arguments than headings when given one row 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -370,17 +370,17 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .it throws error when there are no arguments for given headings 1`] = `
+exports[`elric-each .it throws error when there are no arguments for given headings 1`] = `
 "Error: \`.each\` called with a Tagged Template Literal with no data, remember to interpolate with \${expression} syntax.
 "
 `;
 
-exports[`jest-each .it.only throws an error when called with an empty string 1`] = `
+exports[`elric-each .it.only throws an error when called with an empty string 1`] = `
 "Error: \`.each\` called with an empty Tagged Template Literal of table data.
 "
 `;
 
-exports[`jest-each .it.only throws error when there are additional words in first column heading 1`] = `
+exports[`elric-each .it.only throws error when there are additional words in first column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -392,7 +392,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .it.only throws error when there are additional words in last column heading 1`] = `
+exports[`elric-each .it.only throws error when there are additional words in last column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -404,7 +404,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .it.only throws error when there are additional words in second column heading 1`] = `
+exports[`elric-each .it.only throws error when there are additional words in second column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -416,7 +416,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .it.only throws error when there are fewer arguments than headings over multiple rows 1`] = `
+exports[`elric-each .it.only throws error when there are fewer arguments than headings over multiple rows 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -432,7 +432,7 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .it.only throws error when there are fewer arguments than headings when given one row 1`] = `
+exports[`elric-each .it.only throws error when there are fewer arguments than headings when given one row 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -445,17 +445,17 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .it.only throws error when there are no arguments for given headings 1`] = `
+exports[`elric-each .it.only throws error when there are no arguments for given headings 1`] = `
 "Error: \`.each\` called with a Tagged Template Literal with no data, remember to interpolate with \${expression} syntax.
 "
 `;
 
-exports[`jest-each .test throws an error when called with an empty string 1`] = `
+exports[`elric-each .test throws an error when called with an empty string 1`] = `
 "Error: \`.each\` called with an empty Tagged Template Literal of table data.
 "
 `;
 
-exports[`jest-each .test throws error when there are additional words in first column heading 1`] = `
+exports[`elric-each .test throws error when there are additional words in first column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -467,7 +467,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .test throws error when there are additional words in last column heading 1`] = `
+exports[`elric-each .test throws error when there are additional words in last column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -479,7 +479,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .test throws error when there are additional words in second column heading 1`] = `
+exports[`elric-each .test throws error when there are additional words in second column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -491,7 +491,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .test throws error when there are fewer arguments than headings over multiple rows 1`] = `
+exports[`elric-each .test throws error when there are fewer arguments than headings over multiple rows 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -507,7 +507,7 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .test throws error when there are fewer arguments than headings when given one row 1`] = `
+exports[`elric-each .test throws error when there are fewer arguments than headings when given one row 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -520,17 +520,17 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .test throws error when there are no arguments for given headings 1`] = `
+exports[`elric-each .test throws error when there are no arguments for given headings 1`] = `
 "Error: \`.each\` called with a Tagged Template Literal with no data, remember to interpolate with \${expression} syntax.
 "
 `;
 
-exports[`jest-each .test.concurrent throws an error when called with an empty string 1`] = `
+exports[`elric-each .test.concurrent throws an error when called with an empty string 1`] = `
 "Error: \`.each\` called with an empty Tagged Template Literal of table data.
 "
 `;
 
-exports[`jest-each .test.concurrent throws error when there are additional words in first column heading 1`] = `
+exports[`elric-each .test.concurrent throws error when there are additional words in first column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -542,7 +542,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .test.concurrent throws error when there are additional words in last column heading 1`] = `
+exports[`elric-each .test.concurrent throws error when there are additional words in last column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -554,7 +554,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .test.concurrent throws error when there are additional words in second column heading 1`] = `
+exports[`elric-each .test.concurrent throws error when there are additional words in second column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -566,7 +566,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .test.concurrent throws error when there are fewer arguments than headings over multiple rows 1`] = `
+exports[`elric-each .test.concurrent throws error when there are fewer arguments than headings over multiple rows 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -582,7 +582,7 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .test.concurrent throws error when there are fewer arguments than headings when given one row 1`] = `
+exports[`elric-each .test.concurrent throws error when there are fewer arguments than headings when given one row 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -595,17 +595,17 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .test.concurrent throws error when there are no arguments for given headings 1`] = `
+exports[`elric-each .test.concurrent throws error when there are no arguments for given headings 1`] = `
 "Error: \`.each\` called with a Tagged Template Literal with no data, remember to interpolate with \${expression} syntax.
 "
 `;
 
-exports[`jest-each .test.concurrent.only throws an error when called with an empty string 1`] = `
+exports[`elric-each .test.concurrent.only throws an error when called with an empty string 1`] = `
 "Error: \`.each\` called with an empty Tagged Template Literal of table data.
 "
 `;
 
-exports[`jest-each .test.concurrent.only throws error when there are additional words in first column heading 1`] = `
+exports[`elric-each .test.concurrent.only throws error when there are additional words in first column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -617,7 +617,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .test.concurrent.only throws error when there are additional words in last column heading 1`] = `
+exports[`elric-each .test.concurrent.only throws error when there are additional words in last column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -629,7 +629,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .test.concurrent.only throws error when there are additional words in second column heading 1`] = `
+exports[`elric-each .test.concurrent.only throws error when there are additional words in second column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -641,7 +641,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .test.concurrent.only throws error when there are fewer arguments than headings over multiple rows 1`] = `
+exports[`elric-each .test.concurrent.only throws error when there are fewer arguments than headings over multiple rows 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -657,7 +657,7 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .test.concurrent.only throws error when there are fewer arguments than headings when given one row 1`] = `
+exports[`elric-each .test.concurrent.only throws error when there are fewer arguments than headings when given one row 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -670,17 +670,17 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .test.concurrent.only throws error when there are no arguments for given headings 1`] = `
+exports[`elric-each .test.concurrent.only throws error when there are no arguments for given headings 1`] = `
 "Error: \`.each\` called with a Tagged Template Literal with no data, remember to interpolate with \${expression} syntax.
 "
 `;
 
-exports[`jest-each .test.concurrent.skip throws an error when called with an empty string 1`] = `
+exports[`elric-each .test.concurrent.skip throws an error when called with an empty string 1`] = `
 "Error: \`.each\` called with an empty Tagged Template Literal of table data.
 "
 `;
 
-exports[`jest-each .test.concurrent.skip throws error when there are additional words in first column heading 1`] = `
+exports[`elric-each .test.concurrent.skip throws error when there are additional words in first column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -692,7 +692,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .test.concurrent.skip throws error when there are additional words in last column heading 1`] = `
+exports[`elric-each .test.concurrent.skip throws error when there are additional words in last column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -704,7 +704,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .test.concurrent.skip throws error when there are additional words in second column heading 1`] = `
+exports[`elric-each .test.concurrent.skip throws error when there are additional words in second column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -716,7 +716,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .test.concurrent.skip throws error when there are fewer arguments than headings over multiple rows 1`] = `
+exports[`elric-each .test.concurrent.skip throws error when there are fewer arguments than headings over multiple rows 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -732,7 +732,7 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .test.concurrent.skip throws error when there are fewer arguments than headings when given one row 1`] = `
+exports[`elric-each .test.concurrent.skip throws error when there are fewer arguments than headings when given one row 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -745,17 +745,17 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .test.concurrent.skip throws error when there are no arguments for given headings 1`] = `
+exports[`elric-each .test.concurrent.skip throws error when there are no arguments for given headings 1`] = `
 "Error: \`.each\` called with a Tagged Template Literal with no data, remember to interpolate with \${expression} syntax.
 "
 `;
 
-exports[`jest-each .test.only throws an error when called with an empty string 1`] = `
+exports[`elric-each .test.only throws an error when called with an empty string 1`] = `
 "Error: \`.each\` called with an empty Tagged Template Literal of table data.
 "
 `;
 
-exports[`jest-each .test.only throws error when there are additional words in first column heading 1`] = `
+exports[`elric-each .test.only throws error when there are additional words in first column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -767,7 +767,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .test.only throws error when there are additional words in last column heading 1`] = `
+exports[`elric-each .test.only throws error when there are additional words in last column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -779,7 +779,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .test.only throws error when there are additional words in second column heading 1`] = `
+exports[`elric-each .test.only throws error when there are additional words in second column heading 1`] = `
 "Table headings do not conform to expected format:
 
 <green>heading1 | headingN</>
@@ -791,7 +791,7 @@ Received:
 <red>          \\"</>"
 `;
 
-exports[`jest-each .test.only throws error when there are fewer arguments than headings over multiple rows 1`] = `
+exports[`elric-each .test.only throws error when there are fewer arguments than headings over multiple rows 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -807,7 +807,7 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .test.only throws error when there are fewer arguments than headings when given one row 1`] = `
+exports[`elric-each .test.only throws error when there are fewer arguments than headings when given one row 1`] = `
 "Not enough arguments supplied for given headings:
 <green>a | b | expected</>
 
@@ -820,7 +820,7 @@ Received:
 Missing <red>2</> arguments"
 `;
 
-exports[`jest-each .test.only throws error when there are no arguments for given headings 1`] = `
+exports[`elric-each .test.only throws error when there are no arguments for given headings 1`] = `
 "Error: \`.each\` called with a Tagged Template Literal with no data, remember to interpolate with \${expression} syntax.
 "
 `;

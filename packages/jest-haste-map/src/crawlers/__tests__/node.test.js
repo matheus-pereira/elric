@@ -8,17 +8,17 @@
 
 'use strict';
 
-jest.mock('child_process', () => ({
-  spawn: jest.fn((cmd, args) => {
+elric.mock('child_process', () => ({
+  spawn: elric.fn((cmd, args) => {
     let closeCallback;
     return {
-      on: jest.fn().mockImplementation((event, callback) => {
+      on: elric.fn().mockImplementation((event, callback) => {
         if (event === 'exit') {
           callback(mockSpawnExit, null);
         }
       }),
       stdout: {
-        on: jest.fn().mockImplementation((event, callback) => {
+        on: elric.fn().mockImplementation((event, callback) => {
           if (event === 'data') {
             setTimeout(() => {
               callback(mockResponse);
@@ -28,7 +28,7 @@ jest.mock('child_process', () => ({
             closeCallback = callback;
           }
         }),
-        setEncoding: jest.fn(),
+        setEncoding: elric.fn(),
       },
     };
   }),
@@ -36,7 +36,7 @@ jest.mock('child_process', () => ({
 
 let mockHasReaddirWithFileTypesSupport = false;
 
-jest.mock('graceful-fs', () => {
+elric.mock('graceful-fs', () => {
   const slash = require('slash');
   let mtime = 32;
   const size = 42;
@@ -61,8 +61,8 @@ jest.mock('graceful-fs', () => {
     );
   };
   return {
-    lstat: jest.fn(stat),
-    readdir: jest.fn((dir, options, callback) => {
+    lstat: elric.fn(stat),
+    readdir: elric.fn((dir, options, callback) => {
       // readdir has an optional `options` arg that's in the middle of the args list.
       // we always provide it in practice, but let's try to handle the case where it's not
       // provided too
@@ -124,7 +124,7 @@ jest.mock('graceful-fs', () => {
         }
       }
     }),
-    stat: jest.fn(stat),
+    stat: elric.fn(stat),
   };
 });
 
@@ -142,7 +142,7 @@ let childProcess;
 
 describe('node crawler', () => {
   beforeEach(() => {
-    jest.resetModules();
+    elric.resetModules();
 
     mockResponse = [
       '/project/fruits/pear.js',

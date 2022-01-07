@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// elric Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`does not exceed the command line testTimeout 1`] = `
 PASS __tests__/a-banana.js

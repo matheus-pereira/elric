@@ -6,7 +6,7 @@
  */
 
 import * as path from 'path';
-import {json as runWithJson} from '../runJest';
+import {json as runWithJson} from '../runelric';
 
 it('runs tests in only test.js and spec.js', () => {
   const {json: result} = runWithJson('test-in-root');

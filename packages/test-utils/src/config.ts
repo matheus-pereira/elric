@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 
 const DEFAULT_GLOBAL_CONFIG: Config.GlobalConfig = {
   bail: 0,
@@ -54,7 +54,7 @@ const DEFAULT_GLOBAL_CONFIG: Config.GlobalConfig = {
   testNamePattern: '',
   testPathPattern: '',
   testResultsProcessor: undefined,
-  testSequencer: '@jest/test-sequencer',
+  testSequencer: '@elric/test-sequencer',
   testTimeout: 5000,
   updateSnapshot: 'none',
   useStderr: false,
@@ -99,7 +99,7 @@ const DEFAULT_PROJECT_CONFIG: Config.ProjectConfig = {
   restoreMocks: false,
   rootDir: '/test_root_dir/',
   roots: [],
-  runner: 'jest-runner',
+  runner: 'elric-runner',
   setupFiles: [],
   setupFilesAfterEnv: [],
   skipFilter: false,
@@ -114,7 +114,7 @@ const DEFAULT_PROJECT_CONFIG: Config.ProjectConfig = {
   testMatch: [],
   testPathIgnorePatterns: [],
   testRegex: ['\\.test\\.js$'],
-  testRunner: 'jest-circus/runner',
+  testRunner: 'elric-circus/runner',
   testURL: 'http://localhost',
   timers: 'real',
   transform: [],

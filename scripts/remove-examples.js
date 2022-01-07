@@ -11,7 +11,7 @@ const {writeFileSync} = require('fs');
 const {resolve} = require('path');
 const rimraf = require('rimraf');
 
-const configFile = require.resolve('../jest.config');
+const configFile = require.resolve('../elric.config');
 
 const config = require(configFile);
 

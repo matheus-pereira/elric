@@ -8,20 +8,20 @@
 import * as path from 'path';
 import glob = require('glob');
 import slash = require('slash');
-import type {Config} from '@jest/types';
+import type {Config} from '@elric/types';
 
-const OUTSIDE_JEST_VM_PROTOCOL = 'jest-main:';
+const OUTSIDE_elric_VM_PROTOCOL = 'elric-main:';
 // String manipulation is easier here, fileURLToPath is only in newer Nodes,
 // plus setting non-standard protocols on URL objects is difficult.
-export const createOutsideJestVmPath = (path: string): string =>
-  OUTSIDE_JEST_VM_PROTOCOL + '//' + encodeURIComponent(path);
-export const decodePossibleOutsideJestVmPath = (
-  outsideJestVmPath: string,
+export const createOutsideelricVmPath = (path: string): string =>
+  OUTSIDE_elric_VM_PROTOCOL + '//' + encodeURIComponent(path);
+export const decodePossibleOutsideelricVmPath = (
+  outsideelricVmPath: string,
 ): string | undefined => {
-  if (outsideJestVmPath.startsWith(OUTSIDE_JEST_VM_PROTOCOL)) {
+  if (outsideelricVmPath.startsWith(OUTSIDE_elric_VM_PROTOCOL)) {
     return decodeURIComponent(
-      outsideJestVmPath.replace(
-        new RegExp('^' + OUTSIDE_JEST_VM_PROTOCOL + '//'),
+      outsideelricVmPath.replace(
+        new RegExp('^' + OUTSIDE_elric_VM_PROTOCOL + '//'),
         '',
       ),
     );
@@ -55,7 +55,7 @@ export const findSiblingsWithFileExtension = (
         .join('\n');
 
       if (matches) {
-        const foundMessage = `\n\nHowever, Jest was able to find:\n${matches}`;
+        const foundMessage = `\n\nHowever, elric was able to find:\n${matches}`;
 
         const mappedModuleFileExtensions = moduleFileExtensions
           .map(ext => `'${ext}'`)
@@ -64,7 +64,7 @@ export const findSiblingsWithFileExtension = (
         return (
           foundMessage +
           "\n\nYou might want to include a file extension in your import, or update your 'moduleFileExtensions', which is currently " +
-          `[${mappedModuleFileExtensions}].\n\nSee https://jestjs.io/docs/configuration#modulefileextensions-arraystring`
+          `[${mappedModuleFileExtensions}].\n\nSee https://elricjs.io/docs/configuration#modulefileextensions-arraystring`
         );
       }
     } catch {}

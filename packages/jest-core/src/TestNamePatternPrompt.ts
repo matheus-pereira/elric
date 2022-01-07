@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type {TestResult} from '@jest/test-result';
+import type {TestResult} from '@elric/test-result';
 import {
   PatternPrompt,
   Prompt,
   ScrollOptions,
   printPatternCaret,
   printRestoredPatternCaret,
-} from 'jest-watcher';
+} from 'elric-watcher';
 
 // TODO: Make underscored props `private`
 export default class TestNamePatternPrompt extends PatternPrompt {

@@ -8,16 +8,16 @@
 import {tmpdir} from 'os';
 import * as path from 'path';
 import * as fs from 'graceful-fs';
-import {onNodeVersions} from '@jest/test-utils';
-import {createDirectory} from 'jest-util';
+import {onNodeVersions} from '@elric/test-utils';
+import {createDirectory} from 'elric-util';
 import {cleanup, runYarnInstall} from '../Utils';
-import runJest, {json as runWithJson} from '../runJest';
+import runelric, {json as runWithJson} from '../runelric';
 
-const DIR = path.join(tmpdir(), 'jest-global-teardown');
-const project1DIR = path.join(tmpdir(), 'jest-global-teardown-project-1');
-const project2DIR = path.join(tmpdir(), 'jest-global-teardown-project-2');
+const DIR = path.join(tmpdir(), 'elric-global-teardown');
+const project1DIR = path.join(tmpdir(), 'elric-global-teardown-project-1');
+const project2DIR = path.join(tmpdir(), 'elric-global-teardown-project-2');
 const e2eDir = path.resolve(__dirname, '../global-teardown');
-const esmTmpDir = path.join(tmpdir(), 'jest-global-teardown-esm');
+const esmTmpDir = path.join(tmpdir(), 'elric-global-teardown-esm');
 
 beforeAll(() => {
   runYarnInstall(e2eDir);
@@ -51,26 +51,26 @@ test('globalTeardown is triggered once after all test suites', () => {
   expect(teardown).toBe('teardown');
 });
 
-test('jest throws an error when globalTeardown does not export a function', () => {
+test('elric throws an error when globalTeardown does not export a function', () => {
   const teardownPath = path.resolve(e2eDir, 'invalidTeardown.js');
-  const {exitCode, stderr} = runJest(e2eDir, [
+  const {exitCode, stderr} = runelric(e2eDir, [
     `--globalTeardown=${teardownPath}`,
     `--testPathPattern=__tests__`,
   ]);
 
   expect(exitCode).toBe(1);
-  expect(stderr).toContain('Jest: Got error running globalTeardown');
+  expect(stderr).toContain('elric: Got error running globalTeardown');
   expect(stderr).toContain(
     `globalTeardown file must export a function at ${teardownPath}`,
   );
 });
 
-test('globalTeardown function gets jest config object as a parameter', () => {
+test('globalTeardown function gets elric config object as a parameter', () => {
   const teardownPath = path.resolve(e2eDir, 'teardownWithConfig.js');
 
   const testPathPattern = 'pass';
 
-  const result = runJest(e2eDir, [
+  const result = runelric(e2eDir, [
     `--globalTeardown=${teardownPath}`,
     `--testPathPattern=${testPathPattern}`,
   ]);
@@ -79,7 +79,7 @@ test('globalTeardown function gets jest config object as a parameter', () => {
 });
 
 test('should call globalTeardown function of multiple projects', () => {
-  const configPath = path.resolve(e2eDir, 'projects.jest.config.js');
+  const configPath = path.resolve(e2eDir, 'projects.elric.config.js');
 
   const result = runWithJson('global-teardown', [`--config=${configPath}`]);
 
@@ -91,7 +91,7 @@ test('should call globalTeardown function of multiple projects', () => {
 });
 
 test('should not call a globalTeardown of a project if there are no tests to run from this project', () => {
-  const configPath = path.resolve(e2eDir, 'projects.jest.config.js');
+  const configPath = path.resolve(e2eDir, 'projects.elric.config.js');
 
   const result = runWithJson('global-teardown', [
     `--config=${configPath}`,
@@ -110,7 +110,7 @@ test('globalTeardown works with default export', () => {
 
   const testPathPattern = 'pass';
 
-  const result = runJest(e2eDir, [
+  const result = runelric(e2eDir, [
     `--globalTeardown=${teardownPath}`,
     `--testPathPattern=${testPathPattern}`,
   ]);
@@ -124,13 +124,13 @@ test('globalTeardown throws with named export', () => {
     'invalidTeardownWithNamedExport.js',
   );
 
-  const {exitCode, stderr} = runJest(e2eDir, [
+  const {exitCode, stderr} = runelric(e2eDir, [
     `--globalTeardown=${teardownPath}`,
     `--testPathPattern=__tests__`,
   ]);
 
   expect(exitCode).toBe(1);
-  expect(stderr).toContain('Jest: Got error running globalTeardown');
+  expect(stderr).toContain('elric: Got error running globalTeardown');
   expect(stderr).toContain(
     `globalTeardown file must export a function at ${teardownPath}`,
   );
@@ -138,7 +138,7 @@ test('globalTeardown throws with named export', () => {
 
 onNodeVersions('>=12.17.0', () => {
   test('globalTeardown works with ESM modules', () => {
-    const {exitCode} = runJest('global-teardown-esm', [`--no-cache`], {
+    const {exitCode} = runelric('global-teardown-esm', [`--no-cache`], {
       nodeOptions: '--experimental-vm-modules --no-warnings',
     });
 

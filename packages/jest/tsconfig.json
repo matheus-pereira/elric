@@ -4,5 +4,5 @@
     "rootDir": "src",
     "outDir": "build"
   },
-  "references": [{"path": "../jest-cli"}, {"path": "../jest-core"}]
+  "references": [{"path": "../elric-cli"}, {"path": "../elric-core"}]
 }
